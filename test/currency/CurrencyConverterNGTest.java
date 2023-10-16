@@ -63,19 +63,27 @@ public class CurrencyConverterNGTest {
         assertEquals(actual, expected, TEST_DELTA);
     }
     
-    /*
+    /**
      * Test of the getRate function, of the CurrencyConverter class.
      */
-//    @Test
-//    public void testGetRate() {
-//        System.out.println("getRate");
-//        fail("The test case is a prototype.");
-//        Currency source = null;
-//        Currency target = null;
-//        String expResult = "";
-//        String result = CurrencyConverter.getRate(source, target);
-//        assertEquals(result, expResult);
-//        // TODO review the generated test code and remove the default call to fail.
-//    }
+    @Test
+    public void testGetRate() {
+        System.out.println("getRate");
+        Currency firstTarget = CurrencyChooser
+                .chooseCurrencyOtherThan(U_S_DOLLARS);
+        double fromDollars = Double.parseDouble(CurrencyConverter
+                .getRate(U_S_DOLLARS, firstTarget));
+        double toDollars = Double.parseDouble(CurrencyConverter
+                .getRate(firstTarget, U_S_DOLLARS));
+        double expected = 1.0;
+        double actual = fromDollars * toDollars;
+        String msg = "Rate of conversion from " + U_S_DOLLARS.getDisplayName() 
+                + " (" + U_S_DOLLARS.getCurrencyCode() + ") to " 
+                + firstTarget.getDisplayName() + " (" 
+                + firstTarget.getCurrencyCode() + ") is said to be " 
+                + fromDollars + ", and vice-versa is said to be " + toDollars;
+        System.out.println(msg);
+        assertEquals(actual, expected, TEST_DELTA, msg);
+    }
     
 }
