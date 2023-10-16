@@ -191,20 +191,26 @@ public class CurrencyChooserNGTest {
     @Test
     public void testUnavailableFractionDigitsCauseException() {
         int unlikelyFractionDigits = Integer.MAX_VALUE;
-        fail("REWRITE THIS TEST FOR TESTNG");
-//        Throwable t = assertThrows(NoSuchElementException.class, () -> {
-//            Currency badCurrency 
-//                    = CurrencyChooser.chooseCurrency(unlikelyFractionDigits);
-//            System.out.println("Somehow asking for currency with " 
-//                    + unlikelyFractionDigits + " fraction digits gave " 
-//                    + badCurrency.getDisplayName());
-//        });
-//        String excMsg = t.getMessage();
-//        assert excMsg != null : "Message should not be null";
-//        System.out.println("\"" + excMsg + "\"");
-//        String digitString = Integer.toString(unlikelyFractionDigits);
-//        String msg = "Exception message should include \"" + digitString + "\"";
-//        assert excMsg.contains(digitString) : msg;
+        try {
+            Currency badCurrency 
+                    = CurrencyChooser.chooseCurrency(unlikelyFractionDigits);
+            System.out.println("Somehow asking for currency with " 
+                    + unlikelyFractionDigits + " fraction digits gave " 
+                    + badCurrency.getDisplayName());
+        } catch (NoSuchElementException nsee) {
+            String excMsg = nsee.getMessage();
+            assert excMsg != null : "Message should not be null";
+            System.out.println("\"" + excMsg + "\"");
+            String digitString = Integer.toString(unlikelyFractionDigits);
+            String msg = "Exception message should include \"" + digitString 
+                    + "\"";
+            assert excMsg.contains(digitString) : msg;
+        } catch (RuntimeException re) {
+            String msg = re.getClass().getName() 
+                    + " is the wrong exception to throw for " 
+                    + unlikelyFractionDigits + " fraction digits";
+            fail(msg);
+        }
     }
     
     @Test
