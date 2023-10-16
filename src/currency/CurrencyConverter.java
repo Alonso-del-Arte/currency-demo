@@ -37,6 +37,9 @@ public class CurrencyConverter {
         if (source.getCurrencyCode().equals("USD")) {
             return "2.70";
         }
+        if (source.getCurrencyCode().equals("XCD")) {
+            return Double.toString(1.0 / 2.7);
+        }
         return "1.0";
     }
     
