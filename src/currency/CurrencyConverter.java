@@ -26,7 +26,7 @@ public class CurrencyConverter {
     
     // TODO: Write tests for this
     public static String getRate(Currency source, Currency target) {
-        return "-1.0";
+        return "1.0";
     }
     
 }
