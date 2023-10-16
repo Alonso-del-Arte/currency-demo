@@ -32,6 +32,9 @@ public class CurrencyConverterNGTest {
     
     private static final Currency U_S_DOLLARS = Currency.getInstance(Locale.US);
     
+    private static final Currency EAST_CARIBBEAN_DOLLARS 
+            = Currency.getInstance("XCD");
+    
     @Test
     public void testGetRateNoConversionNeeded() {
         Currency currency = CurrencyChooser.chooseCurrency();
@@ -42,6 +45,14 @@ public class CurrencyConverterNGTest {
         String msg = "No conversion needed for " + iso4217Code + " to " 
                 + iso4217Code;
         assertEquals(actual, expected, TEST_DELTA, msg);
+    }
+    
+    @Test
+    public void testGetRateForUSDollarsToEastCaribbeanDollars() {
+        double expected = 2.7;
+        double actual = Double.parseDouble(CurrencyConverter
+                .getRate(U_S_DOLLARS, EAST_CARIBBEAN_DOLLARS));
+        assertEquals(actual, expected, TEST_DELTA);
     }
     
     /*
