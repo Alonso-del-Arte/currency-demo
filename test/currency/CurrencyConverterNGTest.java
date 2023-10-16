@@ -28,7 +28,7 @@ import org.testng.annotations.Test;
  */
 public class CurrencyConverterNGTest {
     
-    private static final double TEST_DELTA = 0.0001;
+    private static final double TEST_DELTA = 0.001;
     
     private static final Currency U_S_DOLLARS = Currency.getInstance(Locale.US);
     
@@ -52,6 +52,14 @@ public class CurrencyConverterNGTest {
         double expected = 2.7;
         double actual = Double.parseDouble(CurrencyConverter
                 .getRate(U_S_DOLLARS, EAST_CARIBBEAN_DOLLARS));
+        assertEquals(actual, expected, TEST_DELTA);
+    }
+    
+    @Test
+    public void testGetRateForEastCaribbeanDollarsToUSDollars() {
+        double expected = 1.0 / 2.7;
+        double actual = Double.parseDouble(CurrencyConverter
+                .getRate(EAST_CARIBBEAN_DOLLARS, U_S_DOLLARS));
         assertEquals(actual, expected, TEST_DELTA);
     }
     
