@@ -16,13 +16,26 @@
  */
 package currency;
 
+import java.io.InputStream;
+import java.io.IOException;
+import java.net.HttpURLConnection;
+import java.net.MalformedURLException;
+import java.net.URI;
+import java.net.URISyntaxException;
+import java.net.URL;
 import java.util.Currency;
+import java.util.Scanner;
 
 /**
  *
  * @author Alonso del Arte
  */
 public class CurrencyConverter {
+    
+    private static final String API_KEY = System.getenv("FOREX_API_KEY");
+    
+    private static final String USER_AGENT_ID = "Java/"
+            + System.getProperty("java.version");
     
     /**
      * Gives the rate for a currency conversion.
@@ -34,16 +47,7 @@ public class CurrencyConverter {
      * constructor.
      */
     public static String getRate(Currency source, Currency target) {
-        if (source.getCurrencyCode().equals("USD")) {
-            return "2.70";
-        }
-        if (source.getCurrencyCode().equals("XCD")) {
-            return Double.toString(1.0 / 2.7);
-        }
-        if (source.getCurrencyCode().equals(target.getCurrencyCode())) {
-            return "1.0";
-        }
-        return "3.2";
+        return "-2.0";
     }
     
 }
