@@ -42,8 +42,6 @@ public class CurrencyChooser {
     private static final Map<Integer, Set<Currency>> CURRENCIES_DIGITS_MAP 
             = new HashMap<>();
     
-    private static boolean oddNumberedCall = false;
-
     static {
         for (Currency currency : CURRENCIES) {
             int fractionDigits = currency.getDefaultFractionDigits(); 
@@ -104,8 +102,8 @@ public class CurrencyChooser {
             return currencies.get(index);
         } else {
             String excMsg = "No available currency with " + fractionDigits 
-                    + " fraction digits";throw new RuntimeException(excMsg);
-//            throw new NoSuchElementException(excMsg);
+                    + " fraction digits";
+            throw new NoSuchElementException(excMsg);
         }
     }
 
