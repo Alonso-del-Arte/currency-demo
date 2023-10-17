@@ -69,6 +69,7 @@ public class CurrencyChooser {
         }
         CURRENCIES.removeAll(PSEUDO_CURRENCIES);
         CURRENCIES.removeAll(HISTORICAL_CURRENCIES);
+        CURRENCIES.remove(Currency.getInstance("USS"));
     }
 
     /**
