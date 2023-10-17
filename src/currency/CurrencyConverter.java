@@ -19,7 +19,6 @@ package currency;
 import java.io.InputStream;
 import java.io.IOException;
 import java.net.HttpURLConnection;
-import java.net.MalformedURLException;
 import java.net.URI;
 import java.net.URISyntaxException;
 import java.net.URL;
@@ -38,16 +37,51 @@ public class CurrencyConverter {
             + System.getProperty("java.version");
     
     /**
-     * Gives the rate for a currency conversion.
+     * Gives the rate for a currency conversion. This function calls Manny's 
+     * Free Currency Converter API.
      * @param source The currency to convert from. For example, United States 
      * dollars (USD).
      * @param target The currency to convert to. For example, euros (EUR).
      * @return The rate as a <code>String</code> (this is to avoid loss of 
      * precision when passing the value to the <code>BigDecimal</code> 
-     * constructor.
+     * constructor).
+     * @throws RuntimeException If the API returns an HTTP status code other 
+     * than HTTP OK (200), if there is an unexpected I/O problem, or if the URI 
+     * for the API has a syntax error. In the latter two cases, the exception 
+     * object will wrap a specific checked exception.
      */
     public static String getRate(Currency source, Currency target) {
-        return "-2.0";
+        String queryPath 
+                = "https://free.currconv.com/api/v7/convert?q="
+                + source.getCurrencyCode() + "_" 
+                + target.getCurrencyCode()
+                + "&compact=ultra&apiKey=" + API_KEY;
+        try {
+            URI uri = new URI(queryPath);
+            URL queryURL = uri.toURL();
+            HttpURLConnection connection 
+                    = (HttpURLConnection) queryURL.openConnection();
+            connection.setRequestMethod("GET");
+            connection.setRequestProperty("User-Agent", USER_AGENT_ID);
+            int responseCode = connection.getResponseCode();
+            if (responseCode == HttpURLConnection.HTTP_OK) {
+                InputStream stream = (InputStream) connection.getContent();
+                Scanner scanner = new Scanner(stream);
+                String quote = scanner.nextLine();
+                return quote.substring(quote.indexOf(':') + 1, 
+                        quote.indexOf('}'));
+            } else {
+                String excMsg = "Query " + queryPath + " returned status " 
+                        + responseCode;
+                throw new RuntimeException(excMsg);
+            }
+        } catch (IOException ioe) {
+            String excMsg = "Unexpected I/O problem encountered";
+            throw new RuntimeException(excMsg, ioe);
+        } catch (URISyntaxException urise) {
+            String excMsg = "Query path <" + queryPath + "> is not valid";
+            throw new RuntimeException(excMsg, urise);
+        }
     }
     
 }
