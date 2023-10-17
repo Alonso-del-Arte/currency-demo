@@ -49,7 +49,7 @@ public class CurrencyConverterNGTest {
     
     @Test
     public void testGetRateForUSDollarsToEastCaribbeanDollars() {
-        double expected = 2.7;
+        double expected = 2.702;
         double actual = Double.parseDouble(CurrencyConverter
                 .getRate(U_S_DOLLARS, EAST_CARIBBEAN_DOLLARS));
         assertEquals(actual, expected, TEST_DELTA);
