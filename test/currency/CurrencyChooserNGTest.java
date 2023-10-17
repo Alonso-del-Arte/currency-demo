@@ -108,7 +108,7 @@ public class CurrencyChooserNGTest {
                 + dollarsDisplayName + " gave " + actual 
                 + " distinct, should've given at least " + expected 
                 + " distinct";
-        assert expected < actual : msg;
+        assert expected <= actual : msg;
     }
     
     @Test
@@ -287,7 +287,8 @@ public class CurrencyChooserNGTest {
     public void testSameDayUSDollarExcluded() {
         Currency sameDayDollar = Currency.getInstance("USS");
         String sameDayDollarDisplayName = sameDayDollar.getDisplayName();
-        for (int i = 0; i < TOTAL_NUMBER_OF_CURRENCIES; i++) {
+        int numberOfCalls = 2 * TOTAL_NUMBER_OF_CURRENCIES;
+        for (int i = 0; i < numberOfCalls; i++) {
             Currency currency = CurrencyChooser.chooseCurrency();
             String msg = "Currency " + currency.getDisplayName() 
                     + " should not be " + sameDayDollarDisplayName;
