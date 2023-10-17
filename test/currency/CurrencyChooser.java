@@ -39,10 +39,14 @@ public class CurrencyChooser {
 
     private static final Set<Currency> PSEUDO_CURRENCIES = new HashSet<>();
 
+    private static final Set<Currency> HISTORICAL_CURRENCIES = new HashSet<>();
+
     private static final Map<Integer, Set<Currency>> CURRENCIES_DIGITS_MAP 
             = new HashMap<>();
     
     static {
+        final String twentiethCenturyYearIndicator = "\u002819";
+        final String twentyFirstCenturyYearIndicator = "\u002820";
         for (Currency currency : CURRENCIES) {
             int fractionDigits = currency.getDefaultFractionDigits(); 
             if (fractionDigits < 0) {
@@ -57,8 +61,14 @@ public class CurrencyChooser {
                 }
                 digitGroupedSet.add(currency);
             }
+            String dispName = currency.getDisplayName();
+            if (dispName.contains(twentiethCenturyYearIndicator) 
+                    || dispName.contains(twentyFirstCenturyYearIndicator)) {
+                HISTORICAL_CURRENCIES.add(currency);
+            }
         }
         CURRENCIES.removeAll(PSEUDO_CURRENCIES);
+        CURRENCIES.removeAll(HISTORICAL_CURRENCIES);
     }
 
     /**
