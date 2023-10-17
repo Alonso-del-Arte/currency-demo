@@ -43,6 +43,8 @@ public class CurrencyChooserNGTest {
     
     private static final Currency DOLLARS = Currency.getInstance(Locale.US);
     
+    private static final int TOTAL_NUMBER_OF_CURRENCIES = CURRENCIES.size();
+    
     static {
         for (Currency currency : CURRENCIES) {
             int fractDigits = currency.getDefaultFractionDigits();
@@ -262,6 +264,35 @@ public class CurrencyChooserNGTest {
                 + expected + " should've been chosen, " + actual 
                 + " were chosen";
         assert actual >= expected : msg;
+    }
+    
+    private static boolean isHistoricalCurrency(Currency currency) {
+        String displayName = currency.getDisplayName();
+        return displayName.contains("\u002819") 
+                || displayName.contains("\u002820");
+    }
+    
+    @Test
+    public void testHistoricalCurrenciesExcluded() {
+        int numberOfCalls = 2 * TOTAL_NUMBER_OF_CURRENCIES;
+        for (int i = 0; i < numberOfCalls; i++) {
+            Currency currency = CurrencyChooser.chooseCurrency();
+            String msg = "Currency " + currency.getDisplayName() 
+                    + " should not be a historical currency";
+            assert !isHistoricalCurrency(currency) : msg;
+        }
+    }
+
+    @Test
+    public void testSameDayUSDollarExcluded() {
+        Currency sameDayDollar = Currency.getInstance("USS");
+        String sameDayDollarDisplayName = sameDayDollar.getDisplayName();
+        for (int i = 0; i < TOTAL_NUMBER_OF_CURRENCIES; i++) {
+            Currency currency = CurrencyChooser.chooseCurrency();
+            String msg = "Currency " + currency.getDisplayName() 
+                    + " should not be " + sameDayDollarDisplayName;
+            assertNotEquals(sameDayDollar, currency, msg);
+        }
     }
 
 }
