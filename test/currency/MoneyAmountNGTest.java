@@ -366,6 +366,24 @@ public class MoneyAmountNGTest {
         assert !amount.equals(null) : msg;
     }
     
+    @Test
+    public void testNotEqualsDiffClass() {
+        int units = RANDOM.nextInt(1048576);
+        Currency currency = chooseCurrency();
+        MoneyAmount amount = new MoneyAmount(units, currency);
+        MoneyAmount diffClassAmount = new MoneyAmount(units, currency) {
+            
+            @Override
+            public String toString() {
+                return this.getClass().getName() + "<" + super.toString() + ">";
+            }
+            
+        };
+        String msg = amount.toString() + " should not equal " 
+                + diffClassAmount.toString();
+        assertNotEquals(amount, diffClassAmount, msg);
+    }
+
 //    @Test
 //    void testConstructorRejectsPseudoCurrencies() {
 //        Set<Currency> currencies = Currency.getAvailableCurrencies();
