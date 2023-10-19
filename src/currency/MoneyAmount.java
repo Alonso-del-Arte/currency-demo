@@ -10,7 +10,7 @@ import java.util.Currency;
  * Represents an amount of money of a specific currency.
  * @author Alonso del Arte
  */
-public class MoneyAmount {
+public class MoneyAmount implements Comparable<MoneyAmount> {
     
     private final long singles;
     
@@ -73,6 +73,37 @@ public class MoneyAmount {
         return this.currencyID;
     }
     
+    // TODO: Write tests for this
+    public MoneyAmount plus(MoneyAmount addend) {
+        return this;
+    }
+    
+    // TODO: Write tests for this
+    public MoneyAmount negate() {
+        return this;
+    }
+    
+    // TODO: Write tests for this
+    public MoneyAmount minus(MoneyAmount subtrahend) {
+        return this;
+    }
+    
+    // TODO: Write tests for this
+    public MoneyAmount times(int multiplicand) {
+        return this;
+    }
+    
+    // TODO: Write tests for this
+    public MoneyAmount divides(int divisor) {
+        return this;
+    }
+    
+    // TODO: Write tests for this
+    @Override
+    public int compareTo(MoneyAmount other) {
+        return 0;
+    }
+
     @Override
     public String toString() {
         String prefix = (this.cents < 10) ? "$0.0" : "$0.";
