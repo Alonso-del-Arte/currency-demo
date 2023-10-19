@@ -349,7 +349,7 @@ public class MoneyAmountNGTest {
         }
     }
     
-//    @Test
+    @Test
     public void testReferentialEquality() {
         int units = RANDOM.nextInt(1048576);
         Currency currency = chooseCurrency();
