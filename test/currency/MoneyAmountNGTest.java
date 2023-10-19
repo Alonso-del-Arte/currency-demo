@@ -173,7 +173,7 @@ public class MoneyAmountNGTest {
     public void testToStringEurosZeroToNineCents() {
         for (short cents = 0; cents < 10; cents++) {
             MoneyAmount amount = new MoneyAmount(0, EUROS, cents);
-            String expected = "EUR0.0" + cents;
+            String expected = "\u20AC0.0" + cents;
             String actual = amount.toString();
             assertEquals(actual, expected);
         }
@@ -183,7 +183,7 @@ public class MoneyAmountNGTest {
     public void testToStringEurosTenToNinetyNineCents() {
         for (short cents = 10; cents < 100; cents++) {
             MoneyAmount amount = new MoneyAmount(0, EUROS, cents);
-            String expected = "EUR0." + cents;
+            String expected = "\u20AC0." + cents;
             String actual = amount.toString();
             assertEquals(actual, expected);
         }
@@ -192,7 +192,7 @@ public class MoneyAmountNGTest {
     @Test
     public void testToStringEurosPlusZeroToNineCents() {
         int euroQty = RANDOM.nextInt(1000) + 1;
-        String part = "EUR" + euroQty + ".0";
+        String part = "\u20AC" + euroQty + ".0";
         for (short cents = 0; cents < 10; cents++) {
             MoneyAmount amount = new MoneyAmount(euroQty, EUROS, cents);
             String expected = part + cents;
@@ -204,7 +204,7 @@ public class MoneyAmountNGTest {
     @Test
     public void testToStringEurosPlusTenToNinetyCentsCents() {
         int euroQty = RANDOM.nextInt(1000) + 1;
-        String part = "EUR" + euroQty + '.';
+        String part = "\u20AC" + euroQty + '.';
         for (short cents = 10; cents < 100; cents++) {
             MoneyAmount amount = new MoneyAmount(euroQty, EUROS, cents);
             String expected = part + cents;
@@ -216,7 +216,7 @@ public class MoneyAmountNGTest {
     @Test
     public void testToStringEurosNegativeEuroAmountPlusZeroToNineCents() {
         int euroQty = RANDOM.nextInt(1000) + 1;
-        String part = "-EUR" + euroQty + ".0";
+        String part = "-\u20AC" + euroQty + ".0";
         for (short cents = 0; cents < 10; cents++) {
             MoneyAmount amount = new MoneyAmount(-euroQty, EUROS, cents);
             String expected = part + cents;
@@ -228,7 +228,7 @@ public class MoneyAmountNGTest {
     @Test
     public void testToStringEurosNegativeEuroAmountPlusTenToNinetyNineCents() {
         int euroQty = RANDOM.nextInt(1000) + 1;
-        String part = "-EUR" + euroQty + '.';
+        String part = "-\u20AC" + euroQty + '.';
         for (short cents = 10; cents < 100; cents++) {
             MoneyAmount amount = new MoneyAmount(-euroQty, EUROS, cents);
             String expected = part + cents;
@@ -332,7 +332,7 @@ public class MoneyAmountNGTest {
         System.out.println("toString");
         int yenQty = RANDOM.nextInt(1048576);
         MoneyAmount amount = new MoneyAmount(yenQty, YEN);
-        String expected = "JPY" + yenQty;
+        String expected = "\u00A5" + yenQty;
         String actual = amount.toString();
         assertEquals(actual, expected);
     }
@@ -347,6 +347,14 @@ public class MoneyAmountNGTest {
             String actual = amount.toString();
             assertEquals(actual, expected);
         }
+    }
+    
+//    @Test
+    public void testReferentialEquality() {
+        int units = RANDOM.nextInt(1048576);
+        Currency currency = chooseCurrency();
+        MoneyAmount amount = new MoneyAmount(units, currency);
+        assertEquals(amount, amount);
     }
     
 //    @Test
