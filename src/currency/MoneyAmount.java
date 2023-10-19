@@ -110,6 +110,16 @@ public class MoneyAmount implements Comparable<MoneyAmount> {
         return prefix + this.cents;
     }
     
+    @Override
+    public boolean equals(Object obj) {
+        return false;
+    }
+    
+    @Override
+    public int hashCode() {
+        return 0;
+    }
+    
     // TODO: Write tests for this
     public MoneyAmount(long units, Currency currency) {
         this(units, currency, (short) 0);
