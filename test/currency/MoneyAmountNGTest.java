@@ -357,6 +357,15 @@ public class MoneyAmountNGTest {
         assertEquals(amount, amount);
     }
     
+    @Test
+    public void testNotEqualsNull() {
+        int units = RANDOM.nextInt(1048576);
+        Currency currency = chooseCurrency();
+        MoneyAmount amount = new MoneyAmount(units, currency);
+        String msg = amount.toString() + " should not equal null";
+        assert !amount.equals(null) : msg;
+    }
+    
 //    @Test
 //    void testConstructorRejectsPseudoCurrencies() {
 //        Set<Currency> currencies = Currency.getAvailableCurrencies();
