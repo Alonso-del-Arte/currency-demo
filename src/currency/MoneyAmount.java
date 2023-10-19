@@ -106,8 +106,21 @@ public class MoneyAmount implements Comparable<MoneyAmount> {
 
     @Override
     public String toString() {
-        String prefix = (this.cents < 10) ? "$0.0" : "$0.";
-        return prefix + this.cents;
+        if (this.multiplier == 1) {
+            return this.currencyID.getSymbol() + this.singles;
+        }
+        String intermediate = this.currencyID.getSymbol() 
+                + Math.abs(this.singles) + '.';
+        if (this.singles < 0) {
+            intermediate = '-' + intermediate;
+        }
+        if (this.cents < 10) {
+            intermediate += "0";
+        }
+        if (this.cents < 100 && this.multiplier == 1000) {
+            intermediate += "0";
+        }
+        return intermediate + this.cents;
     }
     
     @Override
