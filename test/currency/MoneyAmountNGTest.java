@@ -456,7 +456,7 @@ public class MoneyAmountNGTest {
         }
         int expected = amounts.size();
         int actual = hashes.size();
-        assertEquals(expected, actual);
+        assertEquals(actual, expected);
     }
     
 //    @Test
