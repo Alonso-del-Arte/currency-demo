@@ -407,12 +407,14 @@ public class MoneyAmountNGTest {
         assertEquals(someAmount, sameAmount);
     }
     
-//    @Test
+    @Test
     public void testNotEqualsDifferentEuroAmount() {
         int units = RANDOM.nextInt(1048576);
         MoneyAmount amountA = new MoneyAmount(units, EUROS);
         MoneyAmount amountB = new MoneyAmount(units + 1, EUROS);
-        assertNotEquals(amountA, amountB);
+        String msg = amountA.toString() + " should not equal " 
+                + amountB.toString();
+        assert !amountA.equals(amountB) : msg;
     }
     
 //    @Test
