@@ -138,7 +138,7 @@ public class MoneyAmount implements Comparable<MoneyAmount> {
         if (this.currencyID != other.currencyID) {
             return false;
         }
-        return this.singles == other.singles && this.cents == other.cents;
+        return this.allCents == other.allCents;
     }
     
     @Override
