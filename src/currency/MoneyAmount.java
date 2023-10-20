@@ -125,16 +125,16 @@ public class MoneyAmount implements Comparable<MoneyAmount> {
     
     @Override
     public boolean equals(Object obj) {
-//        if (this == obj) {
-//            return true;
-//        }
-//        if (obj == null) {
-//            return false;
-//        }
-//        if (!this.getClass().equals(obj.getClass())) {
-//            return false;
-//        }
-        return this == obj;
+        if (this == obj) {
+            return true;
+        }
+        if (obj == null) {
+            return false;
+        }
+        if (!this.getClass().equals(obj.getClass())) {
+            return false;
+        }
+        return this.currencyID == ((MoneyAmount) obj).currencyID;
     }
     
     @Override
