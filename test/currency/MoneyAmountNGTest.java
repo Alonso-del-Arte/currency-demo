@@ -22,7 +22,6 @@ import static currency.CurrencyChooser.RANDOM;
 import java.util.Currency;
 import java.util.HashSet;
 import java.util.Locale;
-import java.util.Random;
 import java.util.Set;
 
 import static org.testng.Assert.*;
@@ -357,13 +356,17 @@ public class MoneyAmountNGTest {
         assertEquals(amount, amount);
     }
     
+    private Object provideNull() {
+        return null;
+    }
+    
     @Test
     public void testNotEqualsNull() {
         int units = RANDOM.nextInt(1048576);
         Currency currency = chooseCurrency();
         MoneyAmount amount = new MoneyAmount(units, currency);
         String msg = amount.toString() + " should not equal null";
-        assert !amount.equals(null) : msg;
+        assert !amount.equals(this.provideNull()) : msg;
     }
     
     @Test
@@ -384,6 +387,74 @@ public class MoneyAmountNGTest {
         assertNotEquals(amount, diffClassAmount, msg);
     }
 
+    @Test
+    public void testNotEqualsDiffCurrency() {
+        int units = RANDOM.nextInt(1048576);
+        MoneyAmount amountA = new MoneyAmount(units, DOLLARS);
+        MoneyAmount amountB = new MoneyAmount(units, EUROS);
+        String msg = amountA.toString() + " should not equal " 
+                + amountB.toString() + " regardless of exchange rate";
+        assert !amountA.equals(amountB) : msg;
+    }
+    
+//    @Test
+    public void testEquals() {
+        System.out.println("equals");
+        int units = RANDOM.nextInt(1048576);
+        Currency currency = chooseCurrency();
+        MoneyAmount someAmount = new MoneyAmount(units, currency);
+        MoneyAmount sameAmount = new MoneyAmount(units, currency);
+        assertEquals(someAmount, sameAmount);
+    }
+    
+//    @Test
+    public void testNotEqualsDifferentEuroAmount() {
+        int units = RANDOM.nextInt(1048576);
+        MoneyAmount amountA = new MoneyAmount(units, EUROS);
+        MoneyAmount amountB = new MoneyAmount(units + 1, EUROS);
+        assertNotEquals(amountA, amountB);
+    }
+    
+//    @Test
+    public void testNotEqualsDifferentCentsAmount() {
+        int dollarQty = RANDOM.nextInt(1000) + 1;
+        for (short cents = 0; cents < 99; cents++) {
+            MoneyAmount amountA = new MoneyAmount(dollarQty, DOLLARS, cents);
+            MoneyAmount amountB = new MoneyAmount(dollarQty, DOLLARS, 
+                    (short) (cents +  1));
+            assertNotEquals(amountA, amountB);
+        }
+    }
+    
+//    @Test
+    public void testHashCode() {
+        System.out.println("hashCode");
+        int capacity = RANDOM.nextInt(256) + 64;
+        Set<MoneyAmount> amounts = new HashSet<>(capacity);
+        Set<Integer> hashes = new HashSet<>(capacity);
+        while (amounts.size() < capacity) {
+            int units = RANDOM.nextInt();
+            MoneyAmount amount = new MoneyAmount(units, chooseCurrency());
+            MoneyAmount dinarAmount = new MoneyAmount(units, DINARS);
+            MoneyAmount dollarAmount = new MoneyAmount(units, DOLLARS);
+            MoneyAmount euroAmount = new MoneyAmount(units, EUROS);
+            MoneyAmount yenAmount = new MoneyAmount(units, YEN);
+            amounts.add(amount);
+            amounts.add(dinarAmount);
+            amounts.add(dollarAmount);
+            amounts.add(euroAmount);
+            amounts.add(yenAmount);
+            hashes.add(amount.hashCode());
+            hashes.add(dinarAmount.hashCode());
+            hashes.add(dollarAmount.hashCode());
+            hashes.add(euroAmount.hashCode());
+            hashes.add(yenAmount.hashCode());
+        }
+        int expected = amounts.size();
+        int actual = hashes.size();
+        assertEquals(expected, actual);
+    }
+    
 //    @Test
 //    void testConstructorRejectsPseudoCurrencies() {
 //        Set<Currency> currencies = Currency.getAvailableCurrencies();
