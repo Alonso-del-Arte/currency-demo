@@ -417,14 +417,16 @@ public class MoneyAmountNGTest {
         assert !amountA.equals(amountB) : msg;
     }
     
-//    @Test
+    @Test
     public void testNotEqualsDifferentCentsAmount() {
         int dollarQty = RANDOM.nextInt(1000) + 1;
         for (short cents = 0; cents < 99; cents++) {
             MoneyAmount amountA = new MoneyAmount(dollarQty, DOLLARS, cents);
             MoneyAmount amountB = new MoneyAmount(dollarQty, DOLLARS, 
                     (short) (cents +  1));
-            assertNotEquals(amountA, amountB);
+        String msg = amountA.toString() + " should not equal " 
+                + amountB.toString();
+        assert !amountA.equals(amountB) : msg;
         }
     }
     
