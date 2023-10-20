@@ -397,7 +397,7 @@ public class MoneyAmountNGTest {
         assert !amountA.equals(amountB) : msg;
     }
     
-//    @Test
+    @Test
     public void testEquals() {
         System.out.println("equals");
         int units = RANDOM.nextInt(1048576);
