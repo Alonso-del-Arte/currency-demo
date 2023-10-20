@@ -430,7 +430,7 @@ public class MoneyAmountNGTest {
         }
     }
     
-//    @Test
+    @Test
     public void testHashCode() {
         System.out.println("hashCode");
         int capacity = RANDOM.nextInt(256) + 64;
