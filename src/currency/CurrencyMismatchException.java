@@ -24,16 +24,8 @@ package currency;
 public class CurrencyMismatchException extends RuntimeException {
     
     private static final long serialVersionUID = 4556099108573545874L;
-    
-    private final String excMsg;
-    
+        
     private final MoneyAmount amountA, amountB;
-    
-    // TODO: Write tests for this
-    @Override
-    public String getMessage() {
-        return this.excMsg;
-    }
     
     // TODO: Write tests for this
     public MoneyAmount getAmountA() {
@@ -49,9 +41,9 @@ public class CurrencyMismatchException extends RuntimeException {
         this("SORRY, DEFAULT MESSAGE NOT IMPLEMENTED YET", amtA, amtB);
     }
     
-    public CurrencyMismatchException(String msg, MoneyAmount amtA, 
+    public CurrencyMismatchException(String message, MoneyAmount amtA, 
             MoneyAmount amtB) {
-        this.excMsg = msg;
+        super(message);
         this.amountA = amtA;
         this.amountB = amtB;
     }
