@@ -16,14 +16,45 @@
  */
 package currency;
 
+import static currency.CurrencyChooser.chooseCurrency;
+import static currency.CurrencyChooser.chooseCurrencyOtherThan;
+import static currency.CurrencyChooser.RANDOM;
+
+import java.util.Currency;
+
 import static org.testng.Assert.*;
 import org.testng.annotations.Test;
 
 /**
- *
+ * Tests of the CurrencyMismatchException class.
  * @author Alonso del Arte
  */
 public class CurrencyMismatchExceptionNGTest {
+    
+    private static MoneyAmount chooseAmountA() {
+        return new MoneyAmount(RANDOM.nextInt(1024), chooseCurrency(2), 
+                (short) RANDOM.nextInt(100));
+    }
+    
+    private static MoneyAmount chooseAmountB(MoneyAmount amtA) {
+        Currency currencyA = amtA.getCurrency();
+        return new MoneyAmount(RANDOM.nextInt(1024), 
+                chooseCurrencyOtherThan(currencyA));
+    }
+    
+    /**
+     * Test of the getMessage function, of the CurrencyMismatchException class.
+     */
+    @Test
+    public void testGetMessage() {
+        System.out.println("getMessage");
+        String expected = "FOR TESTING PURPOSES";
+        MoneyAmount amtA = chooseAmountA();
+        MoneyAmount amtB = chooseAmountB(amtA);
+        Throwable exc = new CurrencyMismatchException(expected, amtA, amtB);
+        String actual = exc.getMessage();
+        assertEquals(actual, expected);
+    }
     
     /**
      * Test of getAmountA method, of class CurrencyMismatchException.
