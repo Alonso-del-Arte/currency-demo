@@ -41,6 +41,8 @@ public class CurrencyChooser {
 
     private static final Set<Currency> HISTORICAL_CURRENCIES = new HashSet<>();
 
+    private static final Set<Currency> OTHER_EXCLUSIONS = new HashSet<>();
+
     private static final Map<Integer, Set<Currency>> CURRENCIES_DIGITS_MAP 
             = new HashMap<>();
     
@@ -67,13 +69,31 @@ public class CurrencyChooser {
                 HISTORICAL_CURRENCIES.add(currency);
             }
         }
+        final String[] otherExclusionCodes = {"BGL", "USS"};
+        for (String exclusionCode : otherExclusionCodes) {
+            try {
+                Currency currency = Currency.getInstance(exclusionCode);
+                OTHER_EXCLUSIONS.add(currency);
+            } catch (IllegalArgumentException iae) {
+                System.err.println("\"" + iae.getMessage() + "\"");
+            }
+        }
         CURRENCIES.removeAll(PSEUDO_CURRENCIES);
         CURRENCIES.removeAll(HISTORICAL_CURRENCIES);
-        CURRENCIES.remove(Currency.getInstance("USS"));
+        CURRENCIES.removeAll(OTHER_EXCLUSIONS);
     }
 
     /**
-     * Chooses a currency suitable for the {@link MoneyAmount} constructor.
+     * Chooses a currency suitable for the {@link MoneyAmount} constructor. Also 
+     * tries not to choose a currency that might not be supported by an online 
+     * currency conversion API, such as historical currencies (like the old 
+     * Russian ruble) and the following specific currencies:
+     * <ul>
+     * <li>The same day U.&nbsp;S. dollar (USS), not sure how it differs from 
+     * the U.&nbsp;S. dollar (USD)</li>
+     * <li>The Bulgarian hard lev (BGL), not sure how it differs from the 
+     * Bulgarian lev (BGN)</li>
+     * </ul>
      * @return A currency with default fraction digits of at least 0. For 
      * example, the Kyrgystani som (KGS), which like most world currencies by 
      * default has two fractional digits. A som is divided into 100 tyin.
