@@ -296,4 +296,17 @@ public class CurrencyChooserNGTest {
         }
     }
 
+    @Test
+    public void testBulgarianHardLevExcluded() {
+        Currency bulgarianHardLev = Currency.getInstance("BGL");
+        String bulgarianHardLevDisplayName = bulgarianHardLev.getDisplayName();
+        int numberOfCalls = 2 * TOTAL_NUMBER_OF_CURRENCIES;
+        for (int i = 0; i < numberOfCalls; i++) {
+            Currency currency = CurrencyChooser.chooseCurrency();
+            String msg = "Currency " + currency.getDisplayName() 
+                    + " should not be " + bulgarianHardLevDisplayName;
+            assertNotEquals(bulgarianHardLev, currency, msg);
+        }
+    }
+
 }
