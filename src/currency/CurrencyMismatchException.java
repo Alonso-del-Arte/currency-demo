@@ -16,6 +16,8 @@
  */
 package currency;
 
+import java.util.Currency;
+
 /**
  * Signals that a currency mismatch has occurred and a currency conversion is 
  * needed. Note that this exception is different from the one in Joda Money.
@@ -36,9 +38,19 @@ public class CurrencyMismatchException extends RuntimeException {
     public MoneyAmount getAmountB() {
         return this.amountA;
     }
+    
+    private static String buildMessage(MoneyAmount amtA, MoneyAmount amtB) {
+        Currency currencyA = amtA.getCurrency();
+        Currency currencyB = amtB.getCurrency();
+        return "Conversion needed from " + amtA.toString() + " to " 
+                + currencyB.getDisplayName() + "(" + currencyB.getCurrencyCode() 
+                + ") or " + amtB.toString() + " to " 
+                + currencyA.getDisplayName() + "(" + currencyA.getCurrencyCode() 
+                + ")";
+    }
 
     public CurrencyMismatchException(MoneyAmount amtA, MoneyAmount amtB) {
-        this("SORRY, DEFAULT MESSAGE NOT IMPLEMENTED YET", amtA, amtB);
+        this(buildMessage(amtA, amtB), amtA, amtB);
     }
     
     public CurrencyMismatchException(String message, MoneyAmount amtA, 
