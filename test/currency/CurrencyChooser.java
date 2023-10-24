@@ -42,6 +42,8 @@ public class CurrencyChooser {
     private static final Set<Currency> HISTORICAL_CURRENCIES = new HashSet<>();
 
     private static final Set<Currency> OTHER_EXCLUSIONS = new HashSet<>();
+    
+    private static final String[] OTHER_EXCLUSION_CODES = {"BGL", "CHW", "USS"};
 
     private static final Map<Integer, Set<Currency>> CURRENCIES_DIGITS_MAP 
             = new HashMap<>();
@@ -69,8 +71,7 @@ public class CurrencyChooser {
                 HISTORICAL_CURRENCIES.add(currency);
             }
         }
-        final String[] otherExclusionCodes = {"BGL", "USS"};
-        for (String exclusionCode : otherExclusionCodes) {
+        for (String exclusionCode : OTHER_EXCLUSION_CODES) {
             try {
                 Currency currency = Currency.getInstance(exclusionCode);
                 OTHER_EXCLUSIONS.add(currency);
@@ -89,10 +90,12 @@ public class CurrencyChooser {
      * currency conversion API, such as historical currencies (like the old 
      * Russian ruble) and the following specific currencies:
      * <ul>
-     * <li>The same day U.&nbsp;S. dollar (USS), not sure how it differs from 
-     * the U.&nbsp;S. dollar (USD)</li>
      * <li>The Bulgarian hard lev (BGL), not sure how it differs from the 
      * Bulgarian lev (BGN)</li>
+     * <li>The WIR franc (CHW), a "community currency" that is equal in value to 
+     * the Swiss franc (CHF).</li>
+     * <li>The same day U.&nbsp;S. dollar (USS), not sure how it differs from 
+     * the U.&nbsp;S. dollar (USD)</li>
      * </ul>
      * @return A currency with default fraction digits of at least 0. For 
      * example, the Kyrgystani som (KGS), which like most world currencies by 
