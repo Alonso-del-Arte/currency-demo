@@ -27,6 +27,12 @@ public class CurrencyMismatchException extends RuntimeException {
     private final MoneyAmount amountA, amountB;
     
     // TODO: Write tests for this
+    @Override
+    public String getMessage() {
+        return "SORRY, NOT IMPLEMENTED YET";
+    }
+    
+    // TODO: Write tests for this
     public MoneyAmount getAmountA() {
         return this.amountB;
     }
