@@ -57,7 +57,25 @@ public class CurrencyMismatchExceptionNGTest {
     }
     
     /**
-     * Test of getAmountA method, of class CurrencyMismatchException.
+     * Another test of the getMessage function, of the CurrencyMismatchException 
+     * class.
+     */
+    @Test
+    public void testDefaultMessageConstructorFillsInMessageWithAmounts() {
+        MoneyAmount amtA = chooseAmountA();
+        MoneyAmount amtB = chooseAmountB(amtA);
+        Throwable exc = new CurrencyMismatchException(amtA, amtB);
+        String amtAStr = amtA.toString();
+        String amtBStr = amtB.toString();
+        String excMsg = exc.getMessage();
+        String msg = "Message should include amounts " + amtAStr + " and " 
+                + amtBStr;
+        assert excMsg.contains(amtAStr) : msg;
+        assert excMsg.contains(amtBStr) : msg;
+    }
+    
+    /**
+     * Test of getAmountA method, of the CurrencyMismatchException class.
      */
     @Test
     public void testGetAmountA() {
