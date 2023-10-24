@@ -45,6 +45,13 @@ public class CurrencyChooserNGTest {
     
     private static final int TOTAL_NUMBER_OF_CURRENCIES = CURRENCIES.size();
     
+    private static final int NUMBER_OF_CALLS_MULTIPLIER_FOR_EXCLUSION_SEARCH 
+            = 4;
+    
+    private static final int NUMBER_OF_CALLS_FOR_EXCLUSION_SEARCH 
+            = NUMBER_OF_CALLS_MULTIPLIER_FOR_EXCLUSION_SEARCH 
+            * TOTAL_NUMBER_OF_CURRENCIES;
+    
     static {
         for (Currency currency : CURRENCIES) {
             int fractDigits = currency.getDefaultFractionDigits();
@@ -274,8 +281,7 @@ public class CurrencyChooserNGTest {
     
     @Test
     public void testHistoricalCurrenciesExcluded() {
-        int numberOfCalls = 2 * TOTAL_NUMBER_OF_CURRENCIES;
-        for (int i = 0; i < numberOfCalls; i++) {
+        for (int i = 0; i < NUMBER_OF_CALLS_FOR_EXCLUSION_SEARCH; i++) {
             Currency currency = CurrencyChooser.chooseCurrency();
             String msg = "Currency " + currency.getDisplayName() 
                     + " should not be a historical currency";
@@ -287,8 +293,7 @@ public class CurrencyChooserNGTest {
     public void testSameDayUSDollarExcluded() {
         Currency sameDayDollar = Currency.getInstance("USS");
         String sameDayDollarDisplayName = sameDayDollar.getDisplayName();
-        int numberOfCalls = 2 * TOTAL_NUMBER_OF_CURRENCIES;
-        for (int i = 0; i < numberOfCalls; i++) {
+        for (int i = 0; i < NUMBER_OF_CALLS_FOR_EXCLUSION_SEARCH; i++) {
             Currency currency = CurrencyChooser.chooseCurrency();
             String msg = "Currency " + currency.getDisplayName() 
                     + " should not be " + sameDayDollarDisplayName;
@@ -300,12 +305,23 @@ public class CurrencyChooserNGTest {
     public void testBulgarianHardLevExcluded() {
         Currency bulgarianHardLev = Currency.getInstance("BGL");
         String bulgarianHardLevDisplayName = bulgarianHardLev.getDisplayName();
-        int numberOfCalls = 2 * TOTAL_NUMBER_OF_CURRENCIES;
-        for (int i = 0; i < numberOfCalls; i++) {
+        for (int i = 0; i < NUMBER_OF_CALLS_FOR_EXCLUSION_SEARCH; i++) {
             Currency currency = CurrencyChooser.chooseCurrency();
             String msg = "Currency " + currency.getDisplayName() 
                     + " should not be " + bulgarianHardLevDisplayName;
             assertNotEquals(bulgarianHardLev, currency, msg);
+        }
+    }
+
+    @Test
+    public void testWIRFrancExcluded() {
+        Currency wirFranc = Currency.getInstance("CHW");
+        String wirFrancDisplayName = wirFranc.getDisplayName();
+        for (int i = 0; i < NUMBER_OF_CALLS_FOR_EXCLUSION_SEARCH; i++) {
+            Currency currency = CurrencyChooser.chooseCurrency();
+            String msg = "Currency " + currency.getDisplayName() 
+                    + " should not be " + wirFrancDisplayName;
+            assertNotEquals(wirFranc, currency, msg);
         }
     }
 
