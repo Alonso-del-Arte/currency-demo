@@ -17,19 +17,22 @@
 package currency;
 
 /**
- *
+ * Signals that a currency mismatch has occurred and a currency conversion is 
+ * needed. Note that this exception is different from the one in Joda Money.
  * @author Alonso del Arte
  */
 public class CurrencyMismatchException extends RuntimeException {
     
     private static final long serialVersionUID = 4556099108573545874L;
     
+    private final String excMsg;
+    
     private final MoneyAmount amountA, amountB;
     
     // TODO: Write tests for this
     @Override
     public String getMessage() {
-        return "SORRY, NOT IMPLEMENTED YET";
+        return this.excMsg;
     }
     
     // TODO: Write tests for this
@@ -48,6 +51,7 @@ public class CurrencyMismatchException extends RuntimeException {
     
     public CurrencyMismatchException(String msg, MoneyAmount amtA, 
             MoneyAmount amtB) {
+        this.excMsg = msg;
         this.amountA = amtA;
         this.amountB = amtB;
     }
