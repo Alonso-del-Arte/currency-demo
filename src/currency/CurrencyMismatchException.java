@@ -29,9 +29,13 @@ public class CurrencyMismatchException extends RuntimeException {
         
     private final MoneyAmount amountA, amountB;
     
-    // TODO: Write tests for this
+    /**
+     * Getter for one of the amounts this exception was constructed with.
+     * @return The first amount that was passed in to the constructor. For 
+     * example, $349.75.
+     */
     public MoneyAmount getAmountA() {
-        return this.amountB;
+        return this.amountA;
     }
 
     // TODO: Write tests for this
@@ -43,10 +47,10 @@ public class CurrencyMismatchException extends RuntimeException {
         Currency currencyA = amtA.getCurrency();
         Currency currencyB = amtB.getCurrency();
         return "Conversion needed from " + amtA.toString() + " to " 
-                + currencyB.getDisplayName() + "(" + currencyB.getCurrencyCode() 
-                + ") or " + amtB.toString() + " to " 
-                + currencyA.getDisplayName() + "(" + currencyA.getCurrencyCode() 
-                + ")";
+                + currencyB.getDisplayName() + " (" 
+                + currencyB.getCurrencyCode() + ") or " + amtB.toString() 
+                + " to " + currencyA.getDisplayName() + " (" 
+                + currencyA.getCurrencyCode() + ")";
     }
 
     public CurrencyMismatchException(MoneyAmount amtA, MoneyAmount amtB) {
