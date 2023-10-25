@@ -90,17 +90,17 @@ public class CurrencyMismatchExceptionNGTest {
     }
 
     /**
-     * Test of getAmountB method, of class CurrencyMismatchException.
+     * Test of the getAmountB function, of the CurrencyMismatchException class.
      */
     @Test
     public void testGetAmountB() {
         System.out.println("getAmountB");
-        CurrencyMismatchException instance = null;
-        MoneyAmount expResult = null;
-//        MoneyAmount result = instance.getAmountB();
-//        assertEquals(result, expResult);
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
+        MoneyAmount amtA = chooseAmountA();
+        MoneyAmount expected = chooseAmountB(amtA);
+        CurrencyMismatchException exc = new CurrencyMismatchException(amtA, 
+                expected);
+        MoneyAmount actual = exc.getAmountB();
+        assertEquals(actual, expected);
     }
     
 }
