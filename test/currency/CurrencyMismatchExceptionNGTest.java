@@ -68,6 +68,7 @@ public class CurrencyMismatchExceptionNGTest {
         String amtAStr = amtA.toString();
         String amtBStr = amtB.toString();
         String excMsg = exc.getMessage();
+        System.out.println("\"" + excMsg + "\"");
         String msg = "Message should include amounts " + amtAStr + " and " 
                 + amtBStr;
         assert excMsg.contains(amtAStr) : msg;
@@ -75,17 +76,17 @@ public class CurrencyMismatchExceptionNGTest {
     }
     
     /**
-     * Test of getAmountA method, of the CurrencyMismatchException class.
+     * Test of the getAmountA function, of the CurrencyMismatchException class.
      */
     @Test
     public void testGetAmountA() {
         System.out.println("getAmountA");
-        CurrencyMismatchException instance = null;
-        MoneyAmount expResult = null;
-//        MoneyAmount result = instance.getAmountA();
-//        assertEquals(result, expResult);
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
+        MoneyAmount expected = chooseAmountA();
+        MoneyAmount amtB = chooseAmountB(expected);
+        CurrencyMismatchException exc = new CurrencyMismatchException(expected, 
+                amtB);
+        MoneyAmount actual = exc.getAmountA();
+        assertEquals(actual, expected);
     }
 
     /**
