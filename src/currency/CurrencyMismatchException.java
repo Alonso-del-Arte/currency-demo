@@ -38,9 +38,13 @@ public class CurrencyMismatchException extends RuntimeException {
         return this.amountA;
     }
 
-    // TODO: Write tests for this
+    /**
+     * Getter for one of the amounts this exception was constructed with.
+     * @return The second amount that was passed in to the constructor. For 
+     * example, 500,00&euro;.
+     */
     public MoneyAmount getAmountB() {
-        return this.amountA;
+        return this.amountB;
     }
     
     private static String buildMessage(MoneyAmount amtA, MoneyAmount amtB) {
