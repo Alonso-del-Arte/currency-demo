@@ -93,7 +93,7 @@ public class MoneyAmount implements Comparable<MoneyAmount> {
     
     // TODO: Write tests for this
     public MoneyAmount negate() {
-        return this;
+        return new MoneyAmount(currencyID, -this.allCents, this.multiplier);
     }
     
     // TODO: Write tests for this
