@@ -19,6 +19,7 @@ package org.example;
 import currency.CurrencyConverter;
 
 import java.math.BigDecimal;
+import java.text.DecimalFormat;
 import java.util.Currency;
 import java.util.Locale;
 
@@ -59,6 +60,17 @@ public class Demo3 {
         BigDecimal salesTaxRate = new BigDecimal("0.06");
         BigDecimal expected = new BigDecimal("211.99");
         BigDecimal actual = price.add(price.multiply(salesTaxRate));
+        assertEquals(actual, expected);
+    }
+    
+    @Test
+    public void demoFormattingEffort() {
+        BigDecimal price = new BigDecimal("199.99");
+        BigDecimal salesTaxRate = new BigDecimal("0.06");
+        BigDecimal priceWithTax = price.add(price.multiply(salesTaxRate));
+        DecimalFormat formatter = new DecimalFormat("'$'0.00");
+        String expected = "$211.99";
+        String actual = formatter.format(priceWithTax);
         assertEquals(actual, expected);
     }
     
