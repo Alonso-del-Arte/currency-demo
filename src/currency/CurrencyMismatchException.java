@@ -47,6 +47,16 @@ public class CurrencyMismatchException extends RuntimeException {
         return this.amountB;
     }
     
+    // TODO: Write tests for this
+    public MoneyAmount convertAmountAToCurrencyB() {
+        return new MoneyAmount(-1, Currency.getInstance("EUR"));
+    }
+    
+    // TODO: Write tests for this
+    public MoneyAmount convertAmountBToCurrencyA() {
+        return new MoneyAmount(-1, Currency.getInstance("EUR"));
+    }
+    
     private static String buildMessage(MoneyAmount amtA, MoneyAmount amtB) {
         Currency currencyA = amtA.getCurrency();
         Currency currencyB = amtB.getCurrency();
