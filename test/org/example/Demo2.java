@@ -60,7 +60,7 @@ public class Demo2 {
     private static String format(char symbol, long amount) {
         StringBuilder builder = new StringBuilder(Long.toString(amount));
         builder.insert(0, symbol);
-        builder.insert(builder.length() - 2, symbol);
+        builder.insert(builder.length() - 2, '.');
         return builder.toString();
     }
     
@@ -79,20 +79,21 @@ public class Demo2 {
     
     @Test
     public void testAddDollarsAndEuros() {
-        fail("REWRITE");
-        double dollars = 500.00;
-        double euros = 500.00;
+        long dollars = 50000;
+        long euros = 50000;
         Currency dollar = Currency.getInstance(Locale.US);
         Currency euro = Currency.getInstance("EUR");
-        double expectedA = dollars + (euros 
-                * Double.parseDouble(CurrencyConverter.getRate(euro, dollar)));
-        double expectedB = euros + (dollars 
-                * Double.parseDouble(CurrencyConverter.getRate(dollar, euro)));
-        double actual = dollars + euros;
-        String msg = "$" + dollars + " + \u20AC" + euros + " should be either $" 
-                + expectedA + " or \u20AC" + expectedB + ", got ?" + actual;
+        long expectedA = dollars + ((long) (euros 
+                * Double.parseDouble(CurrencyConverter.getRate(euro, dollar))));
+        long expectedB = euros + ((long) (dollars 
+                * Double.parseDouble(CurrencyConverter.getRate(dollar, euro))));
+        long actual = dollars + euros;
+        String msg = format(DOLLAR_SYMBOL, dollars) + " + " 
+                + format(EURO_SYMBOL, euros) + " should be either " 
+                + format(DOLLAR_SYMBOL, expectedA) + " or " 
+                + format(EURO_SYMBOL, expectedB) + ", got " 
+                + format('?', actual);
         System.out.println(msg);
-        fail("HAVEN'T FINISHED WRITING CURRENCY CONVERTER YET");
         assert expectedA == actual || expectedB == actual : msg;
     }
     
