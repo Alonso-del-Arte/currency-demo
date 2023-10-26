@@ -478,6 +478,23 @@ public class MoneyAmountNGTest {
                 + addendB.toString();
         assertEquals(actual, expected, message);
     }
+
+    // TODO: Write test for plus mismatched currencies
+    
+    // TODO: Write test for minus
+    
+    // TODO: Write test for minus mismatched currencies
+    
+    @Test
+    public void testNegate() {
+        System.out.println("negate");
+        Currency currency = CurrencyChooser.chooseCurrency();
+        int units = RANDOM.nextInt(2048) - 1024;
+        MoneyAmount amount = new MoneyAmount(units, currency);
+        MoneyAmount expected = new MoneyAmount(-units, currency);
+        MoneyAmount actual = amount.negate();
+        assertEquals(actual, expected);
+    }
     
 //    @Test
 //    void testConstructorRejectsPseudoCurrencies() {
