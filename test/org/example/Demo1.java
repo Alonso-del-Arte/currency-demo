@@ -70,7 +70,7 @@ public class Demo1 {
     }
     
     @Test
-    public void demoSpecialFormattingEffort() {
+    public void demoFormattingEffort() {
         double price = 199.99;
         double salesTaxRate = 0.06;
         double priceWithTax = price + (price * salesTaxRate);
