@@ -107,6 +107,11 @@ public class MoneyAmount implements Comparable<MoneyAmount> {
     }
     
     // TODO: Write tests for this
+    public MoneyAmount times(double multiplicand) {
+        return this;
+    }
+    
+    // TODO: Write tests for this
     public MoneyAmount divides(int divisor) {
         return this;
     }
