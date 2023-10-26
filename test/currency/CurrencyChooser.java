@@ -56,19 +56,22 @@ public class CurrencyChooser {
             if (fractionDigits < 0) {
                 PSEUDO_CURRENCIES.add(currency);
             } else {
-                Set<Currency> digitGroupedSet;
-                if (CURRENCIES_DIGITS_MAP.containsKey(fractionDigits)) {
-                    digitGroupedSet = CURRENCIES_DIGITS_MAP.get(fractionDigits);
+                String dispName = currency.getDisplayName();
+                if (dispName.contains(twentiethCenturyYearIndicator) 
+                        || dispName.contains(twentyFirstCenturyYearIndicator)) {
+                    HISTORICAL_CURRENCIES.add(currency);
                 } else {
-                    digitGroupedSet = new HashSet<>();
-                    CURRENCIES_DIGITS_MAP.put(fractionDigits, digitGroupedSet);
+                    Set<Currency> digitGroupedSet;
+                    if (CURRENCIES_DIGITS_MAP.containsKey(fractionDigits)) {
+                        digitGroupedSet = CURRENCIES_DIGITS_MAP
+                                .get(fractionDigits);
+                    } else {
+                        digitGroupedSet = new HashSet<>();
+                        CURRENCIES_DIGITS_MAP.put(fractionDigits, 
+                                digitGroupedSet);
+                    }
+                    digitGroupedSet.add(currency);
                 }
-                digitGroupedSet.add(currency);
-            }
-            String dispName = currency.getDisplayName();
-            if (dispName.contains(twentiethCenturyYearIndicator) 
-                    || dispName.contains(twentyFirstCenturyYearIndicator)) {
-                HISTORICAL_CURRENCIES.add(currency);
             }
         }
         for (String exclusionCode : OTHER_EXCLUSION_CODES) {
