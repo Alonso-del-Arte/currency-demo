@@ -55,31 +55,32 @@ public class Demo3 {
     
     @Test
     public void testAddMichiganSalesTax() {
-        fail("REWRITE");
-        double price = 199.99;
-        double salesTaxRate = 0.06;
-        double expected = 211.99;
-        double actual = price + (price * salesTaxRate);
-        assertEquals(actual, expected, 0.0);
+        BigDecimal price = new BigDecimal("199.99");
+        BigDecimal salesTaxRate = new BigDecimal("0.06");
+        BigDecimal expected = new BigDecimal("211.99");
+        BigDecimal actual = price.add(price.multiply(salesTaxRate));
+        assertEquals(actual, expected);
     }
     
     @Test
     public void testAddDollarsAndEuros() {
-        fail("REWRITE");
-        double dollars = 500.00;
-        double euros = 500.00;
+        String fiveHundred = "500.00";
+        BigDecimal fiveHundredDollars = new BigDecimal(fiveHundred);
+        BigDecimal fiveHundredEuros = new BigDecimal(fiveHundred);
         Currency dollar = Currency.getInstance(Locale.US);
         Currency euro = Currency.getInstance("EUR");
-        double expectedA = dollars + (euros 
-                * Double.parseDouble(CurrencyConverter.getRate(euro, dollar)));
-        double expectedB = euros + (dollars 
-                * Double.parseDouble(CurrencyConverter.getRate(dollar, euro)));
-        double actual = dollars + euros;
-        String msg = "$" + dollars + " + \u20AC" + euros + " should be either $" 
-                + expectedA + " or \u20AC" + expectedB + ", got ?" + actual;
-        System.out.println(msg);
-        fail("HAVEN'T FINISHED WRITING CURRENCY CONVERTER YET");
-        assert expectedA == actual || expectedB == actual : msg;
+        BigDecimal expectedA = fiveHundredDollars.add(fiveHundredEuros
+                .multiply(new BigDecimal(CurrencyConverter.getRate(euro, 
+                        dollar))));
+        BigDecimal expectedB = fiveHundredEuros.add(fiveHundredDollars
+                .multiply(new BigDecimal(CurrencyConverter.getRate(dollar, 
+                        euro))));
+        BigDecimal actual = fiveHundredDollars.add(fiveHundredEuros);
+        String msg = "$" + fiveHundredDollars.toPlainString() + " + \u20AC" 
+                + fiveHundredEuros.toPlainString() + " should be either $" 
+                + expectedA.toPlainString() + " or \u20AC" 
+                + expectedB.toPlainString() + ", got ?" + actual;
+        assert expectedA.equals(actual) || expectedB.equals(actual) : msg;
     }
     
 }
