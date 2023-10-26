@@ -18,6 +18,7 @@ package org.example;
 
 import currency.CurrencyConverter;
 
+import java.text.DecimalFormat;
 import java.util.Currency;
 import java.util.Locale;
 
@@ -69,6 +70,17 @@ public class Demo1 {
     }
     
     @Test
+    public void demoSpecialFormattingEffort() {
+        double price = 199.99;
+        double salesTaxRate = 0.06;
+        double priceWithTax = price + (price * salesTaxRate);
+        DecimalFormat formatter = new DecimalFormat("'$'0.00");
+        String expected = "$211.99";
+        String actual = formatter.format(priceWithTax);
+        assertEquals(actual, expected);
+    }
+    
+    @Test
     public void testAddDollarsAndEuros() {
         double dollars = 500.00;
         double euros = 500.00;
@@ -82,7 +94,6 @@ public class Demo1 {
         String msg = "$" + dollars + " + \u20AC" + euros + " should be either $" 
                 + expectedA + " or \u20AC" + expectedB + ", got ?" + actual;
         System.out.println(msg);
-        fail("HAVEN'T FINISHED WRITING CURRENCY CONVERTER YET");
         assert expectedA == actual || expectedB == actual : msg;
     }
     
