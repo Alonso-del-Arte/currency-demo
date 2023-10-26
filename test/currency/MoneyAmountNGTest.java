@@ -459,6 +459,26 @@ public class MoneyAmountNGTest {
         assertEquals(actual, expected);
     }
     
+    @Test
+    public void testPlus() {
+        System.out.println("plus");
+        Currency currency = CurrencyChooser.chooseCurrency(2);
+        int unitsA = RANDOM.nextInt(Short.MAX_VALUE);
+        short centsA = (short) RANDOM.nextInt(100);
+        MoneyAmount addendA = new MoneyAmount(unitsA, currency, centsA);
+        int unitsB = RANDOM.nextInt(Short.MAX_VALUE);
+        short centsB = (short) RANDOM.nextInt(100);
+        MoneyAmount addendB = new MoneyAmount(unitsB, currency, centsB);
+        int centSum = centsA + centsB;
+        short expCents = (short) (centSum % 100);
+        int expUnits = unitsA + unitsB + (centSum / 100);
+        MoneyAmount expected = new MoneyAmount(expUnits, currency, expCents);
+        MoneyAmount actual = addendA.plus(addendB);
+        String message = "Calculating " + addendA.toString() + " + " 
+                + addendB.toString();
+        assertEquals(actual, expected, message);
+    }
+    
 //    @Test
 //    void testConstructorRejectsPseudoCurrencies() {
 //        Set<Currency> currencies = Currency.getAvailableCurrencies();
