@@ -108,7 +108,9 @@ public class MoneyAmount implements Comparable<MoneyAmount> {
     
     // TODO: Write tests for this
     public MoneyAmount times(double multiplicand) {
-        return this;
+        long fullAmountInCents = (long) (multiplicand * this.allCents);
+        return new MoneyAmount(this.currencyID, fullAmountInCents, 
+                this.multiplier);
     }
     
     // TODO: Write tests for this
@@ -178,7 +180,6 @@ public class MoneyAmount implements Comparable<MoneyAmount> {
         this.allCents = this.singles * this.multiplier + this.cents;
     }
 
-    // TODO: Write tests for this
     private MoneyAmount(Currency currency, long fullAmountInCents, 
             int verifiedMultiplier) {
         this.multiplier = verifiedMultiplier;
