@@ -496,6 +496,29 @@ public class MoneyAmountNGTest {
         assertEquals(actual, expected);
     }
     
+    // TODO: Write test for times (int)
+    
+    @Test
+    public void testTimesDouble() {
+        Currency currency = CurrencyChooser.chooseCurrency(3);
+        int units = RANDOM.nextInt(65536);
+        MoneyAmount amount = new MoneyAmount(units, currency);
+        double multiplicand = RANDOM.nextDouble() + RANDOM.nextInt(16) + 4;
+        int expAllDarahim = (int) (1000.0 * multiplicand * units);
+        int expUnits = expAllDarahim / 1000;
+        short expDarahim = (short) (expAllDarahim % 1000);
+        long maxVariance = 50;
+        MoneyAmount expected = new MoneyAmount(expUnits, currency, expDarahim);
+        MoneyAmount actual = amount.times(multiplicand);
+        String msg = amount.toString() + " multiplied by " + multiplicand
+                + " is expected to be " + expected.toString() + ", got " 
+                + actual.toString();
+        assertEquals(actual.getCurrency(), expected.getCurrency(), msg);
+        long diff = Math.abs(expected.getFullAmountInCents() 
+                - actual.getFullAmountInCents());
+        assert diff < maxVariance : msg;
+    }
+    
 //    @Test
 //    void testConstructorRejectsPseudoCurrencies() {
 //        Set<Currency> currencies = Currency.getAvailableCurrencies();
