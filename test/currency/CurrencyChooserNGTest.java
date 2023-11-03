@@ -338,4 +338,16 @@ public class CurrencyChooserNGTest {
         }
     }
 
+    @Test
+    public void testFinnishMarkkaExcluded() {
+        Currency finnishMarkka = Currency.getInstance("FIM");
+        String finnishMarkkaDisplayName = finnishMarkka.getDisplayName();
+        for (int i = 0; i < NUMBER_OF_CALLS_FOR_EXCLUSION_SEARCH; i++) {
+            Currency currency = CurrencyChooser.chooseCurrency();
+            String msg = "Currency " + currency.getDisplayName() 
+                    + " should not be " + finnishMarkkaDisplayName;
+            assertNotEquals(finnishMarkka, currency, msg);
+        }
+    }
+
 }
