@@ -90,7 +90,7 @@ public class CurrencyChooserNGTest {
         int actual = samples.size();
         String msg = "Trying to pick " + numberOfTries + " from set of " 
                 + totalNumberOfCurrencies + " gave " + actual 
-                + " distinct, should've given at least " + expected 
+                + " distinct, should've given more than " + expected 
                 + " distinct";
         assert expected < actual : msg;
     }
@@ -140,7 +140,7 @@ public class CurrencyChooserNGTest {
         int actual = samples.size();
         String msg = "Trying to pick " + numberOfTries + " other than " 
                 + currencyDisplayName + " gave " + actual 
-                + " distinct, should've given at least " + expected 
+                + " distinct, should've given more than " + expected 
                 + " distinct";
         assert expected < actual : msg;
     }
