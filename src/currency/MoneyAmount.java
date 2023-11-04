@@ -106,9 +106,18 @@ public class MoneyAmount implements Comparable<MoneyAmount> {
         return this;
     }
     
-    // TODO: Write tests for this
+    /**
+     * Multiplies this money amount by a floating point number. Keep in mind 
+     * that due to the vagaries of floating point, there may be occasional 
+     * rounding errors.
+     * @param multiplicand The number to multiply by. For example, 9.75.
+     * @return The money amount multiplied by <code>multiplicand</code>, subject 
+     * to loss of precision since divisions smaller than the currency's default 
+     * subdivision might be ignored. For example, if this amount is $10.25, 
+     * multiplied by 9.75 the result would be $99.94, not $99.9375.
+     */
     public MoneyAmount times(double multiplicand) {
-        long fullAmountInCents = (long) (multiplicand * this.allCents);
+        long fullAmountInCents = (long) Math.ceil(multiplicand * this.allCents);
         return new MoneyAmount(this.currencyID, fullAmountInCents, 
                 this.multiplier);
     }
