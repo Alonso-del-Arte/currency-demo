@@ -521,30 +521,18 @@ public class MoneyAmountNGTest {
     
     /**
      * Another test of the times function, of the MoneyAmount class. The idea 
-     * here is to multiply a pseudorandomly chosen money amount by ten thousand 
-     * and add one cent, but using multiplication by a floating point value. For 
-     * example, 1,28&euro; times 10000.0078125 should give 12800,01&euro;, not 
-     * 12800,00&euro;. In other words, the extra cent should come from rounding 
-     * up.
+     * here is that, in the case of a currency in which the unit divides into a 
+     * hundred cents, if the result includes 5 or more mills, that should get 
+     * rounded up to a full cent.
      */
     @Test
     public void testTimesDoubleRoundsUpWhenNeeded() {
         Currency currency = CurrencyChooser.chooseCurrency(2);
-        int multAllCents = RANDOM.nextInt(65536) + 4;
-        int multUnits = multAllCents / 100;
-        short multDivisions = (short) (multAllCents % 100);
-        MoneyAmount amount = new MoneyAmount(multUnits, currency, 
-                multDivisions);
-        int targetAllCents = 10000 * multAllCents + 1;
-        int targetUnits = targetAllCents / 100;
-        short targetDivisions = (short) (targetAllCents % 100);
-        MoneyAmount expected = new MoneyAmount(targetUnits, currency, 
-                targetDivisions);
-        double multiplicand = targetAllCents / multAllCents;
+        MoneyAmount amount = new MoneyAmount(10, currency, (short) 25);
+        MoneyAmount expected = new MoneyAmount(99, currency, (short) 94);
+        double multiplicand = 9.75;
         MoneyAmount actual = amount.times(multiplicand);
-        String message = "Expecting " + amount.toString() 
-                + " times 10000 plus 1 cent";
-        assertEquals(actual, expected, message);
+        assertEquals(actual, expected);
     }
     
 //    @Test
