@@ -29,10 +29,9 @@ public class CurrencyPropsLister {
     
     // TODO: Write tests for this
     static void printCurrencyInfo(Currency currency) {
-        System.out.print("???" + currency.getDisplayName());
+        System.out.print(currency.getDisplayName());
         System.out.print("   Symbol: " + currency.getSymbol());
         System.out.println("   ISO 4217: " + currency.getCurrencyCode());
-        System.out.println("NO TESTS HAVE BEEN WRITTEN FOR THIS YET");
         System.out.print("Number code: " + currency.getNumericCode());
         System.out.println("   Default fraction digits: " 
                 + currency.getDefaultFractionDigits());
