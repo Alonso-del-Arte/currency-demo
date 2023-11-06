@@ -84,15 +84,22 @@ public class CurrencyPropsListerNGTest {
     }
 
     /**
-     * Test of main method, of class CurrencyPropsLister.
+     * Test of the main procedure, of the CurrencyPropsLister class.
      */
-//    @Test
+    @Test
     public void testMain() {
         System.out.println("main");
-        String[] args = null;
+        Currency currency = CurrencyChooser.chooseCurrency();
+        String[] args = {currency.getCurrencyCode()};
+        this.rerouteOut();
+        CurrencyPropsLister.printCurrencyInfo(currency);
+        String expected = this.stream.toString();
+        this.restoreOut();
+        this.rerouteOut();
         CurrencyPropsLister.main(args);
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
+        String actual = this.stream.toString();
+        this.restoreOut();
+        assertEquals(actual, expected);
     }
     
 
