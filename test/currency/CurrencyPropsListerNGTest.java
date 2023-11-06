@@ -20,9 +20,13 @@ import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 import java.io.OutputStream;
 import java.io.PrintStream;
+import java.util.ArrayList;
 import java.util.Currency;
+import java.util.List;
 
 import static org.testng.Assert.*;
+import org.testng.annotations.AfterTest;
+import org.testng.annotations.BeforeTest;
 import org.testng.annotations.Test;
 
 /**
@@ -31,20 +35,58 @@ import org.testng.annotations.Test;
  */
 public class CurrencyPropsListerNGTest {
     
+    private static final PrintStream USUAL_OUT = System.out;
+    
+    private PrintStream interceptor;
+    
+    private ByteArrayOutputStream stream;
+    
+    private void rerouteOut() {
+        System.out.println("About to reroute usual output stream");
+        this.stream = new ByteArrayOutputStream();
+        this.interceptor = new PrintStream(stream);
+        System.setOut(this.interceptor);
+    }
+    
+    private void restoreOut() {
+        try {
+            this.stream.close();
+            this.interceptor.close();
+            System.setOut(USUAL_OUT);
+            System.out.println("Restored usual output stream");
+        } catch (IOException ioe) {
+            System.err.println("Had problem restoring usual output stream");
+            System.err.println("\"" + ioe.getMessage() + "\"");
+        }
+    }
+    
     /**
-     * Test of printCurrencyInfo procedure, of the CurrencyPropsLister class.
+     * Test of the printCurrencyInfo procedure, of the CurrencyPropsLister 
+     * class.
      */
     @Test
     public void testPrintCurrencyInfo() {
         System.out.println("printCurrencyInfo");
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
+        Currency currency = CurrencyChooser.chooseCurrency();
+        System.out.println("Chose " + currency.getDisplayName() + " (" 
+                + currency.getCurrencyCode() + ") for this test");
+        String expected = currency.getDisplayName() 
+                + "   Symbol: " + currency.getSymbol() + "   ISO 4217: " 
+                + currency.getCurrencyCode() + "Number code: " 
+                + currency.getNumericCode() + "   Default fraction digits: " 
+                + currency.getDefaultFractionDigits();
+        this.rerouteOut();
+        CurrencyPropsLister.printCurrencyInfo(currency);
+        String actual = this.stream.toString().replace("\n", "")
+                .replace("\r", "");
+        this.restoreOut();
+        assertEquals(actual, expected);
     }
 
     /**
      * Test of main method, of class CurrencyPropsLister.
      */
-    @Test
+//    @Test
     public void testMain() {
         System.out.println("main");
         String[] args = null;
@@ -53,4 +95,5 @@ public class CurrencyPropsListerNGTest {
         fail("The test case is a prototype.");
     }
     
+
 }
