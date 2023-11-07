@@ -21,6 +21,7 @@ import java.io.IOException;
 import java.io.PrintStream;
 import java.util.Currency;
 import java.util.Locale;
+import java.util.Set;
 
 import static org.testng.Assert.*;
 import org.testng.annotations.Test;
@@ -120,6 +121,26 @@ public class CurrencyPropsListerNGTest {
             String msg = "Expected output to contain \"" + expectedExcerpt 
                     + "\"";
             assert opResult : msg;
+        }
+    }
+    
+    @Test
+    public void testMainWithZeroArgs() {
+        Set<Currency> currencies = Currency.getAvailableCurrencies();
+        String[] args = {};
+        this.rerouteOut();
+        CurrencyPropsLister.main(args);
+        String actual = this.stream.toString();
+        this.restoreOut();
+        String expectedStart = "There are " + currencies.size() 
+                + " currencies:";
+        String startMsg = "Output should start with \"" + expectedStart + "\"";
+        assert actual.startsWith(expectedStart) : startMsg;
+        for (Currency currency : currencies) {
+            String expectedExcerpt = currency.getDisplayName();
+            String msg = "Output should include information for " 
+                    + expectedExcerpt + " (" + currency.getCurrencyCode() + ")";
+            assert actual.contains(expectedExcerpt) : msg;
         }
     }
 
