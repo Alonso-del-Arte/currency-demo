@@ -143,5 +143,18 @@ public class CurrencyPropsListerNGTest {
             assert actual.contains(expectedExcerpt) : msg;
         }
     }
+    
+    @Test
+    public void testMainErrorOutputIncludesInvalidCurrencyCode() {
+        String invalidCode = "THIS IS NOT A VALID CURRENCY CODE";
+        String[] args = {invalidCode};
+        this.rerouteOut();
+        CurrencyPropsLister.main(args);
+        String actual = this.stream.toString();
+        this.restoreOut();
+        String msg = "Output should include invalid currency code \"" 
+                + invalidCode + "\"";
+        assert actual.contains(invalidCode) : msg;
+    }
 
 }
