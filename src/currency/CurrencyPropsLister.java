@@ -39,10 +39,10 @@ public class CurrencyPropsLister {
     
     // TODO: Write tests for this
     public static void main(String[] args) {
-        if (args.length == 1) {
-            Currency currency = Currency.getInstance(args[0]);
-            printCurrencyInfo(currency);
-        }
+        if (args.length > 0) {
+//            Currency currency = Currency.getInstance(args[0]);
+//            printCurrencyInfo(currency);
+//        }
 //        if (args.length == 0) {
 //            Set<Currency> currencies = Currency.getAvailableCurrencies();
 //            System.out.println("There are " + currencies.size() 
@@ -51,17 +51,17 @@ public class CurrencyPropsLister {
 //                printCurrencyInfo(currency);
 //            });
 //        } else {
-//            for (String arg : args) {
-//                try {
-//                    Currency currency = Currency.getInstance(arg);
-//                    printCurrencyInfo(currency);
-//                } catch (IllegalArgumentException iae) {
-//                    System.out.println(arg + " is not a valid currency code");
-//                    System.out.println("\"" + iae.getMessage() + "\"");
-//                    System.out.println();
-//                }
-//            }
-//        }
+            for (String arg : args) {
+                try {
+                    Currency currency = Currency.getInstance(arg);
+                    printCurrencyInfo(currency);
+                } catch (IllegalArgumentException iae) {
+                    System.out.println(arg + " is not a valid currency code");
+                    System.out.println("\"" + iae.getMessage() + "\"");
+                    System.out.println();
+                }
+            }
+        }
     }
     
 }
