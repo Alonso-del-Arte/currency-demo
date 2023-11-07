@@ -63,7 +63,7 @@ public class CurrencyPropsLister {
                     Currency currency = Currency.getInstance(arg);
                     printCurrencyInfo(currency);
                 } catch (IllegalArgumentException iae) {
-//                    System.out.println(arg + " is not a valid currency code");
+                    System.out.println(arg + " is not a valid currency code");
                     System.out.println("\"" + iae.getMessage() + "\"");
                     System.out.println();
                 }
