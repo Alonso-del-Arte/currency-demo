@@ -18,15 +18,11 @@ package currency;
 
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
-import java.io.OutputStream;
 import java.io.PrintStream;
-import java.util.ArrayList;
 import java.util.Currency;
-import java.util.List;
+import java.util.Locale;
 
 import static org.testng.Assert.*;
-import org.testng.annotations.AfterTest;
-import org.testng.annotations.BeforeTest;
 import org.testng.annotations.Test;
 
 /**
@@ -102,5 +98,29 @@ public class CurrencyPropsListerNGTest {
         assertEquals(actual, expected);
     }
     
+    @Test
+    public void testMainArrayWithAFewCurrencies() {
+        Currency[] currencies = new Currency[5];
+        currencies[0] = CurrencyChooser.chooseCurrency(0);
+        currencies[1] = Currency.getInstance(Locale.US);
+        for (int i = 2; i < 5; i++) {
+            currencies[i] = CurrencyChooser.chooseCurrency(i);
+        }
+        String[] args = new String[currencies.length];
+        for (int j = 0; j < currencies.length; j++) {
+            args[j] = currencies[j].getCurrencyCode();
+        }
+        this.rerouteOut();
+        CurrencyPropsLister.main(args);
+        String actual = this.stream.toString();
+        this.restoreOut();
+        for (String arg : args) {
+            String expectedExcerpt = "ISO 4217: " + arg;
+            boolean opResult = actual.contains(expectedExcerpt);
+            String msg = "Expected output to contain \"" + expectedExcerpt 
+                    + "\"";
+            assert opResult : msg;
+        }
+    }
 
 }
