@@ -37,26 +37,33 @@ public class CurrencyPropsLister {
         System.out.println();
     }
     
-    // TODO: Write tests for this
+    /**
+     * Displays information about specified currencies, or all currencies if 
+     * none are specified. This program only recognizes currencies recognized by 
+     * <code>java.util.Currency</code>. For each currency, this program displays 
+     * a locale-specific symbol (might match the ISO-4217 letter code), the 
+     * ISO-4217 letter code, the ISO-4217 number code and the default fraction 
+     * digits (such as 2 for currencies that divide into cents).
+     * @param args The ISO-4217 letter codes for the desired currencies. For 
+     * example, {"USD", "EUR", "JPY"} for the United States dollar, the euro and 
+     * the Japanese yen. May be an empty array, in which case all currencies 
+     * recognized by <code>java.util.Currency</code> will be displayed.
+     */
     public static void main(String[] args) {
-        if (args.length > 0) {
-//            Currency currency = Currency.getInstance(args[0]);
-//            printCurrencyInfo(currency);
-//        }
-//        if (args.length == 0) {
-//            Set<Currency> currencies = Currency.getAvailableCurrencies();
-//            System.out.println("There are " + currencies.size() 
-//                    + " currencies");
-//            currencies.forEach((currency) -> {
-//                printCurrencyInfo(currency);
-//            });
-//        } else {
+        if (args.length == 0) {
+            Set<Currency> currencies = Currency.getAvailableCurrencies();
+            System.out.println("There are " + currencies.size() 
+                    + " currencies:");
+            currencies.forEach((currency) -> {
+                printCurrencyInfo(currency);
+            });
+        } else {
             for (String arg : args) {
                 try {
                     Currency currency = Currency.getInstance(arg);
                     printCurrencyInfo(currency);
                 } catch (IllegalArgumentException iae) {
-                    System.out.println(arg + " is not a valid currency code");
+//                    System.out.println(arg + " is not a valid currency code");
                     System.out.println("\"" + iae.getMessage() + "\"");
                     System.out.println();
                 }
