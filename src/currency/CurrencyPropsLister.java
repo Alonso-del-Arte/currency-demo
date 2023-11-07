@@ -27,7 +27,6 @@ import java.util.Set;
  */
 public class CurrencyPropsLister {
     
-    // TODO: Write tests for this
     static void printCurrencyInfo(Currency currency) {
         System.out.print(currency.getDisplayName());
         System.out.print("   Symbol: " + currency.getSymbol());
@@ -40,13 +39,17 @@ public class CurrencyPropsLister {
     
     // TODO: Write tests for this
     public static void main(String[] args) {
+        if (args.length == 1) {
+            Currency currency = Currency.getInstance(args[0]);
+            printCurrencyInfo(currency);
+        }
 //        if (args.length == 0) {
-            Set<Currency> currencies = Currency.getAvailableCurrencies();
-            System.out.println("There are " + currencies.size() 
-                    + " currencies");
-            currencies.forEach((currency) -> {
-                printCurrencyInfo(currency);
-            });
+//            Set<Currency> currencies = Currency.getAvailableCurrencies();
+//            System.out.println("There are " + currencies.size() 
+//                    + " currencies");
+//            currencies.forEach((currency) -> {
+//                printCurrencyInfo(currency);
+//            });
 //        } else {
 //            for (String arg : args) {
 //                try {
