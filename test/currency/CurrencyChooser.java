@@ -43,8 +43,8 @@ public class CurrencyChooser {
 
     private static final Set<Currency> OTHER_EXCLUSIONS = new HashSet<>();
     
-    private static final String[] OTHER_EXCLUSION_CODES = {"BGL", "CHW", "FIM", 
-        "USS"};
+    private static final String[] OTHER_EXCLUSION_CODES = {"BGL", "CHW", "EEK", 
+        "FIM", "USS"};
 
     private static final Map<Integer, Set<Currency>> CURRENCIES_DIGITS_MAP 
             = new HashMap<>();
@@ -98,6 +98,10 @@ public class CurrencyChooser {
      * Bulgarian lev (BGN)</li>
      * <li>The WIR franc (CHW), a "community currency" that is equal in value to 
      * the Swiss franc (CHF).</li>
+     * <li>The Estonian kroon (EEK), technically a historical currency since now 
+     * the euro (EUR) is the only official currency in Estonia, but it might not 
+     * get picked up as such if the currency file data doesn't indicate 
+     * something like "(1992 &mdash; 2011)"</li>
      * <li>The same day U.&nbsp;S. dollar (USS), not sure how it differs from 
      * the U.&nbsp;S. dollar (USD)</li>
      * </ul>
