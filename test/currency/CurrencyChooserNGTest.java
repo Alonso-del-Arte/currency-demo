@@ -350,4 +350,16 @@ public class CurrencyChooserNGTest {
         }
     }
 
+    @Test
+    public void testEstonianKroonExcluded() {
+        Currency estonianKroon = Currency.getInstance("EEK");
+        String estonianKroonDisplayName = estonianKroon.getDisplayName();
+        for (int i = 0; i < NUMBER_OF_CALLS_FOR_EXCLUSION_SEARCH; i++) {
+            Currency currency = CurrencyChooser.chooseCurrency();
+            String msg = "Currency " + currency.getDisplayName() 
+                    + " should not be " + estonianKroonDisplayName;
+            assertNotEquals(estonianKroon, currency, msg);
+        }
+    }
+
 }
