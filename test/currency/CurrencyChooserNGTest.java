@@ -362,4 +362,16 @@ public class CurrencyChooserNGTest {
         }
     }
 
+    @Test
+    public void testSlovenianTolarExcluded() {
+        Currency slovenianTolar = Currency.getInstance("SIT");
+        String slovenianTolarDisplayName = slovenianTolar.getDisplayName();
+        for (int i = 0; i < NUMBER_OF_CALLS_FOR_EXCLUSION_SEARCH; i++) {
+            Currency currency = CurrencyChooser.chooseCurrency();
+            String msg = "Currency " + currency.getDisplayName() 
+                    + " should not be " + slovenianTolarDisplayName;
+            assertNotEquals(slovenianTolar, currency, msg);
+        }
+    }
+
 }
