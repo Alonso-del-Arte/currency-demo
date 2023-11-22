@@ -81,10 +81,11 @@ public class CurrencyConverterNGTest {
                 .getRate(firstTarget, U_S_DOLLARS));
         double expected = 1.0;
         double actual = fromDollars * toDollars;
-        String msg = "Rate of conversion from " + U_S_DOLLARS.getDisplayName() 
-                + " (" + dollarsDisplayName + ") to " + firstTargetDisplayName 
-                + " (" + firstTarget.getCurrencyCode() + ") is said to be " 
-                + fromDollars + ", and vice-versa is said to be " + toDollars;
+        String msg = "Rate of conversion from " + dollarsDisplayName + " (" 
+                + U_S_DOLLARS.getCurrencyCode() + ") to " 
+                + firstTargetDisplayName + " (" + firstTarget.getCurrencyCode() 
+                + ") is said to be " + fromDollars 
+                + ", and vice-versa is said to be " + toDollars;
         System.out.println(msg);
         assertEquals(actual, expected, TEST_DELTA, msg);
     }
