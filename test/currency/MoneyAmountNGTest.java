@@ -481,7 +481,33 @@ public class MoneyAmountNGTest {
 
     // TODO: Write test for plus mismatched currencies
     
-    // TODO: Write test for minus
+    @Test
+    public void testMinus() {
+        System.out.println("minus");
+        Currency currency = CurrencyChooser.chooseCurrency(2);
+        int unitsA = RANDOM.nextInt(Short.MAX_VALUE) + 1;
+        short centsA = (short) RANDOM.nextInt(100);
+        MoneyAmount minuend = new MoneyAmount(unitsA, currency, centsA);
+        int unitsB = RANDOM.nextInt(unitsA - 1);
+        short centsB = (short) RANDOM.nextInt(100);
+        MoneyAmount subtrahend = new MoneyAmount(unitsB, currency, centsB);
+        int centDiff = centsA - centsB;
+        short expCents = (short) (centDiff % 1000);
+        int unitAdjust = 0;
+        if (expCents < 0) {
+            expCents += 1000;
+            unitAdjust = -1;
+        }
+        int expUnits = unitsA - unitsB + unitAdjust;
+        MoneyAmount expected = new MoneyAmount(expUnits, currency, expCents);
+        MoneyAmount actual = minuend.minus(subtrahend);
+        String message = "Calculating " + minuend.toString() + " \u2212 " 
+                + subtrahend.toString();
+        assertEquals(actual, expected, message);
+    }
+    
+    // TODO: Write test for minus with positive minuend, subtrahend, 
+    // negative subtraction
     
     // TODO: Write test for minus mismatched currencies
     
