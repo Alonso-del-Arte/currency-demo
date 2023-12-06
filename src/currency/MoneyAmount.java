@@ -98,7 +98,8 @@ public class MoneyAmount implements Comparable<MoneyAmount> {
     
     // TODO: Write tests for this
     public MoneyAmount minus(MoneyAmount subtrahend) {
-        return this;
+        return new MoneyAmount(currencyID, this.allCents - subtrahend.allCents,  
+                this.multiplier);
     }
     
     // TODO: Write tests for this
