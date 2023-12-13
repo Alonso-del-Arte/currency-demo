@@ -19,7 +19,10 @@ package currency;
 import java.util.Currency;
 
 /**
- * Represents an amount of money of a specific currency.
+ * Represents an amount of money of a specific currency. The precision is 
+ * limited to the number of default fraction digits. Thus, for example, for a 
+ * currency in which the units are normally divided into 100 cents, mills in 
+ * intermediate calculations are discarded.
  * @author Alonso del Arte
  */
 public class MoneyAmount implements Comparable<MoneyAmount> {
@@ -102,9 +105,18 @@ public class MoneyAmount implements Comparable<MoneyAmount> {
                 this.multiplier);
     }
     
-    // TODO: Write tests for this
+    /**
+     * Multiplies this money amount by an integer. This operation will generally 
+     * be more reliable than multiplying by a floating point number, even if 
+     * that floating point number is arithmetically equal to an integer.
+     * @param multiplicand The number to multiply by. For example, 12.
+     * @return The money amount multiplied by <code>multiplicand</code>. For 
+     * example, if this money amount is 73,55&euro;, multiplied by 12 the result 
+     * would be 882,60&euro;.
+     */
     public MoneyAmount times(int multiplicand) {
-        return this;
+        return new MoneyAmount(this.currencyID, allCents * multiplicand, 
+                this.multiplier);
     }
     
     /**
