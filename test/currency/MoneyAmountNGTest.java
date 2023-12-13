@@ -522,7 +522,24 @@ public class MoneyAmountNGTest {
         assertEquals(actual, expected);
     }
     
-    // TODO: Write test for times (int)
+    @Test
+    public void testTimes() {
+        System.out.println("times");
+        Currency currency = CurrencyChooser.chooseCurrency(2);
+        int units = RANDOM.nextInt(65536);
+        short cents = (short) RANDOM.nextInt(100);
+        MoneyAmount amount = new MoneyAmount(units, currency, cents);
+        int multiplicand = RANDOM.nextInt(16) + 4;
+        short intermediateCents = (short) (cents * multiplicand);
+        short expCents = (short) (intermediateCents % 100);
+        int carriedDollars = (intermediateCents - expCents) / 100;
+        int expDollars = units * multiplicand + carriedDollars;
+        MoneyAmount expected = new MoneyAmount(expDollars, currency, expCents);
+        MoneyAmount actual = amount.times(multiplicand);
+        String message = "Multiplying " + amount.toString() + " by " 
+                + multiplicand;
+        assertEquals(actual, expected, message);
+    }
     
     @Test
     public void testTimesDouble() {
