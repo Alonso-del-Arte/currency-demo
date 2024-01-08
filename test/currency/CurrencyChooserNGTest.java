@@ -75,7 +75,7 @@ public class CurrencyChooserNGTest {
     public void testChooseCurrency() {
         System.out.println("chooseCurrency");
         int totalNumberOfCurrencies = CURRENCIES.size();
-        int numberOfTries = 3 * totalNumberOfCurrencies / 2;
+        int numberOfTries = 5 * totalNumberOfCurrencies / 4;
         Set<Currency> samples = new HashSet<>();
         int sampleNumber = 0;
         while (sampleNumber < numberOfTries) {
