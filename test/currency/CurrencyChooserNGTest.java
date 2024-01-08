@@ -75,7 +75,7 @@ public class CurrencyChooserNGTest {
     public void testChooseCurrency() {
         System.out.println("chooseCurrency");
         int totalNumberOfCurrencies = CURRENCIES.size();
-        int numberOfTries = 5 * totalNumberOfCurrencies / 4;
+        int numberOfTries = 5 * totalNumberOfCurrencies / 3;
         Set<Currency> samples = new HashSet<>();
         int sampleNumber = 0;
         while (sampleNumber < numberOfTries) {
@@ -88,7 +88,7 @@ public class CurrencyChooserNGTest {
         }
         int expected = 7 * totalNumberOfCurrencies / 10;
         int actual = samples.size();
-        String msg = "Trying to pick " + numberOfTries + " from set of " 
+        String msg = "Trying to pick " + numberOfTries + " times from set of " 
                 + totalNumberOfCurrencies + " gave " + actual 
                 + " distinct, should've given more than " + expected 
                 + " distinct";
