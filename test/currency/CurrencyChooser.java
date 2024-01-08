@@ -113,9 +113,9 @@ public class CurrencyChooser {
      * example, the Kyrgystani som (KGS), which like most world currencies by 
      * default has two fractional digits. A som is divided into 100 tyin.
      */
-    public static Currency chooseCurrency() {
-        int index = RANDOM.nextInt(CURRENCIES.size());
-        return CURRENCIES.get(index);
+    public static Currency chooseCurrency() {return Currency.getInstance("XTS");
+//        int index = RANDOM.nextInt(CURRENCIES.size());
+//        return CURRENCIES.get(index);
     }
 
     /**
@@ -140,17 +140,18 @@ public class CurrencyChooser {
      * ignored by this chooser.
      */
     public static Currency chooseCurrency(int fractionDigits) {
-        if (CURRENCIES_DIGITS_MAP.containsKey(fractionDigits)) {
-            List<Currency> currencies 
-                    = new ArrayList<>(CURRENCIES_DIGITS_MAP
-                            .get(fractionDigits));
-            int index = RANDOM.nextInt(currencies.size());
-            return currencies.get(index);
-        } else {
-            String excMsg = "No available currency with " + fractionDigits 
-                    + " fraction digits";
-            throw new NoSuchElementException(excMsg);
-        }
+        return Currency.getInstance("XTS");
+//        if (CURRENCIES_DIGITS_MAP.containsKey(fractionDigits)) {
+//            List<Currency> currencies 
+//                    = new ArrayList<>(CURRENCIES_DIGITS_MAP
+//                            .get(fractionDigits));
+//            int index = RANDOM.nextInt(currencies.size());
+//            return currencies.get(index);
+//        } else {
+//            String excMsg = "No available currency with " + fractionDigits 
+//                    + " fraction digits";
+//            throw new NoSuchElementException(excMsg);
+//        }
     }
 
     /**
@@ -166,11 +167,12 @@ public class CurrencyChooser {
      * other is the U.&nbsp;S. dollar.
      */
     public static Currency chooseCurrencyOtherThan(Currency currency) {
-        Currency otherCurrency = currency;
-        while (otherCurrency == currency) {
-            otherCurrency = chooseCurrency();
-        }
-        return otherCurrency;
+        return currency;
+//        Currency otherCurrency = currency;
+//        while (otherCurrency == currency) {
+//            otherCurrency = chooseCurrency();
+//        }
+//        return otherCurrency;
     }
 
 }
