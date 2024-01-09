@@ -373,5 +373,17 @@ public class CurrencyChooserNGTest {
             assertNotEquals(slovenianTolar, currency, msg);
         }
     }
+    
+    @Test
+    public void testBolivianMVDOLExcluded() {
+        Currency mvDol = Currency.getInstance("BOV");
+        String mvDolDisplayName = mvDol.getDisplayName();
+        for (int i = 0; i < NUMBER_OF_CALLS_FOR_EXCLUSION_SEARCH; i++) {
+            Currency currency = CurrencyChooser.chooseCurrency();
+            String msg = "Currency " + currency.getDisplayName() 
+                    + " should not be " + mvDolDisplayName;
+            assertNotEquals(mvDol, currency, msg);
+        }
+    }
 
 }
