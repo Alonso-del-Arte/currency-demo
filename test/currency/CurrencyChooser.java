@@ -43,8 +43,8 @@ public class CurrencyChooser {
 
     private static final Set<Currency> OTHER_EXCLUSIONS = new HashSet<>();
     
-    private static final String[] OTHER_EXCLUSION_CODES = {"BGL", "CHW", "EEK", 
-        "FIM", "SIT", "USS"};
+    private static final String[] OTHER_EXCLUSION_CODES = {"BGL", "BOV", "CHW", 
+        "EEK", "FIM", "SIT", "USS"};
 
     private static final Map<Integer, Set<Currency>> CURRENCIES_DIGITS_MAP 
             = new HashMap<>();
@@ -94,20 +94,26 @@ public class CurrencyChooser {
      * currency conversion API, such as historical currencies (like the old 
      * Russian ruble) and the following specific currencies:
      * <ul>
-     * <li>The Bulgarian hard lev (BGL), not sure how it differs from the 
-     * Bulgarian lev (BGN)</li>
+     * <li>The Bulgarian hard lev (BGL), I'm not sure how it differs from the 
+     * Bulgarian lev (BGN).</li>
+     * <li>The Bolivian MVDOL (BOV), a monetary unit managed by the Banco 
+     * Central de Bolivia. The MVDOL correlates the modern boliviano (BOB) to 
+     * the United States dollar (USD). The MVDOL is used for financial 
+     * instruments like treasury bills. From what I understand, it's not used 
+     * for everyday expenses like buying groceries, nor for tourists' expenses, 
+     * like booking a hotel.</li>
      * <li>The WIR franc (CHW), a "community currency" that is equal in value to 
-     * the Swiss franc (CHF)</li>
+     * the Swiss franc (CHF).</li>
      * <li>The Estonian kroon (EEK), technically a historical currency since now 
      * the euro (EUR) is the only official currency in Estonia, but it might not 
      * get picked up as such if the currency file data doesn't indicate 
-     * something like "(1992 &mdash; 2011)"</li>
+     * something like "(1992 &mdash; 2011)."</li>
      * <li>The Slovenian tolar (SIT), technically a historical currency since 
      * now the euro (EUR) is the only official currency in Slovenia, but it 
      * might not get picked up as such if the currency file data doesn't 
-     * indicate something like "(1991 &mdash; 2007)"</li>
+     * indicate something like "(1991 &mdash; 2007)."</li>
      * <li>The same day U.&nbsp;S. dollar (USS), not sure how it differs from 
-     * the U.&nbsp;S. dollar (USD)</li>
+     * the U.&nbsp;S. dollar (USD).</li>
      * </ul>
      * @return A currency with default fraction digits of at least 0. For 
      * example, the Kyrgystani som (KGS), which like most world currencies by 
