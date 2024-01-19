@@ -72,22 +72,24 @@ public class CurrencyConverterNGTest {
         Currency firstTarget = CurrencyChooser
                 .chooseCurrencyOtherThan(U_S_DOLLARS);
         String dollarsDisplayName = U_S_DOLLARS.getDisplayName();
+        String dollarsISO4217Code = U_S_DOLLARS.getCurrencyCode();
         String firstTargetDisplayName = firstTarget.getDisplayName();
+        String firstTargetISO4217Code = firstTarget.getCurrencyCode();
         System.out.println("Inquiring rate of conversion from " 
-                + dollarsDisplayName + " to " + firstTargetDisplayName);
+                + dollarsDisplayName + " (" + dollarsISO4217Code + ") to " 
+                + firstTargetDisplayName + " (" + firstTargetISO4217Code + ")");
         double fromDollars = Double.parseDouble(CurrencyConverter
                 .getRate(U_S_DOLLARS, firstTarget));
         double toDollars = Double.parseDouble(CurrencyConverter
                 .getRate(firstTarget, U_S_DOLLARS));
         double expected = 1.0;
         double actual = fromDollars * toDollars;
-        String msg = "Rate of conversion from " + dollarsDisplayName + " (" 
-                + U_S_DOLLARS.getCurrencyCode() + ") to " 
-                + firstTargetDisplayName + " (" + firstTarget.getCurrencyCode() 
-                + ") is said to be " + fromDollars 
+        String message = "Rate of conversion from " + dollarsDisplayName + " (" 
+                + dollarsISO4217Code + ") to " + firstTargetDisplayName + " (" 
+                + firstTargetISO4217Code + ") is said to be " + fromDollars 
                 + ", and vice-versa is said to be " + toDollars;
-        System.out.println(msg);
-        assertEquals(actual, expected, TEST_DELTA, msg);
+        System.out.println(message);
+        assertEquals(actual, expected, TEST_DELTA, message);
     }
     
 }
