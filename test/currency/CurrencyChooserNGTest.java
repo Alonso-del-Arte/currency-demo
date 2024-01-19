@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2023 Alonso del Arte
+ * Copyright (C) 2024 Alonso del Arte
  *
  * This program is free software: you can redistribute it and/or modify it under 
  * the terms of the GNU General Public License as published by the Free Software 
@@ -383,6 +383,18 @@ public class CurrencyChooserNGTest {
             String msg = "Currency " + currency.getDisplayName() 
                     + " should not be " + mvDolDisplayName;
             assertNotEquals(mvDol, currency, msg);
+        }
+    }
+
+    @Test
+    public void testItalianLiraExcluded() {
+        Currency lira = Currency.getInstance("ITL");
+        String liraDisplayName = lira.getDisplayName();
+        for (int i = 0; i < NUMBER_OF_CALLS_FOR_EXCLUSION_SEARCH; i++) {
+            Currency currency = CurrencyChooser.chooseCurrency();
+            String msg = "Currency " + currency.getDisplayName() 
+                    + " should not be " + liraDisplayName;
+            assertNotEquals(lira, currency, msg);
         }
     }
 
