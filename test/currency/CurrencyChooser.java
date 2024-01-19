@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2023 Alonso del Arte
+ * Copyright (C) 2024 Alonso del Arte
  *
  * This program is free software: you can redistribute it and/or modify it under 
  * the terms of the GNU General Public License as published by the Free Software 
@@ -44,7 +44,7 @@ public class CurrencyChooser {
     private static final Set<Currency> OTHER_EXCLUSIONS = new HashSet<>();
     
     private static final String[] OTHER_EXCLUSION_CODES = {"BGL", "BOV", "CHW", 
-        "EEK", "FIM", "SIT", "USS"};
+        "EEK", "FIM", "ITL", "SIT", "USS"};
 
     private static final Map<Integer, Set<Currency>> CURRENCIES_DIGITS_MAP 
             = new HashMap<>();
@@ -92,7 +92,10 @@ public class CurrencyChooser {
      * Chooses a currency suitable for the {@link MoneyAmount} constructor. Also 
      * tries not to choose a currency that might not be supported by an online 
      * currency conversion API, such as historical currencies (like the old 
-     * Russian ruble) and the following specific currencies:
+     * Russian ruble, RUR) that are marked as historical in the Java runtime's 
+     * currency information file by having a range of years in their display 
+     * names (e.g., 1991 &mdash; 1998 for the old Russian ruble), and the 
+     * following specific currencies:
      * <ul>
      * <li>The Bulgarian hard lev (BGL), I'm not sure how it differs from the 
      * Bulgarian lev (BGN).</li>
@@ -104,16 +107,20 @@ public class CurrencyChooser {
      * like booking a hotel.</li>
      * <li>The WIR franc (CHW), a "community currency" that is equal in value to 
      * the Swiss franc (CHF).</li>
-     * <li>The Estonian kroon (EEK), technically a historical currency since now 
-     * the euro (EUR) is the only official currency in Estonia, but it might not 
-     * get picked up as such if the currency file data doesn't indicate 
-     * something like "(1992 &mdash; 2011)."</li>
-     * <li>The Slovenian tolar (SIT), technically a historical currency since 
-     * now the euro (EUR) is the only official currency in Slovenia, but it 
-     * might not get picked up as such if the currency file data doesn't 
-     * indicate something like "(1991 &mdash; 2007)."</li>
      * <li>The same day U.&nbsp;S. dollar (USS), not sure how it differs from 
      * the U.&nbsp;S. dollar (USD).</li>
+     * </ul>
+     * <p>Also, the former currencies of the European nations that now use the 
+     * euro are not marked as historical in the currency information file. 
+     * Specifically, but probably not limited to:</p>
+     * <ul>
+     * <li>The Estonian kroon (EEK) was the official currency of Estonia from 
+     * 1992 to 2011.</li>
+     * <li>The Italian lira (ITL) was the only official currency of Italy from 
+     * 1861 to 1999. It was phased out by 2002, as Italians got used to the 
+     * euro.</li>
+     * <li>The Slovenian tolar (SIT) was the official currency of Slovenia from 
+     * 1991 to 2007.</li>
      * </ul>
      * @return A currency with default fraction digits of at least 0. For 
      * example, the Kyrgystani som (KGS), which like most world currencies by 
