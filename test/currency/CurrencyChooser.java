@@ -27,7 +27,11 @@ import java.util.Random;
 import java.util.Set;
 
 /**
- *
+ * Chooses currencies to be used in the testing of other classes in the 
+ * <code>currency</code> package. Functions are provided to choose currencies 
+ * pseudorandomly, choose currencies with a specified number of subdivisions 
+ * (e.g., 100 cents, 1,000 mills), and to choose currencies other than a 
+ * specified currency.
  * @author Alonso del Arte
  */
 public class CurrencyChooser {
@@ -43,8 +47,8 @@ public class CurrencyChooser {
 
     private static final Set<Currency> OTHER_EXCLUSIONS = new HashSet<>();
     
-    private static final String[] OTHER_EXCLUSION_CODES = {"BGL", "BOV", "CHW", 
-        "EEK", "FIM", "ITL", "SIT", "USS"};
+    private static final String[] OTHER_EXCLUSION_CODES = {"ADP", "BGL", "BOV", 
+        "CHW", "EEK", "FIM", "ITL", "SIT", "USS"};
 
     private static final Map<Integer, Set<Currency>> CURRENCIES_DIGITS_MAP 
             = new HashMap<>();
@@ -111,9 +115,12 @@ public class CurrencyChooser {
      * the U.&nbsp;S. dollar (USD).</li>
      * </ul>
      * <p>Also, the former currencies of the European nations that now use the 
-     * euro are not marked as historical in the currency information file. 
+     * euro (EUR) are not marked as historical in the currency information file. 
      * Specifically, but probably not limited to:</p>
      * <ul>
+     * <li>The Andorran peseta (ADP) was a currency of Andorra in the 
+     * 20<sup>th</sup> Century. It was pegged to the Spanish peseta (ESP) at 
+     * 1:1. By 2002 it had been phased out in favor of the euro.</li>
      * <li>The Estonian kroon (EEK) was the official currency of Estonia from 
      * 1992 to 2011.</li>
      * <li>The Italian lira (ITL) was the only official currency of Italy from 
