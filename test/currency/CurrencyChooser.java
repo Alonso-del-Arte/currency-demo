@@ -134,7 +134,7 @@ public class CurrencyChooser {
      * default has two fractional digits. A som is divided into 100 tyin.
      */
     public static Currency chooseCurrency() {
-        int index = RANDOM.nextInt(CURRENCIES.size());
+        int index = RANDOM.nextInt(HISTORICAL_CURRENCIES.size());
         return CURRENCIES.get(index);
     }
 
