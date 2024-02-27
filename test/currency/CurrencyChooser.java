@@ -123,6 +123,8 @@ public class CurrencyChooser {
      * 1:1. By 2002 it had been phased out in favor of the euro.</li>
      * <li>The Estonian kroon (EEK) was the official currency of Estonia from 
      * 1992 to 2011.</li>
+     * <li>The Finnish markka (FIM) was the official currency of Finland from 
+     * 1860 to 2002.</li>
      * <li>The Italian lira (ITL) was the only official currency of Italy from 
      * 1861 to 1999. It was phased out by 2002, as Italians got used to the 
      * euro.</li>
@@ -134,7 +136,7 @@ public class CurrencyChooser {
      * default has two fractional digits. A som is divided into 100 tyin.
      */
     public static Currency chooseCurrency() {
-        int index = RANDOM.nextInt(OTHER_EXCLUSIONS.size());
+        int index = RANDOM.nextInt(CURRENCIES.size());
         return CURRENCIES.get(index);
     }
 
