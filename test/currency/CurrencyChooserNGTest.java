@@ -339,42 +339,6 @@ public class CurrencyChooserNGTest {
     }
 
     @Test
-    public void testFinnishMarkkaExcluded() {
-        Currency finnishMarkka = Currency.getInstance("FIM");
-        String finnishMarkkaDisplayName = finnishMarkka.getDisplayName();
-        for (int i = 0; i < NUMBER_OF_CALLS_FOR_EXCLUSION_SEARCH; i++) {
-            Currency currency = CurrencyChooser.chooseCurrency();
-            String msg = "Currency " + currency.getDisplayName() 
-                    + " should not be " + finnishMarkkaDisplayName;
-            assertNotEquals(finnishMarkka, currency, msg);
-        }
-    }
-
-    @Test
-    public void testEstonianKroonExcluded() {
-        Currency estonianKroon = Currency.getInstance("EEK");
-        String estonianKroonDisplayName = estonianKroon.getDisplayName();
-        for (int i = 0; i < NUMBER_OF_CALLS_FOR_EXCLUSION_SEARCH; i++) {
-            Currency currency = CurrencyChooser.chooseCurrency();
-            String msg = "Currency " + currency.getDisplayName() 
-                    + " should not be " + estonianKroonDisplayName;
-            assertNotEquals(estonianKroon, currency, msg);
-        }
-    }
-
-    @Test
-    public void testSlovenianTolarExcluded() {
-        Currency slovenianTolar = Currency.getInstance("SIT");
-        String slovenianTolarDisplayName = slovenianTolar.getDisplayName();
-        for (int i = 0; i < NUMBER_OF_CALLS_FOR_EXCLUSION_SEARCH; i++) {
-            Currency currency = CurrencyChooser.chooseCurrency();
-            String msg = "Currency " + currency.getDisplayName() 
-                    + " should not be " + slovenianTolarDisplayName;
-            assertNotEquals(slovenianTolar, currency, msg);
-        }
-    }
-    
-    @Test
     public void testBolivianMVDOLExcluded() {
         Currency mvDol = Currency.getInstance("BOV");
         String mvDolDisplayName = mvDol.getDisplayName();
@@ -386,27 +350,33 @@ public class CurrencyChooserNGTest {
         }
     }
 
+    /**
+     * Another test of the chooseCurrency function, of the CurrencyChooser 
+     * class. The nations of the European Union had their own currencies prior 
+     * to joining. In many cases, the euro (EUR) was introduced in 1999 but the 
+     * nation's own currency was still valid until 2002:
+     * <ul>
+     * <li>Andorran peseta (ADP)</li>
+     * <li>Estonian kroon (EEK)</li>
+     * <li>Finnish markka (FIM)</li>
+     * <li>Italian lira (ITL)</li>
+     * <li>Slovenian tolar (SIT)</li>
+     * </ul>
+     * <p>These currencies are not listed with any range of years in the 
+     * currencies info file like other historical currencies.</p>
+     */
     @Test
-    public void testItalianLiraExcluded() {
-        Currency lira = Currency.getInstance("ITL");
-        String liraDisplayName = lira.getDisplayName();
-        for (int i = 0; i < NUMBER_OF_CALLS_FOR_EXCLUSION_SEARCH; i++) {
-            Currency currency = CurrencyChooser.chooseCurrency();
-            String msg = "Currency " + currency.getDisplayName() 
-                    + " should not be " + liraDisplayName;
-            assertNotEquals(lira, currency, msg);
-        }
-    }
-    
-    @Test
-    public void testAndorranPesetaExcluded() {
-        Currency peseta = Currency.getInstance("ADP");
-        String pesetaDisplayName = peseta.getDisplayName();
-        for (int i = 0; i < NUMBER_OF_CALLS_FOR_EXCLUSION_SEARCH; i++) {
-            Currency currency = CurrencyChooser.chooseCurrency();
-            String msg = "Currency " + currency.getDisplayName() 
-                    + " should not be " + pesetaDisplayName;
-            assertNotEquals(peseta, currency, msg);
+    public void testExcludeEuropeanCurrenciesReplacedByEuro() {
+        String[] oldEuropeanCurrencyCodes = {"ADP", "EEK", "FIM", "ITL", "SIT"};
+        for (String currencyCode : oldEuropeanCurrencyCodes) {
+            Currency excludedCurrency = Currency.getInstance(currencyCode);
+            String exclCurrDisplayName = excludedCurrency.getDisplayName();
+            for (int i = 0; i < NUMBER_OF_CALLS_FOR_EXCLUSION_SEARCH; i++) {
+                Currency currency = CurrencyChooser.chooseCurrency();
+                String msg = "Currency " + currency.getDisplayName() 
+                        + " should not be " + exclCurrDisplayName;
+                assertNotEquals(excludedCurrency, currency, msg);
+            }
         }
     }
 
