@@ -397,5 +397,17 @@ public class CurrencyChooserNGTest {
             assertNotEquals(lira, currency, msg);
         }
     }
+    
+    @Test
+    public void testAndorranPesetaExcluded() {
+        Currency peseta = Currency.getInstance("ADP");
+        String pesetaDisplayName = peseta.getDisplayName();
+        for (int i = 0; i < NUMBER_OF_CALLS_FOR_EXCLUSION_SEARCH; i++) {
+            Currency currency = CurrencyChooser.chooseCurrency();
+            String msg = "Currency " + currency.getDisplayName() 
+                    + " should not be " + pesetaDisplayName;
+            assertNotEquals(peseta, currency, msg);
+        }
+    }
 
 }
