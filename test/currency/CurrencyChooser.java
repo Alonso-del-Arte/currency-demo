@@ -48,7 +48,7 @@ public class CurrencyChooser {
     private static final Set<Currency> OTHER_EXCLUSIONS = new HashSet<>();
     
     private static final String[] OTHER_EXCLUSION_CODES = {"ADP", "BGL", "BOV", 
-        "CHW", "EEK", "FIM", "ITL", "SIT", "USS"};
+        "CHW", "EEK", "FIM", "ITL", "SIT", "USN", "USS"};
 
     private static final Map<Integer, Set<Currency>> CURRENCIES_DIGITS_MAP 
             = new HashMap<>();
@@ -63,7 +63,8 @@ public class CurrencyChooser {
             } else {
                 String dispName = currency.getDisplayName();
                 if (dispName.contains(twentiethCenturyYearIndicator) 
-                        || dispName.contains(twentyFirstCenturyYearIndicator)) {
+                        || dispName.contains(twentyFirstCenturyYearIndicator)) 
+                {
                     HISTORICAL_CURRENCIES.add(currency);
                 } else {
                     Set<Currency> digitGroupedSet;
@@ -111,8 +112,9 @@ public class CurrencyChooser {
      * like booking a hotel.</li>
      * <li>The WIR franc (CHW), a "community currency" that is equal in value to 
      * the Swiss franc (CHF).</li>
-     * <li>The same day U.&nbsp;S. dollar (USS), not sure how it differs from 
-     * the U.&nbsp;S. dollar (USD).</li>
+     * <li>The same day U.&nbsp;S. dollar (USS) and the next day U.&nbsp;S. 
+     * dollar (USN), which serve special purposes in some contexts but are 
+     * generally not recognized by currency conversion APIs.</li>
      * </ul>
      * <p>Also, the former currencies of the European nations that now use the 
      * euro (EUR) are not marked as historical in the currency information file. 
