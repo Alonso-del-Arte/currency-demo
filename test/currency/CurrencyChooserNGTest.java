@@ -315,6 +315,18 @@ public class CurrencyChooserNGTest {
     }
 
     @Test
+    public void testNextDayUSDollarExcluded() {
+        Currency nextDayDollar = Currency.getInstance("USN");
+        String nextDayDollarDisplayName = nextDayDollar.getDisplayName();
+        for (int i = 0; i < NUMBER_OF_CALLS_FOR_EXCLUSION_SEARCH; i++) {
+            Currency currency = CurrencyChooser.chooseCurrency();
+            String msg = "Currency " + currency.getDisplayName() 
+                    + " should not be " + nextDayDollarDisplayName;
+            assertNotEquals(nextDayDollar, currency, msg);
+        }
+    }
+
+    @Test
     public void testBulgarianHardLevExcluded() {
         Currency bulgarianHardLev = Currency.getInstance("BGL");
         String bulgarianHardLevDisplayName = bulgarianHardLev.getDisplayName();
