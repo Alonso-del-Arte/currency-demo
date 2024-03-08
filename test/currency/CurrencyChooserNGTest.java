@@ -372,6 +372,7 @@ public class CurrencyChooserNGTest {
      * <li>Estonian kroon (EEK)</li>
      * <li>Finnish markka (FIM)</li>
      * <li>Italian lira (ITL)</li>
+     * <li>Portuguese escudo (PTE)</li>
      * <li>Slovenian tolar (SIT)</li>
      * </ul>
      * <p>These currencies are not listed with any range of years in the 
@@ -379,7 +380,8 @@ public class CurrencyChooserNGTest {
      */
     @Test
     public void testExcludeEuropeanCurrenciesReplacedByEuro() {
-        String[] oldEuropeanCurrencyCodes = {"ADP", "EEK", "FIM", "ITL", "SIT"};
+        String[] oldEuropeanCurrencyCodes = {"ADP", "EEK", "FIM", "ITL", "PTE", 
+            "SIT"};
         for (String currencyCode : oldEuropeanCurrencyCodes) {
             Currency excludedCurrency = Currency.getInstance(currencyCode);
             String exclCurrDisplayName = excludedCurrency.getDisplayName();
