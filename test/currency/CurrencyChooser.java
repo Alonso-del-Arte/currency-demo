@@ -48,7 +48,7 @@ public class CurrencyChooser {
     private static final Set<Currency> OTHER_EXCLUSIONS = new HashSet<>();
     
     private static final String[] OTHER_EXCLUSION_CODES = {"ADP", "BGL", "BOV", 
-        "CHW", "EEK", "FIM", "ITL", "SIT", "USN", "USS"};
+        "CHW", "EEK", "FIM", "ITL", "PTE", "SIT", "USN", "USS"};
 
     private static final Map<Integer, Set<Currency>> CURRENCIES_DIGITS_MAP 
             = new HashMap<>();
@@ -130,6 +130,9 @@ public class CurrencyChooser {
      * <li>The Italian lira (ITL) was the only official currency of Italy from 
      * 1861 to 1999. It was phased out by 2002, as Italians got used to the 
      * euro.</li>
+     * <li>The Portuguese escudo was the official currency of Portugal from 1911 
+     * to 2002. Portugal was actually one of the first nations of the European 
+     * Union to adopt the euro, in 1999.</li>
      * <li>The Slovenian tolar (SIT) was the official currency of Slovenia from 
      * 1991 to 2007.</li>
      * </ul>
