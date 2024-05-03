@@ -16,6 +16,8 @@
  */
 package currency;
 
+import static currency.CurrencyChooser.RANDOM;
+
 import java.util.Currency;
 import java.util.Locale;
 
@@ -90,6 +92,17 @@ public class CurrencyConverterNGTest {
                 + ", and vice-versa is said to be " + toDollars;
         System.out.println(message);
         assertEquals(actual, expected, TEST_DELTA, message);
+    }
+    
+    @Test
+    public void testConvertButNoConvertNeeded() {
+        int units = RANDOM.nextInt(Short.MAX_VALUE);
+        Currency currency = CurrencyChooser.chooseCurrency();
+        MoneyAmount expected = new MoneyAmount(units, currency);
+        MoneyAmount actual = CurrencyConverter.convert(expected, currency);
+        String message = "Converting " + expected.toString() + " to " 
+                + currency.getDisplayName() + " should not need conversion";
+        assertEquals(actual, expected, message);
     }
     
 }
