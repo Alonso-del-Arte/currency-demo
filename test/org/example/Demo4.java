@@ -17,6 +17,7 @@
 package org.example;
 
 import currency.CurrencyConverter;
+import currency.CurrencyMismatchException;
 import currency.MoneyAmount;
 
 import java.util.Currency;
@@ -24,6 +25,8 @@ import java.util.Locale;
 
 import static org.testng.Assert.*;
 import org.testng.annotations.Test;
+
+import static testframe.api.Asserters.assertThrows;
 
 /**
  * Demonstrates the benefits of writing your own class to represent money 
@@ -35,7 +38,6 @@ public class Demo4 {
     
     private static final Currency DOLLARS = Currency.getInstance(Locale.US); 
     
-    // TODO: Demo writing your own class
     @Test
     public void testAddMichiganSalesTax() {
         MoneyAmount price = new MoneyAmount(199, DOLLARS, (short) 99);
@@ -47,21 +49,25 @@ public class Demo4 {
     
     @Test
     public void testAddDollarsAndEuros() {
-        fail("REWRITE");
-        double dollars = 500.00;
-        double euros = 500.00;
-        Currency dollar = Currency.getInstance(Locale.US);
+        int units = 500;
         Currency euro = Currency.getInstance("EUR");
-        double expectedA = dollars + (euros 
-                * Double.parseDouble(CurrencyConverter.getRate(euro, dollar)));
-        double expectedB = euros + (dollars 
-                * Double.parseDouble(CurrencyConverter.getRate(dollar, euro)));
-        double actual = dollars + euros;
-        String msg = "$" + dollars + " + \u20AC" + euros + " should be either $" 
-                + expectedA + " or \u20AC" + expectedB + ", got ?" + actual;
-        System.out.println(msg);
-        fail("HAVEN'T FINISHED WRITING CURRENCY CONVERTER YET");
-        assert expectedA == actual || expectedB == actual : msg;
+        MoneyAmount dollars = new MoneyAmount(units, DOLLARS);
+        MoneyAmount euros = new MoneyAmount(units, euro);
+        String dolStr = dollars.toString();
+        String eurStr = euros.toString();
+        String msg = "Trying to add " + dolStr + " to " + eurStr 
+                + " should have caused an exception";
+        CurrencyMismatchException cme = assertThrows(() -> {
+            MoneyAmount badAmount = dollars.plus(euros);
+            System.out.println(msg + ", not given " + badAmount);
+        }, CurrencyMismatchException.class, msg);
+        String excMsg = cme.getMessage();
+        assert excMsg != null : "Exception message should not be null";
+        assert !excMsg.isBlank() : "Exception message should not be blank";
+        String containsMsg = "Exception message should contain \'" + dolStr 
+                + "\" and \"" + eurStr + "\"";
+        assert excMsg.contains(dolStr) : containsMsg;
+        assert excMsg.contains(eurStr) : containsMsg;
     }
     
 }
