@@ -54,6 +54,7 @@ public class CurrencyChooser {
             = new HashMap<>();
     
     static {
+        final String nineteenthCenturyYearIndicator = "\u002818";
         final String twentiethCenturyYearIndicator = "\u002819";
         final String twentyFirstCenturyYearIndicator = "\u002820";
         for (Currency currency : CURRENCIES) {
@@ -62,7 +63,8 @@ public class CurrencyChooser {
                 PSEUDO_CURRENCIES.add(currency);
             } else {
                 String dispName = currency.getDisplayName();
-                if (dispName.contains(twentiethCenturyYearIndicator) 
+                if (dispName.contains(nineteenthCenturyYearIndicator)
+                        || dispName.contains(twentiethCenturyYearIndicator) 
                         || dispName.contains(twentyFirstCenturyYearIndicator)) 
                 {
                     HISTORICAL_CURRENCIES.add(currency);
