@@ -275,7 +275,8 @@ public class CurrencyChooserNGTest {
     
     private static boolean isHistoricalCurrency(Currency currency) {
         String displayName = currency.getDisplayName();
-        return displayName.contains("\u002819") 
+        return displayName.contains("\u002818") 
+                || displayName.contains("\u002819") 
                 || displayName.contains("\u002820");
     }
     
