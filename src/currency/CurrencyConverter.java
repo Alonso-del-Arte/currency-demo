@@ -84,4 +84,9 @@ public class CurrencyConverter {
         }
     }
     
+    // TODO: Write tests for this
+    public MoneyAmount convert(MoneyAmount source, Currency target) {
+        return new MoneyAmount(-1, Currency.getInstance("EUR"));
+    }
+    
 }
