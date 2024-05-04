@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2023 Alonso del Arte
+ * Copyright (C) 2024 Alonso del Arte
  *
  * This program is free software: you can redistribute it and/or modify it under 
  * the terms of the GNU General Public License as published by the Free Software 
@@ -88,9 +88,23 @@ public class MoneyAmount implements Comparable<MoneyAmount> {
         return this.currencyID;
     }
     
-    // TODO: Write tests for this
+    /**
+     * Adds a money amount to this one. For example, let's say this amount is 
+     * $100.00.
+     * @param addend The amount to add to this one. For example, $28.20.
+     * @return The sum of the two amounts. For example, $128.20.
+     * @throws CurrencyMismatchException If <code>addend</code> is not of the 
+     * same currency amount as this one (e.g., if this amount is in U.&nbsp;S. 
+     * dollars and <code>addend</code> is in euros).
+     */
     public MoneyAmount plus(MoneyAmount addend) {
-        return new MoneyAmount(currencyID, this.allCents + addend.allCents,  
+        if (!this.currencyID.equals(addend.currencyID)) {
+            String excMsg = "Currency conversion needed to add " 
+                    + this.currencyID.getDisplayName() + " and " 
+                    + addend.currencyID.getDisplayName();
+            throw new CurrencyMismatchException(excMsg, this, addend);
+        }
+        return new MoneyAmount(currencyID, this.allCents + addend.allCents, 
                 this.multiplier);
     }
     
