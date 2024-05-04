@@ -24,6 +24,8 @@ import java.util.HashSet;
 import java.util.Locale;
 import java.util.Set;
 
+import static org.testframe.api.Asserters.assertThrows;
+
 import static org.testng.Assert.*;
 import org.testng.annotations.Test;
 
@@ -479,7 +481,26 @@ public class MoneyAmountNGTest {
         assertEquals(actual, expected, message);
     }
 
-    // TODO: Write test for plus mismatched currencies
+    @Test
+    public void testPlusMismatchedCurrenciesCausesException() {
+        int units = RANDOM.nextInt(10000) + 1;
+        Currency currencyA = CurrencyChooser.chooseCurrency();
+        MoneyAmount amountA = new MoneyAmount(units, currencyA);
+        Currency currencyB = CurrencyChooser.chooseCurrencyOtherThan(currencyA);
+        MoneyAmount amountB = new MoneyAmount(units, currencyB);
+        String msg = "Adding " + amountA.toString() + " and " 
+                + amountB.toString() 
+                + " should have caused CurrencyMismatchException";
+        Throwable t = assertThrows(() -> {
+            MoneyAmount badAmount = amountA.plus(amountB);
+            System.out.println(msg + ", not given result " 
+                    + badAmount.toString());
+        }, CurrencyMismatchException.class, msg);
+        String excMsg = t.getMessage();
+        assert excMsg != null : "Exception message should not be null";
+        assert !excMsg.isBlank() : "Exception message should not be blank";
+        System.out.println("\"" + excMsg + "\"");
+    }
     
     @Test
     public void testMinus() {
