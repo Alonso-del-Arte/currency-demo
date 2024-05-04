@@ -25,11 +25,8 @@ TODO: Add Moneta dependency
 ### Dependencies for test classes
 
 * TestNG
-
-TODO: Add dependency for TestFrame 0.8, 0.9 or 1.0, 
-`static testframe.api.Asserters.assertThrows` or 
-`static org.testframe.api.Asserters.assertThrows`, I've been having trouble with 
-`assertThrows()` from TestNG...
+* TestFrame 0.9 (this one, in the `testframe.api` namespace, will be phased out)
+* TestFrame 0.95 or later (`org.testframe.api` namespace)
 
 ----
 
