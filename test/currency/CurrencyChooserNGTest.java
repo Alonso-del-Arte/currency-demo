@@ -363,6 +363,18 @@ public class CurrencyChooserNGTest {
         }
     }
 
+    @Test
+    public void testColombianRealValueUnitsExcluded() {
+        Currency unitsRealValue = Currency.getInstance("COU");
+        String unitsDisplayName = unitsRealValue.getDisplayName();
+        for (int i = 0; i < NUMBER_OF_CALLS_FOR_EXCLUSION_SEARCH; i++) {
+            Currency currency = CurrencyChooser.chooseCurrency();
+            String msg = "Currency " + currency.getDisplayName() 
+                    + " should not be " + unitsDisplayName;
+            assertNotEquals(unitsRealValue, currency, msg);
+        }
+    }
+
     /**
      * Another test of the chooseCurrency function, of the CurrencyChooser 
      * class. The nations of the European Union had their own currencies prior 
