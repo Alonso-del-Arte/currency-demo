@@ -96,9 +96,18 @@ public class CurrencyChooser {
         CURRENCIES.removeAll(OTHER_EXCLUSIONS);
     }
     
-    // TODO: Write tests for this
+    /**
+     * Gives the set of currencies suitable for the {@link MoneyAmount}  
+     * constructor. Hopefully all these currencies are also suitable for online 
+     * foreign exchange rate APIs.
+     * @return A set of all available currencies, minus historical currencies 
+     * such as the original bol&iacute;var (VEB, 1871 &mdash; 2008) or the old 
+     * bol&iacute;var (VEF, 2008 &mdash; 2018) which was replaced by the 
+     * bol&iacute;var soverano (VED), and also excluding metals like gold (XAU) 
+     * and silver (XAG).
+     */
     public static Set<Currency> getSuitableCurrencies() {
-        return new HashSet<>();
+        return new HashSet<>(CURRENCIES);
     }
 
     /**
