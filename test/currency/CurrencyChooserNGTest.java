@@ -22,7 +22,7 @@ import java.util.HashSet;
 import java.util.Locale;
 import java.util.Map;
 import java.util.NoSuchElementException;
-import java.util.Set;
+import java.util.Set;import java.util.stream.Collectors;
 
 import static org.testng.Assert.*;
 import org.testng.annotations.Test;
@@ -52,6 +52,10 @@ public class CurrencyChooserNGTest {
             = NUMBER_OF_CALLS_MULTIPLIER_FOR_EXCLUSION_SEARCH 
             * TOTAL_NUMBER_OF_CURRENCIES;
     
+    private static final String[] OTHER_EXCLUSION_CODES = {"ADP", "BGL", "BOV", 
+        "CHW", "COU", "EEK", "FIM", "GRD", "ITL", "PTE", "SIT", "USN", "USS", 
+        "UYI"};
+    
     static {
         for (Currency currency : CURRENCIES) {
             int fractDigits = currency.getDefaultFractionDigits();
@@ -71,6 +75,37 @@ public class CurrencyChooserNGTest {
         CURRENCIES.removeAll(PSEUDO_CURRENCIES);
     }
 
+    private static boolean isHistoricalCurrency(Currency currency) {
+        String displayName = currency.getDisplayName();
+        return displayName.contains("\u002818") 
+                || displayName.contains("\u002819") 
+                || displayName.contains("\u002820");
+    }
+    
+    private static boolean isPseudoCurrency(Currency currency) {
+        return currency.getDefaultFractionDigits() < 0;
+    } 
+    
+    private static boolean shouldOtherwiseBeExcluded(Currency currency) {
+        String key = currency.getCurrencyCode();
+        return java.util.Arrays.binarySearch(OTHER_EXCLUSION_CODES, key) > -1;
+    } 
+    
+    private static boolean accept(Currency currency) {
+        return !isHistoricalCurrency(currency) && !isPseudoCurrency(currency) 
+                && !shouldOtherwiseBeExcluded(currency);
+    } 
+    
+    @Test
+    public void testGetSuitableCurrencies() {
+        Set<Currency> currencies = Currency.getAvailableCurrencies();
+        Set<Currency> expected = currencies.stream()
+                .filter(currency -> accept(currency))
+                .collect(Collectors.toSet());
+        Set<Currency> actual = CurrencyChooser.getSuitableCurrencies();
+        assertEquals(actual, expected);
+    }
+    
     @Test
     public void testChooseCurrency() {
         System.out.println("chooseCurrency");
@@ -271,13 +306,6 @@ public class CurrencyChooserNGTest {
                 + expected + " should've been chosen, " + actual 
                 + " were chosen";
         assert actual >= expected : msg;
-    }
-    
-    private static boolean isHistoricalCurrency(Currency currency) {
-        String displayName = currency.getDisplayName();
-        return displayName.contains("\u002818") 
-                || displayName.contains("\u002819") 
-                || displayName.contains("\u002820");
     }
     
     @Test
