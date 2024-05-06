@@ -95,6 +95,11 @@ public class CurrencyChooser {
         CURRENCIES.removeAll(HISTORICAL_CURRENCIES);
         CURRENCIES.removeAll(OTHER_EXCLUSIONS);
     }
+    
+    // TODO: Write tests for this
+    public static Set<Currency> getSuitableCurrencies() {
+        return new HashSet<>();
+    }
 
     /**
      * Chooses a currency suitable for the {@link MoneyAmount} constructor. Also 
