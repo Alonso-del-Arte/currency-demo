@@ -427,6 +427,7 @@ public class CurrencyChooserNGTest {
      * <li>Finnish markka (FIM)</li>
      * <li>Greek drachma (GRD)</li>
      * <li>Italian lira (ITL)</li>
+     * <li>Maltese lira (MTL), it was valid until 2008</li>
      * <li>Portuguese escudo (PTE)</li>
      * <li>Slovenian tolar (SIT)</li>
      * </ul>
@@ -436,7 +437,7 @@ public class CurrencyChooserNGTest {
     @Test
     public void testExcludeEuropeanCurrenciesReplacedByEuro() {
         String[] oldEuropeanCurrencyCodes = {"ADP", "EEK", "FIM", "GRD", "ITL", 
-            "PTE", "SIT"};
+            "MTL", "PTE", "SIT"};
         for (String currencyCode : oldEuropeanCurrencyCodes) {
             Currency excludedCurrency = Currency.getInstance(currencyCode);
             String exclCurrDisplayName = excludedCurrency.getDisplayName();
