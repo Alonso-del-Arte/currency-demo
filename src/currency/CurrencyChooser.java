@@ -17,6 +17,7 @@
 package currency;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Currency;
 import java.util.HashSet;
 import java.util.HashMap;
@@ -48,8 +49,8 @@ public class CurrencyChooser {
     private static final Set<Currency> OTHER_EXCLUSIONS = new HashSet<>();
     
     private static final String[] OTHER_EXCLUSION_CODES = {"ADP", "BGL", "BOV", 
-        "CHW", "COU", "EEK", "FIM", "GRD", "ITL", "PTE", "SIT", "USN", "USS", 
-        "UYI"};
+        "CHW", "COU", "EEK", "FIM", "GRD", "ITL", "MTL", "PTE", "SIT", "USN", 
+        "USS", "UYI"};
 
     private static final Map<Integer, Set<Currency>> CURRENCIES_DIGITS_MAP 
             = new HashMap<>();
@@ -79,7 +80,10 @@ public class CurrencyChooser {
                         CURRENCIES_DIGITS_MAP.put(fractionDigits, 
                                 digitGroupedSet);
                     }
-                    digitGroupedSet.add(currency);
+                    if (Arrays.binarySearch(OTHER_EXCLUSION_CODES, 
+                            currency.getCurrencyCode()) < 0) {
+                        digitGroupedSet.add(currency);
+                    }
                 }
             }
         }
