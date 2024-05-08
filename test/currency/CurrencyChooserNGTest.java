@@ -16,6 +16,7 @@
  */
 package currency;
 
+import java.util.Arrays;
 import java.util.Currency;
 import java.util.HashMap;
 import java.util.HashSet;
@@ -53,9 +54,11 @@ public class CurrencyChooserNGTest {
             = NUMBER_OF_CALLS_MULTIPLIER_FOR_EXCLUSION_SEARCH 
             * TOTAL_NUMBER_OF_CURRENCIES;
     
-    private static final String[] OTHER_EXCLUSION_CODES = {"ADP", "BGL", "BOV", 
-        "CHW", "COU", "EEK", "FIM", "GRD", "ITL", "MTL", "PTE", "SIT", "USN", 
-        "USS", "UYI"};
+    private static final String[] EURO_REPLACED_EXCLUSION_CODES = {"ADP", "EEK", 
+        "FIM", "GRD", "ITL", "MTL", "PTE", "SIT"};
+    
+    private static final String[] OTHER_EXCLUSION_CODES = {"BGL", "BOV", 
+        "CHW", "COU", "USN", "USS", "UYI"};
     
     static {
         for (Currency currency : CURRENCIES) {
@@ -75,12 +78,18 @@ public class CurrencyChooserNGTest {
         }
         CURRENCIES.removeAll(PSEUDO_CURRENCIES);
     }
+    
+    private static boolean isEuroReplacedCurrency(Currency currency) {
+        String key = currency.getCurrencyCode();
+        return Arrays.binarySearch(EURO_REPLACED_EXCLUSION_CODES, key) > -1;
+    }
 
     private static boolean isHistoricalCurrency(Currency currency) {
         String displayName = currency.getDisplayName();
         return displayName.contains("\u002818") 
                 || displayName.contains("\u002819") 
-                || displayName.contains("\u002820");
+                || displayName.contains("\u002820") 
+                || isEuroReplacedCurrency(currency);
     }
     
     private static boolean isPseudoCurrency(Currency currency) {
@@ -89,7 +98,7 @@ public class CurrencyChooserNGTest {
     
     private static boolean shouldOtherwiseBeExcluded(Currency currency) {
         String key = currency.getCurrencyCode();
-        return java.util.Arrays.binarySearch(OTHER_EXCLUSION_CODES, key) > -1;
+        return Arrays.binarySearch(OTHER_EXCLUSION_CODES, key) > -1;
     } 
     
     private static boolean accept(Currency currency) {
@@ -186,9 +195,9 @@ public class CurrencyChooserNGTest {
         int expected = 0;
         Currency currency = CurrencyChooser.chooseCurrency(expected);
         int actual = currency.getDefaultFractionDigits();
-        String msg = "Chosen currency " + currency.getDisplayName() 
+        String message = "Chosen currency " + currency.getDisplayName() 
                 + " should have " + expected + " default fraction digits";
-        assertEquals(actual, expected, msg);
+        assertEquals(actual, expected, message);
     }
 
     @Test
@@ -196,9 +205,9 @@ public class CurrencyChooserNGTest {
         int expected = 2;
         Currency currency = CurrencyChooser.chooseCurrency(expected);
         int actual = currency.getDefaultFractionDigits();
-        String msg = "Chosen currency " + currency.getDisplayName() 
+        String message = "Chosen currency " + currency.getDisplayName() 
                 + " should have " + expected + " default fraction digits";
-        assertEquals(actual, expected, msg);
+        assertEquals(actual, expected, message);
     }
 
     @Test
@@ -206,9 +215,9 @@ public class CurrencyChooserNGTest {
         int expected = 3;
         Currency currency = CurrencyChooser.chooseCurrency(expected);
         int actual = currency.getDefaultFractionDigits();
-        String msg = "Chosen currency " + currency.getDisplayName() 
+        String message = "Chosen currency " + currency.getDisplayName() 
                 + " should have " + expected + " default fraction digits";
-        assertEquals(actual, expected, msg);
+        assertEquals(actual, expected, message);
     }
 
     /**
@@ -228,9 +237,9 @@ public class CurrencyChooserNGTest {
         int expected = 4;
         Currency currency = CurrencyChooser.chooseCurrency(expected);
         int actual = currency.getDefaultFractionDigits();
-        String msg = "Chosen currency " + currency.getDisplayName() 
+        String message = "Chosen currency " + currency.getDisplayName() 
                 + " should have " + expected + " default fraction digits";
-        assertEquals(actual, expected, msg);
+        assertEquals(actual, expected, message);
     }
     
     @Test
@@ -251,10 +260,10 @@ public class CurrencyChooserNGTest {
                     + "\"";
             assert excMsg.contains(digitString) : msg;
         } catch (RuntimeException re) {
-            String msg = re.getClass().getName() 
+            String message = re.getClass().getName() 
                     + " is the wrong exception to throw for " 
                     + unlikelyFractionDigits + " fraction digits";
-            fail(msg);
+            fail(message);
         }
     }
     
@@ -436,9 +445,7 @@ public class CurrencyChooserNGTest {
      */
     @Test
     public void testExcludeEuropeanCurrenciesReplacedByEuro() {
-        String[] oldEuropeanCurrencyCodes = {"ADP", "EEK", "FIM", "GRD", "ITL", 
-            "MTL", "PTE", "SIT"};
-        for (String currencyCode : oldEuropeanCurrencyCodes) {
+        for (String currencyCode : EURO_REPLACED_EXCLUSION_CODES) {
             Currency excludedCurrency = Currency.getInstance(currencyCode);
             String exclCurrDisplayName = excludedCurrency.getDisplayName();
             for (int i = 0; i < NUMBER_OF_CALLS_FOR_EXCLUSION_SEARCH; i++) {
