@@ -18,6 +18,10 @@ package currency;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ItemEvent;
+import java.util.Currency;
+import java.util.Locale;
+
+import static org.testframe.api.Asserters.assertThrows;
 
 import static org.testng.Assert.*;
 import org.testng.annotations.Test;
@@ -28,30 +32,21 @@ import org.testng.annotations.Test;
  */
 public class CurrencyPropsWindowNGTest {
     
-    /**
-     * Test of itemStateChanged method, of class CurrencyPropsWindow.
-     */
     @Test
-    public void testItemStateChanged() {
-        System.out.println("itemStateChanged");
-        ItemEvent ie = null;
-        CurrencyPropsWindow instance = new CurrencyPropsWindow();
-        instance.itemStateChanged(ie);
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
+    public void testNoSecondActivation() {
+        Currency currency = CurrencyChooser.chooseCurrency();
+        CurrencyPropsWindow window = new CurrencyPropsWindow(currency);
+        window.activate();
+        System.out.println("Activated window the first time");
+        String msg = "Should not have been able to activate window twice";
+        Throwable t = assertThrows(() -> {
+            window.activate();
+            System.out.println("Activated window a second time");
+        }, IllegalStateException.class, msg);
+        String excMsg = t.getMessage();
+        assert excMsg != null : "Exception message should not be null";
+        assert !excMsg.isBlank() : "Exception message should not be blank";
+        System.out.println("\"" + excMsg + "\"");
     }
-
-    /**
-     * Test of actionPerformed method, of class CurrencyPropsWindow.
-     */
-    @Test
-    public void testActionPerformed() {
-        System.out.println("actionPerformed");
-        ActionEvent ae = null;
-        CurrencyPropsWindow instance = new CurrencyPropsWindow();
-        instance.actionPerformed(ae);
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
-    }
-    
+       
 }
