@@ -49,4 +49,14 @@ public class CurrencyPropsWindow extends JFrame implements ActionListener,
         //
     }
     
+    // TODO: Write tests for this
+    public void activate() {
+        //
+    }
+    
+    // TODO: Write tests for this
+    public CurrencyPropsWindow(Currency currency) {
+        //
+    }
+    
 }
