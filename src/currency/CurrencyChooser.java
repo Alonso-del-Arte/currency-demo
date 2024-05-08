@@ -188,9 +188,6 @@ public class CurrencyChooser {
      * ignored by this chooser.
      */
     public static Currency chooseCurrency(int fractionDigits) {
-        if (fractionDigits == 0) {
-            return Currency.getInstance(java.util.Locale.JAPAN);
-        }
         if (CURRENCIES_DIGITS_MAP.containsKey(fractionDigits)) {
             List<Currency> currencies 
                     = new ArrayList<>(CURRENCIES_DIGITS_MAP
