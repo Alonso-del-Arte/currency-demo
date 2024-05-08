@@ -39,6 +39,8 @@ import javax.swing.JTextField;
 public class CurrencyPropsWindow extends JFrame implements ActionListener, 
         ItemListener {
     
+    private boolean activated = false;
+    
     @Override
     public void itemStateChanged(ItemEvent ie) {
         //
@@ -51,7 +53,11 @@ public class CurrencyPropsWindow extends JFrame implements ActionListener,
     
     // TODO: Write tests for this
     public void activate() {
-        //
+        if (this.activated) {
+            String excMsg = "Window was already active";
+            throw new IllegalStateException(excMsg);
+        }
+        this.activated = true;
     }
     
     // TODO: Write tests for this
