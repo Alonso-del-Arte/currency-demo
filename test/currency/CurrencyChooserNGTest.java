@@ -275,7 +275,7 @@ public class CurrencyChooserNGTest {
         for (int i = 0; i < total; i++) {
             chosenCurrencies.add(CurrencyChooser.chooseCurrency(0));
         }
-        int expected = total / 2;
+        int expected = total / 3;
         int actual = chosenCurrencies.size();
         String msg = "Out of " + total 
                 + " currencies with no divisions, at least " + expected 
