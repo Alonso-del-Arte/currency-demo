@@ -113,6 +113,11 @@ public class CurrencyChooser {
     public static Set<Currency> getSuitableCurrencies() {
         return new HashSet<>(CURRENCIES);
     }
+    
+    // TODO: Write tests for this
+    public static boolean isSuitableCurrency() {
+        return false;
+    }
 
     /**
      * Chooses a currency suitable for the {@link MoneyAmount} constructor. Also 
