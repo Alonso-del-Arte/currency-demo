@@ -114,9 +114,9 @@ public class CurrencyChooser {
         return new HashSet<>(CURRENCIES);
     }
     
-    // TODO: Write tests for this
-    public static boolean isSuitableCurrency() {
-        return true;
+    public static boolean isSuitableCurrency(Currency currency) {
+//        return CURRENCIES.contains(RANDOM)
+        return false;
     }
 
     /**
