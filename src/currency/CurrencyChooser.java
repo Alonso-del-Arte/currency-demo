@@ -114,9 +114,14 @@ public class CurrencyChooser {
         return new HashSet<>(CURRENCIES);
     }
     
+    /**
+     * 
+     * @param currency
+     * @return 
+     */
     public static boolean isSuitableCurrency(Currency currency) {
 //        return CURRENCIES.contains(RANDOM)
-        return false;
+        return true;
     }
 
     /**
