@@ -127,7 +127,7 @@ public class CurrencyChooserNGTest {
             assert CurrencyChooser.isSuitableCurrency(currency) : msg;
         }
     }
-    @org.testng.annotations.Ignore
+    
     @Test
     public void testIsNotSuitableCurrency() {
         Set<Currency> complement = new HashSet<>(CURRENCIES);
