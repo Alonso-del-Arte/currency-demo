@@ -115,13 +115,25 @@ public class CurrencyChooser {
     }
     
     /**
-     * 
-     * @param currency
-     * @return 
+     * Tells whether or not a currency is suitable for the {@link MoneyAmount} 
+     * constructor and {@link CurrencyConverter}. If a currency's identified as 
+     * historical in the Java runtime currency information file, or if it's a 
+     * precious metal (e.g., gold, silver, platinum), or if it's for testing 
+     * purposes only, it will not be considered suitable. There are a few other 
+     * exclusions.
+     * @param currency The currency to check. Two examples: the old Venezuelan 
+     * bol&iacute;var (VEB), which was valid from 1871 to 2008; and the modern 
+     * Venezuelan bol&iacute;var (VES), technically valid since 2018 &mdash; for 
+     * what it's worth, however, you might be better off with U.&nbsp;S. dollars 
+     * in Venezuela.
+     * @return True if the currency's suitable, false otherwise. In the 
+     * examples, this function returns false for VEB (currency conversion APIs 
+     * don't give exchange rates for conversions to and from this currency) and 
+     * true for VES (one euro exchanges to 39.65 bol&iacute;vares as of May 21, 
+     * 2024).
      */
     public static boolean isSuitableCurrency(Currency currency) {
-//        return CURRENCIES.contains(RANDOM)
-        return true;
+        return CURRENCIES.contains(currency);
     }
 
     /**
