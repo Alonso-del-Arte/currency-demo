@@ -116,7 +116,7 @@ public class CurrencyChooser {
     
     // TODO: Write tests for this
     public static boolean isSuitableCurrency() {
-        return false;
+        return true;
     }
 
     /**
