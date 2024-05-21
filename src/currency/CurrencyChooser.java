@@ -135,6 +135,11 @@ public class CurrencyChooser {
     public static boolean isSuitableCurrency(Currency currency) {
         return CURRENCIES.contains(currency);
     }
+    
+    // TODO: Write tests for this
+    public static Currency choosePseudocurrency() {
+        return Currency.getInstance("EUR");
+    }
 
     /**
      * Chooses a currency suitable for the {@link MoneyAmount} constructor. Also 
