@@ -43,6 +43,8 @@ public class CurrencyChooser {
             = new ArrayList<>(Currency.getAvailableCurrencies());
 
     private static final Set<Currency> PSEUDO_CURRENCIES = new HashSet<>();
+    
+    private static final List<Currency> PSEUDO_CURRENCIES_LIST;
 
     private static final Set<Currency> HISTORICAL_CURRENCIES = new HashSet<>();
 
@@ -98,6 +100,7 @@ public class CurrencyChooser {
         CURRENCIES.removeAll(PSEUDO_CURRENCIES);
         CURRENCIES.removeAll(HISTORICAL_CURRENCIES);
         CURRENCIES.removeAll(OTHER_EXCLUSIONS);
+        PSEUDO_CURRENCIES_LIST = new ArrayList<>(PSEUDO_CURRENCIES);
     }
     
     /**
@@ -136,9 +139,14 @@ public class CurrencyChooser {
         return CURRENCIES.contains(currency);
     }
     
-    // TODO: Write tests for this
+    /**
+     * Chooses a pseudocurrency. Pseudocurrencies differ from standard 
+     * currencies in that their values are not determined by a government bank.
+     * @return A pseudocurrency. For example, gold (XAU).
+     */
     public static Currency choosePseudocurrency() {
-        return Currency.getInstance("EUR");
+        int index = RANDOM.nextInt(PSEUDO_CURRENCIES_LIST.size());
+        return PSEUDO_CURRENCIES_LIST.get(index);
     }
 
     /**
