@@ -18,7 +18,6 @@ package demo;
 
 import currency.CurrencyConverter;
 import currency.MoneyAmount;
-import draft.ConverterDisplay;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -87,6 +86,12 @@ public class CurrencyConverterGUI extends JFrame implements ActionListener,
     }
 
     public CurrencyConverterGUI(Currency from, Currency to) {
+        if (from.getDefaultFractionDigits() < 0) {
+            String excMsg = "Combination of currency from " 
+                    + from.getCurrencyCode() + " to " + to.getCurrencyCode() 
+                    + " is not valid for this converter";
+            throw new IllegalArgumentException(excMsg);
+        }
         this.fromCurrency = from;
         this.toCurrency = to;
         this.fromAmount = new MoneyAmount(1, this.fromCurrency);
