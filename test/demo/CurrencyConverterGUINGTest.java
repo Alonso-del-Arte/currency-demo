@@ -16,9 +16,9 @@
  */
 package demo;
 
+import currency.CurrencyChooser;
 import currency.CurrencyConverter;
 import currency.MoneyAmount;
-import draft.ConverterDisplay;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -36,22 +36,38 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
 
+import static org.testframe.api.Asserters.assertThrows;
+
 import static org.testng.Assert.*;
 import org.testng.annotations.Test;
 
 /**
  * Tests of the CurrencyConverterGUI class.
- * @author al
+ * @author Alonso del Arte
  */
 public class CurrencyConverterGUINGTest {
     
-    public CurrencyConverterGUINGTest() {
-    }
-
     @Test
-    public void testSomeMethod() {
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
+    public void testConstructorRejectsFromPseudocurrency() {
+        Currency from = CurrencyChooser.choosePseudocurrency();
+        Currency to = CurrencyChooser.chooseCurrency();
+        String fromCurrCode = from.getCurrencyCode();
+        String toCurrCode = to.getCurrencyCode();
+        String msg = "Choosing " + from.getDisplayName() + " (" 
+                + fromCurrCode + ") for conversion to " + to.getDisplayName() 
+                + " (" + toCurrCode + ") should cause an exception";
+        Throwable t = assertThrows(() -> {
+            CurrencyConverterGUI instance = new CurrencyConverterGUI(from, to);
+            System.out.println(msg + ", not created instance " 
+                    + instance.toString());
+        }, IllegalArgumentException.class, msg);
+        String excMsg = t.getMessage();
+        assert excMsg != null : "Exception message should not be null";
+        assert !excMsg.isBlank() : "Exception message should not be blank";
+        String containsMsg = "Exception message should contain currency codes " 
+                + fromCurrCode + " and " + toCurrCode;
+        assert excMsg.contains(fromCurrCode) : containsMsg;
+        assert excMsg.contains(toCurrCode) : containsMsg;
     }
     
 }
