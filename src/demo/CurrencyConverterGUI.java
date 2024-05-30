@@ -92,6 +92,12 @@ public class CurrencyConverterGUI extends JFrame implements ActionListener,
                     + " is not valid for this converter";
             throw new IllegalArgumentException(excMsg);
         }
+        if (to.getDefaultFractionDigits() < 0) {
+            String excMsg = "Combination of currency from " 
+                    + from.getCurrencyCode() + " to " + to.getCurrencyCode() 
+                    + " is not valid for this converter";
+            throw new IllegalArgumentException(excMsg);
+        }
         this.fromCurrency = from;
         this.toCurrency = to;
         this.fromAmount = new MoneyAmount(1, this.fromCurrency);
