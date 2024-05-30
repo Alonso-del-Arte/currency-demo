@@ -70,4 +70,27 @@ public class CurrencyConverterGUINGTest {
         assert excMsg.contains(toCurrCode) : containsMsg;
     }
     
+    @Test
+    public void testConstructorRejectsToPseudocurrency() {
+        Currency from = CurrencyChooser.chooseCurrency();
+        Currency to = CurrencyChooser.choosePseudocurrency();
+        String fromCurrCode = from.getCurrencyCode();
+        String toCurrCode = to.getCurrencyCode();
+        String msg = "Choosing " + from.getDisplayName() + " (" 
+                + fromCurrCode + ") for conversion to " + to.getDisplayName() 
+                + " (" + toCurrCode + ") should cause an exception";
+        Throwable t = assertThrows(() -> {
+            CurrencyConverterGUI instance = new CurrencyConverterGUI(from, to);
+            System.out.println(msg + ", not created instance " 
+                    + instance.toString());
+        }, IllegalArgumentException.class, msg);
+        String excMsg = t.getMessage();
+        assert excMsg != null : "Exception message should not be null";
+        assert !excMsg.isBlank() : "Exception message should not be blank";
+        String containsMsg = "Exception message should contain currency codes " 
+                + fromCurrCode + " and " + toCurrCode;
+        assert excMsg.contains(fromCurrCode) : containsMsg;
+        assert excMsg.contains(toCurrCode) : containsMsg;
+    }
+    
 }
