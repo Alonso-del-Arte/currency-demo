@@ -86,13 +86,9 @@ public class CurrencyConverterGUI extends JFrame implements ActionListener,
     }
 
     public CurrencyConverterGUI(Currency from, Currency to) {
-        if (from.getDefaultFractionDigits() < 0) {
-            String excMsg = "Combination of currency from " 
-                    + from.getCurrencyCode() + " to " + to.getCurrencyCode() 
-                    + " is not valid for this converter";
-            throw new IllegalArgumentException(excMsg);
-        }
-        if (to.getDefaultFractionDigits() < 0) {
+        boolean eitherIsPseudo = from.getDefaultFractionDigits() < 0 
+                || to.getDefaultFractionDigits() < 0;
+        if (eitherIsPseudo) {
             String excMsg = "Combination of currency from " 
                     + from.getCurrencyCode() + " to " + to.getCurrencyCode() 
                     + " is not valid for this converter";
