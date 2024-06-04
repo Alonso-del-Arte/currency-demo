@@ -75,12 +75,12 @@ public class CurrencyInformationDisplay extends JFrame
     }
     
     public void activate() {
-//        if (this.activated) {
-//            String excMsg = "Display was already activated";
-//            throw new IllegalStateException(excMsg);
-//        }
+        if (this.activated) {
+            String excMsg = "Display was already activated";
+            throw new IllegalStateException(excMsg);
+        }
 //        this.setVisible(true);
-//        this.activated = true;
+        this.activated = true;
     }
     
     public CurrencyInformationDisplay(Currency currency) {
