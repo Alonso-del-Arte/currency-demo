@@ -79,7 +79,7 @@ public class CurrencyInformationDisplay extends JFrame
             String excMsg = "Display was already activated";
             throw new IllegalStateException(excMsg);
         }
-//        this.setVisible(true);
+        this.setVisible(true);
         this.activated = true;
     }
     
