@@ -16,8 +16,15 @@
  */
 package demo;
 
+import currency.CurrencyChooser;
+import currency.CurrencyConverter;
+import currency.MoneyAmount;
+
 import java.awt.event.ActionEvent;
 import java.awt.event.ItemEvent;
+import java.util.Currency;
+
+import static org.testframe.api.Asserters.assertThrows;
 
 import static org.testng.Assert.*;
 import org.testng.annotations.Test;
@@ -28,36 +35,28 @@ import org.testng.annotations.Test;
  */
 public class CurrencyInformationDisplayNGTest {
     
-    /**
-     * Test of itemStateChanged method, of class CurrencyInformationDisplay.
-     */
     @Test
-    public void testItemStateChanged() {
-        System.out.println("itemStateChanged");
-        ItemEvent ie = null;
-        CurrencyInformationDisplay instance = null;
-        instance.itemStateChanged(ie);
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
+    public void testNoActivateTwice() {
+        Currency currency = CurrencyChooser.chooseCurrency();
+        CurrencyInformationDisplay instance 
+                = new CurrencyInformationDisplay(currency);
+        instance.activate();
+        String msg = "Should not have been able to activate " 
+                + instance.toString() + " twice";
+        Throwable t = assertThrows(() -> {
+            instance.activate();
+            System.out.println("Activated window a second time");
+        }, IllegalStateException.class, msg);
+        String excMsg = t.getMessage();
+        assert excMsg != null : "Exception message should not be null";
+        assert !excMsg.isBlank() : "Exception message should not be blank";
+        System.out.println("\"" + excMsg + "\"");
     }
-
-    /**
-     * Test of actionPerformed method, of class CurrencyInformationDisplay.
-     */
-    @Test
-    public void testActionPerformed() {
-        System.out.println("actionPerformed");
-        ActionEvent ae = null;
-        CurrencyInformationDisplay instance = null;
-        instance.actionPerformed(ae);
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
-    }
-
+    
     /**
      * Test of activate method, of class CurrencyInformationDisplay.
      */
-    @Test
+//    @Test
     public void testActivate() {
         System.out.println("activate");
         CurrencyInformationDisplay instance = null;
@@ -66,16 +65,4 @@ public class CurrencyInformationDisplayNGTest {
         fail("The test case is a prototype.");
     }
 
-    /**
-     * Test of main method, of class CurrencyInformationDisplay.
-     */
-    @Test
-    public void testMain() {
-        System.out.println("main");
-        String[] args = null;
-        CurrencyInformationDisplay.main(args);
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
-    }
-    
 }
