@@ -54,15 +54,18 @@ public class CurrencyInformationDisplayNGTest {
     }
     
     /**
-     * Test of activate method, of class CurrencyInformationDisplay.
+     * Test of the activate procedure, of the CurrencyInformationDisplay class.
      */
-//    @Test
+    @Test
     public void testActivate() {
         System.out.println("activate");
-        CurrencyInformationDisplay instance = null;
+        Currency currency = CurrencyChooser.chooseCurrency();
+        CurrencyInformationDisplay instance 
+                = new CurrencyInformationDisplay(currency);
         instance.activate();
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
+        String msg = "Instance " + instance.toString() 
+                + " should be visible after activation";
+        assert instance.isVisible() : msg;
     }
 
 }
