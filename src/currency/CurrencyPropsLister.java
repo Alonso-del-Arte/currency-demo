@@ -24,7 +24,10 @@ import java.util.Set;
  * those recognized by the Java runtime through the {@link java.util.Currency} 
  * class.
  * @author Alonso del Arte
+ * @deprecated Pending removal upon completion of same class in 
+ * <code>demo</code> package.
  */
+@Deprecated
 public class CurrencyPropsLister {
     
     static void printCurrencyInfo(Currency currency) {

@@ -25,7 +25,10 @@ import java.util.Locale;
  * {@link java.util.Currency} class, and the available locales are those 
  * recognized by the Java runtime through the {@link java.util.Locale} class.
  * @author Alonso del Arte
+ * @deprecated Pending removal upon completion of same class in 
+ * <code>demo</code> package.
  */
+@Deprecated
 public class CurrencyByLocalePropsLister {
     
     // TODO: Write tests for this
