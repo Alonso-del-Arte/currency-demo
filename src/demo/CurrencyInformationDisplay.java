@@ -44,6 +44,8 @@ import javax.swing.JTextField;
 public class CurrencyInformationDisplay extends JFrame 
         implements ActionListener, ItemListener {
     
+    private static final String PARTIAL_TITLE = "Currency Information for ";
+    
     private static final Currency[] ALL_SUITABLE_CURRENCIES 
             = CurrencyChooser.getSuitableCurrencies().toArray(Currency[]::new);
     
@@ -63,6 +65,7 @@ public class CurrencyInformationDisplay extends JFrame
     
     public void setCurrency(Currency currency) {
         this.selectedCurrency = currency;
+        this.setTitle(PARTIAL_TITLE + this.selectedCurrency.getCurrencyCode());
     }
     
     @Override
@@ -95,7 +98,7 @@ public class CurrencyInformationDisplay extends JFrame
     
     public CurrencyInformationDisplay(Currency currency) {
         this.selectedCurrency = currency;
-        this.setTitle("Currency Information for " + currency.getCurrencyCode());
+        this.setTitle(PARTIAL_TITLE + currency.getCurrencyCode());
     }
     
     public static void main(String[] args) {
