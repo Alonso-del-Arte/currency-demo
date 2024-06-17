@@ -94,6 +94,22 @@ public class CurrencyInformationDisplayNGTest {
     }
     
     @Test
+    public void testTitleShouldUpdateOnDifferentCurrencyChosen() {
+        Currency currency = CurrencyChooser.chooseCurrency();
+        CurrencyInformationDisplay instance 
+                = new CurrencyInformationDisplay(currency);
+        String originalTitle = instance.getTitle();
+        Currency otherCurrency 
+                = CurrencyChooser.chooseCurrencyOtherThan(currency);
+        instance.setCurrency(otherCurrency);
+        String expected = "Currency Information for " + otherCurrency;
+        String actual = instance.getTitle();
+        String message = "Instance initialized as \"" + originalTitle 
+                + "\" should be able to change to \"" + expected + "\"";
+        assertEquals(actual, expected, message);
+    }
+    
+    @Test
     public void testConstructorSetsCurrencyInTitle() {
         Currency currency = CurrencyChooser.chooseCurrency();
         CurrencyInformationDisplay instance 
