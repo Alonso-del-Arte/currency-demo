@@ -51,8 +51,8 @@ public class CurrencyChooser {
     private static final Set<Currency> OTHER_EXCLUSIONS = new HashSet<>();
     
     private static final String[] OTHER_EXCLUSION_CODES = {"ADP", "BGL", "BOV", 
-        "CHW", "COU", "EEK", "FIM", "GRD", "ITL", "MTL", "MXV", "PTE", "SIT", 
-        "USN", "USS", "UYI"};
+        "CHW", "COU", "EEK", "FIM", "GRD", "ITL", "MTL", "MXV", "NLG", "PTE", 
+        "SIT", "USN", "USS", "UYI"};
 
     private static final Map<Integer, Set<Currency>> CURRENCIES_DIGITS_MAP 
             = new HashMap<>();
@@ -183,9 +183,17 @@ public class CurrencyChooser {
      * 1992 to 2011.</li>
      * <li>The Finnish markka (FIM) was the official currency of Finland from 
      * 1860 to 2002.</li>
+     * <li>The Greek drachma (GRD) was valid until 2002, after a phasing out 
+     * period that started in 1999.</li>
      * <li>The Italian lira (ITL) was the only official currency of Italy from 
      * 1861 to 1999. It was phased out by 2002, as Italians got used to the 
      * euro.</li>
+     * <li>The Maltese lira (MTL) was valid until 2008. Malta joined the 
+     * European Union in 2004, after most of the other nations of the union had 
+     * phased out their own currencies. So the phasing out period for the lira 
+     * was pretty much the whole year 2008.</li>
+     * <li>The Dutch guilder (NLG), also called the florin, was valid until 
+     * 2002, after a phasing out period that started in 1999.</li>
      * <li>The Portuguese escudo was the official currency of Portugal from 1911 
      * to 2002. Portugal was actually one of the first nations of the European 
      * Union to adopt the euro, in 1999.</li>
