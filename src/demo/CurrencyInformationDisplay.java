@@ -55,8 +55,10 @@ public class CurrencyInformationDisplay extends JFrame
     
     private boolean activated = false;
     
+    private Currency selectedCurrency;
+    
     public Currency getCurrency() {
-        return Currency.getInstance("XTS");
+        return this.selectedCurrency;
     }
     
     public void setCurrency(Currency currency) {
@@ -92,6 +94,7 @@ public class CurrencyInformationDisplay extends JFrame
     }
     
     public CurrencyInformationDisplay(Currency currency) {
+        this.selectedCurrency = currency;
         this.setTitle("Currency Information for " + currency.getCurrencyCode());
     }
     
