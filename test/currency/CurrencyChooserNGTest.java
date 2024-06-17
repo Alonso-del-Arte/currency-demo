@@ -55,7 +55,7 @@ public class CurrencyChooserNGTest {
             * TOTAL_NUMBER_OF_CURRENCIES;
     
     private static final String[] EURO_REPLACED_EXCLUSION_CODES = {"ADP", "EEK", 
-        "FIM", "GRD", "ITL", "MTL", "PTE", "SIT"};
+        "FIM", "GRD", "ITL", "MTL", "NLG", "PTE", "SIT"};
     
     private static final String[] OTHER_EXCLUSION_CODES = {"BGL", "BOV", 
         "CHW", "COU", "MXV", "USN", "USS", "UYI"};
@@ -479,7 +479,8 @@ public class CurrencyChooserNGTest {
      * Another test of the chooseCurrency function, of the CurrencyChooser 
      * class. The nations of the European Union had their own currencies prior 
      * to joining. In many cases, the euro (EUR) was introduced in 1999 but the 
-     * nation's own currency was still valid until 2002:
+     * nation's own currency was still valid until 2002. In the following list, 
+     * the last date of validity is given only if it's after 2002.
      * <ul>
      * <li>Andorran peseta (ADP)</li>
      * <li>Estonian kroon (EEK)</li>
@@ -487,6 +488,7 @@ public class CurrencyChooserNGTest {
      * <li>Greek drachma (GRD)</li>
      * <li>Italian lira (ITL)</li>
      * <li>Maltese lira (MTL), it was valid until 2008</li>
+     * <li>Dutch guilder (NLG), also called florin</li>
      * <li>Portuguese escudo (PTE)</li>
      * <li>Slovenian tolar (SIT)</li>
      * </ul>
