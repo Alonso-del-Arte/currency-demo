@@ -92,7 +92,7 @@ public class CurrencyInformationDisplay extends JFrame
     }
     
     public CurrencyInformationDisplay(Currency currency) {
-        //
+        this.setTitle("Currency Information for " + currency.getCurrencyCode());
     }
     
     public static void main(String[] args) {
