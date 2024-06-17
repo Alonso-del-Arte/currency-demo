@@ -69,6 +69,15 @@ public class CurrencyInformationDisplayNGTest {
     }
     
     @Test
+    public void testConstructorSetsCurrency() {
+        Currency expected = CurrencyChooser.chooseCurrency();
+        CurrencyInformationDisplay instance 
+                = new CurrencyInformationDisplay(expected);
+        Currency actual = instance.getCurrency();
+        assertEquals(actual, expected);
+    }
+    
+    @Test
     public void testConstructorSetsCurrencyInTitle() {
         Currency currency = CurrencyChooser.chooseCurrency();
         CurrencyInformationDisplay instance 
