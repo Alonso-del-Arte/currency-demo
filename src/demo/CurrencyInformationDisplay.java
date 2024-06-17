@@ -55,6 +55,14 @@ public class CurrencyInformationDisplay extends JFrame
     
     private boolean activated = false;
     
+    public Currency getCurrency() {
+        return Currency.getInstance("XTS");
+    }
+    
+    public void setCurrency(Currency currency) {
+        //
+    }
+    
     @Override
     public void itemStateChanged(ItemEvent ie) {
         //
