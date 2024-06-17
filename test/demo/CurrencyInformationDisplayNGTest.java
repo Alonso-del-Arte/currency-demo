@@ -67,5 +67,16 @@ public class CurrencyInformationDisplayNGTest {
                 + " should be visible after activation";
         assert instance.isVisible() : msg;
     }
+    
+    @Test
+    public void testConstructorSetsCurrencyInTitle() {
+        Currency currency = CurrencyChooser.chooseCurrency();
+        CurrencyInformationDisplay instance 
+                = new CurrencyInformationDisplay(currency);
+        String expected = "Currency Information for " 
+                + currency.getCurrencyCode();
+        String actual = instance.getTitle();
+        assertEquals(actual, expected);
+    }
 
 }
