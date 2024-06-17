@@ -62,7 +62,7 @@ public class CurrencyInformationDisplay extends JFrame
     }
     
     public void setCurrency(Currency currency) {
-        //
+        this.selectedCurrency = currency;
     }
     
     @Override
