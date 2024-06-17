@@ -78,6 +78,22 @@ public class CurrencyInformationDisplayNGTest {
     }
     
     @Test
+    public void testGetSetCurrency() {
+        System.out.println("getCurrency");
+        System.out.println("setCurrency");
+        Currency currency = CurrencyChooser.chooseCurrency();
+        CurrencyInformationDisplay instance 
+                = new CurrencyInformationDisplay(currency);
+        Currency expected = CurrencyChooser.chooseCurrencyOtherThan(currency);
+        instance.setCurrency(expected);
+        Currency actual = instance.getCurrency();
+        String message = "Instance initialized with " 
+                + currency.getCurrencyCode() + " should be able to change to " 
+                + expected.getCurrencyCode();
+        assertEquals(actual, expected, message);
+    }
+    
+    @Test
     public void testConstructorSetsCurrencyInTitle() {
         Currency currency = CurrencyChooser.chooseCurrency();
         CurrencyInformationDisplay instance 
