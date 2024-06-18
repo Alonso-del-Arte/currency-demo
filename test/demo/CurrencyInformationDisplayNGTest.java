@@ -21,8 +21,11 @@ import currency.CurrencyConverter;
 import currency.MoneyAmount;
 
 import java.awt.event.ActionEvent;
+import java.awt.GridLayout;
 import java.awt.event.ItemEvent;
 import java.util.Currency;
+
+import javax.swing.WindowConstants;
 
 import static org.testframe.api.Asserters.assertThrows;
 
@@ -34,6 +37,9 @@ import org.testng.annotations.Test;
  * @author Alonso del Arte
  */
 public class CurrencyInformationDisplayNGTest {
+    
+    private static final String EXPECTED_PARTIAL_TITLE 
+            = "Currency Information for ";
     
     @Test
     public void testNoActivateTwice() {
@@ -102,20 +108,62 @@ public class CurrencyInformationDisplayNGTest {
         Currency otherCurrency 
                 = CurrencyChooser.chooseCurrencyOtherThan(currency);
         instance.setCurrency(otherCurrency);
-        String expected = "Currency Information for " + otherCurrency;
+        String expected = EXPECTED_PARTIAL_TITLE + otherCurrency;
         String actual = instance.getTitle();
         String message = "Instance initialized as \"" + originalTitle 
                 + "\" should be able to change to \"" + expected + "\"";
         assertEquals(actual, expected, message);
     }
     
+    private static String defaultCloseOperationText(int operation) {
+        switch (operation) {
+            case WindowConstants.DO_NOTHING_ON_CLOSE:
+                return "DO_NOTHING_ON_CLOSE";
+            case WindowConstants.HIDE_ON_CLOSE:
+                return "HIDE_ON_CLOSE";
+            case WindowConstants.DISPOSE_ON_CLOSE:
+                return "DISPOSE_ON_CLOSE";
+            case WindowConstants.EXIT_ON_CLOSE:
+                return "EXIT_ON_CLOSE";
+            default:
+                return "Unrecognized operation";
+        }
+        // TODO: Figure out how set -source 21 for this project
+//        return switch (operation) {
+//            case WindowConstants.DO_NOTHING_ON_CLOSE -> "DO_NOTHING_ON_CLOSE";
+//            case WindowConstants.HIDE_ON_CLOSE -> "HIDE_ON_CLOSE";
+//            case WindowConstants.DISPOSE_ON_CLOSE -> "DISPOSE_ON_CLOSE";
+//            case WindowConstants.EXIT_ON_CLOSE -> "EXIT_ON_CLOSE";
+//            default -> "Unrecognized operation";
+//        };
+    }
+    
+    @Test
+    public void testDisplayHasExitOnCloseAsDefaultCloseOperation() {
+        Currency currency = CurrencyChooser.chooseCurrency();
+        CurrencyInformationDisplay instance 
+                = new CurrencyInformationDisplay(currency);
+        int expected = WindowConstants.EXIT_ON_CLOSE;
+        int actual = instance.getDefaultCloseOperation();
+        String message = "Default close operation should be EXIT_ON_CLOSE, got " 
+                + defaultCloseOperationText(actual);
+        assertEquals(actual, expected, message);
+    }
+    
+    // TODO: Test that display uses GridLayout
+    
+    // TODO: Test that text fields are not editable
+
+    // TODO: Test that text fields have specific number of columns
+    
+    // TODO: Test that item state change causes currency to change
+    
     @Test
     public void testConstructorSetsCurrencyInTitle() {
         Currency currency = CurrencyChooser.chooseCurrency();
         CurrencyInformationDisplay instance 
                 = new CurrencyInformationDisplay(currency);
-        String expected = "Currency Information for " 
-                + currency.getCurrencyCode();
+        String expected = EXPECTED_PARTIAL_TITLE + currency.getCurrencyCode();
         String actual = instance.getTitle();
         assertEquals(actual, expected);
     }
