@@ -143,6 +143,7 @@ public class CurrencyInformationDisplayNGTest {
         Currency currency = CurrencyChooser.chooseCurrency();
         CurrencyInformationDisplay instance 
                 = new CurrencyInformationDisplay(currency);
+        instance.activate();
         int expected = WindowConstants.EXIT_ON_CLOSE;
         int actual = instance.getDefaultCloseOperation();
         String message = "Default close operation should be EXIT_ON_CLOSE, got " 
