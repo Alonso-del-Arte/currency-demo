@@ -36,6 +36,7 @@ import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
+import javax.swing.WindowConstants;
 
 /**
  *
@@ -92,6 +93,7 @@ public class CurrencyInformationDisplay extends JFrame
             String excMsg = "Display was already activated";
             throw new IllegalStateException(excMsg);
         }
+        this.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
         this.setVisible(true);
         this.activated = true;
     }
