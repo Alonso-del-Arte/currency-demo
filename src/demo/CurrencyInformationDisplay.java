@@ -104,6 +104,7 @@ public class CurrencyInformationDisplay extends JFrame
         this.setTitle(PARTIAL_TITLE + currency.getCurrencyCode());
         String text = "NOT IMPLEMENTED YET";
         this.displayNameField = new JTextField(text);
+        this.displayNameField.setEditable(false);
         this.letterCodeField =  new JTextField(text);
         this.numberCodeField = new JTextField(text);
         this.symbolField = new JTextField(text);
