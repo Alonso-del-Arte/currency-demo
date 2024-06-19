@@ -102,6 +102,12 @@ public class CurrencyInformationDisplay extends JFrame
     public CurrencyInformationDisplay(Currency currency) {
         this.selectedCurrency = currency;
         this.setTitle(PARTIAL_TITLE + currency.getCurrencyCode());
+        String text = "NOT IMPLEMENTED YET";
+        this.displayNameField = new JTextField(text);
+        this.letterCodeField =  new JTextField(text);
+        this.numberCodeField = new JTextField(text);
+        this.symbolField = new JTextField(text);
+        this.fractionDigitsField = new JTextField(text);
     }
     
     public static void main(String[] args) {
