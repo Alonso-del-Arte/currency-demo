@@ -37,6 +37,7 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
 import javax.swing.WindowConstants;
+import javax.swing.border.EmptyBorder;
 
 /**
  *
@@ -53,7 +54,7 @@ public class CurrencyInformationDisplay extends JFrame
     private final JComboBox<Currency> currencies 
             = new JComboBox<>(ALL_SUITABLE_CURRENCIES);
     
-    private JTextField displayNameField, symbolField, numberCodeField, 
+    JTextField displayNameField, letterCodeField, numberCodeField, symbolField,  
             fractionDigitsField;
     
     private boolean activated = false;
