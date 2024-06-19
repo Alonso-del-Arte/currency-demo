@@ -162,6 +162,15 @@ public class CurrencyInformationDisplayNGTest {
         assert !instance.displayNameField.isEditable() : msg;
     }
     
+    @Test
+    public void testLetterCodeFieldNotEditable() {
+        Currency currency = CurrencyChooser.chooseCurrency();
+        CurrencyInformationDisplay instance 
+                = new CurrencyInformationDisplay(currency);
+        String msg = "Letter code field should not be editable to end user";
+        assert !instance.letterCodeField.isEditable() : msg;
+    }
+    
     // TODO: Test that text fields are not editable
 
     // TODO: Test that text fields have specific number of columns
