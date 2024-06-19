@@ -153,9 +153,20 @@ public class CurrencyInformationDisplayNGTest {
     
     // TODO: Test that display uses GridLayout
     
+    @Test
+    public void testDisplayNameFieldNotEditable() {
+        Currency currency = CurrencyChooser.chooseCurrency();
+        CurrencyInformationDisplay instance 
+                = new CurrencyInformationDisplay(currency);
+        String msg = "Display name field should not be editable to end user";
+        assert !instance.displayNameField.isEditable() : msg;
+    }
+    
     // TODO: Test that text fields are not editable
 
     // TODO: Test that text fields have specific number of columns
+    
+    // TODO: Test that numeric code field zero pads when necessary
     
     // TODO: Test that item state change causes currency to change
     
