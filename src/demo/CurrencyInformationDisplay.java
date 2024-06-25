@@ -114,7 +114,7 @@ public class CurrencyInformationDisplay extends JFrame
         this.setTitle(PARTIAL_TITLE + currency.getCurrencyCode());
         JPanel panel = new JPanel();
         String text = this.selectedCurrency.getDisplayName();
-        this.displayNameField = new JTextField("???", 
+        this.displayNameField = new JTextField(text, 
                 DEFAULT_TEXT_FIELD_COLUMNS);
         panel.add(this.displayNameField);
         panel.add(new JLabel(text));
