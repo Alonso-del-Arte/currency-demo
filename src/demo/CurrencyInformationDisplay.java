@@ -104,6 +104,7 @@ public class CurrencyInformationDisplay extends JFrame
             throw new IllegalStateException(excMsg);
         }
         this.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
+        this.pack();
         this.setVisible(true);
         this.activated = true;
     }
@@ -111,9 +112,12 @@ public class CurrencyInformationDisplay extends JFrame
     public CurrencyInformationDisplay(Currency currency) {
         this.selectedCurrency = currency;
         this.setTitle(PARTIAL_TITLE + currency.getCurrencyCode());
-        String text = "NOT IMPLEMENTED YET";
+        JPanel panel = new JPanel();
+        String text = this.selectedCurrency.getDisplayName();
         this.displayNameField = new JTextField(text, 
                 DEFAULT_TEXT_FIELD_COLUMNS);
+        panel.add(this.displayNameField);
+        panel.add(new JLabel(text));
         this.displayNameField.setEditable(false);
         this.letterCodeField =  new JTextField(text);
         this.letterCodeField.setEditable(false);
@@ -123,6 +127,7 @@ public class CurrencyInformationDisplay extends JFrame
         this.symbolField.setEditable(false);
         this.fractionDigitsField = new JTextField(text);
         this.fractionDigitsField.setEditable(false);
+        this.add(panel);
     }
     
     public static void main(String[] args) {
