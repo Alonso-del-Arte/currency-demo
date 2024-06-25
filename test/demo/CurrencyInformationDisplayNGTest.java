@@ -163,6 +163,16 @@ public class CurrencyInformationDisplayNGTest {
     }
     
     @Test
+    public void testDisplayNameFieldHasSpecifiedNumberOfColumns() {
+        Currency currency = CurrencyChooser.chooseCurrency();
+        CurrencyInformationDisplay instance 
+                = new CurrencyInformationDisplay(currency);
+        int expected = CurrencyInformationDisplay.DEFAULT_TEXT_FIELD_COLUMNS;
+        int actual = instance.displayNameField.getColumns();
+        assertEquals(actual, expected);
+    }
+    
+    @Test
     public void testLetterCodeFieldNotEditable() {
         Currency currency = CurrencyChooser.chooseCurrency();
         CurrencyInformationDisplay instance 
@@ -198,8 +208,6 @@ public class CurrencyInformationDisplayNGTest {
         assert !instance.fractionDigitsField.isEditable() : msg;
     }
 
-    // TODO: Test that text fields have specific number of columns
-    
     // TODO: Test that numeric code field zero pads when necessary
     
     // TODO: Test that item state change causes currency to change
