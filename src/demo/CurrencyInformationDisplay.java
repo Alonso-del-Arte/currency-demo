@@ -113,13 +113,14 @@ public class CurrencyInformationDisplay extends JFrame
         this.selectedCurrency = currency;
         this.setTitle(PARTIAL_TITLE + currency.getCurrencyCode());
         JPanel panel = new JPanel();
-        String text = this.selectedCurrency.getDisplayName();
-        this.displayNameField = new JTextField(text, 
-                DEFAULT_TEXT_FIELD_COLUMNS);
+        String text = "Huh?";
+        this.displayNameField = new JTextField(this.selectedCurrency
+                .getDisplayName(), DEFAULT_TEXT_FIELD_COLUMNS);
         panel.add(this.displayNameField);
         panel.add(new JLabel(text));
         this.displayNameField.setEditable(false);
-        this.letterCodeField =  new JTextField(text);
+        this.letterCodeField =  new JTextField(this.selectedCurrency
+                .getCurrencyCode());
         this.letterCodeField.setEditable(false);
         this.numberCodeField = new JTextField(text);
         this.numberCodeField.setEditable(false);
