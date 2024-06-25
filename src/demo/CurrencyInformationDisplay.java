@@ -48,6 +48,15 @@ public class CurrencyInformationDisplay extends JFrame
     
     private static final String PARTIAL_TITLE = "Currency Information for ";
     
+    /**
+     * How many columns wide to make the text field for the currency's display 
+     * name field. The display name can be as short as four letters (e.g., the 
+     * euro) or it can be as long as that of the S&atilde;o Tom&eacute; and 
+     * Pr&iacute;ncipe dobra or longer still, in which case it generally won't 
+     * fit in the default column width.
+     */
+    private static final int DEFAULT_TEXT_FIELD_COLUMNS = 16;
+    
     private static final Currency[] ALL_SUITABLE_CURRENCIES 
             = CurrencyChooser.getSuitableCurrencies().toArray(Currency[]::new);
     
