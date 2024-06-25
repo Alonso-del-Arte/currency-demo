@@ -416,6 +416,18 @@ public class CurrencyChooserNGTest {
     }
 
     @Test
+    public void testWIREuroExcluded() {
+        Currency wirEuro = Currency.getInstance("CHE");
+        String wirEuroDisplayName = wirEuro.getDisplayName();
+        for (int i = 0; i < NUMBER_OF_CALLS_FOR_EXCLUSION_SEARCH; i++) {
+            Currency currency = CurrencyChooser.chooseCurrency();
+            String msg = "Currency " + currency.getDisplayName() 
+                    + " should not be " + wirEuroDisplayName;
+            assertNotEquals(wirEuro, currency, msg);
+        }
+    }
+
+    @Test
     public void testWIRFrancExcluded() {
         Currency wirFranc = Currency.getInstance("CHW");
         String wirFrancDisplayName = wirFranc.getDisplayName();
