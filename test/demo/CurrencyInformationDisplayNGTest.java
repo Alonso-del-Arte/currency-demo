@@ -225,15 +225,15 @@ public class CurrencyInformationDisplayNGTest {
         assertEquals(actual, expected);
     }
     
-//    @Test
-//    public void testDisplayNameSetToCurrencySpecifiedInConstructor() {
-//        Currency currency = CurrencyChooser.chooseCurrency();
-//        CurrencyInformationDisplay instance 
-//                = new CurrencyInformationDisplay(currency);
-//        String expected = currency.getDisplayName();
-//        String actual = instance.displayNameField.getText();
-//        assertEquals(actual, expected);
-//    }
+    @Test
+    public void testDisplayNameSetToCurrencySpecifiedInConstructor() {
+        Currency currency = CurrencyChooser.chooseCurrency();
+        CurrencyInformationDisplay instance 
+                = new CurrencyInformationDisplay(currency);
+        String expected = currency.getDisplayName();
+        String actual = instance.displayNameField.getText();
+        assertEquals(actual, expected);
+    }
     
     private static boolean contains(Component[] components, 
             Component component) {
