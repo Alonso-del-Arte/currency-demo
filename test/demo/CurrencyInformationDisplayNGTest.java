@@ -229,6 +229,7 @@ public class CurrencyInformationDisplayNGTest {
         Currency currency = CurrencyChooser.chooseCurrency();
         CurrencyInformationDisplay instance 
                 = new CurrencyInformationDisplay(currency);
+        instance.activate();
         boolean jPanelFound = false;
         Component[] components = instance.getComponents();
         for (Component component : components) {
