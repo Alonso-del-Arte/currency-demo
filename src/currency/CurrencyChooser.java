@@ -51,8 +51,8 @@ public class CurrencyChooser {
     private static final Set<Currency> OTHER_EXCLUSIONS = new HashSet<>();
     
     private static final String[] OTHER_EXCLUSION_CODES = {"ADP", "BGL", "BOV", 
-        "CHW", "COU", "EEK", "FIM", "GRD", "ITL", "MTL", "MXV", "NLG", "PTE", 
-        "SIT", "USN", "USS", "UYI"};
+        "CHE", "CHW", "COU", "EEK", "FIM", "GRD", "ITL", "MTL", "MXV", "NLG", 
+        "PTE", "SIT", "USN", "USS", "UYI"};
 
     private static final Map<Integer, Set<Currency>> CURRENCIES_DIGITS_MAP 
             = new HashMap<>();
@@ -166,6 +166,8 @@ public class CurrencyChooser {
      * instruments like treasury bills. From what I understand, it's not used 
      * for everyday expenses like buying groceries, nor for tourists' expenses, 
      * like booking a hotel.</li>
+     * <li>The WIR euro (CHE), a "community currency" that is equal in value to 
+     * the euro (EUR), but is not traded outside of Switzerland.</li>
      * <li>The WIR franc (CHW), a "community currency" that is equal in value to 
      * the Swiss franc (CHF).</li>
      * <li>The same day U.&nbsp;S. dollar (USS) and the next day U.&nbsp;S. 
