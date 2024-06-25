@@ -28,6 +28,16 @@ TODO: Add Moneta dependency
 * TestFrame 0.9 (this one, in the `testframe.api` namespace, will be phased out)
 * TestFrame 0.95 or later (`org.testframe.api` namespace)
 
+## Miscellaneous notes
+
+In the Java currency information file, the S&atilde;o Tom&eacute; and Príncipe 
+dobra (STD) is listed as a historical currency, in effect from 1977 to 2017, and 
+the dobra (STN) is not identified as historical. However, Manny's currency 
+converter API responds with "\{\}" for conversions involving STN, but on June 
+24, 2024, that same API responded "\{"USD_STD":20697.981008\}" and 
+"\{"EUR_STD":22213.258432\}" for queries involving the U.&nbsp;S. dollar and 
+euro, respectively.
+
 ----
 
 This project is closed off to Hacktoberfest.
