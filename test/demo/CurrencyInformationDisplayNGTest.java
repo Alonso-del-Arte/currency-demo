@@ -21,10 +21,12 @@ import currency.CurrencyConverter;
 import currency.MoneyAmount;
 
 import java.awt.event.ActionEvent;
+import java.awt.Component;
 import java.awt.GridLayout;
 import java.awt.event.ItemEvent;
 import java.util.Currency;
 
+import javax.swing.JPanel;
 import javax.swing.WindowConstants;
 
 import static org.testframe.api.Asserters.assertThrows;
@@ -220,6 +222,22 @@ public class CurrencyInformationDisplayNGTest {
         String expected = EXPECTED_PARTIAL_TITLE + currency.getCurrencyCode();
         String actual = instance.getTitle();
         assertEquals(actual, expected);
+    }
+    
+    @Test
+    public void testDisplayIncludesJPanel() {
+        Currency currency = CurrencyChooser.chooseCurrency();
+        CurrencyInformationDisplay instance 
+                = new CurrencyInformationDisplay(currency);
+        boolean jPanelFound = false;
+        Component[] components = instance.getComponents();
+        for (Component component : components) {
+            if (component instanceof JPanel) {
+                jPanelFound = true;
+            }
+        }
+        String msg = "JFrame should include JPanel";
+        assert jPanelFound : msg;
     }
 
 }
