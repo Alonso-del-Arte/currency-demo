@@ -55,7 +55,7 @@ public class CurrencyInformationDisplay extends JFrame
      * Pr&iacute;ncipe dobra or longer still, in which case it generally won't 
      * fit in the default column width.
      */
-    private static final int DEFAULT_TEXT_FIELD_COLUMNS = 16;
+    static final int DEFAULT_TEXT_FIELD_COLUMNS = 16;
     
     private static final Currency[] ALL_SUITABLE_CURRENCIES 
             = CurrencyChooser.getSuitableCurrencies().toArray(Currency[]::new);
