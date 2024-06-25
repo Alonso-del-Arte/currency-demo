@@ -237,6 +237,18 @@ public class CurrencyInformationDisplayNGTest {
         assertEquals(actual, expected, message);
     }
     
+    @Test
+    public void testLetterCodePerCurrencySpecifiedInConstructor() {
+        Currency currency = CurrencyChooser.chooseCurrency();
+        CurrencyInformationDisplay instance 
+                = new CurrencyInformationDisplay(currency);
+        String expected = currency.getCurrencyCode();
+        String actual = instance.letterCodeField.getText();
+        String message = "Display should show letter code for currency " 
+                + currency.getDisplayName();
+        assertEquals(actual, expected, message);
+    }
+    
     private static boolean contains(Component[] components, 
             Component component) {
         boolean found = false;
