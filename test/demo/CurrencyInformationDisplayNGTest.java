@@ -225,23 +225,51 @@ public class CurrencyInformationDisplayNGTest {
         assertEquals(actual, expected);
     }
     
+    private static boolean contains(Component[] components, 
+            Component component) {
+        boolean found = false;
+        int len = components.length;
+        int index = 0;
+        while (!found && index < len) {
+            found = components[index].equals(component);
+            index++;
+        }
+        return found;
+    }
+    
+    @org.junit.Ignore
     @Test
     public void testDisplayIncludesJPanel() {
         Currency currency = CurrencyChooser.chooseCurrency();
         CurrencyInformationDisplay instance 
                 = new CurrencyInformationDisplay(currency);
         instance.activate();
+        JPanel panel = null;
         boolean jPanelFound = false;
         JRootPane rootPane = instance.getRootPane();
         Component[] components = rootPane.getComponents();
         for (Component component : components) {
             System.out.println(component.toString());
             if (component instanceof JPanel) {
+                panel = (JPanel) component;
                 jPanelFound = true;
             }
         }
         String msg = "Display should include JPanel";
         assert jPanelFound : msg;
+        assert panel != null : msg;
+        Component[] panelComponents = rootPane.getComponents();
+        System.out.println(java.util.Arrays.toString(panelComponents));
+        assert contains(panelComponents, instance.displayNameField) 
+                : "Components should include display name field";
+        assert contains(panelComponents, instance.letterCodeField) 
+                : "Components should include letter code field";
+        assert contains(panelComponents, instance.numberCodeField) 
+                : "Components should include number code field";
+        assert contains(panelComponents, instance.symbolField) 
+                : "Components should include symbol field";
+        assert contains(panelComponents, instance.fractionDigitsField) 
+                : "Components should include fraction digits field";
     }
 
 }
