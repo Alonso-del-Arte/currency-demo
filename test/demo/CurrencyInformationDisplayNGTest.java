@@ -232,7 +232,9 @@ public class CurrencyInformationDisplayNGTest {
                 = new CurrencyInformationDisplay(currency);
         String expected = currency.getDisplayName();
         String actual = instance.displayNameField.getText();
-        assertEquals(actual, expected);
+        String message = "Display should show display name for currency " 
+                + currency.getCurrencyCode();
+        assertEquals(actual, expected, message);
     }
     
     private static boolean contains(Component[] components, 
