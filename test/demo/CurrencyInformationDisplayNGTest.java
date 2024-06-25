@@ -27,6 +27,7 @@ import java.awt.event.ItemEvent;
 import java.util.Currency;
 
 import javax.swing.JPanel;
+import javax.swing.JRootPane;
 import javax.swing.WindowConstants;
 
 import static org.testframe.api.Asserters.assertThrows;
@@ -231,13 +232,15 @@ public class CurrencyInformationDisplayNGTest {
                 = new CurrencyInformationDisplay(currency);
         instance.activate();
         boolean jPanelFound = false;
-        Component[] components = instance.getComponents();
+        JRootPane rootPane = instance.getRootPane();
+        Component[] components = rootPane.getComponents();
         for (Component component : components) {
+            System.out.println(component.toString());
             if (component instanceof JPanel) {
                 jPanelFound = true;
             }
         }
-        String msg = "JFrame should include JPanel";
+        String msg = "Display should include JPanel";
         assert jPanelFound : msg;
     }
 
