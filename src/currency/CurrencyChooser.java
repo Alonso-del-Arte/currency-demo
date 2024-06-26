@@ -26,6 +26,7 @@ import java.util.Map;
 import java.util.NoSuchElementException;
 import java.util.Random;
 import java.util.Set;
+import java.util.function.Predicate;
 
 /**
  * Chooses currencies to be used in the testing of other classes in the 
@@ -244,6 +245,11 @@ public class CurrencyChooser {
                     + " fraction digits";
             throw new NoSuchElementException(excMsg);
         }
+    }
+    
+    // TODO: Write tests for this
+    public static Currency chooseCurrency(Predicate<Currency> predicate) {
+        return Currency.getInstance("XTS");
     }
 
     /**
