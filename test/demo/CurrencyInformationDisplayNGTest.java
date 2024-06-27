@@ -249,6 +249,21 @@ public class CurrencyInformationDisplayNGTest {
         assertEquals(actual, expected, message);
     }
     
+    @Test
+    public void testNumericCodePerCurrencySpecifiedInConstructor() {
+        Currency currency = CurrencyChooser.chooseCurrency(
+                (curr) -> curr.getNumericCode() > 99
+        );
+        CurrencyInformationDisplay instance 
+                = new CurrencyInformationDisplay(currency);
+        String expected = Integer.toString(currency.getNumericCode());
+        String actual = instance.numberCodeField.getText();
+        String message = "Display should show number code for currency " 
+                + currency.getDisplayName() + " (" + currency.getCurrencyCode() 
+                + ")";
+        assertEquals(actual, expected, message);
+    }
+    
     private static boolean contains(Component[] components, 
             Component component) {
         boolean found = false;
