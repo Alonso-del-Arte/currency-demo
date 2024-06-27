@@ -247,9 +247,21 @@ public class CurrencyChooser {
         }
     }
     
-    // TODO: Write tests for this
+    /**
+     * Chooses a currency according to a specified predicate.
+     * @param predicate The predicate. For example, currency's display name 
+     * should contain the word "dollar".
+     * @return A currency satisfying the predicate. For the example predicate, 
+     * for example, the Surinamese dollar (SRD). 
+     */
     public static Currency chooseCurrency(Predicate<Currency> predicate) {
-        return Currency.getInstance("XTS");
+        boolean found = false;
+        Currency currency = chooseCurrency();
+        while (!found) {
+            currency = chooseCurrency();
+            found = predicate.test(currency);
+        }
+        return currency;
     }
 
     /**
