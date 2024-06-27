@@ -127,6 +127,9 @@ public class CurrencyInformationDisplay extends JFrame
         if (numberCode < 100) {
             numberCodeText = "0" + numberCodeText;
         }
+        if (numberCode < 10) {
+            numberCodeText = "0" + numberCodeText;
+        }
         this.numberCodeField = new JTextField(numberCodeText);
         this.numberCodeField.setEditable(false);
         this.symbolField = new JTextField(text);
