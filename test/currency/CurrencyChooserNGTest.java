@@ -24,7 +24,10 @@ import java.util.Locale;
 import java.util.Map;
 import java.util.NoSuchElementException;
 import java.util.Set;
+import java.util.function.Predicate;
 import java.util.stream.Collectors;
+
+import static org.testframe.api.Asserters.assertContainsSame;
 
 import static org.testng.Assert.*;
 import org.testng.annotations.Test;
@@ -354,6 +357,27 @@ public class CurrencyChooserNGTest {
                 + expected + " should've been chosen, " + actual 
                 + " were chosen";
         assert actual >= expected : msg;
+    }
+    
+    @Test
+    public void testChooseCurrencyByPredicate() {
+        int remainder = ((int) System.currentTimeMillis()) % 16;
+        Predicate<Currency> predicate 
+                = (currency) -> currency.getNumericCode() % 16 == remainder;
+        // TODO: Refactor to use assertContainsSame()
+        Set<Currency> filtered = CURRENCIES.stream().filter(predicate)
+                .collect(Collectors.toSet());
+        Set<Currency> expected = new HashSet<>(filtered);
+        Set<Currency> actual = new HashSet<>();
+        String message = "Choosing currencies with numeric code " + remainder 
+                + " modulo 16";
+        int totalNumberOfCalls = 20 * expected.size();
+        int callsSoFar = 0;
+        while (callsSoFar < totalNumberOfCalls) {
+            actual.add(CurrencyChooser.chooseCurrency(predicate));
+            callsSoFar++;
+        }
+        assertEquals(actual, expected, message);
     }
     
     @Test
