@@ -366,6 +366,7 @@ public class CurrencyChooserNGTest {
                 = (currency) -> currency.getNumericCode() % 16 == remainder;
         // TODO: Refactor to use assertContainsSame()
         Set<Currency> filtered = CURRENCIES.stream().filter(predicate)
+                .filter((currency) -> accept(currency))
                 .collect(Collectors.toSet());
         Set<Currency> expected = new HashSet<>(filtered);
         Set<Currency> actual = new HashSet<>();
