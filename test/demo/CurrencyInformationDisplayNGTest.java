@@ -264,6 +264,21 @@ public class CurrencyInformationDisplayNGTest {
         assertEquals(actual, expected, message);
     }
     
+    @Test
+    public void testSingleZeroPaddedNumericCodePerCurrencyInConstructor() {
+        Currency currency = CurrencyChooser.chooseCurrency(
+                (curr) -> Math.floor(Math.log10(curr.getNumericCode())) == 1.0
+        );
+        CurrencyInformationDisplay instance 
+                = new CurrencyInformationDisplay(currency);
+        String expected = "0" + Integer.toString(currency.getNumericCode());
+        String actual = instance.numberCodeField.getText();
+        String message = "Display should show zero-padded number code for " 
+                + currency.getDisplayName() + " (" + currency.getCurrencyCode() 
+                + ")";
+        assertEquals(actual, expected, message);
+    }
+    
     private static boolean contains(Component[] components, 
             Component component) {
         boolean found = false;
