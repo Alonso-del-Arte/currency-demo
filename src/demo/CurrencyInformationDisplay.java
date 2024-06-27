@@ -122,7 +122,8 @@ public class CurrencyInformationDisplay extends JFrame
         this.letterCodeField =  new JTextField(this.selectedCurrency
                 .getCurrencyCode());
         this.letterCodeField.setEditable(false);
-        this.numberCodeField = new JTextField(text);
+        this.numberCodeField = new JTextField(Integer.toString(this
+                .selectedCurrency.getNumericCode()));
         this.numberCodeField.setEditable(false);
         this.symbolField = new JTextField(text);
         this.symbolField.setEditable(false);
