@@ -17,17 +17,13 @@
 package demo;
 
 import currency.CurrencyChooser;
-import currency.CurrencyConverter;
-import currency.MoneyAmount;
 
 import java.awt.ItemSelectable;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.awt.BorderLayout;
+import java.awt.GridLayout;
 import java.awt.event.ItemEvent;
 import java.awt.event.ItemListener;
-import java.math.BigDecimal;
-import java.math.RoundingMode;
 import java.util.Currency;
 import java.util.Locale;
 
@@ -62,6 +58,8 @@ public class CurrencyInformationDisplay extends JFrame
     
     private final JComboBox<Currency> currencies 
             = new JComboBox<>(ALL_SUITABLE_CURRENCIES);
+    
+    final JLabel symbolLabel = new JLabel("Current locale symbol? ");
     
     JTextField displayNameField, letterCodeField, numberCodeField, symbolField,  
             fractionDigitsField;
@@ -109,27 +107,39 @@ public class CurrencyInformationDisplay extends JFrame
         this.activated = true;
     }
     
+    // TODO: Mangle labels, write tests for labels, fields
+    // TODO: Remove currency sleection dropdown, write tests
     public CurrencyInformationDisplay(Currency currency) {
         this.selectedCurrency = currency;
         this.setTitle(PARTIAL_TITLE + currency.getCurrencyCode());
-        JPanel panel = new JPanel();
-        String text = "Huh?";
+        JPanel panel = new JPanel(new GridLayout(6, 2));
+        panel.setBorder(new EmptyBorder(10, 10, 10, 10));
+        panel.add(new JLabel("Choose "));
+        panel.add(this.currencies);
+        panel.add(new JLabel("Currency: "));
         this.displayNameField = new JTextField(this.selectedCurrency
                 .getDisplayName(), DEFAULT_TEXT_FIELD_COLUMNS);
-        panel.add(this.displayNameField);
-        panel.add(new JLabel(text));
         this.displayNameField.setEditable(false);
+        panel.add(this.displayNameField);
+        panel.add(new JLabel("ISO-4217 letter code: "));
         this.letterCodeField =  new JTextField(this.selectedCurrency
                 .getCurrencyCode());
         this.letterCodeField.setEditable(false);
+        panel.add(this.letterCodeField);
+        panel.add(new JLabel("Numeric code: "));
         this.numberCodeField = new JTextField(this.selectedCurrency
                 .getNumericCodeAsString());
         this.numberCodeField.setEditable(false);
+        panel.add(this.numberCodeField);
+        panel.add(this.symbolLabel);
         this.symbolField = new JTextField(this.selectedCurrency.getSymbol());
         this.symbolField.setEditable(false);
+        panel.add(this.symbolField);
+        panel.add(new JLabel("Fraction digits: "));
         this.fractionDigitsField = new JTextField(Integer
                 .toString(this.selectedCurrency.getDefaultFractionDigits()));
         this.fractionDigitsField.setEditable(false);
+        panel.add(this.fractionDigitsField);
         this.add(panel);
     }
     
