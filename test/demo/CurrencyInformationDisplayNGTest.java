@@ -294,6 +294,18 @@ public class CurrencyInformationDisplayNGTest {
         assertEquals(actual, expected, message);
     }
     
+    @Test
+    public void testSymbolPerCurrencySpecifiedInConstructor() {
+        Currency currency = CurrencyChooser.chooseCurrency();
+        CurrencyInformationDisplay instance 
+                = new CurrencyInformationDisplay(currency);
+        String expected = currency.getSymbol();
+        String actual = instance.symbolField.getText();
+        String message = "Display should show symbol " + expected 
+                + " for currency " + currency.getDisplayName();
+        assertEquals(actual, expected, message);
+    }
+    
     private static boolean contains(Component[] components, 
             Component component) {
         boolean found = false;
