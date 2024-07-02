@@ -306,6 +306,19 @@ public class CurrencyInformationDisplayNGTest {
         assertEquals(actual, expected, message);
     }
     
+    @Test
+    public void testFractionDigitsPerCurrencySpecifiedInConstructor() {
+        Currency currency = CurrencyChooser.chooseCurrency();
+        CurrencyInformationDisplay instance 
+                = new CurrencyInformationDisplay(currency);
+        String expected = Integer.toString(currency.getDefaultFractionDigits());
+        String actual = instance.fractionDigitsField.getText();
+        String message = "Display should show default fraction digits " 
+                + expected + " for currency " + currency.getDisplayName() + " (" 
+                + currency.getCurrencyCode() + ")";
+        assertEquals(actual, expected, message);
+    }
+    
     private static boolean contains(Component[] components, 
             Component component) {
         boolean found = false;
