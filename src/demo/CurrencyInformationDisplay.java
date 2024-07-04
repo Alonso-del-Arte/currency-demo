@@ -85,7 +85,9 @@ public class CurrencyInformationDisplay extends JFrame
     
     @Override
     public void itemStateChanged(ItemEvent ie) {
-        //
+        if (ie.getStateChange() == ItemEvent.SELECTED) {
+            this.setCurrency((Currency) ie.getItem());
+        }
     }
     
     @Override
@@ -122,6 +124,7 @@ public class CurrencyInformationDisplay extends JFrame
         panel.setBorder(new EmptyBorder(10, 10, 10, 10));
         panel.add(new JLabel("Choose "));
         this.currenciesDropdown.setSelectedItem(this.selectedCurrency);
+        this.currenciesDropdown.addItemListener(this);
         panel.add(this.currenciesDropdown);
         panel.add(new JLabel("Currency: "));
         this.displayNameField = new JTextField(this.selectedCurrency
