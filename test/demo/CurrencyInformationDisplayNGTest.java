@@ -19,12 +19,14 @@ package demo;
 import currency.CurrencyChooser;
 import currency.CurrencyConverter;
 import currency.MoneyAmount;
+import currency.comparators.LetterCodeComparator;
 
 import java.awt.event.ActionEvent;
 import java.awt.Component;
 import java.awt.GridLayout;
 import java.awt.event.ItemEvent;
 import java.awt.event.ItemListener;
+import java.util.Arrays;
 import java.util.Currency;
 
 import javax.swing.JPanel;
@@ -336,6 +338,23 @@ public class CurrencyInformationDisplayNGTest implements ItemListener {
                 + " (" + expected.getCurrencyCode() + "), dropdown shows " 
                 + actual.getDisplayName() + " (" + actual.getCurrencyCode() 
                 + ")";
+        assertEquals(actual, expected, message);
+    }
+    
+    @Test
+    public void testComboBoxListsCurrenciesAlphabeticallyByLetterCode() {
+        Currency currency = CurrencyChooser.chooseCurrency();
+        CurrencyInformationDisplay instance 
+                = new CurrencyInformationDisplay(currency);
+        Currency[] expected = CurrencyChooser.getSuitableCurrencies()
+                .toArray(Currency[]::new);
+        Arrays.sort(expected, new LetterCodeComparator());
+        int size = instance.currenciesDropdown.getItemCount();
+        Currency[] actual = new Currency[size];
+        for (int index = 0; index < size; index++) {
+            actual[index] = instance.currenciesDropdown.getItemAt(index);
+        }
+        String message = "Currencies should be sorted by letter code";
         assertEquals(actual, expected, message);
     }
     
