@@ -17,6 +17,7 @@
 package demo;
 
 import currency.CurrencyChooser;
+import currency.comparators.LetterCodeComparator;
 
 import java.awt.ItemSelectable;
 import java.awt.event.ActionEvent;
@@ -24,6 +25,7 @@ import java.awt.event.ActionListener;
 import java.awt.GridLayout;
 import java.awt.event.ItemEvent;
 import java.awt.event.ItemListener;
+import java.util.Arrays;
 import java.util.Currency;
 import java.util.Locale;
 
@@ -55,6 +57,10 @@ public class CurrencyInformationDisplay extends JFrame
     
     private static final Currency[] ALL_SUITABLE_CURRENCIES 
             = CurrencyChooser.getSuitableCurrencies().toArray(Currency[]::new);
+    
+    static {
+        Arrays.sort(ALL_SUITABLE_CURRENCIES, new LetterCodeComparator());
+    }
     
     final JComboBox<Currency> currenciesDropdown 
             = new JComboBox<>(ALL_SUITABLE_CURRENCIES);
