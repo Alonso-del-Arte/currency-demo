@@ -81,6 +81,7 @@ public class CurrencyInformationDisplay extends JFrame
     public void setCurrency(Currency currency) {
         this.selectedCurrency = currency;
         this.setTitle(PARTIAL_TITLE + this.selectedCurrency.getCurrencyCode());
+        this.displayNameField.setText(this.selectedCurrency.getDisplayName());
     }
     
     @Override
