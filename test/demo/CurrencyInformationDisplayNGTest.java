@@ -24,6 +24,7 @@ import java.awt.event.ActionEvent;
 import java.awt.Component;
 import java.awt.GridLayout;
 import java.awt.event.ItemEvent;
+import java.awt.event.ItemListener;
 import java.util.Currency;
 
 import javax.swing.JPanel;
@@ -39,11 +40,16 @@ import org.testng.annotations.Test;
  * Tests of the CurrencyInformationDisplay class.
  * @author Alonso del Arte
  */
-public class CurrencyInformationDisplayNGTest {
+public class CurrencyInformationDisplayNGTest implements ItemListener {
     
     private static final String EXPECTED_PARTIAL_TITLE 
             = "Currency Information for ";
     
+    @Override
+    public void itemStateChanged(ItemEvent ie) {
+        //
+    }
+
     @Test
     public void testNoActivateTwice() {
         Currency currency = CurrencyChooser.chooseCurrency();
@@ -316,6 +322,20 @@ public class CurrencyInformationDisplayNGTest {
         String message = "Display should show default fraction digits " 
                 + expected + " for currency " + currency.getDisplayName() + " (" 
                 + currency.getCurrencyCode() + ")";
+        assertEquals(actual, expected, message);
+    }
+    
+    @Test
+    public void testComboBoxHasConstructorSpecifiedCurrencySelectedAtFirst() {
+        Currency expected = CurrencyChooser.chooseCurrency();
+        CurrencyInformationDisplay instance 
+                = new CurrencyInformationDisplay(expected);
+        Currency actual = (Currency) instance.currenciesDropdown
+                .getSelectedItem();
+        String message = "Constructor specified " + expected.getDisplayName() 
+                + " (" + expected.getCurrencyCode() + "), dropdown shows " 
+                + actual.getDisplayName() + " (" + actual.getCurrencyCode() 
+                + ")";
         assertEquals(actual, expected, message);
     }
     
