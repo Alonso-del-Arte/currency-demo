@@ -108,13 +108,14 @@ public class CurrencyInformationDisplay extends JFrame
     }
     
     // TODO: Mangle labels, write tests for labels, fields
-    // TODO: Remove currency sleection dropdown, write tests
+    // TODO: Remove currency selection dropdown, write tests
     public CurrencyInformationDisplay(Currency currency) {
         this.selectedCurrency = currency;
         this.setTitle(PARTIAL_TITLE + currency.getCurrencyCode());
         JPanel panel = new JPanel(new GridLayout(6, 2));
         panel.setBorder(new EmptyBorder(10, 10, 10, 10));
         panel.add(new JLabel("Choose "));
+        this.currenciesDropdown.setSelectedItem(this.selectedCurrency);
         panel.add(this.currenciesDropdown);
         panel.add(new JLabel("Currency: "));
         this.displayNameField = new JTextField(this.selectedCurrency
