@@ -56,7 +56,7 @@ public class CurrencyInformationDisplay extends JFrame
     private static final Currency[] ALL_SUITABLE_CURRENCIES 
             = CurrencyChooser.getSuitableCurrencies().toArray(Currency[]::new);
     
-    private final JComboBox<Currency> currencies 
+    final JComboBox<Currency> currencies 
             = new JComboBox<>(ALL_SUITABLE_CURRENCIES);
     
     final JLabel symbolLabel = new JLabel("Current locale symbol? ");
