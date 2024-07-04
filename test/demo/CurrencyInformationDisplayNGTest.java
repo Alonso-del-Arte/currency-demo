@@ -392,6 +392,20 @@ public class CurrencyInformationDisplayNGTest implements ItemListener {
         assertEquals(actual, expected);
     }
     
+    @Test
+    public void testDisplayReflectsComboBoxSelectionInDisplayName() {
+        Currency currency = CurrencyChooser.chooseCurrency();
+        CurrencyInformationDisplay instance 
+                = new CurrencyInformationDisplay(currency);
+        Currency secondCurrency = CurrencyChooser
+                .chooseCurrencyOtherThan(currency);
+        instance.currenciesDropdown.addItemListener(this);
+        instance.currenciesDropdown.setSelectedItem(secondCurrency);
+        String expected = secondCurrency.getDisplayName();
+        String actual = instance.displayNameField.getText();
+        assertEquals(actual, expected);
+    }
+    
     private static boolean contains(Component[] components, 
             Component component) {
         boolean found = false;
