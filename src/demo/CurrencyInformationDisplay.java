@@ -56,7 +56,7 @@ public class CurrencyInformationDisplay extends JFrame
     private static final Currency[] ALL_SUITABLE_CURRENCIES 
             = CurrencyChooser.getSuitableCurrencies().toArray(Currency[]::new);
     
-    final JComboBox<Currency> currencies 
+    final JComboBox<Currency> currenciesDropdown 
             = new JComboBox<>(ALL_SUITABLE_CURRENCIES);
     
     final JLabel symbolLabel = new JLabel("Current locale symbol? ");
@@ -115,7 +115,7 @@ public class CurrencyInformationDisplay extends JFrame
         JPanel panel = new JPanel(new GridLayout(6, 2));
         panel.setBorder(new EmptyBorder(10, 10, 10, 10));
         panel.add(new JLabel("Choose "));
-        panel.add(this.currencies);
+        panel.add(this.currenciesDropdown);
         panel.add(new JLabel("Currency: "));
         this.displayNameField = new JTextField(this.selectedCurrency
                 .getDisplayName(), DEFAULT_TEXT_FIELD_COLUMNS);
