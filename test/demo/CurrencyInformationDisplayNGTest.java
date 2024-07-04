@@ -47,9 +47,28 @@ public class CurrencyInformationDisplayNGTest implements ItemListener {
     private static final String EXPECTED_PARTIAL_TITLE 
             = "Currency Information for ";
     
+    private boolean haveReceivedItemChangeEvent = false;
+    
+    // TODO: Change source above source 13, use switch expression
+    private static String itemStateLabel(int stateCode) {
+        switch (stateCode) {
+            case ItemEvent.DESELECTED:
+                return "deselected";
+            case ItemEvent.ITEM_FIRST:
+                return "item first";
+            case ItemEvent.SELECTED:
+                return "selected";
+            default:
+                return "not recognized";
+        }
+    }
+    
     @Override
     public void itemStateChanged(ItemEvent ie) {
-        //
+        this.haveReceivedItemChangeEvent = true;
+        System.out.println("Affected item is " + ie.getItem().toString());
+        String itemStateStr = itemStateLabel(ie.getStateChange());
+        System.out.println("Item state is " + itemStateStr);
     }
 
     @Test
@@ -365,6 +384,7 @@ public class CurrencyInformationDisplayNGTest implements ItemListener {
                 = new CurrencyInformationDisplay(currency);
         Currency secondCurrency = CurrencyChooser
                 .chooseCurrencyOtherThan(currency);
+        instance.currenciesDropdown.addItemListener(this);
         instance.currenciesDropdown.setSelectedItem(secondCurrency);
         String expected = EXPECTED_PARTIAL_TITLE 
                 + secondCurrency.getCurrencyCode();
