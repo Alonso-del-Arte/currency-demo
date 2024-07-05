@@ -85,7 +85,7 @@ public class CurrencyInformationDisplay extends JFrame
         this.letterCodeField.setText(this.selectedCurrency.getCurrencyCode());
         String numberCode = Integer.toString(this.selectedCurrency
                 .getNumericCode());
-        if (numberCode.length() < 3) {
+        while (numberCode.length() < 3) {
             numberCode = "0" + numberCode;
         }
         this.numberCodeField.setText(numberCode);
