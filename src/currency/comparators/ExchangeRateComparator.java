@@ -35,5 +35,14 @@ public class ExchangeRateComparator implements Comparator<Currency> {
     public int compare(Currency currencyA, Currency currencyB) {
         return 0;
     }
+    
+    /**
+     * Constructor.
+     * @param base The currency on which to base the comparisons. For example, 
+     * the United States dollar (USD).
+     */
+    public ExchangeRateComparator(Currency base) {
+        // TODO: Write tests for this
+    }
   
 }
