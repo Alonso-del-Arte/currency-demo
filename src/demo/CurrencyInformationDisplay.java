@@ -83,12 +83,8 @@ public class CurrencyInformationDisplay extends JFrame
         this.setTitle(PARTIAL_TITLE + this.selectedCurrency.getCurrencyCode());
         this.displayNameField.setText(this.selectedCurrency.getDisplayName());
         this.letterCodeField.setText(this.selectedCurrency.getCurrencyCode());
-        String numberCode = Integer.toString(this.selectedCurrency
-                .getNumericCode());
-        while (numberCode.length() < 3) {
-            numberCode = "0" + numberCode;
-        }
-        this.numberCodeField.setText(numberCode);
+        this.numberCodeField.setText(this.selectedCurrency
+                .getNumericCodeAsString());
     }
     
     @Override
