@@ -112,7 +112,7 @@ public class CurrencyInformationDisplay extends JFrame
             throw new IllegalStateException(excMsg);
         }
         this.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
-//        this.currenciesDropdown.addItemListener(this);
+        this.currenciesDropdown.addItemListener(this);
         this.pack();
         this.setVisible(true);
         this.activated = true;
