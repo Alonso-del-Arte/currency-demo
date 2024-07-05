@@ -485,6 +485,23 @@ public class CurrencyInformationDisplayNGTest implements ItemListener {
         assertEquals(actual, expected, message);
     }
     
+    @Test
+    public void testDisplayReflectsComboBoxSelectionInSymbol() {
+        Currency currency = CurrencyChooser.chooseCurrency();
+        CurrencyInformationDisplay instance 
+                = new CurrencyInformationDisplay(currency);
+        instance.activate();
+        Currency secondCurrency = CurrencyChooser
+                .chooseCurrencyOtherThan(currency);
+        instance.currenciesDropdown.addItemListener(this);
+        instance.currenciesDropdown.setSelectedItem(secondCurrency);
+        String expected = secondCurrency.getSymbol();
+        String actual = instance.symbolField.getText();
+        String message = "Expecting \"" + expected + "\" for " 
+                + secondCurrency.getDisplayName();
+        assertEquals(actual, expected, message);
+    }
+    
     private static boolean contains(Component[] components, 
             Component component) {
         boolean found = false;
