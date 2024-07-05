@@ -19,7 +19,6 @@ package demo;
 import currency.CurrencyChooser;
 import currency.comparators.LetterCodeComparator;
 
-import java.awt.ItemSelectable;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.GridLayout;
@@ -85,6 +84,7 @@ public class CurrencyInformationDisplay extends JFrame
         this.letterCodeField.setText(this.selectedCurrency.getCurrencyCode());
         this.numberCodeField.setText(this.selectedCurrency
                 .getNumericCodeAsString());
+        this.symbolField.setText(this.selectedCurrency.getSymbol());
     }
     
     @Override
