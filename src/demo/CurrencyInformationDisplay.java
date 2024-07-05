@@ -112,6 +112,7 @@ public class CurrencyInformationDisplay extends JFrame
             throw new IllegalStateException(excMsg);
         }
         this.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
+//        this.currenciesDropdown.addItemListener(this);
         this.pack();
         this.setVisible(true);
         this.activated = true;
@@ -126,7 +127,6 @@ public class CurrencyInformationDisplay extends JFrame
         panel.setBorder(new EmptyBorder(10, 10, 10, 10));
         panel.add(new JLabel("Choose "));
         this.currenciesDropdown.setSelectedItem(this.selectedCurrency);
-        this.currenciesDropdown.addItemListener(this);
         panel.add(this.currenciesDropdown);
         panel.add(new JLabel("Currency: "));
         this.displayNameField = new JTextField(this.selectedCurrency
