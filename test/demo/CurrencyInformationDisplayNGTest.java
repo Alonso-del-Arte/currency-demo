@@ -382,6 +382,7 @@ public class CurrencyInformationDisplayNGTest implements ItemListener {
         Currency currency = CurrencyChooser.chooseCurrency();
         CurrencyInformationDisplay instance 
                 = new CurrencyInformationDisplay(currency);
+        instance.activate();
         Currency secondCurrency = CurrencyChooser
                 .chooseCurrencyOtherThan(currency);
         instance.currenciesDropdown.addItemListener(this);
@@ -397,6 +398,7 @@ public class CurrencyInformationDisplayNGTest implements ItemListener {
         Currency currency = CurrencyChooser.chooseCurrency();
         CurrencyInformationDisplay instance 
                 = new CurrencyInformationDisplay(currency);
+        instance.activate();
         Currency secondCurrency = CurrencyChooser
                 .chooseCurrencyOtherThan(currency);
         instance.currenciesDropdown.addItemListener(this);
@@ -411,6 +413,7 @@ public class CurrencyInformationDisplayNGTest implements ItemListener {
         Currency currency = CurrencyChooser.chooseCurrency();
         CurrencyInformationDisplay instance 
                 = new CurrencyInformationDisplay(currency);
+        instance.activate();
         Currency secondCurrency = CurrencyChooser
                 .chooseCurrencyOtherThan(currency);
         instance.currenciesDropdown.addItemListener(this);
