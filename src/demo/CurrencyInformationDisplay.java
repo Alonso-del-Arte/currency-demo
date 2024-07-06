@@ -64,7 +64,7 @@ public class CurrencyInformationDisplay extends JFrame
     final JComboBox<Currency> currenciesDropdown 
             = new JComboBox<>(ALL_SUITABLE_CURRENCIES);
     
-    final JLabel symbolLabel = new JLabel("Current locale symbol? ");
+    final JLabel symbolLabel = new JLabel("Current locale symbol: ");
     
     JTextField displayNameField, letterCodeField, numberCodeField, symbolField,  
             fractionDigitsField;
