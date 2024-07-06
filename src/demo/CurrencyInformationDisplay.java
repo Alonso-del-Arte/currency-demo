@@ -147,7 +147,8 @@ public class CurrencyInformationDisplay extends JFrame
                 .getNumericCodeAsString());
         this.numberCodeField.setEditable(false);
         panel.add(this.numberCodeField);
-        this.symbolLabel.setEnabled(false);
+        this.symbolLabel.setEnabled(!this.selectedCurrency.getSymbol()
+                .equals(this.selectedCurrency.getCurrencyCode()));
         panel.add(this.symbolLabel);
         this.symbolField = new JTextField(this.selectedCurrency.getSymbol());
         this.symbolField.setEditable(false);
