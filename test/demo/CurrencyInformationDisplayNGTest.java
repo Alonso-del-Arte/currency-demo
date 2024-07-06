@@ -322,6 +322,16 @@ public class CurrencyInformationDisplayNGTest implements ItemListener {
     }
     
     @Test
+    public void testSymbolLabelText() {
+        Currency currency = CurrencyChooser.chooseCurrency();
+        CurrencyInformationDisplay instance 
+                = new CurrencyInformationDisplay(currency);
+        String expected = "Current locale symbol: ";
+        String actual = instance.symbolLabel.getText();
+        assertEquals(actual, expected);
+    }
+    
+    @Test
     public void testSymbolPerCurrencySpecifiedInConstructor() {
         Currency currency = CurrencyChooser.chooseCurrency();
         CurrencyInformationDisplay instance 
