@@ -358,6 +358,20 @@ public class CurrencyInformationDisplayNGTest implements ItemListener {
     }
     
     @Test
+    public void testSymbolLabelEnabledWhenSymbolDiffersFromLetterCode() {
+        Currency currency = CurrencyChooser.chooseCurrency(
+                (curr) -> !curr.getSymbol().equals(curr.getCurrencyCode())
+        );
+        CurrencyInformationDisplay instance 
+                = new CurrencyInformationDisplay(currency);
+        String msg = "Given that " + currency.getDisplayName() + " (" 
+                + currency.getCurrencyCode() + ") has symbol " 
+                + currency.getSymbol() 
+                + " in this locale, symbol label should be enabled";
+        assert instance.symbolLabel.isEnabled() : msg;
+    }
+    
+    @Test
     public void testFractionDigitsPerCurrencySpecifiedInConstructor() {
         Currency currency = CurrencyChooser.chooseCurrency();
         CurrencyInformationDisplay instance 
