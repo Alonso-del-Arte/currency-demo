@@ -541,7 +541,7 @@ public class CurrencyInformationDisplayNGTest implements ItemListener {
     }
     
     @Test
-    public void testComboBoxSymbolLabelEnabledWhenSymbolSameAsLetterCode() {
+    public void testComboBoxSymbolLabelDisabledWhenSymbolSameAsLetterCode() {
         Currency currency = CurrencyChooser.chooseCurrency(
                 (curr) -> !curr.getSymbol().equals(curr.getCurrencyCode())
         );
@@ -560,19 +560,25 @@ public class CurrencyInformationDisplayNGTest implements ItemListener {
         assert !instance.symbolLabel.isEnabled() : msg;
     }
     
-//    @Test
-//    public void testSymbolLabelEnabledWhenSymbolDiffersFromLetterCode() {
-//        Currency currency = CurrencyChooser.chooseCurrency(
-//                (curr) -> !curr.getSymbol().equals(curr.getCurrencyCode())
-//        );
-//        CurrencyInformationDisplay instance 
-//                = new CurrencyInformationDisplay(currency);
-//        String msg = "Given that " + currency.getDisplayName() + " (" 
-//                + currency.getCurrencyCode() + ") has symbol " 
-//                + currency.getSymbol() 
-//                + " in this locale, symbol label should be enabled";
-//        assert instance.symbolLabel.isEnabled() : msg;
-//    }
+    @Test
+    public void testComboBoxSymbolLabelEnabledWhenSymbolDiffersLetterCode() {
+        Currency currency = CurrencyChooser.chooseCurrency(
+                (curr) -> curr.getSymbol().equals(curr.getCurrencyCode())
+        );
+        CurrencyInformationDisplay instance 
+                = new CurrencyInformationDisplay(currency);
+        instance.activate();
+        Currency secondCurrency = CurrencyChooser.chooseCurrency(
+                (curr) -> !curr.getSymbol().equals(curr.getCurrencyCode())
+        );
+        instance.currenciesDropdown.addItemListener(this);
+        instance.currenciesDropdown.setSelectedItem(secondCurrency);
+        String msg = "Given that " + secondCurrency.getDisplayName() + " (" 
+                + secondCurrency.getCurrencyCode() + ") has symbol " 
+                + secondCurrency.getSymbol() 
+                + " in this locale, symbol label should be enabled";
+        assert instance.symbolLabel.isEnabled() : msg;
+    }
     
     @Test
     public void testDisplayReflectsComboBoxSelDefaultFractDigits() {
