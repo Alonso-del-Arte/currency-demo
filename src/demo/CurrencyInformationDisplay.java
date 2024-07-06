@@ -84,7 +84,8 @@ public class CurrencyInformationDisplay extends JFrame
         this.letterCodeField.setText(this.selectedCurrency.getCurrencyCode());
         this.numberCodeField.setText(this.selectedCurrency
                 .getNumericCodeAsString());
-        this.symbolLabel.setEnabled(false);
+        this.symbolLabel.setEnabled(!this.selectedCurrency.getSymbol()
+                .equals(this.selectedCurrency.getCurrencyCode()));
         this.symbolField.setText(this.selectedCurrency.getSymbol());
         this.fractionDigitsField.setText(Integer.toString(this.selectedCurrency
                 .getDefaultFractionDigits()));
