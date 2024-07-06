@@ -19,8 +19,6 @@ package demo;
 import currency.CurrencyChooser;
 import currency.comparators.LetterCodeComparator;
 
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 import java.awt.GridLayout;
 import java.awt.event.ItemEvent;
 import java.awt.event.ItemListener;
@@ -37,11 +35,16 @@ import javax.swing.WindowConstants;
 import javax.swing.border.EmptyBorder;
 
 /**
- *
+ * A display of information about a currency. The display shows the currency's 
+ * name in the current locale (e.g., "Japanese Yen" in an English-speaking 
+ * locale), the ISO-4217 letter code (e.g., "JPY"), the ISO-4217 numeric code 
+ * (e.g., 392), the symbol in the current locale (may or may not differ from the 
+ * letter code; e.g., &yen;), and the number of default fraction digits (e.g., 0 
+ * in the case of the Japanese yen).
+ * <p>The user may select a different currency from the combo box.</p>
  * @author Alonso del Arte
  */
-public class CurrencyInformationDisplay extends JFrame 
-        implements ActionListener, ItemListener {
+public class CurrencyInformationDisplay extends JFrame implements ItemListener {
     
     private static final String PARTIAL_TITLE = "Currency Information for ";
     
@@ -98,20 +101,6 @@ public class CurrencyInformationDisplay extends JFrame
         }
     }
     
-    @Override
-    public void actionPerformed(ActionEvent ae) {
-//        String command = ae.getActionCommand();
-//        switch (command) {
-//            case NINE_PIPS_LABEL:
-//                CardImage.toggleNinePipsAreSymmetrical();
-//                this.repaint();
-//                break;
-//            default:
-//                System.err.println("Command \"" + command 
-//                        + "\" not recognized");
-//        }
-    }
-    
     public void activate() {
         if (this.activated) {
             String excMsg = "Display was already activated";
@@ -126,6 +115,7 @@ public class CurrencyInformationDisplay extends JFrame
     
     // TODO: Mangle labels, write tests for labels, fields
     // TODO: Remove currency selection dropdown, write tests
+    // TODO: Write Javadoc
     public CurrencyInformationDisplay(Currency currency) {
         this.selectedCurrency = currency;
         this.setTitle(PARTIAL_TITLE + currency.getCurrencyCode());
