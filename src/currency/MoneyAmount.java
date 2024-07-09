@@ -173,6 +173,10 @@ public class MoneyAmount implements Comparable<MoneyAmount> {
     // TODO: Write tests for this
     @Override
     public int compareTo(MoneyAmount other) {
+        if (!this.currencyID.equals(other.currencyID)) {
+            String excMsg = "FOR TESTING PURPOSES ONLY";
+            throw new RuntimeException(excMsg);
+        }
         return 0;
     }
 
