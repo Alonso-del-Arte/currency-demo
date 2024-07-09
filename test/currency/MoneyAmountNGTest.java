@@ -461,6 +461,18 @@ public class MoneyAmountNGTest {
         assertEquals(actual, expected);
     }
     
+    private static void assertCurrencyCodesIncluded(String excMsg, 
+            Currency currencyA, Currency currencyB) {
+        String currACode = currencyA.getCurrencyCode();
+        String currBCode = currencyB.getCurrencyCode();
+        String msg = "Exception message should include currency code " 
+                + currACode + " for " + currencyA.getDisplayName() 
+                + " and currency code " + currBCode + " for " 
+                + currencyB.getDisplayName();
+        assert excMsg.contains(currACode) : msg;
+        assert excMsg.contains(currBCode) : msg;
+    }
+    
     @Test
     public void testPlus() {
         System.out.println("plus");
@@ -499,6 +511,7 @@ public class MoneyAmountNGTest {
         String excMsg = t.getMessage();
         assert excMsg != null : "Exception message should not be null";
         assert !excMsg.isBlank() : "Exception message should not be blank";
+        assertCurrencyCodesIncluded(excMsg, currencyA, currencyB);
         System.out.println("\"" + excMsg + "\"");
     }
     
@@ -555,6 +568,7 @@ public class MoneyAmountNGTest {
         String excMsg = t.getMessage();
         assert excMsg != null : "Exception message should not be null";
         assert !excMsg.isBlank() : "Exception message should not be blank";
+        assertCurrencyCodesIncluded(excMsg, currencyA, currencyB);
         System.out.println("\"" + excMsg + "\"");
     }
     
