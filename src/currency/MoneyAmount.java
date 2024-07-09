@@ -130,6 +130,12 @@ public class MoneyAmount implements Comparable<MoneyAmount> {
      * fresh new instance.
      */
     public MoneyAmount minus(MoneyAmount subtrahend) {
+        if (!this.currencyID.equals(subtrahend.currencyID)) {
+            String excMsg = "Currency conversion needed to subtract " 
+                    + subtrahend.currencyID.getDisplayName() + " from " 
+                    + this.currencyID.getDisplayName();
+            throw new CurrencyMismatchException(excMsg, this, subtrahend);
+        }
         return new MoneyAmount(this.currencyID, this.allCents 
                 - subtrahend.allCents, this.multiplier);
     }
