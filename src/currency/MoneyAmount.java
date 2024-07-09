@@ -202,19 +202,16 @@ public class MoneyAmount implements Comparable<MoneyAmount> {
         return (this.currencyID.hashCode() << 16) + (int) this.allCents;
     }
     
-    // TODO: Write tests for this
+    /**
+     * Auxiliary constructor. If the cents or mills are 0 or not applicable, 
+     * they can simply be omitted.
+     * @param units How many units of the currency. For example, 20 for $20.00 
+     * or &yen;20.
+     * @param currency The currency. Examples: United States dollar (USD), 
+     * Japanese yen (JPY).
+     */
     public MoneyAmount(long units, Currency currency) {
-        if (currency.getDefaultFractionDigits() < 0) {
-            String excMsg = "Pseudocurrency " + currency.getDisplayName() + " (" 
-                    + currency.getCurrencyCode() + " is not valid";
-            throw new IllegalArgumentException(excMsg);
-        }
-        this.singles = units;
-        this.cents = 0;
-        this.multiplier = calculateMultiplier(currency);
-        this.currencyID = currency;
-        this.allCents = this.singles * this.multiplier + this.cents;
-//        this(units, currency, (short) 0);
+        this(units, currency, (short) 0);
     }
 
     // TODO: Write tests for this
