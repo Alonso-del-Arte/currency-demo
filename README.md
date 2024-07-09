@@ -38,6 +38,13 @@ STN, but on June 24, 2024, that same API responded "\{"USD_STD":20697.981008\}"
 and "\{"EUR_STD":22213.258432\}" for queries involving the U.&nbsp;S. dollar and 
 euro, respectively.
 
+Not sure what's going on with the Mauritanian ouguiya. The currency code "MRO" 
+is identified as "Mauritanian Ouguiya (1973–2017)" in the Java currency 
+information file. But Manny's currency converter, as of July 9, 2024, gives an 
+exchange rate of 356.999828 for U.&nbsp;S. dollars to MRO. But that same 
+converter gives an exchange rate of 35.6999828 for USD to MRU, which the Java 
+currency information file suggests is not a historical currency.
+
 ----
 
 This project is closed off to Hacktoberfest.
