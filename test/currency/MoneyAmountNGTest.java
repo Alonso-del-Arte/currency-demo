@@ -605,8 +605,9 @@ public class MoneyAmountNGTest {
         for (Currency currency : currencies) {
             int fractDigits = currency.getDefaultFractionDigits();
             if (fractDigits < 0) {
+                int units = RANDOM.nextInt(Short.MAX_VALUE);
                 Throwable t = assertThrows(() -> {
-                    MoneyAmount badAmount = new MoneyAmount(0, currency);
+                    MoneyAmount badAmount = new MoneyAmount(units, currency);
                     System.out.println("Instantiated amount " 
                             + badAmount.toString() + " with currency "  
                             + currency.getDisplayName() + " which has " 
@@ -622,6 +623,31 @@ public class MoneyAmountNGTest {
             }
         }
     }
+    
+//    @Test
+//    public void testWithCentsConstructorRejectsPseudoCurrencies() {
+//        Set<Currency> currencies = Currency.getAvailableCurrencies();
+//        for (Currency currency : currencies) {
+//            int fractDigits = currency.getDefaultFractionDigits();
+//            if (fractDigits < 0) {
+//                Throwable t = assertThrows(() -> {
+//                    MoneyAmount badAmount = new MoneyAmount(0, currency, 
+//                            (short) 1);
+//                    System.out.println("Instantiated amount " 
+//                            + badAmount.toString() + " with currency "  
+//                            + currency.getDisplayName() + " which has " 
+//                            + fractDigits + " fractional digits");
+//                }, IllegalArgumentException.class);
+//                String excMsg = t.getMessage();
+//                assert excMsg != null : "Message should not be null";
+//                String currencyCode = currency.getCurrencyCode();
+//                String msg = "Message should include currency code " 
+//                        + currencyCode + " for pseudo-currency " 
+//                        + currency.getDisplayName();
+//                assert excMsg.contains(currencyCode) : msg;
+//            }
+//        }
+//    }
     
 //    @Test
 //    void testConstructorRejectsNullCurrency() {
