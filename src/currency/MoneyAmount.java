@@ -204,11 +204,11 @@ public class MoneyAmount implements Comparable<MoneyAmount> {
     
     // TODO: Write tests for this
     public MoneyAmount(long units, Currency currency) {
-        if (currency.getDefaultFractionDigits() < 0) {
-            String excMsg = "Pseudocurrency " + currency.getDisplayName() + " (" 
-                    + currency.getCurrencyCode() + " is not valid";
-            throw new IllegalArgumentException(excMsg);
-        }
+//        if (currency.getDefaultFractionDigits() < 0) {
+//            String excMsg = "Pseudocurrency " + currency.getDisplayName() + " (" 
+//                    + currency.getCurrencyCode() + " is not valid";
+//            throw new IllegalArgumentException(excMsg);
+//        }
         this.singles = units;
         this.cents = 0;
         this.multiplier = calculateMultiplier(currency);
