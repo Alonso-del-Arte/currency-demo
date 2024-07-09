@@ -600,7 +600,7 @@ public class MoneyAmountNGTest {
     }
     
     @Test
-    public void testConstructorRejectsPseudoCurrencies() {
+    public void testChainedConstructorRejectsPseudoCurrencies() {
         Set<Currency> currencies = Currency.getAvailableCurrencies();
         for (Currency currency : currencies) {
             int fractDigits = currency.getDefaultFractionDigits();
@@ -614,10 +614,11 @@ public class MoneyAmountNGTest {
                 }, IllegalArgumentException.class);
                 String excMsg = t.getMessage();
                 assert excMsg != null : "Message should not be null";
-                String symbol = currency.getSymbol();
-                String msg = "Message should include symbol " + symbol 
-                        + " for pseudo-currency " + currency.getDisplayName();
-                assert excMsg.contains(symbol) : msg;
+                String currencyCode = currency.getCurrencyCode();
+                String msg = "Message should include currency code " 
+                        + currencyCode + " for pseudo-currency " 
+                        + currency.getDisplayName();
+                assert excMsg.contains(currencyCode) : msg;
             }
         }
     }
