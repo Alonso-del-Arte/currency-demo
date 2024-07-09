@@ -108,16 +108,30 @@ public class MoneyAmount implements Comparable<MoneyAmount> {
                 this.multiplier);
     }
     
-    // TODO: Write tests for this
+    /**
+     * Gives the additive inverse of this money amount. The additive inverse is 
+     * the amount that added to this amount is zero. For the example, let's say 
+     * this amount is &minus;119,35&euro;.
+     * @return This amount negated. For example, 119,35&euro;. Note that 0 of 
+     * any currency is its own additive inverse. This function may or may not 
+     * return a fresh instance in that case.
+     */
     public MoneyAmount negate() {
-        return new MoneyAmount(currencyID, -this.allCents, this.multiplier);
+        return new MoneyAmount(this.currencyID, -this.allCents, 
+                this.multiplier);
     }
     
-    // TODO: Write tests for this
+    /**
+     * Subtracts a money amount from this money amount. For the example, let's 
+     * say this amount is $128.20.
+     * @param subtrahend The amount to subtract. For example, $30.50.
+     * @return The subtraction. For example, $97.70. Even if the 
+     * <code>subtrahend</code> is 0, this function will most likely return a 
+     * fresh new instance.
+     */
     public MoneyAmount minus(MoneyAmount subtrahend) {
-        return this;
-//                new MoneyAmount(currencyID, this.allCents - subtrahend.allCents,  
-//                this.multiplier);
+        return new MoneyAmount(this.currencyID, this.allCents 
+                - subtrahend.allCents, this.multiplier);
     }
     
     /**
