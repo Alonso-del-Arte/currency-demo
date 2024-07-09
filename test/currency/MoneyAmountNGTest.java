@@ -537,7 +537,26 @@ public class MoneyAmountNGTest {
     // TODO: Write test for minus with positive minuend, subtrahend, 
     // negative subtraction
     
-    // TODO: Write test for minus mismatched currencies
+    @Test
+    public void testMinusMismatchedCurrenciesCausesException() {
+        int units = RANDOM.nextInt(10000) + 1;
+        Currency currencyA = CurrencyChooser.chooseCurrency();
+        MoneyAmount minuend = new MoneyAmount(units, currencyA);
+        Currency currencyB = CurrencyChooser.chooseCurrencyOtherThan(currencyA);
+        MoneyAmount subtrahend = new MoneyAmount(units, currencyB);
+        String msg = "Subtracting " + subtrahend.toString() + " from " 
+                + minuend.toString() 
+                + " should have caused CurrencyMismatchException";
+        Throwable t = assertThrows(() -> {
+            MoneyAmount badAmount = minuend.minus(subtrahend);
+            System.out.println(msg + ", not given result " 
+                    + badAmount.toString());
+        }, CurrencyMismatchException.class, msg);
+        String excMsg = t.getMessage();
+        assert excMsg != null : "Exception message should not be null";
+        assert !excMsg.isBlank() : "Exception message should not be blank";
+        System.out.println("\"" + excMsg + "\"");
+    }
     
     @Test
     public void testNegate() {
