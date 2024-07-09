@@ -100,8 +100,10 @@ public class MoneyAmount implements Comparable<MoneyAmount> {
     public MoneyAmount plus(MoneyAmount addend) {
         if (!this.currencyID.equals(addend.currencyID)) {
             String excMsg = "Currency conversion needed to add " 
-                    + this.currencyID.getDisplayName() + " and " 
-                    + addend.currencyID.getDisplayName();
+                    + this.currencyID.getDisplayName() + " (" 
+                    + this.currencyID.getCurrencyCode() + ") and " 
+                    + addend.currencyID.getDisplayName() + " (" 
+                    + addend.currencyID.getCurrencyCode() + ")";
             throw new CurrencyMismatchException(excMsg, this, addend);
         }
         return new MoneyAmount(currencyID, this.allCents + addend.allCents, 
@@ -132,8 +134,10 @@ public class MoneyAmount implements Comparable<MoneyAmount> {
     public MoneyAmount minus(MoneyAmount subtrahend) {
         if (!this.currencyID.equals(subtrahend.currencyID)) {
             String excMsg = "Currency conversion needed to subtract " 
-                    + subtrahend.currencyID.getDisplayName() + " from " 
-                    + this.currencyID.getDisplayName();
+                    + subtrahend.currencyID.getDisplayName() + " (" 
+                    + subtrahend.currencyID.getCurrencyCode() + ") from "
+                    + this.currencyID.getDisplayName() + " (" 
+                    + this.currencyID.getCurrencyCode() + ")";
             throw new CurrencyMismatchException(excMsg, this, subtrahend);
         }
         return new MoneyAmount(this.currencyID, this.allCents 
