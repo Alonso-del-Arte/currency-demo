@@ -52,8 +52,8 @@ public class CurrencyChooser {
     private static final Set<Currency> OTHER_EXCLUSIONS = new HashSet<>();
     
     private static final String[] OTHER_EXCLUSION_CODES = {"ADP", "BGL", "BOV", 
-        "CHE", "CHW", "COU", "EEK", "FIM", "GRD", "ITL", "MTL", "MXV", "NLG", 
-        "PTE", "SIT", "USN", "USS", "UYI"};
+        "CHE", "CHW", "COU", "CYP", "EEK", "FIM", "GRD", "ITL", "MTL", "MXV", 
+        "NLG", "PTE", "SIT", "USN", "USS", "UYI"};
 
     private static final Map<Integer, Set<Currency>> CURRENCIES_DIGITS_MAP 
             = new HashMap<>();
@@ -182,6 +182,8 @@ public class CurrencyChooser {
      * <li>The Andorran peseta (ADP) was a currency of Andorra in the 
      * 20<sup>th</sup> Century. It was pegged to the Spanish peseta (ESP) at 
      * 1:1. By 2002 it had been phased out in favor of the euro.</li>
+     * <li>The Cypriot pound (CYP) was a currency of Cyprus until 2008, when it 
+     * was replaced by the euro.</li>
      * <li>The Estonian kroon (EEK) was the official currency of Estonia from 
      * 1992 to 2011.</li>
      * <li>The Finnish markka (FIM) was the official currency of Finland from 
