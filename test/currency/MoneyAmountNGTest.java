@@ -505,18 +505,25 @@ public class MoneyAmountNGTest {
     @Test
     public void testMinus() {
         System.out.println("minus");
-        Currency currency = CurrencyChooser.chooseCurrency(2);
+        Currency currency = CurrencyChooser.chooseCurrency((curr) 
+                -> curr.getDefaultFractionDigits() > 0);
+        int bound = 1;
+        int counter = currency.getDefaultFractionDigits();
+        while (counter > 0) {
+            bound *= 10;
+            counter--;
+        }
         int unitsA = RANDOM.nextInt(Short.MAX_VALUE) + 1;
-        short centsA = (short) RANDOM.nextInt(100);
+        short centsA = (short) RANDOM.nextInt(bound);
         MoneyAmount minuend = new MoneyAmount(unitsA, currency, centsA);
         int unitsB = RANDOM.nextInt(unitsA - 1);
-        short centsB = (short) RANDOM.nextInt(100);
+        short centsB = (short) RANDOM.nextInt(bound);
         MoneyAmount subtrahend = new MoneyAmount(unitsB, currency, centsB);
         int centDiff = centsA - centsB;
-        short expCents = (short) (centDiff % 1000);
+        short expCents = (short) (centDiff % bound);
         int unitAdjust = 0;
         if (expCents < 0) {
-            expCents += 1000;
+            expCents += bound;
             unitAdjust = -1;
         }
         int expUnits = unitsA - unitsB + unitAdjust;
