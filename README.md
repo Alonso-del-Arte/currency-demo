@@ -25,7 +25,7 @@ TODO: Add Moneta dependency
 ### Dependencies for test classes
 
 * TestNG
-* TestFrame 0.9 (this one, in the `testframe.api` namespace, will be phased out)
+* ~~TestFrame 0.9~~ (this has been phased out)
 * TestFrame 0.95 or later (`org.testframe.api` namespace)
 
 ## Miscellaneous notes
