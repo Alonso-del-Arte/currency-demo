@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2023 Alonso del Arte
+ * Copyright (C) 2024 Alonso del Arte
  *
  * This program is free software: you can redistribute it and/or modify it under 
  * the terms of the GNU General Public License as published by the Free Software 
@@ -26,7 +26,7 @@ import java.util.Locale;
 import static org.testng.Assert.*;
 import org.testng.annotations.Test;
 
-import static testframe.api.Asserters.assertThrows;
+import static org.testframe.api.Asserters.assertThrows;
 
 /**
  * Demonstrates the benefits of writing your own class to represent money 
