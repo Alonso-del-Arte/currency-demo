@@ -235,6 +235,9 @@ public class MoneyAmount implements Comparable<MoneyAmount> {
 
     // TODO: Write tests for this
     public MoneyAmount(long units, Currency currency, short divisions) {
+        if (currency == null) {
+            throw new RuntimeException("FOR TESTING PURPOSES");
+        }
         if (currency.getDefaultFractionDigits() < 0) {
             String excMsg = "Pseudocurrency " + currency.getDisplayName() + " (" 
                     + currency.getCurrencyCode() + " is not valid";
