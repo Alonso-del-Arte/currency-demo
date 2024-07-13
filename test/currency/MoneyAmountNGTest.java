@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2023 Alonso del Arte
+ * Copyright (C) 2024 Alonso del Arte
  *
  * This program is free software: you can redistribute it and/or modify it under 
  * the terms of the GNU General Public License as published by the Free Software 
@@ -640,6 +640,25 @@ public class MoneyAmountNGTest {
     }
     
     @Test
+    public void testCompareToThrowsExceptionForMismatchedCurrencies() {
+        Currency currencyA = CurrencyChooser.chooseCurrency();
+        int units = RANDOM.nextInt(Short.MAX_VALUE);
+        MoneyAmount amountA = new MoneyAmount(units, currencyA);
+        Currency currencyB = CurrencyChooser.chooseCurrencyOtherThan(currencyA);
+        MoneyAmount amountB = new MoneyAmount(units, currencyB);
+        String msg = "Comparing " + amountA.toString() + " and " 
+                + amountB.toString() + " should cause an exception";
+        Throwable t = assertThrows(() -> {
+            int badResult = amountA.compareTo(amountB);
+            System.out.println(msg + ", not given result " + badResult);
+        }, CurrencyMismatchException.class, msg);
+        String excMsg = t.getMessage();
+        assert excMsg != null : "Exception message should not be null";
+        assert !excMsg.isBlank() : "Exception message should not be blank";
+        System.out.println("\"" + excMsg + "\"");
+    }
+    
+    @Test
     public void testNoCentsConstructorRejectsPseudoCurrencies() {
         Set<Currency> currencies = Currency.getAvailableCurrencies();
         for (Currency currency : currencies) {
@@ -692,17 +711,18 @@ public class MoneyAmountNGTest {
     }
     
 //    @Test
-//    void testConstructorRejectsNullCurrency() {
+//    public void testConstructorRejectsNullCurrency() {
 //        int units = RANDOM.nextInt(1048576);
-//        Throwable t = assertThrows(NullPointerException.class, () -> {
+//        Throwable t = assertThrows(() -> {
 //            MoneyAmount amount = new MoneyAmount(units, null);
 //            System.out.println("Should not have created " 
 //                    + amount.getClass().getName() + '@' 
 //                    + Integer.toString(amount.hashCode(), 16) + " for " + units 
 //                    + " of null currency");
-//        });
+//        }, NullPointerException.class);
 //        String excMsg = t.getMessage();
 //        assert excMsg != null : "Message should not be null";
+//        System.out.println("\"" + excMsg + "\"");
 //    }
 
 }
