@@ -174,8 +174,7 @@ public class MoneyAmount implements Comparable<MoneyAmount> {
     @Override
     public int compareTo(MoneyAmount other) {
         if (!this.currencyID.equals(other.currencyID)) {
-            String excMsg = "FOR TESTING PURPOSES ONLY";
-            throw new RuntimeException(excMsg);
+            throw new CurrencyMismatchException(this, other);
         }
         return 0;
     }
