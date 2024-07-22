@@ -21,6 +21,8 @@ import static currency.CurrencyChooser.RANDOM;
 import java.util.Currency;
 import java.util.Locale;
 
+import static org.testframe.api.Asserters.assertInRange;
+
 import static org.testng.Assert.*;
 import org.testng.annotations.Test;
 
@@ -103,6 +105,32 @@ public class CurrencyConverterNGTest {
         String message = "Converting " + expected.toString() + " to " 
                 + currency.getDisplayName() + " should not need conversion";
         assertEquals(actual, expected, message);
+    }
+    
+    @Test
+    public void testConvertUSDollarsToEastCaribbeanDollars() {
+        int units = RANDOM.nextInt(Short.MAX_VALUE) + Byte.MAX_VALUE;
+        short divisions = (short) RANDOM.nextInt(100);
+        MoneyAmount source = new MoneyAmount(units, U_S_DOLLARS, divisions);
+        int expectedUnits = (int) Math.floor(2.7 * units);
+        int marginOfError = expectedUnits / 40;
+        MoneyAmount minimum = new MoneyAmount(expectedUnits - marginOfError, 
+                EAST_CARIBBEAN_DOLLARS);
+        MoneyAmount maximum = new MoneyAmount(expectedUnits + marginOfError, 
+                EAST_CARIBBEAN_DOLLARS);
+        MoneyAmount expected = new MoneyAmount(expectedUnits, 
+                EAST_CARIBBEAN_DOLLARS);
+        MoneyAmount actual = CurrencyConverter.convert(source, 
+                EAST_CARIBBEAN_DOLLARS);
+        String xcdDisplayName = EAST_CARIBBEAN_DOLLARS.getDisplayName();
+        String message = "Conversion of " + source.toString() + " to " 
+                + xcdDisplayName + " should give amount of that currency, got " 
+                + actual.toString();
+        assertEquals(actual.getCurrency(), EAST_CARIBBEAN_DOLLARS, message);
+        String msg = "Converting " + source.toString() + " to " + xcdDisplayName 
+                + " should give roughly " + expected.toString();
+        assertInRange(minimum, actual, maximum, msg);
+        System.out.println(msg + ", got " + actual.toString());
     }
     
 }
