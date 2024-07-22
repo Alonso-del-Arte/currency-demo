@@ -22,6 +22,11 @@ official part of the Java Development Kit.
 
 TODO: Add Moneta dependency
 
+At first, the baseline for this project was Java 8, but I've decided to move it 
+up to Java 17. I'm actually using Java 21, though. Compiling with Java 17 or 
+earlier might still be possible, but then be aware that some null pointer 
+exceptions might have null exception messages.
+
 ### Dependencies for test classes
 
 * TestNG
