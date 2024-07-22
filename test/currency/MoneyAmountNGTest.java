@@ -19,8 +19,12 @@ package currency;
 import static currency.CurrencyChooser.chooseCurrency;
 import static currency.CurrencyChooser.RANDOM;
 
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.Currency;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Locale;
 import java.util.Set;
 
@@ -710,19 +714,19 @@ public class MoneyAmountNGTest {
         }
     }
     
-//    @Test
-//    public void testConstructorRejectsNullCurrency() {
-//        int units = RANDOM.nextInt(1048576);
-//        Throwable t = assertThrows(() -> {
-//            MoneyAmount amount = new MoneyAmount(units, null);
-//            System.out.println("Should not have created " 
-//                    + amount.getClass().getName() + '@' 
-//                    + Integer.toString(amount.hashCode(), 16) + " for " + units 
-//                    + " of null currency");
-//        }, NullPointerException.class);
-//        String excMsg = t.getMessage();
-//        assert excMsg != null : "Message should not be null";
-//        System.out.println("\"" + excMsg + "\"");
-//    }
+    @Test
+    public void testConstructorRejectsNullCurrency() {
+        int units = RANDOM.nextInt(1048576);
+        Throwable t = assertThrows(() -> {
+            MoneyAmount amount = new MoneyAmount(units, null);
+            System.out.println("Should not have created " 
+                    + amount.getClass().getName() + '@' 
+                    + Integer.toString(amount.hashCode(), 16) + " for " + units 
+                    + " of null currency");
+        }, NullPointerException.class);
+        String excMsg = t.getMessage();
+        assert excMsg != null : "Message should not be null";
+        System.out.println("\"" + excMsg + "\"");
+    }
 
 }
