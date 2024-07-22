@@ -233,10 +233,15 @@ public class MoneyAmount implements Comparable<MoneyAmount> {
         this(units, currency, (short) 0);
     }
 
-    // TODO: Write tests for this
+    /**
+     * Primary constructor.
+     * @param units
+     * @param currency
+     * @param divisions 
+     */
     public MoneyAmount(long units, Currency currency, short divisions) {
         if (currency == null) {
-            throw new RuntimeException("FOR TESTING PURPOSES");
+            throw new NullPointerException("Currency should not be null");
         }
         if (currency.getDefaultFractionDigits() < 0) {
             String excMsg = "Pseudocurrency " + currency.getDisplayName() + " (" 
