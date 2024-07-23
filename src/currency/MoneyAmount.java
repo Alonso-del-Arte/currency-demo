@@ -231,14 +231,14 @@ public class MoneyAmount implements Comparable<MoneyAmount> {
      */
     public MoneyAmount(long units, Currency currency) {
 //        this(units, currency, (short) 0);
-        if (currency == null) {
-            throw new RuntimeException("FOR TESTING PURPOSES ONLY");
-        }
-        if (currency.getDefaultFractionDigits() < 0) {
-            String excMsg = "Pseudocurrency " + currency.getDisplayName() + " (" 
-                    + currency.getCurrencyCode() + " is not valid";
-            throw new IllegalArgumentException(excMsg);
-        }
+//        if (currency == null) {
+//            throw new RuntimeException("FOR TESTING PURPOSES ONLY");
+//        }
+//        if (currency.getDefaultFractionDigits() < 0) {
+//            String excMsg = "Pseudocurrency " + currency.getDisplayName() + " (" 
+//                    + currency.getCurrencyCode() + " is not valid";
+//            throw new IllegalArgumentException(excMsg);
+//        }
         this.singles = units;
         this.cents = 0;
         this.multiplier = calculateMultiplier(currency);
@@ -258,14 +258,14 @@ public class MoneyAmount implements Comparable<MoneyAmount> {
 //        if (currency == null) {
 //            throw new NullPointerException("Currency should not be null");
 //        }
-        if (currency == null) {
-            throw new RuntimeException("FOR TESTING PURPOSES ONLY");
-        }
-        if (currency.getDefaultFractionDigits() < 0) {
-            String excMsg = "Pseudocurrency " + currency.getDisplayName() + " (" 
-                    + currency.getCurrencyCode() + " is not valid";
-            throw new IllegalArgumentException(excMsg);
-        }
+//        if (currency == null) {
+//            throw new RuntimeException("FOR TESTING PURPOSES ONLY");
+//        }
+//        if (currency.getDefaultFractionDigits() < 0) {
+//            String excMsg = "Pseudocurrency " + currency.getDisplayName() + " (" 
+//                    + currency.getCurrencyCode() + " is not valid";
+//            throw new IllegalArgumentException(excMsg);
+//        }
         this.singles = units;
         this.cents = divisions;
         this.multiplier = calculateMultiplier(currency);
