@@ -52,8 +52,8 @@ public class CurrencyChooser {
     private static final Set<Currency> OTHER_EXCLUSIONS = new HashSet<>();
     
     private static final String[] OTHER_EXCLUSION_CODES = {"ADP", "BGL", "BOV", 
-        "CHE", "CHW", "COU", "CYP", "EEK", "FIM", "GRD", "ITL", "MTL", "MXV", 
-        "NLG", "PTE", "SIT", "USN", "USS", "UYI"};
+        "CHE", "CHW", "COU", "CYP", "EEK", "FIM", "GRD", "ITL", "LUF", "MTL", 
+        "MXV", "NLG", "PTE", "SIT", "USN", "USS", "UYI"};
 
     private static final Map<Integer, Set<Currency>> CURRENCIES_DIGITS_MAP 
             = new HashMap<>();
@@ -181,18 +181,23 @@ public class CurrencyChooser {
      * <ul>
      * <li>The Andorran peseta (ADP) was a currency of Andorra in the 
      * 20<sup>th</sup> Century. It was pegged to the Spanish peseta (ESP) at 
-     * 1:1. By 2002 it had been phased out in favor of the euro.</li>
+     * 1:1.</li>
      * <li>The Cypriot pound (CYP) was a currency of Cyprus until 2008, when it 
      * was replaced by the euro.</li>
      * <li>The Estonian kroon (EEK) was the official currency of Estonia from 
      * 1992 to 2011.</li>
      * <li>The Finnish markka (FIM) was the official currency of Finland from 
      * 1860 to 2002.</li>
-     * <li>The Greek drachma (GRD) was valid until 2002, after a phasing out 
-     * period that started in 1999.</li>
+     * <li>The Greek drachma (GRD) was valid until 2002, as was the case with 
+     * the currencies of several other countries that joined the eurozone in 
+     * 1999.</li>
      * <li>The Italian lira (ITL) was the only official currency of Italy from 
-     * 1861 to 1999. It was phased out by 2002, as Italians got used to the 
-     * euro.</li>
+     * 1861 to 1999.</li>
+     * <li>The Luxembourgian franc (LUF) was the official currency of Luxembourg 
+     * from 1854 to 2002 except during World War II. But even after the war, 
+     * some other countries' currencies were accepted in Luxembourg. That 
+     * nation's residents have been characterized as enthusiastic adopters of 
+     * the euro, which was introduced in 1999.</li>
      * <li>The Maltese lira (MTL) was valid until 2008. Malta joined the 
      * European Union in 2004, after most of the other nations of the union had 
      * phased out their own currencies. So the phasing out period for the lira 
@@ -205,6 +210,14 @@ public class CurrencyChooser {
      * <li>The Slovenian tolar (SIT) was the official currency of Slovenia from 
      * 1991 to 2007.</li>
      * </ul>
+     * <p>In many cases, the euro was introduced in 1999 but the nation's old 
+     * currency continued to be valid until 2002, this is not always noted for 
+     * each of the currencies it's applicable to.</p>
+     * <p>As an interesting aside, note that some of the euro-replaced notes and 
+     * coins can still be exchanged for euros. It varies by country: French 
+     * francs can no longer be exchanged for euros, for example, while 
+     * Lithuanian litas (both notes and coins) can be exchanged 
+     * indefinitely.</p>
      * @return A currency with default fraction digits of at least 0. For 
      * example, the Kyrgystani som (KGS), which like most world currencies by 
      * default has two fractional digits. A som is divided into 100 tyin.
