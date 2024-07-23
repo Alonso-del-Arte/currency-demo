@@ -231,19 +231,16 @@ public class MoneyAmount implements Comparable<MoneyAmount> {
      */
     public MoneyAmount(long units, Currency currency) {
 //        this(units, currency, (short) 0);
-//        if (currency == null) {
-//            throw new RuntimeException("FOR TESTING PURPOSES ONLY");
-//        }
-//        if (currency.getDefaultFractionDigits() < 0) {
-//            String excMsg = "Pseudocurrency " + currency.getDisplayName() + " (" 
-//                    + currency.getCurrencyCode() + " is not valid";
-//            throw new IllegalArgumentException(excMsg);
-//        }
+        if (currency == null) {
+            throw new NullPointerException("Currency shouldn't be null");
+        }
+        if (currency.getDefaultFractionDigits() < 0) {
+            String excMsg = "Pseudocurrency " + currency.getDisplayName() + " (" 
+                    + currency.getCurrencyCode() + " is not valid";
+            throw new IllegalArgumentException(excMsg);
+        }
         this.singles = units;
         this.cents = 0;
-        if (currency == null) {
-            currency = Currency.getInstance("XTS");
-        }
         this.multiplier = calculateMultiplier(currency);
         this.currencyID = currency;
         this.allCents = this.singles * this.multiplier + this.cents;
@@ -258,17 +255,14 @@ public class MoneyAmount implements Comparable<MoneyAmount> {
      * @throws NullPointerException If {@code currency} is null.
      */
     public MoneyAmount(long units, Currency currency, short divisions) {
-//        if (currency == null) {
-//            throw new NullPointerException("Currency should not be null");
-//        }
-//        if (currency == null) {
-//            throw new RuntimeException("FOR TESTING PURPOSES ONLY");
-//        }
-//        if (currency.getDefaultFractionDigits() < 0) {
-//            String excMsg = "Pseudocurrency " + currency.getDisplayName() + " (" 
-//                    + currency.getCurrencyCode() + " is not valid";
-//            throw new IllegalArgumentException(excMsg);
-//        }
+        if (currency == null) {
+            throw new NullPointerException("Currency should not be null");
+        }
+        if (currency.getDefaultFractionDigits() < 0) {
+            String excMsg = "Pseudocurrency " + currency.getDisplayName() + " (" 
+                    + currency.getCurrencyCode() + " is not valid";
+            throw new IllegalArgumentException(excMsg);
+        }
         this.singles = units;
         this.cents = divisions;
         this.multiplier = calculateMultiplier(currency);
