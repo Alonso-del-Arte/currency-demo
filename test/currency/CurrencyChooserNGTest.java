@@ -27,8 +27,6 @@ import java.util.Set;
 import java.util.function.Predicate;
 import java.util.stream.Collectors;
 
-import static org.testframe.api.Asserters.assertContainsSame;
-
 import static org.testng.Assert.*;
 import org.testng.annotations.Test;
 
@@ -58,7 +56,7 @@ public class CurrencyChooserNGTest {
             * TOTAL_NUMBER_OF_CURRENCIES;
     
     private static final String[] EURO_REPLACED_EXCLUSION_CODES = {"ADP", "CYP", 
-        "EEK", "FIM", "GRD", "ITL", "MTL", "NLG", "PTE", "SIT"};
+        "EEK", "FIM", "GRD", "ITL", "LUF", "MTL", "NLG", "PTE", "SIT"};
     
     private static final String[] OTHER_EXCLUSION_CODES = {"BGL", "BOV", "CHE", 
         "CHW", "COU", "MXV", "USN", "USS", "UYI"};
