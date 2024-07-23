@@ -662,6 +662,61 @@ public class MoneyAmountNGTest {
         System.out.println("\"" + excMsg + "\"");
     }
     
+    private static int determineDivisionsBound(Currency currency) {
+        int bound = 1;
+        int exponent = currency.getDefaultFractionDigits();
+        while (exponent > 0) {
+            bound *= 10;
+            exponent--;
+        }
+        return bound;
+    }
+    
+    private static List<MoneyAmount> makeAmountList(Currency currency) {
+        int initialCapacity = RANDOM.nextInt(8) + 2;
+        int units = RANDOM.nextInt(Short.MAX_VALUE);
+        int bound = determineDivisionsBound(currency);
+        short divisions;
+        if (bound > 1) {
+            divisions = (short) RANDOM.nextInt(bound);
+        } else {
+            divisions = 0;
+        }
+        MoneyAmount initial = new MoneyAmount(units, currency, divisions);
+        List<MoneyAmount> list = new ArrayList<>(initialCapacity);
+        list.add(initial);
+        int threshold = initialCapacity / 2;
+        for (int multiplicand = 1; multiplicand < threshold; multiplicand++) {
+            MoneyAmount curr = initial.times(multiplicand);
+            list.add(curr);
+            list.add(curr.negate());
+        }
+        return list;
+    }
+    
+    @Test
+    public void testCompareTo() {
+        System.out.println("compareTo");
+        List<MoneyAmount> toBeSorted 
+                = makeAmountList(CurrencyChooser.chooseCurrency((currency) -> 
+                        !currency.getSymbol().equals(currency.getCurrencyCode())
+                ));
+        List<MoneyAmount> expected = new ArrayList<>(toBeSorted);
+        List<MoneyAmount> actual = new ArrayList<>(toBeSorted);
+        Collections.sort(expected, (MoneyAmount a, MoneyAmount b) -> {
+            return Long.compare(a.getFullAmountInCents(), 
+                    b.getFullAmountInCents());
+        });
+        Collections.sort(actual);
+        assertEquals(actual, expected);
+    }
+    
+    // TODO: Write test for cents overflowing dollars
+    
+    // TODO: Write test for negative dollars, positive cents
+    
+    // TODO: Write test for negative dollars, negative cents
+    
     @Test
     public void testNoCentsConstructorRejectsPseudoCurrencies() {
         Set<Currency> currencies = Currency.getAvailableCurrencies();
@@ -744,5 +799,8 @@ public class MoneyAmountNGTest {
         assert excMsg != null : "Message should not be null";
         System.out.println("\"" + excMsg + "\"");
     }
+    
+    // TODO: Write test that null currency gives NPE with same exception message 
+    //       regardless of constructor
 
 }
