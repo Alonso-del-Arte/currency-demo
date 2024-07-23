@@ -170,13 +170,23 @@ public class MoneyAmount implements Comparable<MoneyAmount> {
         return this;
     }
     
-    // TODO: Write tests for this
+    /**
+     * Compares this money amount to another. For the examples, suppose this 
+     * money amount is 70,89&euro;.
+     * @param other The amount to compare this amount to. Examples: 40,00&euro;; 
+     * 70,89&euro;; 70,90&euro;.
+     * @return A negative integer, most likely &minus;1, if this amount is less 
+     * than {@code other}; 0 if this amount is equal to {@code other}; a 
+     * positive integer, most likely 1, if this amount is greater than {@code 
+     * other}. In the examples, &minus;1 for 40,00&euro;; 0 for 70,89&euro;; 1 
+     * for 70,90&euro;.
+     */
     @Override
     public int compareTo(MoneyAmount other) {
         if (!this.currencyID.equals(other.currencyID)) {
             throw new CurrencyMismatchException(this, other);
         }
-        return 0;
+        return Long.compare(this.allCents, other.allCents);
     }
 
     @Override
