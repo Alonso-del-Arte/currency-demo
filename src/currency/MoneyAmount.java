@@ -241,10 +241,10 @@ public class MoneyAmount implements Comparable<MoneyAmount> {
 //        }
         this.singles = units;
         this.cents = 0;
-        this.multiplier = calculateMultiplier(currency);
         if (currency == null) {
             currency = Currency.getInstance("XTS");
         }
+        this.multiplier = calculateMultiplier(currency);
         this.currencyID = currency;
         this.allCents = this.singles * this.multiplier + this.cents;
     }
