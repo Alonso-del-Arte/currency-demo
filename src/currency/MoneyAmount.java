@@ -228,22 +228,12 @@ public class MoneyAmount implements Comparable<MoneyAmount> {
      * or &yen;20.
      * @param currency The currency. Examples: United States dollar (USD), 
      * Japanese yen (JPY).
+     * @throws IllegalArgumentException If {@code currency} is a pseudocurrency 
+     * like gold (XAU).
+     * @throws NullPointerException If {@code currency} is null.
      */
     public MoneyAmount(long units, Currency currency) {
-//        this(units, currency, (short) 0);
-        if (currency == null) {
-            throw new NullPointerException("Currency shouldn't be null");
-        }
-        if (currency.getDefaultFractionDigits() < 0) {
-            String excMsg = "Pseudocurrency " + currency.getDisplayName() + " (" 
-                    + currency.getCurrencyCode() + " is not valid";
-            throw new IllegalArgumentException(excMsg);
-        }
-        this.singles = units;
-        this.cents = 0;
-        this.multiplier = calculateMultiplier(currency);
-        this.currencyID = currency;
-        this.allCents = this.singles * this.multiplier + this.cents;
+        this(units, currency, (short) 0);
     }
 
     /**
@@ -252,6 +242,8 @@ public class MoneyAmount implements Comparable<MoneyAmount> {
      * @param units The number of units. For example, 37.
      * @param currency The currency. For example, United States dollars (USD).
      * @param divisions The number of divisions of the unit. For example, 99.
+     * @throws IllegalArgumentException If {@code currency} is a pseudocurrency 
+     * like gold (XAU).
      * @throws NullPointerException If {@code currency} is null.
      */
     public MoneyAmount(long units, Currency currency, short divisions) {
