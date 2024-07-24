@@ -56,7 +56,8 @@ public class CurrencyChooserNGTest {
             * TOTAL_NUMBER_OF_CURRENCIES;
     
     private static final String[] EURO_REPLACED_EXCLUSION_CODES = {"ADP", "CYP", 
-        "EEK", "ESP", "FIM", "GRD", "ITL", "LUF", "MTL", "NLG", "PTE", "SIT"};
+        "EEK", "ESP", "FIM", "FRF", "GRD", "ITL", "LUF", "MTL", "NLG", "PTE", 
+        "SIT"};
     
     private static final String[] OTHER_EXCLUSION_CODES = {"BGL", "BOV", "CHE", 
         "CHW", "COU", "MXV", "USN", "USS", "UYI"};
