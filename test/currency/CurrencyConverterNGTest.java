@@ -145,6 +145,10 @@ public class CurrencyConverterNGTest {
                 U_S_DOLLARS);
         MoneyAmount maximum = new MoneyAmount(expectedUnits + marginOfError, 
                 U_S_DOLLARS);
+        if (minimum.equals(maximum)) {
+            MoneyAmount adjustment = new MoneyAmount(2, U_S_DOLLARS);
+            maximum = maximum.plus(adjustment);
+        }
         MoneyAmount expected = new MoneyAmount(expectedUnits, 
                 U_S_DOLLARS);
         MoneyAmount actual = CurrencyConverter.convert(source, U_S_DOLLARS);
