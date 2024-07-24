@@ -113,7 +113,7 @@ public class CurrencyConverterNGTest {
         short divisions = (short) RANDOM.nextInt(100);
         MoneyAmount source = new MoneyAmount(units, U_S_DOLLARS, divisions);
         int expectedUnits = (int) Math.floor(2.7 * units);
-        int marginOfError = expectedUnits / 160;
+        int marginOfError = expectedUnits / 320;
         MoneyAmount minimum = new MoneyAmount(expectedUnits - marginOfError, 
                 EAST_CARIBBEAN_DOLLARS);
         MoneyAmount maximum = new MoneyAmount(expectedUnits + marginOfError, 
@@ -140,7 +140,7 @@ public class CurrencyConverterNGTest {
         MoneyAmount source = new MoneyAmount(units, EAST_CARIBBEAN_DOLLARS, 
                 divisions);
         int expectedUnits = (int) Math.floor(0.37 * units);
-        int marginOfError = expectedUnits / 160;
+        int marginOfError = expectedUnits / 320;
         MoneyAmount minimum = new MoneyAmount(expectedUnits - marginOfError, 
                 U_S_DOLLARS);
         MoneyAmount maximum = new MoneyAmount(expectedUnits + marginOfError, 
