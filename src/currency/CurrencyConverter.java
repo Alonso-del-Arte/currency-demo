@@ -90,6 +90,11 @@ public class CurrencyConverter {
                     target, source.getDivisions());
             return intermediate.times(2.70255);
         }
+        if (target.getCurrencyCode().equals("USD")) {
+            MoneyAmount intermediate = new MoneyAmount(source.getUnits(),
+                    target, source.getDivisions());
+            return intermediate.times(0.370021);
+        }
         return source;
     }
     
