@@ -52,8 +52,8 @@ public class CurrencyChooser {
     private static final Set<Currency> OTHER_EXCLUSIONS = new HashSet<>();
     
     private static final String[] OTHER_EXCLUSION_CODES = {"ADP", "BGL", "BOV", 
-        "CHE", "CHW", "COU", "CYP", "EEK", "ESP", "FIM", "GRD", "ITL", "LUF", 
-        "MTL", "MXV", "NLG", "PTE", "SIT", "USN", "USS", "UYI"};
+        "CHE", "CHW", "COU", "CYP", "EEK", "ESP", "FIM", "FRF", "GRD", "ITL", 
+        "LUF", "MTL", "MXV", "NLG", "PTE", "SIT", "USN", "USS", "UYI"};
 
     private static final Map<Integer, Set<Currency>> CURRENCIES_DIGITS_MAP 
             = new HashMap<>();
@@ -187,44 +187,50 @@ public class CurrencyChooser {
      * 20<sup>th</sup> Century. It was pegged to the Spanish peseta (ESP) at 
      * 1:1.</li>
      * <li>The Cypriot pound (CYP) was a currency of Cyprus until 2008, when it 
-     * was replaced by the euro.</li>
+     * was replaced by the euro. The old notes and coins can no longer be 
+     * exchanged for euros.</li>
      * <li>The Estonian kroon (EEK) was the official currency of Estonia from 
-     * 1992 to 2011.</li>
-     * The Spanish peseta (ESP) was the official currency of Spain from 1868 to 
-     * 2002. After June 30, 2021, the old notes and coins can no longer be 
-     * exchanged for euros.
+     * 1992 to 2011. The old notes and coins can be exchanged for euros at the 
+     * country's central bank indefinitely.</li>
+     * <li>The Spanish peseta (ESP) was the official currency of Spain from 1868 
+     * to 2002. After June 30, 2021, the old notes and coins can no longer be 
+     * exchanged for euros.</li>
      * <li>The Finnish markka (FIM) was the official currency of Finland from 
-     * 1860 to 2002.</li>
+     * 1860 to 2002. The old notes and coins can no longer be exchanged for 
+     * euros.</li>
+     * <li>The French franc (FRF) was the official currency of France from 1960 
+     * to 2002, though its history dates back to 1795 and earlier. The old notes 
+     * and coins can no longer be exchanged for euros.</li>
      * <li>The Greek drachma (GRD) was valid until 2002, as was the case with 
      * the currencies of several other countries that joined the eurozone in 
-     * 1999.</li>
+     * 1999. The old notes and coins can no longer be exchanged for euros.</li>
      * <li>The Italian lira (ITL) was the only official currency of Italy from 
-     * 1861 to 1999.</li>
+     * 1861 to 1999. The old notes and coins can no longer be exchanged for 
+     * euros.</li>
      * <li>The Luxembourgian franc (LUF) was the official currency of Luxembourg 
      * from 1854 to 2002 except during World War II. But even after the war, 
      * some other countries' currencies were accepted in Luxembourg. That 
      * nation's residents have been characterized as enthusiastic adopters of 
-     * the euro, which was introduced in 1999.</li>
+     * the euro, which was introduced in 1999. The old coins can no longer be 
+     * exchanged for euros. However, the old notes can be exchanged 
+     * indefinitely.</li>
      * <li>The Maltese lira (MTL) was valid until 2008. Malta joined the 
      * European Union in 2004, after most of the other nations of the union had 
-     * phased out their own currencies. So the phasing out period for the lira 
-     * was pretty much the whole year 2008.</li>
+     * phased out their own old currencies. So the phasing out period for the 
+     * lira was pretty much the whole year 2008. The old notes and coins can no 
+     * longer be exchanged for euros.</li>
      * <li>The Dutch guilder (NLG), also called the florin, was valid until 
-     * 2002, after a phasing out period that started in 1999.</li>
-     * <li>The Portuguese escudo was the official currency of Portugal from 1911 
-     * to 2002. Portugal was actually one of the first nations of the European 
-     * Union to adopt the euro, in 1999.</li>
+     * 2002. The old coins can no longer be exchanged for euros. However, the 
+     * old notes can exchanged until January 1, 2032, with some conditions.</li>
+     * <li>The Portuguese escudo (PTE) was the official currency of Portugal 
+     * from 1911 to 2002. The old notes and coins can no longer be exchanged for 
+     * euros.</li>
      * <li>The Slovenian tolar (SIT) was the official currency of Slovenia from 
-     * 1991 to 2007.</li>
+     * 1991 to 2007. The old coins can no longer be exchanged for euros, but the 
+     * old notes can be exchanged for euros indefinitely.</li>
      * </ul>
-     * <p>In many cases, the euro was introduced in 1999 but the nation's old 
-     * currency continued to be valid until 2002, this is not always noted for 
-     * each of the currencies it's applicable to.</p>
-     * <p>As an interesting aside, note that some of the euro-replaced notes and 
-     * coins can still be exchanged for euros. It varies by country: French 
-     * francs can no longer be exchanged for euros, for example, while 
-     * Lithuanian litas (both notes and coins) can be exchanged 
-     * indefinitely.</p>
+     * <p>I have not yet verified this is the complete list of euro-replaced 
+     * currencies.</p>
      * @return A currency with default fraction digits of at least 0. For 
      * example, the Kyrgystani som (KGS), which like most world currencies by 
      * default has two fractional digits. A som is divided into 100 tyin.
