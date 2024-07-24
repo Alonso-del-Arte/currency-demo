@@ -85,6 +85,11 @@ public class CurrencyConverter {
     
     // TODO: Write tests for this
     public static MoneyAmount convert(MoneyAmount source, Currency target) {
+        if (target.getCurrencyCode().equals("XCD")) {
+            MoneyAmount intermediate = new MoneyAmount(source.getUnits(),
+                    target, source.getDivisions());
+            return intermediate.times(2.70255);
+        }
         return source;
     }
     
