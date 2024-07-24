@@ -75,7 +75,7 @@ public class MoneyAmount implements Comparable<MoneyAmount> {
      * units. For example, if the amount is &euro;197.54, this function returns 
      * 54.
      */
-    public long getDivisions() {
+    public short getDivisions() {
         return this.cents;
     }
     
