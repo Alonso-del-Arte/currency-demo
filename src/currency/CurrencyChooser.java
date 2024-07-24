@@ -52,8 +52,8 @@ public class CurrencyChooser {
     private static final Set<Currency> OTHER_EXCLUSIONS = new HashSet<>();
     
     private static final String[] OTHER_EXCLUSION_CODES = {"ADP", "BGL", "BOV", 
-        "CHE", "CHW", "COU", "CYP", "EEK", "ESP", "FIM", "FRF", "GRD", "ITL", 
-        "LUF", "MTL", "MXV", "NLG", "PTE", "SIT", "USN", "USS", "UYI"};
+        "CHE", "CHW", "COU", "CYP", "EEK", "ESP", "FIM", "FRF", "GRD", "GWP", 
+        "ITL", "LUF", "MTL", "MXV", "NLG", "PTE", "SIT", "USN", "USS", "UYI"};
 
     private static final Map<Integer, Set<Currency>> CURRENCIES_DIGITS_MAP 
             = new HashMap<>();
@@ -171,6 +171,10 @@ public class CurrencyChooser {
      * the euro (EUR), but is not traded outside of Switzerland.</li>
      * <li>The WIR franc (CHW), a "community currency" that is equal in value to 
      * the Swiss franc (CHF).</li>
+     * <li>The Guinea-Bissau peso (GWP) was the official currency of 
+     * Guinea-Bissau from 1976 to 1997. It was originally traded at par with the 
+     * Portuguese escudo (PTE), but it was already overvalued at that rate. In 
+     * 1997, it was replaced by the CFA franc.</li>
      * <li>The same day U.&nbsp;S. dollar (USS) and the next day U.&nbsp;S. 
      * dollar (USN), which serve special purposes in some contexts but are 
      * generally not recognized by currency conversion APIs.</li>
