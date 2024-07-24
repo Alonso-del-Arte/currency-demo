@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2023 Alonso del Arte
+ * Copyright (C) 2024 Alonso del Arte
  *
  * This program is free software: you can redistribute it and/or modify it under 
  * the terms of the GNU General Public License as published by the Free Software 
@@ -128,6 +128,32 @@ public class CurrencyConverterNGTest {
                 + actual.toString();
         assertEquals(actual.getCurrency(), EAST_CARIBBEAN_DOLLARS, message);
         String msg = "Converting " + source.toString() + " to " + xcdDisplayName 
+                + " should give roughly " + expected.toString();
+        assertInRange(minimum, actual, maximum, msg);
+        System.out.println(msg + ", got " + actual.toString());
+    }
+    
+    @Test
+    public void testConvertEastCaribbeanDollarsToUSDollars() {
+        int units = RANDOM.nextInt(Short.MAX_VALUE) + Byte.MAX_VALUE;
+        short divisions = (short) RANDOM.nextInt(100);
+        MoneyAmount source = new MoneyAmount(units, EAST_CARIBBEAN_DOLLARS, 
+                divisions);
+        int expectedUnits = (int) Math.floor(0.37 * units);
+        int marginOfError = expectedUnits / 160;
+        MoneyAmount minimum = new MoneyAmount(expectedUnits - marginOfError, 
+                U_S_DOLLARS);
+        MoneyAmount maximum = new MoneyAmount(expectedUnits + marginOfError, 
+                U_S_DOLLARS);
+        MoneyAmount expected = new MoneyAmount(expectedUnits, 
+                U_S_DOLLARS);
+        MoneyAmount actual = CurrencyConverter.convert(source, U_S_DOLLARS);
+        String usdDisplayName = U_S_DOLLARS.getDisplayName();
+        String message = "Conversion of " + source.toString() + " to " 
+                + usdDisplayName + " should give amount of that currency, got " 
+                + actual.toString();
+        assertEquals(actual.getCurrency(), U_S_DOLLARS, message);
+        String msg = "Converting " + source.toString() + " to " + usdDisplayName 
                 + " should give roughly " + expected.toString();
         assertInRange(minimum, actual, maximum, msg);
         System.out.println(msg + ", got " + actual.toString());
