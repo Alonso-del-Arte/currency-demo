@@ -21,7 +21,6 @@ import static currency.CurrencyChooser.RANDOM;
 
 import java.util.ArrayList;
 import java.util.Collections;
-import java.util.Comparator;
 import java.util.Currency;
 import java.util.HashSet;
 import java.util.List;
@@ -711,7 +710,27 @@ public class MoneyAmountNGTest {
         assertEquals(actual, expected);
     }
     
-    // TODO: Write test for cents overflowing dollars
+    @Test
+    public void testOverflowDivisionsRollOverToUnits() {
+        Currency currency = chooseCurrency();
+        int units = RANDOM.nextInt(Short.MAX_VALUE) + Byte.MAX_VALUE;
+        int overflowMultiplier = RANDOM.nextInt(16) + 4;
+        int bound = determineDivisionsBound(currency);
+        int overflow = overflowMultiplier * bound;
+        short properCents = (short) RANDOM.nextInt(bound);
+        short divisions = (short) (overflow + properCents);
+        MoneyAmount expected = new MoneyAmount(units + overflowMultiplier, 
+                currency, properCents);
+        MoneyAmount actual = new MoneyAmount(units, currency, divisions);
+        String message = "Given " + units + " units of " 
+                + currency.getDisplayName() + " (" + currency.getCurrencyCode() 
+                + ") and " + divisions + " divisions thereof, expecting " 
+                + expected.toString();
+        assertEquals(actual, expected, message);
+        String expStr = expected.toString();
+        String actStr = actual.toString();
+        assertEquals(actStr, expStr, message);
+    }
     
     // TODO: Write test for negative dollars, positive cents
     
