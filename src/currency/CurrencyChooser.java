@@ -52,9 +52,9 @@ public class CurrencyChooser {
     private static final Set<Currency> OTHER_EXCLUSIONS = new HashSet<>();
     
     private static final String[] OTHER_EXCLUSION_CODES = {"ADP", "BEF", "BGL", 
-        "BOV", "CHE", "CHW", "COU", "CYP", "EEK", "ESP", "FIM", "FRF", "GRD", 
-        "GWP", "IEP", "ITL", "LUF", "MTL", "MXV", "NLG", "PTE", "SIT", "USN", 
-        "USS", "UYI"};
+        "BOV", "CHE", "CHW", "COU", "CYP", "DEM", "EEK", "ESP", "FIM", "FRF", 
+        "GRD", "GWP", "IEP", "ITL", "LUF", "MTL", "MXV", "NLG", "PTE", "SIT", 
+        "USN", "USS", "UYI"};
 
     private static final Map<Integer, Set<Currency>> CURRENCIES_DIGITS_MAP 
             = new HashMap<>();
@@ -191,12 +191,15 @@ public class CurrencyChooser {
      * <li>The Andorran peseta (ADP) was a currency of Andorra in the 
      * 20<sup>th</sup> Century. It was pegged to the Spanish peseta (ESP) at 
      * 1:1.</li>
-     * <li>The Belgian franc (BEF) was the official currency of Belgium until 
-     * 2002. The old coins can no longer be exchanged for euros, but there's no 
-     * time limit for exchanging the old notes.</li>
+     * <li>The Belgian franc (BEF) was the official currency of Belgium from 
+     * 1832 to 2002. The old coins can no longer be exchanged for euros, but 
+     * there's no time limit for exchanging the old notes.</li>
      * <li>The Cypriot pound (CYP) was a currency of Cyprus until 2008, when it 
      * was replaced by the euro. The old notes and coins can no longer be 
      * exchanged for euros.</li>
+     * <li>The German mark (DEM) was the official currency of West Germany from 
+     * 1948 to 1990 and of unified Germany from 1990 to 2002. The old notes and 
+     * coins can be exchanged for euros indefinitely.</li>
      * <li>The Estonian kroon (EEK) was the official currency of Estonia from 
      * 1992 to 2011. The old notes and coins can be exchanged for euros at the 
      * country's central bank indefinitely.</li>
