@@ -163,4 +163,38 @@ public class CurrencyConverterNGTest {
         System.out.println(msg + ", got " + actual.toString());
     }
     
+    @Test
+    public void testConvert() {
+        System.out.println("convert");
+        Currency currency = CurrencyChooser.chooseCurrency(
+                (cur) -> !cur.getSymbol().equals(cur.getCurrencyCode())
+        );
+        int units = RANDOM.nextInt(Short.MAX_VALUE) + Byte.MAX_VALUE;
+        short divisions = 0;
+        int exponent = currency.getDefaultFractionDigits();
+        if (exponent > 0) {
+            int bound = 1;
+            while (exponent > 0) {
+                bound *= 10;
+                exponent--;
+            }
+            divisions = (short) RANDOM.nextInt(bound);
+        }
+        MoneyAmount minimum = new MoneyAmount(units - 10, currency);
+        MoneyAmount maximum = new MoneyAmount(units + 10, currency);
+        Currency target = CurrencyChooser.chooseCurrencyOtherThan(currency);
+        MoneyAmount source = new MoneyAmount(units, currency, divisions);
+        System.out.println("Inquiring to convert " + source.toString() + " to " 
+                + target.getDisplayName() + " (" + target.getCurrencyCode() 
+                + ")");
+        MoneyAmount intermediate = CurrencyConverter.convert(source, target);
+        assertEquals(intermediate.getCurrency(), target);
+        MoneyAmount actual = CurrencyConverter.convert(intermediate, currency);
+        String msg = source.toString() + " is said to convert to " 
+                + intermediate.toString() 
+                + ", and that's said to convert back to " + actual.toString();
+        assertInRange(minimum, actual, maximum, msg);
+        System.out.println(msg);
+    }
+    
 }
