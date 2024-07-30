@@ -49,6 +49,8 @@ public class CurrencyConverter {
      * than HTTP OK (200), if there is an unexpected I/O problem, or if the URI 
      * for the API has a syntax error. In the latter two cases, the exception 
      * object will wrap a specific checked exception.
+     * @throws NumberFormatException If <code>target</code> is not a currency 
+     * recognized by the currency conversion API, such as a historical currency.
      */
     public static String getRate(Currency source, Currency target) {
         String queryPath 
@@ -84,22 +86,20 @@ public class CurrencyConverter {
     }
     
     /**
-     * 
-     * @param source
-     * @param target
-     * @return 
+     * Converts a money amount to a specified currency.
+     * @param source The original money amount. For example, $100.00 in United 
+     * States dollars (USD).
+     * @param target The currency to convert to. For example, euros (EUR).
+     * @return The converted amount. In the example, which I ran on July 30, 
+     * 2024, the result was &euro;92.47.
+     * @throws RuntimeException If the API returns an HTTP status code other 
+     * than HTTP OK (200), if there is an unexpected I/O problem, or if the URI 
+     * for the API has a syntax error. In the latter two cases, the exception 
+     * object will wrap a specific checked exception.
+     * @throws NumberFormatException If <code>target</code> is not a currency 
+     * recognized by the currency conversion API, such as a historical currency.
      */
     public static MoneyAmount convert(MoneyAmount source, Currency target) {
-        if (target.getCurrencyCode().equals("XCD")) {
-            MoneyAmount intermediate = new MoneyAmount(source.getUnits(),
-                    target, source.getDivisions());
-            return intermediate.times(2.70255);
-        }
-        if (target.getCurrencyCode().equals("USD")) {
-            MoneyAmount intermediate = new MoneyAmount(source.getUnits(),
-                    target, source.getDivisions());
-            return intermediate.times(0.370021);
-        }
         double multiplicand = Double.parseDouble(getRate(source.getCurrency(), 
                 target));
         MoneyAmount intermediate = new MoneyAmount(source.getUnits(), 
