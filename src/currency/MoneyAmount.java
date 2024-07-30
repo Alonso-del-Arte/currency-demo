@@ -265,9 +265,14 @@ public class MoneyAmount implements Comparable<MoneyAmount> {
                     + currency.getCurrencyCode() + " is not valid";
             throw new IllegalArgumentException(excMsg);
         }
+        this.multiplier = calculateMultiplier(currency);
+        if (divisions > this.multiplier) {
+            long overflowUnits = divisions / this.multiplier;
+            units += overflowUnits;
+            divisions -= overflowUnits * this.multiplier;
+        }
         this.singles = units;
         this.cents = divisions;
-        this.multiplier = calculateMultiplier(currency);
         this.currencyID = currency;
         this.allCents = this.singles * this.multiplier + this.cents;
     }
