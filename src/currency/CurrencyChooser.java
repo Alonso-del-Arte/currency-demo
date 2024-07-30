@@ -54,7 +54,7 @@ public class CurrencyChooser {
     private static final String[] OTHER_EXCLUSION_CODES = {"ADP", "BEF", "BGL", 
         "BOV", "CHE", "CHW", "COU", "CYP", "DEM", "EEK", "ESP", "FIM", "FRF", 
         "GRD", "GWP", "IEP", "ITL", "LUF", "MTL", "MXV", "NLG", "PTE", "SIT", 
-        "USN", "USS", "UYI"};
+        "TPE", "USN", "USS", "UYI"};
 
     private static final Map<Integer, Set<Currency>> CURRENCIES_DIGITS_MAP 
             = new HashMap<>();
@@ -176,6 +176,8 @@ public class CurrencyChooser {
      * Guinea-Bissau from 1976 to 1997. It was originally traded at par with the 
      * Portuguese escudo (PTE), but it was already overvalued at that rate. In 
      * 1997, it was replaced by the CFA franc.</li>
+     * <li>The Timorese escudo (TPE) was the official currency of Portuguese 
+     * Timor prior to occupation by Indonesia.</li>
      * <li>The same day U.&nbsp;S. dollar (USS) and the next day U.&nbsp;S. 
      * dollar (USN), which serve special purposes in some contexts but are 
      * generally not recognized by currency conversion APIs.</li>
