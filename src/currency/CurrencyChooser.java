@@ -53,7 +53,8 @@ public class CurrencyChooser {
     
     private static final String[] OTHER_EXCLUSION_CODES = {"ADP", "BGL", "BOV", 
         "CHE", "CHW", "COU", "CYP", "EEK", "ESP", "FIM", "FRF", "GRD", "GWP", 
-        "ITL", "LUF", "MTL", "MXV", "NLG", "PTE", "SIT", "USN", "USS", "UYI"};
+        "IEP", "ITL", "LUF", "MTL", "MXV", "NLG", "PTE", "SIT", "USN", "USS", 
+        "UYI"};
 
     private static final Map<Integer, Set<Currency>> CURRENCIES_DIGITS_MAP 
             = new HashMap<>();
@@ -181,11 +182,11 @@ public class CurrencyChooser {
      * </ul>
      * <p>Also, the former currencies of the European nations that now use the 
      * euro (EUR) are not marked as historical in the currency information file. 
-     * In the case of the founding nations, the euro was introduced in 1999 but 
-     * the old national currency continued to be valid until 2002. Some of the 
-     * old notes and coins can still be exchanged to euros, but this varies from 
-     * country to country. These are the euro-replaced currencies this currency 
-     * chooser specifically excludes:</p>
+     * In the case of the founding nations of the eurozone, the euro was 
+     * introduced in 1999 but the old national currency continued to be valid 
+     * until 2002. Some of the old notes and coins can still be exchanged to 
+     * euros, but this varies from country to country. These are the 
+     * euro-replaced currencies this currency chooser specifically excludes:</p>
      * <ul>
      * <li>The Andorran peseta (ADP) was a currency of Andorra in the 
      * 20<sup>th</sup> Century. It was pegged to the Spanish peseta (ESP) at 
@@ -208,6 +209,9 @@ public class CurrencyChooser {
      * <li>The Greek drachma (GRD) was valid until 2002, as was the case with 
      * the currencies of several other countries that joined the eurozone in 
      * 1999. The old notes and coins can no longer be exchanged for euros.</li>
+     * <li>The Irish pound (IEP) was the official currency of Ireland  until 
+     * 2002. Old Irish pound notes and coins can be exchanged for euros at the 
+     * Central Bank of Ireland indefinitely.</li>
      * <li>The Italian lira (ITL) was the only official currency of Italy from 
      * 1861 to 1999. The old notes and coins can no longer be exchanged for 
      * euros.</li>
