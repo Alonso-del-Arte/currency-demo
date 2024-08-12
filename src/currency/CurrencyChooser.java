@@ -51,10 +51,10 @@ public class CurrencyChooser {
 
     private static final Set<Currency> OTHER_EXCLUSIONS = new HashSet<>();
     
-    private static final String[] OTHER_EXCLUSION_CODES = {"ADP", "BEF", "BGL", 
-        "BOV", "CHE", "CHW", "COU", "CYP", "DEM", "EEK", "ESP", "FIM", "FRF", 
-        "GRD", "GWP", "IEP", "ITL", "LUF", "MTL", "MXV", "NLG", "PTE", "SIT", 
-        "TPE", "USN", "USS", "UYI"};
+    private static final String[] OTHER_EXCLUSION_CODES = {"ADP", "ATS", "BEF", 
+        "BGL", "BOV", "CHE", "CHW", "COU", "CYP", "DEM", "EEK", "ESP", "FIM", 
+        "FRF", "GRD", "GWP", "IEP", "ITL", "LUF", "MTL", "MXV", "NLG", "PTE", 
+        "SIT", "TPE", "USN", "USS", "UYI"};
 
     private static final Map<Integer, Set<Currency>> CURRENCIES_DIGITS_MAP 
             = new HashMap<>();
@@ -193,6 +193,9 @@ public class CurrencyChooser {
      * <li>The Andorran peseta (ADP) was a currency of Andorra in the 
      * 20<sup>th</sup> Century. It was pegged to the Spanish peseta (ESP) at 
      * 1:1.</li>
+     * <li>The Austrian schilling (ATS) was the official currency of Austria 
+     * from 1925 to 2002 except during World War II and shortly before. The old 
+     * notes and coins can be exchanged for euros indefinitely.</li>
      * <li>The Belgian franc (BEF) was the official currency of Belgium from 
      * 1832 to 2002. The old coins can no longer be exchanged for euros, but 
      * there's no time limit for exchanging the old notes.</li>
