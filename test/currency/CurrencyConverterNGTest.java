@@ -167,7 +167,8 @@ public class CurrencyConverterNGTest {
     public void testConvert() {
         System.out.println("convert");
         Currency currency = CurrencyChooser.chooseCurrency(
-                (cur) -> !cur.getSymbol().equals(cur.getCurrencyCode())
+                (cur) -> !cur.getSymbol().equals(cur.getCurrencyCode()) 
+                        && cur.getDefaultFractionDigits() > 1
         );
         int units = RANDOM.nextInt(Short.MAX_VALUE) + Byte.MAX_VALUE;
         short divisions = 0;
@@ -182,7 +183,11 @@ public class CurrencyConverterNGTest {
         }
         MoneyAmount minimum = new MoneyAmount(units - 10, currency);
         MoneyAmount maximum = new MoneyAmount(units + 10, currency);
-        Currency target = CurrencyChooser.chooseCurrencyOtherThan(currency);
+        Currency target = CurrencyChooser.chooseCurrency(
+                (cur) -> !cur.equals(currency) 
+                        && cur.getDefaultFractionDigits() 
+                                == currency.getDefaultFractionDigits()
+        );
         MoneyAmount source = new MoneyAmount(units, currency, divisions);
         System.out.println("Inquiring to convert " + source.toString() + " to " 
                 + target.getDisplayName() + " (" + target.getCurrencyCode() 
@@ -195,6 +200,11 @@ public class CurrencyConverterNGTest {
                 + ", and that's said to convert back to " + actual.toString();
         assertInRange(minimum, actual, maximum, msg);
         System.out.println(msg);
+    }
+    
+    @Test
+    public void testConvertFromCurrNoSubdivsToCurrWithSubdivs() {
+        fail("FINISH WRITING THIS TEST");
     }
     
 }
