@@ -28,17 +28,16 @@ import org.testng.annotations.Test;
 public class CurrencyPairNGTest {
     
     /**
-     * Test of getFromCurrency method, of class CurrencyPair.
+     * Test of the getFromCurrency function, of the CurrencyPair class.
      */
     @Test
     public void testGetFromCurrency() {
         System.out.println("getFromCurrency");
-        CurrencyPair instance = null;
-        Currency expResult = null;
-        Currency result = instance.getFromCurrency();
-        assertEquals(result, expResult);
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
+        Currency expected = CurrencyChooser.chooseCurrency();
+        Currency to = CurrencyChooser.chooseCurrencyOtherThan(expected);
+        CurrencyPair instance = new CurrencyPair(expected, to);
+        Currency actual = instance.getFromCurrency();
+        assertEquals(actual, expected);
     }
 
     /**
@@ -47,12 +46,11 @@ public class CurrencyPairNGTest {
     @Test
     public void testGetToCurrency() {
         System.out.println("getToCurrency");
-        CurrencyPair instance = null;
-        Currency expResult = null;
-        Currency result = instance.getToCurrency();
-        assertEquals(result, expResult);
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
+        Currency from = CurrencyChooser.chooseCurrency();
+        Currency expected = CurrencyChooser.chooseCurrencyOtherThan(from);
+        CurrencyPair instance = new CurrencyPair(from, expected);
+        Currency actual = instance.getToCurrency();
+        assertEquals(actual, expected);
     }
     
 }
