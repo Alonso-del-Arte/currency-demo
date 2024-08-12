@@ -22,7 +22,9 @@ import currency.MoneyAmount;
 import java.util.ArrayList;
 import java.util.Currency;
 import java.util.List;
-import java.util.Locale;
+import java.util.Map;
+import java.util.TreeMap;
+import java.util.stream.Collectors;
 
 import static org.testng.Assert.*;
 import org.testng.annotations.Test;
@@ -33,20 +35,29 @@ import org.testng.annotations.Test;
  */
 public class ExchangeRateComparatorNGTest {
     
-    private static final List<String> CURRENCY_CODES = List.of("EUR", "USD");
+    private static final List<String> CURRENCY_CODES = List.of("AUD", "CAD", 
+            "CHF", "EUR", "GBP", "JPY", "USD");
+    
+    private static final List<Currency> CURRENCIES = CURRENCY_CODES.stream()
+            .map((s) -> Currency.getInstance(s)).collect(Collectors.toList());
+    
+    private static List<Currency> makeList(Currency currency) {
+        Map<MoneyAmount, Currency> map = new TreeMap<>();
+        MoneyAmount baseAmount = new MoneyAmount(1, currency);
+        List<Currency> list = new ArrayList<>();
+        return list;
+    }
     
     /**
-     * Test of compare method, of class ExchangeRateComparator.
+     * Test of the compare function, of the ExchangeRateComparator class.
      */
     @Test
     public void testCompare() {
         System.out.println("compare");
-        Currency currencyA = null;
-        Currency currencyB = null;
-        ExchangeRateComparator instance = null;
-        int expResult = 0;
-        int result = instance.compare(currencyA, currencyB);
-        assertEquals(result, expResult);
+        for (Currency currency : CURRENCIES) {
+            System.out.println(currency.getDisplayName() + " (" 
+                    + currency.getCurrencyCode() + ")");
+        }
         // TODO review the generated test code and remove the default call to fail.
         fail("The test case is a prototype.");
     }
