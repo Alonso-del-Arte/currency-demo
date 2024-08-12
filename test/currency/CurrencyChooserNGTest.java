@@ -55,9 +55,9 @@ public class CurrencyChooserNGTest {
             = NUMBER_OF_CALLS_MULTIPLIER_FOR_EXCLUSION_SEARCH 
             * TOTAL_NUMBER_OF_CURRENCIES;
     
-    private static final String[] EURO_REPLACED_EXCLUSION_CODES = {"ADP", "BEF", 
-        "CYP", "DEM", "EEK", "ESP", "FIM", "FRF", "GRD", "IEP", "ITL", "LUF", 
-        "MTL", "NLG", "PTE", "SIT"};
+    private static final String[] EURO_REPLACED_EXCLUSION_CODES = {"ADP", "ATS", 
+        "BEF", "CYP", "DEM", "EEK", "ESP", "FIM", "FRF", "GRD", "IEP", "ITL", 
+        "LUF", "MTL", "NLG", "PTE", "SIT"};
     
     private static final String[] OTHER_EXCLUSION_CODES = {"BGL", "BOV", "CHE", 
         "CHW", "COU", "GWP", "MXV", "TPE", "USN", "USS", "UYI"};
