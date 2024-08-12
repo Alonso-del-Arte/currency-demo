@@ -100,11 +100,12 @@ public class CurrencyConverter {
      * recognized by the currency conversion API, such as a historical currency.
      */
     public static MoneyAmount convert(MoneyAmount source, Currency target) {
-        double multiplicand = Double.parseDouble(getRate(source.getCurrency(), 
-                target));
-        MoneyAmount intermediate = new MoneyAmount(source.getUnits(), 
-                    target, source.getDivisions());
-        return intermediate.times(multiplicand);
+        return source;
+//        double multiplicand = Double.parseDouble(getRate(source.getCurrency(), 
+//                target));
+//        MoneyAmount intermediate = new MoneyAmount(source.getUnits(), 
+//                    target, source.getDivisions());
+//        return intermediate.times(multiplicand);
     }
     
 }
