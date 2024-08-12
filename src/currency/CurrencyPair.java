@@ -19,23 +19,39 @@ package currency;
 import java.util.Currency;
 
 /**
- * Represents a pair of currencies. Preferably two distinct currencies.
+ * Represents a pair of currencies. Preferably two distinct currencies. This is 
+ * an immutable class. Its main purpose is to facilitate caching of recent 
+ * results from a foreign exchange API.
  * @author Alonso del Arte
  */
 public class CurrencyPair {
     
-    // TODO: Write tests for this
+    private final Currency source, target;
+    
+    /**
+     * Retrieves the From currency given to the constructor.
+     * @return The From currency. For example, United States dollars (USD).
+     */
     public Currency getFromCurrency() {
-        return Currency.getInstance("XTS");
+        return this.source;
     }
     
-    // TODO: Write tests for this
+    /**
+     * Retrieves the To currency given to the constructor.
+     * @return The To currency. For example, euros (EUR).
+     */
     public Currency getToCurrency() {
-        return Currency.getInstance("XTS");
+        return this.target;
     }
     
+    /**
+     * Constructor.
+     * @param from The From currency. For example, United States dollars (USD).
+     * @param to The To currency. For example, euros (EUR).
+     */
     public CurrencyPair(Currency from, Currency to) {
-        //
+        this.source = from;
+        this.target = to;
     }
     
 }
