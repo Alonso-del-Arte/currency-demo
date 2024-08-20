@@ -37,10 +37,4 @@ public class MannysCurrencyConverterAPIAccess implements ExchangeRateProvider {
         return -1.0;
     }
     
-    // TODO: Write tests for this
-    @Override
-    public MoneyAmount convert(MoneyAmount source, Currency target) {
-        return new MoneyAmount(-1, Currency.getInstance("EUR"));
-    }
-    
 }

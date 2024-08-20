@@ -43,20 +43,4 @@ public class MannysCurrencyConverterAPIAccessNGTest {
         fail("The test case is a prototype.");
     }
 
-    /**
-     * Test of convert method, of class MannysCurrencyConverterAPIAccess.
-     */
-    @Test
-    public void testConvert() {
-        System.out.println("convert");
-        MoneyAmount source = null;
-        Currency target = null;
-        MannysCurrencyConverterAPIAccess instance = new MannysCurrencyConverterAPIAccess();
-        MoneyAmount expResult = null;
-        MoneyAmount result = instance.convert(source, target);
-        assertEquals(result, expResult);
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
-    }
-    
 }

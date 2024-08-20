@@ -33,18 +33,9 @@ public interface ExchangeRateProvider {
      * example, euros (EUR).
      * @return The conversion rate. In the example as of August 12, 2024, 
      * 0.915796.
+     * @throws RuntimeException If some kind of {@code IOException} or other 
+     * checked exception occurs, it will be wrapped into an unchecked exception.
      */
     double getRate(Currency source, Currency target);
-    
-    /**
-     * 
-     * @param source
-     * @param target
-     * @return 
-     */
-    // TODO: Write tests for this
-    default MoneyAmount convert(MoneyAmount source, Currency target) {
-        return source;
-    }
     
 }
