@@ -102,8 +102,13 @@ public class CurrencyConverter {
     public static MoneyAmount convert(MoneyAmount source, Currency target) {
         double multiplicand = Double.parseDouble(getRate(source.getCurrency(), 
                 target));
-        MoneyAmount intermediate = new MoneyAmount(source.getUnits(), 
-                    target, source.getDivisions());
+        long units = source.getUnits();
+        short divisions = source.getDivisions();
+        if (source.getCurrency().getDefaultFractionDigits() 
+                > target.getDefaultFractionDigits()) {
+            divisions = 0;
+        }
+        MoneyAmount intermediate = new MoneyAmount(units, target, divisions);
         return intermediate.times(multiplicand);
     }
     
