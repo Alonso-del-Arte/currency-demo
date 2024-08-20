@@ -204,7 +204,25 @@ public class CurrencyConverterNGTest {
     
     @Test
     public void testConvertFromCurrNoSubdivsToCurrWithSubdivs() {
-        fail("FINISH WRITING THIS TEST");
+        Currency currency = CurrencyChooser.chooseCurrency(0);
+        int units = RANDOM.nextInt(Short.MAX_VALUE) + Byte.MAX_VALUE;
+        MoneyAmount source = new MoneyAmount(units, currency);
+        Currency target = CurrencyChooser.chooseCurrency(
+                (cur) -> cur.getDefaultFractionDigits() > 1
+        );
+        MoneyAmount minimum = new MoneyAmount(units - 10, currency);
+        MoneyAmount maximum = new MoneyAmount(units + 10, currency);
+        System.out.println("Inquiring to convert " + source.toString() + " to " 
+                + target.getDisplayName() + " (" + target.getCurrencyCode() 
+                + ")");
+        MoneyAmount intermediate = CurrencyConverter.convert(source, target);
+        assertEquals(intermediate.getCurrency(), target);
+        MoneyAmount actual = CurrencyConverter.convert(intermediate, currency);
+        String msg = source.toString() + " is said to convert to " 
+                + intermediate.toString() 
+                + ", and that's said to convert back to " + actual.toString();
+        assertInRange(minimum, actual, maximum, msg);
+        System.out.println(msg);
     }
     
 }
