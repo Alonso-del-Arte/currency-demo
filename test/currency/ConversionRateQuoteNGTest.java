@@ -46,7 +46,26 @@ public class ConversionRateQuoteNGTest {
         }, NullPointerException.class, msg);
         String excMsg = t.getMessage();
         assert excMsg != null : "Exception message should not be null";
-        assert !excMsg.isBlank() : "Exception message should not be null";
+        assert !excMsg.isBlank() : "Exception message should not be blank";
+    }
+    
+    @Test
+    public void testConstructorRejectsNullDate() {
+        Currency from = CurrencyChooser.chooseCurrency();
+        Currency to = CurrencyChooser.chooseCurrencyOtherThan(from);
+        CurrencyPair currencies = new CurrencyPair(from, to);
+        double rate = RANDOM.nextDouble();
+        String msg = "Using null date should've caused NPE";
+        Throwable t = assertThrows(() -> {
+            ConversionRateQuote instance = new ConversionRateQuote(currencies, 
+                    rate, null);
+            System.out.println(msg + ", not created instance " 
+                    + instance.getClass().getName() + '@' 
+                    + Integer.toHexString(System.identityHashCode(instance)));
+        }, NullPointerException.class, msg);
+        String excMsg = t.getMessage();
+        assert excMsg != null : "Exception message should not be null";
+        assert !excMsg.isBlank() : "Exception message should not be blank";
     }
     
 }
