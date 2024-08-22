@@ -27,7 +27,10 @@ public class ConversionRateQuote {
     
     public ConversionRateQuote(CurrencyPair currencies, double rate, 
             LocalDateTime date) {
-        //
+        if (currencies == null) {
+            String excMsg = "Currency pair should not be null";
+            throw new NullPointerException(excMsg);
+        }
     }
     
 }
