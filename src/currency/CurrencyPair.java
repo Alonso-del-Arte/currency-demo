@@ -50,8 +50,8 @@ public class CurrencyPair {
      * @param to The To currency. For example, euros (EUR).
      */
     public CurrencyPair(Currency from, Currency to) {
-        if (from == null) {
-            String excMsg = "From currency should not be null";
+        if (from == null || to == null) {
+            String excMsg = "From and To currencies should not be null";
             throw new NullPointerException(excMsg);
         }
         this.source = from;
