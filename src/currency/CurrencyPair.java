@@ -45,9 +45,26 @@ public class CurrencyPair {
     }
     
     /**
+     * Gives a textual representation of this currency pair. This is designed to 
+     * be easy to put in a query to Manny's currency conversion API. For the 
+     * example, let's say this pair is United States dollars (USD) and euros 
+     * (EUR).
+     * @return The ISO-4217 letter codes for the From and To currencies, 
+     * separated by an underscore. For example, "USD_EUR".
+     */
+    @Override
+    public String toString() {
+        return this.source.getCurrencyCode() + '_' 
+                + this.target.getCurrencyCode();
+    }
+    
+    /**
      * Constructor.
      * @param from The From currency. For example, United States dollars (USD).
-     * @param to The To currency. For example, euros (EUR).
+     * @param to The To currency. For example, euros (EUR). Ought to be 
+     * different from {@code from}, but this is not checked.
+     * @throws NullPointerException If either {@code from} or {@code to} is 
+     * null.
      */
     public CurrencyPair(Currency from, Currency to) {
         if (from == null || to == null) {
