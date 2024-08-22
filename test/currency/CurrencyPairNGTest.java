@@ -56,6 +56,17 @@ public class CurrencyPairNGTest {
     }
     
     @Test
+    public void testToString() {
+        System.out.println("toString");
+        Currency from = CurrencyChooser.chooseCurrency();
+        Currency to = CurrencyChooser.chooseCurrencyOtherThan(from);
+        CurrencyPair instance = new CurrencyPair(from, to);
+        String expected = from.getCurrencyCode() + '_' + to.getCurrencyCode();
+        String actual = instance.toString();
+        assertEquals(actual, expected);
+    }
+    
+    @Test
     public void testConstructorRejectsNullFromCurrency() {
         Currency to = CurrencyChooser.chooseCurrency();
         String msg = "Currency pair with null From currency and " 
