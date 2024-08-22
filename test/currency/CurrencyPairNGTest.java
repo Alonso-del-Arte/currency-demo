@@ -18,6 +18,8 @@ package currency;
 
 import java.util.Currency;
 
+import static org.testframe.api.Asserters.assertThrows;
+
 import static org.testng.Assert.*;
 import org.testng.annotations.Test;
 
@@ -51,6 +53,24 @@ public class CurrencyPairNGTest {
         CurrencyPair instance = new CurrencyPair(from, expected);
         Currency actual = instance.getToCurrency();
         assertEquals(actual, expected);
+    }
+    
+    @Test
+    public void testConstructorRejectsNullFromCurrency() {
+        Currency to = CurrencyChooser.chooseCurrency();
+        String msg = "Currency pair with null From currency and " 
+                + to.getDisplayName() + " (" + to.getCurrencyCode() 
+                + ") should cause NPE";
+        Throwable t = assertThrows(() -> {
+            CurrencyPair instance = new CurrencyPair(null, to);
+            System.out.println(msg + ", not created instance " 
+                    + instance.getClass().getName() + '@' 
+                    + Integer.toHexString(System.identityHashCode(instance)));
+        }, NullPointerException.class, msg);
+        String excMsg = t.getMessage();
+        assert excMsg != null : "Exception message should not be null";
+        assert !excMsg.isBlank() : "Exception message should not be blank";
+        System.out.println("\"" + excMsg + "\"");
     }
     
 }
