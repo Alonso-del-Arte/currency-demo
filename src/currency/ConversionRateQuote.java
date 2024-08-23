@@ -31,8 +31,7 @@ public class ConversionRateQuote {
             String excMsg = "Currency pair, date, should not be null";
             throw new NullPointerException(excMsg);
         }
-        if (rate == Double.NEGATIVE_INFINITY 
-                || rate == Double.POSITIVE_INFINITY || Double.isNaN(rate)) {
+        if (!Double.isFinite(rate)) {
             String excMsg = "Rate " + rate + " is not valid";
             throw new IllegalArgumentException(excMsg);
         }
