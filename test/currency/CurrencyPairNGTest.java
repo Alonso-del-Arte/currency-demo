@@ -67,6 +67,13 @@ public class CurrencyPairNGTest {
     }
     
     @Test
+    public void testReferentialEquality() {
+        Currency from = CurrencyChooser.chooseCurrency();
+        Currency to = CurrencyChooser.chooseCurrencyOtherThan(from);
+        CurrencyPair somePair = new CurrencyPair(from, to);
+        assertEquals(somePair, somePair);
+    }
+    
     public void testEquals() {
         System.out.println("equals");
         Currency from = CurrencyChooser.chooseCurrency();
