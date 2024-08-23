@@ -74,6 +74,20 @@ public class CurrencyPairNGTest {
         assertEquals(somePair, somePair);
     }
     
+    private static Object provideNull() {
+        return null;
+    }
+    
+    @Test
+    public void testNotEqualsNull() {
+        Currency from = CurrencyChooser.chooseCurrency();
+        Currency to = CurrencyChooser.chooseCurrencyOtherThan(from);
+        CurrencyPair somePair = new CurrencyPair(from, to);
+        Object obj = provideNull();
+        String msg = "Pair " + somePair.toString() + " should not equal null";
+        assert !somePair.equals(obj) : msg;
+    }
+    
     public void testEquals() {
         System.out.println("equals");
         Currency from = CurrencyChooser.chooseCurrency();
