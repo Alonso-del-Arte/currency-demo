@@ -66,7 +66,7 @@ public class CurrencyPair {
     // TODO: Write more tests for this
     @Override
     public boolean equals(Object obj) {
-        return obj != null;
+        return obj instanceof CurrencyPair;
     }
     
     // TODO: Write tests for this
