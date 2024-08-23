@@ -67,6 +67,20 @@ public class CurrencyPairNGTest {
     }
     
     @Test
+    public void testEquals() {
+        System.out.println("equals");
+        Currency from = CurrencyChooser.chooseCurrency();
+        Currency to = CurrencyChooser.chooseCurrencyOtherThan(from);
+        CurrencyPair somePair = new CurrencyPair(from, to);
+        CurrencyPair samePair = new CurrencyPair(from, to);
+        assertEquals(samePair, somePair);
+    }
+    
+    public void testHashCode() {
+        fail("PLACEHOLDER FOR TEST");
+    }
+    
+    @Test
     public void testConstructorRejectsNullFromCurrency() {
         Currency to = CurrencyChooser.chooseCurrency();
         String msg = "Currency pair with null From currency and " 
