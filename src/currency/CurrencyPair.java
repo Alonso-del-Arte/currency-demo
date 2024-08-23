@@ -44,6 +44,11 @@ public class CurrencyPair {
         return this.target;
     }
     
+    // TODO: Write tests for this
+    public CurrencyPair flip() {
+        return this;
+    }
+    
     /**
      * Gives a textual representation of this currency pair. This is designed to 
      * be easy to put in a query to Manny's currency conversion API. For the 
