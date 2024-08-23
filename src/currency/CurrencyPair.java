@@ -63,6 +63,18 @@ public class CurrencyPair {
                 + this.target.getCurrencyCode();
     }
     
+    // TODO: Write more tests for this
+    @Override
+    public boolean equals(Object obj) {
+        return true;
+    }
+    
+    // TODO: Write tests for this
+    @Override
+    public int hashCode() {
+        return 0;
+    }
+    
     /**
      * Constructor.
      * @param from The From currency. For example, United States dollars (USD).
