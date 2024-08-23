@@ -97,8 +97,6 @@ public class CurrencyPairNGTest {
                 + from.toString() + " nor " + to.toString();
         assertNotEquals(from, pair, msg);
         assertNotEquals(to, pair, msg);
-        assert !pair.equals(from) : msg;
-        assert !pair.equals(to) : msg;
     }
     
     public void testEquals() {
