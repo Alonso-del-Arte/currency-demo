@@ -17,14 +17,41 @@
 package currency;
 
 import java.time.LocalDateTime;
-import java.util.Currency;
 
 /**
- *
+ * Provides a dated currency conversion rate quote. It will be up to the caller 
+ * to determine whether the quote is still good or if it has become outdated and 
+ * a new quote needs to be obtained.
  * @author Alonso del Arte
  */
 public class ConversionRateQuote {
     
+    // TODO: Write tests for this
+    public CurrencyPair getCurrencies() {
+        return new CurrencyPair(java.util.Currency.getInstance("EUR"), 
+                java.util.Currency.getInstance("EUR"));
+    }
+    
+    // TODO: Write tests for this
+    public double getRate() {
+        return Double.NaN;
+    }
+    
+    // TODO: Write tests for this
+    public LocalDateTime getDate() {
+        return LocalDateTime.of(1800, java.time.Month.APRIL, 1, 12, 0);
+    }
+    
+    /**
+     * Constructor.
+     * @param currencies The pair of currencies. For example, from United States 
+     * dollars (USD) to euros (EUR).
+     * @param rate The rate of conversion for one unit of the From currency to 
+     * the To currency. For example, 0.9, meaning that one U.&nbsp;S. dollar 
+     * converts to 90 cents of an euro.
+     * @param date The date and time the currency quote was obtained. For 
+     * example, 5:35 p.m. on August 26, 2024.
+     */
     public ConversionRateQuote(CurrencyPair currencies, double rate, 
             LocalDateTime date) {
         if (currencies == null || date == null) {
