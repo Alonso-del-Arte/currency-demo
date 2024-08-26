@@ -47,7 +47,7 @@ public class CurrencyPairNGTest {
     }
 
     /**
-     * Test of getToCurrency method, of class CurrencyPair.
+     * Test of the getToCurrency function, of the CurrencyPair class.
      */
     @Test
     public void testGetToCurrency() {
@@ -57,6 +57,20 @@ public class CurrencyPairNGTest {
         CurrencyPair instance = new CurrencyPair(from, expected);
         Currency actual = instance.getToCurrency();
         assertEquals(actual, expected);
+    }
+    
+    @Test
+    public void testFlip() {
+        System.out.println("flip");
+        Currency from = CurrencyChooser.chooseCurrency();
+        Currency to = CurrencyChooser.chooseCurrencyOtherThan(from);
+        CurrencyPair instance = new CurrencyPair(from, to);
+        CurrencyPair expected = new CurrencyPair(to, from);
+        CurrencyPair actual = instance.flip();
+        String message = "Expected from " + from.getDisplayName() + " to " 
+                + to.getDisplayName() + " to flip to from " 
+                + to.getDisplayName() + " to " + from.getDisplayName();
+        assertEquals(actual, expected, message);
     }
     
     @Test
