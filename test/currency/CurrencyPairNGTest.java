@@ -16,7 +16,11 @@
  */
 package currency;
 
+import static currency.CurrencyChooser.RANDOM;
+
 import java.util.Currency;
+import java.util.HashSet;
+import java.util.Set;
 
 import static org.testframe.api.Asserters.assertThrows;
 
@@ -132,9 +136,25 @@ public class CurrencyPairNGTest {
         CurrencyPair samePair = new CurrencyPair(from, to);
         assertEquals(samePair, somePair);
     }
-    
+
+    @Test
     public void testHashCode() {
-        fail("PLACEHOLDER FOR TEST");
+        System.out.println("hashCode");
+        int initialCapacity = RANDOM.nextInt(64) + 16;
+        Set<CurrencyPair> pairs = new HashSet<>(initialCapacity);
+        Set<Integer> hashes = new HashSet<>(initialCapacity);
+        for (int i = 0; i < initialCapacity; i++) {
+            Currency from = CurrencyChooser.chooseCurrency();
+            Currency to = CurrencyChooser.chooseCurrencyOtherThan(from);
+            CurrencyPair pair = new CurrencyPair(from, to);
+            pairs.add(pair);
+            hashes.add(pair.hashCode());
+        }
+        int expected = pairs.size();
+        String message = "Set of " + expected 
+                + " currency pairs should have as many hashes";
+        int actual = hashes.size();
+        assertEquals(actual, expected, message);
     }
     
     @Test
