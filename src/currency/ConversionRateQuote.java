@@ -26,10 +26,10 @@ import java.time.LocalDateTime;
  */
 public class ConversionRateQuote {
     
-    // TODO: Write tests for this
+    private final CurrencyPair pair;
+    
     public CurrencyPair getCurrencies() {
-        return new CurrencyPair(java.util.Currency.getInstance("EUR"), 
-                java.util.Currency.getInstance("EUR"));
+        return this.pair;
     }
     
     // TODO: Write tests for this
@@ -62,6 +62,7 @@ public class ConversionRateQuote {
             String excMsg = "Rate " + rate + " is not valid";
             throw new IllegalArgumentException(excMsg);
         }
+        this.pair = currencies;
     }
     
 }
