@@ -123,6 +123,7 @@ public class CurrencyPairNGTest {
         assertNotEquals(diffPair, somePair, message);
     }
     
+    @Test
     public void testEquals() {
         System.out.println("equals");
         Currency from = CurrencyChooser.chooseCurrency();
