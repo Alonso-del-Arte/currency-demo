@@ -111,6 +111,18 @@ public class CurrencyPairNGTest {
         assertNotEquals(diffPair, somePair, message);
     }
     
+    @Test
+    public void testNotEqualsDiffToCurrency() {
+        Currency from = CurrencyChooser.chooseCurrency();
+        Currency toA = CurrencyChooser.chooseCurrency();
+        Currency toB = CurrencyChooser.chooseCurrency();
+        CurrencyPair somePair = new CurrencyPair(from, toA);
+        CurrencyPair diffPair = new CurrencyPair(from, toB);
+        String message = somePair.toString() + " should not match " 
+                + diffPair.toString();
+        assertNotEquals(diffPair, somePair, message);
+    }
+    
     public void testEquals() {
         System.out.println("equals");
         Currency from = CurrencyChooser.chooseCurrency();
