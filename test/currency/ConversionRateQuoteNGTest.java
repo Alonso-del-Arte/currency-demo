@@ -33,6 +33,20 @@ import org.testng.annotations.Test;
 public class ConversionRateQuoteNGTest {
     
     @Test
+    public void testGetCurrencies() {
+        System.out.println("getCurrencies");
+        Currency from = CurrencyChooser.chooseCurrency();
+        Currency to = CurrencyChooser.chooseCurrencyOtherThan(from);
+        CurrencyPair expected = new CurrencyPair(from, to);
+        double rate = RANDOM.nextDouble();
+        LocalDateTime date = LocalDateTime.now();
+        ConversionRateQuote instance = new ConversionRateQuote(expected, rate, 
+                date);
+        CurrencyPair actual = instance.getCurrencies();
+        assertEquals(actual, expected);
+    }
+    
+    @Test
     public void testConstructorRejectsNullCurrencyPair() {
         double rate = RANDOM.nextDouble();
         LocalDateTime date = LocalDateTime.now();
