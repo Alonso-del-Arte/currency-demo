@@ -63,6 +63,39 @@ public class CurrencyPair {
                 + this.target.getCurrencyCode();
     }
     
+    /**
+     * Determines if this currency pair is equal to another object. For the 
+     * examples, suppose this currency pair is from United States dollars (USD) 
+     * to euros (EUR).
+     * @param obj The object to compare against. Examples: a currency pair from 
+     * USD to EUR, a currency pair from USD to Canadian dollars (CAD), a 
+     * currency pair from CAD to EUR, the {@code Currency} instance for CAD, and 
+     * a null.
+     * @return True if {@code obj} matches this currency pair in both the From 
+     * and To currencies, false in all other cases. In the examples, this would 
+     * be true for the USD to EUR currency pair, false for the USD to CAD pair 
+     * (To currencies don't match), false for the CAD to EUR pair (From 
+     * currencies don't match), false for the CAD instance, and certainly false 
+     * for the null.
+     */
+    @Override
+    public boolean equals(Object obj) {
+        if (this == obj) {
+            return true;
+        }
+        if (obj == null) {
+            return false;
+        }
+        if (!this.getClass().equals(obj.getClass())) {
+            return false;
+        }
+        CurrencyPair other = (CurrencyPair) obj;
+        if (!this.source.equals(other.source)) {
+            return false;
+        }
+        return this.target.equals(other.target);
+    }
+    
     // TODO: Write tests for this
     @Override
     public int hashCode() {
