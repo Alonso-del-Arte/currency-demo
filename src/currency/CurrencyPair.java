@@ -44,9 +44,14 @@ public class CurrencyPair {
         return this.target;
     }
     
-    // TODO: Write tests for this
+    /**
+     * Flips this pair of currencies. The From currency becomes the To currency, 
+     * and the To currency becomes the From currency. For the example, let's say 
+     * this pair is from United States dollars (USD) to euros (EUR). 
+     * @return A flipped currency pair. For example, from EUR to USD.
+     */
     public CurrencyPair flip() {
-        return this;
+        return new CurrencyPair(this.target, this.source);
     }
     
     /**
