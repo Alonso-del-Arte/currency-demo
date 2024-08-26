@@ -96,10 +96,18 @@ public class CurrencyPair {
         return this.target.equals(other.target);
     }
     
-    // TODO: Write tests for this
+    /**
+     * Gives a hash code for this currency pair. The hash code is based on the 
+     * 3-digit codes from ISO-4217. I reserve the right to change the 
+     * mathematical formula in a later version of this class.
+     * @return A hash code based on the From and To currencies' 3-digit codes in 
+     * ISO-4217. For example, for a pair from United States dollars (USD) to 
+     * euros (EUR), this might be 55051218 = 840 &times; 65536 + 978.
+     */
     @Override
     public int hashCode() {
-        return 0;
+        return (this.source.getNumericCode() << 16) 
+                + this.target.getNumericCode();
     }
     
     /**
