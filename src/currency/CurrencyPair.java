@@ -63,21 +63,6 @@ public class CurrencyPair {
                 + this.target.getCurrencyCode();
     }
     
-    // TODO: Write more tests for this
-    @Override
-    public boolean equals(Object obj) {
-        if (this == obj) {
-            return true;
-        }
-        if (obj == null) {
-            return false;
-        }
-        if (!this.getClass().equals(obj.getClass())) {
-            return false;
-        }
-        return this.source.equals(((CurrencyPair) obj).source);
-    }
-    
     // TODO: Write tests for this
     @Override
     public int hashCode() {
