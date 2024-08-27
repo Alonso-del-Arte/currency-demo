@@ -30,6 +30,8 @@ public class ConversionRateQuote {
     
     private final double conversionRate;
     
+    private final LocalDateTime fetchDate;
+    
     /**
      * Retrieves the currencies this quote was initialized with.
      * @return The currency pair passed to the constructor. For example, United 
@@ -47,9 +49,13 @@ public class ConversionRateQuote {
         return this.conversionRate;
     }
     
-    // TODO: Write tests for this
+    /**
+     * Retrieves the date and time this quote was initialized with.
+     * @return The date and time passed to the constructor. For example, 5:35 
+     * p.m. on August 26, 2024.
+     */
     public LocalDateTime getDate() {
-        return LocalDateTime.of(1800, java.time.Month.APRIL, 1, 12, 0);
+        return this.fetchDate;
     }
     
     /**
@@ -74,6 +80,7 @@ public class ConversionRateQuote {
         }
         this.pair = currencies;
         this.conversionRate = rate;
+        this.fetchDate = date;
     }
     
 }
