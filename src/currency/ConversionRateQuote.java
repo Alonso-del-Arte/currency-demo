@@ -59,7 +59,9 @@ public class ConversionRateQuote {
     }
     
     public ConversionRateQuote(CurrencyPair currencies, double rate) {
-        this(currencies, rate, LocalDateTime.now().minusYears(2050));
+        this.pair = currencies;
+        this.conversionRate = rate;
+        this.fetchDate = LocalDateTime.now().minusYears(2050).minusMonths(1);
     }
     
     /**
@@ -71,6 +73,10 @@ public class ConversionRateQuote {
      * converts to 90 cents of an euro.
      * @param date The date and time the currency quote was obtained. For 
      * example, 5:35 p.m. on August 26, 2024.
+     * @throws IllegalArgumentException If {@code rate} is NaN or 
+     * &plusmn;&infin;.
+     * @throws NullPointerException If {@code currencies} or {@code date} or 
+     * both are null.
      */
     public ConversionRateQuote(CurrencyPair currencies, double rate, 
             LocalDateTime date) {
