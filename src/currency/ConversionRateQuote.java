@@ -28,13 +28,23 @@ public class ConversionRateQuote {
     
     private final CurrencyPair pair;
     
+    private final double conversionRate;
+    
+    /**
+     * Retrieves the currencies this quote was initialized with.
+     * @return The currency pair passed to the constructor. For example, United 
+     * States dollars (USD) to euros (EUR).
+     */
     public CurrencyPair getCurrencies() {
         return this.pair;
     }
     
-    // TODO: Write tests for this
+    /**
+     * Retrieves the rate this quote was initialized with.
+     * @return The rate passed to the constructor. For example, 0.9.
+     */
     public double getRate() {
-        return Double.NaN;
+        return this.conversionRate;
     }
     
     // TODO: Write tests for this
@@ -63,6 +73,7 @@ public class ConversionRateQuote {
             throw new IllegalArgumentException(excMsg);
         }
         this.pair = currencies;
+        this.conversionRate = rate;
     }
     
 }
