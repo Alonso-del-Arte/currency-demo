@@ -47,6 +47,20 @@ public class ConversionRateQuoteNGTest {
     }
     
     @Test
+    public void testGetRate() {
+        System.out.println("getRate");
+        Currency from = CurrencyChooser.chooseCurrency();
+        Currency to = CurrencyChooser.chooseCurrencyOtherThan(from);
+        CurrencyPair currencies = new CurrencyPair(from, to);
+        double expected = RANDOM.nextDouble();
+        LocalDateTime date = LocalDateTime.now();
+        ConversionRateQuote instance = new ConversionRateQuote(currencies, 
+                expected, date);
+        double actual = instance.getRate();
+        assertEquals(actual, expected);
+    }
+    
+    @Test
     public void testConstructorRejectsNullCurrencyPair() {
         double rate = RANDOM.nextDouble();
         LocalDateTime date = LocalDateTime.now();
