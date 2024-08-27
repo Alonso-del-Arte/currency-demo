@@ -58,8 +58,12 @@ public class ConversionRateQuote {
         return this.fetchDate;
     }
     
+    public ConversionRateQuote(CurrencyPair currencies, double rate) {
+        this(currencies, rate, LocalDateTime.now().minusYears(2050));
+    }
+    
     /**
-     * Constructor.
+     * Primary constructor.
      * @param currencies The pair of currencies. For example, from United States 
      * dollars (USD) to euros (EUR).
      * @param rate The rate of conversion for one unit of the From currency to 
