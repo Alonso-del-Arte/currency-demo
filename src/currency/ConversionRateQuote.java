@@ -58,7 +58,20 @@ public class ConversionRateQuote {
         return this.fetchDate;
     }
     
+    /**
+     * Auxiliary constructor.
+     * @param currencies The pair of currencies. For example, from United States 
+     * dollars (USD) to euros (EUR).
+     * @param rate The rate of conversion for one unit of the From currency to 
+     * the To currency. For example, 0.9, meaning that one U.&nbsp;S. dollar 
+     * converts to 90 cents of an euro.
+     * @throws NullPointerException If {@code currencies} is null.
+     */
     public ConversionRateQuote(CurrencyPair currencies, double rate) {
+        if (currencies == null) {
+            String excMsg = "Currency pair should not be null";
+            throw new NullPointerException(excMsg);
+        }
         this.pair = currencies;
         this.conversionRate = rate;
         this.fetchDate = LocalDateTime.now();
