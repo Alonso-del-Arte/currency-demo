@@ -72,7 +72,8 @@ public class ConversionRateQuote {
             String excMsg = "Currency pair should not be null";
             throw new NullPointerException(excMsg);
         }
-        if (rate == Double.NEGATIVE_INFINITY) {
+        if (rate == Double.NEGATIVE_INFINITY 
+                || rate == Double.POSITIVE_INFINITY) {
             String excMsg = "Rate should not be " + rate;
             throw new IllegalArgumentException(excMsg);
         }
