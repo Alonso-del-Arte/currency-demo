@@ -188,6 +188,26 @@ public class ConversionRateQuoteNGTest {
     }
     
     @Test
+    public void testAuxConstructorRejectsPositiveInfinityRate() {
+        Currency from = CurrencyChooser.chooseCurrency();
+        Currency to = CurrencyChooser.chooseCurrencyOtherThan(from);
+        CurrencyPair currencies = new CurrencyPair(from, to);
+        double rate = Double.POSITIVE_INFINITY;
+        String msg = "Using " + rate + " for rate should've caused exception";
+        Throwable t = assertThrows(() -> {
+            ConversionRateQuote instance = new ConversionRateQuote(currencies, 
+                    rate);
+            System.out.println(msg + ", not created instance " 
+                    + instance.getClass().getName() + '@' 
+                    + Integer.toHexString(System.identityHashCode(instance)));
+        }, IllegalArgumentException.class, msg);
+        String excMsg = t.getMessage();
+        assert excMsg != null : "Exception message should not be null";
+        assert !excMsg.isBlank() : "Exception message should not be blank";
+        System.out.println("\"" + excMsg + "\"");
+    }
+    
+    @Test
     public void testConstructorRejectsNaNRate() {
         Currency from = CurrencyChooser.chooseCurrency();
         Currency to = CurrencyChooser.chooseCurrencyOtherThan(from);
