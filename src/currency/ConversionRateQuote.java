@@ -61,7 +61,7 @@ public class ConversionRateQuote {
     public ConversionRateQuote(CurrencyPair currencies, double rate) {
         this.pair = currencies;
         this.conversionRate = rate;
-        this.fetchDate = LocalDateTime.now().minusYears(2050).minusMonths(1);
+        this.fetchDate = LocalDateTime.now();
     }
     
     /**
