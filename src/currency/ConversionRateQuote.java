@@ -65,6 +65,8 @@ public class ConversionRateQuote {
      * @param rate The rate of conversion for one unit of the From currency to 
      * the To currency. For example, 0.9, meaning that one U.&nbsp;S. dollar 
      * converts to 90 cents of an euro.
+     * @throws IllegalArgumentException If {@code rate} is NaN or 
+     * &plusmn;&infin;.
      * @throws NullPointerException If {@code currencies} is null.
      */
     public ConversionRateQuote(CurrencyPair currencies, double rate) {
@@ -72,8 +74,7 @@ public class ConversionRateQuote {
             String excMsg = "Currency pair should not be null";
             throw new NullPointerException(excMsg);
         }
-        if (Double.isNaN(rate) || rate == Double.NEGATIVE_INFINITY 
-                || rate == Double.POSITIVE_INFINITY) {
+        if (!Double.isFinite(rate)) {
             String excMsg = "Rate should not be " + rate;
             throw new IllegalArgumentException(excMsg);
         }
