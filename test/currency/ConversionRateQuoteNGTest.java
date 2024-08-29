@@ -21,6 +21,7 @@ import static currency.CurrencyChooser.RANDOM;
 import java.time.LocalDateTime;
 import java.util.Currency;
 
+import static org.testframe.api.Asserters.assertInRange;
 import static org.testframe.api.Asserters.assertThrows;
 
 import static org.testng.Assert.*;
@@ -72,6 +73,22 @@ public class ConversionRateQuoteNGTest {
                 expected);
         LocalDateTime actual = instance.getDate();
         assertEquals(actual, expected);
+    }
+    
+    @Test
+    public void testAuxiliaryConstructorFillsInCurrentDateTime() {
+        Currency from = CurrencyChooser.chooseCurrency();
+        Currency to = CurrencyChooser.chooseCurrencyOtherThan(from);
+        CurrencyPair currencies = new CurrencyPair(from, to);
+        double rate = 1.0 + RANDOM.nextDouble();
+        ConversionRateQuote instance = new ConversionRateQuote(currencies, 
+                rate);
+        LocalDateTime expected = LocalDateTime.now();
+        int minutes = 5;
+        LocalDateTime minimum = expected.minusMinutes(minutes);
+        LocalDateTime maximum = expected.plusMinutes(minutes);
+        LocalDateTime actual = instance.getDate();
+        assertInRange(minimum, actual, maximum);
     }
     
     @Test
