@@ -110,6 +110,22 @@ public class ConversionRateQuoteNGTest {
     }
     
     @Test
+    public void testAuxConstructorRejectsNullCurrencyPair() {
+        double rate = RANDOM.nextDouble();
+        String msg = "Using null currency pair should've caused NPE";
+        Throwable t = assertThrows(() -> {
+            ConversionRateQuote instance = new ConversionRateQuote(null, rate);
+            System.out.println(msg + ", not created instance " 
+                    + instance.getClass().getName() + '@' 
+                    + Integer.toHexString(System.identityHashCode(instance)));
+        }, NullPointerException.class, msg);
+        String excMsg = t.getMessage();
+        assert excMsg != null : "Exception message should not be null";
+        assert !excMsg.isBlank() : "Exception message should not be blank";
+        System.out.println("\"" + excMsg + "\"");
+    }
+    
+    @Test
     public void testConstructorRejectsNegativeInfinityRate() {
         Currency from = CurrencyChooser.chooseCurrency();
         Currency to = CurrencyChooser.chooseCurrencyOtherThan(from);
