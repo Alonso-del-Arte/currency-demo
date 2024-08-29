@@ -59,7 +59,10 @@ public class ConversionRateQuote {
     }
     
     /**
-     * Auxiliary constructor.
+     * Auxiliary constructor. Use this constructor when the quote date is very 
+     * close to the current time. Otherwise, use the {@link 
+     * #ConversionRateQuote(currency.CurrencyPair, double, 
+     * java.time.LocalDateTime) three-parameter constructor}.
      * @param currencies The pair of currencies. For example, from United States 
      * dollars (USD) to euros (EUR).
      * @param rate The rate of conversion for one unit of the From currency to 
@@ -70,21 +73,14 @@ public class ConversionRateQuote {
      * @throws NullPointerException If {@code currencies} is null.
      */
     public ConversionRateQuote(CurrencyPair currencies, double rate) {
-        if (currencies == null) {
-            String excMsg = "Currency pair should not be null";
-            throw new NullPointerException(excMsg);
-        }
-        if (!Double.isFinite(rate)) {
-            String excMsg = "Rate should not be " + rate;
-            throw new IllegalArgumentException(excMsg);
-        }
-        this.pair = currencies;
-        this.conversionRate = rate;
-        this.fetchDate = LocalDateTime.now();
+        this(currencies, rate, LocalDateTime.now());
     }
     
     /**
-     * Primary constructor.
+     * Primary constructor. Use this constructor when it is necessary to specify 
+     * a quote date that is very different from the current time. Otherwise, use 
+     * the {@link #ConversionRateQuote(currency.CurrencyPair, double) 
+     * two-parameter constructor}.
      * @param currencies The pair of currencies. For example, from United States 
      * dollars (USD) to euros (EUR).
      * @param rate The rate of conversion for one unit of the From currency to 
