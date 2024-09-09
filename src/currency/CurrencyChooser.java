@@ -54,7 +54,7 @@ public class CurrencyChooser {
     private static final String[] OTHER_EXCLUSION_CODES = {"ADP", "ATS", "BEF", 
         "BGL", "BOV", "CHE", "CHW", "COU", "CYP", "DEM", "EEK", "ESP", "FIM", 
         "FRF", "GRD", "GWP", "IEP", "ITL", "LUF", "MTL", "MXV", "NLG", "PTE", 
-        "SIT", "TPE", "USN", "USS", "UYI", "VED"};
+        "SIT", "TPE", "USN", "USS", "UYI", "VED", "ZWN"};
 
     private static final Map<Integer, Set<Currency>> CURRENCIES_DIGITS_MAP 
             = new HashMap<>();
@@ -181,6 +181,15 @@ public class CurrencyChooser {
      * <li>The same day U.&nbsp;S. dollar (USS) and the next day U.&nbsp;S. 
      * dollar (USN), which serve special purposes in some contexts but are 
      * generally not recognized by currency conversion APIs.</li>
+     * <li>The so-called "bolivar dig&iacute;tal is excluded because, despite 
+     * its official standing, is not recognized by some currency conversion 
+     * APIs.</li>
+     * <li>The Zimbabwean dollar (ZWN) is in limbo as far as Java's runtime is 
+     * concerned. Although another Zimbabwean dollar (ZWL) is recognized by 
+     * Manny's free currency conversion API, Java's currency information file 
+     * lists it as a historical currency that was valid only in 2009. Whatever 
+     * the case may be, tourists are perhaps best served bringing U.&nbsp;S. 
+     * dollars.</li>
      * </ul>
      * <p>Also, the former currencies of the European nations that now use the 
      * euro (EUR) are not marked as historical in the currency information file. 
