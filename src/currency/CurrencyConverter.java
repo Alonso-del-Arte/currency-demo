@@ -100,17 +100,26 @@ public class CurrencyConverter {
      * recognized by the currency conversion API, such as a historical currency.
      */
     public static MoneyAmount convert(MoneyAmount source, Currency target) {
-        double multiplicand = Double.parseDouble(getRate(source.getCurrency(), 
-                target));
-        long units = source.getUnits();
-        short divisions = source.getDivisions();
-        if (source.getCurrency().getDefaultFractionDigits() 
-                > target.getDefaultFractionDigits()) {
-            divisions = 0;
+        double original = source.getFullAmountInCents();
+        Currency sourceCurrency = source.getCurrency();
+        int sourceDecPlaceCounter = sourceCurrency.getDefaultFractionDigits();
+        while (sourceDecPlaceCounter > 0) {
+            original /= 10;
+            sourceDecPlaceCounter--;
         }
-        MoneyAmount intermediate = new MoneyAmount(units, target, divisions);
-        return new MoneyAmount(0, target);
-//        return intermediate.times(multiplicand);
+        double multiplicand = Double.parseDouble(getRate(sourceCurrency, 
+                target));
+        double converted = original * multiplicand;
+        int targetDecPlaceCounter = target.getDefaultFractionDigits();
+        double floored = Math.floor(converted);
+        double divs = converted - floored;
+        while (targetDecPlaceCounter > 0) {
+            divs *= 10;
+            targetDecPlaceCounter--;
+        }
+        long units = (long) floored;
+        short divisions = (short) divs;
+        return new MoneyAmount(units, target, divisions);
     }
     
 }
