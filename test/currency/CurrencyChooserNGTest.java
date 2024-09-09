@@ -60,7 +60,7 @@ public class CurrencyChooserNGTest {
         "LUF", "MTL", "NLG", "PTE", "SIT"};
     
     private static final String[] OTHER_EXCLUSION_CODES = {"BGL", "BOV", "CHE", 
-        "CHW", "COU", "GWP", "MXV", "TPE", "USN", "USS", "UYI", "VED"};
+        "CHW", "COU", "GWP", "MXV", "TPE", "USN", "USS", "UYI", "VED", "ZWN"};
     
     static {
         for (Currency currency : CURRENCIES) {
@@ -545,6 +545,18 @@ public class CurrencyChooserNGTest {
                     + " should not be " + bolivarDigitalDisplayName 
                     + " (the so-called bolivar dig\u00EDtal)";
             assertNotEquals(bolivarDigital, currency, msg);
+        }
+    }
+
+    @Test
+    public void testZimbabweanDollarExcluded() {
+        Currency zimbabweanDollar = Currency.getInstance("ZWN");
+        String zimbabweanDollarDisplayName = zimbabweanDollar.getDisplayName();
+        for (int i = 0; i < NUMBER_OF_CALLS_FOR_EXCLUSION_SEARCH; i++) {
+            Currency currency = CurrencyChooser.chooseCurrency();
+            String msg = "Currency " + currency.getDisplayName() 
+                    + " should not be " + zimbabweanDollarDisplayName;
+            assertNotEquals(zimbabweanDollar, currency, msg);
         }
     }
 
