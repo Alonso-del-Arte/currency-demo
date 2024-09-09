@@ -54,7 +54,7 @@ public class CurrencyChooser {
     private static final String[] OTHER_EXCLUSION_CODES = {"ADP", "ATS", "BEF", 
         "BGL", "BOV", "CHE", "CHW", "COU", "CYP", "DEM", "EEK", "ESP", "FIM", 
         "FRF", "GRD", "GWP", "IEP", "ITL", "LUF", "MTL", "MXV", "NLG", "PTE", 
-        "SIT", "TPE", "USN", "USS", "UYI"};
+        "SIT", "TPE", "USN", "USS", "UYI", "VED"};
 
     private static final Map<Integer, Set<Currency>> CURRENCIES_DIGITS_MAP 
             = new HashMap<>();
