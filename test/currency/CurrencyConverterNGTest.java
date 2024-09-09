@@ -39,6 +39,8 @@ public class CurrencyConverterNGTest {
     private static final Currency EAST_CARIBBEAN_DOLLARS 
             = Currency.getInstance("XCD");
     
+    // START OF SECTION THAT WILL EVENTUALLY BE REMOVED
+    
     @Test
     public void testGetRateNoConversionNeeded() {
         Currency currency = CurrencyChooser.chooseCurrency();
@@ -223,6 +225,17 @@ public class CurrencyConverterNGTest {
                 + ", and that's said to convert back to " + actual.toString();
         assertInRange(minimum, actual, maximum, msg);
         System.out.println(msg);
+    }
+    
+    // END OF SECTION THAT WILL EVENTUALLY BE REMOVED
+    
+    @Test
+    public void testGetProvider() {
+        System.out.println("getProvider");
+        ExchangeRateProvider expected = new MockExchangeRateProvider();
+        CurrencyConverter instance = new CurrencyConverter(expected);
+        ExchangeRateProvider actual = instance.getProvider();
+        assertEquals(actual, expected);
     }
     
 }
