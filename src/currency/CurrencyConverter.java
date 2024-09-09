@@ -36,12 +36,13 @@ public class CurrencyConverter {
     private static final String USER_AGENT_ID = "Java/"
             + System.getProperty("java.version");
     
+    // TODO: Deprecate once instance equivalent is available    
     /**
      * Gives the rate for a currency conversion. This function calls Manny's 
      * Free Currency Converter API.
-     * @param source The currency to convert from. For example, United States 
-     * dollars (USD).
-     * @param target The currency to convert to. For example, euros (EUR).
+     * @param source The currency to convertOld from. For example, United States 
+ dollars (USD).
+     * @param target The currency to convertOld to. For example, euros (EUR).
      * @return The rate as a <code>String</code> (this is to avoid loss of 
      * precision when passing the value to the <code>BigDecimal</code> 
      * constructor).
@@ -85,11 +86,14 @@ public class CurrencyConverter {
         }
     }
     
+    // TODO: Deprecate once instance equivalent is available    
     /**
-     * Converts a money amount to a specified currency.
+     * Converts a money amount to a specified currency. This static function 
+     * will soon be deprecated in favor of instance functions that can use 
+     * different currency conversion APIs.
      * @param source The original money amount. For example, $100.00 in United 
      * States dollars (USD).
-     * @param target The currency to convert to. For example, euros (EUR).
+     * @param target The currency to convertOld to. For example, euros (EUR).
      * @return The converted amount. In the example, which I ran on July 30, 
      * 2024, the result was &euro;92.47.
      * @throws RuntimeException If the API returns an HTTP status code other 
@@ -99,7 +103,7 @@ public class CurrencyConverter {
      * @throws NumberFormatException If <code>target</code> is not a currency 
      * recognized by the currency conversion API, such as a historical currency.
      */
-    public static MoneyAmount convert(MoneyAmount source, Currency target) {
+    public static MoneyAmount convertOld(MoneyAmount source, Currency target) {
         double original = source.getFullAmountInCents();
         Currency sourceCurrency = source.getCurrency();
         int sourceDecPlaceCounter = sourceCurrency.getDefaultFractionDigits();
@@ -120,6 +124,21 @@ public class CurrencyConverter {
         long units = (long) floored;
         short divisions = (short) divs;
         return new MoneyAmount(units, target, divisions);
+    }
+    
+    // TODO: Write tests for this
+    public ExchangeRateProvider getProvider() {
+        return (Currency source, Currency target) -> Double.NaN;
+    }
+    
+    // TODO: Write tests for this
+    public MoneyAmount convert(MoneyAmount source, Currency target) {
+        return source;
+    }
+    
+    // TODO: Write tests for this
+    public CurrencyConverter(ExchangeRateProvider rateProvider) {
+        //
     }
     
 }

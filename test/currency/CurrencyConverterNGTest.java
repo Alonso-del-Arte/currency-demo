@@ -101,7 +101,7 @@ public class CurrencyConverterNGTest {
         int units = RANDOM.nextInt(Short.MAX_VALUE);
         Currency currency = CurrencyChooser.chooseCurrency();
         MoneyAmount expected = new MoneyAmount(units, currency);
-        MoneyAmount actual = CurrencyConverter.convert(expected, currency);
+        MoneyAmount actual = CurrencyConverter.convertOld(expected, currency);
         String message = "Converting " + expected.toString() + " to " 
                 + currency.getDisplayName() + " should not need conversion";
         assertEquals(actual, expected, message);
@@ -120,7 +120,7 @@ public class CurrencyConverterNGTest {
                 EAST_CARIBBEAN_DOLLARS);
         MoneyAmount expected = new MoneyAmount(expectedUnits, 
                 EAST_CARIBBEAN_DOLLARS);
-        MoneyAmount actual = CurrencyConverter.convert(source, 
+        MoneyAmount actual = CurrencyConverter.convertOld(source, 
                 EAST_CARIBBEAN_DOLLARS);
         String xcdDisplayName = EAST_CARIBBEAN_DOLLARS.getDisplayName();
         String message = "Conversion of " + source.toString() + " to " 
@@ -151,7 +151,7 @@ public class CurrencyConverterNGTest {
         }
         MoneyAmount expected = new MoneyAmount(expectedUnits, 
                 U_S_DOLLARS);
-        MoneyAmount actual = CurrencyConverter.convert(source, U_S_DOLLARS);
+        MoneyAmount actual = CurrencyConverter.convertOld(source, U_S_DOLLARS);
         String usdDisplayName = U_S_DOLLARS.getDisplayName();
         String message = "Conversion of " + source.toString() + " to " 
                 + usdDisplayName + " should give amount of that currency, got " 
@@ -192,9 +192,9 @@ public class CurrencyConverterNGTest {
         System.out.println("Inquiring to convert " + source.toString() + " to " 
                 + target.getDisplayName() + " (" + target.getCurrencyCode() 
                 + ")");
-        MoneyAmount intermediate = CurrencyConverter.convert(source, target);
+        MoneyAmount intermediate = CurrencyConverter.convertOld(source, target);
         assertEquals(intermediate.getCurrency(), target);
-        MoneyAmount actual = CurrencyConverter.convert(intermediate, currency);
+        MoneyAmount actual = CurrencyConverter.convertOld(intermediate, currency);
         String msg = source.toString() + " is said to convert to " 
                 + intermediate.toString() 
                 + ", and that's said to convert back to " + actual.toString();
@@ -215,9 +215,9 @@ public class CurrencyConverterNGTest {
         System.out.println("Inquiring to convert " + source.toString() + " to " 
                 + target.getDisplayName() + " (" + target.getCurrencyCode() 
                 + ")");
-        MoneyAmount intermediate = CurrencyConverter.convert(source, target);
+        MoneyAmount intermediate = CurrencyConverter.convertOld(source, target);
         assertEquals(intermediate.getCurrency(), target);
-        MoneyAmount actual = CurrencyConverter.convert(intermediate, currency);
+        MoneyAmount actual = CurrencyConverter.convertOld(intermediate, currency);
         String msg = source.toString() + " is said to convert to " 
                 + intermediate.toString() 
                 + ", and that's said to convert back to " + actual.toString();
