@@ -109,7 +109,8 @@ public class CurrencyConverter {
             divisions = 0;
         }
         MoneyAmount intermediate = new MoneyAmount(units, target, divisions);
-        return intermediate.times(multiplicand);
+        return new MoneyAmount(0, target);
+//        return intermediate.times(multiplicand);
     }
     
 }
