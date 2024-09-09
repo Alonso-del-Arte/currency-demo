@@ -36,6 +36,8 @@ public class CurrencyConverter {
     private static final String USER_AGENT_ID = "Java/"
             + System.getProperty("java.version");
     
+    private final ExchangeRateProvider exchangeRateProvider;
+    
     // TODO: Deprecate once instance equivalent is available    
     /**
      * Gives the rate for a currency conversion. This function calls Manny's 
@@ -126,9 +128,12 @@ public class CurrencyConverter {
         return new MoneyAmount(units, target, divisions);
     }
     
-    // TODO: Write tests for this
+    /**
+     * Discloses the rate provider this converter is using.
+     * @return The rate provider given to the constructor.
+     */
     public ExchangeRateProvider getProvider() {
-        return (Currency source, Currency target) -> Double.NaN;
+        return this.exchangeRateProvider;
     }
     
     // TODO: Write tests for this
@@ -136,9 +141,13 @@ public class CurrencyConverter {
         return source;
     }
     
-    // TODO: Write tests for this
+    /**
+     * Constructor.
+     * @param rateProvider The rate provider to use. For example, an instance of 
+     * {@link MannysCurrencyConverterAPIAccess}.
+     */
     public CurrencyConverter(ExchangeRateProvider rateProvider) {
-        //
+        this.exchangeRateProvider = rateProvider;
     }
     
 }
