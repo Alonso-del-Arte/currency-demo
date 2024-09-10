@@ -50,8 +50,12 @@ exchange rate of 356.999828 for U.&nbsp;S. dollars to MRO. But that same
 converter gives an exchange rate of 35.6999828 for USD to MRU, which the Java 
 currency information file suggests is not a historical currency.
 
-The situation with the Zimbabwean dollar (ZWD, ZWL, ZWN) is even more confusing. 
-The currency chooser in this project simply omits them all.
+The situation with the Zimbabwean dollar (ZWD, ZWL, ZWN, ZWR) is even more 
+confusing. The currency chooser in this project simply omits them all, even 
+though at least one currency conversion API acknowledges one of the four 
+ISO-4217 codes as valid. Specifically, Manny's currency converter API 
+acknowledges ZWL as a valid current currency code, with an exchange rate from 
+U.&nbsp;S. dollar of 321.999592 as of September 10, 2024.
 
 ----
 
