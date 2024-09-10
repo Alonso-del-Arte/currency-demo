@@ -50,6 +50,9 @@ exchange rate of 356.999828 for U.&nbsp;S. dollars to MRO. But that same
 converter gives an exchange rate of 35.6999828 for USD to MRU, which the Java 
 currency information file suggests is not a historical currency.
 
+The situation with the Zimbabwean dollar (ZWD, ZWL, ZWN) is even more confusing. 
+The currency chooser in this project simply omits them all.
+
 ----
 
 This project is closed off to Hacktoberfest.
