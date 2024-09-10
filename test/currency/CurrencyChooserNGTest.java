@@ -60,7 +60,8 @@ public class CurrencyChooserNGTest {
         "LUF", "MTL", "NLG", "PTE", "SIT"};
     
     private static final String[] OTHER_EXCLUSION_CODES = {"BGL", "BOV", "CHE", 
-        "CHW", "COU", "GWP", "MXV", "TPE", "USN", "USS", "UYI", "VED", "ZWN"};
+        "CHW", "COU", "GWP", "MXV", "SRG", "TPE", "USN", "USS", "UYI", "VED", 
+        "ZWN"};
     
     static {
         for (Currency currency : CURRENCIES) {
@@ -508,6 +509,19 @@ public class CurrencyChooserNGTest {
             String msg = "Currency " + currency.getDisplayName() 
                     + " should not be " + unitsDisplayName;
             assertNotEquals(unitsInvestment, currency, msg);
+        }
+    }
+
+    @Test
+    public void testSurinameseGuilderExcluded() {
+        Currency surinameseGuilder = Currency.getInstance("SRG");
+        String surinameseGuilderDisplayName 
+                = surinameseGuilder.getDisplayName();
+        for (int i = 0; i < NUMBER_OF_CALLS_FOR_EXCLUSION_SEARCH; i++) {
+            Currency currency = CurrencyChooser.chooseCurrency();
+            String msg = "Currency " + currency.getDisplayName() 
+                    + " should not be " + surinameseGuilderDisplayName;
+            assertNotEquals(surinameseGuilder, currency, msg);
         }
     }
 
