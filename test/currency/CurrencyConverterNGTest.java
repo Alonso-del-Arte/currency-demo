@@ -22,6 +22,7 @@ import java.util.Currency;
 import java.util.Locale;
 
 import static org.testframe.api.Asserters.assertInRange;
+import static org.testframe.api.Asserters.assertThrows;
 
 import static org.testng.Assert.*;
 import org.testng.annotations.Test;
@@ -236,6 +237,20 @@ public class CurrencyConverterNGTest {
         CurrencyConverter instance = new CurrencyConverter(expected);
         ExchangeRateProvider actual = instance.getProvider();
         assertEquals(actual, expected);
+    }
+    
+    @Test
+    public void testConstructorRejectsNullProvider() {
+        String msg = "Trying to use null provider should cause exception";
+        Throwable t = assertThrows(() -> {
+            CurrencyConverter badConverter = new CurrencyConverter(null);
+            System.out.println(msg + ", not given instance " 
+                    + badConverter.toString());
+        }, NullPointerException.class, msg);
+        String excMsg = t.getMessage();
+        assert excMsg != null : "Exception message should not be null";
+        assert !excMsg.isBlank() : "Exception message should not be blank";
+        System.out.println("\"" + excMsg + "\"");
     }
     
 }
