@@ -147,6 +147,10 @@ public class CurrencyConverter {
      * {@link MannysCurrencyConverterAPIAccess}.
      */
     public CurrencyConverter(ExchangeRateProvider rateProvider) {
+        if (rateProvider == null ) {
+            String excMsg = "Rate provider should not be null";
+            throw new NullPointerException(excMsg);
+        }
         this.exchangeRateProvider = rateProvider;
     }
     
