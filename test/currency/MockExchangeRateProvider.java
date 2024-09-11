@@ -29,7 +29,16 @@ public class MockExchangeRateProvider implements ExchangeRateProvider {
     
     private final ConversionRateQuote[] quotes;
     
-    // TODO: Write tests for this
+    /**
+     * Gives a conversion rate.
+     * @param source The source currency. For example, United States dollar 
+     * (USD).
+     * @param target The target currency. For example, euro (EUR).
+     * @return Either a rate specified by one of the quotes given to the 
+     * constructor, or 1.0 if the particular combination was not specified to 
+     * the constructor, even if the opposite combination was given to the 
+     * constructor (this function will not try to deduce the rate).
+     */
     @Override
     public double getRate(Currency source, Currency target) {
         CurrencyPair pair = new CurrencyPair(source, target);
@@ -38,9 +47,16 @@ public class MockExchangeRateProvider implements ExchangeRateProvider {
                 return quote.getRate();
             }
         }
-        return Double.NEGATIVE_INFINITY;
+        return 1.0;
     }
         
+    /**
+     * Constructor.
+     * @param rateQuotes A group of rate quotes. For example, United States 
+     * dollar (USD) to Japanese yen (JPY) at a rate of 141.396985 and euro (EUR) 
+     * to Brazilian real (BRL) at a rate of 6.257201, both quotes as of 
+     * September 11, 2024.
+     */
     public MockExchangeRateProvider(ConversionRateQuote... rateQuotes) {
         this.quotes = rateQuotes;
     }
