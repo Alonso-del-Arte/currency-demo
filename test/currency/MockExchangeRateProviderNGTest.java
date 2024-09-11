@@ -33,6 +33,8 @@ import org.testng.annotations.Test;
  */
 public class MockExchangeRateProviderNGTest {
     
+    private static final double TEST_DELTA = 0.00001;
+    
     private static final Currency UNITED_STATES_DOLLARS 
             = Currency.getInstance(Locale.US);
     
@@ -58,7 +60,6 @@ public class MockExchangeRateProviderNGTest {
     public void testGetRate() {
         System.out.println("getRate");
         ConversionRateQuote[] rateQuotes = inventQuotes();
-        double delta = 0.00001;
         ExchangeRateProvider instance 
                 = new MockExchangeRateProvider(rateQuotes);
         for (ConversionRateQuote quote : rateQuotes) {
@@ -71,8 +72,28 @@ public class MockExchangeRateProviderNGTest {
                     + source.getDisplayName() + " (" + source.getCurrencyCode() 
                     + ") to " + target.getDisplayName() + " (" 
                     + target.getCurrencyCode() + ")";
-            assertEquals(actual, expected, delta, message);
+            assertEquals(actual, expected, TEST_DELTA, message);
         }
+    }
+    
+    @Test
+    public void testUnspecifiedPairGives1To1Rate() {
+        ConversionRateQuote[] rateQuotes = inventQuotes();
+        ExchangeRateProvider instance 
+                = new MockExchangeRateProvider(rateQuotes);
+        ConversionRateQuote quote 
+                = rateQuotes[RANDOM.nextInt(rateQuotes.length)];
+        CurrencyPair pair = quote.getCurrencies().flip();
+            Currency source = pair.getFromCurrency();
+            Currency target = pair.getToCurrency();
+        double expected = 1.0;
+        double actual = instance.getRate(source, target);
+        String message = "Given that mock rate of conversion from " 
+                + source.getDisplayName() + " (" + source.getCurrencyCode() 
+                + ") to " + target.getDisplayName() + " (" 
+                + target.getCurrencyCode() 
+                + ") not specified, should give 1.0, not try to deduce";
+        assertEquals(actual, expected, TEST_DELTA, message);
     }
     
 }
