@@ -19,18 +19,30 @@ package currency;
 import java.util.Currency;
 
 /**
- *
+ * Provides mock exchange rates. The purpose here is to test that a {@link 
+ * CurrencyConverter} instance uses the exchange rate provider it's initialized 
+ * with, and not whether or not the instance gives accurate or even plausible 
+ * exchange rates.
  * @author Alonso del Arte
  */
 public class MockExchangeRateProvider implements ExchangeRateProvider {
     
+    private final ConversionRateQuote[] quotes;
+    
     // TODO: Write tests for this
     @Override
     public double getRate(Currency source, Currency target) {
+        CurrencyPair pair = new CurrencyPair(source, target);
+        for (ConversionRateQuote quote : this.quotes) {
+            if (quote.getCurrencies().equals(pair)) {
+                return quote.getRate();
+            }
+        }
         return Double.NEGATIVE_INFINITY;
     }
         
     public MockExchangeRateProvider(ConversionRateQuote... rateQuotes) {
+        this.quotes = rateQuotes;
     }
         
 }
