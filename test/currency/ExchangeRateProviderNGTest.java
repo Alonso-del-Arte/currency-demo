@@ -24,19 +24,6 @@ import java.util.Currency;
  */
 public class ExchangeRateProviderNGTest {
     
-    static class MockExchangeRateProvider implements ExchangeRateProvider {
-        
-        private final double mockRate;
-        
-        @Override
-        public double getRate(Currency source, Currency target) {
-            return this.mockRate;
-        }
-        
-        public MockExchangeRateProvider(double rate) {
-            this.mockRate = rate;
-        }
-        
-    }
+    // TODO: Determine if this test class is even necessary
     
 }
