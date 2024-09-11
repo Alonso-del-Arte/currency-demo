@@ -50,6 +50,12 @@ exchange rate of 356.999828 for U.&nbsp;S. dollars to MRO. But that same
 converter gives an exchange rate of 35.6999828 for USD to MRU, which the Java 
 currency information file suggests is not a historical currency.
 
+Venezuela apparently has two active official currencies, the Venezuelan 
+bol&iacute;var (VES) and the bol&iacute;var digital (VED), which has been 
+described as no more a digital currency than any other official currency. As the 
+API I'm using in this project recognizes VES but not VED, I'm excluding VED from 
+this project.
+
 The situation with the Zimbabwean dollar (ZWD, ZWL, ZWN, ZWR) is even more 
 confusing. The currency chooser in this project simply omits them all, even 
 though at least one currency conversion API acknowledges one of the four 
