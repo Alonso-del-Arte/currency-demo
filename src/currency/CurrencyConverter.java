@@ -138,7 +138,7 @@ public class CurrencyConverter {
     
     // TODO: Write tests for this
     public MoneyAmount convert(MoneyAmount source, Currency target) {
-        return source;
+        return source.negate();
     }
     
     /**
