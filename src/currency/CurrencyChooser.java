@@ -51,10 +51,10 @@ public class CurrencyChooser {
 
     private static final Set<Currency> OTHER_EXCLUSIONS = new HashSet<>();
     
-    private static final String[] OTHER_EXCLUSION_CODES = {"ADP", "ATS", "BEF", 
-        "BGL", "BOV", "CHE", "CHW", "COU", "CYP", "DEM", "EEK", "ESP", "FIM", 
-        "FRF", "GRD", "GWP", "IEP", "ITL", "LUF", "MTL", "MXV", "NLG", "PTE", 
-        "SIT", "SRG", "TPE", "USN", "USS", "UYI", "VED", "ZWN"};
+    private static final String[] OTHER_EXCLUSION_CODES = {"ADP", "ATS", "AYM", 
+        "BEF", "BGL", "BOV", "CHE", "CHW", "COU", "CYP", "DEM", "EEK", "ESP", 
+        "FIM", "FRF", "GRD", "GWP", "IEP", "ITL", "LUF", "MTL", "MXV", "NLG", 
+        "PTE", "SIT", "SRG", "TPE", "USN", "USS", "UYI", "VED", "ZWN"};
 
     private static final Map<Integer, Set<Currency>> CURRENCIES_DIGITS_MAP 
             = new HashMap<>();
@@ -160,6 +160,10 @@ public class CurrencyChooser {
      * names (e.g., 1991 &mdash; 1998 for the old Russian ruble), and the 
      * following specific currencies:
      * <ul>
+     * <li>The Azerbaijan manat was improperly given the currency code AYM in 
+     * 2005. The ISO-4217 rules require that the 3-letter code start with the 
+     * 2-letter ISO-3166 code for the country, in this case AZ. It was removed 
+     * the next year, but remains in Java's currency information file.</li>
      * <li>The Bulgarian hard lev (BGL), I'm not sure how it differs from the 
      * Bulgarian lev (BGN).</li>
      * <li>The Bolivian MVDOL (BOV), a monetary unit managed by the Banco 
