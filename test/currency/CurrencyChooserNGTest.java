@@ -59,9 +59,9 @@ public class CurrencyChooserNGTest {
         "BEF", "CYP", "DEM", "EEK", "ESP", "FIM", "FRF", "GRD", "IEP", "ITL", 
         "LUF", "MTL", "NLG", "PTE", "SIT"};
     
-    private static final String[] OTHER_EXCLUSION_CODES = {"BGL", "BOV", "CHE", 
-        "CHW", "COU", "GWP", "MXV", "SRG", "TPE", "USN", "USS", "UYI", "VED", 
-        "ZWN"};
+    private static final String[] OTHER_EXCLUSION_CODES = {"AYM", "BGL", "BOV", 
+        "CHE", "CHW", "COU", "GWP", "MXV", "SRG", "TPE", "USN", "USS", "UYI", 
+        "VED", "ZWN"};
     
     static {
         for (Currency currency : CURRENCIES) {
@@ -425,6 +425,18 @@ public class CurrencyChooserNGTest {
             String msg = "Currency " + currency.getDisplayName() 
                     + " should not be " + nextDayDollarDisplayName;
             assertNotEquals(nextDayDollar, currency, msg);
+        }
+    }
+
+    @Test
+    public void testImproperAzerbaijanManatExcluded() {
+        Currency improperManat = Currency.getInstance("AYM");
+        String improperManatDisplayName = improperManat.getDisplayName();
+        for (int i = 0; i < NUMBER_OF_CALLS_FOR_EXCLUSION_SEARCH; i++) {
+            Currency currency = CurrencyChooser.chooseCurrency();
+            String msg = "Currency " + currency.getDisplayName() 
+                    + " should not be " + improperManatDisplayName;
+            assertNotEquals(improperManat, currency, msg);
         }
     }
 
