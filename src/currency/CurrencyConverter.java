@@ -136,9 +136,35 @@ public class CurrencyConverter {
         return this.exchangeRateProvider;
     }
     
-    // TODO: Write tests for this
+    /**
+     * Converts a source amount of money to a target currency. The exchange rate 
+     * provider that was given to the constructor is queried.
+     * @param source The source amount of money. For example, $100.00 in United 
+     * States dollars (USD).
+     * @param target The target currency. For example, euros (EUR).
+     * @return The converted amount, according to the given exchange rate 
+     * provider. In the example, this might be 90,82&euro;.
+     */
     public MoneyAmount convert(MoneyAmount source, Currency target) {
-        return new MoneyAmount(-source.getUnits(), target, (short) 0);
+        double intermediate = source.getFullAmountInCents();
+        Currency sourceCurrency = source.getCurrency();
+        int sourceExponent = sourceCurrency.getDefaultFractionDigits();
+        while (sourceExponent > 0) {
+            intermediate /= 10.0;
+            sourceExponent--;
+        }
+        double rate = this.exchangeRateProvider.getRate(sourceCurrency, target);
+        double converted = intermediate * rate;
+        double floored = Math.floor(converted);
+        double roughDivs = converted - floored;
+        int targetExponent = target.getDefaultFractionDigits();
+        while (targetExponent > 0) {
+            roughDivs *= 10.0;
+            targetExponent--;
+        }
+        long units = (long) floored;
+        short divisions = (short) Math.floor(roughDivs);
+        return new MoneyAmount(units, target, divisions);
     }
     
     /**
