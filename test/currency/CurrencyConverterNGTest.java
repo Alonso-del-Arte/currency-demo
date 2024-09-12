@@ -28,7 +28,10 @@ import static org.testng.Assert.*;
 import org.testng.annotations.Test;
 
 /**
- * Tests of the CurrencyConverter class.
+ * Tests of the CurrencyConverter class. The original idea limited the class 
+ * under test to a single online API. In the changeover away from static 
+ * functions, this test class should test that instances use the given exchange 
+ * rate provider, not that the conversions are real or even plausible.
  * @author Alonso del Arte
  */
 public class CurrencyConverterNGTest {
@@ -167,7 +170,7 @@ public class CurrencyConverterNGTest {
     }
     
     @Test
-    public void testConvert() {
+    public void testConvertOld() {
         System.out.println("convert");
         Currency currency = CurrencyChooser.chooseCurrency(
                 (cur) -> !cur.getSymbol().equals(cur.getCurrencyCode()) 
@@ -237,6 +240,36 @@ public class CurrencyConverterNGTest {
         CurrencyConverter instance = new CurrencyConverter(expected);
         ExchangeRateProvider actual = instance.getProvider();
         assertEquals(actual, expected);
+    }
+    
+    @Test
+    public void testConvert() {
+        System.out.println("convert");
+        Currency from = CurrencyChooser.chooseCurrency(0);
+        Currency target = CurrencyChooser.chooseCurrency(3);
+        CurrencyPair currencies = new CurrencyPair(from, target);
+        double rate = 1.0 + (RANDOM.nextDouble() / 100);
+        ConversionRateQuote quote = new ConversionRateQuote(currencies, rate);
+        ExchangeRateProvider rateProvider = new MockExchangeRateProvider(quote);
+        CurrencyConverter instance = new CurrencyConverter(rateProvider);
+        int units = RANDOM.nextInt(16384) + 16;
+        MoneyAmount source = new MoneyAmount(units, from);
+        double intermediate = rate * units;
+        double floored = Math.floor(intermediate);
+        int expUnits = (int) floored;
+        double roughDivs = intermediate - floored;
+        short divisions = (short) Math.floor(roughDivs * 1000);
+        MoneyAmount expected = new MoneyAmount(expUnits, target, divisions);
+        MoneyAmount oneUnit = new MoneyAmount(1, target);
+        MoneyAmount minimum = expected.minus(oneUnit);
+        MoneyAmount maximum = expected.plus(oneUnit);
+        MoneyAmount actual = instance.convert(source, target);
+        String msg = "Given mock rate of " + rate + " to convert from " 
+                + from.getDisplayName() + " (" + from.getCurrencyCode() 
+                + ") to " + target.getDisplayName() + " (" 
+                + target.getCurrencyCode() + ") expected " + source.toString() 
+                + " to convert to roughly " + expected.toString();
+        assertInRange(minimum, actual, maximum, msg);
     }
     
     @Test
