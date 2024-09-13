@@ -17,6 +17,7 @@
 package currency;
 
 import java.util.Currency;
+import java.util.Locale;
 
 import static org.testng.Assert.*;
 import org.testng.annotations.Test;
@@ -27,10 +28,29 @@ import org.testng.annotations.Test;
  */
 public class MannysCurrencyConverterAPIAccessNGTest {
     
+    private static final double TEST_DELTA = 0.001;
+    
+    private static final Currency U_S_DOLLARS = Currency.getInstance(Locale.US);
+    
+    private static final Currency EAST_CARIBBEAN_DOLLARS 
+            = Currency.getInstance("XCD");
+    
+    @Test
+    public void testGetRateNoConversionNeeded() {
+        ExchangeRateProvider instance = new MannysCurrencyConverterAPIAccess();
+        Currency currency = CurrencyChooser.chooseCurrency();
+        double expected = 1.0;
+        double actual = instance.getRate(currency, currency);
+        String iso4217Code = currency.getCurrencyCode();
+        String msg = "No conversion needed for " + iso4217Code + " to " 
+                + iso4217Code;
+        assertEquals(actual, expected, TEST_DELTA, msg);
+    }
+    
     /**
      * Test of getRate method, of class MannysCurrencyConverterAPIAccess.
      */
-    @Test
+//    @Test
     public void testGetRate() {
         System.out.println("getRate");
         Currency source = null;
