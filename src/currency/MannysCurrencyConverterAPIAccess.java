@@ -26,10 +26,19 @@ import java.util.Currency;
 import java.util.Scanner;
 
 /**
- *
+ * Provides access to Manny's Free Currency Converter API. To use this, you need 
+ * an API key, and to place that API key in an environment variable called 
+ * "FOREX_API_KEY". Go to the website <a 
+ * href="https://free.currencyconverterapi.com">currencyconverterapi.com</a> for 
+ * more information.
  * @author Alonso del Arte
  */
 public class MannysCurrencyConverterAPIAccess implements ExchangeRateProvider {
+    
+    private static final String API_KEY = System.getenv("FOREX_API_KEY");
+    
+    private static final String USER_AGENT_ID = "Java/"
+            + System.getProperty("java.version");
     
     // TODO: Write tests for this
     @Override
