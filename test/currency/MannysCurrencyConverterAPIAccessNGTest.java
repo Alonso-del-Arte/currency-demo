@@ -42,9 +42,17 @@ public class MannysCurrencyConverterAPIAccessNGTest {
         double expected = 1.0;
         double actual = instance.getRate(currency, currency);
         String iso4217Code = currency.getCurrencyCode();
-        String msg = "No conversion needed for " + iso4217Code + " to " 
+        String message = "No conversion needed for " + iso4217Code + " to " 
                 + iso4217Code;
-        assertEquals(actual, expected, TEST_DELTA, msg);
+        assertEquals(actual, expected, TEST_DELTA, message);
+    }
+    
+    @Test
+    public void testGetRateForUSDollarsToEastCaribbeanDollars() {
+        ExchangeRateProvider instance = new MannysCurrencyConverterAPIAccess();
+        double expected = 2.702;
+        double actual = instance.getRate(U_S_DOLLARS, EAST_CARIBBEAN_DOLLARS);
+        assertEquals(actual, expected, TEST_DELTA);
     }
     
     /**
