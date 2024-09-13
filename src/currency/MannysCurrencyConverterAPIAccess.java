@@ -43,7 +43,7 @@ public class MannysCurrencyConverterAPIAccess implements ExchangeRateProvider {
     // TODO: Write tests for this
     @Override
     public double getRate(Currency source, Currency target) {
-        return -1.0;
+        return 1.0;
     }
     
 }
