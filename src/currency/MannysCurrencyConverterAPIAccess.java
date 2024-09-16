@@ -46,6 +46,9 @@ public class MannysCurrencyConverterAPIAccess implements ExchangeRateProvider {
         if (source == target) {
             return 1.0;
         } else {
+            if (source.getCurrencyCode().equals("XCD")) {
+                return 0.37;
+            }
             return 2.702;
         }
     }
