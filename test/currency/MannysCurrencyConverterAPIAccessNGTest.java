@@ -55,6 +55,14 @@ public class MannysCurrencyConverterAPIAccessNGTest {
         assertEquals(actual, expected, TEST_DELTA);
     }
     
+    @Test
+    public void testGetRateForEastCaribbeanDollarsToUSDollars() {
+        ExchangeRateProvider instance = new MannysCurrencyConverterAPIAccess();
+        double expected = 0.37;
+        double actual = instance.getRate(EAST_CARIBBEAN_DOLLARS, U_S_DOLLARS);
+        assertEquals(actual, expected, TEST_DELTA);
+    }
+    
     /**
      * Test of getRate method, of class MannysCurrencyConverterAPIAccess.
      */
