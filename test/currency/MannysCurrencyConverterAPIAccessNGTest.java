@@ -64,19 +64,32 @@ public class MannysCurrencyConverterAPIAccessNGTest {
     }
     
     /**
-     * Test of getRate method, of class MannysCurrencyConverterAPIAccess.
+     * Test of the getRate function, of the MannysCurrencyConverterAPIAccess 
+     * class.
      */
-//    @Test
+    @Test
     public void testGetRate() {
         System.out.println("getRate");
-        Currency source = null;
-        Currency target = null;
-        MannysCurrencyConverterAPIAccess instance = new MannysCurrencyConverterAPIAccess();
-        double expResult = 0.0;
-        double result = instance.getRate(source, target);
-        assertEquals(result, expResult, 0.0);
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
+        ExchangeRateProvider instance = new MannysCurrencyConverterAPIAccess();
+        Currency firstTarget = CurrencyChooser
+                .chooseCurrencyOtherThan(U_S_DOLLARS);
+        String dollarsDisplayName = U_S_DOLLARS.getDisplayName();
+        String dollarsISO4217Code = U_S_DOLLARS.getCurrencyCode();
+        String firstTargetDisplayName = firstTarget.getDisplayName();
+        String firstTargetISO4217Code = firstTarget.getCurrencyCode();
+        System.out.println("Inquiring rate of conversion from " 
+                + dollarsDisplayName + " (" + dollarsISO4217Code + ") to " 
+                + firstTargetDisplayName + " (" + firstTargetISO4217Code + ")");
+        double fromDollars = instance.getRate(U_S_DOLLARS, firstTarget);
+        double toDollars = instance.getRate(firstTarget, U_S_DOLLARS);
+        double expected = 1.0;
+        double actual = fromDollars * toDollars;
+        String message = "Rate of conversion from " + dollarsDisplayName + " (" 
+                + dollarsISO4217Code + ") to " + firstTargetDisplayName + " (" 
+                + firstTargetISO4217Code + ") is said to be " + fromDollars 
+                + ", and vice-versa is said to be " + toDollars;
+        System.out.println(message);
+        assertEquals(actual, expected, TEST_DELTA, message);
     }
 
 }
