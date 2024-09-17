@@ -16,8 +16,15 @@
  */
 package currency;
 
+import java.io.InputStream;
+import java.io.IOException;
+import java.net.HttpURLConnection;
+import java.net.URI;
+import java.net.URISyntaxException;
+import java.net.URL;
 import java.util.Currency;
 import java.util.Locale;
+import java.util.Scanner;
 
 import static org.testng.Assert.*;
 import org.testng.annotations.Test;
@@ -89,6 +96,59 @@ public class MannysCurrencyConverterAPIAccessNGTest {
                 + firstTargetISO4217Code + ") is said to be " + fromDollars 
                 + ", and vice-versa is said to be " + toDollars;
         System.out.println(message);
+        assertEquals(actual, expected, TEST_DELTA, message);
+    }
+    
+    private static double getRateFromMannysAPI(Currency source, Currency target, 
+            String message) {
+        final String apiKey = System.getenv("FOREX_API_KEY");
+        String queryPath 
+                = "https://free.currconv.com/api/v7/convert?q="
+                + source.getCurrencyCode() + "_" 
+                + target.getCurrencyCode()
+                + "&compact=ultra&apiKey=" + apiKey;
+        final String userAgentID = "Java/" 
+                + System.getProperty("java.version");
+        try {
+            URI uri = new URI(queryPath);
+            URL queryURL = uri.toURL();
+            HttpURLConnection connection 
+                    = (HttpURLConnection) queryURL.openConnection();
+            connection.setRequestProperty("User-Agent", userAgentID);
+            int responseCode = connection.getResponseCode();
+            if (responseCode == HttpURLConnection.HTTP_OK) {
+                InputStream stream = (InputStream) connection.getContent();
+                Scanner scanner = new Scanner(stream);
+                String quote = scanner.nextLine();
+                return Double.parseDouble(quote.substring(quote.indexOf(':') 
+                        + 1, quote.indexOf('}')));
+            } else {
+                String excMsg = "Query " + queryPath + " returned status " 
+                        + responseCode;
+                throw new RuntimeException(excMsg);
+            }
+        } catch (IOException ioe) {
+            String excMsg = "Unexpected I/O problem encountered";
+            throw new RuntimeException(excMsg, ioe);
+        } catch (URISyntaxException urise) {
+            String excMsg = "Query path <" + queryPath + "> is not valid";
+            throw new RuntimeException(excMsg, urise);
+        } catch (NumberFormatException nfe) {
+            throw new RuntimeException(message, nfe);
+        }
+    }
+    
+    @Test
+    public void testGetRateActuallyCallsMannysAPI() {
+        ExchangeRateProvider instance = new MannysCurrencyConverterAPIAccess();
+        Currency source = CurrencyChooser.chooseCurrency();
+        Currency target = CurrencyChooser.chooseCurrencyOtherThan(source);
+        String message = "Inquiring Manny's API for rate of conversion from " 
+                + source.getDisplayName() + " (" + source.getCurrencyCode() 
+                + ") to " + target.getDisplayName() + " (" 
+                + target.getCurrencyCode() + ")";
+        double expected = getRateFromMannysAPI(source, target, message);
+        double actual = instance.getRate(source, target);
         assertEquals(actual, expected, TEST_DELTA, message);
     }
 
