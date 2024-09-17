@@ -38,7 +38,6 @@ public class CurrencyConverter {
     
     private final ExchangeRateProvider exchangeRateProvider;
     
-    // TODO: Deprecate once instance equivalent is available    
     /**
      * Gives the rate for a currency conversion. This function calls Manny's 
      * Free Currency Converter API.
@@ -54,7 +53,11 @@ public class CurrencyConverter {
      * object will wrap a specific checked exception.
      * @throws NumberFormatException If <code>target</code> is not a currency 
      * recognized by the currency conversion API, such as a historical currency.
+     * @deprecated This function will be removed. Instead use a {@code 
+     * CurrencyConverter} instance with your favorite implementation of {@link 
+     * ExchangeRateProvider}.
      */
+    @Deprecated
     public static String getRate(Currency source, Currency target) {
         String queryPath 
                 = "https://free.currconv.com/api/v7/convert?q="
@@ -88,7 +91,6 @@ public class CurrencyConverter {
         }
     }
     
-    // TODO: Deprecate once instance equivalent is available    
     /**
      * Converts a money amount to a specified currency. This static function 
      * will soon be deprecated in favor of instance functions that can use 
@@ -104,7 +106,11 @@ public class CurrencyConverter {
      * object will wrap a specific checked exception.
      * @throws NumberFormatException If <code>target</code> is not a currency 
      * recognized by the currency conversion API, such as a historical currency.
+     * @deprecated This function will be removed. Instead use a {@code 
+     * CurrencyConverter} instance with your favorite implementation of {@link 
+     * ExchangeRateProvider}.
      */
+    @Deprecated
     public static MoneyAmount convertOld(MoneyAmount source, Currency target) {
         double original = source.getFullAmountInCents();
         Currency sourceCurrency = source.getCurrency();
