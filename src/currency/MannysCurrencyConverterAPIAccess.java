@@ -35,32 +35,59 @@ import java.util.Scanner;
  */
 public class MannysCurrencyConverterAPIAccess implements ExchangeRateProvider {
     
+    private static final String QUERY_PATH_BEGIN 
+            = "https://free.currconv.com/api/v7/convert?q=";
+    
+    private static final String QUERY_PATH_CONNECTOR = "&compact=ultra&apiKey=";
+    
     private static final String API_KEY = System.getenv("FOREX_API_KEY");
     
     private static final String USER_AGENT_ID = "Java/"
             + System.getProperty("java.version");
     
-    private int callCount = 0;
-    
-    private double prevRate;
-    
-    // TODO: Write tests for this
+    /**
+     * Gives the rate for a currency conversion. This function calls Manny's 
+     * Free Currency Converter API.
+     * @param source The currency to convert from. For example, United States 
+     * dollars (USD).
+     * @param target The currency to convert to. For example, euros (EUR).
+     * @return The rate. For example, 0.89854 as of September 16, 2024.
+     * @throws RuntimeException If the API returns an HTTP status code other 
+     * than HTTP OK (200), if there is an unexpected I/O problem, or if the URI 
+     * for the API has a syntax error. In the latter two cases, the exception 
+     * object will wrap a specific checked exception.
+     * @throws NumberFormatException If {@code target} is not a currency 
+     * recognized by the currency conversion API, such as a historical currency.
+     */
     @Override
     public double getRate(Currency source, Currency target) {
-        this.callCount++;
-        if (this.callCount == 2) {
-            return 1.0 / this.prevRate;
-        }
-        if (source == target) {
-            this.prevRate = 1.0;
-        } else {
-            if (source.getCurrencyCode().equals("XCD")) {
-                this.prevRate = 0.37;
+        String queryPath = QUERY_PATH_BEGIN + source.getCurrencyCode() + '_' 
+                + target.getCurrencyCode() + QUERY_PATH_CONNECTOR + API_KEY;
+        try {
+            URI uri = new URI(queryPath);
+            URL queryURL = uri.toURL();
+            HttpURLConnection connection 
+                    = (HttpURLConnection) queryURL.openConnection();
+            connection.setRequestProperty("User-Agent", USER_AGENT_ID);
+            int responseCode = connection.getResponseCode();
+            if (responseCode == HttpURLConnection.HTTP_OK) {
+                InputStream stream = (InputStream) connection.getContent();
+                Scanner scanner = new Scanner(stream);
+                String quote = scanner.nextLine();
+                return Double.parseDouble(quote.substring(quote.indexOf(':') 
+                        + 1, quote.indexOf('}')));
             } else {
-                this.prevRate = 2.702;
+                String excMsg = "Query " + queryPath + " returned status " 
+                        + responseCode;
+                throw new RuntimeException(excMsg);
             }
+        } catch (IOException ioe) {
+            String excMsg = "Unexpected I/O problem encountered";
+            throw new RuntimeException(excMsg, ioe);
+        } catch (URISyntaxException urise) {
+            String excMsg = "Query path <" + queryPath + "> is not valid";
+            throw new RuntimeException(excMsg, urise);
         }
-        return this.prevRate;
     }
     
 }
