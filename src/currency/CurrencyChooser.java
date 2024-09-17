@@ -54,7 +54,7 @@ public class CurrencyChooser {
     private static final String[] OTHER_EXCLUSION_CODES = {"ADP", "ATS", "AYM", 
         "BEF", "BGL", "BOV", "CHE", "CHW", "COU", "CYP", "DEM", "EEK", "ESP", 
         "FIM", "FRF", "GRD", "GWP", "IEP", "ITL", "LUF", "MTL", "MXV", "NLG", 
-        "PTE", "SIT", "SRG", "TPE", "USN", "USS", "UYI", "VED", "ZWN"};
+        "PTE", "SIT", "SRG", "STN", "TPE", "USN", "USS", "UYI", "VED", "ZWN"};
 
     private static final Map<Integer, Set<Currency>> CURRENCIES_DIGITS_MAP 
             = new HashMap<>();
@@ -183,6 +183,10 @@ public class CurrencyChooser {
      * <li>The Surinamese guilder (SRG) was the currency of Suriname until 2004, 
      * when it was replaced by the Surinamese dollar (SRD) at a rate of a 
      * thousand guilder for one dollar.</li>
+     * <li>The S&atilde;o Tom&eacute; &amp; Pr&iacute;ncipe dobra (STN) is still 
+     * a valid currency, as far as I can tell, but Manny's Currency Converter 
+     * does not recognize it, instead recognizing the earlier dobra (STD), which 
+     * was valid from 1977 to 2017.</li>
      * <li>The Timorese escudo (TPE) was the official currency of Portuguese 
      * Timor prior to occupation by Indonesia.</li>
      * <li>The same day U.&nbsp;S. dollar (USS) and the next day U.&nbsp;S. 
