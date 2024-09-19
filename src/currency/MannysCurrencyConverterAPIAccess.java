@@ -45,22 +45,7 @@ public class MannysCurrencyConverterAPIAccess implements ExchangeRateProvider {
     private static final String USER_AGENT_ID = "Java/"
             + System.getProperty("java.version");
     
-    /**
-     * Gives the rate for a currency conversion. This function calls Manny's 
-     * Free Currency Converter API.
-     * @param source The currency to convert from. For example, United States 
-     * dollars (USD).
-     * @param target The currency to convert to. For example, euros (EUR).
-     * @return The rate. For example, 0.89854 as of September 16, 2024.
-     * @throws RuntimeException If the API returns an HTTP status code other 
-     * than HTTP OK (200), if there is an unexpected I/O problem, or if the URI 
-     * for the API has a syntax error. In the latter two cases, the exception 
-     * object will wrap a specific checked exception.
-     * @throws NumberFormatException If {@code target} is not a currency 
-     * recognized by the currency conversion API, such as a historical currency.
-     */
-    @Override
-    public double getRate(Currency source, Currency target) {
+    static double makeAPICall(Currency source, Currency target) {
         String queryPath = QUERY_PATH_BEGIN + source.getCurrencyCode() + '_' 
                 + target.getCurrencyCode() + QUERY_PATH_CONNECTOR + API_KEY;
         try {
@@ -88,6 +73,26 @@ public class MannysCurrencyConverterAPIAccess implements ExchangeRateProvider {
             String excMsg = "Query path <" + queryPath + "> is not valid";
             throw new RuntimeException(excMsg, urise);
         }
+    }
+    
+    /**
+     * Gives the rate for a currency conversion. This function calls Manny's 
+     * Free Currency Converter API.
+     * @param source The currency to convert from. For example, United States 
+     * dollars (USD).
+     * @param target The currency to convert to. For example, euros (EUR).
+     * @return The rate. For example, 0.89854 as of September 16, 2024.
+     * @throws RuntimeException If the API returns an HTTP status code other 
+     * than HTTP OK (200), if there is an unexpected I/O problem, or if the URI 
+     * for the API has a syntax error. In the latter two cases, the exception 
+     * object will wrap a specific checked exception.
+     * @throws NumberFormatException If {@code target} is not a currency 
+     * recognized by the currency conversion API, such as a historical currency.
+     */
+    @Override
+    public double getRate(Currency source, Currency target) {
+        // TODO: Implement rate quote caching
+        return makeAPICall(source, target);
     }
     
 }
