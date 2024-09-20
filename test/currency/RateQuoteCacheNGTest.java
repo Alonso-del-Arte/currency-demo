@@ -19,6 +19,7 @@ package currency;
 import static currency.CurrencyChooser.RANDOM;
 
 import java.time.LocalDateTime;
+import java.util.Currency;
 
 import static org.testframe.api.Asserters.assertThrows;
 
@@ -31,6 +32,8 @@ import org.testng.annotations.Test;
  */
 public class RateQuoteCacheNGTest {
     
+    private static final int DEFAULT_CAPACITY = 8;
+    
     @Test
     public void testMinimumCapacityConstant() {
         assertEquals(RateQuoteCache.MINIMUM_CAPACITY, 4);
@@ -42,33 +45,19 @@ public class RateQuoteCacheNGTest {
     }
     
     /**
-     * Test of create method, of class RateQuoteCache.
+     * Test of the has function, of the RateQuoteCache class.
      */
-//    @Test
-    public void testCreate() {
-        System.out.println("create");
-        CurrencyPair currencies = null;
-        RateQuoteCache instance = null;
-        ConversionRateQuote expResult = null;
-        ConversionRateQuote result = instance.create(currencies);
-        assertEquals(result, expResult);
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
-    }
-
-    /**
-     * Test of has method, of class RateQuoteCache.
-     */
-//    @Test
+    @Test
     public void testHas() {
         System.out.println("has");
-        CurrencyPair currencies = null;
-        RateQuoteCache instance = null;
-        boolean expResult = false;
-        boolean result = instance.has(currencies);
-        assertEquals(result, expResult);
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
+        Currency from = CurrencyChooser.chooseCurrency();
+        Currency to = CurrencyChooser.chooseCurrencyOtherThan(from);
+        CurrencyPair currencies = new CurrencyPair(from, to);
+        RateQuoteCache instance = new RateQuoteCacheImpl(DEFAULT_CAPACITY);
+        instance.create(currencies);
+        String msg = "Right after adding " + currencies.toString() 
+                + " to the cache, cache should have that pair";
+        assert instance.has(currencies) : msg;
     }
 
     /**
@@ -168,7 +157,7 @@ public class RateQuoteCacheNGTest {
 
         @Override
         public ConversionRateQuote create(CurrencyPair currencies) {
-            return null;
+            return new ConversionRateQuote(currencies, RANDOM.nextDouble());
         }
         
         @Override
