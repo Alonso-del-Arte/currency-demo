@@ -143,6 +143,27 @@ public class RateQuoteCacheNGTest {
         }
     }
 
+    @Test
+    public void testConstructorRejectsExcessiveCapacity() {
+        int capacity = RateQuoteCache.MAXIMUM_CAPACITY + RANDOM.nextInt(128) 
+                + 1;
+        String msg = "Capacity " + capacity + " in excess of maximum capacity "  
+                + RateQuoteCache.MAXIMUM_CAPACITY 
+                + " should cause an exception";
+        Throwable t = assertThrows(() -> {
+            RateQuoteCache badCache = new RateQuoteCacheImpl(capacity);
+            System.out.println(msg + ", not given instance " 
+                    + badCache.toString());
+        }, IllegalArgumentException.class, msg);
+        String excMsg = t.getMessage();
+        assert excMsg != null : "Exception message should not be null";
+        assert !excMsg.isBlank() : "Exception message should not be blank";
+        String numStr = Integer.toString(capacity);
+        String capMsg = "Exception message should contain \"" + numStr + "\"";
+        assert excMsg.contains(numStr) : capMsg;
+        System.out.println("\"" + excMsg + "\"");
+    }
+
     private static class RateQuoteCacheImpl extends RateQuoteCache {
 
         @Override
