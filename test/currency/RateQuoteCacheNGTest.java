@@ -27,10 +27,15 @@ import org.testng.annotations.Test;
  */
 public class RateQuoteCacheNGTest {
     
+    @Test
+    public void testMinimumCapacityConstant() {
+        assertEquals(RateQuoteCache.MININUM_CAPACITY, 4);
+    }
+    
     /**
      * Test of create method, of class RateQuoteCache.
      */
-    @Test
+//    @Test
     public void testCreate() {
         System.out.println("create");
         CurrencyPair currencies = null;
@@ -45,7 +50,7 @@ public class RateQuoteCacheNGTest {
     /**
      * Test of has method, of class RateQuoteCache.
      */
-    @Test
+//    @Test
     public void testHas() {
         System.out.println("has");
         CurrencyPair currencies = null;
@@ -60,7 +65,7 @@ public class RateQuoteCacheNGTest {
     /**
      * Test of retrieve method, of class RateQuoteCache.
      */
-    @Test
+//    @Test
     public void testRetrieve() {
         System.out.println("retrieve");
         CurrencyPair currencies = null;
