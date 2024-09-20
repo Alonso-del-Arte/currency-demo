@@ -22,6 +22,12 @@ package currency;
  */
 abstract class RateQuoteCache {
     
+    // TODO: Write a test for this
+    public static final int MININUM_CAPACITY = 0;
+    
+    // TODO: Write a test for this
+    public static final int MAXIMUM_CAPACITY = 0;
+    
     private ConversionRateQuote[] quotes = new ConversionRateQuote[10];
     
     /**
