@@ -72,7 +72,7 @@ abstract class RateQuoteCache {
     }
 
     public RateQuoteCache(int capacity) {
-        if (capacity < 1) {
+        if (capacity < MINIMUM_CAPACITY) {
             String excMsg = "Capacity " + capacity + " is not valid";
             throw new IllegalArgumentException(excMsg);
         }
