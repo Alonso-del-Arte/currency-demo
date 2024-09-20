@@ -60,6 +60,17 @@ public class RateQuoteCacheNGTest {
         assert instance.has(currencies) : msg;
     }
 
+    @Test
+    public void testDoesNotHave() {
+        Currency from = CurrencyChooser.chooseCurrency();
+        Currency to = CurrencyChooser.chooseCurrencyOtherThan(from);
+        CurrencyPair currencies = new CurrencyPair(from, to);
+        RateQuoteCache instance = new RateQuoteCacheImpl(DEFAULT_CAPACITY);
+        String msg = "Since " + currencies.toString() 
+                + " was not added to the cache, cache shouldn't have that pair";
+        assert !instance.has(currencies) : msg;
+    }
+
     /**
      * Test of retrieve method, of class RateQuoteCache.
      */
