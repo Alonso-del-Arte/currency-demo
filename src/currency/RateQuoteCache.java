@@ -22,8 +22,11 @@ package currency;
  */
 abstract class RateQuoteCache {
     
-    // TODO: Write a test for this
-    public static final int MININUM_CAPACITY = 0;
+    /**
+     * The minimum capacity for a cache. The ideal capacity's probably greater 
+     * than this but less than {@link #MAXIMUM_CAPACITY}.
+     */
+    public static final int MININUM_CAPACITY = 4;
     
     // TODO: Write a test for this
     public static final int MAXIMUM_CAPACITY = 0;
