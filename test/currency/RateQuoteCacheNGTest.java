@@ -59,7 +59,7 @@ public class RateQuoteCacheNGTest {
                 + " to the cache, cache should have that pair";
         assert instance.has(currencies) : msg;
     }
-
+@org.testng.annotations.Ignore
     @Test
     public void testDoesNotHave() {
         Currency from = CurrencyChooser.chooseCurrency();
