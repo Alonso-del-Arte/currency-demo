@@ -22,6 +22,8 @@ package currency;
  */
 abstract class RateQuoteCache {
     
+    private ConversionRateQuote lastRetrieved;
+    
     /**
      * The minimum capacity for a cache. The ideal capacity's probably greater 
      * than this but less than {@link #MAXIMUM_CAPACITY}.
@@ -50,7 +52,7 @@ abstract class RateQuoteCache {
     
     // TODO: Write tests for this
     boolean has(CurrencyPair currencies) {
-        return true;
+        return this.lastRetrieved != null;
     }
     
     /**
@@ -68,7 +70,9 @@ abstract class RateQuoteCache {
     
     // TODO: Write tests for this
     ConversionRateQuote retrieve(CurrencyPair currencies) {
-        return new ConversionRateQuote(currencies, 0.0);
+        ConversionRateQuote quote = new ConversionRateQuote(currencies, 0.0);
+        this.lastRetrieved = quote;
+        return quote;
     }
 
     /**
