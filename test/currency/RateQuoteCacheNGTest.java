@@ -29,7 +29,7 @@ public class RateQuoteCacheNGTest {
     
     @Test
     public void testMinimumCapacityConstant() {
-        assertEquals(RateQuoteCache.MININUM_CAPACITY, 4);
+        assertEquals(RateQuoteCache.MINIMUM_CAPACITY, 4);
     }
     
     @Test

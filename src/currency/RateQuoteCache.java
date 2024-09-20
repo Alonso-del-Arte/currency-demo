@@ -26,11 +26,11 @@ abstract class RateQuoteCache {
      * The minimum capacity for a cache. The ideal capacity's probably greater 
      * than this but less than {@link #MAXIMUM_CAPACITY}.
      */
-    public static final int MININUM_CAPACITY = 4;
+    public static final int MINIMUM_CAPACITY = 4;
     
     /**
      * The maximum capacity for a cache. The ideal capacity's probably less than  
-     * this but greater than {@link #MININUM_CAPACITY}.
+     * this but greater than {@link #MINIMUM_CAPACITY}.
      */
     public static final int MAXIMUM_CAPACITY = 128;
     
