@@ -32,6 +32,11 @@ public class RateQuoteCacheNGTest {
         assertEquals(RateQuoteCache.MININUM_CAPACITY, 4);
     }
     
+    @Test
+    public void testMaximumCapacityConstant() {
+        assertEquals(RateQuoteCache.MAXIMUM_CAPACITY, 128);
+    }
+    
     /**
      * Test of create method, of class RateQuoteCache.
      */
