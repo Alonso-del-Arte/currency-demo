@@ -50,7 +50,7 @@ abstract class RateQuoteCache {
     
     // TODO: Write tests for this
     boolean has(CurrencyPair currencies) {
-        return true;
+        return false;
     }
     
     /**
