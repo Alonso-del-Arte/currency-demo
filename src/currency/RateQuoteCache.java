@@ -28,8 +28,11 @@ abstract class RateQuoteCache {
      */
     public static final int MININUM_CAPACITY = 4;
     
-    // TODO: Write a test for this
-    public static final int MAXIMUM_CAPACITY = 0;
+    /**
+     * The maximum capacity for a cache. The ideal capacity's probably less than  
+     * this but greater than {@link #MININUM_CAPACITY}.
+     */
+    public static final int MAXIMUM_CAPACITY = 128;
     
     private ConversionRateQuote[] quotes = new ConversionRateQuote[10];
     
