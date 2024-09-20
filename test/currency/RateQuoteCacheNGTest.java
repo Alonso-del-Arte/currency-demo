@@ -98,6 +98,9 @@ public class RateQuoteCacheNGTest {
         String excMsg = t.getMessage();
         assert excMsg != null : "Exception message should not be null";
         assert !excMsg.isBlank() : "Exception message should not be blank";
+        String numStr = Integer.toString(capacity);
+        String capMsg = "Exception message should contain \"" + numStr + "\"";
+        assert excMsg.contains(numStr) : capMsg;
         System.out.println("\"" + excMsg + "\"");
     }
 
