@@ -71,8 +71,16 @@ abstract class RateQuoteCache {
         return new ConversionRateQuote(currencies, 0.0);
     }
 
+    /**
+     * Constructor.
+     * @param capacity The capacity for the cache. For example, 32. Should be at 
+     * least {@link #MINIMUM_CAPACITY} but not more than {@link 
+     * #MAXIMUM_CAPACITY}.
+     * @throws IllegalArgumentException If {@code capacity} is less than {@link 
+     * #MINIMUM_CAPACITY} or more than {@link #MAXIMUM_CAPACITY}.
+     */
     public RateQuoteCache(int capacity) {
-        if (capacity < MINIMUM_CAPACITY) {
+        if (capacity < MINIMUM_CAPACITY || capacity > MAXIMUM_CAPACITY) {
             String excMsg = "Capacity " + capacity + " is not valid";
             throw new IllegalArgumentException(excMsg);
         }
