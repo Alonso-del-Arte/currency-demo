@@ -16,7 +16,11 @@
  */
 package currency;
 
+import static currency.CurrencyChooser.RANDOM;
+
 import java.time.LocalDateTime;
+
+import static org.testframe.api.Asserters.assertThrows;
 
 import static org.testng.Assert.*;
 import org.testng.annotations.Test;
@@ -81,6 +85,21 @@ public class RateQuoteCacheNGTest {
         // TODO review the generated test code and remove the default call to fail.
         fail("The test case is a prototype.");
     }
+    
+    @Test
+    public void testConstructorRejectsNegativeCapacity() {
+        int capacity = -RANDOM.nextInt(128) - 1;
+        String msg = "Capacity " + capacity + " should cause an exception";
+        Throwable t = assertThrows(() -> {
+            RateQuoteCache badCache = new RateQuoteCacheImpl(capacity);
+            System.out.println(msg + ", not given instance " 
+                    + badCache.toString());
+        }, IllegalArgumentException.class, msg);
+        String excMsg = t.getMessage();
+        assert excMsg != null : "Exception message should not be null";
+        assert !excMsg.isBlank() : "Exception message should not be blank";
+        System.out.println("\"" + excMsg + "\"");
+    }
 
     private static class RateQuoteCacheImpl extends RateQuoteCache {
 
@@ -94,8 +113,8 @@ public class RateQuoteCacheNGTest {
             return true;
         }
         
-        public RateQuoteCacheImpl() {
-            super(10);
+        public RateQuoteCacheImpl(int capacity) {
+            super(capacity);
         }
 
     }
