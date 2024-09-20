@@ -54,7 +54,7 @@ public class RateQuoteCacheNGTest {
         Currency to = CurrencyChooser.chooseCurrencyOtherThan(from);
         CurrencyPair currencies = new CurrencyPair(from, to);
         RateQuoteCache instance = new RateQuoteCacheImpl(DEFAULT_CAPACITY);
-        instance.create(currencies);
+        instance.retrieve(currencies);
         String msg = "Right after adding " + currencies.toString() 
                 + " to the cache, cache should have that pair";
         assert instance.has(currencies) : msg;
