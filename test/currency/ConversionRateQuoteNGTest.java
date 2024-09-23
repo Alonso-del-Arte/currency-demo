@@ -76,6 +76,18 @@ public class ConversionRateQuoteNGTest {
     }
     
     @Test
+    public void testReferentialEquality() {
+        Currency from = CurrencyChooser.chooseCurrency();
+        Currency to = CurrencyChooser.chooseCurrencyOtherThan(from);
+        CurrencyPair currencies = new CurrencyPair(from, to);
+        double rate = RANDOM.nextDouble();
+        LocalDateTime date = LocalDateTime.now();
+        ConversionRateQuote quote = new ConversionRateQuote(currencies, rate, 
+                date);
+        assertEquals(quote, quote);
+    }
+    
+    @Test
     public void testAuxiliaryConstructorFillsInCurrentDateTime() {
         Currency from = CurrencyChooser.chooseCurrency();
         Currency to = CurrencyChooser.chooseCurrencyOtherThan(from);
