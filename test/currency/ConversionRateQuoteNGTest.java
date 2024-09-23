@@ -17,6 +17,7 @@
 package currency;
 
 import static currency.CurrencyChooser.RANDOM;
+import static currency.MoneyAmountNGTest.provideNull;
 
 import java.time.LocalDateTime;
 import java.util.Currency;
@@ -85,6 +86,20 @@ public class ConversionRateQuoteNGTest {
         ConversionRateQuote quote = new ConversionRateQuote(currencies, rate, 
                 date);
         assertEquals(quote, quote);
+    }
+    
+    @Test
+    public void testNotEqualsNull() {
+        Currency from = CurrencyChooser.chooseCurrency();
+        Currency to = CurrencyChooser.chooseCurrencyOtherThan(from);
+        CurrencyPair currencies = new CurrencyPair(from, to);
+        double rate = RANDOM.nextDouble();
+        LocalDateTime date = LocalDateTime.now();
+        ConversionRateQuote quote = new ConversionRateQuote(currencies, rate, 
+                date);
+        Object obj = provideNull();
+        String msg = quote.toString() + " should not equal null";
+        assert !quote.equals(obj) : msg;
     }
     
     @Test
