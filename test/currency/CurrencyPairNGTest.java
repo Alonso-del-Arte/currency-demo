@@ -17,6 +17,7 @@
 package currency;
 
 import static currency.CurrencyChooser.RANDOM;
+import static currency.MoneyAmountNGTest.provideNull;
 
 import java.util.Currency;
 import java.util.HashSet;
@@ -90,10 +91,6 @@ public class CurrencyPairNGTest {
         Currency to = CurrencyChooser.chooseCurrencyOtherThan(from);
         CurrencyPair somePair = new CurrencyPair(from, to);
         assertEquals(somePair, somePair);
-    }
-    
-    private static Object provideNull() {
-        return null;
     }
     
     @Test
