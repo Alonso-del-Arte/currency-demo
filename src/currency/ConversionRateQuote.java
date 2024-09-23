@@ -58,6 +58,18 @@ public class ConversionRateQuote {
         return this.fetchDate;
     }
     
+    // TODO: Write tests for this
+    @Override
+    public boolean equals(Object obj) {
+        return false;
+    }
+    
+    // TODO: Write tests for this
+    @Override
+    public int hashCode() {
+        return Integer.MAX_VALUE;
+    }
+    
     /**
      * Auxiliary constructor. Use this constructor when the quote date is very 
      * close to the current time. Otherwise, use the {@link 
