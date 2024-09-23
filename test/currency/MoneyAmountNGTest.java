@@ -371,7 +371,8 @@ public class MoneyAmountNGTest {
         Currency currency = chooseCurrency();
         MoneyAmount amount = new MoneyAmount(units, currency);
         String msg = amount.toString() + " should not equal null";
-        assert !amount.equals(this.provideNull()) : msg;
+        Object obj = provideNull();
+        assert !amount.equals(obj) : msg;
     }
     
     @Test
