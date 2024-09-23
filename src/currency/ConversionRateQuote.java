@@ -61,7 +61,7 @@ public class ConversionRateQuote {
     // TODO: Write tests for this
     @Override
     public boolean equals(Object obj) {
-        return obj != null;
+        return obj instanceof ConversionRateQuote;
     }
     
     // TODO: Write tests for this
