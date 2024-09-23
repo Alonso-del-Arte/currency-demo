@@ -103,6 +103,21 @@ public class ConversionRateQuoteNGTest {
     }
     
     @Test
+    public void testNotEqualsDiffClass() {
+        Currency from = CurrencyChooser.chooseCurrency();
+        Currency to = CurrencyChooser.chooseCurrencyOtherThan(from);
+        CurrencyPair currencies = new CurrencyPair(from, to);
+        double rate = RANDOM.nextDouble();
+        LocalDateTime date = LocalDateTime.now();
+        ConversionRateQuote quote = new ConversionRateQuote(currencies, rate, 
+                date);
+        Object[] objects = {this, from, to, currencies, date};
+        Object obj = objects[RANDOM.nextInt(objects.length)];
+        String msg = quote.toString() + " should not equal " + obj.toString();
+        assert !quote.equals(obj) : msg;
+    }
+    
+    @Test
     public void testAuxiliaryConstructorFillsInCurrentDateTime() {
         Currency from = CurrencyChooser.chooseCurrency();
         Currency to = CurrencyChooser.chooseCurrencyOtherThan(from);
