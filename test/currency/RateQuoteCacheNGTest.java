@@ -70,6 +70,11 @@ public class RateQuoteCacheNGTest {
                 + " was not added to the cache, cache shouldn't have that pair";
         assert !instance.has(currencies) : msg;
     }
+    
+    @Test
+    public void testCacheRetainsValueWhileCapacityAvailable() {
+        fail("HAVEN'T WRITTEN TEST YET");
+    }
 
     /**
      * Test of retrieve method, of class RateQuoteCache.
