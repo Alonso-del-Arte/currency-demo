@@ -43,23 +43,23 @@ public class CurrencyByLocalePropsLister {
                     + currency.getDefaultFractionDigits());
             System.out.println();
         } catch (IllegalArgumentException iae) {
-            System.out.println("NO TESTS HAVE BEEN WRITTEN FOR THIS YET");
-//            System.out.println("There is no currency for locale " 
-//                    + locale.getDisplayName());
-//            System.out.println("\"" + iae.getMessage() + "\"");
-//            System.out.println();
+            System.out.println("There is no currency for locale " 
+                    + locale.getDisplayName());
+            System.out.println("\"" + iae.getMessage() + "\"");
+            System.out.println();
         }
     }
     
     // TODO: Write tests for this
     public static void main(String[] args) {
+        System.out.println("NO TESTS HAVE BEEN WRITTEN FOR THIS YET");
 //        Locale defaultLocale = Locale.getDefault();
 //        System.out.println("Your locale is " + defaultLocale.toString());
 //        System.out.println();
-        Locale[] locales = Locale.getAvailableLocales();
-        for (Locale locale : locales) {
-            printCurrencyInfo(locale);
-        }
+//        Locale[] locales = Locale.getAvailableLocales();
+//        for (Locale locale : locales) {
+//            printCurrencyInfo(locale);
+//        }
     }
     
 }
