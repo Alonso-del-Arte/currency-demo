@@ -101,6 +101,37 @@ public class CurrencyByLocalePropsListerNGTest {
         }, msg);
     }
     
+    @Test
+    public void testMainWithNoArgsGivesDefaultLocaleInfo() {
+        String[] args = {};
+        Locale locale = Locale.getDefault();
+        String localeDisplayName = locale.getDisplayName();
+        Currency currency = null;
+        try {
+            currency = Currency.getInstance(locale);
+        } catch (IllegalArgumentException iae) {
+            System.out.println("Default locale not assoc'd with currency");
+            System.out.println("\"" + iae.getMessage() + "\"");
+        }
+        if (currency == null) {
+            String msg = "Print-out should include " + localeDisplayName;
+            assertPrintOut((s -> s.contains(localeDisplayName)), () -> {
+                CurrencyByLocalePropsLister.main(args);
+            }, msg);
+        } else {
+            String currencyDisplayName = currency.getDisplayName();
+            String letterCode = currency.getCurrencyCode();
+            String msg = "Print-out should include information for " 
+                    + currencyDisplayName + " (" + letterCode + ") from " 
+                    + localeDisplayName;
+            assertPrintOut((s -> s.contains(currencyDisplayName) 
+                    && s.contains(letterCode) && s.contains(localeDisplayName)), 
+                    () -> {
+                        CurrencyByLocalePropsLister.main(args);
+                    }, msg);
+        }
+    }
+    
     /**
      * Test of main method, of class CurrencyByLocalePropsLister.
      */
