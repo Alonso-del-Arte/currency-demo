@@ -20,8 +20,12 @@ import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 import java.io.OutputStream;
 import java.io.PrintStream;
+import java.util.Arrays;
 import java.util.Currency;
 import java.util.Locale;
+import java.util.Random;
+
+import static org.testframe.api.Asserters.assertPrintOut;
 
 import static org.testng.Assert.*;
 import org.testng.annotations.Test;
@@ -31,6 +35,54 @@ import org.testng.annotations.Test;
  * @author Alonso del Arte
  */
 public class CurrencyByLocalePropsListerNGTest {
+    
+    private static final Locale[] LOCALES = Locale.getAvailableLocales();
+    
+    private static final int NUMBER_OF_LOCALES = LOCALES.length;
+    
+    private static final Random RANDOM = new Random();
+    
+    private static Locale chooseLocale() {
+        Locale locale = null;
+        while (locale == null) {
+            locale = LOCALES[RANDOM.nextInt(NUMBER_OF_LOCALES)];
+            try {
+                Currency currency = Currency.getInstance(locale);
+                System.out.println("Chose locale " + locale.getDisplayName() 
+                        + " which is associated with currency " 
+                        + currency.getDisplayName() + " (" 
+                        + currency.getCurrencyCode() + ")");
+            } catch (IllegalArgumentException iae) {
+                System.err.println(iae.getMessage());
+                locale = null;
+            }
+        }
+        return locale;
+    }
+    
+    @Test
+    public void testPrintCurrencyInfo() {
+        System.out.println("printCurrencyInfo");
+        Locale locale = chooseLocale();
+        Currency currency = Currency.getInstance(locale);
+        String currencyDisplayName = currency.getDisplayName();
+        String genSymbol = "Symbol: " + currency.getSymbol();
+        String locSpecSymbol = "Symbol for locale " + locale.getDisplayName() 
+                + ": " + currency.getSymbol(locale);
+        String iso4217Code = "ISO 4217: " + currency.getCurrencyCode();
+        String numberCode = "Number code: " + currency.getNumericCodeAsString();
+        String fractDigits = "Default fraction digits: " 
+                + currency.getDefaultFractionDigits();
+        String[] expected = {currencyDisplayName, genSymbol, locSpecSymbol, 
+            iso4217Code, numberCode, fractDigits};
+        String msg = "Print-out should include " + Arrays.toString(expected);
+        assertPrintOut((s -> s.contains(currencyDisplayName) 
+                && s.contains(genSymbol) && s.contains(locSpecSymbol) 
+                && s.contains(iso4217Code) && s.contains(numberCode) 
+                && s.contains(fractDigits)), () -> {
+                    CurrencyByLocalePropsLister.printCurrencyInfo(locale);
+        }, msg);
+    }
     
     /**
      * Test of main method, of class CurrencyByLocalePropsLister.
