@@ -28,16 +28,25 @@ import java.util.Locale;
  */
 public class CurrencyByLocalePropsLister {
     
-    // TODO: Write tests for this
+    /**
+     * Writes to the console information about the currency associated with a 
+     * given locale. If the locale does not have any associated currency, a 
+     * message to that effect will be written to the console.
+     * @param locale The locale for which the currency information is to be 
+     * printed. Two examples: Samburu (Kenya) which is associated with the 
+     * Kenyan shilling (KES) and Central Kurdish which is not associated with 
+     * any currency.
+     */
     static void printCurrencyInfo(Locale locale) {
         try {
             Currency currency = Currency.getInstance(locale);
             System.out.print(currency.getDisplayName());
-            System.out.println("      Symbol: " + currency.getSymbol());
+            System.out.println("            Symbol: " + currency.getSymbol());
             System.out.print("Symbol for locale " + locale.getDisplayName());
             System.out.println(": " + currency.getSymbol(locale));
-            System.out.print("ISO 4217: " + currency.getCurrencyCode());
-            System.out.println("      Number code: " 
+            System.out.print("ISO 4217 letter code: " 
+                    + currency.getCurrencyCode());
+            System.out.println("ISO 4217 number code: " 
                     + currency.getNumericCode());
             System.out.println("Default fraction digits: " 
                     + currency.getDefaultFractionDigits());
