@@ -75,7 +75,7 @@ public class CurrencyByLocalePropsListerNGTest {
                 + ": " + currency.getSymbol(locale);
         String iso4217Code = "ISO 4217 letter code: " 
                 + currency.getCurrencyCode();
-        String numberCode = "IS 4217 number code: " 
+        String numberCode = "ISO 4217 number code: " 
                 + currency.getNumericCodeAsString();
         String fractDigits = "Default fraction digits: " 
                 + currency.getDefaultFractionDigits();
