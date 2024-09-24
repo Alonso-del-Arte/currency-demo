@@ -350,5 +350,14 @@ public class CurrencyChooser {
         }
         return otherCurrency;
     }
+    
+    // TODO: Write tests for this, should give distinct pairs
+    public static CurrencyPair[] choosePairs(int numberOfPairs) {
+        Currency from = Currency.getInstance("USD");
+        Currency to = Currency.getInstance("EUR");
+        CurrencyPair dollarsToEuros = new CurrencyPair(from, to);
+        CurrencyPair[] pairs = {dollarsToEuros, dollarsToEuros};
+        return pairs;
+    }
 
 }
