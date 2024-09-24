@@ -61,7 +61,7 @@ public class CurrencyByLocalePropsLister {
     
     // TODO: Write tests for this
     public static void main(String[] args) {
-        System.out.println("NO TESTS HAVE BEEN WRITTEN FOR THIS YET");
+        printCurrencyInfo(Locale.getDefault());
 //        Locale defaultLocale = Locale.getDefault();
 //        System.out.println("Your locale is " + defaultLocale.toString());
 //        System.out.println();
