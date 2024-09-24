@@ -31,7 +31,9 @@ exceptions might have null exception messages.
 
 * TestNG
 * ~~TestFrame 0.9~~ (this has been phased out)
-* TestFrame 0.95 or later (`org.testframe.api` namespace)
+* ~~TestFrame 0.95~~ (`org.testframe.api` namespace but `assertPrintOut()` was a 
+stub)
+* TestFrame 1.0 or later (`org.testframe.api` namespace, `assertPrintOut()`)
 
 ## Miscellaneous notes
 
