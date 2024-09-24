@@ -42,9 +42,10 @@ public class CurrencyByLocalePropsListerNGTest {
     
     private static final Random RANDOM = new Random();
     
-    private static Locale chooseLocale() {
+    private static Locale chooseLocale(boolean hasAssociatedCurrency) {
         Locale locale = null;
-        while (locale == null) {
+        boolean flag = !hasAssociatedCurrency;
+        while (flag ^ hasAssociatedCurrency) {
             locale = LOCALES[RANDOM.nextInt(NUMBER_OF_LOCALES)];
             try {
                 Currency currency = Currency.getInstance(locale);
@@ -52,9 +53,12 @@ public class CurrencyByLocalePropsListerNGTest {
                         + " which is associated with currency " 
                         + currency.getDisplayName() + " (" 
                         + currency.getCurrencyCode() + ")");
+                flag = true;
             } catch (IllegalArgumentException iae) {
                 System.err.println(iae.getMessage());
-                locale = null;
+                System.out.println("Chose locale " + locale.getDisplayName() 
+                        + " which is not associated with any currency");
+                flag = false;
             }
         }
         return locale;
@@ -63,7 +67,7 @@ public class CurrencyByLocalePropsListerNGTest {
     @Test
     public void testPrintCurrencyInfo() {
         System.out.println("printCurrencyInfo");
-        Locale locale = chooseLocale();
+        Locale locale = chooseLocale(true);
         Currency currency = Currency.getInstance(locale);
         String currencyDisplayName = currency.getDisplayName();
         String genSymbol = "Symbol: " + currency.getSymbol();
@@ -81,6 +85,17 @@ public class CurrencyByLocalePropsListerNGTest {
                 && s.contains(iso4217Code) && s.contains(numberCode) 
                 && s.contains(fractDigits)), () -> {
                     CurrencyByLocalePropsLister.printCurrencyInfo(locale);
+        }, msg);
+    }
+    
+    @Test
+    public void testPrintCurrencyInfoAcknowledgesUnassociatedLocale() {
+        Locale locale = chooseLocale(false);
+        String localeDisplayName = locale.getDisplayName();
+        String msg = "Print-out should include " + localeDisplayName 
+                + ", which is not associated with any currency";
+        assertPrintOut((s -> s.contains(localeDisplayName)), () -> {
+            CurrencyByLocalePropsLister.printCurrencyInfo(locale);
         }, msg);
     }
     
