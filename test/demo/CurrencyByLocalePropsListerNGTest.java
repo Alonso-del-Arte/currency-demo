@@ -73,8 +73,10 @@ public class CurrencyByLocalePropsListerNGTest {
         String genSymbol = "Symbol: " + currency.getSymbol();
         String locSpecSymbol = "Symbol for locale " + locale.getDisplayName() 
                 + ": " + currency.getSymbol(locale);
-        String iso4217Code = "ISO 4217: " + currency.getCurrencyCode();
-        String numberCode = "Number code: " + currency.getNumericCodeAsString();
+        String iso4217Code = "ISO 4217 letter code: " 
+                + currency.getCurrencyCode();
+        String numberCode = "IS 4217 number code: " 
+                + currency.getNumericCodeAsString();
         String fractDigits = "Default fraction digits: " 
                 + currency.getDefaultFractionDigits();
         String[] expected = {currencyDisplayName, genSymbol, locSpecSymbol, 
