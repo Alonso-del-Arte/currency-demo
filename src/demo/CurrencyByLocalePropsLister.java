@@ -31,19 +31,19 @@ public class CurrencyByLocalePropsLister {
     // TODO: Write tests for this
     static void printCurrencyInfo(Locale locale) {
         try {
-//            Currency currency = Currency.getInstance(locale);
-//            System.out.print(currency.getDisplayName());
-//            System.out.println("      Symbol: " + currency.getSymbol());
-//            System.out.print("Symbol for locale " + locale.getDisplayName());
-//            System.out.println(": " + currency.getSymbol(locale));
-        System.out.println("NO TESTS HAVE BEEN WRITTEN FOR THIS YET");
-//            System.out.print("ISO 4217: " + currency.getCurrencyCode());
-//            System.out.println("      Number code: " 
-//                    + currency.getNumericCode());
-//            System.out.println("Default fraction digits: " 
-//                    + currency.getDefaultFractionDigits());
-//            System.out.println();
+            Currency currency = Currency.getInstance(locale);
+            System.out.print(currency.getDisplayName());
+            System.out.println("      Symbol: " + currency.getSymbol());
+            System.out.print("Symbol for locale " + locale.getDisplayName());
+            System.out.println(": " + currency.getSymbol(locale));
+            System.out.print("ISO 4217: " + currency.getCurrencyCode());
+            System.out.println("      Number code: " 
+                    + currency.getNumericCode());
+            System.out.println("Default fraction digits: " 
+                    + currency.getDefaultFractionDigits());
+            System.out.println();
         } catch (IllegalArgumentException iae) {
+            System.out.println("NO TESTS HAVE BEEN WRITTEN FOR THIS YET");
 //            System.out.println("There is no currency for locale " 
 //                    + locale.getDisplayName());
 //            System.out.println("\"" + iae.getMessage() + "\"");
