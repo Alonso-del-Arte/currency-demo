@@ -135,6 +135,24 @@ public class ConversionRateQuoteNGTest {
     }
     
     @Test
+    public void testEquals() {
+        System.out.println("equals");
+        Currency from = CurrencyChooser.chooseCurrency();
+        Currency to = CurrencyChooser.chooseCurrencyOtherThan(from);
+        CurrencyPair currencies = new CurrencyPair(from, to);
+        double rate = RANDOM.nextDouble();
+        LocalDateTime date = LocalDateTime.now();
+        ConversionRateQuote someQuote = new ConversionRateQuote(currencies, 
+                rate, date);
+        ConversionRateQuote sameQuote = new ConversionRateQuote(currencies, 
+                rate, date);
+        String message = "Quote for " + currencies.toString() + " at a rate of " 
+                + rate + " on " + date.toString() 
+                + " should match other quote with those same parameters";
+        assertEquals(sameQuote, someQuote, message);
+    }
+    
+    @Test
     public void testAuxiliaryConstructorFillsInCurrentDateTime() {
         Currency from = CurrencyChooser.chooseCurrency();
         Currency to = CurrencyChooser.chooseCurrencyOtherThan(from);
