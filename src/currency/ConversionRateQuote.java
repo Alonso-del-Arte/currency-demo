@@ -60,12 +60,6 @@ public class ConversionRateQuote {
     
     // TODO: Write tests for this
     @Override
-    public boolean equals(Object obj) {
-        return obj instanceof ConversionRateQuote;
-    }
-    
-    // TODO: Write tests for this
-    @Override
     public int hashCode() {
         return Integer.MAX_VALUE;
     }
