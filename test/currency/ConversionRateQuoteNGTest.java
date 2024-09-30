@@ -153,6 +153,25 @@ public class ConversionRateQuoteNGTest {
     }
     
     @Test
+    public void testNotEqualsDiffRate() {
+        Currency from = CurrencyChooser.chooseCurrency();
+        Currency to = CurrencyChooser.chooseCurrencyOtherThan(from);
+        CurrencyPair currencies = new CurrencyPair(from, to);
+        double rateA = RANDOM.nextDouble();
+        double rateB = Double.longBitsToDouble(Double.doubleToLongBits(rateA) 
+                + 1);
+        LocalDateTime date = LocalDateTime.now();
+        ConversionRateQuote quoteA = new ConversionRateQuote(currencies, rateA, 
+                date);
+        ConversionRateQuote quoteB = new ConversionRateQuote(currencies, rateB, 
+                date);
+        String message = "Quote for " + currencies.toString() + " at a rate of " 
+                + rateA + " on " + date.toString() 
+                + " should not match quote for same currencies at " + rateB;
+        assertNotEquals(quoteA, quoteB, message);
+    }
+    
+    @Test
     public void testAuxiliaryConstructorFillsInCurrentDateTime() {
         Currency from = CurrencyChooser.chooseCurrency();
         Currency to = CurrencyChooser.chooseCurrencyOtherThan(from);
