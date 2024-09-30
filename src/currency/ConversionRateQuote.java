@@ -60,6 +60,21 @@ public class ConversionRateQuote {
     
     // TODO: Write tests for this
     @Override
+    public boolean equals(Object obj) {
+        if (this == obj) {
+            return true;
+        }
+        if (obj == null) {
+            return false;
+        }
+        if (!this.getClass().equals(obj.getClass())) {
+            return false;
+        }
+        return this.pair.equals(((ConversionRateQuote) obj).pair);
+    }
+
+    // TODO: Write tests for this
+    @Override
     public int hashCode() {
         return Integer.MAX_VALUE;
     }
