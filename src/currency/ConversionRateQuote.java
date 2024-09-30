@@ -70,7 +70,11 @@ public class ConversionRateQuote {
         if (!this.getClass().equals(obj.getClass())) {
             return false;
         }
-        return this.pair.equals(((ConversionRateQuote) obj).pair);
+        ConversionRateQuote other = ((ConversionRateQuote) obj);
+        if (!this.pair.equals(other.pair)) {
+            return false;
+        }
+        return this.conversionRate == other.conversionRate;
     }
 
     // TODO: Write tests for this
