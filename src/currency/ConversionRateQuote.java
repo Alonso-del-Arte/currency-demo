@@ -121,7 +121,7 @@ public class ConversionRateQuote {
     public int hashCode() {
         int hash = this.pair.hashCode();
         hash += Double.doubleToLongBits(this.conversionRate);
-        return hash + this.fetchDate.hashCode();
+        return 0;// hash + this.fetchDate.hashCode();
     }
     
     /**
