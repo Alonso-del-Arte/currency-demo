@@ -21,7 +21,9 @@ import java.time.LocalDateTime;
 /**
  * Provides a dated currency conversion rate quote. It will be up to the caller 
  * to determine whether the quote is still good or if it has become outdated and 
- * a new quote needs to be obtained.
+ * a new quote needs to be obtained. A timestamp is provided in addition to the 
+ * currencies queried and their exchange rate. Objects of this class contain no 
+ * other information about the quote.
  * @author Alonso del Arte
  */
 public class ConversionRateQuote {
@@ -58,7 +60,31 @@ public class ConversionRateQuote {
         return this.fetchDate;
     }
     
-    // TODO: Write tests for this
+    /**
+     * Determines whether or not this conversion rate quote is equal to some 
+     * other object. For the examples, suppose this quote is for U.&nbsp;S. 
+     * dollars (USD) to euros (EUR) at a rate of 0.89755 fetched on September 
+     * 30, 2024 at 7:15 p.m. local time.
+     * @param obj The object to compare. Examples: USD to EUR at 0.9 on 
+     * September 30, 2024 at 7:15 p.m.; USD to EUR at 0.89755 on September 30, 
+     * 2024 at 7:15 p.m.; USD to EUR at 0.89755 on September 30, 2024 at 7:18 
+     * p.m.; USD to Swiss francs (CHF) at a rate of 0.844955 on September 30, 
+     * 2024 at 7:15 p.m.; EUR to USD at 1.114168 on September 30, 2024 at 7:15 
+     * p.m.; the date September 30, 2024; and null.
+     * @return True if {@code obj} is another conversion rate quote for the same 
+     * pair of currencies in the same direction at the same rate on the same 
+     * date and time, false in all other cases. Note that there is no variance 
+     * allowed for either the rate or the date and time. A quote of USD to EUR 
+     * at 0.9 is thus considered different than a quote with a rate of 0.89755, 
+     * even though that small difference is unlikely to have any practical 
+     * impact in a real world situation, so this function returns false for the 
+     * first example. The second example should return true, unless there was a 
+     * variance of a few milliseconds not shown here. In the USD to CHF example, 
+     * this function would return false without checking whether or not the rate 
+     * and date match. The same is also true in the EUR to USD example even 
+     * though it's the same two currencies, because the direction differs. And 
+     * it also returns false for the last two examples.
+     */
     @Override
     public boolean equals(Object obj) {
         if (this == obj) {
@@ -74,7 +100,10 @@ public class ConversionRateQuote {
         if (!this.pair.equals(other.pair)) {
             return false;
         }
-        return this.conversionRate == other.conversionRate;
+        if (this.conversionRate != other.conversionRate) {
+            return false;
+        }
+        return this.fetchDate.equals(other.fetchDate);
     }
 
     // TODO: Write tests for this
