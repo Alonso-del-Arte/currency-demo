@@ -107,13 +107,20 @@ public class ConversionRateQuote {
     }
 
     /**
-     * Gives a hash code for this quote.
-     * @return A hash code.
+     * Gives a hash code for this quote. It is mathematically impossible to 
+     * guarantee unique hash codes for all possible quotes. The most we can hope 
+     * for is that the hash codes are unique during a given session. The exact 
+     * formula may be subject to change in the future.
+     * @return A hash code based on the currency pair, rate and timestamp. For  
+     * example, for a quote of United States dollars (USD) to euros (EUR) of 
+     * 0.90344 obtained on October 1, 2024 at 5:18 p.m., the hash code might be 
+     * 220015088. A quote for the same currencies at the same rate obtained on 
+     * the same date at 5:19 p.m. might have a hash code of &minus;1561856979.
      */
     @Override
     public int hashCode() {
         int hash = this.pair.hashCode();
-        hash += (int) Double.doubleToLongBits(this.conversionRate);
+        hash += Double.doubleToLongBits(this.conversionRate);
         return hash + this.fetchDate.hashCode();
     }
     
