@@ -106,10 +106,15 @@ public class ConversionRateQuote {
         return this.fetchDate.equals(other.fetchDate);
     }
 
-    // TODO: Write tests for this
+    /**
+     * Gives a hash code for this quote.
+     * @return A hash code.
+     */
     @Override
     public int hashCode() {
-        return Integer.MAX_VALUE;
+        int hash = this.pair.hashCode();
+        hash += (int) Double.doubleToLongBits(this.conversionRate);
+        return hash + this.fetchDate.hashCode();
     }
     
     /**
