@@ -25,6 +25,7 @@ import java.util.HashSet;
 import java.util.Set;
 
 import static org.testframe.api.Asserters.assertInRange;
+import static org.testframe.api.Asserters.assertMinimum;
 import static org.testframe.api.Asserters.assertThrows;
 
 import static org.testng.Assert.*;
@@ -224,12 +225,12 @@ public class ConversionRateQuoteNGTest {
             hashes.add(quote4.hashCode());
         }
         int numberOfQuotes = quotes.size();
-        int expected = 3 * numberOfQuotes / 5;
+        int minimum = 3 * numberOfQuotes / 5;
         int actual = hashes.size();
         String msg = "Given " + numberOfQuotes 
-                + " quotes, there should be at least " + expected 
+                + " quotes, there should be at least " + minimum 
                 + " distinct hash codes, got " + actual + " distinct";
-        assert actual >= expected : msg;
+        assertMinimum(minimum, actual, msg);
         System.out.println(msg);
     }
     
