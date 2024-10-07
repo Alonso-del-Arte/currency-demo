@@ -360,4 +360,9 @@ public class CurrencyChooser {
         return pairs;
     }
 
+    // TODO: Write tests for this, should give distinct pairs
+    public static CurrencyPair choosePairOtherThan(CurrencyPair pair) {
+        return pair;
+    }
+
 }
