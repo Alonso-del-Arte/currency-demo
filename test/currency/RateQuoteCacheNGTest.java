@@ -178,7 +178,7 @@ public class RateQuoteCacheNGTest {
         
         @Override
         boolean needsRefresh(CurrencyPair currencies) {
-            return true;
+            return false;
         }
         
         public RateQuoteCacheImpl(int capacity) {
