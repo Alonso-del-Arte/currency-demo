@@ -27,6 +27,8 @@ import java.util.Set;
 import java.util.function.Predicate;
 import java.util.stream.Collectors;
 
+import static org.testframe.api.Asserters.assertMinimum;
+
 import static org.testng.Assert.*;
 import org.testng.annotations.Test;
 
@@ -631,6 +633,29 @@ public class CurrencyChooserNGTest {
                 assertNotEquals(excludedCurrency, currency, msg);
             }
         }
+    }
+    
+    @Test
+    public void testChoosePairOtherThan() {
+        System.out.println("choosePairOtherThan");
+        Currency from = CurrencyChooser.chooseCurrency();
+        Currency to = CurrencyChooser.chooseCurrency();
+        CurrencyPair pair = new CurrencyPair(from, to);
+        Set<CurrencyPair> pairs 
+                = new HashSet<>(NUMBER_OF_CALLS_FOR_EXCLUSION_SEARCH);
+        String msgPart = " should not be " + pair.toString();
+        for (int i = 0; i < NUMBER_OF_CALLS_FOR_EXCLUSION_SEARCH; i++) {
+            CurrencyPair other = CurrencyChooser.choosePairOtherThan(pair);
+            String message = other.toString() + msgPart;
+            assertNotEquals(pair, other, message);
+            pairs.add(other);
+        }
+        int minimum = 3 * NUMBER_OF_CALLS_FOR_EXCLUSION_SEARCH / 5;
+        int actual = pairs.size();
+        String msg = "After " + NUMBER_OF_CALLS_FOR_EXCLUSION_SEARCH 
+                + " calls, there should be at least " + minimum 
+                + " distinct currency pairs";
+        assertMinimum(minimum, actual, msg);
     }
 
 }
