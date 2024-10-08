@@ -360,9 +360,28 @@ public class CurrencyChooser {
         return pairs;
     }
 
-    // TODO: Write tests for this, should give distinct pairs
+    /**
+     * Chooses a pair of currencies other than a specified pair. 
+     * @param pair A pair of currencies. For example, United States dollars 
+     * (USD) to euros (EUR).
+     * @return Another pair of currencies. Might have the same currencies but 
+     * flipped (in the example, EUR to USD), or it might match the source 
+     * currency and differ in the target currency, or it might match the target 
+     * currency but differ in the source currency. We do guarantee that the pair 
+     * will consist of two different currencies. That is, it won't be USD to 
+     * USD, nor EUR to EUR, nor any other such pair. Example returns: Nepalese 
+     * rupees (NPR) to Algerian dinars (DZD), East Caribbean dollars (XCD) to 
+     * South Korean won (KRW) and Surinamese dollars (SRD) to Turkish lire 
+     * (TRY).
+     */
     public static CurrencyPair choosePairOtherThan(CurrencyPair pair) {
-        return pair;
+        CurrencyPair other = pair;
+        while (pair.equals(other)) {
+            Currency from = chooseCurrency();
+            Currency to = chooseCurrencyOtherThan(from);
+            other = new CurrencyPair(from, to);
+        }
+        return other;
     }
 
 }
