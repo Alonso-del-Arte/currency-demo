@@ -351,15 +351,6 @@ public class CurrencyChooser {
         return otherCurrency;
     }
     
-    // TODO: Write tests for this, should give distinct pairs
-    public static CurrencyPair[] choosePairs(int numberOfPairs) {
-        Currency from = Currency.getInstance("USD");
-        Currency to = Currency.getInstance("EUR");
-        CurrencyPair dollarsToEuros = new CurrencyPair(from, to);
-        CurrencyPair[] pairs = {dollarsToEuros, dollarsToEuros};
-        return pairs;
-    }
-
     /**
      * Chooses a pair of currencies other than a specified pair. 
      * @param pair A pair of currencies. For example, United States dollars 
@@ -382,6 +373,15 @@ public class CurrencyChooser {
             other = new CurrencyPair(from, to);
         }
         return other;
+    }
+
+    // TODO: Write tests for this, should give distinct pairs
+    public static CurrencyPair[] choosePairs(int numberOfPairs) {
+        Currency from = Currency.getInstance("USD");
+        Currency to = Currency.getInstance("EUR");
+        CurrencyPair dollarsToEuros = new CurrencyPair(from, to);
+        CurrencyPair[] pairs = {dollarsToEuros, dollarsToEuros};
+        return pairs;
     }
 
 }
