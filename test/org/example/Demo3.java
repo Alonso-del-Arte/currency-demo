@@ -16,7 +16,8 @@
  */
 package org.example;
 
-import currency.CurrencyConverter;
+import currency.ExchangeRateProvider;
+import currency.MannysCurrencyConverterAPIAccess;
 
 import java.math.BigDecimal;
 import java.text.DecimalFormat;
@@ -81,11 +82,13 @@ public class Demo3 {
         BigDecimal fiveHundredEuros = new BigDecimal(fiveHundred);
         Currency dollar = Currency.getInstance(Locale.US);
         Currency euro = Currency.getInstance("EUR");
+        ExchangeRateProvider rateProvider 
+                = new MannysCurrencyConverterAPIAccess();
         BigDecimal expectedA = fiveHundredDollars.add(fiveHundredEuros
-                .multiply(new BigDecimal(CurrencyConverter.getRate(euro, 
+                .multiply(new BigDecimal(rateProvider.getRate(euro, 
                         dollar))));
         BigDecimal expectedB = fiveHundredEuros.add(fiveHundredDollars
-                .multiply(new BigDecimal(CurrencyConverter.getRate(dollar, 
+                .multiply(new BigDecimal(rateProvider.getRate(dollar, 
                         euro))));
         BigDecimal actual = fiveHundredDollars.add(fiveHundredEuros);
         String msg = "$" + fiveHundredDollars.toPlainString() + " + \u20AC" 

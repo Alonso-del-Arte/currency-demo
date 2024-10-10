@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2023 Alonso del Arte
+ * Copyright (C) 2024 Alonso del Arte
  *
  * This program is free software: you can redistribute it and/or modify it under 
  * the terms of the GNU General Public License as published by the Free Software 
@@ -16,7 +16,8 @@
  */
 package org.example;
 
-import currency.CurrencyConverter;
+import currency.ExchangeRateProvider;
+import currency.MannysCurrencyConverterAPIAccess;
 
 import java.text.DecimalFormat;
 import java.util.Currency;
@@ -86,10 +87,12 @@ public class Demo1 {
         double euros = 500.00;
         Currency dollar = Currency.getInstance(Locale.US);
         Currency euro = Currency.getInstance("EUR");
+        ExchangeRateProvider rateProvider 
+                = new MannysCurrencyConverterAPIAccess();
         double expectedA = dollars + (euros 
-                * Double.parseDouble(CurrencyConverter.getRate(euro, dollar)));
+                * rateProvider.getRate(euro, dollar));
         double expectedB = euros + (dollars 
-                * Double.parseDouble(CurrencyConverter.getRate(dollar, euro)));
+                * rateProvider.getRate(dollar, euro));
         double actual = dollars + euros;
         String msg = "$" + dollars + " + \u20AC" + euros + " should be either $" 
                 + expectedA + " or \u20AC" + expectedB + ", got ?" + actual;

@@ -16,7 +16,8 @@
  */
 package org.example;
 
-import currency.CurrencyConverter;
+import currency.ExchangeRateProvider;
+import currency.MannysCurrencyConverterAPIAccess;
 
 import java.util.Currency;
 import java.util.Locale;
@@ -83,10 +84,12 @@ public class Demo2 {
         long euros = 50000;
         Currency dollar = Currency.getInstance(Locale.US);
         Currency euro = Currency.getInstance("EUR");
+        ExchangeRateProvider rateProvider 
+                = new MannysCurrencyConverterAPIAccess();
         long expectedA = dollars + ((long) (euros 
-                * Double.parseDouble(CurrencyConverter.getRate(euro, dollar))));
+                * rateProvider.getRate(euro, dollar)));
         long expectedB = euros + ((long) (dollars 
-                * Double.parseDouble(CurrencyConverter.getRate(dollar, euro))));
+                * rateProvider.getRate(dollar, euro)));
         long actual = dollars + euros;
         String msg = format(DOLLAR_SYMBOL, dollars) + " + " 
                 + format(EURO_SYMBOL, euros) + " should be either " 
