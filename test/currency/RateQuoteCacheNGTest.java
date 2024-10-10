@@ -19,7 +19,11 @@ package currency;
 import static currency.CurrencyChooser.RANDOM;
 
 import java.time.LocalDateTime;
+import java.util.ArrayList;
 import java.util.Currency;
+import java.util.HashSet;
+import java.util.List;
+import java.util.Set;
 
 import static org.testframe.api.Asserters.assertThrows;
 
@@ -71,9 +75,44 @@ public class RateQuoteCacheNGTest {
         assert !instance.has(currencies) : msg;
     }
     
+    private static List<CurrencyPair> listOtherPairs(CurrencyPair pair, 
+            int initialCapacity) {
+        int threshold = initialCapacity - 1;
+        Set<CurrencyPair> others = new HashSet<>(threshold);
+        while (others.size() < threshold) {
+            others.add(CurrencyChooser.choosePairOtherThan(pair));
+        }
+        List<CurrencyPair> list = new ArrayList<>(initialCapacity);
+        list.add(pair);
+        list.addAll(others);
+        return list;
+    }
+    
     @Test
+    public void testCacheEvictsValueAfterCapacityExhausted() {
+        Currency from = CurrencyChooser.chooseCurrency();
+        Currency to = CurrencyChooser.chooseCurrencyOtherThan(from);
+        CurrencyPair currencies = new CurrencyPair(from, to);
+        int capacity = RANDOM.nextInt(RateQuoteCache.MINIMUM_CAPACITY, 
+                RateQuoteCache.MAXIMUM_CAPACITY);
+        RateQuoteCache instance = new RateQuoteCacheImpl(capacity);
+        instance.retrieve(currencies);
+        int initialCapacity = capacity 
+                + RANDOM.nextInt(RateQuoteCache.MINIMUM_CAPACITY) + 1;
+        List<CurrencyPair> list = listOtherPairs(currencies, initialCapacity);
+        for (int index = 1; index < initialCapacity; index++) {
+            CurrencyPair currCurrPair = list.get(index);
+            instance.retrieve(currCurrPair);
+        }
+        String msg = "Having retrieved rate for " + currencies.toString() 
+                + " and then " + (initialCapacity - 1) 
+                + " others, cache of capacity " + capacity 
+                + " should not retain " + currencies.toString();
+        assert !instance.has(currencies) : msg;
+    }
+    
     public void testCacheRetainsValueWhileCapacityAvailable() {
-        fail("HAVEN'T WRITTEN TEST YET");
+        fail("TEST PLACEHOLDER");
     }
 
     /**
@@ -170,9 +209,12 @@ public class RateQuoteCacheNGTest {
     }
 
     private static class RateQuoteCacheImpl extends RateQuoteCache {
+        
+        int createCallCount = 0;
 
         @Override
         public ConversionRateQuote create(CurrencyPair currencies) {
+            this.createCallCount++;
             return new ConversionRateQuote(currencies, RANDOM.nextDouble());
         }
         
