@@ -16,17 +16,12 @@
  */
 package currency;
 
-import java.io.InputStream;
-import java.io.IOException;
-import java.net.HttpURLConnection;
-import java.net.URI;
-import java.net.URISyntaxException;
-import java.net.URL;
 import java.util.Currency;
-import java.util.Scanner;
 
 /**
- *
+ * Converts currencies. To construct an instance of this class, an instance of 
+ * {@link ExchangeRateProvider}, such as {@link 
+ * MannysCurrencyConverterAPIAccess} is necessary.
  * @author Alonso del Arte
  */
 public class CurrencyConverter {
