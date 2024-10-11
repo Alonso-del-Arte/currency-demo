@@ -22,8 +22,6 @@ package currency;
  */
 abstract class RateQuoteCache {
     
-    private ConversionRateQuote lastRetrieved;
-    
     /**
      * The minimum capacity for a cache. The ideal capacity's probably greater 
      * than this but less than {@link #MAXIMUM_CAPACITY}.
@@ -89,7 +87,6 @@ abstract class RateQuoteCache {
             this.index = 0;
         }
         ConversionRateQuote quote = new ConversionRateQuote(currencies, 0.0);
-        this.lastRetrieved = quote;
         return quote;
     }
 
