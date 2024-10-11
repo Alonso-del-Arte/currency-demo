@@ -86,6 +86,7 @@ abstract class RateQuoteCache {
         if (this.index == this.pairs.length) {
             this.index = 0;
         }
+        this.create(currencies);
         ConversionRateQuote quote = new ConversionRateQuote(currencies, 0.0);
         return quote;
     }
