@@ -152,20 +152,27 @@ public class RateQuoteCacheNGTest {
                 + expected + ", with just one call for that pair";
         assertEquals(actual, expected, message);
     }
+    
+    @Test
+    public void testRetrieveGivesQuoteFromCreateCall() {
+        Currency from = CurrencyChooser.chooseCurrency();
+        Currency to = CurrencyChooser.chooseCurrencyOtherThan(from);
+        CurrencyPair currencies = new CurrencyPair(from, to);
+        int capacity = RANDOM.nextInt(RateQuoteCache.MINIMUM_CAPACITY, 
+                RateQuoteCache.MAXIMUM_CAPACITY);
+        RateQuoteCacheImpl instance = new RateQuoteCacheImpl(capacity);
+        ConversionRateQuote actual = instance.retrieve(currencies);
+        ConversionRateQuote expected = instance.mostRecentlyCreatedQuote;
+        assertEquals(actual, expected);
+    }
 
     /**
-     * Test of retrieve method, of class RateQuoteCache.
+     * Test of the retrieve function, of the RateQuoteCache class.
      */
 //    @Test
     public void testRetrieve() {
         System.out.println("retrieve");
-        CurrencyPair currencies = null;
-        RateQuoteCache instance = null;
-        ConversionRateQuote expResult = null;
-        ConversionRateQuote result = instance.retrieve(currencies);
-        assertEquals(result, expResult);
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
+        fail("PLACEHOLDER");
     }
     
     @Test
@@ -248,16 +255,23 @@ public class RateQuoteCacheNGTest {
 
     private static class RateQuoteCacheImpl extends RateQuoteCache {
         
+        private static final int MINUTES_IN_AN_HOUR = 60;
+        
         int createCallCount = 0;
+        
+        ConversionRateQuote mostRecentlyCreatedQuote = null;
+        
+        int minutes = MINUTES_IN_AN_HOUR + RANDOM.nextInt(MINUTES_IN_AN_HOUR);
         
         boolean refreshNeeded = false;
 
         @Override
-        public ConversionRateQuote create(CurrencyPair currencies) {
+        ConversionRateQuote create(CurrencyPair currencies) {
             this.createCallCount++;
-            LocalDateTime date = LocalDateTime.now().minusMinutes(30);
-            return new ConversionRateQuote(currencies, RANDOM.nextDouble(), 
-                    date);
+            LocalDateTime date = LocalDateTime.now().minusMinutes(minutes);
+            this.mostRecentlyCreatedQuote = new ConversionRateQuote(currencies, 
+                    RANDOM.nextDouble(), date);
+            return this.mostRecentlyCreatedQuote;
         }
         
         @Override
