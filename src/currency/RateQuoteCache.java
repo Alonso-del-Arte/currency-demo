@@ -36,7 +36,9 @@ abstract class RateQuoteCache {
      */
     public static final int MAXIMUM_CAPACITY = 128;
     
-    private ConversionRateQuote[] quotes = new ConversionRateQuote[10];
+    private final CurrencyPair[] pairs;
+    
+    private int index = 0;
     
     /**
      * Adds a conversion rate quote to the cache that was not already there. It 
@@ -50,9 +52,15 @@ abstract class RateQuoteCache {
      */
     abstract ConversionRateQuote create(CurrencyPair currencies);
     
-    // TODO: Write tests for this
+    /**
+     * Determines whether a pair of currencies is in this cache.
+     * @param currencies The pair of currencies to look for. For example, United 
+     * States dollars (USD) to euros (EUR).
+     * @return True if this cache has the specified pair, false otherwise.
+     */
     boolean has(CurrencyPair currencies) {
-        return this.lastRetrieved != null;
+        if (this.index == 0) return false;
+        return currencies.equals(this.pairs[index - 1]);
     }
     
     /**
@@ -70,6 +78,11 @@ abstract class RateQuoteCache {
     
     // TODO: Write tests for this
     ConversionRateQuote retrieve(CurrencyPair currencies) {
+        this.pairs[this.index] = currencies;
+        this.index++;
+        if (this.index == this.pairs.length) {
+            this.index = 0;
+        }
         ConversionRateQuote quote = new ConversionRateQuote(currencies, 0.0);
         this.lastRetrieved = quote;
         return quote;
@@ -88,6 +101,7 @@ abstract class RateQuoteCache {
             String excMsg = "Capacity " + capacity + " is not valid";
             throw new IllegalArgumentException(excMsg);
         }
+        this.pairs = new CurrencyPair[capacity];
     }
     
 }
