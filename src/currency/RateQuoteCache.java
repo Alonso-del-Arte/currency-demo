@@ -81,13 +81,17 @@ abstract class RateQuoteCache {
     
     // TODO: Write tests for this
     ConversionRateQuote retrieve(CurrencyPair currencies) {
-        if (!this.has(currencies)) this.create(currencies);
-        this.pairs[this.index] = currencies;
-        this.index++;
+        ConversionRateQuote quote;
+        if (!this.has(currencies)) {
+            this.pairs[this.index] = currencies;
+            this.index++;
+            quote = this.create(currencies);
+        } else {
+            quote = new ConversionRateQuote(currencies, 0.0);
+        }
         if (this.index == this.pairs.length) {
             this.index = 0;
         }
-        ConversionRateQuote quote = new ConversionRateQuote(currencies, 0.0);
         return quote;
     }
 
