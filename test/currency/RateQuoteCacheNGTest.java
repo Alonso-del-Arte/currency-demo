@@ -89,7 +89,7 @@ public class RateQuoteCacheNGTest {
     }
     
     @Test
-    public void testCacheEvictsValueAfterCapacityExhausted() {
+    public void testCacheEvictsKeyAfterCapacityExhausted() {
         Currency from = CurrencyChooser.chooseCurrency();
         Currency to = CurrencyChooser.chooseCurrencyOtherThan(from);
         CurrencyPair currencies = new CurrencyPair(from, to);
@@ -111,7 +111,7 @@ public class RateQuoteCacheNGTest {
         assert !instance.has(currencies) : msg;
     }
     
-    public void testCacheRetainsValueWhileCapacityAvailable() {
+    public void testCacheRetainsKeyWhileCapacityAvailable() {
         fail("TEST PLACEHOLDER");
     }
 
