@@ -124,6 +124,12 @@ public class ConversionRateQuote {
         return hash + this.fetchDate.hashCode();
     }
     
+    @Override
+    public String toString() {
+        return this.pair.toString() + " at " + this.conversionRate + " as of " 
+                + this.fetchDate.toString();
+    }
+    
     /**
      * Auxiliary constructor. Use this constructor when the quote date is very 
      * close to the current time. Otherwise, use the {@link 
