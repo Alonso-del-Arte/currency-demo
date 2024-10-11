@@ -111,8 +111,25 @@ public class RateQuoteCacheNGTest {
         assert !instance.has(currencies) : msg;
     }
     
+    @Test
     public void testCacheRetainsKeyWhileCapacityAvailable() {
-        fail("TEST PLACEHOLDER");
+        Currency from = CurrencyChooser.chooseCurrency();
+        Currency to = CurrencyChooser.chooseCurrencyOtherThan(from);
+        CurrencyPair currencies = new CurrencyPair(from, to);
+        int capacity = RANDOM.nextInt(RateQuoteCache.MINIMUM_CAPACITY, 
+                RateQuoteCache.MAXIMUM_CAPACITY);
+        RateQuoteCache instance = new RateQuoteCacheImpl(capacity);
+        instance.retrieve(currencies);
+        List<CurrencyPair> list = listOtherPairs(currencies, capacity);
+        for (int index = 1; index < capacity; index++) {
+            CurrencyPair currCurrPair = list.get(index);
+            instance.retrieve(currCurrPair);
+            String msg = "Having retrieved rate for " + currencies.toString() 
+                    + " and then " + index + " other(s) in a cache of capacity " 
+                    + capacity + ", including " + currCurrPair.toString() 
+                    + ", cache should still have " + currencies.toString();
+            assert instance.has(currencies) : msg;
+        }
     }
 
     /**
