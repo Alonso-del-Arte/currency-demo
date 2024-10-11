@@ -131,6 +131,27 @@ public class RateQuoteCacheNGTest {
             assert instance.has(currencies) : msg;
         }
     }
+    
+    @Test
+    public void testCacheRetainsFrequentlyUsedKey() {
+        Currency from = CurrencyChooser.chooseCurrency();
+        Currency to = CurrencyChooser.chooseCurrencyOtherThan(from);
+        CurrencyPair currencies = new CurrencyPair(from, to);
+        int expected = RANDOM.nextInt(RateQuoteCache.MINIMUM_CAPACITY, 
+                RateQuoteCache.MAXIMUM_CAPACITY);
+        RateQuoteCacheImpl instance = new RateQuoteCacheImpl(expected);
+        List<CurrencyPair> list = listOtherPairs(currencies, expected);
+        for (int index = 1; index < expected; index++) {
+            instance.retrieve(currencies);
+            CurrencyPair currCurrPair = list.get(index);
+            instance.retrieve(currCurrPair);
+        }
+        int actual = instance.createCallCount;
+        String message = "Having frequently retrieved rate for " 
+                + currencies.toString() + ", create call count should be " 
+                + expected + ", with just one call for that pair";
+        assertEquals(actual, expected, message);
+    }
 
     /**
      * Test of retrieve method, of class RateQuoteCache.
