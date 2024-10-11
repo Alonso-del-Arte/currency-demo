@@ -59,8 +59,13 @@ abstract class RateQuoteCache {
      * @return True if this cache has the specified pair, false otherwise.
      */
     boolean has(CurrencyPair currencies) {
-        if (this.index == 0) return false;
-        return currencies.equals(this.pairs[index - 1]);
+        int i = 0;
+        boolean found = false;
+        while (!found && i < this.pairs.length) {
+            found = currencies.equals(this.pairs[i]);
+            i++;
+        }
+        return found;
     }
     
     /**
