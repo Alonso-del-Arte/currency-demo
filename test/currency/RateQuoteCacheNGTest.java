@@ -249,16 +249,20 @@ public class RateQuoteCacheNGTest {
     private static class RateQuoteCacheImpl extends RateQuoteCache {
         
         int createCallCount = 0;
+        
+        boolean refreshNeeded = false;
 
         @Override
         public ConversionRateQuote create(CurrencyPair currencies) {
             this.createCallCount++;
-            return new ConversionRateQuote(currencies, RANDOM.nextDouble());
+            LocalDateTime date = LocalDateTime.now().minusMinutes(30);
+            return new ConversionRateQuote(currencies, RANDOM.nextDouble(), 
+                    date);
         }
         
         @Override
         boolean needsRefresh(CurrencyPair currencies) {
-            return false;
+            return this.refreshNeeded;
         }
         
         public RateQuoteCacheImpl(int capacity) {
