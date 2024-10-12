@@ -36,7 +36,9 @@ abstract class RateQuoteCache {
     
     private final CurrencyPair[] pairs;
     
-    private int index = 0;
+    private final ConversionRateQuote[] quotes;
+    
+    private int nextAvailableIndex = 0;
     
     /**
      * Adds a conversion rate quote to the cache that was not already there. It 
@@ -50,6 +52,16 @@ abstract class RateQuoteCache {
      */
     abstract ConversionRateQuote create(CurrencyPair currencies);
     
+    private int indexOf(CurrencyPair currencies) {
+        int i = 0;
+        boolean found = false;
+        while (!found && i < this.pairs.length) {
+            found = currencies.equals(this.pairs[i]);
+            i++;
+        }
+        return found ? i - 1 : 1 - i;
+    }
+    
     /**
      * Determines whether a pair of currencies is in this cache.
      * @param currencies The pair of currencies to look for. For example, United 
@@ -57,13 +69,7 @@ abstract class RateQuoteCache {
      * @return True if this cache has the specified pair, false otherwise.
      */
     boolean has(CurrencyPair currencies) {
-        int i = 0;
-        boolean found = false;
-        while (!found && i < this.pairs.length) {
-            found = currencies.equals(this.pairs[i]);
-            i++;
-        }
-        return found;
+        return this.indexOf(currencies) > -1;
     }
     
     /**
@@ -79,18 +85,43 @@ abstract class RateQuoteCache {
      */
     abstract boolean needsRefresh(CurrencyPair currencies);
     
-    // TODO: Write tests for this
+    private void moveKeyToFront(int index) {
+        CurrencyPair pair = this.pairs[index];
+        for (int i = index; i > 0; i--) {
+            this.pairs[i] = this.pairs[i - 1];
+        }
+        this.pairs[0] = pair;
+    }
+    
+    private void moveValueToFront(int index) {
+        ConversionRateQuote quote = this.quotes[index];
+        for (int i = index; i > 0; i--) {
+            this.quotes[i] = this.quotes[i - 1];
+        }
+        this.quotes[0] = quote;
+    }
+    
+    /**
+     * 
+     * @param currencies
+     * @return 
+     */
     ConversionRateQuote retrieve(CurrencyPair currencies) {
         ConversionRateQuote quote;
-        if (!this.has(currencies)) {
-            this.pairs[this.index] = currencies;
-            this.index++;
+        int index = this.indexOf(currencies);
+        if (index < 0) {
+            index = this.nextAvailableIndex;
+            this.pairs[index] = currencies;
             quote = this.create(currencies);
+            this.quotes[index] = quote;
+            this.nextAvailableIndex++;
         } else {
-            quote = new ConversionRateQuote(currencies, 0.0);
+            quote = this.quotes[index];
         }
-        if (this.index == this.pairs.length) {
-            this.index = 0;
+        this.moveKeyToFront(index);
+        this.moveValueToFront(index);
+        if (this.nextAvailableIndex == this.pairs.length) {
+            this.nextAvailableIndex--;
         }
         return quote;
     }
@@ -109,6 +140,7 @@ abstract class RateQuoteCache {
             throw new IllegalArgumentException(excMsg);
         }
         this.pairs = new CurrencyPair[capacity];
+        this.quotes = new ConversionRateQuote[capacity];
     }
     
 }
