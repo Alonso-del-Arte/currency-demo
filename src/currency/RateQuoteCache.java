@@ -85,26 +85,23 @@ abstract class RateQuoteCache {
      */
     abstract boolean needsRefresh(CurrencyPair currencies);
     
-    private void moveKeyToFront(int index) {
-        CurrencyPair pair = this.pairs[index];
+    private static void moveArrayObjectToFront(Object[] objects, int index) {
+        Object mostRecent = objects[index];
         for (int i = index; i > 0; i--) {
-            this.pairs[i] = this.pairs[i - 1];
+            objects[i] = objects[i - 1];
         }
-        this.pairs[0] = pair;
-    }
-    
-    private void moveValueToFront(int index) {
-        ConversionRateQuote quote = this.quotes[index];
-        for (int i = index; i > 0; i--) {
-            this.quotes[i] = this.quotes[i - 1];
-        }
-        this.quotes[0] = quote;
+        objects[0] = mostRecent;
     }
     
     /**
-     * 
-     * @param currencies
-     * @return 
+     * Either retrieves a quote from the cache or creates it anew if it's not 
+     * already in the cache. Each call for a quote that is not the very most 
+     * recently retrieve will cause the contents of the cache to shift in some 
+     * way.
+     * @param currencies The pair of currencies for which to retrieve a quote. 
+     * For example, United States dollars (USD) to euros (EUR).
+     * @return A conversion rate quote. For example, $1 = 0,91335&euro; as of 
+     * October 11, 2024.
      */
     ConversionRateQuote retrieve(CurrencyPair currencies) {
         ConversionRateQuote quote;
@@ -118,8 +115,8 @@ abstract class RateQuoteCache {
         } else {
             quote = this.quotes[index];
         }
-        this.moveKeyToFront(index);
-        this.moveValueToFront(index);
+        moveArrayObjectToFront(this.pairs, index);
+        moveArrayObjectToFront(this.quotes, index);
         if (this.nextAvailableIndex == this.pairs.length) {
             this.nextAvailableIndex--;
         }
