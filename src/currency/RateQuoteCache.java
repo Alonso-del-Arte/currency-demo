@@ -17,7 +17,8 @@
 package currency;
 
 /**
- *
+ * Least recently used (LRU) cache for conversion rate quotes. The criterion for 
+ * refreshing a quote is to be determined by the caller.
  * @author Alonso del Arte
  */
 abstract class RateQuoteCache {
@@ -33,8 +34,6 @@ abstract class RateQuoteCache {
      * this but greater than {@link #MINIMUM_CAPACITY}.
      */
     public static final int MAXIMUM_CAPACITY = 128;
-    
-    private final CurrencyPair[] pairs;
     
     private final ConversionRateQuote[] quotes;
     
@@ -55,11 +54,15 @@ abstract class RateQuoteCache {
     private int indexOf(CurrencyPair currencies) {
         int i = 0;
         boolean found = false;
-        while (!found && i < this.pairs.length) {
-            found = currencies.equals(this.pairs[i]);
+        while (!found && i < this.quotes.length) {
+            ConversionRateQuote currQuote = this.quotes[i];
+            if (currQuote == null) {
+                break;
+            }
+            found = currencies.equals(currQuote.getCurrencies());
             i++;
         }
-        return found ? i - 1 : 1 - i;
+        return found ? i - 1 : -1;
     }
     
     /**
@@ -108,16 +111,14 @@ abstract class RateQuoteCache {
         int index = this.indexOf(currencies);
         if (index < 0) {
             index = this.nextAvailableIndex;
-            this.pairs[index] = currencies;
             quote = this.create(currencies);
             this.quotes[index] = quote;
             this.nextAvailableIndex++;
         } else {
             quote = this.quotes[index];
         }
-        moveArrayObjectToFront(this.pairs, index);
         moveArrayObjectToFront(this.quotes, index);
-        if (this.nextAvailableIndex == this.pairs.length) {
+        if (this.nextAvailableIndex == this.quotes.length) {
             this.nextAvailableIndex--;
         }
         return quote;
@@ -136,7 +137,6 @@ abstract class RateQuoteCache {
             String excMsg = "Capacity " + capacity + " is not valid";
             throw new IllegalArgumentException(excMsg);
         }
-        this.pairs = new CurrencyPair[capacity];
         this.quotes = new ConversionRateQuote[capacity];
     }
     
