@@ -39,6 +39,8 @@ abstract class RateQuoteCache {
     
     private int nextAvailableIndex = 0;
     
+    private boolean cacheFull = false;
+    
     /**
      * Adds a conversion rate quote to the cache that was not already there. It 
      * can certainly be the case that a quote for a particular currency pair was 
@@ -54,12 +56,10 @@ abstract class RateQuoteCache {
     private int indexOf(CurrencyPair currencies) {
         int i = 0;
         boolean found = false;
-        while (!found && i < this.quotes.length) {
-            ConversionRateQuote currQuote = this.quotes[i];
-            if (currQuote == null) {
-                break;
-            }
-            found = currencies.equals(currQuote.getCurrencies());
+        int stop = this.cacheFull ? this.quotes.length 
+                : this.nextAvailableIndex;
+        while (!found && i < stop) {
+            found = currencies.equals(this.quotes[i].getCurrencies());
             i++;
         }
         return found ? i - 1 : -1;
@@ -120,6 +120,7 @@ abstract class RateQuoteCache {
         moveArrayObjectToFront(this.quotes, index);
         if (this.nextAvailableIndex == this.quotes.length) {
             this.nextAvailableIndex--;
+            this.cacheFull = true;
         }
         return quote;
     }
