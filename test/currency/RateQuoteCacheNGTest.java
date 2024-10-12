@@ -169,10 +169,35 @@ public class RateQuoteCacheNGTest {
     /**
      * Test of the retrieve function, of the RateQuoteCache class.
      */
-//    @Test
+    @Test
     public void testRetrieve() {
         System.out.println("retrieve");
-        fail("PLACEHOLDER");
+        Currency from = CurrencyChooser.chooseCurrency();
+        Currency to = CurrencyChooser.chooseCurrencyOtherThan(from);
+        CurrencyPair currencies = new CurrencyPair(from, to);
+        int capacity = RANDOM.nextInt(RateQuoteCache.MINIMUM_CAPACITY, 
+                RateQuoteCache.MAXIMUM_CAPACITY);
+        RateQuoteCacheImpl instance = new RateQuoteCacheImpl(capacity);
+        ConversionRateQuote expected = instance.retrieve(currencies);
+        int initialCapacity = capacity + 1;
+        List<CurrencyPair> list = listOtherPairs(currencies, initialCapacity);
+        for (int index = 1; index < capacity; index++) {
+            CurrencyPair currCurrPair = list.get(index);
+            instance.retrieve(currCurrPair);
+            instance.retrieve(currencies);
+        }
+        instance.minutes = 0;
+        ConversionRateQuote actual = instance.retrieve(currencies);
+        assertEquals(actual, expected);
+        for (int j = 1; j < initialCapacity; j++) {
+            CurrencyPair currCurrPair = list.get(j);
+            instance.retrieve(currCurrPair);
+        }
+        ConversionRateQuote potentialFreshQuote = instance.retrieve(currencies);
+        String msg = "After evicting " + actual.toString() 
+                + " from cache, it should not match fresh quote " 
+                + potentialFreshQuote.toString();
+        assert !actual.equals(potentialFreshQuote) : msg;
     }
     
     @Test
