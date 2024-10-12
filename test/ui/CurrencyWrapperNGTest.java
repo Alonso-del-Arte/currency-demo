@@ -16,6 +16,10 @@
  */
 package ui;
 
+import currency.CurrencyChooser;
+
+import java.util.Currency;
+
 import static org.testng.Assert.*;
 import org.testng.annotations.Test;
 
@@ -26,9 +30,15 @@ import org.testng.annotations.Test;
 public class CurrencyWrapperNGTest {
     
     @Test
-    public void placehold() {
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
+    public void testToString() {
+        System.out.println("toString");
+        Currency currency = CurrencyChooser.chooseCurrency();
+        CurrencyWrapper instance = new CurrencyWrapper(currency);
+        String expected = currency.getCurrencyCode() + " \u2014 " 
+                + currency.getDisplayName() + " (" 
+                + currency.getNumericCodeAsString() + ")";
+        String actual = instance.toString();
+        assertEquals(actual, expected);
     }
     
 }
