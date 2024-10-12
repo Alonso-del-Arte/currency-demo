@@ -27,8 +27,26 @@ import java.util.Currency;
  */
 public class CurrencyWrapper {
     
+    private final Currency wrappedCurrency;
+    
+    /**
+     * Provides a textual representation of the wrapped currency of more than 
+     * just the 3-letter or 3-digit ISO-4217 code. For the example, suppose this 
+     * instance wraps the British pound (GBP).
+     * @return The 3-letter ISO-4217 code followed by a space and an em dash, 
+     * followed by the display name in the current locale, followed by a space 
+     * and the 3-digit ISO-4217 code in parentheses. For example "GBP &mdash; 
+     * British pound (826)".
+     */
+    @Override
+    public String toString() {
+        return this.wrappedCurrency.getCurrencyCode() + " \u2014 " 
+                + this.wrappedCurrency.getDisplayName() + " (" 
+                + this.wrappedCurrency.getNumericCodeAsString() + ")";
+    }
+    
     public CurrencyWrapper(Currency currency) {
-        //
+        this.wrappedCurrency = currency;
     }
     
 }
