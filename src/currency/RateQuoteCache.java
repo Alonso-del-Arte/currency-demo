@@ -116,6 +116,10 @@ abstract class RateQuoteCache {
             this.nextAvailableIndex++;
         } else {
             quote = this.quotes[index];
+            if (this.needsRefresh(currencies)) {
+                this.quotes[index] = this.create(currencies);
+                quote = this.quotes[index];
+            }
         }
         moveArrayObjectToFront(this.quotes, index);
         if (this.nextAvailableIndex == this.quotes.length) {
