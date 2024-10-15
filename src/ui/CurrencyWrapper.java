@@ -41,6 +41,7 @@ public class CurrencyWrapper {
     @Override
     public String toString() {
         return this.wrappedCurrency.getCurrencyCode() + " \u2014 " 
+                + this.wrappedCurrency .getSymbol() + " \u2014 " 
                 + this.wrappedCurrency.getDisplayName() + " (" 
                 + this.wrappedCurrency.getNumericCodeAsString() + ")";
     }
