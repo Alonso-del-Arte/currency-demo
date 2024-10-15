@@ -43,6 +43,20 @@ public class CurrencyWrapperNGTest {
         assertEquals(actual, expected);
     }
     
+    @Test
+    public void testToStringIfSymbolInLocaleEqualToCurrencyCode() {
+        System.out.println("toString");
+        Currency currency = CurrencyChooser.chooseCurrency(
+                (cur) -> cur.getSymbol().equals(cur.getCurrencyCode())
+        );
+        CurrencyWrapper instance = new CurrencyWrapper(currency);
+        String expected = currency.getCurrencyCode() + " \u2014 " 
+                + currency.getDisplayName() + " (" 
+                + currency.getNumericCodeAsString() + ")";
+        String actual = instance.toString();
+        assertEquals(actual, expected);
+    }
+    
 //    @Test
     public void testNotYetReferentialEquality() {
         Currency currency = CurrencyChooser.chooseCurrency();
