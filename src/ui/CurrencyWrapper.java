@@ -45,6 +45,16 @@ public class CurrencyWrapper {
                 + this.wrappedCurrency.getNumericCodeAsString() + ")";
     }
     
+    @Override
+    public boolean equals(Object obj) {
+        return false;
+    }
+    
+    @Override
+    public int hashCode() {
+        return 0;
+    }
+    
     public CurrencyWrapper(Currency currency) {
         this.wrappedCurrency = currency;
     }
