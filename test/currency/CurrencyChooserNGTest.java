@@ -62,8 +62,8 @@ public class CurrencyChooserNGTest {
         "LUF", "MTL", "NLG", "PTE", "SIT"};
     
     private static final String[] OTHER_EXCLUSION_CODES = {"AYM", "BGL", "BOV", 
-        "CHE", "CHW", "COU", "GWP", "MXV", "SRG", "STN", "TPE", "USN", "USS", 
-        "UYI", "VED", "ZWN"};
+        "CHE", "CHW", "COU", "GWP", "MGF", "MXV", "SRG", "STN", "TPE", "USN", 
+        "USS", "UYI", "VED", "ZWN"};
     
     static {
         for (Currency currency : CURRENCIES) {
@@ -504,13 +504,25 @@ public class CurrencyChooserNGTest {
 
     @Test
     public void testGuineaBissauPesoExcluded() {
-        Currency unitsRealValue = Currency.getInstance("GWP");
-        String unitsDisplayName = unitsRealValue.getDisplayName();
+        Currency pesos = Currency.getInstance("GWP");
+        String pesosDisplayName = pesos.getDisplayName();
         for (int i = 0; i < NUMBER_OF_CALLS_FOR_EXCLUSION_SEARCH; i++) {
             Currency currency = CurrencyChooser.chooseCurrency();
             String msg = "Currency " + currency.getDisplayName() 
-                    + " should not be " + unitsDisplayName;
-            assertNotEquals(unitsRealValue, currency, msg);
+                    + " should not be " + pesosDisplayName;
+            assertNotEquals(pesos, currency, msg);
+        }
+    }
+
+    @Test
+    public void testMalagasyFrancExcluded() {
+        Currency francs = Currency.getInstance("MGF");
+        String francsDisplayName = francs.getDisplayName();
+        for (int i = 0; i < NUMBER_OF_CALLS_FOR_EXCLUSION_SEARCH; i++) {
+            Currency currency = CurrencyChooser.chooseCurrency();
+            String msg = "Currency " + currency.getDisplayName() 
+                    + " should not be " + francsDisplayName;
+            assertNotEquals(francs, currency, msg);
         }
     }
 
