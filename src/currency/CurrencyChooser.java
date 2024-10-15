@@ -53,8 +53,9 @@ public class CurrencyChooser {
     
     private static final String[] OTHER_EXCLUSION_CODES = {"ADP", "ATS", "AYM", 
         "BEF", "BGL", "BOV", "CHE", "CHW", "COU", "CYP", "DEM", "EEK", "ESP", 
-        "FIM", "FRF", "GRD", "GWP", "IEP", "ITL", "LUF", "MTL", "MXV", "NLG", 
-        "PTE", "SIT", "SRG", "STN", "TPE", "USN", "USS", "UYI", "VED", "ZWN"};
+        "FIM", "FRF", "GRD", "GWP", "IEP", "ITL", "LUF", "MGF", "MTL", "MXV", 
+        "NLG", "PTE", "SIT", "SRG", "STN", "TPE", "USN", "USS", "UYI", "VED", 
+        "ZWN"};
 
     private static final Map<Integer, Set<Currency>> CURRENCIES_DIGITS_MAP 
             = new HashMap<>();
@@ -179,7 +180,10 @@ public class CurrencyChooser {
      * <li>The Guinea-Bissau peso (GWP) was the official currency of 
      * Guinea-Bissau from 1976 to 1997. It was originally traded at par with the 
      * Portuguese escudo (PTE), but it was already overvalued at that rate. In 
-     * 1997, it was replaced by the CFA franc.</li>
+     * 1997, it was replaced by the West African CFA franc (XOF).</li>
+     * <li>The Malagasy franc (MGF) was the official currency of Madagascar 
+     * until 2005. It has been phased out in favor of the Malagasy ariary 
+     * (MGA).</li>
      * <li>The Surinamese guilder (SRG) was the currency of Suriname until 2004, 
      * when it was replaced by the Surinamese dollar (SRD) at a rate of a 
      * thousand guilder for one dollar.</li>
