@@ -27,6 +27,8 @@ import java.util.Currency;
  */
 public class CurrencyWrapper {
     
+    private static final String EM_DASH_SPACED = " \u2014 ";
+    
     private final Currency wrappedCurrency;
     
     /**
@@ -40,8 +42,11 @@ public class CurrencyWrapper {
      */
     @Override
     public String toString() {
-        return this.wrappedCurrency.getCurrencyCode() + " \u2014 " 
-                + this.wrappedCurrency .getSymbol() + " \u2014 " 
+        String iso4217Code = this.wrappedCurrency.getCurrencyCode();
+        String symbolStr = this.wrappedCurrency.getSymbol();
+        String symbolInclude = iso4217Code.equals(symbolStr) 
+                ? "" : symbolStr + EM_DASH_SPACED;
+        return iso4217Code + EM_DASH_SPACED + symbolInclude 
                 + this.wrappedCurrency.getDisplayName() + " (" 
                 + this.wrappedCurrency.getNumericCodeAsString() + ")";
     }
