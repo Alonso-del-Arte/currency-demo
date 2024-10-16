@@ -67,10 +67,12 @@ public class CurrencyWrapperNGTest {
         assertEquals(actual, expected);
     }
     
-//    @Test
-    public void testNotYetReferentialEquality() {
+    @Test
+    public void testReferentialEquality() {
         Currency currency = CurrencyChooser.chooseCurrency();
         CurrencyWrapper instance = new CurrencyWrapper(currency);
+        String msg = instance.toString() + " should be equal to itself";
+        assert instance.equals(instance) : msg;
     }
     
 }
