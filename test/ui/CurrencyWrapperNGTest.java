@@ -30,6 +30,16 @@ import org.testng.annotations.Test;
 public class CurrencyWrapperNGTest {
     
     @Test
+    public void testGetWrappedCurrency() {
+        System.out.println("getWrappedCurrency");
+        Currency expected = CurrencyChooser.chooseCurrency();
+        CurrencyWrapper instance = new CurrencyWrapper(expected);
+        Currency actual = instance.getWrappedCurrency();
+        String message = "Inquiring currency wrapped by " + instance.toString();
+        assertEquals(actual, expected, message);
+    }
+    
+    @Test
     public void testToString() {
         System.out.println("toString");
         Currency currency = CurrencyChooser.chooseCurrency(
