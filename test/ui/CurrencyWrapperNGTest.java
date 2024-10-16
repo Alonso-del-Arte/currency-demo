@@ -108,4 +108,13 @@ public class CurrencyWrapperNGTest {
         assert !wrapperA.equals(wrapperB) : msg;
     }
     
+    @Test
+    public void testEquals() {
+        System.out.println("equals");
+        Currency currency = CurrencyChooser.chooseCurrency();
+        CurrencyWrapper expected = new CurrencyWrapper(currency);
+        CurrencyWrapper actual = new CurrencyWrapper(currency);
+        assertEquals(actual, expected);
+    }
+    
 }
