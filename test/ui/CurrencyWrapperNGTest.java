@@ -17,6 +17,7 @@
 package ui;
 
 import currency.CurrencyChooser;
+import static currency.MoneyAmountNGTest.provideNull;
 
 import java.util.Currency;
 
@@ -73,6 +74,15 @@ public class CurrencyWrapperNGTest {
         CurrencyWrapper instance = new CurrencyWrapper(currency);
         String msg = instance.toString() + " should be equal to itself";
         assert instance.equals(instance) : msg;
+    }
+    
+    @Test
+    public void testNotEqualsNull() {
+        Currency currency = CurrencyChooser.chooseCurrency();
+        CurrencyWrapper instance = new CurrencyWrapper(currency);
+        String msg = instance.toString() + " should not equal null";
+        Object obj = provideNull();
+        assert !instance.equals(obj) : msg;
     }
     
 }
