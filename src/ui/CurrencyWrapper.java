@@ -61,7 +61,7 @@ public class CurrencyWrapper {
     
     @Override
     public boolean equals(Object obj) {
-        return obj != null;
+        return obj instanceof CurrencyWrapper;
     }
     
     @Override
