@@ -85,4 +85,16 @@ public class CurrencyWrapperNGTest {
         assert !instance.equals(obj) : msg;
     }
     
+    @Test
+    public void testNotEqualsDiffClass() {
+        Currency currency = CurrencyChooser.chooseCurrency();
+        CurrencyWrapper instance = new CurrencyWrapper(currency);
+        String msg = instance.toString() + " of class " 
+                + instance.getClass().getName() + " should not equal " 
+                + currency.toString() + " of class " 
+                + currency.getClass().getName();
+        Object obj = currency;
+        assert !instance.equals(obj) : msg;
+    }
+    
 }
