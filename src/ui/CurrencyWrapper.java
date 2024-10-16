@@ -25,7 +25,7 @@ import java.util.Currency;
  * ISO-4217 standard.
  * @author Alonso del Arte
  */
-public class CurrencyWrapper {
+public final class CurrencyWrapper {
     
     private static final String EM_DASH_SPACED = " \u2014 ";
     
@@ -64,10 +64,7 @@ public class CurrencyWrapper {
         if (this == obj) {
             return true;
         }
-        if (obj == null) {
-            return false;
-        }
-        if (!this.getClass().equals(obj.getClass())) {
+        if (!(obj instanceof CurrencyWrapper)) {
             return false;
         }
         return this.wrappedCurrency
