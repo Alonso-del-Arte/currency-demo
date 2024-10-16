@@ -31,6 +31,11 @@ public class CurrencyWrapper {
     
     private final Currency wrappedCurrency;
     
+    // TODO: Write tests for this
+    public Currency getWrappedCurrency() {
+        return Currency.getInstance("XTS");
+    }
+    
     /**
      * Provides a textual representation of the wrapped currency of more than 
      * just the 3-letter or 3-digit ISO-4217 code. For the example, suppose this 
