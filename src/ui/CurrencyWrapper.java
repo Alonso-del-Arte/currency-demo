@@ -31,9 +31,12 @@ public class CurrencyWrapper {
     
     private final Currency wrappedCurrency;
     
-    // TODO: Write tests for this
+    /**
+     * Gives the currency wrapped by this instance.
+     * @return The currency passed to the constructor of this instance.
+     */
     public Currency getWrappedCurrency() {
-        return Currency.getInstance("XTS");
+        return this.wrappedCurrency;
     }
     
     /**
@@ -43,7 +46,7 @@ public class CurrencyWrapper {
      * @return The 3-letter ISO-4217 code followed by a space and an em dash, 
      * followed by the display name in the current locale, followed by a space 
      * and the 3-digit ISO-4217 code in parentheses. For example "GBP &mdash; 
-     * British pound (826)".
+     * &pound; &mdash; British pound (826)".
      */
     @Override
     public String toString() {
