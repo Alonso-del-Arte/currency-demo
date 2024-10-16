@@ -97,4 +97,15 @@ public class CurrencyWrapperNGTest {
         assert !instance.equals(obj) : msg;
     }
     
+    @Test
+    public void testNotEqualsDiffWrappedCurrency() {
+        Currency currencyA = CurrencyChooser.chooseCurrency();
+        Currency currencyB = CurrencyChooser.chooseCurrencyOtherThan(currencyA);
+        CurrencyWrapper wrapperA = new CurrencyWrapper(currencyA);
+        CurrencyWrapper wrapperB = new CurrencyWrapper(currencyB);
+        String msg = wrapperA.toString() + " should not equal " 
+                + wrapperB.toString();
+        assert !wrapperA.equals(wrapperB) : msg;
+    }
+    
 }
