@@ -361,7 +361,7 @@ public class MoneyAmountNGTest {
         assertEquals(amount, amount);
     }
     
-    static Object provideNull() {
+    public static Object provideNull() {
         return null;
     }
     
