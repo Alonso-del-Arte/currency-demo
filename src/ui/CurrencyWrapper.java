@@ -59,6 +59,18 @@ public final class CurrencyWrapper {
                 + this.wrappedCurrency.getNumericCodeAsString() + ")";
     }
     
+    /**
+     * Determines if this wrapper is equal to some other object. For the 
+     * examples, suppose this wrapper wraps the British pound (GBP).
+     * @param obj The object to check against. Examples: wrapper for GBP, 
+     * wrapper for the euro (EUR), the {@code Currency} instance for GBP, null.
+     * @return True if this wrapper wraps the same {@code Currency} instance as 
+     * {@code obj}, false in all other cases. In the examples, true for the 
+     * wrapper for GBP, false for the wrapper for EUR (wraps a different  
+     * currency), false for the {@code Currency} instance for GBP (even though 
+     * that's the currency the example wrapper wraps) and obviously false for 
+     * null.
+     */
     @Override
     public boolean equals(Object obj) {
         if (this == obj) {
@@ -71,9 +83,14 @@ public final class CurrencyWrapper {
                 .equals(((CurrencyWrapper) obj).wrappedCurrency);
     }
     
+    /**
+     * Gives a hash code for this wrapper. The hash code is arithmetically 
+     * related to the hash code for the wrapped currency in some way.
+     * @return A hash code.
+     */
     @Override
     public int hashCode() {
-        return 0;
+        return ((~this.wrappedCurrency.hashCode()) << 1) + 1;
     }
     
     public CurrencyWrapper(Currency currency) {
