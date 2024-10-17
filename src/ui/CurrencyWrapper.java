@@ -54,7 +54,7 @@ public final class CurrencyWrapper {
         String symbolStr = this.wrappedCurrency.getSymbol();
         String symbolInclude = iso4217Code.equals(symbolStr) 
                 ? "" : symbolStr + EM_DASH_SPACED;
-        return iso4217Code + EM_DASH_SPACED + symbolInclude + '?'
+        return iso4217Code + EM_DASH_SPACED + symbolInclude 
                 + this.wrappedCurrency.getDisplayName() + " (" 
                 + this.wrappedCurrency.getNumericCode() + ")";
     }
