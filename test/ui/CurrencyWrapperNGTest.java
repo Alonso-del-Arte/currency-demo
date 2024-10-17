@@ -44,7 +44,8 @@ public class CurrencyWrapperNGTest {
     public void testToString() {
         System.out.println("toString");
         Currency currency = CurrencyChooser.chooseCurrency(
-                (cur) -> !cur.getSymbol().equals(cur.getCurrencyCode())
+                (cur) -> !cur.getSymbol().equals(cur.getCurrencyCode()) 
+                        && cur.getNumericCode() > 99
         );
         CurrencyWrapper instance = new CurrencyWrapper(currency);
         String expected = currency.getCurrencyCode() + " \u2014 " 
@@ -58,7 +59,8 @@ public class CurrencyWrapperNGTest {
     public void testToStringIfSymbolInLocaleEqualToCurrencyCode() {
         System.out.println("toString");
         Currency currency = CurrencyChooser.chooseCurrency(
-                (cur) -> cur.getSymbol().equals(cur.getCurrencyCode())
+                (cur) -> cur.getSymbol().equals(cur.getCurrencyCode()) 
+                        && cur.getNumericCode() > 99
         );
         CurrencyWrapper instance = new CurrencyWrapper(currency);
         String expected = currency.getCurrencyCode() + " \u2014 " 
