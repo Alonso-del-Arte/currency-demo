@@ -50,6 +50,20 @@ public class CurrencyWrapperNGTest {
         CurrencyWrapper instance = new CurrencyWrapper(currency);
         String expected = currency.getCurrencyCode() + " \u2014 " 
                 + currency.getSymbol() + " \u2014 " + currency.getDisplayName() 
+                + " (" + currency.getNumericCode() + ")";
+        String actual = instance.toString();
+        assertEquals(actual, expected);
+    }
+    
+    @Test
+    public void testToStringWithDiffSymbolAndZeroPaddedNumericCode() {
+        Currency currency = CurrencyChooser.chooseCurrency(
+                (cur) -> !cur.getSymbol().equals(cur.getCurrencyCode()) 
+                        && cur.getNumericCode() < 100
+        );
+        CurrencyWrapper instance = new CurrencyWrapper(currency);
+        String expected = currency.getCurrencyCode() + " \u2014 " 
+                + currency.getSymbol() + " \u2014 " + currency.getDisplayName() 
                 + " (" + currency.getNumericCodeAsString() + ")";
         String actual = instance.toString();
         assertEquals(actual, expected);
@@ -57,10 +71,23 @@ public class CurrencyWrapperNGTest {
     
     @Test
     public void testToStringIfSymbolInLocaleEqualToCurrencyCode() {
-        System.out.println("toString");
         Currency currency = CurrencyChooser.chooseCurrency(
                 (cur) -> cur.getSymbol().equals(cur.getCurrencyCode()) 
                         && cur.getNumericCode() > 99
+        );
+        CurrencyWrapper instance = new CurrencyWrapper(currency);
+        String expected = currency.getCurrencyCode() + " \u2014 " 
+                + currency.getDisplayName() + " (" 
+                + currency.getNumericCode() + ")";
+        String actual = instance.toString();
+        assertEquals(actual, expected);
+    }
+    
+    @Test
+    public void testToStringSameSymbolZeroPaddedNumericCode() {
+        Currency currency = CurrencyChooser.chooseCurrency(
+                (cur) -> cur.getSymbol().equals(cur.getCurrencyCode()) 
+                        && cur.getNumericCode() < 100
         );
         CurrencyWrapper instance = new CurrencyWrapper(currency);
         String expected = currency.getCurrencyCode() + " \u2014 " 
