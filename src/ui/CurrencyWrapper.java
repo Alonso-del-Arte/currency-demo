@@ -56,7 +56,7 @@ public final class CurrencyWrapper {
                 ? "" : symbolStr + EM_DASH_SPACED;
         return iso4217Code + EM_DASH_SPACED + symbolInclude 
                 + this.wrappedCurrency.getDisplayName() + " (" 
-                + this.wrappedCurrency.getNumericCode() + ")";
+                + this.wrappedCurrency.getNumericCodeAsString()+ ")";
     }
     
     /**
