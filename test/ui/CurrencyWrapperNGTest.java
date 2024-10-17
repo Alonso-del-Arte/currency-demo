@@ -117,4 +117,18 @@ public class CurrencyWrapperNGTest {
         assertEquals(actual, expected);
     }
     
+    @Test
+    public void testHashCode() {
+        System.out.println("hashCode");
+        Currency currency = CurrencyChooser.chooseCurrency();
+        CurrencyWrapper instance = new CurrencyWrapper(currency);
+        int currencyHashCode = currency.hashCode();
+        int expected = ((~currencyHashCode) << 1) + 1;
+        int actual = instance.hashCode();
+        String message = "Reckoning hash code of wrapper " + instance.toString() 
+                + " which wraps Currency instance with hash code " 
+                + currencyHashCode;
+        assertEquals(actual, expected, message);
+    }
+    
 }
