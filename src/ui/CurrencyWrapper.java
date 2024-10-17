@@ -54,9 +54,9 @@ public final class CurrencyWrapper {
         String symbolStr = this.wrappedCurrency.getSymbol();
         String symbolInclude = iso4217Code.equals(symbolStr) 
                 ? "" : symbolStr + EM_DASH_SPACED;
-        return iso4217Code + EM_DASH_SPACED + symbolInclude 
+        return iso4217Code + EM_DASH_SPACED + symbolInclude + '?'
                 + this.wrappedCurrency.getDisplayName() + " (" 
-                + this.wrappedCurrency.getNumericCodeAsString() + ")";
+                + this.wrappedCurrency.getNumericCode() + ")";
     }
     
     /**
@@ -85,14 +85,21 @@ public final class CurrencyWrapper {
     
     /**
      * Gives a hash code for this wrapper. The hash code is arithmetically 
-     * related to the hash code for the wrapped currency in some way.
-     * @return A hash code.
+     * related to the hash code for the wrapped currency in some way. Those two 
+     * hash codes may or may not match for sign and parity.
+     * @return A hash code. For example, if the {@code Currency} instance for 
+     * euros (EUR) hashes to 1560911714, the wrapper might hash to 1173143867.
      */
     @Override
     public int hashCode() {
         return ((~this.wrappedCurrency.hashCode()) << 1) + 1;
     }
     
+    /**
+     * Sole constructor.
+     * @param currency The currency to wrap. For example, United States dollars 
+     * (USD).
+     */
     public CurrencyWrapper(Currency currency) {
         this.wrappedCurrency = currency;
     }
