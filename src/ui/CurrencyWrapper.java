@@ -95,6 +95,15 @@ public final class CurrencyWrapper {
         return ((~this.wrappedCurrency.hashCode()) << 1) + 1;
     }
     
+    // TODO: Write tests for this
+    public static CurrencyWrapper[] wrap(Currency[] currencies) {
+        CurrencyWrapper[] array = new CurrencyWrapper[currencies.length];
+        CurrencyWrapper placeholder 
+                = new CurrencyWrapper(Currency.getInstance("XTS"));
+        java.util.Arrays.fill(array, placeholder);
+        return array;
+    }
+    
     /**
      * Sole constructor.
      * @param currency The currency to wrap. For example, United States dollars 
