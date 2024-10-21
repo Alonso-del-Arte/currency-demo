@@ -222,4 +222,20 @@ public class CurrencyWrapperNGTest {
         assertEquals(actual, expected);
     }
     
+    @Test
+    public void testConstructorRejectsNullCurrency() {
+        String msg = "Constructor should've rejected null currency";
+        Throwable t = assertThrows(() -> {
+            CurrencyWrapper badInstance = new CurrencyWrapper(null);
+            System.out.println(msg + ", not created instance " 
+                    + badInstance.getClass().getName() + '@' 
+                    + Integer.toHexString(System
+                            .identityHashCode(badInstance)));
+        }, NullPointerException.class, msg);
+        String excMsg = t.getMessage();
+        assert excMsg != null : "Exception message should not be null";
+        assert !excMsg.isBlank() : "Exception message should not be blank";
+        System.out.println("\"" + excMsg + "\"");
+    }
+    
 }
