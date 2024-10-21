@@ -95,12 +95,16 @@ public final class CurrencyWrapper {
         return ((~this.wrappedCurrency.hashCode()) << 1) + 1;
     }
     
-    // TODO: Write tests for this
+    /**
+     * Wraps {@code Currency} instances into currency wrappers.
+     * @param currencies The currencies to wrap. For example, United States 
+     * dollars (USD), euros (EUR), Japanese yen (JPY).
+     * @return An array of wrappers with each currency of {@code currencies} in 
+     * the same order.
+     * @throws NullPointerException If any of the currencies are null, or if the 
+     * array of currencies is null.
+     */
     public static CurrencyWrapper[] wrap(Currency[] currencies) {
-        if (currencies == null) {
-            String excMsg = "Array should not be null";
-            throw new NullPointerException(excMsg);
-        }
         CurrencyWrapper[] array = new CurrencyWrapper[currencies.length];
         for (int i = 0; i < currencies.length; i++) {
             array[i] = new CurrencyWrapper(currencies[i]);
@@ -112,6 +116,7 @@ public final class CurrencyWrapper {
      * Sole constructor.
      * @param currency The currency to wrap. For example, United States dollars 
      * (USD).
+     * @throws NullPointerException If {@code currency} is null.
      */
     public CurrencyWrapper(Currency currency) {
         if (currency == null) {
