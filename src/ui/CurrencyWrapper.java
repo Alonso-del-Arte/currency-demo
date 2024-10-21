@@ -121,6 +121,10 @@ public final class CurrencyWrapper {
      * (USD).
      */
     public CurrencyWrapper(Currency currency) {
+        if (currency == null) {
+            String excMsg = "Currency should not be null";
+            throw new NullPointerException(excMsg);
+        }
         this.wrappedCurrency = currency;
     }
     
