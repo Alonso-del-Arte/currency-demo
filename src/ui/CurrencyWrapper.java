@@ -97,11 +97,11 @@ public final class CurrencyWrapper {
     
     // TODO: Write tests for this
     public static CurrencyWrapper[] wrap(Currency[] currencies) {
-        int size = 4;
-        if (currencies != null) {
-            size = currencies.length;
+        if (currencies == null) {
+            String excMsg = "Array should not be null";
+            throw new NullPointerException(excMsg);
         }
-        CurrencyWrapper[] array = new CurrencyWrapper[size];
+        CurrencyWrapper[] array = new CurrencyWrapper[currencies.length];
         CurrencyWrapper placeholder 
                 = new CurrencyWrapper(Currency.getInstance("XTS"));
         java.util.Arrays.fill(array, placeholder);
