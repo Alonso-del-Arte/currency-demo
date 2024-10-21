@@ -206,8 +206,9 @@ public class CurrencyWrapperNGTest {
         System.out.println("\"" + excMsg + "\"");
     }
     
-    public void testWrap_NOT_YET_() {
-        System.out.println("wrap_NOT_YET_");
+    @Test
+    public void testWrap() {
+        System.out.println("wrap");
         int size = RANDOM.nextInt(4, 10);
         Currency[] currencies = new Currency[size];
         for (int i = 0; i < size; i++) {
