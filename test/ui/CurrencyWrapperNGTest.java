@@ -181,8 +181,29 @@ public class CurrencyWrapperNGTest {
         System.out.println("\"" + excMsg + "\"");
     }
     
-    public void test_NOT_YET_WrapRejectsNullCurrency() {
-        //
+    @Test
+    public void testWrapRejectsNullCurrency() {
+        int size = RANDOM.nextInt(4, 10);
+        Currency[] currencies = new Currency[size];
+        int exclusionIndex = RANDOM.nextInt(size);
+        for (int i = 0; i < size; i++) {
+            if (i != exclusionIndex) {
+                currencies[i] = CurrencyChooser.chooseCurrency();
+            }
+        }
+        String msg 
+                = "wrap() function should've rejected array " 
+                + Arrays.toString(currencies) 
+                + " for containing one null element";
+        Throwable t = assertThrows(() -> {
+            CurrencyWrapper[] badInstance = CurrencyWrapper.wrap(currencies);
+            System.out.println(msg + ", not created array " 
+                    + Arrays.toString(badInstance));
+        }, NullPointerException.class, msg);
+        String excMsg = t.getMessage();
+        assert excMsg != null : "Exception message should not be null";
+        assert !excMsg.isBlank() : "Exception message should not be blank";
+        System.out.println("\"" + excMsg + "\"");
     }
     
     public void testWrap_NOT_YET_() {
