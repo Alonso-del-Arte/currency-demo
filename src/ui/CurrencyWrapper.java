@@ -109,9 +109,9 @@ public final class CurrencyWrapper {
             }
         }
         CurrencyWrapper[] array = new CurrencyWrapper[currencies.length];
-        CurrencyWrapper placeholder 
-                = new CurrencyWrapper(Currency.getInstance("XTS"));
-        java.util.Arrays.fill(array, placeholder);
+        for (int j = 0; j < currencies.length; j++) {
+            array[j] = new CurrencyWrapper(currencies[j]);
+        }
         return array;
     }
     
