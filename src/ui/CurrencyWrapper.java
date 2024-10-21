@@ -101,16 +101,9 @@ public final class CurrencyWrapper {
             String excMsg = "Array should not be null";
             throw new NullPointerException(excMsg);
         }
-        for (int i = 0; i < currencies.length; i++) {
-            if (currencies[i] == null) {
-                String excMsg = "Null currency at position " + i 
-                        + " is not valid";
-                throw new NullPointerException(excMsg);
-            }
-        }
         CurrencyWrapper[] array = new CurrencyWrapper[currencies.length];
-        for (int j = 0; j < currencies.length; j++) {
-            array[j] = new CurrencyWrapper(currencies[j]);
+        for (int i = 0; i < currencies.length; i++) {
+            array[i] = new CurrencyWrapper(currencies[i]);
         }
         return array;
     }
