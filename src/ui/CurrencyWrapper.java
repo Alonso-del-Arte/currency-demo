@@ -101,6 +101,13 @@ public final class CurrencyWrapper {
             String excMsg = "Array should not be null";
             throw new NullPointerException(excMsg);
         }
+        for (int i = 0; i < currencies.length; i++) {
+            if (currencies[i] == null) {
+                String excMsg = "Null currency at position " + i 
+                        + " is not valid";
+                throw new NullPointerException(excMsg);
+            }
+        }
         CurrencyWrapper[] array = new CurrencyWrapper[currencies.length];
         CurrencyWrapper placeholder 
                 = new CurrencyWrapper(Currency.getInstance("XTS"));
