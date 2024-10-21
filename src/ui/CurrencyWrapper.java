@@ -97,7 +97,11 @@ public final class CurrencyWrapper {
     
     // TODO: Write tests for this
     public static CurrencyWrapper[] wrap(Currency[] currencies) {
-        CurrencyWrapper[] array = new CurrencyWrapper[currencies.length];
+        int size = 4;
+        if (currencies != null) {
+            size = currencies.length;
+        }
+        CurrencyWrapper[] array = new CurrencyWrapper[size];
         CurrencyWrapper placeholder 
                 = new CurrencyWrapper(Currency.getInstance("XTS"));
         java.util.Arrays.fill(array, placeholder);
