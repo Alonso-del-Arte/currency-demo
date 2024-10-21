@@ -19,8 +19,11 @@ package ui;
 import currency.CurrencyChooser;
 import static currency.MoneyAmountNGTest.provideNull;
 
+import java.util.Arrays;
 import java.util.Currency;
 import java.util.Random;
+
+import static org.testframe.api.Asserters.assertThrows;
 
 import static org.testng.Assert.*;
 import org.testng.annotations.Test;
@@ -165,8 +168,25 @@ public class CurrencyWrapperNGTest {
     }
     
     @Test
-    public void testWrap() {
-        System.out.println("wrap");
+    public void testWrapRejectsNullArray() {
+        String msg = "wrap() function should've rejected null array";
+        Throwable t = assertThrows(() -> {
+            CurrencyWrapper[] badInstance = CurrencyWrapper.wrap(null);
+            System.out.println(msg + ", not created array " 
+                    + Arrays.toString(badInstance));
+        }, NullPointerException.class, msg);
+        String excMsg = t.getMessage();
+        assert excMsg != null : "Exception message should not be null";
+        assert !excMsg.isBlank() : "Exception message should not be blank";
+        System.out.println("\"" + excMsg + "\"");
+    }
+    
+    public void test_NOT_YET_WrapRejectsNullCurrency() {
+        //
+    }
+    
+    public void testWrap_NOT_YET_() {
+        System.out.println("wrap_NOT_YET_");
         int size = RANDOM.nextInt(4, 10);
         Currency[] currencies = new Currency[size];
         for (int i = 0; i < size; i++) {
