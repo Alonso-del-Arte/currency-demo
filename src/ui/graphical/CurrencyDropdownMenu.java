@@ -45,4 +45,8 @@ import ui.CurrencyWrapper;
  */
 public class CurrencyDropdownMenu extends JComboBox<CurrencyWrapper> {
     
+    public CurrencyDropdownMenu(Currency[] currencies) {
+        // TODO: Write tests for this
+    }
+    
 }
