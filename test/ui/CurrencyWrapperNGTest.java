@@ -20,6 +20,7 @@ import currency.CurrencyChooser;
 import static currency.MoneyAmountNGTest.provideNull;
 
 import java.util.Currency;
+import java.util.Random;
 
 import static org.testng.Assert.*;
 import org.testng.annotations.Test;
@@ -29,6 +30,9 @@ import org.testng.annotations.Test;
  * @author Alonso del Arte
  */
 public class CurrencyWrapperNGTest {
+    
+    private static final Random RANDOM = new Random(System.currentTimeMillis() 
+            << 5);
     
     @Test
     public void testGetWrappedCurrency() {
@@ -158,6 +162,22 @@ public class CurrencyWrapperNGTest {
                 + " which wraps Currency instance with hash code " 
                 + currencyHashCode;
         assertEquals(actual, expected, message);
+    }
+    
+    @Test
+    public void testWrap() {
+        System.out.println("wrap");
+        int size = RANDOM.nextInt(4, 10);
+        Currency[] currencies = new Currency[size];
+        for (int i = 0; i < size; i++) {
+            currencies[i] = CurrencyChooser.chooseCurrency();
+        }
+        CurrencyWrapper[] expected = new CurrencyWrapper[size];
+        for (int j = 0; j < size; j++) {
+            expected[j] = new CurrencyWrapper(currencies[j]);
+        }
+        CurrencyWrapper[] actual = CurrencyWrapper.wrap(currencies);
+        assertEquals(actual, expected);
     }
     
 }
