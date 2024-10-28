@@ -17,13 +17,9 @@
 package demo;
 
 import currency.CurrencyChooser;
-import currency.CurrencyConverter;
-import currency.MoneyAmount;
 import currency.comparators.LetterCodeComparator;
 
-import java.awt.event.ActionEvent;
 import java.awt.Component;
-import java.awt.GridLayout;
 import java.awt.event.ItemEvent;
 import java.awt.event.ItemListener;
 import java.util.Arrays;
@@ -38,6 +34,8 @@ import static org.testframe.api.Asserters.assertThrows;
 import static org.testng.Assert.*;
 import org.testng.annotations.Test;
 
+import ui.CurrencyWrapper;
+
 /**
  * Tests of the CurrencyInformationDisplay class.
  * @author Alonso del Arte
@@ -46,8 +44,6 @@ public class CurrencyInformationDisplayNGTest implements ItemListener {
     
     private static final String EXPECTED_PARTIAL_TITLE 
             = "Currency Information for ";
-    
-    private boolean haveReceivedItemChangeEvent = false;
     
     // TODO: Change source above source 13, use switch expression
     private static String itemStateLabel(int stateCode) {
@@ -65,7 +61,6 @@ public class CurrencyInformationDisplayNGTest implements ItemListener {
     
     @Override
     public void itemStateChanged(ItemEvent ie) {
-        this.haveReceivedItemChangeEvent = true;
         System.out.println("Affected item is " + ie.getItem().toString());
         String itemStateStr = itemStateLabel(ie.getStateChange());
         System.out.println("Item state is " + itemStateStr);
@@ -389,8 +384,8 @@ public class CurrencyInformationDisplayNGTest implements ItemListener {
         Currency expected = CurrencyChooser.chooseCurrency();
         CurrencyInformationDisplay instance 
                 = new CurrencyInformationDisplay(expected);
-        Currency actual = (Currency) instance.currenciesDropdown
-                .getSelectedItem();
+        Currency actual = ((CurrencyWrapper) instance.currenciesDropdown
+                .getSelectedItem()).getWrappedCurrency();
         String message = "Constructor specified " + expected.getDisplayName() 
                 + " (" + expected.getCurrencyCode() + "), dropdown shows " 
                 + actual.getDisplayName() + " (" + actual.getCurrencyCode() 
@@ -409,7 +404,8 @@ public class CurrencyInformationDisplayNGTest implements ItemListener {
         int size = instance.currenciesDropdown.getItemCount();
         Currency[] actual = new Currency[size];
         for (int index = 0; index < size; index++) {
-            actual[index] = instance.currenciesDropdown.getItemAt(index);
+            actual[index] = instance.currenciesDropdown.getItemAt(index)
+                    .getWrappedCurrency();
         }
         String message = "Currencies should be sorted by letter code";
         assertEquals(actual, expected, message);

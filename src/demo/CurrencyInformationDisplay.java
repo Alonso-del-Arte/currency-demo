@@ -34,6 +34,9 @@ import javax.swing.JTextField;
 import javax.swing.WindowConstants;
 import javax.swing.border.EmptyBorder;
 
+import ui.CurrencyWrapper;
+import ui.graphical.CurrencyDropdownMenu;
+
 /**
  * A display of information about a currency. The display shows the currency's 
  * name in the current locale (e.g., "Japanese Yen" in an English-speaking 
@@ -64,8 +67,8 @@ public class CurrencyInformationDisplay extends JFrame implements ItemListener {
         Arrays.sort(ALL_SUITABLE_CURRENCIES, new LetterCodeComparator());
     }
     
-    final JComboBox<Currency> currenciesDropdown 
-            = new JComboBox<>(ALL_SUITABLE_CURRENCIES);
+    final JComboBox<CurrencyWrapper> currenciesDropdown 
+            = new CurrencyDropdownMenu(ALL_SUITABLE_CURRENCIES);
     
     final JLabel symbolLabel = new JLabel("Current locale symbol: ");
     
@@ -97,7 +100,8 @@ public class CurrencyInformationDisplay extends JFrame implements ItemListener {
     @Override
     public void itemStateChanged(ItemEvent ie) {
         if (ie.getStateChange() == ItemEvent.SELECTED) {
-            this.setCurrency((Currency) ie.getItem());
+            this.setCurrency(((CurrencyWrapper) ie.getItem())
+                    .getWrappedCurrency());
         }
     }
     
