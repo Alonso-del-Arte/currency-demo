@@ -420,7 +420,8 @@ public class CurrencyInformationDisplayNGTest implements ItemListener {
         Currency secondCurrency = CurrencyChooser
                 .chooseCurrencyOtherThan(currency);
         instance.currenciesDropdown.addItemListener(this);
-        instance.currenciesDropdown.setSelectedItem(secondCurrency);
+        instance.currenciesDropdown
+                .setSelectedItem(new CurrencyWrapper(secondCurrency));
         String expected = EXPECTED_PARTIAL_TITLE 
                 + secondCurrency.getCurrencyCode();
         String actual = instance.getTitle();
@@ -436,7 +437,8 @@ public class CurrencyInformationDisplayNGTest implements ItemListener {
         Currency secondCurrency = CurrencyChooser
                 .chooseCurrencyOtherThan(currency);
         instance.currenciesDropdown.addItemListener(this);
-        instance.currenciesDropdown.setSelectedItem(secondCurrency);
+        instance.currenciesDropdown
+                .setSelectedItem(new CurrencyWrapper(secondCurrency));
         String expected = secondCurrency.getDisplayName();
         String actual = instance.displayNameField.getText();
         assertEquals(actual, expected);
@@ -451,7 +453,8 @@ public class CurrencyInformationDisplayNGTest implements ItemListener {
         Currency secondCurrency = CurrencyChooser
                 .chooseCurrencyOtherThan(currency);
         instance.currenciesDropdown.addItemListener(this);
-        instance.currenciesDropdown.setSelectedItem(secondCurrency);
+        instance.currenciesDropdown
+                .setSelectedItem(new CurrencyWrapper(secondCurrency));
         String expected = secondCurrency.getCurrencyCode();
         String actual = instance.letterCodeField.getText();
         String message = "Expecting \"" + expected + "\" for " 
@@ -469,7 +472,8 @@ public class CurrencyInformationDisplayNGTest implements ItemListener {
                 (curr) -> curr.getNumericCode() > 99 && curr != currency
         );
         instance.currenciesDropdown.addItemListener(this);
-        instance.currenciesDropdown.setSelectedItem(secondCurrency);
+        instance.currenciesDropdown
+                .setSelectedItem(new CurrencyWrapper(secondCurrency));
         String expected = Integer.toString(secondCurrency.getNumericCode());
         String actual = instance.numberCodeField.getText();
         String message = "Expecting \"" + expected + "\" for " 
@@ -489,7 +493,8 @@ public class CurrencyInformationDisplayNGTest implements ItemListener {
                         && curr != currency
         );
         instance.currenciesDropdown.addItemListener(this);
-        instance.currenciesDropdown.setSelectedItem(secondCurrency);
+        instance.currenciesDropdown
+                .setSelectedItem(new CurrencyWrapper(secondCurrency));
         String expected = "0" + Integer.toString(secondCurrency
                 .getNumericCode());
         String actual = instance.numberCodeField.getText();
@@ -509,7 +514,8 @@ public class CurrencyInformationDisplayNGTest implements ItemListener {
                 (curr) -> curr.getNumericCode() < 10 && curr != currency
         );
         instance.currenciesDropdown.addItemListener(this);
-        instance.currenciesDropdown.setSelectedItem(secondCurrency);
+        instance.currenciesDropdown
+                .setSelectedItem(new CurrencyWrapper(secondCurrency));
         String expected = "00" + Integer.toString(secondCurrency
                 .getNumericCode());
         String actual = instance.numberCodeField.getText();
@@ -528,7 +534,8 @@ public class CurrencyInformationDisplayNGTest implements ItemListener {
         Currency secondCurrency = CurrencyChooser
                 .chooseCurrencyOtherThan(currency);
         instance.currenciesDropdown.addItemListener(this);
-        instance.currenciesDropdown.setSelectedItem(secondCurrency);
+        instance.currenciesDropdown
+                .setSelectedItem(new CurrencyWrapper(secondCurrency));
         String expected = secondCurrency.getSymbol();
         String actual = instance.symbolField.getText();
         String message = "Expecting \"" + expected + "\" for " 
@@ -548,7 +555,8 @@ public class CurrencyInformationDisplayNGTest implements ItemListener {
                 (curr) -> curr.getSymbol().equals(curr.getCurrencyCode())
         );
         instance.currenciesDropdown.addItemListener(this);
-        instance.currenciesDropdown.setSelectedItem(secondCurrency);
+        instance.currenciesDropdown
+                .setSelectedItem(new CurrencyWrapper(secondCurrency));
         String msg = "Given that " + secondCurrency.getDisplayName() + " (" 
                 + secondCurrency.getCurrencyCode() + ") has symbol " 
                 + secondCurrency.getSymbol() 
@@ -568,7 +576,8 @@ public class CurrencyInformationDisplayNGTest implements ItemListener {
                 (curr) -> !curr.getSymbol().equals(curr.getCurrencyCode())
         );
         instance.currenciesDropdown.addItemListener(this);
-        instance.currenciesDropdown.setSelectedItem(secondCurrency);
+        instance.currenciesDropdown
+                .setSelectedItem(new CurrencyWrapper(secondCurrency));
         String msg = "Given that " + secondCurrency.getDisplayName() + " (" 
                 + secondCurrency.getCurrencyCode() + ") has symbol " 
                 + secondCurrency.getSymbol() 
@@ -587,7 +596,8 @@ public class CurrencyInformationDisplayNGTest implements ItemListener {
                         != currency.getDefaultFractionDigits()
         );
         instance.currenciesDropdown.addItemListener(this);
-        instance.currenciesDropdown.setSelectedItem(secondCurrency);
+        instance.currenciesDropdown
+                .setSelectedItem(new CurrencyWrapper(secondCurrency));
         String expected = Integer.toString(secondCurrency
                 .getDefaultFractionDigits());
         String actual = instance.fractionDigitsField.getText();
