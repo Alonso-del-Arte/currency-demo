@@ -84,17 +84,17 @@ public class CurrencyInformationDisplay extends JFrame implements ItemListener {
     }
     
     public void setCurrency(Currency currency) {
-//        this.selectedCurrency = currency;
-//        this.setTitle(PARTIAL_TITLE + this.selectedCurrency.getCurrencyCode());
-//        this.displayNameField.setText(this.selectedCurrency.getDisplayName());
-//        this.letterCodeField.setText(this.selectedCurrency.getCurrencyCode());
-//        this.numberCodeField.setText(this.selectedCurrency
-//                .getNumericCodeAsString());
-//        this.symbolLabel.setEnabled(!this.selectedCurrency.getSymbol()
-//                .equals(this.selectedCurrency.getCurrencyCode()));
-//        this.symbolField.setText(this.selectedCurrency.getSymbol());
-//        this.fractionDigitsField.setText(Integer.toString(this.selectedCurrency
-//                .getDefaultFractionDigits()));
+        this.selectedCurrency = currency;
+        this.setTitle(PARTIAL_TITLE + this.selectedCurrency.getCurrencyCode());
+        this.displayNameField.setText(this.selectedCurrency.getDisplayName());
+        this.letterCodeField.setText(this.selectedCurrency.getCurrencyCode());
+        this.numberCodeField.setText(this.selectedCurrency
+                .getNumericCodeAsString());
+        this.symbolLabel.setEnabled(!this.selectedCurrency.getSymbol()
+                .equals(this.selectedCurrency.getCurrencyCode()));
+        this.symbolField.setText(this.selectedCurrency.getSymbol());
+        this.fractionDigitsField.setText(Integer.toString(this.selectedCurrency
+                .getDefaultFractionDigits()));
     }
     
     @Override
@@ -126,8 +126,8 @@ public class CurrencyInformationDisplay extends JFrame implements ItemListener {
         JPanel panel = new JPanel(new GridLayout(6, 2));
         panel.setBorder(new EmptyBorder(10, 10, 10, 10));
         panel.add(new JLabel("Choose "));
-//        this.currenciesDropdown
-//                .setSelectedItem(new CurrencyWrapper(this.selectedCurrency));
+        this.currenciesDropdown
+                .setSelectedItem(new CurrencyWrapper(this.selectedCurrency));
         panel.add(this.currenciesDropdown);
         panel.add(new JLabel("Currency: "));
         this.displayNameField = new JTextField(this.selectedCurrency
