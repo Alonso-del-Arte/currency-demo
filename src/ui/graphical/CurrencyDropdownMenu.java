@@ -27,7 +27,6 @@ import java.math.BigDecimal;
 import java.math.RoundingMode;
 import java.util.Arrays;
 import java.util.Currency;
-import java.util.Locale;
 
 import javax.swing.JComboBox;
 import javax.swing.JFrame;
@@ -45,8 +44,14 @@ import ui.CurrencyWrapper;
  */
 public class CurrencyDropdownMenu extends JComboBox<CurrencyWrapper> {
     
+    /**
+     * Sole constructor.
+     * @param currencies The currencies for the drop-down menu to include. For 
+     * example, Canadian dollars (CAD), United States dollars (USD) and Mexican 
+     * pesos (MXN).
+     */
     public CurrencyDropdownMenu(Currency[] currencies) {
-        // TODO: Write tests for this
+        super(CurrencyWrapper.wrap(currencies));
     }
     
 }
