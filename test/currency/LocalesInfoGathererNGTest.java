@@ -78,6 +78,19 @@ public class LocalesInfoGathererNGTest {
         assertEquals(actual, expected, message);
     }
 
+    @Test
+    public void testGetSymbolsDoesNotLeakField() {
+        Currency currency = CurrencyChooser.chooseCurrency();
+        LocalesInfoGatherer instance = new LocalesInfoGatherer(currency);
+        Map<String, Set<Locale>> firstResult = instance.getSymbols();
+        Map<String, Set<Locale>> expected = gatherSymbols(currency);
+        firstResult.clear();
+        Map<String, Set<Locale>> actual = instance.getSymbols();
+        String message = "Gathering symbols for " + currency.getDisplayName() 
+                + " (" + currency.getCurrencyCode() + ")";
+        assertEquals(actual, expected, message);
+    }
+
     /**
      * Test of getDisplayNames method, of class LocalesInfoGatherer.
      */
