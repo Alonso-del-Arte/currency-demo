@@ -48,9 +48,16 @@ public class LocalesInfoGatherer {
         return this.heldCurrency;
     }
     
-    // TODO: Write tests for this
+    /**
+     * Gives a map of the symbols for a specific currency in different locales. 
+     * For example, suppose this instance was initialized with United States 
+     * dollars (USD).
+     * @return A map of the symbols for keys and sets of locales for the values. 
+     * In the example, the keys would be $US, $, US $, US$, USD, $ US, 
+     * &#x449;.&#x434;., $ SU.
+     */
     public Map<String, Set<Locale>> getSymbols() {
-        return this.symbolsMap;
+        return new HashMap<>(this.symbolsMap);
     }
     
     // TODO: Write tests for this
