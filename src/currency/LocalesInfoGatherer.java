@@ -36,7 +36,7 @@ public class LocalesInfoGatherer {
     
     private final Currency heldCurrency;
     
-    private final Map<String, Set<Locale>> symbolsMap;
+    private final Map<String, Set<Locale>> symbolsMap, namesMap;
     
     /**
      * Getter for the currency that was passed to the constructor. For example, 
@@ -62,21 +62,35 @@ public class LocalesInfoGatherer {
     
     // TODO: Write tests for this
     public Map<String, Set<Locale>> getDisplayNames() {
-        return new HashMap<>();
+        return this.namesMap;
     }
     
-    // TODO: Write tests for this
+    /**
+     * Sole constructor.
+     * @param currency The currency for which to gather locale information. For 
+     * example, euros (EUR).
+     */
     public LocalesInfoGatherer(Currency currency) {
         this.heldCurrency = currency;
         this.symbolsMap = new HashMap<>();
+        this.namesMap = new HashMap<>();
         for (Locale locale : LOCALES) {
             String symbol = currency.getSymbol(locale);
+            String name = currency.getDisplayName(locale);
             if (this.symbolsMap.containsKey(symbol)) {
                 this.symbolsMap.get(symbol).add(locale);
             } else {
                 Set<Locale> set = new HashSet<>();
                 set.add(locale);
                 this.symbolsMap.put(symbol, set);
+            }
+            if (this.namesMap.containsKey(name)) {
+                Set<Locale> set = this.namesMap.get(name);
+                set.add(locale);
+            } else {
+                Set<Locale> set = new HashSet<>();
+                set.add(locale);
+                this.namesMap.put(name, set);
             }
         }
     }
