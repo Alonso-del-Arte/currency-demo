@@ -128,6 +128,7 @@ public class CurrencyInformationDisplay extends JFrame implements ItemListener {
         panel.add(new JLabel("Choose "));
         this.currenciesDropdown
                 .setSelectedItem(new CurrencyWrapper(this.selectedCurrency));
+        this.currenciesDropdown.setEditable(true);
         panel.add(this.currenciesDropdown);
         panel.add(new JLabel("Currency: "));
         this.displayNameField = new JTextField(this.selectedCurrency
