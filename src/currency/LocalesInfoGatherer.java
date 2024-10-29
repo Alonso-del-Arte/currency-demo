@@ -33,9 +33,16 @@ import java.util.Set;
  */
 public class LocalesInfoGatherer {
     
-    // TODO: Write tests for this
+    private final Currency heldCurrency;
+    
+    /**
+     * Getter for the currency that was passed to the constructor. For example, 
+     * suppose this instance was initialized with euros (EUR).
+     * @return The currency that was passed to the constructor. In the example, 
+     * this would be EUR.
+     */
     public Currency getCurrency() {
-        return Currency.getInstance("XTS");
+        return this.heldCurrency;
     }
     
     // TODO: Write tests for this
@@ -50,7 +57,7 @@ public class LocalesInfoGatherer {
     
     // TODO: Write tests for this
     public LocalesInfoGatherer(Currency currency) {
-        //
+        this.heldCurrency = currency;
     }
     
 }
