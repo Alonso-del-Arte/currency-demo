@@ -72,8 +72,7 @@ public class LocalesInfoGatherer {
         for (Locale locale : LOCALES) {
             String symbol = currency.getSymbol(locale);
             if (this.symbolsMap.containsKey(symbol)) {
-                Set<Locale> set = this.symbolsMap.get(symbol);
-                set.add(locale);
+                this.symbolsMap.get(symbol).add(locale);
             } else {
                 Set<Locale> set = new HashSet<>();
                 set.add(locale);
