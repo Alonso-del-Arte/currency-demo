@@ -91,18 +91,36 @@ public class LocalesInfoGathererNGTest {
         assertEquals(actual, expected, message);
     }
 
+    private static Map<String, Set<Locale>> gatherNames(Currency currency) {
+        Map<String, Set<Locale>> map = new HashMap<>();
+        for (Locale locale : LOCALES) {
+            String displayName = currency.getDisplayName(locale);
+            if (map.containsKey(displayName)) {
+                Set<Locale> set = map.get(displayName);
+                set.add(locale);
+            } else {
+                Set<Locale> set = new HashSet<>();
+                set.add(locale);
+                map.put(displayName, set);
+            }
+        }
+        return map;
+    }
+
     /**
      * Test of getDisplayNames method, of class LocalesInfoGatherer.
      */
     @Test
     public void testGetDisplayNames() {
         System.out.println("getDisplayNames");
-//        LocalesInfoGatherer instance = null;
-//        Map expResult = null;
-//        Map result = instance.getDisplayNames();
-//        assertEquals(result, expResult);
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
+        Currency currency = CurrencyChooser.chooseCurrency();
+        LocalesInfoGatherer instance = new LocalesInfoGatherer(currency);
+        Map<String, Set<Locale>> expected = gatherNames(currency);
+        Map<String, Set<Locale>> actual = instance.getDisplayNames();
+        String message = "Gathering display names for " 
+                + currency.getDisplayName() + " (" + currency.getCurrencyCode() 
+                + ")";
+        assertEquals(actual, expected, message);
     }
     
 }
