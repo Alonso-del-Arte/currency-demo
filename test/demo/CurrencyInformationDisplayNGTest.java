@@ -100,6 +100,16 @@ public class CurrencyInformationDisplayNGTest implements ItemListener {
     }
     
     @Test
+    public void testCurrencyDropdownShouldNotBeEditable() {
+        Currency currency = CurrencyChooser.chooseCurrency();
+        CurrencyInformationDisplay instance 
+                = new CurrencyInformationDisplay(currency);
+        String msg = "Currency drop-down menu for " + instance.getTitle()
+                + " should not be editable";
+        assert !instance.currenciesDropdown.isEditable() : msg;
+    }
+    
+    @Test
     public void testConstructorSetsCurrency() {
         Currency expected = CurrencyChooser.chooseCurrency();
         CurrencyInformationDisplay instance 
