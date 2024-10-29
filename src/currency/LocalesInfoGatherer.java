@@ -60,9 +60,16 @@ public class LocalesInfoGatherer {
         return new HashMap<>(this.symbolsMap);
     }
     
-    // TODO: Write tests for this
+    /**
+     * Gives a map of the display name for a specific currency in different 
+     * locales. For example, suppose this instance was initialized with United 
+     * States dollars (USD).
+     * @return A map of the display names for keys and sets of locales for the 
+     * values. In the example, the keys would include "d&oacute;lar 
+     * estadounidense" and "americk&yacute; dol&aacute;r".
+     */
     public Map<String, Set<Locale>> getDisplayNames() {
-        return this.namesMap;
+        return new HashMap<>(this.namesMap);
     }
     
     /**
