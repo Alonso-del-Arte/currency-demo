@@ -78,6 +78,9 @@ public class LocalesInfoGatherer {
      * example, euros (EUR).
      */
     public LocalesInfoGatherer(Currency currency) {
+        if (currency == null) {
+            currency = Currency.getInstance("XTS");
+        }
         this.heldCurrency = currency;
         this.symbolsMap = new HashMap<>();
         this.namesMap = new HashMap<>();
