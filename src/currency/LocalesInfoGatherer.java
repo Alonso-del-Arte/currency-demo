@@ -16,7 +16,6 @@
  */
 package currency;
 
-import java.util.Arrays;
 import java.util.Currency;
 import java.util.HashMap;
 import java.util.HashSet;
@@ -33,7 +32,11 @@ import java.util.Set;
  */
 public class LocalesInfoGatherer {
     
+    private static final Locale[] LOCALES = Locale.getAvailableLocales();
+    
     private final Currency heldCurrency;
+    
+    private final Map<String, Set<Locale>> symbolsMap;
     
     /**
      * Getter for the currency that was passed to the constructor. For example, 
@@ -47,7 +50,7 @@ public class LocalesInfoGatherer {
     
     // TODO: Write tests for this
     public Map<String, Set<Locale>> getSymbols() {
-        return new HashMap<>();
+        return this.symbolsMap;
     }
     
     // TODO: Write tests for this
@@ -58,6 +61,18 @@ public class LocalesInfoGatherer {
     // TODO: Write tests for this
     public LocalesInfoGatherer(Currency currency) {
         this.heldCurrency = currency;
+        this.symbolsMap = new HashMap<>();
+        for (Locale locale : LOCALES) {
+            String symbol = currency.getSymbol(locale);
+            if (this.symbolsMap.containsKey(symbol)) {
+                Set<Locale> set = this.symbolsMap.get(symbol);
+                set.add(locale);
+            } else {
+                Set<Locale> set = new HashSet<>();
+                set.add(locale);
+                this.symbolsMap.put(symbol, set);
+            }
+        }
     }
     
 }
