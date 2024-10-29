@@ -85,8 +85,7 @@ public class LocalesInfoGatherer {
                 this.symbolsMap.put(symbol, set);
             }
             if (this.namesMap.containsKey(name)) {
-                Set<Locale> set = this.namesMap.get(name);
-                set.add(locale);
+                this.namesMap.get(name).add(locale);
             } else {
                 Set<Locale> set = new HashSet<>();
                 set.add(locale);
