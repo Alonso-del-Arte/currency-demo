@@ -29,17 +29,15 @@ import org.testng.annotations.Test;
 public class LocalesInfoGathererNGTest {
     
     /**
-     * Test of getCurrency method, of class LocalesInfoGatherer.
+     * Test of the getCurrency function, of the LocalesInfoGatherer class.
      */
     @Test
     public void testGetCurrency() {
         System.out.println("getCurrency");
-        LocalesInfoGatherer instance = null;
-        Currency expResult = null;
-        Currency result = instance.getCurrency();
-        assertEquals(result, expResult);
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
+        Currency expected = CurrencyChooser.chooseCurrency();
+        LocalesInfoGatherer instance = new LocalesInfoGatherer(expected);
+        Currency actual = instance.getCurrency();
+        assertEquals(actual, expected);
     }
 
     /**
@@ -48,10 +46,10 @@ public class LocalesInfoGathererNGTest {
     @Test
     public void testGetSymbols() {
         System.out.println("getSymbols");
-        LocalesInfoGatherer instance = null;
-        Map expResult = null;
-        Map result = instance.getSymbols();
-        assertEquals(result, expResult);
+//        LocalesInfoGatherer instance = null;
+//        Map expResult = null;
+//        Map result = instance.getSymbols();
+//        assertEquals(result, expResult);
         // TODO review the generated test code and remove the default call to fail.
         fail("The test case is a prototype.");
     }
@@ -62,10 +60,10 @@ public class LocalesInfoGathererNGTest {
     @Test
     public void testGetDisplayNames() {
         System.out.println("getDisplayNames");
-        LocalesInfoGatherer instance = null;
-        Map expResult = null;
-        Map result = instance.getDisplayNames();
-        assertEquals(result, expResult);
+//        LocalesInfoGatherer instance = null;
+//        Map expResult = null;
+//        Map result = instance.getDisplayNames();
+//        assertEquals(result, expResult);
         // TODO review the generated test code and remove the default call to fail.
         fail("The test case is a prototype.");
     }
