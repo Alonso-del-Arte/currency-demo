@@ -16,8 +16,13 @@
  */
 package currency;
 
+import java.util.Arrays;
 import java.util.Currency;
+import java.util.HashMap;
+import java.util.HashSet;
+import java.util.Locale;
 import java.util.Map;
+import java.util.Set;
 
 import static org.testng.Assert.*;
 import org.testng.annotations.Test;
@@ -27,6 +32,8 @@ import org.testng.annotations.Test;
  * @author Alonso del Arte
  */
 public class LocalesInfoGathererNGTest {
+    
+    private static final Locale[] LOCALES = Locale.getAvailableLocales();
     
     /**
      * Test of the getCurrency function, of the LocalesInfoGatherer class.
@@ -39,19 +46,36 @@ public class LocalesInfoGathererNGTest {
         Currency actual = instance.getCurrency();
         assertEquals(actual, expected);
     }
+    
+    private static Map<String, Set<Locale>> gatherSymbols(Currency currency) {
+        Map<String, Set<Locale>> map = new HashMap<>();
+        for (Locale locale : LOCALES) {
+            String symbol = currency.getSymbol(locale);
+            if (map.containsKey(symbol)) {
+                Set<Locale> set = map.get(symbol);
+                set.add(locale);
+            } else {
+                Set<Locale> set = new HashSet<>();
+                set.add(locale);
+                map.put(symbol, set);
+            }
+        }
+        return map;
+    }
 
     /**
-     * Test of getSymbols method, of class LocalesInfoGatherer.
+     * Test of the getSymbols function, of the LocalesInfoGatherer class.
      */
     @Test
     public void testGetSymbols() {
         System.out.println("getSymbols");
-//        LocalesInfoGatherer instance = null;
-//        Map expResult = null;
-//        Map result = instance.getSymbols();
-//        assertEquals(result, expResult);
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
+        Currency currency = CurrencyChooser.chooseCurrency();
+        LocalesInfoGatherer instance = new LocalesInfoGatherer(currency);
+        Map<String, Set<Locale>> expected = gatherSymbols(currency);
+        Map<String, Set<Locale>> actual = instance.getSymbols();
+        String message = "Gathering symbols for " + currency.getDisplayName() 
+                + " (" + currency.getCurrencyCode() + ")";
+        assertEquals(actual, expected, message);
     }
 
     /**
