@@ -108,7 +108,7 @@ public class LocalesInfoGathererNGTest {
     }
 
     /**
-     * Test of getDisplayNames method, of class LocalesInfoGatherer.
+     * Test of the getDisplayNames function, of the LocalesInfoGatherer class.
      */
     @Test
     public void testGetDisplayNames() {
@@ -123,4 +123,18 @@ public class LocalesInfoGathererNGTest {
         assertEquals(actual, expected, message);
     }
     
+    @Test
+    public void testGetDisplayNamesDoesNotLeakField() {
+        Currency currency = CurrencyChooser.chooseCurrency();
+        LocalesInfoGatherer instance = new LocalesInfoGatherer(currency);
+        Map<String, Set<Locale>> firstResult = instance.getDisplayNames();
+        Map<String, Set<Locale>> expected = gatherNames(currency);
+        firstResult.clear();
+        Map<String, Set<Locale>> actual = instance.getDisplayNames();
+        String message = "Gathering display names for " 
+                + currency.getDisplayName() + " (" + currency.getCurrencyCode() 
+                + ")";
+        assertEquals(actual, expected, message);
+    }
+
 }
