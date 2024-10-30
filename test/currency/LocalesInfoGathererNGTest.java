@@ -16,7 +16,6 @@
  */
 package currency;
 
-import java.util.Arrays;
 import java.util.Currency;
 import java.util.HashMap;
 import java.util.HashSet;
@@ -24,6 +23,7 @@ import java.util.Locale;
 import java.util.Map;
 import java.util.Set;
 
+import static org.testframe.api.Asserters.assertThrows;
 import static org.testng.Assert.*;
 import org.testng.annotations.Test;
 
@@ -135,6 +135,19 @@ public class LocalesInfoGathererNGTest {
                 + currency.getDisplayName() + " (" + currency.getCurrencyCode() 
                 + ")";
         assertEquals(actual, expected, message);
+    }
+    
+    @Test
+    public void testConstructorRejectsNullCurrency() {
+        String msg = "Null currency should cause exception";
+        Throwable t = assertThrows(() -> {
+            LocalesInfoGatherer badInstance = new LocalesInfoGatherer(null);
+            System.out.println(msg + ", not created instance " 
+                    + badInstance.toString());
+        }, NullPointerException.class, msg);
+        String excMsg = t.getMessage();
+        assert excMsg != null : "Exception message should not be null";
+        assert !excMsg.isBlank() : "Exception message should not be blank";
     }
 
 }
