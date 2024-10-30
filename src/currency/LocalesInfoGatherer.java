@@ -76,12 +76,9 @@ public class LocalesInfoGatherer {
      * Sole constructor.
      * @param currency The currency for which to gather locale information. For 
      * example, euros (EUR).
+     * @throws NullPointerException If {@code currency} is null.
      */
     public LocalesInfoGatherer(Currency currency) {
-        if (currency == null) {
-            String excMsg = "Currency should not be null";
-            throw new NullPointerException(excMsg);
-        }
         this.heldCurrency = currency;
         this.symbolsMap = new HashMap<>();
         this.namesMap = new HashMap<>();
