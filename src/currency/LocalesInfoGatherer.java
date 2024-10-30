@@ -79,7 +79,8 @@ public class LocalesInfoGatherer {
      */
     public LocalesInfoGatherer(Currency currency) {
         if (currency == null) {
-            currency = Currency.getInstance("XTS");
+            String excMsg = "Currency should not be null";
+            throw new NullPointerException(excMsg);
         }
         this.heldCurrency = currency;
         this.symbolsMap = new HashMap<>();
