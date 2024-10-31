@@ -131,16 +131,17 @@ abstract class RateQuoteCache {
     /**
      * Constructor.
      * @param capacity The capacity for the cache. For example, 32. Should be at 
-     * least {@link #MINIMUM_CAPACITY} but not more than {@link 
-     * #MAXIMUM_CAPACITY}.
+     * least {@link cacheops.LRUCache#MINIMUM_CAPACITY} but not more than {@link 
+     * cacheops.LRUCache#MAXIMUM_CAPACITY}.
      * @throws IllegalArgumentException If {@code capacity} is less than {@link 
-     * #MINIMUM_CAPACITY} or more than {@link #MAXIMUM_CAPACITY}.
+     * cacheops.LRUCache#MINIMUM_CAPACITY} or more than {@link 
+     * cacheops.LRUCache#MAXIMUM_CAPACITY}.
      */
     public RateQuoteCache(int capacity) {
-        if (capacity < MINIMUM_CAPACITY || capacity > MAXIMUM_CAPACITY) {
-            String excMsg = "Capacity " + capacity + " is not valid";
-            throw new IllegalArgumentException(excMsg);
-        }
+//        if (capacity < MINIMUM_CAPACITY || capacity > MAXIMUM_CAPACITY) {
+//            String excMsg = "Capacity " + capacity + " is not valid";
+//            throw new IllegalArgumentException(excMsg);
+//        }
         this.quotes = new ConversionRateQuote[capacity];
     }
     
