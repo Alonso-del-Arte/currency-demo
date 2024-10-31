@@ -52,12 +52,12 @@ public abstract class LRUCache<N, V> {
     
     // TODO: Write tests for this
     boolean has(V value) {
-        return false;
+        return true;
     }
 
     // TODO: Write tests for this
     public V retrieve(N name) {
-        return null;
+        return this.create(name);
     }
     
     /**
