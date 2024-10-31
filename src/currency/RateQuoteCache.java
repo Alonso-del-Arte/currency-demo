@@ -16,6 +16,8 @@
  */
 package currency;
 
+import cacheops.LRUCache;
+
 /**
  * Least recently used (LRU) cache for conversion rate quotes. The criterion for 
  * refreshing a quote is to be determined by the caller.
@@ -126,10 +128,11 @@ abstract class RateQuoteCache {
      * cacheops.LRUCache#MAXIMUM_CAPACITY}.
      */
     public RateQuoteCache(int capacity) {
-//        if (capacity < MINIMUM_CAPACITY || capacity > MAXIMUM_CAPACITY) {
-//            String excMsg = "Capacity " + capacity + " is not valid";
-//            throw new IllegalArgumentException(excMsg);
-//        }
+        if (capacity < LRUCache.MINIMUM_CAPACITY 
+                || capacity > LRUCache.MAXIMUM_CAPACITY) {
+            String excMsg = "Capacity " + capacity + " is not valid";
+            throw new IllegalArgumentException(excMsg);
+        }
         this.quotes = new ConversionRateQuote[capacity];
     }
     
