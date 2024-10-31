@@ -70,6 +70,24 @@ public class LRUCacheNGTest {
         System.out.println("\"" + excMsg + "\"");
     }
 
+    @Test
+    public void testConstructorRejectsSizeBelowMinimum() {
+        for (int i = 0; i < LRUCache.MINIMUM_CAPACITY; i++) {
+            final int badSize = i;
+            Throwable t = assertThrows(() -> {
+                LRUCacheImpl badCache = new LRUCacheImpl(badSize);
+                System.out.println("Should not have been able to create "
+                        + badCache + " of size " + badSize
+                        + ", which is less than minimum capacity "
+                        + LRUCache.MINIMUM_CAPACITY);
+            }, IllegalArgumentException.class);
+            String excMsg = t.getMessage();
+            assert excMsg != null : "Exception message should not be null";
+            assert !excMsg.isBlank() : "Exception message should not be blank";
+            System.out.println("\"" + excMsg + "\"");
+        }
+    }
+
     private static class LRUCacheImpl extends LRUCache<String, Pattern> {
 
         @Override
