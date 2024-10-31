@@ -31,15 +31,15 @@ public abstract class LRUCache<N, V> {
      * The minimum capacity for a cache. The ideal capacity's probably greater 
      * than this but less than {@link #MAXIMUM_CAPACITY}.
      */
-    // TODO: Write tests for this
     public static final int MINIMUM_CAPACITY = 4;
     
     /**
      * The maximum capacity for a cache. The ideal capacity's probably less than  
      * this but greater than {@link #MINIMUM_CAPACITY}.
      */
-    // TODO: Write tests for this
     public static final int MAXIMUM_CAPACITY = 128;
+    
+    private V mostRecentlyCreated = null;
     
     /**
      * Creates a value for a given name. Ideally this function should only be 
@@ -52,12 +52,13 @@ public abstract class LRUCache<N, V> {
     
     // TODO: Write tests for this
     boolean has(V value) {
-        return false;
+        return value.equals(this.mostRecentlyCreated);
     }
 
     // TODO: Write tests for this
     public V retrieve(N name) {
-        return this.create(name);
+        this.mostRecentlyCreated = this.create(name);
+        return this.mostRecentlyCreated;
     }
     
     /**
