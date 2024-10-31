@@ -52,7 +52,7 @@ public abstract class LRUCache<N, V> {
     
     // TODO: Write tests for this
     boolean has(V value) {
-        return true;
+        return false;
     }
 
     // TODO: Write tests for this
