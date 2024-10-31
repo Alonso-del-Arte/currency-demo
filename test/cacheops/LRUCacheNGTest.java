@@ -88,6 +88,21 @@ public class LRUCacheNGTest {
         }
     }
 
+    @Test
+    public void testConstructorRejectsExcessiveCapacity() {
+        int capacity = LRUCache.MAXIMUM_CAPACITY 
+                + RANDOM.nextInt(Short.MAX_VALUE) + 1;
+        String msg = "Capacity " + capacity + " should cause exception";
+        Throwable t = assertThrows(() -> {
+            LRUCacheImpl badInstance = new LRUCacheImpl(capacity);
+            System.out.println(msg + ", not created " + badInstance.toString());
+        }, IllegalArgumentException.class, msg);
+        String excMsg = t.getMessage();
+        assert excMsg != null : "Exception message should not be null";
+        assert !excMsg.isBlank() : "Exception message should not be blank";
+        System.out.println("\"" + excMsg + "\"");
+    }
+
     private static class LRUCacheImpl extends LRUCache<String, Pattern> {
 
         @Override
