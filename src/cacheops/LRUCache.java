@@ -39,7 +39,7 @@ public abstract class LRUCache<N, V> {
      * this but greater than {@link #MINIMUM_CAPACITY}.
      */
     // TODO: Write tests for this
-    public static final int MAXIMUM_CAPACITY = -2;
+    public static final int MAXIMUM_CAPACITY = 128;
     
     /**
      * Creates a value for a given name. Ideally this function should only be 
