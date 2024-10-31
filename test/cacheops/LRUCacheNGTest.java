@@ -30,13 +30,11 @@ import org.testng.annotations.Test;
  */
 public class LRUCacheNGTest {
     
-    public LRUCacheNGTest() {
-    }
-
     @Test
-    public void testSomeMethod() {
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
+    public void testMinimumCapacityConstant() {
+        int expected = 4;
+        int actual = LRUCache.MINIMUM_CAPACITY;
+        assertEquals(actual, expected);
     }
     
     private static class LRUCacheImpl extends LRUCache<String, Pattern> {
