@@ -60,10 +60,15 @@ public abstract class LRUCache<N, V> {
         return null;
     }
     
-    // TODO: Write tests for this
+    /**
+     * Constructor.
+     * @param capacity How much capacity the cache should have.
+     * @throws IllegalArgumentException If {@code capacity} is less than {@link 
+     * #MINIMUM_CAPACITY} or more than {@link #MAXIMUM_CAPACITY}.
+     */
     public LRUCache(int capacity) {
         if (capacity < MINIMUM_CAPACITY || capacity > MAXIMUM_CAPACITY) {
-            String excMsg = "Capacity is not valid";
+            String excMsg = "Capacity " + capacity + " is not valid";
             throw new IllegalArgumentException(excMsg);
         }
     }
