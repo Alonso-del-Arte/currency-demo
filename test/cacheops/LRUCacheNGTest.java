@@ -43,9 +43,9 @@ public class LRUCacheNGTest {
     }
     
     private static String makeRegexValueForNumber() {
-        int a = RANDOM.nextInt(1, 9);
-        int b = RANDOM.nextInt(1, 9);
-        return "\\d{" + a + "}\\d{" + b + "}";
+        int a = RANDOM.nextInt(2, 10);
+        int b = RANDOM.nextInt(2, 10);
+        return "\\d{" + a + "}-\\d{" + b + "}";
     }
     
     @Test
@@ -128,6 +128,19 @@ public class LRUCacheNGTest {
         String msg = "Cache shouldn't have value " + value.toString() 
                 + " that wasn't added";
         assert !instance.has(value) : msg;
+    }
+    
+    @Test
+    public void testHas() {
+        System.out.println("has");
+        int capacity = chooseCapacity();
+        LRUCacheImpl instance = new LRUCacheImpl(capacity);
+        String regex = makeRegexValueForNumber();
+        instance.retrieve(regex);
+        Pattern value = Pattern.compile(regex);
+        String msg = "Cache should have value " + value.toString() 
+                + " that was added";
+        assert instance.has(value) : msg;
     }
 
     private static class LRUCacheImpl extends LRUCache<String, Pattern> {
