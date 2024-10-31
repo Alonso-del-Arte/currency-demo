@@ -18,9 +18,14 @@ package cacheops;
 
 /**
  * A least recently used (LRU) cache.
+ * @param <N> The type of the names for the values to cache. Ideally this should 
+ * be an immutable class that is easily calculated anew.
+ * @param <V> The type of the values to cache. To be worth caching, the values 
+ * should be too expensive to recalculate each and every time they're needed, so 
+ * that it's easier to retrieve from the cache.
  * @author Alonso del Arte
  */
-public abstract class LRUCache {
+public abstract class LRUCache<N, V> {
     
     /**
      * The minimum capacity for a cache. The ideal capacity's probably greater 
@@ -35,6 +40,25 @@ public abstract class LRUCache {
      */
     // TODO: Write tests for this
     public static final int MAXIMUM_CAPACITY = -2;
+    
+    /**
+     * Creates a value for a given name. Ideally this function should only be 
+     * called by {@link #retrieve(java.lang.Object) retrieve()}.
+     * @param name The name to create a value for. Once the value is in the 
+     * cache, this name can be used to retrieve it.
+     * @return A new value. Preferably not null.
+     */
+    protected abstract V create(N name);
+    
+    // TODO: Write tests for this
+    boolean has(V value) {
+        return false;
+    }
+
+    // TODO: Write tests for this
+    public V retrieve(N name) {
+        return null;
+    }
     
     // TODO: Write tests for this
     public LRUCache(int capacity) {

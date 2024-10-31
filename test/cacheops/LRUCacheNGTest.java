@@ -16,6 +16,11 @@
  */
 package cacheops;
 
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
+import java.util.Random;
+import java.util.regex.Pattern;
+
 import static org.testng.Assert.*;
 import org.testng.annotations.Test;
 
@@ -34,7 +39,12 @@ public class LRUCacheNGTest {
         fail("The test case is a prototype.");
     }
     
-    private static class LRUCacheImpl extends LRUCache {
+    private static class LRUCacheImpl extends LRUCache<String, Pattern> {
+
+        @Override
+        protected Pattern create(String name) {
+            return Pattern.compile(name);
+        }
 
         public LRUCacheImpl(int capacity) {
             super(capacity);
