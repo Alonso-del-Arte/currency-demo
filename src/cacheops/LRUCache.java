@@ -32,7 +32,7 @@ public abstract class LRUCache<N, V> {
      * than this but less than {@link #MAXIMUM_CAPACITY}.
      */
     // TODO: Write tests for this
-    public static final int MINIMUM_CAPACITY = -1;
+    public static final int MINIMUM_CAPACITY = 4;
     
     /**
      * The maximum capacity for a cache. The ideal capacity's probably less than  
