@@ -16,8 +16,6 @@
  */
 package cacheops;
 
-import java.time.LocalDate;
-import java.time.format.DateTimeFormatter;
 import java.util.Random;
 import java.util.regex.Pattern;
 
@@ -36,16 +34,21 @@ public class LRUCacheNGTest {
     
     private static final int CAPACITY_ORIGIN = 4;
     
-    private static final int CAPACITY_BOUND = 128;
+    private static final int CAPACITY_BOUND = 129;
     
     private static int chooseCapacity() {
         return RANDOM.nextInt(CAPACITY_ORIGIN, CAPACITY_BOUND);
     }
     
-    private static String makeRegexValueForNumber() {
+    private static String makeRegexNameForNumberWithDash() {
         int a = RANDOM.nextInt(2, 10);
         int b = RANDOM.nextInt(2, 10);
         return "\\d{" + a + "}-\\d{" + b + "}";
+    }
+    
+    private static String makeRegexNameForCapitalizedWord() {
+        int n = RANDOM.nextInt(2, 10);
+        return "[A-Z][a-z]{" + n + "}";
     }
     
     @Test
@@ -57,7 +60,7 @@ public class LRUCacheNGTest {
     
     @Test
     public void testMaximumCapacityConstant() {
-        int expected = CAPACITY_BOUND;
+        int expected = CAPACITY_BOUND - 1;
         int actual = LRUCache.MAXIMUM_CAPACITY;
         assertEquals(actual, expected);
     }
@@ -123,8 +126,8 @@ public class LRUCacheNGTest {
     public void testDoesNotHave() {
         int capacity = chooseCapacity();
         LRUCacheImpl instance = new LRUCacheImpl(capacity);
-        String regex = makeRegexValueForNumber();
-        Pattern value = Pattern.compile(regex);
+        String name = makeRegexNameForNumberWithDash();
+        Pattern value = Pattern.compile(name);
         String msg = "Cache shouldn't have value " + value.toString() 
                 + " that wasn't added";
         assert !instance.has(value) : msg;
@@ -135,17 +138,47 @@ public class LRUCacheNGTest {
         System.out.println("has");
         int capacity = chooseCapacity();
         LRUCacheImpl instance = new LRUCacheImpl(capacity);
-        String regex = makeRegexValueForNumber();
-        Pattern value = instance.retrieve(regex);
+        String name = makeRegexNameForNumberWithDash();
+        Pattern value = instance.retrieve(name);
         String msg = "Cache should have value " + value.toString() 
                 + " that was added";
         assert instance.has(value) : msg;
     }
+    
+    /**
+     * Test of the retrieve function, of the LRUCache class. Many name-value 
+     * pairs can be added to the cache, and as long as there's capacity, all 
+     * values should be available for retrieval. The retrieve call should not 
+     * cause a create call for a value that's already in the cache. Note that 
+     * the Pattern class does not have an equals() override, at least as of Java 
+     * 21.
+     */
+    @Test
+    public void testRetrieve() {
+        System.out.println("retrieve");
+        int capacity = chooseCapacity();
+        LRUCacheImpl instance = new LRUCacheImpl(capacity);
+        String name = makeRegexNameForCapitalizedWord();
+        Pattern expected = instance.retrieve(name);
+        for (int i = 1; i < capacity; i++) {
+            instance.retrieve(makeRegexNameForNumberWithDash());
+        }
+        Pattern actual = instance.retrieve(name);
+        String message = "Value " + expected.toString() + " as one of " 
+                + capacity 
+                + " in a cache of that capacity should be retrieved";
+        assertEquals(actual, expected, message);
+        assertEquals(instance.createCallCount, capacity, message 
+                + ", not created anew");
+    }
 
     private static class LRUCacheImpl extends LRUCache<String, Pattern> {
+        
+        int createCallCount = 0;
 
         @Override
         protected Pattern create(String name) {
+            this.createCallCount++;
             return Pattern.compile(name);
         }
 
