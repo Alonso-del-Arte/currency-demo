@@ -136,8 +136,7 @@ public class LRUCacheNGTest {
         int capacity = chooseCapacity();
         LRUCacheImpl instance = new LRUCacheImpl(capacity);
         String regex = makeRegexValueForNumber();
-        instance.retrieve(regex);
-        Pattern value = Pattern.compile(regex);
+        Pattern value = instance.retrieve(regex);
         String msg = "Cache should have value " + value.toString() 
                 + " that was added";
         assert instance.has(value) : msg;
