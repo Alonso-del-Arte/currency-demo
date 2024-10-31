@@ -16,6 +16,7 @@
  */
 package currency;
 
+import cacheops.LRUCache;
 import static currency.CurrencyChooser.RANDOM;
 
 import java.time.LocalDateTime;
@@ -37,16 +38,6 @@ import org.testng.annotations.Test;
 public class RateQuoteCacheNGTest {
     
     private static final int DEFAULT_CAPACITY = 8;
-    
-    @Test
-    public void testMinimumCapacityConstant() {
-        assertEquals(RateQuoteCache.MINIMUM_CAPACITY, 4);
-    }
-    
-    @Test
-    public void testMaximumCapacityConstant() {
-        assertEquals(RateQuoteCache.MAXIMUM_CAPACITY, 128);
-    }
     
     /**
      * Test of the has function, of the RateQuoteCache class.
@@ -93,12 +84,12 @@ public class RateQuoteCacheNGTest {
         Currency from = CurrencyChooser.chooseCurrency();
         Currency to = CurrencyChooser.chooseCurrencyOtherThan(from);
         CurrencyPair currencies = new CurrencyPair(from, to);
-        int capacity = RANDOM.nextInt(RateQuoteCache.MINIMUM_CAPACITY, 
-                RateQuoteCache.MAXIMUM_CAPACITY);
+        int capacity = RANDOM.nextInt(LRUCache.MINIMUM_CAPACITY, 
+                LRUCache.MAXIMUM_CAPACITY);
         RateQuoteCache instance = new RateQuoteCacheImpl(capacity);
         instance.retrieve(currencies);
         int initialCapacity = capacity 
-                + RANDOM.nextInt(RateQuoteCache.MINIMUM_CAPACITY) + 1;
+                + RANDOM.nextInt(LRUCache.MINIMUM_CAPACITY) + 1;
         List<CurrencyPair> list = listOtherPairs(currencies, initialCapacity);
         for (int index = 1; index < initialCapacity; index++) {
             CurrencyPair currCurrPair = list.get(index);
@@ -116,8 +107,8 @@ public class RateQuoteCacheNGTest {
         Currency from = CurrencyChooser.chooseCurrency();
         Currency to = CurrencyChooser.chooseCurrencyOtherThan(from);
         CurrencyPair currencies = new CurrencyPair(from, to);
-        int capacity = RANDOM.nextInt(RateQuoteCache.MINIMUM_CAPACITY, 
-                RateQuoteCache.MAXIMUM_CAPACITY);
+        int capacity = RANDOM.nextInt(LRUCache.MINIMUM_CAPACITY, 
+                LRUCache.MAXIMUM_CAPACITY);
         RateQuoteCache instance = new RateQuoteCacheImpl(capacity);
         instance.retrieve(currencies);
         List<CurrencyPair> list = listOtherPairs(currencies, capacity);
@@ -137,8 +128,8 @@ public class RateQuoteCacheNGTest {
         Currency from = CurrencyChooser.chooseCurrency();
         Currency to = CurrencyChooser.chooseCurrencyOtherThan(from);
         CurrencyPair currencies = new CurrencyPair(from, to);
-        int expected = RANDOM.nextInt(RateQuoteCache.MINIMUM_CAPACITY, 
-                RateQuoteCache.MAXIMUM_CAPACITY);
+        int expected = RANDOM.nextInt(LRUCache.MINIMUM_CAPACITY, 
+                LRUCache.MAXIMUM_CAPACITY);
         RateQuoteCacheImpl instance = new RateQuoteCacheImpl(expected);
         List<CurrencyPair> list = listOtherPairs(currencies, expected);
         for (int index = 1; index < expected; index++) {
@@ -158,8 +149,8 @@ public class RateQuoteCacheNGTest {
         Currency from = CurrencyChooser.chooseCurrency();
         Currency to = CurrencyChooser.chooseCurrencyOtherThan(from);
         CurrencyPair currencies = new CurrencyPair(from, to);
-        int capacity = RANDOM.nextInt(RateQuoteCache.MINIMUM_CAPACITY, 
-                RateQuoteCache.MAXIMUM_CAPACITY);
+        int capacity = RANDOM.nextInt(LRUCache.MINIMUM_CAPACITY, 
+                LRUCache.MAXIMUM_CAPACITY);
         RateQuoteCacheImpl instance = new RateQuoteCacheImpl(capacity);
         ConversionRateQuote actual = instance.retrieve(currencies);
         ConversionRateQuote expected = instance.mostRecentlyCreatedQuote;
@@ -175,8 +166,8 @@ public class RateQuoteCacheNGTest {
         Currency from = CurrencyChooser.chooseCurrency();
         Currency to = CurrencyChooser.chooseCurrencyOtherThan(from);
         CurrencyPair currencies = new CurrencyPair(from, to);
-        int capacity = RANDOM.nextInt(RateQuoteCache.MINIMUM_CAPACITY, 
-                RateQuoteCache.MAXIMUM_CAPACITY);
+        int capacity = RANDOM.nextInt(LRUCache.MINIMUM_CAPACITY, 
+                LRUCache.MAXIMUM_CAPACITY);
         RateQuoteCacheImpl instance = new RateQuoteCacheImpl(capacity);
         ConversionRateQuote expected = instance.retrieve(currencies);
         int initialCapacity = capacity + 1;
@@ -205,8 +196,8 @@ public class RateQuoteCacheNGTest {
         Currency from = CurrencyChooser.chooseCurrency();
         Currency to = CurrencyChooser.chooseCurrencyOtherThan(from);
         CurrencyPair currencies = new CurrencyPair(from, to);
-        int capacity = RANDOM.nextInt(RateQuoteCache.MINIMUM_CAPACITY, 
-                RateQuoteCache.MAXIMUM_CAPACITY);
+        int capacity = RANDOM.nextInt(LRUCache.MINIMUM_CAPACITY, 
+                LRUCache.MAXIMUM_CAPACITY);
         RateQuoteCacheImpl instance = new RateQuoteCacheImpl(capacity);
         ConversionRateQuote unexpected = instance.retrieve(currencies);
         instance.minutes = 0;
@@ -255,7 +246,7 @@ public class RateQuoteCacheNGTest {
     
     @Test
     public void testConstructorRejectsLowPositiveCapacity() {
-        for (int i = 1; i < RateQuoteCache.MINIMUM_CAPACITY; i++) {
+        for (int i = 1; i < LRUCache.MINIMUM_CAPACITY; i++) {
             final int capacity = i;
             String msg = "Capacity " + capacity + " should cause an exception";
             Throwable t = assertThrows(() -> {
@@ -276,11 +267,10 @@ public class RateQuoteCacheNGTest {
 
     @Test
     public void testConstructorRejectsExcessiveCapacity() {
-        int capacity = RateQuoteCache.MAXIMUM_CAPACITY + RANDOM.nextInt(128) 
+        int capacity = LRUCache.MAXIMUM_CAPACITY + RANDOM.nextInt(128) 
                 + 1;
         String msg = "Capacity " + capacity + " in excess of maximum capacity "  
-                + RateQuoteCache.MAXIMUM_CAPACITY 
-                + " should cause an exception";
+                + LRUCache.MAXIMUM_CAPACITY + " should cause an exception";
         Throwable t = assertThrows(() -> {
             RateQuoteCache badCache = new RateQuoteCacheImpl(capacity);
             System.out.println(msg + ", not given instance " 
