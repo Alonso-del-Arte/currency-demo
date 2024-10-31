@@ -37,6 +37,13 @@ public class LRUCacheNGTest {
         assertEquals(actual, expected);
     }
     
+    @Test
+    public void testMaximumCapacityConstant() {
+        int expected = 128;
+        int actual = LRUCache.MAXIMUM_CAPACITY;
+        assertEquals(actual, expected);
+    }
+    
     private static class LRUCacheImpl extends LRUCache<String, Pattern> {
 
         @Override
