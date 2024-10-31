@@ -42,6 +42,12 @@ public class LRUCacheNGTest {
         return RANDOM.nextInt(CAPACITY_ORIGIN, CAPACITY_BOUND);
     }
     
+    private static String makeRegexValueForNumber() {
+        int a = RANDOM.nextInt(1, 9);
+        int b = RANDOM.nextInt(1, 9);
+        return "\\d{" + a + "}\\d{" + b + "}";
+    }
+    
     @Test
     public void testMinimumCapacityConstant() {
         int expected = CAPACITY_ORIGIN;
@@ -111,6 +117,17 @@ public class LRUCacheNGTest {
         String capMsg = "Exception message should include \"" + numStr + "\"";
         assert excMsg.contains(numStr) : capMsg;
         System.out.println("\"" + excMsg + "\"");
+    }
+    
+    @Test
+    public void testDoesNotHave() {
+        int capacity = chooseCapacity();
+        LRUCacheImpl instance = new LRUCacheImpl(capacity);
+        String regex = makeRegexValueForNumber();
+        Pattern value = Pattern.compile(regex);
+        String msg = "Cache shouldn't have value " + value.toString() 
+                + " that wasn't added";
+        assert !instance.has(value) : msg;
     }
 
     private static class LRUCacheImpl extends LRUCache<String, Pattern> {
