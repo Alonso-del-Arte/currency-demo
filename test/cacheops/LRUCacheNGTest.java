@@ -21,6 +21,8 @@ import java.time.format.DateTimeFormatter;
 import java.util.Random;
 import java.util.regex.Pattern;
 
+import static org.testframe.api.Asserters.assertThrows;
+
 import static org.testng.Assert.*;
 import org.testng.annotations.Test;
 
@@ -30,20 +32,44 @@ import org.testng.annotations.Test;
  */
 public class LRUCacheNGTest {
     
+    private static final Random RANDOM = new Random();
+    
+    private static final int CAPACITY_ORIGIN = 4;
+    
+    private static final int CAPACITY_BOUND = 128;
+    
+    private static int chooseCapacity() {
+        return RANDOM.nextInt(CAPACITY_ORIGIN, CAPACITY_BOUND);
+    }
+    
     @Test
     public void testMinimumCapacityConstant() {
-        int expected = 4;
+        int expected = CAPACITY_ORIGIN;
         int actual = LRUCache.MINIMUM_CAPACITY;
         assertEquals(actual, expected);
     }
     
     @Test
     public void testMaximumCapacityConstant() {
-        int expected = 128;
+        int expected = CAPACITY_BOUND;
         int actual = LRUCache.MAXIMUM_CAPACITY;
         assertEquals(actual, expected);
     }
     
+    @Test
+    public void testConstructorRejectsNegativeCapacity() {
+        int capacity = RANDOM.nextInt() | Integer.MIN_VALUE;
+        String msg = "Capacity " + capacity + " should cause exception";
+        Throwable t = assertThrows(() -> {
+            LRUCacheImpl badInstance = new LRUCacheImpl(capacity);
+            System.out.println(msg + ", not created " + badInstance.toString());
+        }, IllegalArgumentException.class, msg);
+        String excMsg = t.getMessage();
+        assert excMsg != null : "Exception message should not be null";
+        assert !excMsg.isBlank() : "Exception message should not be blank";
+        System.out.println("\"" + excMsg + "\"");
+    }
+
     private static class LRUCacheImpl extends LRUCache<String, Pattern> {
 
         @Override
