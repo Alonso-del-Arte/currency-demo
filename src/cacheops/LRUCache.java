@@ -62,7 +62,10 @@ public abstract class LRUCache<N, V> {
     
     // TODO: Write tests for this
     public LRUCache(int capacity) {
-        //
+        if (capacity < 0) {
+            String excMsg = "Capacity " + capacity + " is not valid";
+            throw new IllegalArgumentException(excMsg);
+        }
     }
     
 }
