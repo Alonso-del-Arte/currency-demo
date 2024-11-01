@@ -17,12 +17,28 @@
 package cacheops;
 
 /**
- * A least recently used (LRU) cache.
+ * A least recently used (LRU) cache. The idea is that the cache makes the most 
+ * recently used items available. The cache has a capacity specified at the time 
+ * of construction. New items can still be added when capacity is reached, the 
+ * cache simply discards the least recently used item.
+ * <p>One way to implement the cache is with an array. New items are added at 
+ * the first index of the array and the other items are pushed back one index. 
+ * Whatever was at the last index is simply discarded.</p>
+ * <p>As long as an item is in the cache, it can't be collected by the garbage 
+ * collector. Once it's out of the cache, there might be no more references to 
+ * the object, in which case the memory it takes up can be reclaimed.</p>
+ * <p>This class is modeled on the {@code sun.misc.LRUCache} class that 
+ * {@code java.util.Scanner} uses in some implementations of the Java 
+ * Development Kit (JDK). But unlike that one, this one uses no "native 
+ * methods," and, perhaps more importantly, is not proprietary.</p>
  * @param <N> The type of the names for the values to cache. Ideally this should 
- * be an immutable class that is easily calculated anew.
+ * be an immutable class that is easily calculated anew, and which has {@code 
+ * equals()} overridden. For example, {@code java.lang.String} is a good choice 
+ * of {@code N} type.
  * @param <V> The type of the values to cache. To be worth caching, the values 
  * should be too expensive to recalculate each and every time they're needed, so 
- * that it's easier to retrieve from the cache.
+ * that it's easier to retrieve from the cache. For example, {@code 
+ * java.util.regex.Pattern} is a good choice of {@code V} type.
  * @author Alonso del Arte
  */
 public abstract class LRUCache<N, V> {
@@ -96,23 +112,22 @@ public abstract class LRUCache<N, V> {
     public V retrieve(N name) {
         int ind = indexOf(name, this.names);
         V value;
+        int shiftEndIndex;
         if (ind < 0) {
             value = this.create(name);
-            backShift(this.names, this.index);
-            backShift(this.values, this.index);
-            this.values[0] = value;
-            this.names[0] = name;
+            shiftEndIndex = this.index;
             this.index++;
             if (this.index == this.cacheCapacity) {
                 this.index--;
             }
         } else {
+            shiftEndIndex = ind;
             value = (V) this.values[ind];
-            backShift(this.names, ind);
-            backShift(this.values, ind);
-            this.names[0] = name;
-            this.values[0] = value;
         }
+        backShift(this.names, shiftEndIndex);
+        backShift(this.values, shiftEndIndex);
+        this.names[0] = name;
+        this.values[0] = value;
         return value;
     }
     
