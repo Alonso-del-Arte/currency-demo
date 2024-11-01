@@ -202,6 +202,23 @@ public class LRUCacheNGTest {
                 + " other values";
         assert !instance.has(value) : msg;
     }
+    
+    @Test
+    public void testFrequentlyUsedStaysInCache() {
+        int capacity = chooseCapacity();
+        LRUCache<String, Pattern> instance = new LRUCacheImpl(capacity);
+        String name = makeRegexNameForCapitalizedWord();
+        Pattern value = instance.retrieve(name);
+        int excess = RANDOM.nextInt(capacity) + 1;
+        int numberOfItems = capacity + excess;
+        for (int i = 1; i < numberOfItems; i++) {
+            instance.retrieve("\\d{" + i + "}");
+            String msg = "Constantly retrieving " + instance.retrieve(name) 
+                    + " should keep it in the cache even after " + i 
+                    + " other items in cache of capacity " + capacity;
+            assert instance.has(value) : msg;
+        }
+    }
 
     private static class LRUCacheImpl extends LRUCache<String, Pattern> {
         
