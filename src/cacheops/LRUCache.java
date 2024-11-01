@@ -85,7 +85,7 @@ public abstract class LRUCache<N, V> {
             this.names[this.index] = name;
             this.index++;
             if (this.index == this.cacheCapacity) {
-                this.index--;
+                this.index = 0;
             }
         } else {
             value = (V) this.values[ind];
