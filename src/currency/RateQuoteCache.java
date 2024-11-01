@@ -23,7 +23,8 @@ import cacheops.LRUCache;
  * refreshing a quote is to be determined by the caller.
  * @author Alonso del Arte
  */
-abstract class RateQuoteCache {
+abstract class RateQuoteCache extends LRUCache<CurrencyPair, 
+        ConversionRateQuote> {
     
     private final ConversionRateQuote[] quotes;
     
@@ -41,7 +42,8 @@ abstract class RateQuoteCache {
      * @return The new conversion rate quote. For example, $1 to &euro;0.89585 
      * as of September 19, 2024. 
      */
-    abstract ConversionRateQuote create(CurrencyPair currencies);
+    @Override
+    protected abstract ConversionRateQuote create(CurrencyPair currencies);
     
     private int indexOf(CurrencyPair currencies) {
         int i = 0;
@@ -96,7 +98,8 @@ abstract class RateQuoteCache {
      * @return A conversion rate quote. For example, $1 = 0,91335&euro; as of 
      * October 11, 2024.
      */
-    ConversionRateQuote retrieve(CurrencyPair currencies) {
+    @Override
+    public ConversionRateQuote retrieve(CurrencyPair currencies) {
         ConversionRateQuote quote;
         int index = this.indexOf(currencies);
         if (index < 0) {
@@ -128,6 +131,7 @@ abstract class RateQuoteCache {
      * cacheops.LRUCache#MAXIMUM_CAPACITY}.
      */
     public RateQuoteCache(int capacity) {
+        super(capacity);
         if (capacity < LRUCache.MINIMUM_CAPACITY 
                 || capacity > LRUCache.MAXIMUM_CAPACITY) {
             String excMsg = "Capacity " + capacity + " is not valid";

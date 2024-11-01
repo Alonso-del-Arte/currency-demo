@@ -298,7 +298,7 @@ public class RateQuoteCacheNGTest {
         boolean refreshNeeded = false;
 
         @Override
-        ConversionRateQuote create(CurrencyPair currencies) {
+        protected ConversionRateQuote create(CurrencyPair currencies) {
             this.createCallCount++;
             LocalDateTime date = LocalDateTime.now().minusMinutes(minutes);
             this.mostRecentlyCreatedQuote = new ConversionRateQuote(currencies, 
