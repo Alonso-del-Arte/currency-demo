@@ -39,7 +39,11 @@ public abstract class LRUCache<N, V> {
      */
     public static final int MAXIMUM_CAPACITY = 128;
     
-    private V mostRecentlyCreated = null;
+    private final int cacheCapacity;
+    
+    private final Object[] names, values;
+    
+    private int index = 0;
     
     /**
      * Creates a value for a given name. Ideally this function should only be 
@@ -50,15 +54,37 @@ public abstract class LRUCache<N, V> {
      */
     protected abstract V create(N name);
     
-    // TODO: Write tests for this
+    private static int indexOf(Object obj, Object[] array) {
+        boolean notFound = true;
+        int i = 0;
+        while (notFound && i < array.length) {
+            notFound = !obj.equals(array[i]);
+            i++;
+        }
+        return notFound ? -1 : i - 1;
+    }
+    
+    /**
+     * Determines whether this cache has a particular value. This function is 
+     * intended for internal use and testing only.
+     * @param value The value to check the cache for. For example, in a cache of 
+     * regular expressions, the regular expression for e-mail addresses.
+     * @return True if the cache has the value, false otherwise.
+     */
     boolean has(V value) {
-        return value.equals(this.mostRecentlyCreated);
+        return indexOf(value, this.values) > -1;
     }
 
     // TODO: Write tests for this
     public V retrieve(N name) {
-        this.mostRecentlyCreated = this.create(name);
-        return this.mostRecentlyCreated;
+        V value = this.create(name);
+        this.values[this.index] = value;
+        this.names[this.index] = name;
+        this.index++;
+        if (this.index == this.cacheCapacity) {
+            this.index--;
+        }
+        return value;
     }
     
     /**
@@ -72,6 +98,9 @@ public abstract class LRUCache<N, V> {
             String excMsg = "Capacity " + capacity + " is not valid";
             throw new IllegalArgumentException(excMsg);
         }
+        this.cacheCapacity = capacity;
+        this.names = new Object[this.cacheCapacity];
+        this.values = new Object[this.cacheCapacity];
     }
     
 }
