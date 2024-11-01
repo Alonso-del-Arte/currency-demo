@@ -74,21 +74,44 @@ public abstract class LRUCache<N, V> {
     boolean has(V value) {
         return indexOf(value, this.values) > -1;
     }
+    
+    private static void backShift(Object[] array, int shiftEndIndex) {
+        for (int i = shiftEndIndex; i > 0; i--) {
+            array[i] = array[i - 1];
+        }
+    }
 
-    // TODO: Write tests for this
+    /**
+     * Retrieves a value from the cache by its name, or creates it anew and adds 
+     * it to the cache if it wasn't already stored. In either case, the cache 
+     * notes the value is the most recently used. If a value is added to the 
+     * cache and the cache was already at capacity, the least recently used 
+     * value will be removed from the cache. If the name of a removed value is 
+     * called for later, it will have to be created anew.
+     * @param name The name for the value.
+     * @return The value.
+     * @throws NullPointerException If {@code name} is null. The exception 
+     * message will probably be empty, and thus not very helpful.
+     */
     public V retrieve(N name) {
         int ind = indexOf(name, this.names);
         V value;
         if (ind < 0) {
             value = this.create(name);
-            this.values[this.index] = value;
-            this.names[this.index] = name;
+            backShift(this.names, this.index);
+            backShift(this.values, this.index);
+            this.values[0] = value;
+            this.names[0] = name;
             this.index++;
             if (this.index == this.cacheCapacity) {
-                this.index = 0;
+                this.index--;
             }
         } else {
             value = (V) this.values[ind];
+            backShift(this.names, ind);
+            backShift(this.values, ind);
+            this.names[0] = name;
+            this.values[0] = value;
         }
         return value;
     }
