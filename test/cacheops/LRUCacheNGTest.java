@@ -176,7 +176,7 @@ public class LRUCacheNGTest {
         String name = makeRegexNameForCapitalizedWord();
         Pattern expected = instance.retrieve(name);
         for (int i = 1; i < capacity; i++) {
-            instance.retrieve(makeRegexNameForNumberWithDash());
+            instance.retrieve("\\d{" + i + "}");
         }
         Pattern actual = instance.retrieve(name);
         String message = "Value " + expected.toString() + " as one of " 
