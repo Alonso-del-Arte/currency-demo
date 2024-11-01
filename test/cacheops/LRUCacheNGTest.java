@@ -70,7 +70,7 @@ public class LRUCacheNGTest {
         int capacity = RANDOM.nextInt() | Integer.MIN_VALUE;
         String msg = "Capacity " + capacity + " should cause exception";
         Throwable t = assertThrows(() -> {
-            LRUCacheImpl badInstance = new LRUCacheImpl(capacity);
+            LRUCache<String, Pattern> badInstance = new LRUCacheImpl(capacity);
             System.out.println(msg + ", not created " + badInstance.toString());
         }, IllegalArgumentException.class, msg);
         String excMsg = t.getMessage();
@@ -87,7 +87,7 @@ public class LRUCacheNGTest {
         for (int i = 0; i < LRUCache.MINIMUM_CAPACITY; i++) {
             final int badSize = i;
             Throwable t = assertThrows(() -> {
-                LRUCacheImpl badCache = new LRUCacheImpl(badSize);
+                LRUCache<String, Pattern> badCache = new LRUCacheImpl(badSize);
                 System.out.println("Should not have been able to create "
                         + badCache + " of size " + badSize
                         + ", which is less than minimum capacity "
@@ -110,7 +110,7 @@ public class LRUCacheNGTest {
                 + RANDOM.nextInt(Short.MAX_VALUE) + 1;
         String msg = "Capacity " + capacity + " should cause exception";
         Throwable t = assertThrows(() -> {
-            LRUCacheImpl badInstance = new LRUCacheImpl(capacity);
+            LRUCache<String, Pattern> badInstance = new LRUCacheImpl(capacity);
             System.out.println(msg + ", not created " + badInstance.toString());
         }, IllegalArgumentException.class, msg);
         String excMsg = t.getMessage();
@@ -125,7 +125,7 @@ public class LRUCacheNGTest {
     @Test
     public void testDoesNotHave() {
         int capacity = chooseCapacity();
-        LRUCacheImpl instance = new LRUCacheImpl(capacity);
+        LRUCache<String, Pattern> instance = new LRUCacheImpl(capacity);
         String name = makeRegexNameForNumberWithDash();
         Pattern value = Pattern.compile(name);
         String msg = "Cache shouldn't have value " + value.toString() 
@@ -137,11 +137,26 @@ public class LRUCacheNGTest {
     public void testHas() {
         System.out.println("has");
         int capacity = chooseCapacity();
-        LRUCacheImpl instance = new LRUCacheImpl(capacity);
+        LRUCache<String, Pattern> instance = new LRUCacheImpl(capacity);
         String name = makeRegexNameForNumberWithDash();
         Pattern value = instance.retrieve(name);
         String msg = "Cache should have value " + value.toString() 
                 + " that was added";
+        assert instance.has(value) : msg;
+    }
+    
+    @Test
+    public void testStillHas() {
+        int capacity = chooseCapacity();
+        LRUCache<String, Pattern> instance = new LRUCacheImpl(capacity);
+        String name = makeRegexNameForCapitalizedWord();
+        Pattern value = instance.retrieve(name);
+        for (int i = 1; i < capacity; i++) {
+            instance.retrieve(makeRegexNameForNumberWithDash());
+        }
+        String msg = "Cache should still have value " + value.toString()
+                + " in cache with capacity " + capacity 
+                + " that hasn't had any evictions";
         assert instance.has(value) : msg;
     }
     
