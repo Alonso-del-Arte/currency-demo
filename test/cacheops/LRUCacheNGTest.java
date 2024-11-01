@@ -186,6 +186,22 @@ public class LRUCacheNGTest {
         assertEquals(instance.createCallCount, capacity, message 
                 + ", not created anew");
     }
+    
+    @Test
+    public void testNameValueEventuallyForgottenAfterCapacityReached() {
+        int capacity = chooseCapacity();
+        LRUCache<String, Pattern> instance = new LRUCacheImpl(capacity);
+        String name = makeRegexNameForCapitalizedWord();
+        Pattern value = instance.retrieve(name);
+        for (int i = 0; i < capacity; i++) {
+            instance.retrieve("\\d{" + i + "}");
+        }
+        String msg = "Value " + value.toString() 
+                + " added to cache of capacity " + capacity 
+                + " should be forgotten after adding " + capacity 
+                + " other values";
+        assert !instance.has(value) : msg;
+    }
 
     private static class LRUCacheImpl extends LRUCache<String, Pattern> {
         
