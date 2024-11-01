@@ -77,12 +77,18 @@ public abstract class LRUCache<N, V> {
 
     // TODO: Write tests for this
     public V retrieve(N name) {
-        V value = this.create(name);
-        this.values[this.index] = value;
-        this.names[this.index] = name;
-        this.index++;
-        if (this.index == this.cacheCapacity) {
-            this.index--;
+        int ind = indexOf(name, this.names);
+        V value;
+        if (ind < 0) {
+            value = this.create(name);
+            this.values[this.index] = value;
+            this.names[this.index] = name;
+            this.index++;
+            if (this.index == this.cacheCapacity) {
+                this.index--;
+            }
+        } else {
+            value = (V) this.values[ind];
         }
         return value;
     }
