@@ -131,6 +131,10 @@ public abstract class LRUCache<N, V> {
         return value;
     }
     
+    protected void invalidate(N name) {
+        // TODO: Write tests for this
+    }
+    
     /**
      * Constructor.
      * @param capacity How much capacity the cache should have.
