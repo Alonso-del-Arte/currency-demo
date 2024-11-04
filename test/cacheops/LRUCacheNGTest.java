@@ -16,9 +16,15 @@
  */
 package cacheops;
 
+import java.time.Duration;
+import java.time.LocalDateTime;
+import java.time.temporal.ChronoUnit;
+import java.time.temporal.TemporalAmount;
+import java.time.temporal.TemporalUnit;
 import java.util.Random;
 import java.util.regex.Pattern;
 
+import static org.testframe.api.Asserters.assertMinimum;
 import static org.testframe.api.Asserters.assertThrows;
 
 import static org.testng.Assert.*;
@@ -219,7 +225,30 @@ public class LRUCacheNGTest {
             assert instance.has(value) : msg;
         }
     }
+    
+    @Test
+    public void testInvalidate() {
+        System.out.println("invalidate");
+        int capacity = chooseCapacity();
+        LRUCache2ndImpl instance = new LRUCache2ndImpl(capacity);
+        String name = Integer.toHexString(RANDOM.nextInt());
+        LocalDateTime staleValue = instance.retrieve(name);
+        instance.durationToSubtract = Duration.of(1, ChronoUnit.SECONDS);
+        instance.invalidate(name);
+        LocalDateTime actual = instance.retrieve(name);
+        String message = "After invalidating value for name \"" + name 
+                + "\", cache should not have stale value " 
+                + staleValue.toString();
+        assertNotEquals(staleValue, actual, message);
+        LocalDateTime minimum = LocalDateTime.now().minusHours(1);
+        assertMinimum(minimum, actual);
+    }
 
+    /**
+     * An implementation of LRUCache&lt;String, Pattern&gt; to be used for most 
+     * of the tests. This is motivated by the real use case of 
+     * java.util.Scanner.
+     */
     private static class LRUCacheImpl extends LRUCache<String, Pattern> {
         
         int createCallCount = 0;
@@ -231,6 +260,28 @@ public class LRUCacheNGTest {
         }
 
         public LRUCacheImpl(int capacity) {
+            super(capacity);
+        }
+        
+    }
+    
+    /**
+     * A second test implementation of LRUCache&lt;N, V&gt;. To test the 
+     * invalidate() procedure, I needed a V type that could practically or 
+     * theoretically go stale, and that's not the case with 
+     * java.util.regex.Pattern.
+     */
+    private static class LRUCache2ndImpl 
+            extends LRUCache<String, LocalDateTime> {
+        
+        Duration durationToSubtract = Duration.of(1, ChronoUnit.DAYS);
+        
+        @Override
+        protected LocalDateTime create(String name) {
+            return LocalDateTime.now().minus(this.durationToSubtract);
+        }
+        
+        public LRUCache2ndImpl(int capacity) {
             super(capacity);
         }
         
