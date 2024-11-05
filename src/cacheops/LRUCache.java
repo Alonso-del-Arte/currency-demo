@@ -63,7 +63,8 @@ public abstract class LRUCache<N, V> {
     
     /**
      * Creates a value for a given name. Ideally this function should only be 
-     * called by {@link #retrieve(java.lang.Object) retrieve()}.
+     * called by {@link #retrieve(java.lang.Object) retrieve()} or {@link 
+     * #refresh(java.lang.Object) refresh()}.
      * @param name The name to create a value for. Once the value is in the 
      * cache, this name can be used to retrieve it.
      * @return A new value. Preferably not null.
@@ -132,7 +133,8 @@ public abstract class LRUCache<N, V> {
     }
     
     protected void refresh(N name) {
-        // TODO: Write tests for this
+        int ind = indexOf(name, this.names);
+        this.values[ind] = this.create(name);
     }
     
     /**
