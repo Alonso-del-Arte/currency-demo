@@ -227,16 +227,16 @@ public class LRUCacheNGTest {
     }
     
     @Test
-    public void testInvalidate() {
-        System.out.println("invalidate");
+    public void testRefresh() {
+        System.out.println("refresh");
         int capacity = chooseCapacity();
         LRUCache2ndImpl instance = new LRUCache2ndImpl(capacity);
         String name = Integer.toHexString(RANDOM.nextInt());
         LocalDateTime staleValue = instance.retrieve(name);
         instance.durationToSubtract = Duration.of(1, ChronoUnit.SECONDS);
-        instance.invalidate(name);
+        instance.refresh(name);
         LocalDateTime actual = instance.retrieve(name);
-        String message = "After invalidating value for name \"" + name 
+        String message = "After refreshing value for name \"" + name 
                 + "\", cache should not have stale value " 
                 + staleValue.toString();
         assertNotEquals(staleValue, actual, message);

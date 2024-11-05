@@ -131,7 +131,7 @@ public abstract class LRUCache<N, V> {
         return value;
     }
     
-    protected void invalidate(N name) {
+    protected void refresh(N name) {
         // TODO: Write tests for this
     }
     
