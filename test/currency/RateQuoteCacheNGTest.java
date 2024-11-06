@@ -40,11 +40,11 @@ public class RateQuoteCacheNGTest {
     private static final int DEFAULT_CAPACITY = 8;
     
     /**
-     * Test of the has function, of the RateQuoteCache class.
+     * Test of the hasPair function, of the RateQuoteCache class.
      */
     @Test
-    public void testHas() {
-        System.out.println("has");
+    public void testHasPair() {
+        System.out.println("hasPair");
         Currency from = CurrencyChooser.chooseCurrency();
         Currency to = CurrencyChooser.chooseCurrencyOtherThan(from);
         CurrencyPair currencies = new CurrencyPair(from, to);
@@ -52,18 +52,18 @@ public class RateQuoteCacheNGTest {
         instance.retrieve(currencies);
         String msg = "Right after adding " + currencies.toString() 
                 + " to the cache, cache should have that pair";
-        assert instance.has(currencies) : msg;
+        assert instance.hasPair(currencies) : msg;
     }
 
     @Test
-    public void testDoesNotHave() {
+    public void testDoesNotHavePair() {
         Currency from = CurrencyChooser.chooseCurrency();
         Currency to = CurrencyChooser.chooseCurrencyOtherThan(from);
         CurrencyPair currencies = new CurrencyPair(from, to);
         RateQuoteCache instance = new RateQuoteCacheImpl(DEFAULT_CAPACITY);
         String msg = "Since " + currencies.toString() 
                 + " was not added to the cache, cache shouldn't have that pair";
-        assert !instance.has(currencies) : msg;
+        assert !instance.hasPair(currencies) : msg;
     }
     
     private static List<CurrencyPair> listOtherPairs(CurrencyPair pair, 
@@ -99,7 +99,7 @@ public class RateQuoteCacheNGTest {
                 + " and then " + (initialCapacity - 1) 
                 + " others, cache of capacity " + capacity 
                 + " should not retain " + currencies.toString();
-        assert !instance.has(currencies) : msg;
+        assert !instance.hasPair(currencies) : msg;
     }
     
     @Test
@@ -119,7 +119,7 @@ public class RateQuoteCacheNGTest {
                     + " and then " + index + " other(s) in a cache of capacity " 
                     + capacity + ", including " + currCurrPair.toString() 
                     + ", cache should still have " + currencies.toString();
-            assert instance.has(currencies) : msg;
+            assert instance.hasPair(currencies) : msg;
         }
     }
     
