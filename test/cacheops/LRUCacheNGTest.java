@@ -24,6 +24,7 @@ import java.time.temporal.TemporalUnit;
 import java.util.Random;
 import java.util.regex.Pattern;
 
+import static org.testframe.api.Asserters.assertDoesNotThrow;
 import static org.testframe.api.Asserters.assertMinimum;
 import static org.testframe.api.Asserters.assertThrows;
 
@@ -242,6 +243,19 @@ public class LRUCacheNGTest {
         assertNotEquals(staleValue, actual, message);
         LocalDateTime minimum = LocalDateTime.now().minusHours(1);
         assertMinimum(minimum, actual);
+    }
+
+    @Test
+    public void testRefreshAbsentDoesNotCauseException() {
+        System.out.println("refresh");
+        int capacity = chooseCapacity();
+        LRUCache2ndImpl instance = new LRUCache2ndImpl(capacity);
+        String name = Integer.toHexString(RANDOM.nextInt());
+        String msg = "Trying to refresh value for name \"" + name 
+                + "\" not in empty cache should not cause any exception";
+        assertDoesNotThrow(() -> {
+            instance.refresh(name);
+        }, msg);
     }
 
     /**
