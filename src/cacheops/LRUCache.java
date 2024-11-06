@@ -27,7 +27,7 @@ package cacheops;
  * <p>As long as an item is in the cache, it can't be collected by the garbage 
  * collector. Once it's out of the cache, there might be no more references to 
  * the object, in which case the memory it takes up can be reclaimed.</p>
- * <p>This class is modeled on the {@code sun.misc.LRUCache} class that 
+ * <p>This class is modeled on the {@code sun.misc.LRUCache<N, V>} class that 
  * {@code java.util.Scanner} uses in some implementations of the Java 
  * Development Kit (JDK). But unlike that one, this one uses no "native 
  * methods," and, perhaps more importantly, is not proprietary.</p>
@@ -36,8 +36,9 @@ package cacheops;
  * equals()} overridden. For example, {@code java.lang.String} is a good choice 
  * of {@code N} type.
  * @param <V> The type of the values to cache. To be worth caching, the values 
- * should be too expensive to recalculate each and every time they're needed, so 
- * that it's easier to retrieve from the cache. For example, {@code 
+ * should be too expensive to recalculate each and every time they're needed, 
+ * such as that it requires a database call or an online API call, so that it's 
+ * easier to retrieve from the cache. For example, {@code 
  * java.util.regex.Pattern} is a good choice of {@code V} type.
  * @author Alonso del Arte
  */
@@ -134,7 +135,9 @@ public abstract class LRUCache<N, V> {
     
     /**
      * Refreshes the value for a given name in the cache. If the name is not in 
-     * the cache, nothing happens.
+     * the cache, nothing happens. Unless overridden, the behavior of this 
+     * procedure is to refresh in place, so the name-value pair is not marked as 
+     * more or less recent than before.
      * @param name The name for which to refresh the value. For example, in a 
      * cache of stock quotes, the stock symbol for IBM.
      */
