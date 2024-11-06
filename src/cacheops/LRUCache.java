@@ -132,9 +132,17 @@ public abstract class LRUCache<N, V> {
         return value;
     }
     
+    /**
+     * Refreshes the value for a given name in the cache. If the name is not in 
+     * the cache, nothing happens.
+     * @param name The name for which to refresh the value. For example, in a 
+     * cache of stock quotes, the stock symbol for IBM.
+     */
     protected void refresh(N name) {
         int ind = indexOf(name, this.names);
-        this.values[ind] = this.create(name);
+        if (ind > -1) {
+            this.values[ind] = this.create(name);
+        }
     }
     
     /**
