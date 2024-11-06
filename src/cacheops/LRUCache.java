@@ -57,7 +57,7 @@ public abstract class LRUCache<N, V> {
     
     private final int cacheCapacity;
     
-    private final Object[] names, values;
+    protected final Object[] names, values;
     
     private int index = 0;
     
