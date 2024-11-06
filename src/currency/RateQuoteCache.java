@@ -56,6 +56,24 @@ abstract class RateQuoteCache extends LRUCache<CurrencyPair,
     abstract boolean needsRefresh(CurrencyPair currencies);
     
     /**
+     * Either retrieves a quote from the cache or creates it anew if it's not 
+     * already in the cache. Each call for a quote that is not the very most 
+     * recently retrieved will cause the contents of the cache to shift in some 
+     * way.
+     * @param currencies The pair of currencies for which to retrieve a quote. 
+     * For example, United States dollars (USD) to euros (EUR).
+     * @return A conversion rate quote. For example, $1 = 0,91335&euro; as of 
+     * October 11, 2024.
+     */
+    @Override
+    public ConversionRateQuote retrieve(CurrencyPair currencies) {
+        if (this.needsRefresh(currencies)) {
+            this.refresh(currencies);
+        }
+        return super.retrieve(currencies);
+    }
+    
+    /**
      * Constructor.
      * @param capacity The capacity for the cache. For example, 32. Should be at 
      * least {@link cacheops.LRUCache#MINIMUM_CAPACITY} but not more than {@link 
