@@ -19,8 +19,9 @@ package demo;
 import currency.ConversionRateQuote;
 import currency.CurrencyConverter;
 import currency.CurrencyPair;
-import currency.RateQuoteCache;
+import currency.MannysCurrencyConverterAPIAccess;
 import currency.MoneyAmount;
+import currency.RateQuoteCache;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -48,6 +49,9 @@ public class CurrencyConverterGUI extends JFrame implements ActionListener,
     private static final Currency DOLLARS = Currency.getInstance(Locale.US);
     
     private static final Currency EUROS = Currency.getInstance("EUR");
+    
+    private static final CurrencyPair DEFAULT_PAIR = new CurrencyPair(DOLLARS, 
+            EUROS);
     
     private static final Currency[] ALL_CURRENCIES 
             = Currency.getAvailableCurrencies().toArray(Currency[]::new);
@@ -103,8 +107,15 @@ public class CurrencyConverterGUI extends JFrame implements ActionListener,
     public void actionPerformed(ActionEvent ae) {
         //
     }
+    
+    public CurrencyConverterGUI(CurrencyConverter converter) {
+        this(DEFAULT_PAIR, converter);
+    }
 
-    public CurrencyConverterGUI(Currency from, Currency to) {
+    public CurrencyConverterGUI(CurrencyPair currencies, 
+            CurrencyConverter converter) {
+        Currency from = currencies.getFromCurrency();
+        Currency to = currencies.getToCurrency();
         boolean eitherIsPseudo = from.getDefaultFractionDigits() < 0 
                 || to.getDefaultFractionDigits() < 0;
         if (eitherIsPseudo) {
@@ -143,7 +154,8 @@ public class CurrencyConverterGUI extends JFrame implements ActionListener,
     }
     
     public static void main(String[] args) {
-        CurrencyConverterGUI display = new CurrencyConverterGUI(DOLLARS, EUROS);
+        CurrencyConverterGUI display = new CurrencyConverterGUI(DEFAULT_PAIR, 
+                new CurrencyConverter(new MannysCurrencyConverterAPIAccess()));
         display.setVisible(true);
     }
     

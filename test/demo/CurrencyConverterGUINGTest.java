@@ -18,6 +18,9 @@ package demo;
 
 import currency.CurrencyChooser;
 import currency.CurrencyConverter;
+import currency.CurrencyPair;
+import currency.ExchangeRateProvider;
+import currency.MockExchangeRateProvider;
 import currency.MoneyAmount;
 
 import java.awt.event.ActionEvent;
@@ -47,17 +50,25 @@ import org.testng.annotations.Test;
  */
 public class CurrencyConverterGUINGTest {
     
+    private static final ExchangeRateProvider MOCK_RATE_PROVIDER 
+            = new MockExchangeRateProvider();
+    
+    private static final CurrencyConverter MOCK_CONVERTER 
+            = new CurrencyConverter(MOCK_RATE_PROVIDER);
+    
     @Test
     public void testConstructorRejectsFromPseudocurrency() {
         Currency from = CurrencyChooser.choosePseudocurrency();
         Currency to = CurrencyChooser.chooseCurrency();
+        CurrencyPair currencies = new CurrencyPair(from, to);
         String fromCurrCode = from.getCurrencyCode();
         String toCurrCode = to.getCurrencyCode();
         String msg = "Choosing " + from.getDisplayName() + " (" 
                 + fromCurrCode + ") for conversion to " + to.getDisplayName() 
                 + " (" + toCurrCode + ") should cause an exception";
         Throwable t = assertThrows(() -> {
-            CurrencyConverterGUI instance = new CurrencyConverterGUI(from, to);
+            CurrencyConverterGUI instance = new CurrencyConverterGUI(currencies, 
+                    MOCK_CONVERTER);
             System.out.println(msg + ", not created instance " 
                     + instance.toString());
         }, IllegalArgumentException.class, msg);
@@ -74,13 +85,15 @@ public class CurrencyConverterGUINGTest {
     public void testConstructorRejectsToPseudocurrency() {
         Currency from = CurrencyChooser.chooseCurrency();
         Currency to = CurrencyChooser.choosePseudocurrency();
+        CurrencyPair currencies = new CurrencyPair(from, to);
         String fromCurrCode = from.getCurrencyCode();
         String toCurrCode = to.getCurrencyCode();
         String msg = "Choosing " + from.getDisplayName() + " (" 
                 + fromCurrCode + ") for conversion to " + to.getDisplayName() 
                 + " (" + toCurrCode + ") should cause an exception";
         Throwable t = assertThrows(() -> {
-            CurrencyConverterGUI instance = new CurrencyConverterGUI(from, to);
+            CurrencyConverterGUI instance = new CurrencyConverterGUI(currencies, 
+                    MOCK_CONVERTER);
             System.out.println(msg + ", not created instance " 
                     + instance.toString());
         }, IllegalArgumentException.class, msg);
