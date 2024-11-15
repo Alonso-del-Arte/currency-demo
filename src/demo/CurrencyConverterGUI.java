@@ -16,7 +16,10 @@
  */
 package demo;
 
+import currency.ConversionRateQuote;
 import currency.CurrencyConverter;
+import currency.CurrencyPair;
+import currency.RateQuoteCache;
 import currency.MoneyAmount;
 
 import java.awt.event.ActionEvent;
@@ -70,6 +73,22 @@ public class CurrencyConverterGUI extends JFrame implements ActionListener,
     private Currency fromCurrency, toCurrency;
     
     private MoneyAmount fromAmount, toAmount;
+    
+    private RateQuoteCache quoteCache = new RateQuoteCache(10) {
+        
+        // TODO: Write tests for this
+        @Override
+        public boolean needsRefresh(CurrencyPair currencies) {
+            return true;
+        }
+        
+        // TODO: Write tests for this
+        @Override
+        protected ConversionRateQuote create(CurrencyPair name) {
+            return new ConversionRateQuote(name, 1.0);
+        }
+        
+    };
     
     private void updateReadouts() {
         //
