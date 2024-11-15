@@ -23,7 +23,7 @@ import cacheops.LRUCache;
  * refreshing a quote is to be determined by the caller.
  * @author Alonso del Arte
  */
-abstract class RateQuoteCache extends LRUCache<CurrencyPair, 
+public abstract class RateQuoteCache extends LRUCache<CurrencyPair, 
         ConversionRateQuote> {
     
     /**
@@ -53,7 +53,7 @@ abstract class RateQuoteCache extends LRUCache<CurrencyPair,
      * @return True if the conversion rate quote needs to be refreshed, false if 
      * not.
      */
-    abstract boolean needsRefresh(CurrencyPair currencies);
+    public abstract boolean needsRefresh(CurrencyPair currencies);
     
     /**
      * Either retrieves a quote from the cache or creates it anew if it's not 

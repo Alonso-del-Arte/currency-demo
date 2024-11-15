@@ -307,7 +307,7 @@ public class RateQuoteCacheNGTest {
         }
         
         @Override
-        boolean needsRefresh(CurrencyPair currencies) {
+        public boolean needsRefresh(CurrencyPair currencies) {
             return this.refreshNeeded;
         }
         
