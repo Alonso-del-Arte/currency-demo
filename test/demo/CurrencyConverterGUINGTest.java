@@ -79,6 +79,7 @@ public class CurrencyConverterGUINGTest {
                 + fromCurrCode + " and " + toCurrCode;
         assert excMsg.contains(fromCurrCode) : containsMsg;
         assert excMsg.contains(toCurrCode) : containsMsg;
+        System.out.println("\"" + excMsg + "\"");
     }
     
     @Test
@@ -104,6 +105,7 @@ public class CurrencyConverterGUINGTest {
                 + fromCurrCode + " and " + toCurrCode;
         assert excMsg.contains(fromCurrCode) : containsMsg;
         assert excMsg.contains(toCurrCode) : containsMsg;
+        System.out.println("\"" + excMsg + "\"");
     }
     
 }
