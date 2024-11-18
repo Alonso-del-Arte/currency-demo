@@ -32,7 +32,9 @@ import static org.testng.Assert.*;
 import org.testng.annotations.Test;
 
 /**
- * Tests of the ConversionRateQuote class.
+ * Tests of the ConversionRateQuote class. Note that the conversion rates used 
+ * for these tests are for testing purposes only, and if they bear any relation 
+ * to actual currency exchange rates, this is strictly a coincidence.
  * @author Alonso del Arte
  */
 public class ConversionRateQuoteNGTest {
@@ -248,6 +250,24 @@ public class ConversionRateQuoteNGTest {
         String expected = currencies.toString() + " at " + rate + " as of " 
                 + date.toString();
         String actual = instance.toString();
+        assertEquals(actual, expected);
+    }
+    
+    @Test
+    public void testInvert() {
+        System.out.println("invert");
+        Currency from = CurrencyChooser.chooseCurrency();
+        Currency to = CurrencyChooser.chooseCurrencyOtherThan(from);
+        CurrencyPair currencies = new CurrencyPair(from, to);
+        double rate = 1.0 + RANDOM.nextDouble();
+        LocalDateTime date = LocalDateTime.now();
+        ConversionRateQuote instance = new ConversionRateQuote(currencies, 
+                rate, date);
+        CurrencyPair flippedPair = currencies.flip();
+        double invertedRate = 1.0 / rate;
+        ConversionRateQuote expected = new ConversionRateQuote(flippedPair, 
+                invertedRate, date);
+        ConversionRateQuote actual = instance.invert();
         assertEquals(actual, expected);
     }
     
