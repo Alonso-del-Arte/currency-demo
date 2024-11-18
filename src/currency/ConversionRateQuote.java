@@ -60,6 +60,11 @@ public class ConversionRateQuote {
         return this.fetchDate;
     }
     
+    // TODO: Write tests for this
+    public ConversionRateQuote invert() {
+        return this;
+    }
+    
     /**
      * Determines whether or not this conversion rate quote is equal to some 
      * other object. For the examples, suppose this quote is for U.&nbsp;S. 
