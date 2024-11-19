@@ -60,9 +60,24 @@ public class ConversionRateQuote {
         return this.fetchDate;
     }
     
-    // TODO: Write tests for this
+    /**
+     * Calculates the conversion rate in the opposite direction based off of 
+     * this quote. In some cases, this might be preferable to making a new API 
+     * call. For the example, suppose that this quote is United States dollars 
+     * (USD) to euros (EUR) at 0.94369 on November 18, 2024 at 7:29 p.m.
+     * @return A conversion rate quote calculated from this quote. The From 
+     * currency becomes the To currency and vice-versa, the rate is the 
+     * reciprocal of this quote's rate, the timestamp is the same, since 
+     * presumably the API would have given this rate if so queried at the exact 
+     * same time. In the example, this would be EUR to USD at 1.0596700187561594 
+     * on November 18, 2024 at 7:29 p.m. To construct this example, I did make 
+     * API calls in both directions at roughly the same time. The API that I 
+     * used gave me 1.059714 for EUR to USD.
+     */
     public ConversionRateQuote invert() {
-        return this;
+        CurrencyPair currencies = this.pair.flip();
+        double rate = 1.0 / this.conversionRate;
+        return new ConversionRateQuote(currencies, rate, this.fetchDate);
     }
     
     /**
