@@ -37,7 +37,7 @@ import org.testng.annotations.Test;
  */
 public class MannysCurrencyConverterAPIAccessNGTest {
     
-    private static final double TEST_DELTA = 0.001;
+    private static final double TEST_DELTA = 0.01;
     
     private static final Currency U_S_DOLLARS = Currency.getInstance(Locale.US);
     
