@@ -16,6 +16,8 @@
  */
 package currency;
 
+import currency.*;
+
 import java.io.InputStream;
 import java.io.IOException;
 import java.net.HttpURLConnection;

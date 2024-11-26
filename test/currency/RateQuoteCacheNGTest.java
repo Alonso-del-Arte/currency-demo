@@ -18,6 +18,7 @@ package currency;
 
 import cacheops.LRUCache;
 import static currency.CurrencyChooser.RANDOM;
+import currency.*;
 
 import java.time.LocalDateTime;
 import java.util.ArrayList;

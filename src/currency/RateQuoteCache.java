@@ -17,6 +17,7 @@
 package currency;
 
 import cacheops.LRUCache;
+import currency.*;
 
 /**
  * Least recently used (LRU) cache for conversion rate quotes. The criterion for 

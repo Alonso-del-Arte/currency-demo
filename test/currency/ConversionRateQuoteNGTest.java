@@ -18,6 +18,7 @@ package currency;
 
 import static currency.CurrencyChooser.RANDOM;
 import static currency.MoneyAmountNGTest.provideNull;
+import currency.*;
 
 import java.time.LocalDateTime;
 import java.util.Currency;

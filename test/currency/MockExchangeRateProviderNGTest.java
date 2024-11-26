@@ -17,6 +17,7 @@
 package currency;
 
 import static currency.CurrencyChooser.RANDOM;
+import currency.*;
 
 import java.time.LocalDateTime;
 import java.util.Currency;

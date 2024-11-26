@@ -16,6 +16,8 @@
  */
 package currency;
 
+import currency.*;
+
 import java.util.Currency;
 
 /**
