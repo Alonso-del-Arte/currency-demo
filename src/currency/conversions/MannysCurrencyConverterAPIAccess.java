@@ -92,7 +92,7 @@ public class MannysCurrencyConverterAPIAccess implements ExchangeRateProvider {
     @Override
     public double getRate(Currency source, Currency target) {
         // TODO: Implement rate quote caching
-        return makeAPICall(source, target);
+        return -1.0;// makeAPICall(source, target);
     }
     
 }
