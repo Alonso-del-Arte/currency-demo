@@ -16,12 +16,12 @@
  */
 package demo;
 
-import currency.ConversionRateQuote;
-import currency.CurrencyConverter;
 import currency.CurrencyPair;
-import currency.MannysCurrencyConverterAPIAccess;
 import currency.MoneyAmount;
-import currency.RateQuoteCache;
+import currency.conversions.ConversionRateQuote;
+import currency.conversions.CurrencyConverter;
+import currency.conversions.MannysCurrencyConverterAPIAccess;
+import currency.conversions.RateQuoteCache;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;

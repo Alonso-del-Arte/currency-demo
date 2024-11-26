@@ -16,7 +16,7 @@
  */
 package org.example;
 
-import currency.CurrencyConverter;
+import currency.conversions.CurrencyConverter;
 
 import java.math.BigDecimal;
 import java.math.RoundingMode;

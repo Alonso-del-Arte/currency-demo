@@ -14,10 +14,11 @@
  * You should have received a copy of the GNU General Public License along with 
  * this program. If not, see <http://www.gnu.org/licenses/>.
  */
-package currency;
+package currency.conversions;
 
-import static currency.CurrencyChooser.RANDOM;
-import currency.*;
+import currency.CurrencyChooser;
+import currency.CurrencyPair;
+import static currency.conversions.ExchangeRateProviderNGTest.RANDOM;
 
 import java.time.LocalDateTime;
 import java.util.Currency;

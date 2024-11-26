@@ -16,7 +16,7 @@
  */
 package currency.comparators;
 
-import currency.CurrencyConverter;
+import currency.conversions.CurrencyConverter;
 
 import java.io.IOException;
 import java.net.URISyntaxException;

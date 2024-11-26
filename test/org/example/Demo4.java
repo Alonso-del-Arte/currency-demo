@@ -16,9 +16,9 @@
  */
 package org.example;
 
-import currency.CurrencyConverter;
 import currency.CurrencyMismatchException;
 import currency.MoneyAmount;
+import currency.conversions.CurrencyConverter;
 
 import java.util.Currency;
 import java.util.Locale;

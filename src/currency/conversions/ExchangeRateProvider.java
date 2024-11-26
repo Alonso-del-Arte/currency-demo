@@ -14,14 +14,13 @@
  * You should have received a copy of the GNU General Public License along with 
  * this program. If not, see <http://www.gnu.org/licenses/>.
  */
-package currency;
-
-import currency.*;
+package currency.conversions;
 
 import java.util.Currency;
 
 /**
- *
+ * Defines one function for classes that provide access to a currency conversion 
+ * rate API.
  * @author Alonso del Arte
  */
 public interface ExchangeRateProvider {

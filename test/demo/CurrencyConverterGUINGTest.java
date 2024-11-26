@@ -17,11 +17,11 @@
 package demo;
 
 import currency.CurrencyChooser;
-import currency.CurrencyConverter;
 import currency.CurrencyPair;
-import currency.ExchangeRateProvider;
-import currency.MockExchangeRateProvider;
 import currency.MoneyAmount;
+import currency.conversions.CurrencyConverter;
+import currency.conversions.ExchangeRateProvider;
+import currency.conversions.MockExchangeRateProvider;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;

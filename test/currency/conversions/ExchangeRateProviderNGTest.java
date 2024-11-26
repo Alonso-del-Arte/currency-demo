@@ -14,11 +14,10 @@
  * You should have received a copy of the GNU General Public License along with 
  * this program. If not, see <http://www.gnu.org/licenses/>.
  */
-package currency;
-
-import currency.*;
+package currency.conversions;
 
 import java.util.Currency;
+import java.util.Random;
 
 /**
  * Tests of the ExchangeRateProvider interface.
@@ -26,6 +25,9 @@ import java.util.Currency;
  */
 public class ExchangeRateProviderNGTest {
     
-    // TODO: Determine if this test class is even necessary
+    static final Random RANDOM = new Random();
+    
+    // TODO: Determine if this test class is even necessary (the Random instance 
+    // can always be moved)
     
 }

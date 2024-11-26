@@ -16,8 +16,8 @@
  */
 package org.example;
 
-import currency.ExchangeRateProvider;
-import currency.MannysCurrencyConverterAPIAccess;
+import currency.conversions.ExchangeRateProvider;
+import currency.conversions.MannysCurrencyConverterAPIAccess;
 
 import java.math.BigDecimal;
 import java.text.DecimalFormat;

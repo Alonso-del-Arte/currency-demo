@@ -14,10 +14,10 @@
  * You should have received a copy of the GNU General Public License along with 
  * this program. If not, see <http://www.gnu.org/licenses/>.
  */
-package currency;
+package currency.conversions;
 
 import cacheops.LRUCache;
-import currency.*;
+import currency.CurrencyPair;
 
 /**
  * Least recently used (LRU) cache for conversion rate quotes. The criterion for 

@@ -16,9 +16,9 @@
  */
 package currency.comparators;
 
-import currency.CurrencyConverter;
-import currency.MannysCurrencyConverterAPIAccess;
 import currency.MoneyAmount;
+import currency.conversions.CurrencyConverter;
+import currency.conversions.MannysCurrencyConverterAPIAccess;
 
 import java.util.ArrayList;
 import java.util.Currency;
