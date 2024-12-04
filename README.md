@@ -35,6 +35,15 @@ exceptions might have null exception messages.
 stub, this has also been phased out)
 * TestFrame 1.0 or later (`org.testframe.api` namespace, `assertPrintOut()`)
 
+## Notes about internationalization
+
+Although I have not made a conscious effort to internationalize this repository, 
+there is some internationalization in this program. Java gives us some 
+internationalization for "free." In particular, the names and symbols of 
+currencies will vary depending on your locale.
+
+FINISH WRITING
+
 ## Miscellaneous notes
 
 In the Java currency information file, the S&atilde;o Tom&eacute; and 
