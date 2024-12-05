@@ -42,6 +42,26 @@ there is some internationalization in this program. Java gives us some
 internationalization for "free." In particular, the names and symbols of 
 currencies will vary depending on your locale.
 
+Unicode provides a fairly complete set of currency symbols, many of which are 
+accessible through some `java.util.Currency`'s `getSymbol()` function depending 
+on the default or specified locale. The following table lists some symbols that 
+are generally used for one specific currency (though the ones marked with an 
+asterisk are also used for some other currency in combination with letters).
+
+| Unicode | Symbol   | ISO-4217 | Name                    |
+|---------|----------|----------|-------------------------|
+| U+0024  | $        | USD*     | United States dollar    |
+| U+00A3  | &pound;  | GBP      | British pound           |
+| U+00A5  | &yen;    | JPY*     | Japanese yen            |
+| U+20A1  | &#x20A1; | CRC      | Costa Rican col&oacute; |
+| U+20AA  | &#x20AA; | ILS      | Israeli new shekel      |
+| U+20AC  | &euro;   | EUR      | Euro                    |
+
+The symbol &#x20A0; was intended for the euro but it's hardly used nowadays.
+
+Note that Bitcoin has the symbol &#x20BF; and the 3-letter code XBT has been 
+proposed for ISO-4217.
+
 FINISH WRITING
 
 ## Miscellaneous notes
