@@ -48,18 +48,18 @@ on the default or specified locale. The following table lists some symbols that
 are generally used for one specific currency (though the ones marked with an 
 asterisk are also used for some other currency in combination with letters).
 
-| Unicode | Symbol   | ISO-4217 | Name                    |
-|---------|----------|----------|-------------------------|
-| U+0024  | $        | USD*     | United States dollar    |
-| U+00A3  | &pound;  | GBP      | British pound           |
-| U+00A5  | &yen;    | JPY*     | Japanese yen            |
-| U+20A1  | &#x20A1; | CRC      | Costa Rican col&oacute; |
-| U+20A6  | &#x20A6; | NGN      | Nigerian naira          |
-| U+20A9  | &#x20A9; | KRW      | South Korean won        |
-| U+20AA  | &#x20AA; | ILS      | Israeli new shekel      |
-| U+20AB  | &#x20AB; | VND      | Vietnamese dong         |
-| U+20AC  | &euro;   | EUR      | Euro                    |
-| U+20B9  | &#x20B9; | INR      | Indian rupee            |
+| Unicode | Symbol   | ISO-4217 | Name                     |
+|---------|----------|----------|--------------------------|
+| U+0024  | $        | USD*     | United States dollar     |
+| U+00A3  | &pound;  | GBP      | British pound            |
+| U+00A5  | &yen;    | JPY*     | Japanese yen             |
+| U+20A1  | &#x20A1; | CRC      | Costa Rican col&oacute;n |
+| U+20A6  | &#x20A6; | NGN      | Nigerian naira           |
+| U+20A9  | &#x20A9; | KRW      | South Korean won         |
+| U+20AA  | &#x20AA; | ILS      | Israeli new shekel       |
+| U+20AB  | &#x20AB; | VND      | Vietnamese dong          |
+| U+20AC  | &euro;   | EUR      | Euro                     |
+| U+20B9  | &#x20B9; | INR      | Indian rupee             |
 
 The symbol &#x20A0; was intended for the euro but it's hardly used nowadays. The 
 symbol &#x20A8; for Indian rupee was used much more frequently.
