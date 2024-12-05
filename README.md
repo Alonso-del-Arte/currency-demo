@@ -54,10 +54,27 @@ asterisk are also used for some other currency in combination with letters).
 | U+00A3  | &pound;  | GBP      | British pound           |
 | U+00A5  | &yen;    | JPY*     | Japanese yen            |
 | U+20A1  | &#x20A1; | CRC      | Costa Rican col&oacute; |
+| U+20A6  | &#x20A6; | NGN      | Nigerian naira          |
+| U+20A9  | &#x20A9; | KRW      | South Korean won        |
 | U+20AA  | &#x20AA; | ILS      | Israeli new shekel      |
+| U+20AB  | &#x20AB; | VND      | Vietnamese dong         |
 | U+20AC  | &euro;   | EUR      | Euro                    |
+| U+20B9  | &#x20B9; | INR      | Indian rupee            |
 
-The symbol &#x20A0; was intended for the euro but it's hardly used nowadays.
+The symbol &#x20A0; was intended for the euro but it's hardly used nowadays. The 
+symbol &#x20A8; for Indian rupee was used much more frequently.
+
+The cruzeiro symbol &#x20A2; is of greater historical interest, even though now 
+the official currency of Brazil is the Brazilian real (BRL), for which the 
+symbols R$ and BR$ are used to varying degree.
+
+Some euro-replaced currencies still have their own symbols in Unicode.
+
+| Unicode | Symbol   | ISO-4217 | Name           |
+|---------|----------|----------|----------------|
+| U+20A3  | &#x20A3; | FRF      | French franc   |
+| U+20A4  | &#x20A4; | ITL      | Italian lira   |
+| U+20A7  | &#x20A7; | ESP      | Spanish peseta |
 
 Note that Bitcoin has the symbol &#x20BF; and the 3-letter code XBT has been 
 proposed for ISO-4217.
