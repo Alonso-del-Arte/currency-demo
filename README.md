@@ -4,13 +4,16 @@ For a presentation about JSR-354.
 
 Money is unfortunately a big part of our lives. And yet, Java does not provide 
 an out-of-the-box data type to represent money amounts. Our options in Java 8 
-are, from very bad to very good:
+are, from very bad to very good but still short of ideal:
 
-* Use `float` or `double`
-* Use 'int` or `long`
-* Use `java.math.BigDecimal`
-* Create our own class
-* Use a third-party library
+* Use `float` or `double` &mdash; not good to use floating point for fixed point 
+quantities
+* Use 'int` or `long` &mdash; no information about where to put the decimal 
+point
+* Use `java.math.BigDecimal` &mdash; no information about the currency
+* Create our own class &mdash; we might duplicate third-party library efforts
+* Use a third-party library &mdash; we might need to integrate our project with 
+a project that uses a different third-party library
 
 The JSR-354 proposal was approved for consideration to add to Java 9. However, 
 it wasn't actually added to Java 9, and as of Java 21 it is still not an 
@@ -62,7 +65,7 @@ asterisk are also used for some other currency in combination with letters).
 | U+20B9  | &#x20B9; | INR      | Indian rupee             |
 
 The symbol &#x20A0; was intended for the euro but it's hardly used nowadays. The 
-symbol &#x20A8; for Indian rupee was used much more frequently.
+symbol &#x20A8; for the Indian rupee was used much more frequently.
 
 The cruzeiro symbol &#x20A2; is of greater historical interest, even though now 
 the official currency of Brazil is the Brazilian real (BRL), for which the 
