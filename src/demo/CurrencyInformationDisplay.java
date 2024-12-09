@@ -21,6 +21,7 @@ import currency.CurrencyChooser;
 import currency.LocalesInfoGatherer;
 import currency.comparators.LetterCodeComparator;
 
+import java.awt.Dimension;
 import java.awt.GridLayout;
 import java.awt.event.ItemEvent;
 import java.awt.event.ItemListener;
@@ -55,6 +56,13 @@ import ui.graphical.CurrencyDropdownMenu;
 public class CurrencyInformationDisplay extends JFrame implements ItemListener {
     
     private static final String PARTIAL_TITLE = "Currency Information for ";
+    
+    private static final int DEFAULT_WIDTH = 600;
+    
+    private static final int DEFAULT_HEIGHT = 400;
+    
+    private static final Dimension DEFAULT_DIMENSION 
+            = new Dimension(DEFAULT_WIDTH, DEFAULT_HEIGHT);
     
     /**
      * How many columns wide to make the text field for the currency's display 
@@ -144,6 +152,8 @@ public class CurrencyInformationDisplay extends JFrame implements ItemListener {
     public CurrencyInformationDisplay(Currency currency) {
         this.selectedCurrency = currency;
         this.setTitle(PARTIAL_TITLE + currency.getCurrencyCode());
+        Dimension preferredSize = new Dimension(100, 100);
+        this.setPreferredSize(preferredSize);
         JPanel panel = new JPanel(new GridLayout(9, 2));
         panel.setBorder(new EmptyBorder(10, 10, 10, 10));
         panel.add(new JLabel("Choose "));
