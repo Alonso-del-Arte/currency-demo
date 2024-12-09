@@ -56,6 +56,9 @@ asterisk are also used for some other currency in combination with letters).
 | U+0024  | $        | USD*     | United States dollar     |
 | U+00A3  | &pound;  | GBP      | British pound            |
 | U+00A5  | &yen;    | JPY*     | Japanese yen             |
+| U+058F  | &#x58F;  | AMD      | Armenian dram            |
+| U+060B  | &#x60B;  | AFN      | Afghan afghani           |
+| U+0E3F  | &#xE3F;  | THB      | Thai bhat                |
 | U+20A1  | &#x20A1; | CRC      | Costa Rican col&oacute;n |
 | U+20A6  | &#x20A6; | NGN      | Nigerian naira           |
 | U+20A9  | &#x20A9; | KRW      | South Korean won         |
@@ -63,6 +66,10 @@ asterisk are also used for some other currency in combination with letters).
 | U+20AB  | &#x20AB; | VND      | Vietnamese dong          |
 | U+20AC  | &euro;   | EUR      | Euro                     |
 | U+20B9  | &#x20B9; | INR      | Indian rupee             |
+| U+20BA  | &#x20BA; | TRY      | Turkish lira             |
+| U+20BC  | &#x20BC; | AZN      | Azerbaijani manat        |
+| U+20BD  | &#x20BD; | RUB      | Russian ruble            |
+| U+20BE  | &#x20BE; | GEL      | Georgian lari            |
 
 The symbol &#x20A0; was intended for the euro but it's hardly used nowadays. The 
 symbol &#x20A8; for the Indian rupee was used much more frequently.
@@ -80,7 +87,8 @@ Some euro-replaced currencies still have their own symbols in Unicode.
 | U+20A7  | &#x20A7; | ESP      | Spanish peseta |
 
 Note that Bitcoin has the symbol &#x20BF; and the 3-letter code XBT has been 
-proposed for ISO-4217.
+proposed for ISO-4217. That symbol should not be confused with the symbol for 
+the Thai bhat, &#xE3F;.
 
 FINISH WRITING
 
