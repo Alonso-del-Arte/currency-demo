@@ -16,7 +16,9 @@
  */
 package demo;
 
+import cacheops.LRUCache;
 import currency.CurrencyChooser;
+import currency.LocalesInfoGatherer;
 import currency.comparators.LetterCodeComparator;
 
 import java.awt.GridLayout;
@@ -30,7 +32,10 @@ import javax.swing.JComboBox;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
+import javax.swing.JTextArea;
 import javax.swing.JTextField;
+import javax.swing.JSeparator;
+import javax.swing.JScrollPane;
 import javax.swing.WindowConstants;
 import javax.swing.border.EmptyBorder;
 
@@ -75,9 +80,25 @@ public class CurrencyInformationDisplay extends JFrame implements ItemListener {
     JTextField displayNameField, letterCodeField, numberCodeField, symbolField,  
             fractionDigitsField;
     
+    final JTextArea otherDisplayNames, otherSymbols;
+    
     private boolean activated = false;
     
     private Currency selectedCurrency;
+    
+    private static final int DEFAULT_NUMBER_OF_CACHED_LOCALES_INFO_GATHERERS 
+            = 32;
+    
+    final LRUCache<Currency, LocalesInfoGatherer> localesInfoCache 
+            = new LRUCache<Currency, LocalesInfoGatherer>
+                (DEFAULT_NUMBER_OF_CACHED_LOCALES_INFO_GATHERERS) {
+                    
+                    @Override
+                    public LocalesInfoGatherer create(Currency currency) {
+                        return new LocalesInfoGatherer(currency);
+                    }
+                
+                };
     
     public Currency getCurrency() {
         return this.selectedCurrency;
@@ -123,7 +144,7 @@ public class CurrencyInformationDisplay extends JFrame implements ItemListener {
     public CurrencyInformationDisplay(Currency currency) {
         this.selectedCurrency = currency;
         this.setTitle(PARTIAL_TITLE + currency.getCurrencyCode());
-        JPanel panel = new JPanel(new GridLayout(6, 2));
+        JPanel panel = new JPanel(new GridLayout(9, 2));
         panel.setBorder(new EmptyBorder(10, 10, 10, 10));
         panel.add(new JLabel("Choose "));
         this.currenciesDropdown
@@ -155,6 +176,25 @@ public class CurrencyInformationDisplay extends JFrame implements ItemListener {
                 .toString(this.selectedCurrency.getDefaultFractionDigits()));
         this.fractionDigitsField.setEditable(false);
         panel.add(this.fractionDigitsField);
+        LocalesInfoGatherer locsInfo 
+                = this.localesInfoCache.retrieve(this.selectedCurrency);
+        panel.add(new JLabel("Other display names: "));
+        this.otherDisplayNames = new JTextArea(10, DEFAULT_TEXT_FIELD_COLUMNS);
+        this.otherDisplayNames.setLineWrap(true);
+        this.otherDisplayNames.setText("HAVEN'T WRITTEN TESTS FOR THIS YET");
+//        this.otherDisplayNames.setText(locsInfo.getDisplayNames().keySet()
+//                .toString());
+        JScrollPane scrollPane1 = new JScrollPane(this.otherDisplayNames);
+        panel.add(scrollPane1);
+        panel.add(new JSeparator());
+        panel.add(new JSeparator());
+        panel.add(new JLabel("Other symbols: "));
+        this.otherSymbols = new JTextArea(3, DEFAULT_TEXT_FIELD_COLUMNS);
+        this.otherSymbols.setLineWrap(true);
+        this.otherSymbols.setText("HAVEN'T WRITTEN TESTS FOR THIS YET");
+//        this.otherSymbols.setText(locsInfo.getSymbols().keySet().toString());
+        JScrollPane scrollPane2 = new JScrollPane(this.otherSymbols);
+        panel.add(scrollPane2);
         this.add(panel);
     }
     
