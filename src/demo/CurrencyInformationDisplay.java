@@ -57,9 +57,9 @@ public class CurrencyInformationDisplay extends JFrame implements ItemListener {
     
     private static final String PARTIAL_TITLE = "Currency Information for ";
     
-    private static final int DEFAULT_WIDTH = 600;
+    static final int DEFAULT_WIDTH = 600;
     
-    private static final int DEFAULT_HEIGHT = 400;
+    static final int DEFAULT_HEIGHT = 400;
     
     private static final Dimension DEFAULT_DIMENSION 
             = new Dimension(DEFAULT_WIDTH, DEFAULT_HEIGHT);
