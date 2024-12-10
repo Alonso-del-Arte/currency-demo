@@ -20,6 +20,7 @@ import currency.CurrencyChooser;
 import currency.comparators.LetterCodeComparator;
 
 import java.awt.Component;
+import java.awt.Dimension;
 import java.awt.event.ItemEvent;
 import java.awt.event.ItemListener;
 import java.util.Arrays;
@@ -64,6 +65,19 @@ public class CurrencyInformationDisplayNGTest implements ItemListener {
         System.out.println("Affected item is " + ie.getItem().toString());
         String itemStateStr = itemStateLabel(ie.getStateChange());
         System.out.println("Item state is " + itemStateStr);
+    }
+    
+    @Test
+    public void testPreferredSize() {
+        Currency currency = CurrencyChooser.chooseCurrency();
+        CurrencyInformationDisplay instance 
+                = new CurrencyInformationDisplay(currency);
+        Dimension expected 
+                = new Dimension(CurrencyInformationDisplay
+                        .DEFAULT_WIDTH, CurrencyInformationDisplay
+                                .DEFAULT_HEIGHT);
+        Dimension actual = instance.getPreferredSize();
+        assertEquals(actual, expected);
     }
 
     @Test
