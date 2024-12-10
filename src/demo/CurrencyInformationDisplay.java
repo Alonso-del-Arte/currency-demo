@@ -57,10 +57,24 @@ public class CurrencyInformationDisplay extends JFrame implements ItemListener {
     
     private static final String PARTIAL_TITLE = "Currency Information for ";
     
+    /**
+     * The preferred width for the size of this graphical component. This is a 
+     * value I've arrived at through a lot of experimentation. Subject to change 
+     * in later versions of this program.
+     */
     static final int DEFAULT_WIDTH = 600;
     
+    /**
+     * The preferred height for the size of this graphical component. This is a 
+     * value I've arrived at through a lot of experimentation. Subject to change 
+     * in later versions of this program.
+     */
     static final int DEFAULT_HEIGHT = 400;
     
+    /**
+     * The preferred size for this graphical component. It is equal to {@link 
+     * #DEFAULT_WIDTH} times {@link #DEFAULT_HEIGHT}.
+     */
     private static final Dimension DEFAULT_DIMENSION 
             = new Dimension(DEFAULT_WIDTH, DEFAULT_HEIGHT);
     
@@ -152,8 +166,7 @@ public class CurrencyInformationDisplay extends JFrame implements ItemListener {
     public CurrencyInformationDisplay(Currency currency) {
         this.selectedCurrency = currency;
         this.setTitle(PARTIAL_TITLE + currency.getCurrencyCode());
-        Dimension preferredSize = new Dimension(100, 100);
-        this.setPreferredSize(preferredSize);
+        this.setPreferredSize(DEFAULT_DIMENSION);
         JPanel panel = new JPanel(new GridLayout(9, 2));
         panel.setBorder(new EmptyBorder(10, 10, 10, 10));
         panel.add(new JLabel("Choose "));
