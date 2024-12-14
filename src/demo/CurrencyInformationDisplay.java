@@ -204,9 +204,8 @@ public class CurrencyInformationDisplay extends JFrame implements ItemListener {
         panel.add(new JLabel("Other display names: "));
         this.otherDisplayNames = new JTextArea(10, DEFAULT_TEXT_FIELD_COLUMNS);
         this.otherDisplayNames.setLineWrap(true);
-        this.otherDisplayNames.setText("HAVEN'T WRITTEN TESTS FOR THIS YET");
-//        this.otherDisplayNames.setText(locsInfo.getDisplayNames().keySet()
-//                .toString());
+        this.otherDisplayNames.setText(locsInfo.getDisplayNames().keySet()
+                .toString());
         JScrollPane scrollPane1 = new JScrollPane(this.otherDisplayNames);
         panel.add(scrollPane1);
         panel.add(new JSeparator());
@@ -214,8 +213,7 @@ public class CurrencyInformationDisplay extends JFrame implements ItemListener {
         panel.add(new JLabel("Other symbols: "));
         this.otherSymbols = new JTextArea(3, DEFAULT_TEXT_FIELD_COLUMNS);
         this.otherSymbols.setLineWrap(true);
-        this.otherSymbols.setText("HAVEN'T WRITTEN TESTS FOR THIS YET");
-//        this.otherSymbols.setText(locsInfo.getSymbols().keySet().toString());
+        this.otherSymbols.setText(locsInfo.getSymbols().keySet().toString());
         JScrollPane scrollPane2 = new JScrollPane(this.otherSymbols);
         panel.add(scrollPane2);
         this.add(panel);
