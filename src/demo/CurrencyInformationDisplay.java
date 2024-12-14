@@ -144,6 +144,9 @@ public class CurrencyInformationDisplay extends JFrame implements ItemListener {
         Set<String> moreDisplayNames = locsInfo.getDisplayNames().keySet();
         moreDisplayNames.remove(this.selectedCurrency.getDisplayName());
         this.otherDisplayNames.setText(moreDisplayNames.toString());
+        Set<String> moreSymbols = locsInfo.getSymbols().keySet();
+        moreSymbols.remove(this.selectedCurrency.getSymbol());
+        this.otherSymbols.setText(moreSymbols.toString());
     }
     
     @Override
