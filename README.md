@@ -122,6 +122,9 @@ ISO-4217 codes as valid. Specifically, Manny's currency converter API
 acknowledges ZWL as a valid current currency code, with an exchange rate from 
 U.&nbsp;S. dollar of 321.999592 as of September 10, 2024.
 
+Note to self, 13 December 2024: Check if Trinidad &amp; Tobago dollar is brittle 
+for other display names test
+
 ----
 
 This project is closed off to Hacktoberfest.
