@@ -705,6 +705,35 @@ public class CurrencyInformationDisplayNGTest implements ItemListener {
 
     }
     
+    @Test
+    public void testDisplayReflectsComboBoxSelOtherSymbols() {
+        Currency currency = CurrencyChooser.chooseCurrency();
+        CurrencyInformationDisplay instance 
+                = new CurrencyInformationDisplay(currency);
+        instance.activate();
+        Currency secondCurrency = CurrencyChooser.chooseCurrency(
+                (curr) -> curr.getDefaultFractionDigits() 
+                        != currency.getDefaultFractionDigits()
+        );
+        instance.currenciesDropdown.addItemListener(this);
+        instance.currenciesDropdown
+                .setSelectedItem(new CurrencyWrapper(secondCurrency));
+        LocalesInfoGatherer info = new LocalesInfoGatherer(secondCurrency);
+        Set<String> symbols = info.getSymbols().keySet();
+        String omitFromOther = secondCurrency.getSymbol();
+        boolean opResult = symbols.remove(omitFromOther);
+        String removalMsg = "Should have been able to remove " + omitFromOther;
+        assert opResult : removalMsg;
+        String[] expected = symbols.toArray(String[]::new);
+        String reportedSymbols = instance.otherSymbols.getText();
+        String[] actual = reportedSymbols.substring(1, 
+                reportedSymbols.length() - 1).split(", ");
+        String msg = "Other symbols field should omit \"" + omitFromOther 
+                + "\", which is already listed in field above";
+        assertContainsSame(expected, actual, msg);
+
+    }
+    
     private static boolean contains(Component[] components, 
             Component component) {
         boolean found = false;
