@@ -427,6 +427,28 @@ public class CurrencyInformationDisplayNGTest implements ItemListener {
     }
     
     @Test
+    public void testOtherSymbolsPerCurrencySpecifiedInConstructor() {
+        Currency currency = CurrencyChooser.chooseCurrency(
+                (cur) -> !cur.getSymbol().equals(cur.getCurrencyCode())
+        );
+        CurrencyInformationDisplay instance 
+                = new CurrencyInformationDisplay(currency);
+        LocalesInfoGatherer info = new LocalesInfoGatherer(currency);
+        Set<String> symbols = info.getSymbols().keySet();
+        String omitFromOther = currency.getSymbol();
+        boolean opResult = symbols.remove(omitFromOther);
+        String removalMsg = "Should have been able to remove " + omitFromOther;
+        assert opResult : removalMsg;
+        String[] expected = symbols.toArray(String[]::new);
+        String reportedSymbols = instance.otherSymbols.getText();
+        String[] actual = reportedSymbols.substring(1, 
+                reportedSymbols.length() - 1).split(", ");
+        String msg = "Other symbols field should omit \"" + omitFromOther 
+                + "\", which is already listed in field above";
+        assertContainsSame(expected, actual, msg);
+    }
+    
+    @Test
     public void testComboBoxHasConstructorSpecifiedCurrencySelectedAtFirst() {
         Currency expected = CurrencyChooser.chooseCurrency();
         CurrencyInformationDisplay instance 
