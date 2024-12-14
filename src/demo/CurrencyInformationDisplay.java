@@ -193,7 +193,8 @@ public class CurrencyInformationDisplay extends JFrame implements ItemListener {
         this.symbolLabel.setEnabled(!this.selectedCurrency.getSymbol()
                 .equals(this.selectedCurrency.getCurrencyCode()));
         panel.add(this.symbolLabel);
-        this.symbolField = new JTextField(this.selectedCurrency.getSymbol());
+        String mainSymbol = this.selectedCurrency.getSymbol();
+        this.symbolField = new JTextField(mainSymbol);
         this.symbolField.setEditable(false);
         panel.add(this.symbolField);
         panel.add(new JLabel("Fraction digits: "));
@@ -214,9 +215,11 @@ public class CurrencyInformationDisplay extends JFrame implements ItemListener {
         panel.add(new JSeparator());
         panel.add(new JSeparator());
         panel.add(new JLabel("Other symbols: "));
+        Set<String> moreSymbols = locsInfo.getSymbols().keySet();
+        moreSymbols.remove(mainSymbol);
         this.otherSymbols = new JTextArea(3, DEFAULT_TEXT_FIELD_COLUMNS);
         this.otherSymbols.setLineWrap(true);
-        this.otherSymbols.setText(locsInfo.getSymbols().keySet().toString());
+        this.otherSymbols.setText(moreSymbols.toString());
         JScrollPane scrollPane2 = new JScrollPane(this.otherSymbols);
         panel.add(scrollPane2);
         this.add(panel);
