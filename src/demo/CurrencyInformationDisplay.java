@@ -139,6 +139,11 @@ public class CurrencyInformationDisplay extends JFrame implements ItemListener {
         this.symbolField.setText(this.selectedCurrency.getSymbol());
         this.fractionDigitsField.setText(Integer.toString(this.selectedCurrency
                 .getDefaultFractionDigits()));
+        LocalesInfoGatherer locsInfo = this.localesInfoCache
+                .retrieve(this.selectedCurrency);
+        Set<String> moreDisplayNames = locsInfo.getDisplayNames().keySet();
+        moreDisplayNames.remove(this.selectedCurrency.getDisplayName());
+        this.otherDisplayNames.setText(moreDisplayNames.toString());
     }
     
     @Override
