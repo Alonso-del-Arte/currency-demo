@@ -28,6 +28,7 @@ import java.awt.event.ItemListener;
 import java.util.Arrays;
 import java.util.Currency;
 import java.util.Locale;
+import java.util.Set;
 
 import javax.swing.JComboBox;
 import javax.swing.JFrame;
@@ -174,8 +175,9 @@ public class CurrencyInformationDisplay extends JFrame implements ItemListener {
                 .setSelectedItem(new CurrencyWrapper(this.selectedCurrency));
         panel.add(this.currenciesDropdown);
         panel.add(new JLabel("Currency: "));
-        this.displayNameField = new JTextField(this.selectedCurrency
-                .getDisplayName(), DEFAULT_TEXT_FIELD_COLUMNS);
+        String mainDisplayName = this.selectedCurrency.getDisplayName();
+        this.displayNameField = new JTextField(mainDisplayName, 
+                DEFAULT_TEXT_FIELD_COLUMNS);
         this.displayNameField.setEditable(false);
         panel.add(this.displayNameField);
         panel.add(new JLabel("ISO-4217 letter code: "));
@@ -201,11 +203,12 @@ public class CurrencyInformationDisplay extends JFrame implements ItemListener {
         panel.add(this.fractionDigitsField);
         LocalesInfoGatherer locsInfo 
                 = this.localesInfoCache.retrieve(this.selectedCurrency);
+        Set<String> moreDisplayNames = locsInfo.getDisplayNames().keySet();
+        moreDisplayNames.remove(mainDisplayName);
         panel.add(new JLabel("Other display names: "));
         this.otherDisplayNames = new JTextArea(10, DEFAULT_TEXT_FIELD_COLUMNS);
         this.otherDisplayNames.setLineWrap(true);
-        this.otherDisplayNames.setText(locsInfo.getDisplayNames().keySet()
-                .toString());
+        this.otherDisplayNames.setText(moreDisplayNames.toString());
         JScrollPane scrollPane1 = new JScrollPane(this.otherDisplayNames);
         panel.add(scrollPane1);
         panel.add(new JSeparator());
