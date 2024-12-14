@@ -17,6 +17,7 @@
 package demo;
 
 import currency.CurrencyChooser;
+import currency.LocalesInfoGatherer;
 import currency.comparators.LetterCodeComparator;
 
 import java.awt.Component;
@@ -25,11 +26,13 @@ import java.awt.event.ItemEvent;
 import java.awt.event.ItemListener;
 import java.util.Arrays;
 import java.util.Currency;
+import java.util.Set;
 
 import javax.swing.JPanel;
 import javax.swing.JRootPane;
 import javax.swing.WindowConstants;
 
+import static org.testframe.api.Asserters.assertContainsSame;
 import static org.testframe.api.Asserters.assertThrows;
 
 import static org.testng.Assert.*;
@@ -401,6 +404,26 @@ public class CurrencyInformationDisplayNGTest implements ItemListener {
                 + expected + " for currency " + currency.getDisplayName() + " (" 
                 + currency.getCurrencyCode() + ")";
         assertEquals(actual, expected, message);
+    }
+    
+    @Test
+    public void testOtherDisplayNamesPerCurrencySpecifiedInConstructor() {
+        Currency currency = CurrencyChooser.chooseCurrency();
+        CurrencyInformationDisplay instance 
+                = new CurrencyInformationDisplay(currency);
+        LocalesInfoGatherer info = new LocalesInfoGatherer(currency);
+        Set<String> displayNames = info.getDisplayNames().keySet();
+        String omitFromOther = currency.getDisplayName();
+        boolean opResult = displayNames.remove(omitFromOther);
+        String removalMsg = "Should have been able to remove " + omitFromOther;
+        assert opResult : removalMsg;
+        String[] expected = displayNames.toArray(String[]::new);
+        String reportedDisplayNames = instance.otherDisplayNames.getText();
+        String[] actual = reportedDisplayNames.substring(1, 
+                reportedDisplayNames.length() - 1).split(", ");
+        String msg = "Other display names field should omit \"" + omitFromOther 
+                + "\", which is already listed in field above";
+        assertContainsSame(expected, actual, msg);
     }
     
     @Test
