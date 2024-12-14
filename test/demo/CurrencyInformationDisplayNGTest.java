@@ -676,6 +676,35 @@ public class CurrencyInformationDisplayNGTest implements ItemListener {
         assertEquals(actual, expected, message);
     }
     
+    @Test
+    public void testDisplayReflectsComboBoxSelOtherDisplayNames() {
+        Currency currency = CurrencyChooser.chooseCurrency();
+        CurrencyInformationDisplay instance 
+                = new CurrencyInformationDisplay(currency);
+        instance.activate();
+        Currency secondCurrency = CurrencyChooser.chooseCurrency(
+                (curr) -> curr.getDefaultFractionDigits() 
+                        != currency.getDefaultFractionDigits()
+        );
+        instance.currenciesDropdown.addItemListener(this);
+        instance.currenciesDropdown
+                .setSelectedItem(new CurrencyWrapper(secondCurrency));
+        LocalesInfoGatherer info = new LocalesInfoGatherer(secondCurrency);
+        Set<String> displayNames = info.getDisplayNames().keySet();
+        String omitFromOther = secondCurrency.getDisplayName();
+        boolean opResult = displayNames.remove(omitFromOther);
+        String removalMsg = "Should have been able to remove " + omitFromOther;
+        assert opResult : removalMsg;
+        String[] expected = displayNames.toArray(String[]::new);
+        String reportedDisplayNames = instance.otherDisplayNames.getText();
+        String[] actual = reportedDisplayNames.substring(1, 
+                reportedDisplayNames.length() - 1).split(", ");
+        String msg = "Other display names field should omit \"" + omitFromOther 
+                + "\", which is already listed in field above";
+        assertContainsSame(expected, actual, msg);
+
+    }
+    
     private static boolean contains(Component[] components, 
             Component component) {
         boolean found = false;
