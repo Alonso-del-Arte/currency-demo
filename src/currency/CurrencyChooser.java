@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2024 Alonso del Arte
+ * Copyright (C) 2025 Alonso del Arte
  *
  * This program is free software: you can redistribute it and/or modify it under 
  * the terms of the GNU General Public License as published by the Free Software 
@@ -312,9 +312,9 @@ public class CurrencyChooser {
             int index = RANDOM.nextInt(currencies.size());
             return currencies.get(index);
         } else {
-            String message = "No available currency with " + fractionDigits 
+            String excMsg = "No available currency with " + fractionDigits 
                     + " fraction digits";
-            throw new RuntimeException(message);
+            throw new NoSuchElementException(excMsg);
         }
     }
     
