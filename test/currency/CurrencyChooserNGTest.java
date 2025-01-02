@@ -23,11 +23,13 @@ import java.util.HashSet;
 import java.util.Locale;
 import java.util.Map;
 import java.util.NoSuchElementException;
+import java.util.Random;
 import java.util.Set;
 import java.util.function.Predicate;
 import java.util.stream.Collectors;
 
 import static org.testframe.api.Asserters.assertMinimum;
+import static org.testframe.api.Asserters.assertThrows;
 
 import static org.testng.Assert.*;
 import org.testng.annotations.Test;
@@ -288,27 +290,25 @@ public class CurrencyChooserNGTest {
     
     @Test
     public void testUnavailableFractionDigitsCauseException() {
-        int unlikelyFractionDigits = Integer.MAX_VALUE;
-        try {
+        Random random = new Random();
+        int bound = 128;
+        int unlikelyFractionDigits = bound + random.nextInt(bound);
+        String msg = "Asking for currency with " + unlikelyFractionDigits 
+                + " fraction digits should cause exception";
+        Throwable t = assertThrows(() -> {
             Currency badCurrency 
                     = CurrencyChooser.chooseCurrency(unlikelyFractionDigits);
             System.out.println("Somehow asking for currency with " 
                     + unlikelyFractionDigits + " fraction digits gave " 
                     + badCurrency.getDisplayName());
-        } catch (NoSuchElementException nsee) {
-            String excMsg = nsee.getMessage();
-            assert excMsg != null : "Message should not be null";
-            System.out.println("\"" + excMsg + "\"");
-            String digitString = Integer.toString(unlikelyFractionDigits);
-            String msg = "Exception message should include \"" + digitString 
-                    + "\"";
-            assert excMsg.contains(digitString) : msg;
-        } catch (RuntimeException re) {
-            String message = re.getClass().getName() 
-                    + " is the wrong exception to throw for " 
-                    + unlikelyFractionDigits + " fraction digits";
-            fail(message);
-        }
+        }, NoSuchElementException.class, msg); 
+        String excMsg = t.getMessage();
+        assert excMsg != null : "Message should not be null";
+        System.out.println("\"" + excMsg + "\"");
+        String digitString = Integer.toString(unlikelyFractionDigits);
+        String containsMsg = "Exception message should include \"" + digitString 
+                + "\"";
+        assert excMsg.contains(digitString) : containsMsg;
     }
     
     @Test
