@@ -312,9 +312,9 @@ public class CurrencyChooser {
             int index = RANDOM.nextInt(currencies.size());
             return currencies.get(index);
         } else {
-            String excMsg = "No available currency with " + fractionDigits 
+            String message = "No available currency with " + fractionDigits 
                     + " fraction digits";
-            throw new NoSuchElementException(excMsg);
+            throw new RuntimeException(message);
         }
     }
     
