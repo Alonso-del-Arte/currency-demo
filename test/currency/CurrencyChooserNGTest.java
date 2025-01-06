@@ -329,12 +329,12 @@ public class CurrencyChooserNGTest {
                     message);
             chosenCurrencies.add(currency);
         }
-        int expected = total / 3;
+        int minimum = total / 3;
         int actual = chosenCurrencies.size();
         String msg = "Out of " + total 
-                + " currencies with no divisions, at least " + expected 
+                + " currencies with no divisions, at least " + minimum 
                 + " should've been chosen, " + actual + " were chosen";
-        assert actual >= expected : msg;
+        assertMinimum(minimum, actual, msg);
     }
     
     @Test
@@ -344,7 +344,6 @@ public class CurrencyChooserNGTest {
         int total = noCentCurrencies.size();
         Set<Currency> chosenCurrencies = new HashSet<>();
         int maxCallCount = total / 3;
-        int expected = maxCallCount / 8;
         for (int i = 0; i < maxCallCount; i++) {
             Currency currency = CurrencyChooser.chooseCurrency(fractionDigits);
             String message = "Currency " + currency.getDisplayName() + " (" 
@@ -354,12 +353,13 @@ public class CurrencyChooserNGTest {
                     message);
             chosenCurrencies.add(currency);
         }
+        int minimum = maxCallCount / 8;
         int actual = chosenCurrencies.size();
         String msg = "Out of " + total 
-                + " currencies dividing into 100 cents, at least " + expected 
+                + " currencies dividing into 100 cents, at least " + minimum 
                 + " should've been chosen after " + maxCallCount + " calls, " 
                 + actual + " were chosen";
-        assert actual >= expected : msg;
+        assertMinimum(minimum, actual, msg);
     }
     
     @Test
@@ -377,13 +377,13 @@ public class CurrencyChooserNGTest {
                     message);
             chosenCurrencies.add(currency);
         }
-        int expected = total / 2;
+        int minimum = total / 2;
         int actual = chosenCurrencies.size();
         String msg = "Out of " + total 
                 + " currencies dividing into 1,000 darahim, at least " 
-                + expected + " should've been chosen, " + actual 
+                + minimum + " should've been chosen, " + actual 
                 + " were chosen";
-        assert actual >= expected : msg;
+        assertMinimum(minimum, actual, msg);
     }
     
     @Test
