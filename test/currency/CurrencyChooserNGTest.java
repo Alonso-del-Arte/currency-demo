@@ -28,6 +28,7 @@ import java.util.Set;
 import java.util.function.Predicate;
 import java.util.stream.Collectors;
 
+import static org.testframe.api.Asserters.assertContainsSame;
 import static org.testframe.api.Asserters.assertMinimum;
 import static org.testframe.api.Asserters.assertThrows;
 
@@ -391,13 +392,12 @@ public class CurrencyChooserNGTest {
         int remainder = ((int) System.currentTimeMillis()) % 16;
         Predicate<Currency> predicate 
                 = (currency) -> currency.getNumericCode() % 16 == remainder;
-        // TODO: Refactor to use assertContainsSame()
         Set<Currency> filtered = CURRENCIES.stream().filter(predicate)
                 .filter((currency) -> accept(currency))
                 .collect(Collectors.toSet());
         Set<Currency> expected = new HashSet<>(filtered);
         Set<Currency> actual = new HashSet<>();
-        String message = "Choosing currencies with numeric code " + remainder 
+        String msg = "Choosing currencies with numeric code " + remainder 
                 + " modulo 16";
         int totalNumberOfCalls = 20 * expected.size();
         int callsSoFar = 0;
@@ -405,7 +405,7 @@ public class CurrencyChooserNGTest {
             actual.add(CurrencyChooser.chooseCurrency(predicate));
             callsSoFar++;
         }
-        assertEquals(actual, expected, message);
+        assertContainsSame(expected, actual, msg);
     }
     
     @Test
