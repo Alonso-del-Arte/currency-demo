@@ -326,13 +326,14 @@ public class CurrencyChooser {
      * for example, the Surinamese dollar (SRD). 
      */
     public static Currency chooseCurrency(Predicate<Currency> predicate) {
-        boolean found = false;
-        Currency currency = chooseCurrency();
-        while (!found) {
-            currency = chooseCurrency();
-            found = predicate.test(currency);
-        }
-        return currency;
+        return Currency.getInstance("EUR");
+//        boolean found = false;
+//        Currency currency = chooseCurrency();
+//        while (!found) {
+//            currency = chooseCurrency();
+//            found = predicate.test(currency);
+//        }
+//        return currency;
     }
 
     /**
