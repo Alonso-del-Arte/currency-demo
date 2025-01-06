@@ -300,7 +300,10 @@ public class CurrencyChooserNGTest {
                     = CurrencyChooser.chooseCurrency(unlikelyFractionDigits);
             System.out.println("Somehow asking for currency with " 
                     + unlikelyFractionDigits + " fraction digits gave " 
-                    + badCurrency.getDisplayName());
+                    + badCurrency.getDisplayName() + " (" 
+                    + badCurrency.getCurrencyCode() + "), which only has "
+                    + badCurrency.getDefaultFractionDigits()
+                    + " fraction digits");
         }, NoSuchElementException.class, msg); 
         String excMsg = t.getMessage();
         assert excMsg != null : "Message should not be null";
@@ -313,11 +316,18 @@ public class CurrencyChooserNGTest {
     
     @Test
     public void testChooseNoCentsCurrencyRandomlyEnough() {
-        Set<Currency> noCentCurrencies = FRACT_DIGITS_MAP.get(0);
+        int fractionDigits = 0;
+        Set<Currency> noCentCurrencies = FRACT_DIGITS_MAP.get(fractionDigits);
         int total = noCentCurrencies.size();
         Set<Currency> chosenCurrencies = new HashSet<>();
         for (int i = 0; i < total; i++) {
-            chosenCurrencies.add(CurrencyChooser.chooseCurrency(0));
+            Currency currency = CurrencyChooser.chooseCurrency(fractionDigits);
+            String message = "Currency " + currency.getDisplayName() + " (" 
+                    + currency.getCurrencyCode() + ") expected to have " 
+                    + fractionDigits + " fraction digits";
+            assertEquals(currency.getDefaultFractionDigits(), fractionDigits, 
+                    message);
+            chosenCurrencies.add(currency);
         }
         int expected = total / 3;
         int actual = chosenCurrencies.size();
@@ -329,13 +339,20 @@ public class CurrencyChooserNGTest {
     
     @Test
     public void testChooseCentCurrencyRandomlyEnough() {
-        Set<Currency> noCentCurrencies = FRACT_DIGITS_MAP.get(2);
+        int fractionDigits = 2;
+        Set<Currency> noCentCurrencies = FRACT_DIGITS_MAP.get(fractionDigits);
         int total = noCentCurrencies.size();
         Set<Currency> chosenCurrencies = new HashSet<>();
         int maxCallCount = total / 3;
         int expected = maxCallCount / 8;
         for (int i = 0; i < maxCallCount; i++) {
-            chosenCurrencies.add(CurrencyChooser.chooseCurrency(3));
+            Currency currency = CurrencyChooser.chooseCurrency(fractionDigits);
+            String message = "Currency " + currency.getDisplayName() + " (" 
+                    + currency.getCurrencyCode() + ") expected to have " 
+                    + fractionDigits + " fraction digits";
+            assertEquals(currency.getDefaultFractionDigits(), fractionDigits, 
+                    message);
+            chosenCurrencies.add(currency);
         }
         int actual = chosenCurrencies.size();
         String msg = "Out of " + total 
@@ -347,11 +364,18 @@ public class CurrencyChooserNGTest {
     
     @Test
     public void testChooseDarahimCurrencyRandomlyEnough() {
-        Set<Currency> noCentCurrencies = FRACT_DIGITS_MAP.get(3);
+        int fractionDigits = 3;
+        Set<Currency> noCentCurrencies = FRACT_DIGITS_MAP.get(fractionDigits);
         int total = noCentCurrencies.size();
         Set<Currency> chosenCurrencies = new HashSet<>();
         for (int i = 0; i < total; i++) {
-            chosenCurrencies.add(CurrencyChooser.chooseCurrency(3));
+            Currency currency = CurrencyChooser.chooseCurrency(fractionDigits);
+            String message = "Currency " + currency.getDisplayName() + " (" 
+                    + currency.getCurrencyCode() + ") expected to have " 
+                    + fractionDigits + " fraction digits";
+            assertEquals(currency.getDefaultFractionDigits(), fractionDigits, 
+                    message);
+            chosenCurrencies.add(currency);
         }
         int expected = total / 2;
         int actual = chosenCurrencies.size();
