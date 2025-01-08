@@ -329,7 +329,9 @@ public class CurrencyChooser {
      * @param predicate The predicate. For example, currency's display name 
      * should contain the word "dollar".
      * @return A currency satisfying the predicate. For the example predicate, 
-     * for example, the Surinamese dollar (SRD). 
+     * for example, the Surinamese dollar (SRD).
+     * @throws NoSuchElementException If no match for the predicate is found 
+     * after a reasonable number of attempts.
      */
     public static Currency chooseCurrency(Predicate<Currency> predicate) {
         boolean found = false;
@@ -345,7 +347,8 @@ public class CurrencyChooser {
             return currency;
         } else {
             String excMsg = "No currency matching predicate found after " 
-                    + attemptsSoFar + " attempts";
+                    + attemptsSoFar + " attempts from pool of " 
+                    + CURRENCIES.size() + " suitable currencies";
             throw new NoSuchElementException(excMsg);
         }
     }
