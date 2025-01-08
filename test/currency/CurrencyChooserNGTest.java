@@ -16,6 +16,8 @@
  */
 package currency;
 
+import java.time.Duration;
+import java.time.temporal.ChronoUnit;
 import java.util.Arrays;
 import java.util.Currency;
 import java.util.HashMap;
@@ -31,6 +33,7 @@ import java.util.stream.Collectors;
 import static org.testframe.api.Asserters.assertContainsSame;
 import static org.testframe.api.Asserters.assertMinimum;
 import static org.testframe.api.Asserters.assertThrows;
+import static org.testframe.api.Asserters.assertTimeout;
 
 import static org.testng.Assert.*;
 import org.testng.annotations.Test;
@@ -406,6 +409,31 @@ public class CurrencyChooserNGTest {
             callsSoFar++;
         }
         assertContainsSame(expected, actual, msg);
+    }
+    
+    @Test
+    public void testChooseCurrencyByBadPredicateCausesException() {
+        String invalidDisplayName = "Invalid display name " 
+                + System.currentTimeMillis();
+        Predicate<Currency> predicate 
+                = (Currency cur) -> cur.getDisplayName()
+                        .equals(invalidDisplayName);
+        Duration allottedTime = Duration.of(10, ChronoUnit.SECONDS);
+        String msg = "Bad predicate for invalid display name \"" 
+                + invalidDisplayName + "\" should not take more than " 
+                + allottedTime.toString() + " to cause exception";
+        assertTimeout(() -> {
+            Throwable t = assertThrows(() -> {
+                Currency currency = CurrencyChooser.chooseCurrency(predicate);
+                System.out.println("Search for \"" + invalidDisplayName 
+                        + "\" somehow gave " + currency.getDisplayName() + " (" 
+                        + currency.getCurrencyCode() + ")");
+            }, NoSuchElementException.class);
+            String excMsg = t.getMessage();
+            assert excMsg != null : "Exception message should not be null";
+            assert !excMsg.isBlank() : "Exception message should not be blank";
+            System.out.println("\"" + excMsg + "\"");
+        }, allottedTime, msg);
     }
     
     @Test
