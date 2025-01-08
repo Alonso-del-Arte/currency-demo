@@ -40,9 +40,15 @@ public class CurrencyChooser {
     
     static final Random RANDOM = new Random();
     
+    private static final Set<Currency> ALL_CURRENCIES 
+            = Currency.getAvailableCurrencies();
+    
+    private static final int MAX_NUMBER_OF_PREDICATE_MATCH_ATTEMPTS 
+            = 3 * ALL_CURRENCIES.size();
+    
     private static final List<Currency> CURRENCIES 
-            = new ArrayList<>(Currency.getAvailableCurrencies());
-
+            = new ArrayList<>(ALL_CURRENCIES);
+    
     private static final Set<Currency> PSEUDO_CURRENCIES = new HashSet<>();
     
     private static final List<Currency> PSEUDO_CURRENCIES_LIST;
@@ -327,12 +333,21 @@ public class CurrencyChooser {
      */
     public static Currency chooseCurrency(Predicate<Currency> predicate) {
         boolean found = false;
+        int attemptsSoFar = 0;
         Currency currency = chooseCurrency();
-        while (!found) {
+        while (!found 
+                && attemptsSoFar < MAX_NUMBER_OF_PREDICATE_MATCH_ATTEMPTS) {
             currency = chooseCurrency();
+            attemptsSoFar++;     
             found = predicate.test(currency);
         }
-        return currency;
+        if (found) {
+            return currency;
+        } else {
+            String excMsg = "No currency matching predicate found after " 
+                    + attemptsSoFar + " attempts";
+            throw new NoSuchElementException(excMsg);
+        }
     }
 
     /**
