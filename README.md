@@ -30,6 +30,9 @@ up to Java 17. I'm actually using Java 21, though. Compiling with Java 17 or
 earlier might still be possible, but then be aware that some null pointer 
 exceptions might have null exception messages.
 
+I will eventually add the TestFrame warnings library as a source dependency. 
+That will be packaged in a JAR separate from the TestFrame testing framework.
+
 ### Dependencies for test classes
 
 * TestNG
