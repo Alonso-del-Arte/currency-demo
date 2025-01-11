@@ -33,19 +33,42 @@ public class ExchangeRateProviderNGTest {
     
     static final Random RANDOM = new Random();
     
+    @Test
+    public void testGetRate() {
+        System.out.println("getRate");
+        Currency from = CurrencyChooser.chooseCurrency();
+        Currency to = CurrencyChooser.chooseCurrencyOtherThan(from);
+        CurrencyPair currencies = new CurrencyPair(from, to);
+        ExchangeRateProviderImpl instance = new ExchangeRateProviderImpl();
+        double actual = instance.getRate(currencies);
+        double expected = instance.mostRecentReturn;
+        double delta = 0.0001;
+        String message = "Inquiring exchange rate from " + from.getDisplayName() 
+                + " (" + from.getCurrencyCode() + ") to " + to.getDisplayName() 
+                + " (" + to.getCurrencyCode() + ")";
+        assertEquals(actual, expected, delta, message);
+        assertEquals(instance.mostRecentSource, from);
+        assertEquals(instance.mostRecentTarget, to);
+    }
+    
     private static class ExchangeRateProviderImpl 
             implements ExchangeRateProvider {
         
-        private static int nonDefaultGetRateCallCount = 0;
+        private int nonDefaultGetRateCallCount = 0;
         
-        private static Currency mostRecentSource, mostRecentTarget;
+        private Currency mostRecentSource;
         
-        private static double mostRecentReturn = Double.NaN;
+        private Currency mostRecentTarget;
+        
+        private double mostRecentReturn = Double.NaN;
         
         @Override
         public double getRate(Currency source, Currency target) {
-            nonDefaultGetRateCallCount++;
-            return 1.0 + RANDOM.nextDouble();
+            this.nonDefaultGetRateCallCount++;
+            this.mostRecentSource = source;
+            this.mostRecentTarget = target;
+            this.mostRecentReturn = 1.0 + RANDOM.nextDouble();
+            return this.mostRecentReturn;
         }
         
     }
