@@ -16,6 +16,8 @@
  */
 package currency.conversions;
 
+import currency.CurrencyPair;
+
 import java.util.Currency;
 
 /**
@@ -38,5 +40,10 @@ public interface ExchangeRateProvider {
      * checked exception occurs, it will be wrapped into an unchecked exception.
      */
     double getRate(Currency source, Currency target);
+    
+    // TODO: Write tests for this
+    default double getRate(CurrencyPair currencies) {
+        return 0.0;
+    }
     
 }
