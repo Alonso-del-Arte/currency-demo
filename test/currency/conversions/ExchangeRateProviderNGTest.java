@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2024 Alonso del Arte
+ * Copyright (C) 2025 Alonso del Arte
  *
  * This program is free software: you can redistribute it and/or modify it under 
  * the terms of the GNU General Public License as published by the Free Software 
@@ -16,8 +16,14 @@
  */
 package currency.conversions;
 
+import currency.CurrencyChooser;
+import currency.CurrencyPair;
+
 import java.util.Currency;
 import java.util.Random;
+
+import static org.testng.Assert.*;
+import org.testng.annotations.Test;
 
 /**
  * Tests of the ExchangeRateProvider interface.
@@ -27,7 +33,21 @@ public class ExchangeRateProviderNGTest {
     
     static final Random RANDOM = new Random();
     
-    // TODO: Determine if this test class is even necessary (the Random instance 
-    // can always be moved)
+    private static class ExchangeRateProviderImpl 
+            implements ExchangeRateProvider {
+        
+        private static int nonDefaultGetRateCallCount = 0;
+        
+        private static Currency mostRecentSource, mostRecentTarget;
+        
+        private static double mostRecentReturn = Double.NaN;
+        
+        @Override
+        public double getRate(Currency source, Currency target) {
+            nonDefaultGetRateCallCount++;
+            return 1.0 + RANDOM.nextDouble();
+        }
+        
+    }
     
 }
