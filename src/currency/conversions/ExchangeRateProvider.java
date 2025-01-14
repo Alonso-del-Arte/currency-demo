@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2024 Alonso del Arte
+ * Copyright (C) 2025 Alonso del Arte
  *
  * This program is free software: you can redistribute it and/or modify it under 
  * the terms of the GNU General Public License as published by the Free Software 
@@ -34,16 +34,28 @@ public interface ExchangeRateProvider {
      * dollars (USD).
      * @param target The target to convert one unit of {@code source} to. For 
      * example, euros (EUR).
-     * @return The conversion rate. In the example as of August 12, 2024, 
-     * 0.915796.
+     * @return The conversion rate. In the example as of August 12, 2024, this 
+     * was 0.915796.
      * @throws RuntimeException If some kind of {@code IOException} or other 
      * checked exception occurs, it will be wrapped into an unchecked exception.
      */
     double getRate(Currency source, Currency target);
     
-    // TODO: Write tests for this
+    /**
+     * Gives the rate to convert one unit of the source currency to the target 
+     * currency. The provided default implementation simply unwraps the {@link 
+     * CurrencyPair} instance and calls the 2-parameter version of the function, 
+     * which this interface does not implement.
+     * @param currencies The pair of currencies, source and target. For example, 
+     * United States dollars (USD) and euros (EUR).
+     * @return The conversion rate. In the example as of January 13, 2025, this 
+     * was 0.97582065.
+     * @throws RuntimeException If some kind of {@code IOException} or other 
+     * checked exception occurs, it will be wrapped into an unchecked exception.
+     */
     default double getRate(CurrencyPair currencies) {
-        return 0.0;
+        return this.getRate(currencies.getFromCurrency(), 
+                currencies.getToCurrency());
     }
     
 }
