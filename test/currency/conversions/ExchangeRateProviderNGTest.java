@@ -41,6 +41,8 @@ public class ExchangeRateProviderNGTest {
         CurrencyPair currencies = new CurrencyPair(from, to);
         ExchangeRateProviderImpl instance = new ExchangeRateProviderImpl();
         double actual = instance.getRate(currencies);
+        String callMsg = "1-parameter getRate() should've called 2-parameter";
+        assert instance.nonDefaultGetRateCallCount == 1 : callMsg;
         double expected = instance.mostRecentReturn;
         double delta = 0.0001;
         String message = "Inquiring exchange rate from " + from.getDisplayName() 
