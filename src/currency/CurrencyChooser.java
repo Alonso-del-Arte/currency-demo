@@ -399,6 +399,11 @@ public class CurrencyChooser {
 
     // TODO: Write tests for this
     public static Set<CurrencyPair> choosePairs(int numberOfPairs) {
+        if (numberOfPairs < 0) {
+            String excMsg = "Number of pairs " + numberOfPairs 
+                    + " is not valid, should be positive";
+            throw new IllegalArgumentException(excMsg);
+        }
         return new HashSet<>();
     }
 
