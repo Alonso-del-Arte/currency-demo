@@ -30,16 +30,14 @@ up to Java 17. I'm actually using Java 21, though. Compiling with Java 17 or
 earlier might still be possible, but then be aware that some null pointer 
 exceptions might have null exception messages.
 
-I will eventually add the TestFrame warnings library as a source dependency. 
-That will be packaged in a JAR separate from the TestFrame testing framework.
-
 ### Dependencies for test classes
 
 * TestNG
 * ~~TestFrame 0.9~~ (this has been phased out)
 * ~~TestFrame 0.95~~ (`org.testframe.api` namespace but `assertPrintOut()` was a 
 stub, this has also been phased out)
-* TestFrame 1.0 or later (`org.testframe.api` namespace, `assertPrintOut()`)
+* TestFrame 1.0 or later (`org.testframe.api` namespace, `assertPrintOut()`). Go 
+to [testframe.org](https://testframe.org) and click on "Download Version 1.0".
 
 ## Notes about internationalization
 
