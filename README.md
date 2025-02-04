@@ -91,8 +91,6 @@ Note that Bitcoin has the symbol &#x20BF; and the 3-letter code XBT has been
 proposed for ISO-4217. That symbol should not be confused with the symbol for 
 the Thai bhat, &#xE3F;.
 
-FINISH WRITING
-
 ## Miscellaneous notes
 
 In the Java currency information file, the S&atilde;o Tom&eacute; and 
