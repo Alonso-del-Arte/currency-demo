@@ -8,7 +8,7 @@ are, from very bad to very good but still short of ideal:
 
 * Use `float` or `double` &mdash; not good to use floating point for fixed point 
 quantities
-* Use 'int` or `long` &mdash; no information about where to put the decimal 
+* Use `int` or `long` &mdash; no information about where to put the decimal 
 point
 * Use `java.math.BigDecimal` &mdash; no information about the currency
 * Create our own class &mdash; we might duplicate third-party library efforts
