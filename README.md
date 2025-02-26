@@ -95,6 +95,23 @@ Note that Bitcoin has the symbol &#x20BF; and the 3-letter code XBT has been
 proposed for ISO-4217. That symbol should not be confused with the symbol for 
 the Thai bhat, &#xE3F;.
 
+## Notes about divisions of a unit of currency
+
+I am aware of the cent symbol, &cent; (Unicode U+00A2, HTML entity &amp;cent;). 
+I briefly thought about using it in this project, for amounts from &minus;0.99 
+to 0.99. The most obvious reason that dissuaded me from that idea is that not 
+all units of currencies divide into 100 cents.
+
+Currencies like the Iraqi dinar (IQD) and the Omani rial (OMR) divide into 1,000 
+milles, or darahim. Some currencies, like the Japanese yen (JPY) or the Ugandan 
+shilling (UGX) don't subdivide at all.
+
+To my knowledge, there are no currencies that divide only into ten parts. And 
+I'm only aware of one currency that divides into 10,000 parts, the Chilean unit 
+of account (CLF). But from what I can gather, that's not really used for 
+everyday purchases like groceries, with the main currency in Chile being the 
+Chilean peso (CLP), which interestingly enough doesn't subdivide at all.
+
 ## Miscellaneous notes
 
 In the Java currency information file, the S&atilde;o Tom&eacute; and 
