@@ -39,6 +39,15 @@ stub, this has also been phased out)
 * TestFrame 1.0 or later (`org.testframe.api` namespace, `assertPrintOut()`). Go 
 to [testframe.org](https://testframe.org) and click on "Download Version 1.0".
 
+## Online currency conversion APIs
+
+There are many currency conversion APIs online that can be used from a Java 
+program like the one in this project. I came across Manny's Currency Converter 
+API through Stack Overflow many years ago and found it to be quite easy and 
+straightforward to use. The free tier allows up to one hundred HTTP requests in 
+an hour. The request syntax is very simple and so is the JSON response. So 
+that's the one I chose for this project.
+
 ## Notes about internationalization
 
 Although I have not made a conscious effort to internationalize this repository, 
