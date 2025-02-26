@@ -45,8 +45,22 @@ There are many currency conversion APIs online that can be used from a Java
 program like the one in this project. I came across Manny's Currency Converter 
 API through Stack Overflow many years ago and found it to be quite easy and 
 straightforward to use. The free tier allows up to one hundred HTTP requests in 
-an hour. The request syntax is very simple and so is the JSON response. So 
-that's the one I chose for this project.
+an hour. The request syntax is very simple and so is the JSON response. Almost 
+every currency with an ISO-4217 code is supported. So that's the one I chose for 
+this project.
+
+However, in November 2024, if I recall correctly, the free tier went down, as 
+had happened a few times before. But then more than a week passed by without it 
+coming back online.
+
+Finally, in February 2025, the server was reconfigured to respond that the free 
+tier servers "are down indefinitely," and encouraging users to sign up for 
+either a prepaid plan starting at $6 for presumably some fixed number of request 
+credits, or a paid plan of $10 or $60 a month.
+
+Manny's free tier was almost too good to be true. I will have to look for some 
+other free API, which will probably be very limited in the number of currencies 
+it supports and how many requests can be made per hour.
 
 ## Notes about internationalization
 
