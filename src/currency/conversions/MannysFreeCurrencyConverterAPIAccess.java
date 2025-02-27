@@ -31,8 +31,12 @@ import java.util.Scanner;
  * "FOREX_API_KEY". Go to the website <a 
  * href="https://free.currencyconverterapi.com">currencyconverterapi.com</a> for 
  * more information.
+ * @deprecated Since late 2024, Manny's Free Currency Converter API is down 
+ * indefinitely. It might never come back online. I have not yet found a good 
+ * replacement.
  * @author Alonso del Arte
  */
+@Deprecated
 public class MannysFreeCurrencyConverterAPIAccess 
         implements ExchangeRateProvider {
     
