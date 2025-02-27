@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2024 Alonso del Arte
+ * Copyright (C) 2025 Alonso del Arte
  *
  * This program is free software: you can redistribute it and/or modify it under 
  * the terms of the GNU General Public License as published by the Free Software 
@@ -33,7 +33,8 @@ import java.util.Scanner;
  * more information.
  * @author Alonso del Arte
  */
-public class MannysCurrencyConverterAPIAccess implements ExchangeRateProvider {
+public class MannysFreeCurrencyConverterAPIAccess 
+        implements ExchangeRateProvider {
     
     private static final String QUERY_PATH_BEGIN 
             = "https://free.currconv.com/api/v7/convert?q=";
@@ -59,8 +60,8 @@ public class MannysCurrencyConverterAPIAccess implements ExchangeRateProvider {
                 InputStream stream = (InputStream) connection.getContent();
                 Scanner scanner = new Scanner(stream);
                 String quote = scanner.nextLine();
-                return Double.parseDouble(quote.substring(quote.indexOf(':') 
-                        + 1, quote.indexOf('}')));
+                return Double.parseDouble(quote
+                        .substring(quote.indexOf(':') + 1, quote.indexOf('}')));
             } else {
                 String excMsg = "Query " + queryPath + " returned status " 
                         + responseCode;

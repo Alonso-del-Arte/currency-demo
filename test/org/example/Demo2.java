@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2023 Alonso del Arte
+ * Copyright (C) 2025 Alonso del Arte
  *
  * This program is free software: you can redistribute it and/or modify it under 
  * the terms of the GNU General Public License as published by the Free Software 
@@ -17,7 +17,7 @@
 package org.example;
 
 import currency.conversions.ExchangeRateProvider;
-import currency.conversions.MannysCurrencyConverterAPIAccess;
+import currency.conversions.MannysFreeCurrencyConverterAPIAccess;
 
 import java.util.Currency;
 import java.util.Locale;
@@ -85,7 +85,7 @@ public class Demo2 {
         Currency dollar = Currency.getInstance(Locale.US);
         Currency euro = Currency.getInstance("EUR");
         ExchangeRateProvider rateProvider 
-                = new MannysCurrencyConverterAPIAccess();
+                = new MannysFreeCurrencyConverterAPIAccess();
         long expectedA = dollars + ((long) (euros 
                 * rateProvider.getRate(euro, dollar)));
         long expectedB = euros + ((long) (dollars 

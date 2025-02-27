@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2024 Alonso del Arte
+ * Copyright (C) 2025 Alonso del Arte
  *
  * This program is free software: you can redistribute it and/or modify it under 
  * the terms of the GNU General Public License as published by the Free Software 
@@ -18,7 +18,7 @@ package currency.comparators;
 
 import currency.MoneyAmount;
 import currency.conversions.CurrencyConverter;
-import currency.conversions.MannysCurrencyConverterAPIAccess;
+import currency.conversions.MannysFreeCurrencyConverterAPIAccess;
 
 import java.util.ArrayList;
 import java.util.Currency;
@@ -44,7 +44,7 @@ public class ExchangeRateComparatorNGTest {
     
     private static List<Currency> makeList(Currency currency) {
         CurrencyConverter converter 
-                = new CurrencyConverter(new MannysCurrencyConverterAPIAccess());
+                = new CurrencyConverter(new MannysFreeCurrencyConverterAPIAccess());
         Map<MoneyAmount, Currency> map = new TreeMap<>();
         for (Currency cur : CURRENCIES) {
             MoneyAmount amount = new MoneyAmount(1, cur);

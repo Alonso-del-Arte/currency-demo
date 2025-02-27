@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2024 Alonso del Arte
+ * Copyright (C) 2025 Alonso del Arte
  *
  * This program is free software: you can redistribute it and/or modify it under 
  * the terms of the GNU General Public License as published by the Free Software 
@@ -20,7 +20,7 @@ import currency.CurrencyPair;
 import currency.MoneyAmount;
 import currency.conversions.ConversionRateQuote;
 import currency.conversions.CurrencyConverter;
-import currency.conversions.MannysCurrencyConverterAPIAccess;
+import currency.conversions.MannysFreeCurrencyConverterAPIAccess;
 import currency.conversions.RateQuoteCache;
 
 import java.awt.event.ActionEvent;
@@ -155,7 +155,9 @@ public class CurrencyConverterGUI extends JFrame implements ActionListener,
     
     public static void main(String[] args) {
         CurrencyConverterGUI display = new CurrencyConverterGUI(DEFAULT_PAIR, 
-                new CurrencyConverter(new MannysCurrencyConverterAPIAccess()));
+                new CurrencyConverter(
+                        new MannysFreeCurrencyConverterAPIAccess()
+                ));
         display.setVisible(true);
     }
     
