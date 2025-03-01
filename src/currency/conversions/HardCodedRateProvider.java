@@ -39,7 +39,11 @@ public class HardCodedRateProvider implements ExchangeRateProvider {
     // TODO: Write tests for this
     @Override
     public double getRate(Currency source, Currency target) {
-        return 25554.99;
+        return switch(target.getCurrencyCode()) {
+            case "MXN" -> 20.55;
+            case "VND" -> 25554.99;
+            default -> -1.0;
+        };
     }
     
 }
