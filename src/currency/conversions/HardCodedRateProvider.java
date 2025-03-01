@@ -28,9 +28,13 @@ import java.util.Currency;
  */
 public class HardCodedRateProvider implements ExchangeRateProvider {
     
-    // TODO: Write tests for this
+    /**
+     * Gives the date that the values given by this provider were hard-coded on. 
+     * It is expected that some of the values will soon go stale, while others 
+     * might remain current until the next hard-coding.
+     */
     public static final LocalDate DATE_OF_HARD_CODING 
-            = LocalDate.of(1970, Month.JANUARY, 1);
+            = LocalDate.of(2025, Month.FEBRUARY, 28);
     
     // TODO: Write tests for this
     @Override
