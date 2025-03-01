@@ -36,13 +36,13 @@ public class HardCodedRateProvider implements ExchangeRateProvider {
     public static final LocalDate DATE_OF_HARD_CODING 
             = LocalDate.of(2025, Month.FEBRUARY, 28);
     
-    // TODO: Write tests for this
     @Override
     public double getRate(Currency source, Currency target) {
         return switch(target.getCurrencyCode()) {
             case "MXN" -> 20.55;
             case "PHP" -> 57.94;
             case "VND" -> 25554.99;
+            case "XAF" -> 630.44;
             default -> -1.0;
         };
     }
