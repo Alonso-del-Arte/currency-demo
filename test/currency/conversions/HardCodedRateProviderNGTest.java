@@ -21,6 +21,9 @@ import currency.CurrencyPair;
 import java.time.LocalDate;
 import java.time.Month;
 import java.util.Currency;
+import java.util.Locale;
+
+import static org.testframe.api.Asserters.assertInRange;
 
 import static org.testng.Assert.*;
 import org.testng.annotations.Test;
@@ -31,11 +34,34 @@ import org.testng.annotations.Test;
  */
 public class HardCodedRateProviderNGTest {
     
+    private static final Currency UNITED_STATES_DOLLARS 
+            = Currency.getInstance(Locale.US);
+    
+    private static final String USD_DISPLAY_NAME 
+            = UNITED_STATES_DOLLARS.getDisplayName();
+    
+    private static final String USD_3_LETTER_CODE 
+            = UNITED_STATES_DOLLARS.getCurrencyCode();
+    
     @Test
     public void testDateOfHardCodingConstant() {
         LocalDate expected = LocalDate.of(2025, Month.FEBRUARY, 28);
         LocalDate actual = HardCodedRateProvider.DATE_OF_HARD_CODING;
         assertEquals(actual, expected);
+    }
+    
+    @Test
+    public void testGetRateUSDToVND() {
+        ExchangeRateProvider instance = new HardCodedRateProvider();
+        Currency vietDong = Currency.getInstance("VND");
+        double minimum = 22000.0;
+        double actual = instance.getRate(UNITED_STATES_DOLLARS, vietDong);
+        double maximum = 26000.0;
+        String msg = "Rate of conversion from " + USD_DISPLAY_NAME + " (" 
+                + USD_3_LETTER_CODE + ") to " + vietDong.getDisplayName() + " (" 
+                + vietDong.getCurrencyCode() 
+                + ") should be in the range of the past 5 years";
+        assertInRange(minimum, actual, maximum, msg);
     }
     
 }
