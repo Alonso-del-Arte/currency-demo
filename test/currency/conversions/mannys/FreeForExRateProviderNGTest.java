@@ -14,9 +14,10 @@
  * You should have received a copy of the GNU General Public License along with 
  * this program. If not, see <http://www.gnu.org/licenses/>.
  */
-package currency.conversions;
+package currency.conversions.mannys;
 
 import currency.CurrencyChooser;
+import currency.conversions.ExchangeRateProvider;
 
 import java.io.InputStream;
 import java.io.IOException;
@@ -32,10 +33,10 @@ import static org.testng.Assert.*;
 import org.testng.annotations.Test;
 
 /**
- * Tests of the MannysFreeCurrencyConverterAPIAccess class.
+ * Tests of the FreeForExRateProvider class.
  * @author Alonso del Arte
  */
-public class MannysCurrencyConverterAPIAccessNGTest {
+public class FreeForExRateProviderNGTest {
     
     private static final double TEST_DELTA = 0.01;
     
@@ -47,7 +48,7 @@ public class MannysCurrencyConverterAPIAccessNGTest {
     @Test
     public void testGetRateNoConversionNeeded() {
         ExchangeRateProvider instance 
-                = new MannysFreeCurrencyConverterAPIAccess();
+                = new FreeForExRateProvider();
         Currency currency = CurrencyChooser.chooseCurrency();
         double expected = 1.0;
         double actual = instance.getRate(currency, currency);
@@ -60,7 +61,7 @@ public class MannysCurrencyConverterAPIAccessNGTest {
     @Test
     public void testGetRateForUSDollarsToEastCaribbeanDollars() {
         ExchangeRateProvider instance 
-                = new MannysFreeCurrencyConverterAPIAccess();
+                = new FreeForExRateProvider();
         double expected = 2.702;
         double actual = instance.getRate(U_S_DOLLARS, EAST_CARIBBEAN_DOLLARS);
         assertEquals(actual, expected, TEST_DELTA);
@@ -69,21 +70,21 @@ public class MannysCurrencyConverterAPIAccessNGTest {
     @Test
     public void testGetRateForEastCaribbeanDollarsToUSDollars() {
         ExchangeRateProvider instance 
-                = new MannysFreeCurrencyConverterAPIAccess();
+                = new FreeForExRateProvider();
         double expected = 0.37;
         double actual = instance.getRate(EAST_CARIBBEAN_DOLLARS, U_S_DOLLARS);
         assertEquals(actual, expected, TEST_DELTA);
     }
     
     /**
-     * Test of the getRate function, of the MannysFreeCurrencyConverterAPIAccess 
-     * class.
+     * Test of the getRate function, of the FreeForExRateProvider 
+ class.
      */
     @Test
     public void testGetRate() {
         System.out.println("getRate");
         ExchangeRateProvider instance 
-                = new MannysFreeCurrencyConverterAPIAccess();
+                = new FreeForExRateProvider();
         Currency firstTarget = CurrencyChooser
                 .chooseCurrencyOtherThan(U_S_DOLLARS);
         String dollarsDisplayName = U_S_DOLLARS.getDisplayName();
@@ -147,7 +148,7 @@ public class MannysCurrencyConverterAPIAccessNGTest {
     @Test
     public void testGetRateActuallyCallsMannysAPI() {
         ExchangeRateProvider instance 
-                = new MannysFreeCurrencyConverterAPIAccess();
+                = new FreeForExRateProvider();
         Currency source = CurrencyChooser.chooseCurrency();
         Currency target = CurrencyChooser.chooseCurrencyOtherThan(source);
         String message = "Inquiring Manny's API for rate of conversion from " 

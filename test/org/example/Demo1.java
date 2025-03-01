@@ -17,7 +17,7 @@
 package org.example;
 
 import currency.conversions.ExchangeRateProvider;
-import currency.conversions.MannysFreeCurrencyConverterAPIAccess;
+import currency.conversions.mannys.FreeForExRateProvider;
 
 import java.text.DecimalFormat;
 import java.util.Currency;
@@ -88,7 +88,7 @@ public class Demo1 {
         Currency dollar = Currency.getInstance(Locale.US);
         Currency euro = Currency.getInstance("EUR");
         ExchangeRateProvider rateProvider 
-                = new MannysFreeCurrencyConverterAPIAccess();
+                = new FreeForExRateProvider();
         double expectedA = dollars + (euros 
                 * rateProvider.getRate(euro, dollar));
         double expectedB = euros + (dollars 

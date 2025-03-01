@@ -18,7 +18,7 @@ package currency.comparators;
 
 import currency.MoneyAmount;
 import currency.conversions.CurrencyConverter;
-import currency.conversions.MannysFreeCurrencyConverterAPIAccess;
+import currency.conversions.mannys.FreeForExRateProvider;
 
 import java.util.ArrayList;
 import java.util.Currency;
@@ -44,7 +44,7 @@ public class ExchangeRateComparatorNGTest {
     
     private static List<Currency> makeList(Currency currency) {
         CurrencyConverter converter 
-                = new CurrencyConverter(new MannysFreeCurrencyConverterAPIAccess());
+                = new CurrencyConverter(new FreeForExRateProvider());
         Map<MoneyAmount, Currency> map = new TreeMap<>();
         for (Currency cur : CURRENCIES) {
             MoneyAmount amount = new MoneyAmount(1, cur);

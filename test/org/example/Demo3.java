@@ -17,7 +17,7 @@
 package org.example;
 
 import currency.conversions.ExchangeRateProvider;
-import currency.conversions.MannysFreeCurrencyConverterAPIAccess;
+import currency.conversions.mannys.FreeForExRateProvider;
 
 import java.math.BigDecimal;
 import java.text.DecimalFormat;
@@ -83,7 +83,7 @@ public class Demo3 {
         Currency dollar = Currency.getInstance(Locale.US);
         Currency euro = Currency.getInstance("EUR");
         ExchangeRateProvider rateProvider 
-                = new MannysFreeCurrencyConverterAPIAccess();
+                = new FreeForExRateProvider();
         BigDecimal expectedA = fiveHundredDollars.add(fiveHundredEuros
                 .multiply(new BigDecimal(rateProvider.getRate(euro, 
                         dollar))));
