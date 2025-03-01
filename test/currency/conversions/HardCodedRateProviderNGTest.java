@@ -18,6 +18,8 @@ package currency.conversions;
 
 import currency.CurrencyPair;
 
+import java.time.LocalDate;
+import java.time.Month;
 import java.util.Currency;
 
 import static org.testng.Assert.*;
@@ -29,13 +31,11 @@ import org.testng.annotations.Test;
  */
 public class HardCodedRateProviderNGTest {
     
-    public HardCodedRateProviderNGTest() {
-    }
-
     @Test
-    public void testSomeMethod() {
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
+    public void testDateOfHardCodingConstant() {
+        LocalDate expected = LocalDate.of(2025, Month.FEBRUARY, 28);
+        LocalDate actual = HardCodedRateProvider.DATE_OF_HARD_CODING;
+        assertEquals(actual, expected);
     }
     
 }
