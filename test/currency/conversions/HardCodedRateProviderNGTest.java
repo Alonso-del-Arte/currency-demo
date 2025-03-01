@@ -65,6 +65,20 @@ public class HardCodedRateProviderNGTest {
     }
     
     @Test
+    public void testGetRateUSDToPHP() {
+        ExchangeRateProvider instance = new HardCodedRateProvider();
+        Currency philPeso = Currency.getInstance("PHP");
+        double minimum = 45.0;
+        double actual = instance.getRate(UNITED_STATES_DOLLARS, philPeso);
+        double maximum = 60.0;
+        String msg = "Rate of conversion from " + USD_DISPLAY_NAME + " (" 
+                + USD_3_LETTER_CODE + ") to " + philPeso.getDisplayName() + " (" 
+                + philPeso.getCurrencyCode() 
+                + ") should be in the range of the past 5 years";
+        assertInRange(minimum, actual, maximum, msg);
+    }
+    
+    @Test
     public void testGetRateUSDToVND() {
         ExchangeRateProvider instance = new HardCodedRateProvider();
         Currency vietDong = Currency.getInstance("VND");
