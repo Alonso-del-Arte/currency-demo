@@ -79,6 +79,20 @@ public class HardCodedRateProviderNGTest {
     }
     
     @Test
+    public void testGetRateUSDToEUR() {
+        ExchangeRateProvider instance = new HardCodedRateProvider();
+        Currency euro = Currency.getInstance("EUR");
+        double minimum = 0.892811;
+        double actual = instance.getRate(UNITED_STATES_DOLLARS, euro);
+        double maximum = 0.978298;
+        String msg = "Rate of conversion from " + USD_DISPLAY_NAME + " (" 
+                + USD_3_LETTER_CODE + ") to " + euro.getDisplayName() + " (" 
+                + euro.getCurrencyCode() 
+                + ") should be in the range of the past 5 years";
+        assertInRange(minimum, actual, maximum, msg);
+    }
+    
+    @Test
     public void testGetRateUSDToGBP() {
         ExchangeRateProvider instance = new HardCodedRateProvider();
         Currency britPound = Currency.getInstance(Locale.UK);
