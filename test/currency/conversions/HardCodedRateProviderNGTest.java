@@ -92,4 +92,18 @@ public class HardCodedRateProviderNGTest {
         assertInRange(minimum, actual, maximum, msg);
     }
     
+    @Test
+    public void testGetRateUSDToXAF() {
+        ExchangeRateProvider instance = new HardCodedRateProvider();
+        Currency cfaFranc = Currency.getInstance("XAF");
+        double minimum = 500.0;
+        double actual = instance.getRate(UNITED_STATES_DOLLARS, cfaFranc);
+        double maximum = 700.0;
+        String msg = "Rate of conversion from " + USD_DISPLAY_NAME + " (" 
+                + USD_3_LETTER_CODE + ") to " + cfaFranc.getDisplayName() + " (" 
+                + cfaFranc.getCurrencyCode() 
+                + ") should be in the range of the past 5 years";
+        assertInRange(minimum, actual, maximum, msg);
+    }
+    
 }
