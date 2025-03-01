@@ -51,6 +51,20 @@ public class HardCodedRateProviderNGTest {
     }
     
     @Test
+    public void testGetRateUSDToAUD() {
+        ExchangeRateProvider instance = new HardCodedRateProvider();
+        Currency austrDollar = Currency.getInstance("AUD");
+        double minimum = 1.44533;
+        double actual = instance.getRate(UNITED_STATES_DOLLARS, austrDollar);
+        double maximum = 1.64034;
+        String msg = "Rate of conversion from " + USD_DISPLAY_NAME + " (" 
+                + USD_3_LETTER_CODE + ") to " + austrDollar.getDisplayName() + " (" 
+                + austrDollar.getCurrencyCode() 
+                + ") should be in the range of the past 5 years";
+        assertInRange(minimum, actual, maximum, msg);
+    }
+    
+    @Test
     public void testGetRateUSDToBRL() {
         ExchangeRateProvider instance = new HardCodedRateProvider();
         Currency brazReal = Currency.getInstance("BRL");
