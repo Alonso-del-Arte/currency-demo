@@ -65,6 +65,20 @@ public class HardCodedRateProviderNGTest {
     }
     
     @Test
+    public void testGetRateUSDToGBP() {
+        ExchangeRateProvider instance = new HardCodedRateProvider();
+        Currency britPound = Currency.getInstance(Locale.UK);
+        double minimum = 0.7;
+        double actual = instance.getRate(UNITED_STATES_DOLLARS, britPound);
+        double maximum = 0.93;
+        String msg = "Rate of conversion from " + USD_DISPLAY_NAME + " (" 
+                + USD_3_LETTER_CODE + ") to " + britPound.getDisplayName() + " (" 
+                + britPound.getCurrencyCode() 
+                + ") should be in the range of the past 5 years";
+        assertInRange(minimum, actual, maximum, msg);
+    }
+    
+    @Test
     public void testGetRateUSDToMXN() {
         ExchangeRateProvider instance = new HardCodedRateProvider();
         Currency mexPeso = Currency.getInstance("MXN");
