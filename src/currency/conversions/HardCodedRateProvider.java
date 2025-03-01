@@ -39,6 +39,7 @@ public class HardCodedRateProvider implements ExchangeRateProvider {
     @Override
     public double getRate(Currency source, Currency target) {
         return switch(target.getCurrencyCode()) {
+            case "AUD" -> 1.6116;
             case "BRL" -> 5.88708;
             case "GBP" -> 0.794448;
             case "KRW" -> 1461.09;
