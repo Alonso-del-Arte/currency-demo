@@ -51,6 +51,20 @@ public class HardCodedRateProviderNGTest {
     }
     
     @Test
+    public void testGetRateUSDToBRL() {
+        ExchangeRateProvider instance = new HardCodedRateProvider();
+        Currency brazReal = Currency.getInstance("BRL");
+        double minimum = 4.47;
+        double actual = instance.getRate(UNITED_STATES_DOLLARS, brazReal);
+        double maximum = 6.29;
+        String msg = "Rate of conversion from " + USD_DISPLAY_NAME + " (" 
+                + USD_3_LETTER_CODE + ") to " + brazReal.getDisplayName() + " (" 
+                + brazReal.getCurrencyCode() 
+                + ") should be in the range of the past 5 years";
+        assertInRange(minimum, actual, maximum, msg);
+    }
+    
+    @Test
     public void testGetRateUSDToMXN() {
         ExchangeRateProvider instance = new HardCodedRateProvider();
         Currency mexPeso = Currency.getInstance("MXN");
