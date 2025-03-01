@@ -41,6 +41,7 @@ public class HardCodedRateProvider implements ExchangeRateProvider {
         return switch(target.getCurrencyCode()) {
             case "AUD" -> 1.6116;
             case "BRL" -> 5.88708;
+            case "EUR" -> 0.962965;
             case "GBP" -> 0.794448;
             case "KRW" -> 1461.09;
             case "MXN" -> 20.55;
