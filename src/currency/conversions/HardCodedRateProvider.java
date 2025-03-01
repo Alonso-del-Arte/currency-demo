@@ -18,6 +18,8 @@ package currency.conversions;
 
 import currency.CurrencyPair;
 
+import java.time.LocalDate;
+import java.time.Month;
 import java.util.Currency;
 
 /**
@@ -25,6 +27,10 @@ import java.util.Currency;
  * @author Alonso del Arte
  */
 public class HardCodedRateProvider implements ExchangeRateProvider {
+    
+    // TODO: Write tests for this
+    public static final LocalDate DATE_OF_HARD_CODING 
+            = LocalDate.of(1970, Month.JANUARY, 1);
     
     // TODO: Write tests for this
     @Override
