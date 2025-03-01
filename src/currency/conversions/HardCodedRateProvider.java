@@ -40,6 +40,7 @@ public class HardCodedRateProvider implements ExchangeRateProvider {
     public double getRate(Currency source, Currency target) {
         return switch(target.getCurrencyCode()) {
             case "BRL" -> 5.88708;
+            case "GBP" -> 0.794448;
             case "MXN" -> 20.55;
             case "PHP" -> 57.94;
             case "VND" -> 25554.99;
