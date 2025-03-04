@@ -135,6 +135,20 @@ public class HardCodedRateProviderNGTest {
     }
     
     @Test
+    public void testGetRateUSDToJPY() {
+        ExchangeRateProvider instance = new HardCodedRateProvider();
+        Currency japaneseYen = Currency.getInstance("JPY");
+        double minimum = 100.0;
+        double actual = instance.getRate(UNITED_STATES_DOLLARS, japaneseYen);
+        double maximum = 160.0;
+        String msg = "Rate of conversion from " + USD_DISPLAY_NAME + " (" 
+                + USD_3_LETTER_CODE + ") to " + japaneseYen.getDisplayName() 
+                + " (" + japaneseYen.getCurrencyCode() 
+                + ") should be in the range of the past 5 years";
+        assertInRange(minimum, actual, maximum, msg);
+    }
+    
+    @Test
     public void testGetRateUSDToKRW() {
         ExchangeRateProvider instance = new HardCodedRateProvider();
         Currency korWon = Currency.getInstance(Locale.KOREA);
