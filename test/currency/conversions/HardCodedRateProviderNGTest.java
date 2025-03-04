@@ -121,6 +121,20 @@ public class HardCodedRateProviderNGTest {
     }
     
     @Test
+    public void testGetRateUSDToILS() {
+        ExchangeRateProvider instance = new HardCodedRateProvider();
+        Currency israeliShekel = Currency.getInstance("ILS");
+        double minimum = 3.0;
+        double actual = instance.getRate(UNITED_STATES_DOLLARS, israeliShekel);
+        double maximum = 4.5;
+        String msg = "Rate of conversion from " + USD_DISPLAY_NAME + " (" 
+                + USD_3_LETTER_CODE + ") to " + israeliShekel.getDisplayName() 
+                + " (" + israeliShekel.getCurrencyCode() 
+                + ") should be in the range of the past 5 years";
+        assertInRange(minimum, actual, maximum, msg);
+    }
+    
+    @Test
     public void testGetRateUSDToKRW() {
         ExchangeRateProvider instance = new HardCodedRateProvider();
         Currency korWon = Currency.getInstance(Locale.KOREA);
