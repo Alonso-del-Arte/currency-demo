@@ -43,6 +43,8 @@ public class HardCodedRateProviderNGTest {
     private static final String USD_3_LETTER_CODE 
             = UNITED_STATES_DOLLARS.getCurrencyCode();
     
+    private static final double DEFAULT_VARIANCE = 0.00001;
+    
     @Test
     public void testDateOfHardCodingConstant() {
         LocalDate expected = LocalDate.of(2025, Month.MARCH, 3);
@@ -61,7 +63,7 @@ public class HardCodedRateProviderNGTest {
                 + USD_3_LETTER_CODE + ") to " + austrDollar.getDisplayName() + " (" 
                 + austrDollar.getCurrencyCode() 
                 + ") should be in the range of the past 5 years";
-        assertInRange(minimum, actual, maximum, msg);
+        assertInRange(minimum, actual, maximum, DEFAULT_VARIANCE, msg);
     }
     
     @Test
@@ -75,7 +77,7 @@ public class HardCodedRateProviderNGTest {
                 + USD_3_LETTER_CODE + ") to " + brazReal.getDisplayName() + " (" 
                 + brazReal.getCurrencyCode() 
                 + ") should be in the range of the past 5 years";
-        assertInRange(minimum, actual, maximum, msg);
+        assertInRange(minimum, actual, maximum, DEFAULT_VARIANCE, msg);
     }
     
     @Test
@@ -89,7 +91,7 @@ public class HardCodedRateProviderNGTest {
                 + USD_3_LETTER_CODE + ") to " + canadianDollar.getDisplayName() 
                 + " (" + canadianDollar.getCurrencyCode() 
                 + ") should be in the range of the past 5 years";
-        assertInRange(minimum, actual, maximum, msg);
+        assertInRange(minimum, actual, maximum, DEFAULT_VARIANCE, msg);
     }
     
     @Test
@@ -103,7 +105,7 @@ public class HardCodedRateProviderNGTest {
                 + USD_3_LETTER_CODE + ") to " + euro.getDisplayName() + " (" 
                 + euro.getCurrencyCode() 
                 + ") should be in the range of the past 5 years";
-        assertInRange(minimum, actual, maximum, msg);
+        assertInRange(minimum, actual, maximum, DEFAULT_VARIANCE, msg);
     }
     
     @Test
@@ -117,7 +119,7 @@ public class HardCodedRateProviderNGTest {
                 + USD_3_LETTER_CODE + ") to " + britPound.getDisplayName() + " (" 
                 + britPound.getCurrencyCode() 
                 + ") should be in the range of the past 5 years";
-        assertInRange(minimum, actual, maximum, msg);
+        assertInRange(minimum, actual, maximum, DEFAULT_VARIANCE, msg);
     }
     
     @Test
@@ -131,7 +133,7 @@ public class HardCodedRateProviderNGTest {
                 + USD_3_LETTER_CODE + ") to " + israeliShekel.getDisplayName() 
                 + " (" + israeliShekel.getCurrencyCode() 
                 + ") should be in the range of the past 5 years";
-        assertInRange(minimum, actual, maximum, msg);
+        assertInRange(minimum, actual, maximum, DEFAULT_VARIANCE, msg);
     }
     
     @Test
@@ -145,7 +147,7 @@ public class HardCodedRateProviderNGTest {
                 + USD_3_LETTER_CODE + ") to " + japaneseYen.getDisplayName() 
                 + " (" + japaneseYen.getCurrencyCode() 
                 + ") should be in the range of the past 5 years";
-        assertInRange(minimum, actual, maximum, msg);
+        assertInRange(minimum, actual, maximum, DEFAULT_VARIANCE, msg);
     }
     
     @Test
@@ -159,7 +161,7 @@ public class HardCodedRateProviderNGTest {
                 + USD_3_LETTER_CODE + ") to " + korWon.getDisplayName() + " (" 
                 + korWon.getCurrencyCode() 
                 + ") should be in the range of the past 5 years";
-        assertInRange(minimum, actual, maximum, msg);
+        assertInRange(minimum, actual, maximum, DEFAULT_VARIANCE, msg);
     }
     
     @Test
@@ -173,7 +175,7 @@ public class HardCodedRateProviderNGTest {
                 + USD_3_LETTER_CODE + ") to " + mexPeso.getDisplayName() + " (" 
                 + mexPeso.getCurrencyCode() 
                 + ") should be in the range of the past 5 years";
-        assertInRange(minimum, actual, maximum, msg);
+        assertInRange(minimum, actual, maximum, DEFAULT_VARIANCE, msg);
     }
     
     @Test
@@ -187,7 +189,7 @@ public class HardCodedRateProviderNGTest {
                 + USD_3_LETTER_CODE + ") to " + philPeso.getDisplayName() + " (" 
                 + philPeso.getCurrencyCode() 
                 + ") should be in the range of the past 5 years";
-        assertInRange(minimum, actual, maximum, msg);
+        assertInRange(minimum, actual, maximum, DEFAULT_VARIANCE, msg);
     }
     
     @Test
@@ -201,7 +203,7 @@ public class HardCodedRateProviderNGTest {
                 + USD_3_LETTER_CODE + ") to " + taiwanDollar.getDisplayName() + " (" 
                 + taiwanDollar.getCurrencyCode() 
                 + ") should be in the range of the past 5 years";
-        assertInRange(minimum, actual, maximum, msg);
+        assertInRange(minimum, actual, maximum, DEFAULT_VARIANCE, msg);
     }
     
     @Test
@@ -215,7 +217,7 @@ public class HardCodedRateProviderNGTest {
                 + USD_3_LETTER_CODE + ") to " + USD_DISPLAY_NAME + " (" 
                 + USD_3_LETTER_CODE 
                 + ") should be in the range of the past 5 years";
-        assertInRange(minimum, actual, maximum, msg);
+        assertInRange(minimum, actual, maximum, DEFAULT_VARIANCE, msg);
     }
     
     @Test
@@ -229,7 +231,7 @@ public class HardCodedRateProviderNGTest {
                 + USD_3_LETTER_CODE + ") to " + vietDong.getDisplayName() + " (" 
                 + vietDong.getCurrencyCode() 
                 + ") should be in the range of the past 5 years";
-        assertInRange(minimum, actual, maximum, msg);
+        assertInRange(minimum, actual, maximum, DEFAULT_VARIANCE, msg);
     }
     
     @Test
@@ -243,7 +245,7 @@ public class HardCodedRateProviderNGTest {
                 + USD_3_LETTER_CODE + ") to " + cfaFranc.getDisplayName() + " (" 
                 + cfaFranc.getCurrencyCode() 
                 + ") should be in the range of the past 5 years";
-        assertInRange(minimum, actual, maximum, msg);
+        assertInRange(minimum, actual, maximum, DEFAULT_VARIANCE, msg);
     }
     
     // TODO: Write tests for source not USD
