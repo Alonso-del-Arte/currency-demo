@@ -248,6 +248,21 @@ public class HardCodedRateProviderNGTest {
         assertInRange(minimum, actual, maximum, DEFAULT_VARIANCE, msg);
     }
     
+    @Test
+    public void testGetRateUSDToXCD() {
+        ExchangeRateProvider instance = new HardCodedRateProvider();
+        Currency eastCaribDollar = Currency.getInstance("XCD");
+        double minimum = 2.69;
+        double actual = instance.getRate(UNITED_STATES_DOLLARS, 
+                eastCaribDollar);
+        double maximum = 2.71;
+        String msg = "Rate of conversion from " + USD_DISPLAY_NAME + " (" 
+                + USD_3_LETTER_CODE + ") to " + eastCaribDollar.getDisplayName() 
+                + " (" + eastCaribDollar.getCurrencyCode() 
+                + ") should be in the range of the past 5 years";
+        assertInRange(minimum, actual, maximum, DEFAULT_VARIANCE, msg);
+    }
+    
     // TODO: Write tests for source not USD
     
 }
