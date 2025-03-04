@@ -207,6 +207,22 @@ public class HardCodedRateProviderNGTest {
     }
     
     @Test
+    public void testGetRateUSDToNZD() {
+        ExchangeRateProvider instance = new HardCodedRateProvider();
+        Currency newZealandDollar = Currency.getInstance("NZD");
+        double minimum = 1.2;
+        double actual = instance.getRate(UNITED_STATES_DOLLARS, 
+                newZealandDollar);
+        double maximum = 1.8;
+        String msg = "Rate of conversion from " + USD_DISPLAY_NAME + " (" 
+                + USD_3_LETTER_CODE + ") to " 
+                + newZealandDollar.getDisplayName() + " (" 
+                + newZealandDollar.getCurrencyCode() 
+                + ") should be in the range of the past 5 years";
+        assertInRange(minimum, actual, maximum, DEFAULT_VARIANCE, msg);
+    }
+    
+    @Test
     public void testGetRateUSDToPHP() {
         ExchangeRateProvider instance = new HardCodedRateProvider();
         Currency philPeso = Currency.getInstance("PHP");
