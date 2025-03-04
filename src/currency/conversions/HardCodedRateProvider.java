@@ -54,6 +54,7 @@ public class HardCodedRateProvider implements ExchangeRateProvider {
             case "VND" -> 25589.98;
             case "XAF" -> 625.4;
             case "XCD" -> 2.7;
+            case "XOF" -> 625.39;
             default -> -1.0;
         };
     }
