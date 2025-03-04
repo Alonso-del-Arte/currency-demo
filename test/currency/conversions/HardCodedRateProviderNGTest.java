@@ -79,6 +79,20 @@ public class HardCodedRateProviderNGTest {
     }
     
     @Test
+    public void testGetRateUSDToCAD() {
+        ExchangeRateProvider instance = new HardCodedRateProvider();
+        Currency canadianDollar = Currency.getInstance("CAD");
+        double minimum = 1.2;
+        double actual = instance.getRate(UNITED_STATES_DOLLARS, canadianDollar);
+        double maximum = 1.5;
+        String msg = "Rate of conversion from " + USD_DISPLAY_NAME + " (" 
+                + USD_3_LETTER_CODE + ") to " + canadianDollar.getDisplayName() 
+                + " (" + canadianDollar.getCurrencyCode() 
+                + ") should be in the range of the past 5 years";
+        assertInRange(minimum, actual, maximum, msg);
+    }
+    
+    @Test
     public void testGetRateUSDToEUR() {
         ExchangeRateProvider instance = new HardCodedRateProvider();
         Currency euro = Currency.getInstance("EUR");
