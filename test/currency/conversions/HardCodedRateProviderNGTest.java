@@ -137,6 +137,20 @@ public class HardCodedRateProviderNGTest {
     }
     
     @Test
+    public void testGetRateUSDToHKD() {
+        ExchangeRateProvider instance = new HardCodedRateProvider();
+        Currency hongKongDollar = Currency.getInstance("HKD");
+        double minimum = 7.7;
+        double actual = instance.getRate(UNITED_STATES_DOLLARS, hongKongDollar);
+        double maximum = 7.85;
+        String msg = "Rate of conversion from " + USD_DISPLAY_NAME + " (" 
+                + USD_3_LETTER_CODE + ") to " + hongKongDollar.getDisplayName() + " (" 
+                + hongKongDollar.getCurrencyCode() 
+                + ") should be in the range of the past 5 years";
+        assertInRange(minimum, actual, maximum, DEFAULT_VARIANCE, msg);
+    }
+    
+    @Test
     public void testGetRateUSDToILS() {
         ExchangeRateProvider instance = new HardCodedRateProvider();
         Currency israeliShekel = Currency.getInstance("ILS");
