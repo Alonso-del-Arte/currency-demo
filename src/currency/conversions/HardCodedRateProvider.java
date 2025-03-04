@@ -50,6 +50,7 @@ public class HardCodedRateProvider implements ExchangeRateProvider {
             case "MXN" -> 20.78;
             case "PHP" -> 57.79;
             case "TWD" -> 32.92;
+            case "USD" -> 1.0;
             case "VND" -> 25589.98;
             case "XAF" -> 625.4;
             default -> -1.0;
