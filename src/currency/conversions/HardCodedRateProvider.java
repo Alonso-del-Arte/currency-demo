@@ -50,6 +50,7 @@ public class HardCodedRateProvider implements ExchangeRateProvider {
             case "JPY" -> 149.22;
             case "KRW" -> 1459.18;
             case "MXN" -> 20.78;
+            case "NZD" -> 1.78;
             case "PHP" -> 57.79;
             case "TWD" -> 32.92;
             case "USD" -> 1.0;
