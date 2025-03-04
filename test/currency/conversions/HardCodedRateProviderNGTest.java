@@ -205,6 +205,20 @@ public class HardCodedRateProviderNGTest {
     }
     
     @Test
+    public void testGetRateUSDToUSD() {
+        ExchangeRateProvider instance = new HardCodedRateProvider();
+        double minimum = 0.9999;
+        double actual = instance.getRate(UNITED_STATES_DOLLARS, 
+                UNITED_STATES_DOLLARS);
+        double maximum = 1.0001;
+        String msg = "Rate of conversion from " + USD_DISPLAY_NAME + " (" 
+                + USD_3_LETTER_CODE + ") to " + USD_DISPLAY_NAME + " (" 
+                + USD_3_LETTER_CODE 
+                + ") should be in the range of the past 5 years";
+        assertInRange(minimum, actual, maximum, msg);
+    }
+    
+    @Test
     public void testGetRateUSDToVND() {
         ExchangeRateProvider instance = new HardCodedRateProvider();
         Currency vietDong = Currency.getInstance("VND");
