@@ -34,7 +34,7 @@ public class HardCodedRateProvider implements ExchangeRateProvider {
      * might remain current until the next hard-coding.
      */
     public static final LocalDate DATE_OF_HARD_CODING 
-            = LocalDate.of(2025, Month.FEBRUARY, 28);
+            = LocalDate.of(2025, Month.MARCH, 3);
     
     @Override
     public double getRate(Currency source, Currency target) {
