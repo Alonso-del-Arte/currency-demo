@@ -38,6 +38,11 @@ exceptions might have null exception messages.
 stub, this has also been phased out)
 * TestFrame 1.0 or later (`org.testframe.api` namespace, `assertPrintOut()`). Go 
 to [testframe.org](https://testframe.org) and click on "Download Version 1.0".
+* TestFrame 1.01. Testing `HardCodedRateProvider` in the `currency.conversions` 
+package, I realized that I neglected the customized messages for 
+`assertInRange()` with parameters of type `double`. This bothered me enough that 
+I had to do a patch release of TestFrame. If you're not bothered by that 
+shortcoming like I was, you can continue using 1.0.
 
 ## Online currency conversion APIs
 
