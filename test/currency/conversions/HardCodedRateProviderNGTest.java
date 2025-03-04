@@ -177,6 +177,20 @@ public class HardCodedRateProviderNGTest {
     }
     
     @Test
+    public void testGetRateUSDToTWD() {
+        ExchangeRateProvider instance = new HardCodedRateProvider();
+        Currency taiwanDollar = Currency.getInstance("TWD");
+        double minimum = 32.6;
+        double actual = instance.getRate(UNITED_STATES_DOLLARS, taiwanDollar);
+        double maximum = 33.0;
+        String msg = "Rate of conversion from " + USD_DISPLAY_NAME + " (" 
+                + USD_3_LETTER_CODE + ") to " + taiwanDollar.getDisplayName() + " (" 
+                + taiwanDollar.getCurrencyCode() 
+                + ") should be in the range of the past 5 years";
+        assertInRange(minimum, actual, maximum, msg);
+    }
+    
+    @Test
     public void testGetRateUSDToVND() {
         ExchangeRateProvider instance = new HardCodedRateProvider();
         Currency vietDong = Currency.getInstance("VND");
