@@ -95,6 +95,20 @@ public class HardCodedRateProviderNGTest {
     }
     
     @Test
+    public void testGetRateUSDToCNY() {
+        ExchangeRateProvider instance = new HardCodedRateProvider();
+        Currency chineseYuan = Currency.getInstance("CNY");
+        double minimum = 6.0;
+        double actual = instance.getRate(UNITED_STATES_DOLLARS, chineseYuan);
+        double maximum = 7.5;
+        String msg = "Rate of conversion from " + USD_DISPLAY_NAME + " (" 
+                + USD_3_LETTER_CODE + ") to " + chineseYuan.getDisplayName() 
+                + " (" + chineseYuan.getCurrencyCode() 
+                + ") should be in the range of the past 5 years";
+        assertInRange(minimum, actual, maximum, DEFAULT_VARIANCE, msg);
+    }
+    
+    @Test
     public void testGetRateUSDToEUR() {
         ExchangeRateProvider instance = new HardCodedRateProvider();
         Currency euro = Currency.getInstance("EUR");
