@@ -45,6 +45,7 @@ public class HardCodedRateProvider implements ExchangeRateProvider {
             case "EUR" -> 0.95;
             case "GBP" -> 0.78822;
             case "ILS" -> 3.6;
+            case "JPY" -> 149.22;
             case "KRW" -> 1459.18;
             case "MXN" -> 20.78;
             case "PHP" -> 57.79;
