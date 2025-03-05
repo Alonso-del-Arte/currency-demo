@@ -167,7 +167,7 @@ public class ConversionRateQuote {
      * @throws NullPointerException If {@code currencies} is null.
      */
     public ConversionRateQuote(CurrencyPair currencies, double rate) {
-        this(currencies, -rate, LocalDateTime.now());
+        this(currencies, rate, LocalDateTime.now());
     }
     
     /**
