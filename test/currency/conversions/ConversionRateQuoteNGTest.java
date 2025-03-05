@@ -43,11 +43,6 @@ import org.testng.annotations.Test;
 public class ConversionRateQuoteNGTest {
     
     @Test
-    public void testPlaceholder() {
-        fail("WRITE TESTS PERTAINING TO AUX CONSTRUCTOR");
-    }
-    
-    @Test
     public void testGetCurrencies() {
         System.out.println("getCurrencies");
         Currency from = CurrencyChooser.chooseCurrency();
@@ -82,8 +77,10 @@ public class ConversionRateQuoteNGTest {
         Currency to = CurrencyChooser.chooseCurrencyOtherThan(from);
         CurrencyPair currencies = new CurrencyPair(from, to);
         double rate = 0.5 + RANDOM.nextDouble();
-        fail("CHANGE HOW expected IS CHOSEN");
-        LocalDateTime expected = LocalDateTime.now();
+        LocalDateTime now = LocalDateTime.now();
+        int days = RANDOM.nextInt(now.getMonth().length(Year.isLeap(now
+                .getYear())));
+        LocalDateTime expected = now.minusDays(days);
         ConversionRateQuote instance = new ConversionRateQuote(currencies, rate, 
                 expected);
         LocalDateTime actual = instance.getDate();
