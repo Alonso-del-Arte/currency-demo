@@ -22,6 +22,7 @@ import static currency.MoneyAmountNGTest.provideNull;
 import static currency.conversions.ExchangeRateProviderNGTest.RANDOM;
 
 import java.time.LocalDateTime;
+import java.time.Year;
 import java.util.Currency;
 import java.util.HashSet;
 import java.util.Set;
@@ -52,7 +53,7 @@ public class ConversionRateQuoteNGTest {
         Currency from = CurrencyChooser.chooseCurrency();
         Currency to = CurrencyChooser.chooseCurrencyOtherThan(from);
         CurrencyPair expected = new CurrencyPair(from, to);
-        double rate = RANDOM.nextDouble();
+        double rate = 0.5 + RANDOM.nextDouble();
         LocalDateTime date = LocalDateTime.now();
         ConversionRateQuote instance = new ConversionRateQuote(expected, rate, 
                 date);
@@ -66,7 +67,7 @@ public class ConversionRateQuoteNGTest {
         Currency from = CurrencyChooser.chooseCurrency();
         Currency to = CurrencyChooser.chooseCurrencyOtherThan(from);
         CurrencyPair currencies = new CurrencyPair(from, to);
-        double expected = RANDOM.nextDouble();
+        double expected = 0.5 + RANDOM.nextDouble();
         LocalDateTime date = LocalDateTime.now();
         ConversionRateQuote instance = new ConversionRateQuote(currencies, 
                 expected, date);
@@ -80,7 +81,8 @@ public class ConversionRateQuoteNGTest {
         Currency from = CurrencyChooser.chooseCurrency();
         Currency to = CurrencyChooser.chooseCurrencyOtherThan(from);
         CurrencyPair currencies = new CurrencyPair(from, to);
-        double rate = RANDOM.nextDouble();
+        double rate = 0.5 + RANDOM.nextDouble();
+        fail("CHANGE HOW expected IS CHOSEN");
         LocalDateTime expected = LocalDateTime.now();
         ConversionRateQuote instance = new ConversionRateQuote(currencies, rate, 
                 expected);
@@ -93,7 +95,7 @@ public class ConversionRateQuoteNGTest {
         Currency from = CurrencyChooser.chooseCurrency();
         Currency to = CurrencyChooser.chooseCurrencyOtherThan(from);
         CurrencyPair currencies = new CurrencyPair(from, to);
-        double rate = RANDOM.nextDouble();
+        double rate = 0.5 + RANDOM.nextDouble();
         LocalDateTime date = LocalDateTime.now();
         ConversionRateQuote quote = new ConversionRateQuote(currencies, rate, 
                 date);
@@ -105,7 +107,7 @@ public class ConversionRateQuoteNGTest {
         Currency from = CurrencyChooser.chooseCurrency();
         Currency to = CurrencyChooser.chooseCurrencyOtherThan(from);
         CurrencyPair currencies = new CurrencyPair(from, to);
-        double rate = RANDOM.nextDouble();
+        double rate = 0.5 + RANDOM.nextDouble();
         LocalDateTime date = LocalDateTime.now();
         ConversionRateQuote quote = new ConversionRateQuote(currencies, rate, 
                 date);
@@ -119,7 +121,7 @@ public class ConversionRateQuoteNGTest {
         Currency from = CurrencyChooser.chooseCurrency();
         Currency to = CurrencyChooser.chooseCurrencyOtherThan(from);
         CurrencyPair currencies = new CurrencyPair(from, to);
-        double rate = RANDOM.nextDouble();
+        double rate = 0.5 + RANDOM.nextDouble();
         LocalDateTime date = LocalDateTime.now();
         ConversionRateQuote quote = new ConversionRateQuote(currencies, rate, 
                 date);
@@ -137,7 +139,7 @@ public class ConversionRateQuoteNGTest {
         Currency fromB = CurrencyChooser.chooseCurrencyOtherThan(fromA);
         Currency toB = CurrencyChooser.chooseCurrencyOtherThan(toA);
         CurrencyPair pairB = new CurrencyPair(fromB, toB);
-        double rate = RANDOM.nextDouble();
+        double rate = 0.5 + RANDOM.nextDouble();
         LocalDateTime date = LocalDateTime.now();
         ConversionRateQuote quoteA = new ConversionRateQuote(pairA, rate, date);
         ConversionRateQuote quoteB = new ConversionRateQuote(pairB, rate, date);
@@ -152,7 +154,7 @@ public class ConversionRateQuoteNGTest {
         Currency from = CurrencyChooser.chooseCurrency();
         Currency to = CurrencyChooser.chooseCurrencyOtherThan(from);
         CurrencyPair currencies = new CurrencyPair(from, to);
-        double rate = RANDOM.nextDouble();
+        double rate = 0.5 + RANDOM.nextDouble();
         LocalDateTime date = LocalDateTime.now();
         ConversionRateQuote someQuote = new ConversionRateQuote(currencies, 
                 rate, date);
@@ -169,7 +171,7 @@ public class ConversionRateQuoteNGTest {
         Currency from = CurrencyChooser.chooseCurrency();
         Currency to = CurrencyChooser.chooseCurrencyOtherThan(from);
         CurrencyPair currencies = new CurrencyPair(from, to);
-        double rateA = RANDOM.nextDouble();
+        double rateA = 0.5 + RANDOM.nextDouble();
         double rateB = Double.longBitsToDouble(Double.doubleToLongBits(rateA) 
                 + 1);
         LocalDateTime date = LocalDateTime.now();
@@ -188,7 +190,7 @@ public class ConversionRateQuoteNGTest {
         Currency from = CurrencyChooser.chooseCurrency();
         Currency to = CurrencyChooser.chooseCurrencyOtherThan(from);
         CurrencyPair currencies = new CurrencyPair(from, to);
-        double rate = RANDOM.nextDouble();
+        double rate = 0.5 + RANDOM.nextDouble();
         LocalDateTime dateA = LocalDateTime.now();
         LocalDateTime dateB = dateA.minusMinutes(RANDOM.nextInt(60) + 1);
         ConversionRateQuote quoteA = new ConversionRateQuote(currencies, rate, 
@@ -214,7 +216,7 @@ public class ConversionRateQuoteNGTest {
             Currency from = CurrencyChooser.chooseCurrency();
             Currency to = CurrencyChooser.chooseCurrencyOtherThan(from);
             CurrencyPair currencies = new CurrencyPair(from, to);
-            double rate = RANDOM.nextDouble();
+            double rate = 0.5 + RANDOM.nextDouble();
             date = date.minusMinutes(i);
             ConversionRateQuote quote1 = new ConversionRateQuote(currencies, 
                     rate, date);
