@@ -42,6 +42,11 @@ import org.testng.annotations.Test;
 public class ConversionRateQuoteNGTest {
     
     @Test
+    public void testPlaceholder() {
+        fail("WRITE TESTS PERTAINING TO AUX CONSTRUCTOR");
+    }
+    
+    @Test
     public void testGetCurrencies() {
         System.out.println("getCurrencies");
         Currency from = CurrencyChooser.chooseCurrency();
