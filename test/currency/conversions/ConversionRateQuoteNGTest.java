@@ -62,7 +62,6 @@ public class ConversionRateQuoteNGTest {
         Currency to = CurrencyChooser.chooseCurrencyOtherThan(from);
         CurrencyPair expected = new CurrencyPair(from, to);
         double rate = 0.5 + RANDOM.nextDouble();
-        LocalDateTime date = LocalDateTime.now();
         ConversionRateQuote instance = new ConversionRateQuote(expected, rate);
         CurrencyPair actual = instance.getCurrencies();
         assertEquals(actual, expected);
@@ -78,6 +77,18 @@ public class ConversionRateQuoteNGTest {
         LocalDateTime date = LocalDateTime.now();
         ConversionRateQuote instance = new ConversionRateQuote(currencies, 
                 expected, date);
+        double actual = instance.getRate();
+        assertEquals(actual, expected);
+    }
+    
+    @Test
+    public void testGetRateFromAuxConstructor() {
+        Currency from = CurrencyChooser.chooseCurrency();
+        Currency to = CurrencyChooser.chooseCurrencyOtherThan(from);
+        CurrencyPair currencies = new CurrencyPair(from, to);
+        double expected = 0.5 + RANDOM.nextDouble();
+        ConversionRateQuote instance = new ConversionRateQuote(currencies, 
+                expected);
         double actual = instance.getRate();
         assertEquals(actual, expected);
     }
