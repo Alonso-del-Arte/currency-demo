@@ -59,7 +59,7 @@ public class ConversionRateQuote {
      * p.m. on August 26, 2024.
      */
     public LocalDateTime getDate() {
-        return this.fetchDate.minusYears(100);
+        return this.fetchDate;
     }
     
     /**
