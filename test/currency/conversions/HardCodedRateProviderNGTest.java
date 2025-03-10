@@ -75,14 +75,14 @@ public class HardCodedRateProviderNGTest {
     @Test
     public void testSupportedCurrenciesDoesNotLeakField() {
         SpecificCurrenciesSupport instance = new HardCodedRateProvider();
+        Set<Currency> initial = instance.supportedCurrencies();
         Currency currency = CurrencyChooser.chooseCurrency(
-                cur -> cur.getCurrencyCode().equals(cur.getSymbol())
+                cur -> !initial.contains(cur)
         );
         String msg = "Trying to add " + currency.getDisplayName() + " (" 
                 + currency.getCurrencyCode() 
                 + ") to reported set should not leak field nor cause exception";
         assertDoesNotThrow(() -> {
-            Set<Currency> initial = instance.supportedCurrencies();
             Set<Currency> expected = new HashSet<>(initial);
             initial.add(currency);
             Set<Currency> actual = instance.supportedCurrencies();
