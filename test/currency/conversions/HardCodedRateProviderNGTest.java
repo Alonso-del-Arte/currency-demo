@@ -16,6 +16,7 @@
  */
 package currency.conversions;
 
+import currency.CurrencyChooser;
 import currency.CurrencyPair;
 import currency.SpecificCurrenciesSupport;
 
@@ -29,6 +30,7 @@ import java.util.stream.Collectors;
 
 import static org.testframe.api.Asserters.assertInRange;
 import static org.testframe.api.Asserters.assertContainsSame;
+import static org.testframe.api.Asserters.assertDoesNotThrow;
 
 import static org.testng.Assert.*;
 import org.testng.annotations.Test;
@@ -68,6 +70,24 @@ public class HardCodedRateProviderNGTest {
                 .collect(Collectors.toSet());
         Set<Currency> actual = instance.supportedCurrencies();
         assertContainsSame(expected, actual);
+    }
+    
+    @Test
+    public void testSupportedCurrenciesDoesNotLeakField() {
+        SpecificCurrenciesSupport instance = new HardCodedRateProvider();
+        Currency currency = CurrencyChooser.chooseCurrency(
+                cur -> cur.getCurrencyCode().equals(cur.getSymbol())
+        );
+        String msg = "Trying to add " + currency.getDisplayName() + " (" 
+                + currency.getCurrencyCode() 
+                + ") to reported set should not leak field nor cause exception";
+        assertDoesNotThrow(() -> {
+            Set<Currency> initial = instance.supportedCurrencies();
+            Set<Currency> expected = new HashSet<>(initial);
+            initial.add(currency);
+            Set<Currency> actual = instance.supportedCurrencies();
+            assertContainsSame(expected, actual, msg);
+        }, msg);
     }
     
     @Test
