@@ -52,7 +52,7 @@ public class HardCodedRateProvider implements ExchangeRateProvider,
     
     @Override
     public Set<Currency> supportedCurrencies() {
-        return SUPPORTED_CURRENCIES;
+        return new HashSet<>(SUPPORTED_CURRENCIES);
     }
     
     @Override
