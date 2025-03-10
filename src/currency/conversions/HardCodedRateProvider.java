@@ -27,7 +27,7 @@ import java.util.Set;
 import java.util.stream.Collectors;
 
 /**
- *
+ * Provides hard-coded currency exchange rates.
  * @author Alonso del Arte
  */
 public class HardCodedRateProvider implements ExchangeRateProvider, 
@@ -52,7 +52,7 @@ public class HardCodedRateProvider implements ExchangeRateProvider,
     
     @Override
     public Set<Currency> supportedCurrencies() {
-        return SUPPORTED_CURRENCIES;
+        return new HashSet<>(SUPPORTED_CURRENCIES);
     }
     
     @Override
