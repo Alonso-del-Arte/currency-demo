@@ -161,5 +161,6 @@ nb-configuration.xml
 
 # Miscellaneous
 scratchpad.txt
+tempnotes.txt
 src/draft
 test/draft
