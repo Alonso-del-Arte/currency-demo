@@ -16,6 +16,7 @@
  */
 package currency.conversions.ayrtech;
 
+import currency.CurrencyChooser;
 import currency.CurrencyPair;
 import currency.SpecificCurrenciesSupport;
 import currency.conversions.ExchangeRateProvider;
@@ -25,9 +26,9 @@ import java.util.HashSet;
 import java.util.Locale;
 import java.util.Set;
 import java.util.stream.Collectors;
+import static org.testframe.api.Asserters.assertContainsSame;
 
 import static org.testframe.api.Asserters.assertInRange;
-import static org.testframe.api.Asserters.assertContainsSame;
 import static org.testframe.api.Asserters.assertDoesNotThrow;
 
 import static org.testng.Assert.*;
@@ -84,6 +85,24 @@ public class FreeAPIAccessNGTest {
         assertContainsSame(SUPPORTED_CURRENCIES, actual);
     }
 
+    @Test
+    public void testSupportedCurrenciesDoesNotLeakField() {
+        SpecificCurrenciesSupport instance = new FreeAPIAccess();
+        Set<Currency> initial = instance.supportedCurrencies();
+        Currency currency = CurrencyChooser.chooseCurrency(
+                cur -> !initial.contains(cur)
+        );
+        String msg = "Trying to add " + currency.getDisplayName() + " (" 
+                + currency.getCurrencyCode() 
+                + ") to reported set should not leak field nor cause exception";
+        assertDoesNotThrow(() -> {
+            Set<Currency> expected = new HashSet<>(initial);
+            initial.add(currency);
+            Set<Currency> actual = instance.supportedCurrencies();
+            assertContainsSame(expected, actual, msg);
+        }, msg);
+    }
+    
     /**
      * Test of getRate method, of class FreeAPIAccess.
      */
