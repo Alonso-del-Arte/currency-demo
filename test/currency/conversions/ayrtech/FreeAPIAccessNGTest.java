@@ -103,6 +103,21 @@ public class FreeAPIAccessNGTest {
         }, msg);
     }
     
+    @Test
+    public void testGetRateSourceSameAsTarget() {
+        ExchangeRateProvider instance = new FreeAPIAccess();
+        double expected = 1.0;
+        double delta = 0.00001;
+        String msgPart = " should be " + expected + " with variance " + delta;
+        for (Currency currency : SUPPORTED_CURRENCIES) {
+            CurrencyPair currencies = new CurrencyPair(currency, currency);
+            double actual = instance.getRate(currencies);
+            String message = "Given " + currency.getDisplayName() 
+                    + ", exchange rate for " + currencies.toString() + msgPart;
+            assertEquals(actual, expected, delta, message);
+        }
+    }
+    
     /**
      * Test of getRate method, of class FreeAPIAccess.
      */
