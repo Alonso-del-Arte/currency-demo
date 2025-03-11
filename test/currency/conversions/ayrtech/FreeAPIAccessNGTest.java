@@ -21,13 +21,20 @@ import currency.CurrencyPair;
 import currency.SpecificCurrenciesSupport;
 import currency.conversions.ExchangeRateProvider;
 
+import java.io.InputStream;
+import java.io.IOException;
+import java.net.HttpURLConnection;
+import java.net.URI;
+import java.net.URISyntaxException;
+import java.net.URL;
 import java.util.Currency;
 import java.util.HashSet;
 import java.util.Locale;
 import java.util.Set;
 import java.util.stream.Collectors;
-import static org.testframe.api.Asserters.assertContainsSame;
+import java.util.Scanner;
 
+import static org.testframe.api.Asserters.assertContainsSame;
 import static org.testframe.api.Asserters.assertInRange;
 import static org.testframe.api.Asserters.assertDoesNotThrow;
 
@@ -132,6 +139,18 @@ public class FreeAPIAccessNGTest {
         // TODO review the generated test code and remove the default call to fail.
         fail("The test case is a prototype.");
         assertEquals(result, expResult, 0.0);
+    }
+    
+    private static class AccessWithAPICallCounter extends FreeAPIAccess {
+        
+        private int callCountSoFar = 0;
+        
+        @Override
+        InputStream makeAPICall() {
+            this.callCountSoFar++;
+            return super.makeAPICall();
+        }
+        
     }
     
 }
