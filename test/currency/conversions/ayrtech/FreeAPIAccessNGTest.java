@@ -16,29 +16,72 @@
  */
 package currency.conversions.ayrtech;
 
+import currency.CurrencyPair;
+import currency.SpecificCurrenciesSupport;
+import currency.conversions.ExchangeRateProvider;
+
 import java.util.Currency;
+import java.util.HashSet;
+import java.util.Locale;
 import java.util.Set;
+import java.util.stream.Collectors;
+
+import static org.testframe.api.Asserters.assertInRange;
+import static org.testframe.api.Asserters.assertContainsSame;
+import static org.testframe.api.Asserters.assertDoesNotThrow;
+
 import static org.testng.Assert.*;
 import org.testng.annotations.Test;
 
 /**
- * Tests of the FreeAPIAccess class. This API requires an API key.
+ * Tests of the FreeAPIAccess class. This API requires an API key. Go to <a 
+ * href="https://www.exchangerate-api.com">https://www.exchangerate-api.com</a> 
+ * to sign up for your own API key, then put it in an environment variable 
+ * called FOREX_API_KEY. When I signed up, I was given a quota of 1,500 requests 
+ * per month, which should be sufficient for my purposes.
+ * <p>There's also an open API which doesn't use an API key but is very tightly 
+ * rate-limited. I don't remember the path from the URL above to the page 
+ * describing how to access the open API.</p>
  * @author Alonso del Arte
  */
 public class FreeAPIAccessNGTest {
     
+    private static final String[] CURRENCY_CODES = {"AED", "AFN", "ALL", "AMD", 
+        "ANG", "AOA", "ARS", "AUD", "AWG", "AZN", "BAM", "BBD", "BDT", "BGN", 
+        "BHD", "BIF", "BMD", "BND", "BOB", "BRL", "BSD", "BTN", "BWP", "BYN", 
+        "BZD", "CAD", "CDF", "CHF", "CLP", "CNY", "COP", "CRC", "CUP", "CVE", 
+        "CZK", "DJF", "DKK", "DOP", "DZD", "EGP", "ERN", "ETB", "EUR", "FJD", 
+        "FKP", "GBP", "GEL", "GHS", "GIP", "GMD", "GNF", "GTQ", "GYD", "HKD", 
+        "HNL", "HRK", "HTG", "HUF", "IDR", "ILS", "INR", "IQD", "IRR", "ISK", 
+        "JMD", "JOD", "JPY", "KES", "KGS", "KHR", "KMF", "KRW", "KWD", "KYD", 
+        "KZT", "LAK", "LBP", "LKR", "LRD", "LSL", "LYD", "MAD", "MDL", "MGA", 
+        "MKD", "MMK", "MNT", "MOP", "MRU", "MUR", "MVR", "MWK", "MXN", "MYR", 
+        "MZN", "NAD", "NGN", "NIO", "NOK", "NPR", "NZD", "OMR", "PAB", "PEN", 
+        "PGK", "PHP", "PKR", "PLN", "PYG", "QAR", "RON", "RSD", "RUB", "RWF", 
+        "SAR", "SBD", "SCR", "SDG", "SEK", "SGD", "SHP", "SLE", "SOS", "SRD", 
+        "SSP", "STN", "SYP", "SZL", "THB", "TJS", "TMT", "TND", "TOP", "TRY", 
+        "TTD", "TWD", "TZS", "UAH", "UGX", "USD", "UYU", "UZS", "VES", "VND", 
+        "VUV", "WST", "XAF", "XCD", "XOF", "XPF", "YER", "ZAR", "ZMW"};
+    
+    private static final Set<Currency> SUPPORTED_CURRENCIES 
+            = Set.of(CURRENCY_CODES).stream().map(
+                    currencyCode -> Currency.getInstance(currencyCode)
+            ).collect(Collectors.toSet());
+
     /**
-     * Test of supportedCurrencies method, of class FreeAPIAccess.
+     * Test of the supportedCurrencies function, of the FreeAPIAccess class. 
+     * This test does not explicitly make an API call directly, and the called 
+     * function should not make an API call either. Of course I did make an API 
+     * call to get the list of currencies supported by the API in the first 
+     * place. I used a Web browser and then used a regular expression to filter 
+     * out the numbers and just have the ISO-4217 currency codes.
      */
     @Test
     public void testSupportedCurrencies() {
         System.out.println("supportedCurrencies");
-        FreeAPIAccess instance = new FreeAPIAccess();
-        Set expResult = null;
-        Set result = instance.supportedCurrencies();
-        assertEquals(result, expResult);
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
+        SpecificCurrenciesSupport instance = new FreeAPIAccess();
+        Set<Currency> actual = instance.supportedCurrencies();
+        assertContainsSame(SUPPORTED_CURRENCIES, actual);
     }
 
     /**
@@ -52,9 +95,9 @@ public class FreeAPIAccessNGTest {
         FreeAPIAccess instance = new FreeAPIAccess();
         double expResult = 0.0;
         double result = instance.getRate(source, target);
-        assertEquals(result, expResult, 0.0);
         // TODO review the generated test code and remove the default call to fail.
         fail("The test case is a prototype.");
+        assertEquals(result, expResult, 0.0);
     }
     
 }
