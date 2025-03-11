@@ -20,12 +20,19 @@ import currency.CurrencyPair;
 import currency.SpecificCurrenciesSupport;
 import currency.conversions.ExchangeRateProvider;
 
+import java.io.InputStream;
+import java.io.IOException;
+import java.net.HttpURLConnection;
+import java.net.URI;
+import java.net.URISyntaxException;
+import java.net.URL;
 import java.time.LocalDate;
 import java.time.Month;
 import java.util.Currency;
 import java.util.HashSet;
 import java.util.Set;
 import java.util.stream.Collectors;
+import java.util.Scanner;
 
 /**
  * WORK IN PROGRESS... The free API is free to use but it does require an API 
@@ -94,6 +101,21 @@ public class FreeAPIAccess implements ExchangeRateProvider,
     @Override
     public Set<Currency> supportedCurrencies() {
         return new HashSet<>(SUPPORTED_CURRENCIES);
+    }
+    
+    InputStream makeAPICall() {
+        return new InputStream() {
+            
+            @Override
+            public int read() throws IOException {
+                return 0;
+            }
+            
+        };
+    }
+    
+    private void processAPICall() {
+        //
     }
     
     // TODO: Write tests for this
