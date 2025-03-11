@@ -29,7 +29,11 @@ import java.util.stream.Collectors;
 
 /**
  * WORK IN PROGRESS... The free API is free to use but it does require an API 
- * key.
+ * key. Go to <a 
+ * href="https://www.exchangerate-api.com">https://www.exchangerate-api.com</a> 
+ * to sign up for your own API key, then put it in an environment variable 
+ * called FOREX_API_KEY. When I signed up, I was given a quota of 1,500 requests 
+ * per month, which should be sufficient for my purposes.
  * @author Alonso del Arte
  */
 public class FreeAPIAccess implements ExchangeRateProvider, 
@@ -57,10 +61,39 @@ public class FreeAPIAccess implements ExchangeRateProvider,
                     currencyCode -> Currency.getInstance(currencyCode)
             ).collect(Collectors.toSet());
 
-    // TODO: Write tests for this
+    /**
+     * The currencies that are supported by ExchangeRate-API, minus currencies 
+     * not recognized by the Java Runtime Environment's currency information 
+     * file. Two historical currencies and a pseudocurrency recognized by both 
+     * ExchangeRate-API and the Java Runtime Environment's currency information 
+     * file have also been left out, as explained below. It is theoretically 
+     * possible for anyone to add currencies to Java's currency information 
+     * file, but in practice this is much too difficult to undertake in a 
+     * demonstration such as this project.
+     * @return The set of currencies, which includes a lot of the world's 
+     * currencies but excludes the following:
+     * <ul>
+     * <li>The Faroese kr&oacute;na (FOK), as it's recognized by the API but not
+     * by the Java currency information file.</li>
+     * <li>The Guernsey pound (GGP), for the same reason.</li>
+     * <li>The Manx pound (IMP), for the same reason.</li>
+     * <li>The Jersey pound (JEP), for the same reason.</li>
+     * <li>The Kiribati dollar (KID), for the same reason.</li>
+     * <li>The North Korean won (KPW) is emphatically <em>not</em> supported by 
+     * the API.</li>
+     * <li>The Sierra Leonean leone (1964 &mdash; 2022, SLL), as it's labeled a 
+     * historical currency by the Java currency information file.</li>
+     * <li>The Tuvaluan dollar (TVD), as it's recognized by the API but not by 
+     * the Java currency information file.</li>
+     * <li>Special drawing rights (XDR), as it's a pseudocurrency by the 
+     * parameters of this project.</li>
+     * <li>The Zimbabwean dollar (ZWL), not sure what's going on with that 
+     * one.</li>
+     * </ul>
+     */
     @Override
     public Set<Currency> supportedCurrencies() {
-        return SUPPORTED_CURRENCIES;
+        return new HashSet<>(SUPPORTED_CURRENCIES);
     }
     
     // TODO: Write tests for this
