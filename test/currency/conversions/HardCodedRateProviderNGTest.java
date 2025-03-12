@@ -388,6 +388,33 @@ public class HardCodedRateProviderNGTest {
         assertInRange(minimum, actual, maximum, DEFAULT_VARIANCE, msg);
     }
     
-    // TODO: Write tests for source not USD
+    @Test
+    public void testGetRate() {
+        ExchangeRateProvider instance = new HardCodedRateProvider();
+        String[] nonUSDCurrencyCodes = {"AUD", "BRL", "CAD", "CNY", "EUR", "GBP", 
+            "HKD", "ILS", "INR", "JPY", "KRW", "MXN", "NZD", "PHP", "TWD", 
+            "VND", "XAF", "XCD", "XOF", "XPF"};
+        Set<Currency> nonUSDCurrencies = Set.of(nonUSDCurrencyCodes)
+                .stream().map(currencyCode 
+                        -> Currency.getInstance(currencyCode))
+                .collect(Collectors.toSet());
+        double delta = 0.01;
+        for (Currency currency : nonUSDCurrencies) {
+            CurrencyPair pair 
+                    = new CurrencyPair(UNITED_STATES_DOLLARS, currency);
+            double rate = instance.getRate(pair);
+            CurrencyPair currencies = pair.flip();
+            double expected = 1.0 / rate;
+            double actual = instance.getRate(currencies);
+            String message = "As conversion rate for " + USD_DISPLAY_NAME + " (" 
+                    + USD_3_LETTER_CODE + ") to " + currency.getDisplayName() 
+                    + " (" + currency.getCurrencyCode() + ") is said to be " 
+                    + rate + ", conversion for " + currencies.toString() 
+                    + " should be " + expected;
+            assertEquals(actual, expected, delta, message);
+        }
+    }
+    
+    // TODO: Write tests for neither source nor target USD
     
 }
