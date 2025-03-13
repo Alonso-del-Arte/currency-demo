@@ -22,7 +22,10 @@ import currency.SpecificCurrenciesSupport;
 import java.time.LocalDate;
 import java.time.Month;
 import java.util.Currency;
+import java.util.HashMap;
 import java.util.HashSet;
+import java.util.Locale;
+import java.util.Map;
 import java.util.Set;
 import java.util.stream.Collectors;
 
@@ -41,6 +44,9 @@ public class HardCodedRateProvider implements ExchangeRateProvider,
     public static final LocalDate DATE_OF_HARD_CODING 
             = LocalDate.of(2025, Month.MARCH, 3);
     
+    private static final Currency UNITED_STATES_DOLLARS 
+            = Currency.getInstance(Locale.US);
+    
     private static final String[] CURRENCY_CODES = {"AUD", "BRL", "CAD", "CNY", 
         "EUR", "GBP", "HKD", "ILS", "INR", "JPY", "KRW", "MXN", "NZD", "PHP", 
         "TWD", "USD", "VND", "XAF", "XCD", "XOF", "XPF"};
@@ -50,6 +56,20 @@ public class HardCodedRateProvider implements ExchangeRateProvider,
                     currencyCode -> Currency.getInstance(currencyCode)
             ).collect(Collectors.toSet());
     
+    private static final double[] HARD_CODED_RATES = {1.6116, 5.9909941, 1.45, 
+        7.29, 0.95, 0.78822, 7.78, 3.6, 87.38, 149.22, 1459.18, 20.78, 1.78, 
+        57.79, 32.92, 1.0, 25589.98, 625.4, 2.7, 625.39, 113.71};
+    
+    private static final Map<CurrencyPair, Double> QUOTES_MAP = new HashMap<>();
+    
+    static {
+        for (int i = 0; i < CURRENCY_CODES.length; i++) {
+            Currency to = Currency.getInstance(CURRENCY_CODES[i]);
+            CurrencyPair key = new CurrencyPair(UNITED_STATES_DOLLARS, to);
+            QUOTES_MAP.put(key, HARD_CODED_RATES[i]);
+        }
+    }
+    
     @Override
     public Set<Currency> supportedCurrencies() {
         return new HashSet<>(SUPPORTED_CURRENCIES);
@@ -57,30 +77,17 @@ public class HardCodedRateProvider implements ExchangeRateProvider,
     
     @Override
     public double getRate(Currency source, Currency target) {
-        return switch(target.getCurrencyCode()) {
-            case "AUD" -> 1.6116;
-            case "BRL" -> 5.9909941;
-            case "CAD" -> 1.45;
-            case "CNY" -> 7.29;
-            case "EUR" -> 0.95;
-            case "GBP" -> 0.78822;
-            case "HKD" -> 7.78;
-            case "ILS" -> 3.6;
-            case "INR" -> 87.38;
-            case "JPY" -> 149.22;
-            case "KRW" -> 1459.18;
-            case "MXN" -> 20.78;
-            case "NZD" -> 1.78;
-            case "PHP" -> 57.79;
-            case "TWD" -> 32.92;
-            case "USD" -> 1.0;
-            case "VND" -> 25589.98;
-            case "XAF" -> 625.4;
-            case "XCD" -> 2.7;
-            case "XOF" -> 625.39;
-            case "XPF" -> 113.71;
-            default -> -1.0;
-        };
+        CurrencyPair currencies = new CurrencyPair(source, target);
+        return this.getRate(currencies);
+    }
+    
+    @Override
+    public double getRate(CurrencyPair currencies) {
+        if (QUOTES_MAP.containsKey(currencies)) {
+            return QUOTES_MAP.get(currencies);
+        } else {
+            return 1.0 / QUOTES_MAP.getOrDefault(currencies.flip(), 1.0);
+        }
     }
     
 }
