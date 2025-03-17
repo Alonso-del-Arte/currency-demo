@@ -16,7 +16,10 @@
  */
 package currency;
 
+import static currency.CurrencyChooser.RANDOM;
+
 import java.util.Currency;
+import java.util.HashSet;
 import java.util.Set;
 
 import static org.testng.Assert.*;
@@ -30,6 +33,32 @@ public class SpecificCurrenciesSupportTest {
     
     private static final Set<Currency> ALL_CURRENCIES 
             = Currency.getAvailableCurrencies();
+    
+    private static Set<Currency> makeSubset() {
+        int leastSignificantDigit = RANDOM.nextInt(10);
+        Set<Currency> subset = new HashSet<>();
+        for (Currency currency : ALL_CURRENCIES) {
+            if (currency.getNumericCode() % 10 == leastSignificantDigit) {
+                subset.add(currency);
+            }
+        }
+        return subset;
+    }
+    
+    @Test
+    public void testSupports() {
+        System.out.println("supports");
+        Set<Currency> currencies = makeSubset();
+        SpecificCurrenciesSupport instance 
+                = new SpecificCurrenciesSupportImpl(currencies);
+        for (Currency currency : currencies) {
+            String msg = "Currency " + currency.getDisplayName() + " (" 
+                    + currency.getCurrencyCode() + ", " 
+                    + currency.getNumericCodeAsString() 
+                    + ") should be supported";
+            assert instance.supports(currency) : msg;
+        }
+    }
     
     private static class SpecificCurrenciesSupportImpl 
             implements SpecificCurrenciesSupport {
