@@ -20,8 +20,10 @@ import java.util.Currency;
 import java.util.Set;
 
 /**
- * Indicates that a class can support specific instances of {@code Currency} but 
- * not others. For the set of supported currencies, call {@link 
+ * Indicates that a class can support specific instances of {@code 
+ * java.util.Currency} but not others. To query whether or not a specific 
+ * currency is supported, call {@link #supports(java.util.Currency) supports()}. 
+ * For the full set of supported currencies, call {@link 
  * #supportedCurrencies()}.
  * @author Alonso del Arte
  */
@@ -35,9 +37,24 @@ public interface SpecificCurrenciesSupport {
      */
     Set<Currency> supportedCurrencies();
     
-    // TODO: Write tests for this
+    /**
+     * Tells whether or not a specific currency is supported. A default 
+     * implementation is provided that calls {@link #supportedCurrencies()}. 
+     * This function should be overridden for classes having a more efficient 
+     * way of determining whether or not a currency is supported. For the 
+     * examples, suppose this instance supports the 20 most traded currencies 
+     * and no others.
+     * @param currency The currency to query for support. Examples: the United 
+     * States dollar (USD) and the Lebanese pound (LBP).
+     * @return True if this instance supports the currency, false otherwise. In 
+     * the example of an instance supporting the 20 most traded currencies, this 
+     * function should return true for USD and false for LBP, which, unlike the 
+     * North Korean won (KPW), can be traded in regulated markets, but very few 
+     * people do.
+     */
     default boolean supports(Currency currency) {
-        return true;
+        Set<Currency> currencies = this.supportedCurrencies();
+        return currencies.contains(currency);
     }
     
 }
