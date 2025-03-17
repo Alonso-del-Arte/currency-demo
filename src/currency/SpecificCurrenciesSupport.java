@@ -37,7 +37,7 @@ public interface SpecificCurrenciesSupport {
     
     // TODO: Write tests for this
     default boolean supports(Currency currency) {
-        return false;
+        return true;
     }
     
 }
