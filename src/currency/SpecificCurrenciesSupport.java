@@ -23,7 +23,7 @@ import java.util.Set;
  * Indicates that a class can support specific instances of {@code Currency} but 
  * not others. For the set of supported currencies, call {@link 
  * #supportedCurrencies()}.
- * @author al
+ * @author Alonso del Arte
  */
 public interface SpecificCurrenciesSupport {
     
@@ -34,5 +34,10 @@ public interface SpecificCurrenciesSupport {
      * currencies in the world.
      */
     Set<Currency> supportedCurrencies();
+    
+    // TODO: Write tests for this
+    default boolean supports(Currency currency) {
+        return false;
+    }
     
 }
