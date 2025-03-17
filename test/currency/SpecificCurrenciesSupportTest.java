@@ -22,7 +22,6 @@ import java.util.Currency;
 import java.util.HashSet;
 import java.util.Set;
 
-import static org.testng.Assert.*;
 import org.testng.annotations.Test;
 
 /**
@@ -57,6 +56,23 @@ public class SpecificCurrenciesSupportTest {
                     + currency.getNumericCodeAsString() 
                     + ") should be supported";
             assert instance.supports(currency) : msg;
+        }
+    }
+    
+    @Test
+    public void testDoesNotSupport() {
+        Set<Currency> currencies = makeSubset();
+        SpecificCurrenciesSupport instance 
+                = new SpecificCurrenciesSupportImpl(currencies);
+        Set<Currency> complement = new HashSet<>(ALL_CURRENCIES);
+        complement.removeAll(currencies);
+        String msgPart = "\u0029 is not in the set " + currencies.toString() 
+                + ", it should not be supported";
+        for (Currency currency : complement) {
+            String msg = "As currency " + currency.getDisplayName() + " \u0028" 
+                    + currency.getCurrencyCode() + ", " 
+                    + currency.getNumericCodeAsString() + msgPart;
+            assert !instance.supports(currency) : msg;
         }
     }
     
