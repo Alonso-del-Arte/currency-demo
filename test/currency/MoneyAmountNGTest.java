@@ -54,6 +54,21 @@ public class MoneyAmountNGTest {
             = Currency.getAvailableCurrencies();
 
     @Test
+    public void testSupports() {
+        System.out.println("supports");
+        Set<Currency> supported = ALL_CURRENCIES.stream()
+                .filter(cur -> cur.getDefaultFractionDigits() > -1)
+                .collect(Collectors.toSet());
+        for (Currency currency : supported) {
+            String msg = "As currency " + currency.getDisplayName() + " (" 
+                    + currency.getCurrencyCode() + ") has " 
+                    + currency.getDefaultFractionDigits() 
+                    + " fraction digits, it should be supported";
+            assert MoneyAmount.supports(currency) : msg;
+        }
+    }
+    
+    @Test
     public void testGetUnits() {
         System.out.println("getUnits");
         int expected = RANDOM.nextInt(32768) - 16384;
@@ -740,15 +755,6 @@ public class MoneyAmountNGTest {
     // TODO: Write test for negative dollars, positive cents
     
     // TODO: Write test for negative dollars, negative cents
-    
-    @Test
-    public void testSupports() {
-        System.out.println("supports");
-        Set<Currency> supported = ALL_CURRENCIES.stream()
-                .filter(c -> c.getDefaultFractionDigits() > -1)
-                .collect(Collectors.toSet());
-        fail();
-    }
     
     @Test
     public void testNoCentsConstructorRejectsPseudoCurrencies() {
