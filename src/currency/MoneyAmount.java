@@ -39,7 +39,7 @@ public class MoneyAmount implements Comparable<MoneyAmount> {
     
     // TODO: Write tests for this
     public static boolean supports(Currency currency) {
-        return true;
+        return currency.getDefaultFractionDigits() > -1;
     }
     
     private static int calculateMultiplier(Currency currency) {
