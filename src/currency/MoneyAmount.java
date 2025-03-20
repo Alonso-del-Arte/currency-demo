@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2024 Alonso del Arte
+ * Copyright (C) 2025 Alonso del Arte
  *
  * This program is free software: you can redistribute it and/or modify it under 
  * the terms of the GNU General Public License as published by the Free Software 
@@ -17,6 +17,7 @@
 package currency;
 
 import java.util.Currency;
+import java.util.Set;
 
 /**
  * Represents an amount of money of a specific currency. The precision is 
@@ -25,7 +26,8 @@ import java.util.Currency;
  * intermediate calculations are discarded.
  * @author Alonso del Arte
  */
-public class MoneyAmount implements Comparable<MoneyAmount> {
+public class MoneyAmount implements Comparable<MoneyAmount>, 
+        SpecificCurrenciesSupport {
     
     private final long singles;
     
@@ -187,6 +189,12 @@ public class MoneyAmount implements Comparable<MoneyAmount> {
             throw new CurrencyMismatchException(this, other);
         }
         return Long.compare(this.allCents, other.allCents);
+    }
+    
+    // TODO: Write tests for this
+    @Override
+    public Set<Currency> supportedCurrencies() {
+        return Set.of(Currency.getInstance("USD"));
     }
 
     @Override
