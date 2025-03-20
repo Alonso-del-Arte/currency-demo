@@ -26,8 +26,7 @@ import java.util.Set;
  * intermediate calculations are discarded.
  * @author Alonso del Arte
  */
-public class MoneyAmount implements Comparable<MoneyAmount>, 
-        SpecificCurrenciesSupport {
+public class MoneyAmount implements Comparable<MoneyAmount> {
     
     private final long singles;
     
@@ -191,12 +190,6 @@ public class MoneyAmount implements Comparable<MoneyAmount>,
         return Long.compare(this.allCents, other.allCents);
     }
     
-    // TODO: Write tests for this
-    @Override
-    public Set<Currency> supportedCurrencies() {
-        return Set.of(Currency.getInstance("USD"));
-    }
-
     @Override
     public String toString() {
         if (this.multiplier == 1) {
