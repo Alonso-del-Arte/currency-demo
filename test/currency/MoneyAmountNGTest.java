@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2024 Alonso del Arte
+ * Copyright (C) 2025 Alonso del Arte
  *
  * This program is free software: you can redistribute it and/or modify it under 
  * the terms of the GNU General Public License as published by the Free Software 
@@ -26,6 +26,7 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Locale;
 import java.util.Set;
+import java.util.stream.Collectors;
 
 import static org.testframe.api.Asserters.assertThrows;
 
@@ -48,6 +49,9 @@ public class MoneyAmountNGTest {
     private static final Currency EUROS = Currency.getInstance("EUR");
     
     private static final Currency YEN = Currency.getInstance(Locale.JAPAN);
+    
+    private static final Set<Currency> ALL_CURRENCIES 
+            = Currency.getAvailableCurrencies();
 
     @Test
     public void testGetUnits() {
@@ -736,6 +740,15 @@ public class MoneyAmountNGTest {
     // TODO: Write test for negative dollars, positive cents
     
     // TODO: Write test for negative dollars, negative cents
+    
+    @Test
+    public void testSupports() {
+        System.out.println("supports");
+        Set<Currency> supported = ALL_CURRENCIES.stream()
+                .filter(c -> c.getDefaultFractionDigits() > -1)
+                .collect(Collectors.toSet());
+        fail();
+    }
     
     @Test
     public void testNoCentsConstructorRejectsPseudoCurrencies() {
