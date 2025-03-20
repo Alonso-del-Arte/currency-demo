@@ -17,7 +17,6 @@
 package currency;
 
 import java.util.Currency;
-import java.util.Set;
 
 /**
  * Represents an amount of money of a specific currency. The precision is 
@@ -37,6 +36,11 @@ public class MoneyAmount implements Comparable<MoneyAmount> {
     private final long allCents;
     
     private final Currency currencyID;
+    
+    // TODO: Write tests for this
+    public static boolean supports(Currency currency) {
+        return false;
+    }
     
     private static int calculateMultiplier(Currency currency) {
         int mult = 1;
