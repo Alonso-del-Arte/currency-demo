@@ -37,7 +37,20 @@ public class MoneyAmount implements Comparable<MoneyAmount> {
     
     private final Currency currencyID;
     
-    // TODO: Write tests for this
+    /**
+     * Tells whether or not the constructors for this class support a particular 
+     * currency. Pseudocurrencies, such as precious metals, are not supported. 
+     * Historical currencies, on the other hand, are.
+     * @param currency The currency to check. Examples: the euro (EUR), the 
+     * Slovenian tolar (SIT), the Yugoslavian new dinar (YUM, 1994 &mdash; 
+     * 2002), gold (XAU).
+     * @return True if the currency has 0 or positive default fraction digits in 
+     * the currency information file, false otherwise. In the examples, this is 
+     * obviously true for the euro, and it's also true for the Slovenian tolar 
+     * even though it was replaced by the euro, and true for the Yugoslavian new 
+     * dinar even though it seems to not have been accepted much in Slovenia. 
+     * But this is definitely false for gold.
+     */
     public static boolean supports(Currency currency) {
         return currency.getDefaultFractionDigits() > -1;
     }
