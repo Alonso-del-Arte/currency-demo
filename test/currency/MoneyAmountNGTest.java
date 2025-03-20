@@ -69,6 +69,20 @@ public class MoneyAmountNGTest {
     }
     
     @Test
+    public void testDoesNotSupport() {
+        Set<Currency> unsupported = ALL_CURRENCIES.stream()
+                .filter(cur -> cur.getDefaultFractionDigits() < 0)
+                .collect(Collectors.toSet());
+        for (Currency currency : unsupported) {
+            String msg = "As currency " + currency.getDisplayName() + " (" 
+                    + currency.getCurrencyCode() + ") has " 
+                    + currency.getDefaultFractionDigits() 
+                    + " fraction digits, it should not be supported";
+            assert !MoneyAmount.supports(currency) : msg;
+        }
+    }
+    
+    @Test
     public void testGetUnits() {
         System.out.println("getUnits");
         int expected = RANDOM.nextInt(32768) - 16384;
