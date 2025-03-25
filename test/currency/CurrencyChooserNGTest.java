@@ -18,10 +18,12 @@ package currency;
 
 import java.time.Duration;
 import java.time.temporal.ChronoUnit;
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Currency;
 import java.util.HashMap;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Locale;
 import java.util.Map;
 import java.util.NoSuchElementException;
@@ -425,6 +427,24 @@ public class CurrencyChooserNGTest {
         assert excMsg != null : "Exception message should not be null";
         assert !excMsg.isBlank() : "Exception message should not be blank";
         System.out.println("\"" + excMsg + "\"");
+    }
+    
+    @Test
+    public void testChooseCurrencyFromSet() {
+        Random random = new Random();
+        int initialCapacity = random.nextInt(16) + 4;
+        Set<Currency> expected = new HashSet<>(initialCapacity);
+        List<Currency> currencies = new ArrayList<>(CURRENCIES);
+        while (expected.size() < initialCapacity) {
+            expected.add(currencies.get(random
+                    .nextInt(TOTAL_NUMBER_OF_CURRENCIES)));
+        }
+        Set<Currency> actual = new HashSet<>(initialCapacity);
+        int numberOfCalls = 12 * initialCapacity;
+        for (int i = 0; i < numberOfCalls; i++) {
+            actual.add(CurrencyChooser.chooseCurrency(expected));
+        }
+        assertContainsSame(expected, actual);
     }
     
     @Test
