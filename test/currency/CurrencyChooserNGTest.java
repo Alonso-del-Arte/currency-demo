@@ -56,14 +56,14 @@ public class CurrencyChooserNGTest {
     
     private static final Currency DOLLARS = Currency.getInstance(Locale.US);
     
-    private static final int TOTAL_NUMBER_OF_CURRENCIES = CURRENCIES.size();
+    private static final int TOTAL_NUMBER_OF_CURRENCIES;
     
     private static final int NUMBER_OF_CALLS_MULTIPLIER_FOR_EXCLUSION_SEARCH 
             = 4;
     
     private static final int NUMBER_OF_CALLS_FOR_EXCLUSION_SEARCH 
             = NUMBER_OF_CALLS_MULTIPLIER_FOR_EXCLUSION_SEARCH 
-            * TOTAL_NUMBER_OF_CURRENCIES;
+            * CURRENCIES.size();
     
     private static final String[] EURO_REPLACED_EXCLUSION_CODES = {"ADP", "ATS", 
         "BEF", "CYP", "DEM", "EEK", "ESP", "FIM", "FRF", "GRD", "IEP", "ITL", 
@@ -90,6 +90,7 @@ public class CurrencyChooserNGTest {
             }
         }
         CURRENCIES.removeAll(PSEUDO_CURRENCIES);
+        TOTAL_NUMBER_OF_CURRENCIES = CURRENCIES.size();
     }
     
     private static boolean isEuroReplacedCurrency(Currency currency) {
