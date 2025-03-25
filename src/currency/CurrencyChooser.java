@@ -352,6 +352,11 @@ public class CurrencyChooser {
             throw new NoSuchElementException(excMsg);
         }
     }
+    
+    // TODO: Write tests for this
+    public static Currency chooseCurrency(Set<Currency> set) {
+        return Currency.getInstance("XTS");
+    }
 
     /**
      * Chooses a currency suitable for the {@link MoneyAmount} constructor 
