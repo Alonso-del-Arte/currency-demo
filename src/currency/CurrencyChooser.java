@@ -353,6 +353,18 @@ public class CurrencyChooser {
         }
     }
     
+    /**
+     * Chooses a currency from a set. This could be used in conjunction with 
+     * {@link SpecificCurrenciesSupport#supportedCurrencies() 
+     * supportedCurrencies()} in classes implementing the {@link 
+     * SpecificCurrenciesSupport} interface.
+     * @param set The set to choose from. For example, a set containing United 
+     * States dollars (USD), euros (EUR) and other frequently traded currencies. 
+     * Should not be empty. Preferably contains more than one currency.
+     * @return A currency from the set. In the example, EUR and USD are possible 
+     * return values.
+     * @throws NoSuchElementException If {@code set} is empty.
+     */
     public static Currency chooseCurrency(Set<Currency> set) {
         if (set.isEmpty()) {
             String excMsg = "Set of currencies should not be empty";
