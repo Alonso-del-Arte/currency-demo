@@ -355,6 +355,10 @@ public class CurrencyChooser {
     
     // TODO: Write tests for this
     public static Currency chooseCurrency(Set<Currency> set) {
+        if (set.isEmpty()) {
+            String excMsg = "Set of currencies should not be empty";
+            throw new NoSuchElementException(excMsg);
+        }
         return Currency.getInstance("XTS");
     }
 
