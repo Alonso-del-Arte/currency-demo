@@ -41,6 +41,8 @@ import org.testng.annotations.Test;
  */
 public class HardCodedRateProviderNGTest {
     
+    private static final double DEFAULT_VARIANCE = 0.00001;
+    
     private static final Currency UNITED_STATES_DOLLARS 
             = Currency.getInstance(Locale.US);
     
@@ -50,7 +52,14 @@ public class HardCodedRateProviderNGTest {
     private static final String USD_3_LETTER_CODE 
             = UNITED_STATES_DOLLARS.getCurrencyCode();
     
-    private static final double DEFAULT_VARIANCE = 0.00001;
+    private static final String[] NON_USD_CURRENCY_CODES = {"AUD", "BRL", "CAD", 
+        "CNY", "EUR", "GBP", "HKD", "ILS", "INR", "JPY", "KRW", "MXN", "NZD", 
+        "PHP", "TWD", "VND", "XAF", "XCD", "XOF", "XPF"};
+    
+    private static final Set<Currency> NON_USD_CURRENCIES 
+            = Set.of(NON_USD_CURRENCY_CODES).stream()
+                    .map(currencyCode -> Currency.getInstance(currencyCode))
+                    .collect(Collectors.toSet());
     
     @Test
     public void testDateOfHardCodingConstant() {
@@ -391,15 +400,8 @@ public class HardCodedRateProviderNGTest {
     @Test
     public void testGetRate() {
         ExchangeRateProvider instance = new HardCodedRateProvider();
-        String[] nonUSDCurrencyCodes = {"AUD", "BRL", "CAD", "CNY", "EUR", "GBP", 
-            "HKD", "ILS", "INR", "JPY", "KRW", "MXN", "NZD", "PHP", "TWD", 
-            "VND", "XAF", "XCD", "XOF", "XPF"};
-        Set<Currency> nonUSDCurrencies = Set.of(nonUSDCurrencyCodes)
-                .stream().map(currencyCode 
-                        -> Currency.getInstance(currencyCode))
-                .collect(Collectors.toSet());
         double delta = 0.01;
-        for (Currency currency : nonUSDCurrencies) {
+        for (Currency currency : NON_USD_CURRENCIES) {
             CurrencyPair pair 
                     = new CurrencyPair(UNITED_STATES_DOLLARS, currency);
             double rate = instance.getRate(pair);
