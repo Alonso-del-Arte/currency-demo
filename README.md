@@ -19,6 +19,12 @@ The JSR-354 proposal was approved for consideration to add to Java 9. However,
 it wasn't actually added to Java 9, and as of Java 21 it is still not an 
 official part of the Java Development Kit.
 
+However, Java does provide the `Currency` type in the `java.util` package, which 
+at least spares us the effort of having to define a type to represent the 
+currencies. An instance of `Currency` can represent euros, for example. But it 
+needs an instance of another type to represent a specific amount of euros, such 
+as, for example, 20&euro;.
+
 ## Dependencies
 
 * Joda Money 1.03, `org.joda.money.{CurrencyMismatchException, Money}`
