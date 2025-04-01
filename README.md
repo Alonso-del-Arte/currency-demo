@@ -73,6 +73,12 @@ Manny's free tier was almost too good to be true. I will have to look for some
 other free API, which will probably be very limited in the number of currencies 
 it supports and how many requests can be made per hour.
 
+As of March 2025, I've decided to go with ExchangeRate-API from AYR Tech. It 
+seems to be better documented than Manny's API, but the JSON responses require 
+more work parsing and caching. Go to 
+[ExchangeRate-API.com](https://www.exchangerate-api.com) for information on the 
+price tiers and documentation on how to use the API.
+
 ## Notes about internationalization
 
 Although I have not made a conscious effort to internationalize this repository, 
