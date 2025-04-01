@@ -67,6 +67,7 @@ public class HardCodedRateProvider implements ExchangeRateProvider,
             Currency to = Currency.getInstance(CURRENCY_CODES[i]);
             CurrencyPair key = new CurrencyPair(UNITED_STATES_DOLLARS, to);
             QUOTES_MAP.put(key, HARD_CODED_RATES[i]);
+            QUOTES_MAP.put(key.flip(), 1.0 / HARD_CODED_RATES[i]);
         }
     }
     
@@ -86,7 +87,20 @@ public class HardCodedRateProvider implements ExchangeRateProvider,
         if (QUOTES_MAP.containsKey(currencies)) {
             return QUOTES_MAP.get(currencies);
         } else {
-            return 1.0 / QUOTES_MAP.getOrDefault(currencies.flip(), 1.0);
+            CurrencyPair key = currencies.flip();
+            if (QUOTES_MAP.containsKey(key)) {
+                return QUOTES_MAP.get(key);
+            } else {
+                CurrencyPair sourcePair 
+                        = new CurrencyPair(UNITED_STATES_DOLLARS, 
+                                currencies.getFromCurrency());
+                CurrencyPair targetPair 
+                        = new CurrencyPair(UNITED_STATES_DOLLARS, 
+                                currencies.getToCurrency());
+                double usdToSource = QUOTES_MAP.getOrDefault(sourcePair, 1.0);
+                double usdToTarget = QUOTES_MAP.getOrDefault(targetPair, 1.0);
+                return usdToTarget / usdToSource;
+            }
         }
     }
     
