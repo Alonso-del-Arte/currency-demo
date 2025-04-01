@@ -417,6 +417,20 @@ public class HardCodedRateProviderNGTest {
         }
     }
     
-    // TODO: Write tests for neither source nor target USD
+    @Test
+    public void testGetRateNeitherCurrencyUSD() {
+        ExchangeRateProvider instance = new HardCodedRateProvider();
+        Currency source = CurrencyChooser.chooseCurrency(NON_USD_CURRENCIES);
+        String msgPart = "Inquiring rate for " + source.getDisplayName() + " (" 
+                + source.getCurrencyCode() + ") to ";
+        for (Currency target : NON_USD_CURRENCIES) {
+            double expected = instance.getRate(UNITED_STATES_DOLLARS, target) 
+                    / instance.getRate(UNITED_STATES_DOLLARS, source);
+            double actual = instance.getRate(source, target);
+            String message = msgPart + target.getDisplayName() + " (" 
+                    + target.getCurrencyCode() + ")";
+            assertEquals(actual, expected, DEFAULT_VARIANCE, message);
+        }
+    }    
     
 }
