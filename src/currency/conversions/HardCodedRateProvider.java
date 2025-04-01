@@ -30,7 +30,8 @@ import java.util.Set;
 import java.util.stream.Collectors;
 
 /**
- * Provides hard-coded currency exchange rates.
+ * Provides hard-coded currency exchange rates. See {@link #DATE_OF_HARD_CODING} 
+ * for the date that these values were hard-coded.
  * @author Alonso del Arte
  */
 public class HardCodedRateProvider implements ExchangeRateProvider, 
@@ -77,12 +78,32 @@ public class HardCodedRateProvider implements ExchangeRateProvider,
         return new HashSet<>(SUPPORTED_CURRENCIES);
     }
     
+    /**
+     * Gives the rate to convert one unit of the source currency to the target 
+     * currency.
+     * @param source The source to convert from. For example, United States 
+     * dollars (USD).
+     * @param target The target to convert one unit of {@code source} to. For 
+     * example, euros (EUR).
+     * @return The conversion rate. In the example as of March 3, 2025, this was 
+     * 0.95.
+     */
     @Override
     public double getRate(Currency source, Currency target) {
         CurrencyPair currencies = new CurrencyPair(source, target);
         return this.getRate(currencies);
     }
     
+    /**
+     * Gives the rate to convert one unit of the source currency to the target 
+     * currency. The provided default implementation simply unwraps the {@link 
+     * CurrencyPair} instance and calls the 2-parameter version of the function, 
+     * which this interface does not implement.
+     * @param currencies The pair of currencies, source and target. For example, 
+     * United States dollars (USD) and euros (EUR).
+     * @return The conversion rate. In the example as of March 3, 2025, this was 
+     * 0.95.
+     */
     @Override
     public double getRate(CurrencyPair currencies) {
         if (QUOTES_MAP.containsKey(currencies)) {
