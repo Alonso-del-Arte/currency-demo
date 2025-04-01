@@ -66,8 +66,9 @@ public class HardCodedRateProvider implements ExchangeRateProvider,
         for (int i = 0; i < CURRENCY_CODES.length; i++) {
             Currency to = Currency.getInstance(CURRENCY_CODES[i]);
             CurrencyPair key = new CurrencyPair(UNITED_STATES_DOLLARS, to);
-            QUOTES_MAP.put(key, HARD_CODED_RATES[i]);
-            QUOTES_MAP.put(key.flip(), 1.0 / HARD_CODED_RATES[i]);
+            double value = HARD_CODED_RATES[i];
+            QUOTES_MAP.put(key, value);
+            QUOTES_MAP.put(key.flip(), 1.0 / value);
         }
     }
     
