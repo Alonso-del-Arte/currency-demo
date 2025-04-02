@@ -79,18 +79,7 @@ public class HardCodedRateProvider implements ExchangeRateProvider,
         return new HashSet<>(SUPPORTED_CURRENCIES);
     }
     
-    /**
-     * Gives the rate to convert one unit of the source currency to the target 
-     * currency.
-     * @param source The source to convert from. For example, United States 
-     * dollars (USD).
-     * @param target The target to convert one unit of {@code source} to. For 
-     * example, euros (EUR).
-     * @return The conversion rate. In the example as of March 3, 2025, this was 
-     * 0.95.
-     */
-    @Override
-    public double getRate(Currency source, Currency target) {
+    private static void checkSupport(Currency source, Currency target) {
         if (!SUPPORTED_CURRENCIES.contains(source)) {
             String excMsg = "Source currency " + source.getDisplayName() + " (" 
                     + source.getCurrencyCode() + ") is not supported";
@@ -101,6 +90,24 @@ public class HardCodedRateProvider implements ExchangeRateProvider,
                     + target.getCurrencyCode() + ") is not supported";
             throw new NoSuchElementException(excMsg);
         }
+    }
+    
+    /**
+     * Gives the rate to convert one unit of the source currency to the target 
+     * currency.
+     * @param source The source to convert from. For example, United States 
+     * dollars (USD).
+     * @param target The target to convert one unit of {@code source} to. For 
+     * example, euros (EUR).
+     * @return The conversion rate. In the example as of March 3, 2025, this was 
+     * 0.95.
+     * @throws NoSuchElementException If either {@code source} or {@code target} 
+     * is not among the supported currencies. See {@link 
+     * #supportedCurrencies()}.
+     */
+    @Override
+    public double getRate(Currency source, Currency target) {
+        checkSupport(source, target);
         CurrencyPair currencies = new CurrencyPair(source, target);
         return this.getRate(currencies);
     }
@@ -114,21 +121,14 @@ public class HardCodedRateProvider implements ExchangeRateProvider,
      * United States dollars (USD) and euros (EUR).
      * @return The conversion rate. In the example as of March 3, 2025, this was 
      * 0.95.
+     * @throws NoSuchElementException If either of the currencies of {@code 
+     * currencies} are not supported. See {@link #supportedCurrencies()}.
      */
     @Override
     public double getRate(CurrencyPair currencies) {
         Currency source = currencies.getFromCurrency();
         Currency target = currencies.getToCurrency();
-        if (!SUPPORTED_CURRENCIES.contains(source)) {
-            String excMsg = "Source currency " + source.getDisplayName() + " (" 
-                    + source.getCurrencyCode() + ") is not supported";
-            throw new NoSuchElementException(excMsg);
-        }
-        if (!SUPPORTED_CURRENCIES.contains(target)) {
-            String excMsg = "Target currency " + target.getDisplayName() + " (" 
-                    + target.getCurrencyCode() + ") is not supported";
-            throw new NoSuchElementException(excMsg);
-        }
+        checkSupport(source, target);
         if (QUOTES_MAP.containsKey(currencies)) {
             return QUOTES_MAP.get(currencies);
         } else {
