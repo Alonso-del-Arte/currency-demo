@@ -25,12 +25,14 @@ import java.time.Month;
 import java.util.Currency;
 import java.util.HashSet;
 import java.util.Locale;
+import java.util.NoSuchElementException;
 import java.util.Set;
 import java.util.stream.Collectors;
 
 import static org.testframe.api.Asserters.assertInRange;
 import static org.testframe.api.Asserters.assertContainsSame;
 import static org.testframe.api.Asserters.assertDoesNotThrow;
+import static org.testframe.api.Asserters.assertThrows;
 
 import static org.testng.Assert.*;
 import org.testng.annotations.Test;
@@ -60,6 +62,17 @@ public class HardCodedRateProviderNGTest {
             = Set.of(NON_USD_CURRENCY_CODES).stream()
                     .map(currencyCode -> Currency.getInstance(currencyCode))
                     .collect(Collectors.toSet());
+    
+    private static final Set<Currency> ALL_CURRENCIES 
+            = Currency.getAvailableCurrencies();
+    
+    private static final Set<Currency> UNSUPPORTED_CURRENCIES 
+            = new HashSet<>(ALL_CURRENCIES);
+    
+    static {
+        UNSUPPORTED_CURRENCIES.remove(UNITED_STATES_DOLLARS);
+        UNSUPPORTED_CURRENCIES.removeAll(NON_USD_CURRENCIES);
+    }
     
     @Test
     public void testDateOfHardCodingConstant() {
@@ -431,6 +444,29 @@ public class HardCodedRateProviderNGTest {
                     + target.getCurrencyCode() + ")";
             assertEquals(actual, expected, DEFAULT_VARIANCE, message);
         }
-    }    
-    
+    }
+
+    @Test
+    public void testUnsupportedSourceCurrencyCausesException() {
+        ExchangeRateProvider instance = new HardCodedRateProvider();
+        Currency from = CurrencyChooser.chooseCurrency(UNSUPPORTED_CURRENCIES);
+        Currency to = CurrencyChooser.chooseCurrency(NON_USD_CURRENCIES);
+        CurrencyPair currencies = new CurrencyPair(from, to);
+        String fromCurrCode = from.getCurrencyCode();
+        String msg = "Since " + from.getDisplayName() + " (" + fromCurrCode 
+                + ") is not supported, conversion from " + fromCurrCode + " to " 
+                + to.getDisplayName() + " (" + to.getCurrencyCode() 
+                + ") should cause exception";
+        Throwable t = assertThrows(() -> {
+            double badRate = instance.getRate(currencies);
+            System.out.println(msg + ", not given result " + badRate);
+        }, NoSuchElementException.class, msg);
+        String excMsg = t.getMessage();
+        assert excMsg != null : "Exception message should not be null";
+        assert !excMsg.isBlank() : "Exception message should not be blank";
+        String containsMsg = "Exception message should contain currency code " 
+                + fromCurrCode;
+        assert excMsg.contains(fromCurrCode) : containsMsg;
+    }
+
 }
