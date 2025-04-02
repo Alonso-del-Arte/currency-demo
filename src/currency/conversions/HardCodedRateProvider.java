@@ -112,6 +112,12 @@ public class HardCodedRateProvider implements ExchangeRateProvider,
      */
     @Override
     public double getRate(CurrencyPair currencies) {
+        Currency source = currencies.getFromCurrency();
+        if (!SUPPORTED_CURRENCIES.contains(source)) {
+            String excMsg = "Source currency " + source.getDisplayName() + " (" 
+                    + source.getCurrencyCode() + ") is not supported";
+            throw new NoSuchElementException(excMsg);
+        }
         if (QUOTES_MAP.containsKey(currencies)) {
             return QUOTES_MAP.get(currencies);
         } else {
