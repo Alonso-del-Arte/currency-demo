@@ -492,4 +492,27 @@ public class HardCodedRateProviderNGTest {
         assert excMsg.contains(fromCurrCode) : containsMsg;
     }
 
+    @Test
+    public void testUnsupportedTargetCurrencyTwoParamGetRateCausesException() {
+        ExchangeRateProvider instance = new HardCodedRateProvider();
+        Currency source = CurrencyChooser.chooseCurrency(NON_USD_CURRENCIES);
+        Currency target 
+                = CurrencyChooser.chooseCurrency(UNSUPPORTED_CURRENCIES);
+        String toCurrCode = target.getCurrencyCode();
+        String msg = "Since " + target.getDisplayName() + " (" + toCurrCode 
+                + ") is not supported, conversion from " 
+                + source.getDisplayName() + " (" + source.getCurrencyCode() 
+                + ") to " + toCurrCode + " should cause exception";
+        Throwable t = assertThrows(() -> {
+            double badRate = instance.getRate(source, target);
+            System.out.println(msg + ", not given result " + badRate);
+        }, NoSuchElementException.class, msg);
+        String excMsg = t.getMessage();
+        assert excMsg != null : "Exception message should not be null";
+        assert !excMsg.isBlank() : "Exception message should not be blank";
+        String containsMsg = "Exception message should contain currency code " 
+                + toCurrCode;
+        assert excMsg.contains(toCurrCode) : containsMsg;
+    }
+
 }
