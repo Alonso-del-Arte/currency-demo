@@ -96,6 +96,11 @@ public class HardCodedRateProvider implements ExchangeRateProvider,
                     + source.getCurrencyCode() + ") is not supported";
             throw new NoSuchElementException(excMsg);
         }
+        if (!SUPPORTED_CURRENCIES.contains(target)) {
+            String excMsg = "Target currency " + target.getDisplayName() + " (" 
+                    + target.getCurrencyCode() + ") is not supported";
+            throw new NoSuchElementException(excMsg);
+        }
         CurrencyPair currencies = new CurrencyPair(source, target);
         return this.getRate(currencies);
     }
