@@ -26,6 +26,7 @@ import java.util.HashMap;
 import java.util.HashSet;
 import java.util.Locale;
 import java.util.Map;
+import java.util.NoSuchElementException;
 import java.util.Set;
 import java.util.stream.Collectors;
 
@@ -90,6 +91,11 @@ public class HardCodedRateProvider implements ExchangeRateProvider,
      */
     @Override
     public double getRate(Currency source, Currency target) {
+        if (!SUPPORTED_CURRENCIES.contains(source)) {
+            String excMsg = "Source currency " + source.getDisplayName() + " (" 
+                    + source.getCurrencyCode() + ") is not supported";
+            throw new NoSuchElementException(excMsg);
+        }
         CurrencyPair currencies = new CurrencyPair(source, target);
         return this.getRate(currencies);
     }
