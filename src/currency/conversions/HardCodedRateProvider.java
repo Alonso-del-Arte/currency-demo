@@ -92,6 +92,27 @@ public class HardCodedRateProvider implements ExchangeRateProvider,
         }
     }
     
+    private static double validatedPairGetRate(CurrencyPair currencies) {
+        if (QUOTES_MAP.containsKey(currencies)) {
+            return QUOTES_MAP.get(currencies);
+        } else {
+            CurrencyPair key = currencies.flip();
+            if (QUOTES_MAP.containsKey(key)) {
+                return QUOTES_MAP.get(key);
+            } else {
+                CurrencyPair sourcePair 
+                        = new CurrencyPair(UNITED_STATES_DOLLARS, 
+                                currencies.getFromCurrency());
+                CurrencyPair targetPair 
+                        = new CurrencyPair(UNITED_STATES_DOLLARS, 
+                                currencies.getToCurrency());
+                double usdToSource = QUOTES_MAP.getOrDefault(sourcePair, 1.0);
+                double usdToTarget = QUOTES_MAP.getOrDefault(targetPair, 1.0);
+                return usdToTarget / usdToSource;
+            }
+        }
+    }
+    
     /**
      * Gives the rate to convert one unit of the source currency to the target 
      * currency.
@@ -129,24 +150,7 @@ public class HardCodedRateProvider implements ExchangeRateProvider,
         Currency source = currencies.getFromCurrency();
         Currency target = currencies.getToCurrency();
         checkSupport(source, target);
-        if (QUOTES_MAP.containsKey(currencies)) {
-            return QUOTES_MAP.get(currencies);
-        } else {
-            CurrencyPair key = currencies.flip();
-            if (QUOTES_MAP.containsKey(key)) {
-                return QUOTES_MAP.get(key);
-            } else {
-                CurrencyPair sourcePair 
-                        = new CurrencyPair(UNITED_STATES_DOLLARS, 
-                                currencies.getFromCurrency());
-                CurrencyPair targetPair 
-                        = new CurrencyPair(UNITED_STATES_DOLLARS, 
-                                currencies.getToCurrency());
-                double usdToSource = QUOTES_MAP.getOrDefault(sourcePair, 1.0);
-                double usdToTarget = QUOTES_MAP.getOrDefault(targetPair, 1.0);
-                return usdToTarget / usdToSource;
-            }
-        }
+        return validatedPairGetRate(currencies);
     }
     
 }
