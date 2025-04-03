@@ -106,8 +106,8 @@ public class HardCodedRateProvider implements ExchangeRateProvider,
                 CurrencyPair targetPair 
                         = new CurrencyPair(UNITED_STATES_DOLLARS, 
                                 currencies.getToCurrency());
-                double usdToSource = QUOTES_MAP.getOrDefault(sourcePair, 1.0);
-                double usdToTarget = QUOTES_MAP.getOrDefault(targetPair, 1.0);
+                double usdToSource = QUOTES_MAP.get(sourcePair);
+                double usdToTarget = QUOTES_MAP.get(targetPair);
                 return usdToTarget / usdToSource;
             }
         }
