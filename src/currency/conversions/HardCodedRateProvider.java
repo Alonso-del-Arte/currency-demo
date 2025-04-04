@@ -130,7 +130,7 @@ public class HardCodedRateProvider implements ExchangeRateProvider,
     public double getRate(Currency source, Currency target) {
         checkSupport(source, target);
         CurrencyPair currencies = new CurrencyPair(source, target);
-        return this.getRate(currencies);
+        return validatedPairGetRate(currencies);
     }
     
     /**
