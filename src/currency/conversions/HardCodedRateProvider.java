@@ -108,7 +108,9 @@ public class HardCodedRateProvider implements ExchangeRateProvider,
                                 currencies.getToCurrency());
                 double usdToSource = QUOTES_MAP.get(sourcePair);
                 double usdToTarget = QUOTES_MAP.get(targetPair);
-                return usdToTarget / usdToSource;
+                double value = usdToTarget / usdToSource;
+                QUOTES_MAP.put(currencies, value);
+                return value;
             }
         }
     }
