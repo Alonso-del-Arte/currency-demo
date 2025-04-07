@@ -121,7 +121,6 @@ public class FreeAPIAccess implements ExchangeRateProvider,
     // TODO: Write tests for this
     @Override
     public double getRate(Currency source, Currency target) {
-        this.makeAPICall();
         return 1.0;
     }
     
