@@ -125,6 +125,21 @@ public class FreeAPIAccessNGTest {
         }
     }
     
+    @Test
+    public void testNoAPICallGetRateWhenSourceSameAsTarget() {
+        AccessWithAPICallCounter instance = new AccessWithAPICallCounter();
+        String msgPart = " should not have needed an API call";
+        int expected = 0;
+        for (Currency currency : SUPPORTED_CURRENCIES) {
+            CurrencyPair currencies = new CurrencyPair(currency, currency);
+            double rate = instance.getRate(currencies);
+            int actual = instance.callCountSoFar;
+            String message = "Getting rate " + rate + " for " 
+                    + currencies.toString() + msgPart;
+            assertEquals(actual, expected, message);
+        }
+    }
+    
     /**
      * Test of getRate method, of class FreeAPIAccess.
      */
