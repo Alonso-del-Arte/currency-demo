@@ -61,7 +61,7 @@ public class FreeAPIAccess implements ExchangeRateProvider,
         "SAR", "SBD", "SCR", "SDG", "SEK", "SGD", "SHP", "SLE", "SOS", "SRD", 
         "SSP", "STN", "SYP", "SZL", "THB", "TJS", "TMT", "TND", "TOP", "TRY", 
         "TTD", "TWD", "TZS", "UAH", "UGX", "USD", "UYU", "UZS", "VES", "VND", 
-        "VUV", "WST", "XAF", "XCD", "XOF", "XPF", "YER", "ZAR", "ZMW"};
+        "VUV", "WST", "XAF", "XCD", "XOF", "XPF", "YER", "ZAR"};
     
     private static final Set<Currency> SUPPORTED_CURRENCIES 
             = Set.of(CURRENCY_CODES).stream().map(
