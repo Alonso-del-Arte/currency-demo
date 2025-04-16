@@ -54,6 +54,12 @@ import org.testng.annotations.Test;
  * <p>There's also an open API which doesn't use an API key but is very tightly 
  * rate-limited. I don't remember the path from the URL above to the page 
  * describing how to access the open API.</p>
+ * <p>Assuming you have a valid API key, a working Internet connection and the 
+ * API is working as expected, it can still happen that the API might have a few 
+ * currencies which your system's Java currency file does not recognize. This 
+ * test class's {@link #setUpClass()} procedure will list unrecognized 
+ * currencies. For example, on my system, Faroese kr&oacute;na (FOK) are not 
+ * recognized.</p>
  * @author Alonso del Arte
  */
 public class FreeAPIAccessNGTest {
@@ -101,6 +107,13 @@ public class FreeAPIAccessNGTest {
         return builder.toString();
     }
     
+    /**
+     * Populates the list of expected supported currencies. If any currencies 
+     * are not recognized, they'll be printed to {@code System.err} but 
+     * hopefully the tests will still run.
+     * @throws IOException If there is any sort of problem connecting to the 
+     * API. No tests will run if this exception arises.
+     */
     @BeforeClass
     public void setUpClass() throws IOException {
         String endPoint = "/codes";
@@ -112,8 +125,6 @@ public class FreeAPIAccessNGTest {
             try {
                 Currency currency = Currency.getInstance(currencyCode);
                 SUPPORTED_CURRENCIES.add(currency);
-                System.out.println("Added " + currency.getDisplayName() + " (" 
-                        + currency.getCurrencyCode() + ")");
             } catch (IllegalArgumentException iae) {
                 int beginIndex = input.indexOf(currencyCode) + 6;
                 int endIndex = input.indexOf('\"', beginIndex + 1);
