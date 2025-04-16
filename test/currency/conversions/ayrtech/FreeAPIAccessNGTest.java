@@ -27,18 +27,22 @@ import java.net.HttpURLConnection;
 import java.net.URI;
 import java.net.URISyntaxException;
 import java.net.URL;
+import java.net.URLConnection;
 import java.util.Currency;
 import java.util.HashSet;
 import java.util.Locale;
 import java.util.Set;
-import java.util.stream.Collectors;
 import java.util.Scanner;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
+import java.util.stream.Collectors;
 
 import static org.testframe.api.Asserters.assertContainsSame;
 import static org.testframe.api.Asserters.assertInRange;
 import static org.testframe.api.Asserters.assertDoesNotThrow;
 
 import static org.testng.Assert.*;
+import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
 
 /**
@@ -54,28 +58,72 @@ import org.testng.annotations.Test;
  */
 public class FreeAPIAccessNGTest {
     
-    private static final String[] CURRENCY_CODES = {"AED", "AFN", "ALL", "AMD", 
-        "ANG", "AOA", "ARS", "AUD", "AWG", "AZN", "BAM", "BBD", "BDT", "BGN", 
-        "BHD", "BIF", "BMD", "BND", "BOB", "BRL", "BSD", "BTN", "BWP", "BYN", 
-        "BZD", "CAD", "CDF", "CHF", "CLP", "CNY", "COP", "CRC", "CUP", "CVE", 
-        "CZK", "DJF", "DKK", "DOP", "DZD", "EGP", "ERN", "ETB", "EUR", "FJD", 
-        "FKP", "GBP", "GEL", "GHS", "GIP", "GMD", "GNF", "GTQ", "GYD", "HKD", 
-        "HNL", "HRK", "HTG", "HUF", "IDR", "ILS", "INR", "IQD", "IRR", "ISK", 
-        "JMD", "JOD", "JPY", "KES", "KGS", "KHR", "KMF", "KRW", "KWD", "KYD", 
-        "KZT", "LAK", "LBP", "LKR", "LRD", "LSL", "LYD", "MAD", "MDL", "MGA", 
-        "MKD", "MMK", "MNT", "MOP", "MRU", "MUR", "MVR", "MWK", "MXN", "MYR", 
-        "MZN", "NAD", "NGN", "NIO", "NOK", "NPR", "NZD", "OMR", "PAB", "PEN", 
-        "PGK", "PHP", "PKR", "PLN", "PYG", "QAR", "RON", "RSD", "RUB", "RWF", 
-        "SAR", "SBD", "SCR", "SDG", "SEK", "SGD", "SHP", "SLE", "SOS", "SRD", 
-        "SSP", "STN", "SYP", "SZL", "THB", "TJS", "TMT", "TND", "TOP", "TRY", 
-        "TTD", "TWD", "TZS", "UAH", "UGX", "USD", "UYU", "UZS", "VES", "VND", 
-        "VUV", "WST", "XAF", "XCD", "XOF", "XPF", "YER", "ZAR", "ZMW"};
+    private static final String API_KEY = System.getenv("FOREX_API_KEY");
     
-    private static final Set<Currency> SUPPORTED_CURRENCIES 
-            = Set.of(CURRENCY_CODES).stream().map(
-                    currencyCode -> Currency.getInstance(currencyCode)
-            ).collect(Collectors.toSet());
+    private static final String QUERY_PATH_BEGIN 
+            = "https://v6.exchangerate-api.com/v6/" + API_KEY;
 
+    private static final Set<Currency> SUPPORTED_CURRENCIES = new HashSet<>();
+
+    private static final String USER_AGENT_ID = "Java/"
+            + System.getProperty("java.version");
+    
+    private static String minify(String endPoint) throws IOException {
+        String queryPath = QUERY_PATH_BEGIN + endPoint;
+        StringBuilder builder = new StringBuilder();
+        try {
+            URI uri = new URI(queryPath);
+            URL queryURL = uri.toURL();
+            HttpURLConnection connection 
+                    = (HttpURLConnection) queryURL.openConnection();
+            connection.setRequestProperty("User-Agent", USER_AGENT_ID);
+            int responseCode = connection.getResponseCode();
+            if (responseCode == HttpURLConnection.HTTP_OK) {
+                InputStream stream = (InputStream) connection.getContent();
+                Scanner scanner = new Scanner(stream);
+                while (scanner.hasNext()) {
+                    String line = scanner.nextLine().replace("\n", "")
+                            .replace("\r", "");
+                    builder.append(line);
+                }
+            } else {
+                String excMsg = "Query " + queryPath + " returned status " 
+                        + responseCode;
+                throw new RuntimeException(excMsg);
+            }
+        } catch (IOException ioe) {
+            String excMsg = "Unexpected I/O problem encountered";
+            throw new RuntimeException(excMsg, ioe);
+        } catch (URISyntaxException urise) {
+            String excMsg = "Query path <" + queryPath + "> is not valid";
+            throw new RuntimeException(excMsg, urise);
+        }
+        return builder.toString();
+    }
+    
+    @BeforeClass
+    public void setUpClass() throws IOException {
+        String endPoint = "/codes";
+        String input = minify(endPoint);
+        Pattern iso4217CodePattern = Pattern.compile("\"[A-Z]{3}\"");
+        Matcher matcher = iso4217CodePattern.matcher(input);
+        while (matcher.find()) {
+            String currencyCode = matcher.group().substring(1, 4);
+            try {
+                Currency currency = Currency.getInstance(currencyCode);
+                SUPPORTED_CURRENCIES.add(currency);
+                System.out.println("Added " + currency.getDisplayName() + " (" 
+                        + currency.getCurrencyCode() + ")");
+            } catch (IllegalArgumentException iae) {
+                int beginIndex = input.indexOf(currencyCode) + 6;
+                int endIndex = input.indexOf('\"', beginIndex + 1);
+                String displayName = input.substring(beginIndex, endIndex);
+                System.err.println("Did not recognize " + currencyCode 
+                        + ", said to be " + displayName);
+            }
+        }
+    }
+    
     /**
      * Test of the supportedCurrencies function, of the FreeAPIAccess class. 
      * This test does not explicitly make an API call directly, and the called 
