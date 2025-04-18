@@ -26,7 +26,10 @@ comes with a lot of information for internationalization, such as what a
 currency is called in several different locales.
 
 But an instance of `Currency` still needs an instance of another type to 
-represent a specific amount of that currency, such as, for example, 20&euro;.
+represent a specific amount of that currency, such as, for example, 20&euro;. 
+For general purpose uses, which could involve interest rate calculations, the 
+numeric part of the money amount class would probably be `BigDecimal`. But in 
+this demonstration, I'm using `long`.
 
 ## Dependencies
 
