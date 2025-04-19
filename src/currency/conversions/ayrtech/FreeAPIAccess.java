@@ -33,6 +33,10 @@ import java.util.HashSet;
 import java.util.Set;
 import java.util.stream.Collectors;
 import java.util.Scanner;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 /**
  * WORK IN PROGRESS... The free API is free to use but it does require an API 
@@ -45,6 +49,14 @@ import java.util.Scanner;
  */
 public class FreeAPIAccess implements ExchangeRateProvider, 
         SpecificCurrenciesSupport {
+    
+    private static final String API_KEY = System.getenv("FOREX_API_KEY");
+    
+    private static final String QUERY_PATH_BEGIN 
+            = "https://v6.exchangerate-api.com/v6/" + API_KEY;
+
+    private static final String USER_AGENT_ID = "Java/"
+            + System.getProperty("java.version");
     
     private static final String[] CURRENCY_CODES = {"AED", "AFN", "ALL", "AMD", 
         "ANG", "AOA", "ARS", "AUD", "AWG", "AZN", "BAM", "BBD", "BDT", "BGN", 
@@ -63,11 +75,67 @@ public class FreeAPIAccess implements ExchangeRateProvider,
         "TTD", "TWD", "TZS", "UAH", "UGX", "USD", "UYU", "UZS", "VES", "VND", 
         "VUV", "WST", "XAF", "XCD", "XOF", "XPF", "YER", "ZAR"};
     
-    private static final Set<Currency> SUPPORTED_CURRENCIES 
-            = Set.of(CURRENCY_CODES).stream().map(
-                    currencyCode -> Currency.getInstance(currencyCode)
-            ).collect(Collectors.toSet());
+    private static final Set<Currency> SUPPORTED_CURRENCIES = new HashSet<>();
 
+    // TODO: Refactor this function to a public function in a different class
+    private static String minify(String endPoint) throws IOException {
+        String queryPath = QUERY_PATH_BEGIN + endPoint;
+        StringBuilder builder = new StringBuilder();
+        try {
+            URI uri = new URI(queryPath);
+            URL queryURL = uri.toURL();
+            HttpURLConnection connection 
+                    = (HttpURLConnection) queryURL.openConnection();
+            connection.setRequestProperty("User-Agent", USER_AGENT_ID);
+            int responseCode = connection.getResponseCode();
+            if (responseCode == HttpURLConnection.HTTP_OK) {
+                InputStream stream = (InputStream) connection.getContent();
+                Scanner scanner = new Scanner(stream);
+                while (scanner.hasNext()) {
+                    String line = scanner.nextLine().replace("\n", "")
+                            .replace("\r", "");
+                    builder.append(line);
+                }
+            } else {
+                String excMsg = "Query " + queryPath + " returned status " 
+                        + responseCode;
+                throw new RuntimeException(excMsg);
+            }
+        } catch (IOException ioe) {
+            String excMsg = "Unexpected I/O problem encountered";
+            throw new RuntimeException(excMsg, ioe);
+        } catch (URISyntaxException urise) {
+            String excMsg = "Query path <" + queryPath + "> is not valid";
+            throw new RuntimeException(excMsg, urise);
+        }
+        return builder.toString();
+    }
+    
+    static {
+        String endPoint = "/codes";
+        try {
+            String input = minify(endPoint);
+            Pattern iso4217CodePattern = Pattern.compile("\"[A-Z]{3}\"");
+            Matcher matcher = iso4217CodePattern.matcher(input);
+            while (matcher.find()) {
+                String currencyCode = matcher.group().substring(1, 4);
+                try {
+                    Currency currency = Currency.getInstance(currencyCode);
+                    SUPPORTED_CURRENCIES.add(currency);
+                } catch (IllegalArgumentException iae) {
+                    int beginIndex = input.indexOf(currencyCode) + 6;
+                    int endIndex = input.indexOf('\"', beginIndex + 1);
+                    String displayName = input.substring(beginIndex, endIndex);
+                    System.out.println("Did not recognize " + currencyCode
+                            + ", said to be " + displayName);
+                }
+            }
+        } catch (IOException ioe) {
+            System.err.println("Encountered problem accessing " + endPoint);
+            System.err.println("\"" + ioe.getMessage() + "\"");
+        }
+    }
+    
     /**
      * The currencies that are supported by ExchangeRate-API, minus currencies 
      * not recognized by the Java Runtime Environment's currency information 
