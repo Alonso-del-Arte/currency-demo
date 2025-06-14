@@ -286,7 +286,7 @@ public class CurrencyChooser {
      */
     public static Currency chooseCurrency() {
         int index = RANDOM.nextInt(CURRENCIES.size());
-        return CURRENCIES.get(index);
+        return CURRENCIES.get(0);
     }
 
     /**
