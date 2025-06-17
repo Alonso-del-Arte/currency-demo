@@ -207,13 +207,13 @@ public class CurrencyChooserNGTest {
             samples.add(sample);
             sampleNumber++;
         }
-        int expected = 11 * numberOfTries / 20;
+        int minimum = 11 * numberOfTries / 20;
         int actual = samples.size();
         String msg = "Trying to pick " + numberOfTries + " other than " 
                 + dollarsDisplayName + " gave " + actual 
-                + " distinct, should've given at least " + expected 
+                + " distinct, should've given at least " + minimum 
                 + " distinct";
-        assert expected <= actual : msg;
+        assertMinimum(minimum, actual, msg);
     }
     
     @Test
@@ -234,13 +234,13 @@ public class CurrencyChooserNGTest {
             samples.add(sample);
             sampleNumber++;
         }
-        int expected = 11 * numberOfTries / 20;
+        int minimum = 11 * numberOfTries / 20;
         int actual = samples.size();
         String msg = "Trying to pick " + numberOfTries + " other than " 
                 + currencyDisplayName + " gave " + actual 
-                + " distinct, should've given more than " + expected 
+                + " distinct, should've given more than " + minimum 
                 + " distinct";
-        assert expected < actual : msg;
+        assertMinimum(minimum, actual, msg);
     }
     
     @Test
