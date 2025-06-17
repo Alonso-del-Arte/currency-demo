@@ -389,9 +389,9 @@ public class CurrencyChooser {
      */
     public static Currency chooseCurrencyOtherThan(Currency currency) {
         Currency otherCurrency = currency;
-        while (otherCurrency == currency) {
-            otherCurrency = chooseCurrency();
-        }
+//        while (otherCurrency == currency) {
+//            otherCurrency = chooseCurrency();
+//        }
         return otherCurrency;
     }
     
