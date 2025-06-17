@@ -184,13 +184,13 @@ public class CurrencyChooserNGTest {
             samples.add(sample);
             sampleNumber++;
         }
-        int expected = 11 * totalNumberOfCurrencies / 20;
+        int minimum = 11 * totalNumberOfCurrencies / 20;
         int actual = samples.size();
         String msg = "Trying to pick " + numberOfTries + " times from set of " 
                 + totalNumberOfCurrencies + " gave " + actual 
-                + " distinct, should've given more than " + expected 
+                + " distinct, should've given more than " + minimum 
                 + " distinct";
-        assert expected <= actual : msg;
+        assertMinimum(minimum, actual, msg);
     }
 
     @Test
