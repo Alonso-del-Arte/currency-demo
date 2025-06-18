@@ -17,9 +17,13 @@ a project that uses a different third-party library
 
 The JSR-354 proposal was approved for consideration to add to Java 9. However, 
 it wasn't actually added to Java 9, and as of Java 21 it is still not an 
-official part of the Java Development Kit (JDK). There would have been a 
-`java.money` package added to the JDK, which would have been roughly analogoous 
-to the `java.time` package that was added in Java 8.
+official part of the Java Development Kit (JDK). The next long-term support 
+(LTS) release is Java 25, due out September 2025, and it's not expected to 
+incorporate JSR-354 either.
+
+If JSR-354 had been added in Java 9, there would have been a `java.money` 
+package added to the JDK, which would have been roughly analogoous to the 
+`java.time` package that was added in Java 8.
 
 However, Java does provide the `Currency` type in the `java.util` package, which 
 spares us the effort of having to define a type to represent the currencies. An 
