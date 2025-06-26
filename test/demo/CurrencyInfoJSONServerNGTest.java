@@ -42,19 +42,17 @@ import org.testng.annotations.Test;
  */
 public class CurrencyInfoJSONServerNGTest {
     
-    public CurrencyInfoJSONServerNGTest() {
-    }
-
     /**
-     * Test of getCurrencyInfo method, of class CurrencyInfoJSONServer.
+     * Test of the getCurrencyInfo function, of the CurrencyInfoJSONServer 
+     * class.
      */
     @Test
     public void testGetCurrencyInfo() {
         System.out.println("getCurrencyInfo");
-        String currencyCode = "";
-        String expResult = "";
-        String result = CurrencyInfoJSONServer.getCurrencyInfo(currencyCode);
-        assertEquals(result, expResult);
+        String currencyCode = "XTS";
+        String expected = "{\"name\": \"Currency for testing\"}";
+        String actual = CurrencyInfoJSONServer.getCurrencyInfo(currencyCode);
+        assertEquals(actual, expected);
         // TODO review the generated test code and remove the default call to fail.
         fail("The test case is a prototype.");
     }
