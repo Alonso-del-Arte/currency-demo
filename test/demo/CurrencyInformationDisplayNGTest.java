@@ -740,8 +740,8 @@ public class CurrencyInformationDisplayNGTest implements ItemListener {
         Component[] components = rootPane.getComponents();
         for (Component component : components) {
             System.out.println(component.toString());
-            if (component instanceof JPanel) {
-                panel = (JPanel) component;
+            if (component instanceof JPanel jPanel) {
+                panel = jPanel;
                 jPanelFound = true;
             }
         }
