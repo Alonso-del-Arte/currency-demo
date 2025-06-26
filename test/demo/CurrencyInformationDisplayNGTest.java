@@ -163,26 +163,13 @@ public class CurrencyInformationDisplayNGTest implements ItemListener {
     }
     
     private static String defaultCloseOperationText(int operation) {
-        switch (operation) {
-            case WindowConstants.DO_NOTHING_ON_CLOSE:
-                return "DO_NOTHING_ON_CLOSE";
-            case WindowConstants.HIDE_ON_CLOSE:
-                return "HIDE_ON_CLOSE";
-            case WindowConstants.DISPOSE_ON_CLOSE:
-                return "DISPOSE_ON_CLOSE";
-            case WindowConstants.EXIT_ON_CLOSE:
-                return "EXIT_ON_CLOSE";
-            default:
-                return "Unrecognized operation";
-        }
-        // TODO: Figure out how set -source 21 for this project
-//        return switch (operation) {
-//            case WindowConstants.DO_NOTHING_ON_CLOSE -> "DO_NOTHING_ON_CLOSE";
-//            case WindowConstants.HIDE_ON_CLOSE -> "HIDE_ON_CLOSE";
-//            case WindowConstants.DISPOSE_ON_CLOSE -> "DISPOSE_ON_CLOSE";
-//            case WindowConstants.EXIT_ON_CLOSE -> "EXIT_ON_CLOSE";
-//            default -> "Unrecognized operation";
-//        };
+        return switch (operation) {
+            case WindowConstants.DO_NOTHING_ON_CLOSE -> "DO_NOTHING_ON_CLOSE";
+            case WindowConstants.HIDE_ON_CLOSE -> "HIDE_ON_CLOSE";
+            case WindowConstants.DISPOSE_ON_CLOSE -> "DISPOSE_ON_CLOSE";
+            case WindowConstants.EXIT_ON_CLOSE -> "EXIT_ON_CLOSE";
+            default -> "Unrecognized operation";
+        };
     }
     
     @Test
