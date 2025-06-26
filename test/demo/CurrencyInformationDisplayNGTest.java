@@ -49,18 +49,13 @@ public class CurrencyInformationDisplayNGTest implements ItemListener {
     private static final String EXPECTED_PARTIAL_TITLE 
             = "Currency Information for ";
     
-    // TODO: Change source above source 13, use switch expression
     private static String itemStateLabel(int stateCode) {
-        switch (stateCode) {
-            case ItemEvent.DESELECTED:
-                return "deselected";
-            case ItemEvent.ITEM_FIRST:
-                return "item first";
-            case ItemEvent.SELECTED:
-                return "selected";
-            default:
-                return "not recognized";
-        }
+        return switch (stateCode) {
+            case ItemEvent.DESELECTED -> "deselected";
+            case ItemEvent.ITEM_FIRST -> "item first";
+            case ItemEvent.SELECTED -> "selected";
+            default -> "not recognized";
+        };
     }
     
     @Override
