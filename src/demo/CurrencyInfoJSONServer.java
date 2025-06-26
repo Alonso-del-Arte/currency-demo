@@ -42,7 +42,7 @@ public class CurrencyInfoJSONServer {
     }
     
     public CurrencyInfoJSONServer(int port) {
-        if (port < 0) {
+        if (port < 0 || port > 4 * Short.MAX_VALUE) {
             String excMsg = "Port " + port + " is not valid";
             throw new IllegalArgumentException(excMsg);
         }
