@@ -32,15 +32,21 @@ import java.net.URLDecoder;
 import java.nio.charset.Charset;
 import java.nio.charset.StandardCharsets;
 import java.util.Currency;
+import java.util.Random;
 
 import static org.testng.Assert.*;
 import org.testng.annotations.Test;
+
+import static org.testframe.api.Asserters.assertThrows;
 
 /**
  * Tests of the CurrencyInfoJSONServer class.
  * @author Alonso del Arte
  */
 public class CurrencyInfoJSONServerNGTest {
+    
+    private static final Random RANDOM 
+            = new Random(System.currentTimeMillis() >> 4);
     
     /**
      * Test of the getCurrencyInfo function, of the CurrencyInfoJSONServer 
@@ -55,6 +61,24 @@ public class CurrencyInfoJSONServerNGTest {
         assertEquals(actual, expected);
         // TODO review the generated test code and remove the default call to fail.
         fail("The test case is a prototype.");
+    }
+    
+    @Test
+    public void testConstructorRejectsNegativePort() {
+        int badPort = -RANDOM.nextInt(Short.MAX_VALUE) - 1;
+        String msg = "Constructor should reject port " + badPort;
+        Throwable t = assertThrows(() -> {
+            Object badInstance = new CurrencyInfoJSONServer(badPort);
+            System.out.println(msg + ", not created instance " 
+                    + badInstance.toString());
+        }, IllegalArgumentException.class, msg);
+        String excMsg = t.getMessage();
+        assert excMsg != null : "Exception message should not be null";
+        assert !excMsg.isBlank() : "Exception message should not be blank";
+        String numStr = Integer.toString(badPort);
+        String containsMsg = "Exception message should contain \"" + numStr 
+                + "\"";
+        assert excMsg.contains(numStr) : containsMsg;
     }
     
 }
