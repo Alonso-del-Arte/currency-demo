@@ -37,6 +37,9 @@ import java.util.Currency;
  */
 public class CurrencyInfoJSONServer {
     
+    // TODO: Write a test for this
+    static final int DEFAULT_HTTP_PORT = 8079;
+    
     public static String getCurrencyInfo(String currencyCode) {
         return "SORRY, NOT IMPLEMENTED YET";
     }
