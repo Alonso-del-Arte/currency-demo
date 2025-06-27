@@ -30,6 +30,7 @@ import java.net.URLDecoder;
 import java.nio.charset.Charset;
 import java.nio.charset.StandardCharsets;
 import java.util.Currency;
+import java.util.Locale;
 
 /**
  *
@@ -53,6 +54,16 @@ public class CurrencyInfoJSONServer {
             String excMsg = "Port " + port + " is not valid";
             throw new IllegalArgumentException(excMsg);
         }
+    }
+    
+    // TODO: Write tests for this
+    public CurrencyInfoJSONServer(Locale locale) {
+        this(DEFAULT_HTTP_PORT + 1);
+    }
+    
+    // TODO: Write tests for this
+    public CurrencyInfoJSONServer(int port, Locale locale) {
+        this(DEFAULT_HTTP_PORT + 2);
     }
     
     public static void main(String[] args) {
