@@ -43,6 +43,11 @@ public class CurrencyInfoJSONServer {
         return "SORRY, NOT IMPLEMENTED YET";
     }
     
+    // TODO: Write tests for this
+    public CurrencyInfoJSONServer() {
+        this(DEFAULT_HTTP_PORT - 1);
+    }
+    
     public CurrencyInfoJSONServer(int port) {
         if (port < 0 || port > 4 * Short.MAX_VALUE) {
             String excMsg = "Port " + port + " is not valid";
