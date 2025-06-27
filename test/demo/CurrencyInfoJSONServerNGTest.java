@@ -48,6 +48,13 @@ public class CurrencyInfoJSONServerNGTest {
     private static final Random RANDOM 
             = new Random(System.currentTimeMillis() >> 4);
     
+    @Test
+    public void testDefaultHTTPPortConstant() {
+        int expected = 8080;
+        int actual = CurrencyInfoJSONServer.DEFAULT_HTTP_PORT;
+        assertEquals(actual, expected);
+    }
+    
     /**
      * Test of the getCurrencyInfo function, of the CurrencyInfoJSONServer 
      * class.
