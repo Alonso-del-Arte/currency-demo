@@ -40,13 +40,18 @@ public class CurrencyInfoJSONServer {
     
     static final int DEFAULT_HTTP_PORT = 8080;
     
+    private final int portNum;
+    
     public static String getCurrencyInfo(String currencyCode) {
         return "SORRY, NOT IMPLEMENTED YET";
     }
     
-    // TODO: Write tests for this
+    /**
+     * Gives the port number that was assigned at the time of construction.
+     * @return The port number. For example, 8080.
+     */
     public int getPort() {
-        return -1;
+        return this.portNum;
     }
 
     // TODO: Write tests for this
@@ -64,6 +69,7 @@ public class CurrencyInfoJSONServer {
             String excMsg = "Port " + port + " is not valid";
             throw new IllegalArgumentException(excMsg);
         }
+        this.portNum = port;
     }
     
     // TODO: Write tests for this
@@ -73,7 +79,7 @@ public class CurrencyInfoJSONServer {
     
     // TODO: Write tests for this
     public CurrencyInfoJSONServer(int port, Locale locale) {
-        this(DEFAULT_HTTP_PORT + 2);
+        this.portNum = port;
     }
     
     public static void main(String[] args) {
