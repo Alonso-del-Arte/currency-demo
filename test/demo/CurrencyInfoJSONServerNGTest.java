@@ -32,6 +32,7 @@ import java.net.URLDecoder;
 import java.nio.charset.Charset;
 import java.nio.charset.StandardCharsets;
 import java.util.Currency;
+import java.util.Locale;
 import java.util.Random;
 
 import static org.testng.Assert.*;
@@ -52,6 +53,15 @@ public class CurrencyInfoJSONServerNGTest {
     public void testDefaultHTTPPortConstant() {
         int expected = 8080;
         int actual = CurrencyInfoJSONServer.DEFAULT_HTTP_PORT;
+        assertEquals(actual, expected);
+    }
+    
+    @Test
+    public void testGetPort() {
+        int expected = RANDOM.nextInt(8000, 8100);
+        CurrencyInfoJSONServer instance = new CurrencyInfoJSONServer(expected, 
+                Locale.getDefault());
+        int actual = instance.getPort();
         assertEquals(actual, expected);
     }
     
