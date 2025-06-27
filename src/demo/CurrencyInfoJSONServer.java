@@ -45,6 +45,16 @@ public class CurrencyInfoJSONServer {
     }
     
     // TODO: Write tests for this
+    public int getPort() {
+        return -1;
+    }
+
+    // TODO: Write tests for this
+    public Locale getLocale() {
+        return Locale.forLanguageTag("en-MX");
+    }
+
+    // TODO: Write tests for this
     public CurrencyInfoJSONServer() {
         this(DEFAULT_HTTP_PORT - 1);
     }
