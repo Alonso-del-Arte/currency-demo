@@ -49,6 +49,8 @@ public class CurrencyInfoJSONServerNGTest {
     private static final Random RANDOM 
             = new Random(System.currentTimeMillis() >> 4);
     
+    private static final Locale DEFAULT_LOCALE = Locale.getDefault();
+    
     @Test
     public void testDefaultHTTPPortConstant() {
         int expected = 8080;
@@ -60,7 +62,7 @@ public class CurrencyInfoJSONServerNGTest {
     public void testGetPort() {
         int expected = RANDOM.nextInt(8000, 8100);
         CurrencyInfoJSONServer instance = new CurrencyInfoJSONServer(expected, 
-                Locale.getDefault());
+                DEFAULT_LOCALE);
         int actual = instance.getPort();
         assertEquals(actual, expected);
     }
