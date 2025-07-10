@@ -61,7 +61,7 @@ public class CurrencyInfoJSONServer {
 
     // TODO: Write tests for this
     public CurrencyInfoJSONServer() {
-        this(DEFAULT_HTTP_PORT - 1);
+        this(DEFAULT_HTTP_PORT);
     }
     
     public CurrencyInfoJSONServer(int port) {
