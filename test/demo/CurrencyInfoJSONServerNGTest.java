@@ -51,6 +51,8 @@ public class CurrencyInfoJSONServerNGTest {
     
     private static final Locale DEFAULT_LOCALE = Locale.getDefault();
     
+    private static final Locale[] LOCALES = Locale.getAvailableLocales();
+    
     @Test
     public void testDefaultHTTPPortConstant() {
         int expected = 8080;
@@ -65,6 +67,17 @@ public class CurrencyInfoJSONServerNGTest {
                 DEFAULT_LOCALE);
         int actual = instance.getPort();
         assertEquals(actual, expected);
+    }
+    
+    @Test
+    public void testGetLocale() {
+        System.out.println("getLocale");
+        for (Locale expected : LOCALES) {
+            CurrencyInfoJSONServer instance 
+                    = new CurrencyInfoJSONServer(expected);
+            Locale actual = instance.getLocale();
+            assertEquals(actual, expected);
+        }
     }
     
     /**
