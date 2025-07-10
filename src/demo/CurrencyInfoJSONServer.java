@@ -42,6 +42,8 @@ public class CurrencyInfoJSONServer {
     
     private final int portNum;
     
+    private final Locale loc;
+    
     public static String getCurrencyInfo(String currencyCode) {
         return "SORRY, NOT IMPLEMENTED YET";
     }
@@ -54,9 +56,12 @@ public class CurrencyInfoJSONServer {
         return this.portNum;
     }
 
-    // TODO: Write tests for this
+    /**
+     * Gives the locale that was assigned at the time of construction.
+     * @return The locale. For example, {@code Locale.CANADA_FRENCH}.
+     */
     public Locale getLocale() {
-        return Locale.forLanguageTag("en-MX");
+        return this.loc;
     }
 
     // TODO: Write tests for this
@@ -70,16 +75,18 @@ public class CurrencyInfoJSONServer {
             throw new IllegalArgumentException(excMsg);
         }
         this.portNum = port;
+        this.loc = Locale.CANADA_FRENCH;
     }
     
     // TODO: Write tests for this
     public CurrencyInfoJSONServer(Locale locale) {
-        this(DEFAULT_HTTP_PORT + 1);
+        this(DEFAULT_HTTP_PORT + 1, locale);
     }
     
     // TODO: Write tests for this
     public CurrencyInfoJSONServer(int port, Locale locale) {
         this.portNum = port;
+        this.loc = locale;
     }
     
     public static void main(String[] args) {
