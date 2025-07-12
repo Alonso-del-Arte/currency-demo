@@ -78,6 +78,12 @@ public class CurrencyInfoJSONServer {
         this(DEFAULT_HTTP_PORT, Locale.getDefault());
     }
     
+    /**
+     * Auxiliary constructor. Sets the locale to the default locale.
+     * @param port The port number to use. For example, 8090.
+     * @throws IllegalArgumentException If {@code port} is negative or 
+     * excessive.
+     */
     public CurrencyInfoJSONServer(int port) {
         if (port < 0 || port > MAX_PORT_NUMBER) {
             String excMsg = "Port " + port + " is not valid";
@@ -87,6 +93,10 @@ public class CurrencyInfoJSONServer {
         this.loc = Locale.getDefault();
     }
     
+    /**
+     * Auxiliary constructor. Sets the port to {@link #DEFAULT_HTTP_PORT}.
+     * @param locale The locale. For example, {@code Locale.CANADA_FRENCH}.
+     */
     public CurrencyInfoJSONServer(Locale locale) {
         this(DEFAULT_HTTP_PORT, locale);
     }
