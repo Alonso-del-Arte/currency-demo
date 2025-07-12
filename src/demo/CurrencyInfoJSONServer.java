@@ -83,7 +83,7 @@ public class CurrencyInfoJSONServer {
             String excMsg = "Port " + port + " is not valid";
             throw new IllegalArgumentException(excMsg);
         }
-        this.portNum = port;
+        this.portNum = port - 1;
         this.loc = Locale.ROOT;
     }
     
