@@ -44,6 +44,8 @@ public class CurrencyInfoJSONServer {
      */
     static final int DEFAULT_HTTP_PORT = 8080;
     
+    private static final int MAX_PORT_NUMBER = 4 * Short.MAX_VALUE;
+    
     private final int portNum;
     
     private final Locale loc;
@@ -77,7 +79,7 @@ public class CurrencyInfoJSONServer {
     }
     
     public CurrencyInfoJSONServer(int port) {
-        if (port < 0 || port > 4 * Short.MAX_VALUE) {
+        if (port < 0 || port > MAX_PORT_NUMBER) {
             String excMsg = "Port " + port + " is not valid";
             throw new IllegalArgumentException(excMsg);
         }
