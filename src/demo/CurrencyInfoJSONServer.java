@@ -66,7 +66,7 @@ public class CurrencyInfoJSONServer {
 
     // TODO: Write tests for this
     public CurrencyInfoJSONServer() {
-        this(DEFAULT_HTTP_PORT);
+        this(DEFAULT_HTTP_PORT, Locale.ROOT);
     }
     
     public CurrencyInfoJSONServer(int port) {
@@ -75,7 +75,7 @@ public class CurrencyInfoJSONServer {
             throw new IllegalArgumentException(excMsg);
         }
         this.portNum = port;
-        this.loc = Locale.CANADA_FRENCH;
+        this.loc = Locale.ROOT;
     }
     
     // TODO: Write tests for this
