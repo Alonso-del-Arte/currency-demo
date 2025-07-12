@@ -89,7 +89,7 @@ public class CurrencyInfoJSONServer {
     
     // TODO: Write tests for this
     public CurrencyInfoJSONServer(Locale locale) {
-        this(DEFAULT_HTTP_PORT + 1, locale);
+        this(DEFAULT_HTTP_PORT + 1, Locale.ROOT);
     }
     
     // TODO: Write tests for this
