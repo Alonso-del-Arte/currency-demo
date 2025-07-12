@@ -131,6 +131,17 @@ public class CurrencyInfoJSONServerNGTest {
     }
     
     @Test
+    public void testLocaleParamConstructorSetsDefaultPort() {
+        int expected = CurrencyInfoJSONServer.DEFAULT_HTTP_PORT;
+        for (Locale locale : LOCALES) {
+            CurrencyInfoJSONServer instance 
+                    = new CurrencyInfoJSONServer(locale);
+            int actual = instance.getPort();
+            assertEquals(actual, expected);
+        }
+    }
+    
+    @Test
     public void testConstructorRejectsNegativePort() {
         int badPort = -RANDOM.nextInt(Short.MAX_VALUE) - 1;
         String msg = "Constructor should reject port " + badPort;
