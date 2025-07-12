@@ -64,9 +64,12 @@ public class CurrencyInfoJSONServer {
         return this.loc;
     }
 
-    // TODO: Write tests for this
+    /**
+     * Auxiliary constructor. Sets port to {@link #DEFAULT_HTTP_PORT} and locale 
+     * to {@code Locale.getDefault()}.
+     */
     public CurrencyInfoJSONServer() {
-        this(DEFAULT_HTTP_PORT, Locale.ROOT);
+        this(DEFAULT_HTTP_PORT, Locale.getDefault());
     }
     
     public CurrencyInfoJSONServer(int port) {
