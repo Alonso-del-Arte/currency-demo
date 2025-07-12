@@ -38,6 +38,10 @@ import java.util.Locale;
  */
 public class CurrencyInfoJSONServer {
     
+    /**
+     * The default HTTP port. This constant is used by the constructors that 
+     * don't take a port number.
+     */
     static final int DEFAULT_HTTP_PORT = 8080;
     
     private final int portNum;
