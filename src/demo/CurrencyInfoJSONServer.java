@@ -84,7 +84,7 @@ public class CurrencyInfoJSONServer {
             throw new IllegalArgumentException(excMsg);
         }
         this.portNum = port;
-        this.loc = Locale.ROOT;
+        this.loc = Locale.getDefault();
     }
     
     // TODO: Write tests for this
