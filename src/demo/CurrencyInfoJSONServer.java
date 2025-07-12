@@ -87,9 +87,8 @@ public class CurrencyInfoJSONServer {
         this.loc = Locale.getDefault();
     }
     
-    // TODO: Write tests for this
     public CurrencyInfoJSONServer(Locale locale) {
-        this(DEFAULT_HTTP_PORT, Locale.ROOT);
+        this(DEFAULT_HTTP_PORT, locale);
     }
     
     // TODO: Write tests for this
