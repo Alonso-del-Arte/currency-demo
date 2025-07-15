@@ -108,7 +108,7 @@ public class CurrencyInfoJSONServer {
      * @throws IllegalArgumentException If {@code port} is negative.
      */
     public CurrencyInfoJSONServer(int port, Locale locale) {
-        if (port < 0) {
+        if (port < 0 || port > MAX_PORT_NUMBER) {
             String excMsg = "Port number " + port + " is not valid";
             throw new IllegalArgumentException(excMsg);
         }
