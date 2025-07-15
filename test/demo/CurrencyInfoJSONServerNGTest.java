@@ -195,6 +195,25 @@ public class CurrencyInfoJSONServerNGTest {
     }
     
     @Test
+    public void testTwoParamConstructorRejectsNegativePort() {
+        int badPort = -RANDOM.nextInt(Short.MAX_VALUE) - 1;
+        Locale locale = LOCALES[RANDOM.nextInt(NUMBER_OF_LOCALES)];
+        String msg = "Constructor should reject port " + badPort;
+        Throwable t = assertThrows(() -> {
+            Object badInstance = new CurrencyInfoJSONServer(badPort, locale);
+            System.out.println(msg + ", not created instance " 
+                    + badInstance.toString());
+        }, IllegalArgumentException.class, msg);
+        String excMsg = t.getMessage();
+        assert excMsg != null : "Exception message should not be null";
+        assert !excMsg.isBlank() : "Exception message should not be blank";
+        String numStr = Integer.toString(badPort);
+        String containsMsg = "Exception message should contain \"" + numStr 
+                + "\"";
+        assert excMsg.contains(numStr) : containsMsg;
+    }
+    
+    @Test
     public void testPortParamConstructorRejectsOutOfRangePort() {
         int badPort = 4 * Short.MAX_VALUE + RANDOM.nextInt(Byte.MAX_VALUE) + 1;
         String msg = "Constructor should reject port " + badPort;
