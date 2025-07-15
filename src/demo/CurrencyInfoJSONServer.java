@@ -101,11 +101,10 @@ public class CurrencyInfoJSONServer {
         this(DEFAULT_HTTP_PORT, locale);
     }
     
-    // TODO: Tweak stub to set wrong port and root locale
     // TODO: Write tests for this
     public CurrencyInfoJSONServer(int port, Locale locale) {
-        this.portNum = port;
-        this.loc = locale;
+        this.portNum = port + 1;
+        this.loc = Locale.ROOT;
     }
     
     public static void main(String[] args) {
