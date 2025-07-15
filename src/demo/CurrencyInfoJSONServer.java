@@ -103,7 +103,7 @@ public class CurrencyInfoJSONServer {
     
     // TODO: Write tests for this
     public CurrencyInfoJSONServer(int port, Locale locale) {
-        this.portNum = port + 1;
+        this.portNum = port;
         this.loc = Locale.ROOT;
     }
     
