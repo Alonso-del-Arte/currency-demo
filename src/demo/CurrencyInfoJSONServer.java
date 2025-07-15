@@ -85,12 +85,7 @@ public class CurrencyInfoJSONServer {
      * excessive.
      */
     public CurrencyInfoJSONServer(int port) {
-        if (port < 0 || port > MAX_PORT_NUMBER) {
-            String excMsg = "Port " + port + " is not valid";
-            throw new IllegalArgumentException(excMsg);
-        }
-        this.portNum = port;
-        this.loc = Locale.getDefault();
+        this(port, Locale.getDefault());
     }
     
     /**
