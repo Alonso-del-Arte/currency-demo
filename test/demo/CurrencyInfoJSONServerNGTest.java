@@ -177,7 +177,7 @@ public class CurrencyInfoJSONServerNGTest {
     }
     
     @Test
-    public void testConstructorRejectsNegativePort() {
+    public void testPortParamConstructorRejectsNegativePort() {
         int badPort = -RANDOM.nextInt(Short.MAX_VALUE) - 1;
         String msg = "Constructor should reject port " + badPort;
         Throwable t = assertThrows(() -> {
@@ -195,7 +195,7 @@ public class CurrencyInfoJSONServerNGTest {
     }
     
     @Test
-    public void testConstructorRejectsOutOfRangePort() {
+    public void testPortParamConstructorRejectsOutOfRangePort() {
         int badPort = 4 * Short.MAX_VALUE + RANDOM.nextInt(Byte.MAX_VALUE) + 1;
         String msg = "Constructor should reject port " + badPort;
         Throwable t = assertThrows(() -> {
