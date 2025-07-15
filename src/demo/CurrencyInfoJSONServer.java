@@ -50,10 +50,6 @@ public class CurrencyInfoJSONServer {
     
     private final Locale loc;
     
-    public static String getCurrencyInfo(String currencyCode) {
-        return "SORRY, NOT IMPLEMENTED YET";
-    }
-    
     /**
      * Gives the port number that was assigned at the time of construction.
      * @return The port number. For example, 8080.
@@ -70,6 +66,10 @@ public class CurrencyInfoJSONServer {
         return this.loc;
     }
 
+    public static String getCurrencyInfo(String currencyCode) {
+        return "SORRY, NOT IMPLEMENTED YET";
+    }
+    
     /**
      * Auxiliary constructor. Sets port to {@link #DEFAULT_HTTP_PORT} and locale 
      * to {@code Locale.getDefault()}.
