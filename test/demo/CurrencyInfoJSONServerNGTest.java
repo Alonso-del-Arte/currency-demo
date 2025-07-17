@@ -34,6 +34,8 @@ import java.nio.charset.StandardCharsets;
 import java.util.Currency;
 import java.util.Locale;
 import java.util.Random;
+import java.util.Set;
+import java.util.stream.Collectors;
 
 import static org.testng.Assert.*;
 import org.testng.annotations.Test;
@@ -80,6 +82,38 @@ public class CurrencyInfoJSONServerNGTest {
             Locale actual = instance.getLocale();
             assertEquals(actual, expected);
         }
+    }
+    
+    private static char chooseUpperCaseLetter() {
+        return (char) (RANDOM.nextInt(26) + 'A');
+    }
+    
+    private static String chooseThreeUpperCaseLetters() {
+        char[] letters = new char[3];
+        for (int i = 0; i < 3; i++) {
+            letters[i] = chooseUpperCaseLetter();
+        }
+        return new String(letters);
+    }
+    
+    @Test
+    public void testGetCurrencyInfoForUnrecognizedCurrencyCode() {
+        Set<Currency> currencies = Currency.getAvailableCurrencies();
+        Set<String> curCodes = currencies.stream().map(c -> c.getCurrencyCode())
+                .collect(Collectors.toSet());
+        String currencyCode = "USD";
+        while (curCodes.contains(currencyCode)) {
+            currencyCode = chooseThreeUpperCaseLetters();
+        }
+        String expected 
+                = "{\"result\":\"error\",\"error-type\":\"unsupported-code\"}";
+        String actual = CurrencyInfoJSONServer.getCurrencyInfo(currencyCode)
+                .replace(" ", "")
+                .replace("\n", "")
+                .replace("\r", "");
+        String message = "Currency code \"" + currencyCode 
+                + "\" should not be recognized";
+        assertEquals(actual, expected, message);
     }
     
     /**
