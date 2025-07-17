@@ -67,7 +67,7 @@ public class CurrencyInfoJSONServer {
     }
 
     public static String getCurrencyInfo(String currencyCode) {
-        return "SORRY, NOT IMPLEMENTED YET";
+        return "{\"result\":\"error\",\"error-type\":\"unsupported-code\"}";
     }
     
     /**
