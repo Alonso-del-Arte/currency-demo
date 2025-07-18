@@ -57,6 +57,9 @@ public class CurrencyInfoJSONServerNGTest {
     
     private static final int NUMBER_OF_LOCALES = LOCALES.length;
     
+    private static final Set<Currency> CURRENCIES 
+            = Currency.getAvailableCurrencies();
+    
     @Test
     public void testDefaultHTTPPortConstant() {
         int expected = 8080;
@@ -98,8 +101,7 @@ public class CurrencyInfoJSONServerNGTest {
     
     @Test
     public void testGetCurrencyInfoForUnrecognizedCurrencyCode() {
-        Set<Currency> currencies = Currency.getAvailableCurrencies();
-        Set<String> curCodes = currencies.stream().map(c -> c.getCurrencyCode())
+        Set<String> curCodes = CURRENCIES.stream().map(c -> c.getCurrencyCode())
                 .collect(Collectors.toSet());
         String currencyCode = "USD";
         while (curCodes.contains(currencyCode)) {
