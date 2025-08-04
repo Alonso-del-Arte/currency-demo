@@ -89,7 +89,8 @@ As of March 2025, I've decided to go with ExchangeRate-API from AYR Tech. It
 seems to be better documented than Manny's API, but the JSON responses require 
 more work parsing and caching. Go to 
 [ExchangeRate-API.com](https://www.exchangerate-api.com) for information on the 
-price tiers and documentation on how to use the API.
+price tiers and documentation on how to use the API. Also note that the API key 
+does not expire monthly like Manny's does.
 
 ## Notes about internationalization
 
