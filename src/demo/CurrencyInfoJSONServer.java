@@ -67,7 +67,17 @@ public class CurrencyInfoJSONServer {
     }
 
     public static String getCurrencyInfo(String currencyCode) {
-        return "{\"result\":\"error\",\"error-type\":\"unsupported-code\"}";
+        try {
+            Currency currency = Currency.getInstance(currencyCode);
+            return "{\"name\":\"" + currency.getDisplayName() 
+                    + "\",\"letterCode\":\"" + currencyCode 
+                    + "\",\"numberCode\":\"" + currency.getNumericCodeAsString() 
+                    + "\",\"symbol\":\"" + currency.getSymbol() 
+                    + "\",\"fractionDigits\":" 
+                    + currency.getDefaultFractionDigits() + "}";
+        } catch (IllegalArgumentException iae) {
+            return "{\"result\":\"error\",\"error-type\":\"unsupported-code\"}";
+        }
     }
     
     /**
