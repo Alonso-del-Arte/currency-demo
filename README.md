@@ -41,6 +41,10 @@ From what I've seen, the 3-letter codes are far more popular than the 3-digit
 codes. Both codes are available for a `Currency` instance through the functions 
 `getCurrencyCode()` and `getNumericCode()` (the latter was added in Java 7).
 
+As a very small consolation for not adding JSR-354, Java 9 at least added the 
+function `getNumericCodeAsString()`. For example, for the Bahraini dinar (BHD), 
+`getNumericCode()` returns 48 and `getNumericCodeAsString()` returns "048".
+
 But an instance of `Currency` still needs an instance of another type to 
 represent a specific amount of that currency, such as, for example, 20&euro;. 
 For general purpose uses, which could involve interest rate calculations, the 
