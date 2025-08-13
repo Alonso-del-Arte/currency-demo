@@ -31,6 +31,16 @@ instance of `Currency` can represent euros, for example. The `Currency` class
 comes with a lot of information for internationalization, such as what a 
 currency is called in several different locales.
 
+The International Organization for Standardization (ISO) provides 3-letter codes 
+and 3-digit zero-padded numeric codes for each currency recognized by the 
+organization. These are listed in ISO-4217. For example, the euro has the 
+3-letter code EUR and the 3-digit 978, and the United States dollar has the 
+codes USD and 840.
+
+From what I've seen, the 3-letter codes are far more popular than the 3-digit 
+codes. Both codes are available for a `Currency` instance through the functions 
+`getCurrencyCode()` and `getNumericCode()` (the latter was added in Java 7).
+
 But an instance of `Currency` still needs an instance of another type to 
 represent a specific amount of that currency, such as, for example, 20&euro;. 
 For general purpose uses, which could involve interest rate calculations, the 
