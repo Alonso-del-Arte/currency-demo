@@ -121,16 +121,23 @@ public class CurrencyInfoJSONServerNGTest {
     /**
      * Test of the getCurrencyInfo function, of the CurrencyInfoJSONServer 
      * class.
-     */@org.testng.annotations.Ignore
+     */
     @Test
     public void testGetCurrencyInfo() {
         System.out.println("getCurrencyInfo");
-        String currencyCode = "XTS";
-        String expected = "{\"name\": \"Currency for testing\"}";
-        String actual = CurrencyInfoJSONServer.getCurrencyInfo(currencyCode);
-        assertEquals(actual, expected);
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
+        for (Currency currency : CURRENCIES) {
+            String currencyCode = currency.getCurrencyCode();
+            String expected = "{\"name\":\"" + currency.getDisplayName() 
+                    + "\",\"letterCode\":\"" + currencyCode 
+                    + "\",\"numberCode\":\"" + currency.getNumericCodeAsString() 
+                    + "\",\"symbol\":\"" + currency.getSymbol() 
+                    + "\",\"fractionDigits\":" 
+                    + currency.getDefaultFractionDigits() + "}";
+            String actual 
+                    = CurrencyInfoJSONServer.getCurrencyInfo(currencyCode)
+                            .replace("\n", "").replace("\r", "");
+            assertEquals(actual, expected);
+        }
     }
     
     @Test
