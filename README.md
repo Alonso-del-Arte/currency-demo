@@ -114,9 +114,9 @@ internationalization for "free." In particular, the names and symbols of
 currencies will vary depending on your locale.
 
 Unicode provides a fairly complete set of currency symbols, many of which are 
-accessible through some `java.util.Currency`'s `getSymbol()` function depending 
-on the default or specified locale. The following table lists some symbols that 
-are generally used for one specific currency (though the ones marked with an 
+accessible through `java.util.Currency`'s `getSymbol()` function depending on 
+the default or specified locale. The following table lists some symbols that are 
+generally used for one specific currency (though the ones marked with an 
 asterisk are also used for some other currency in combination with letters).
 
 | Unicode | Symbol   | ISO-4217 | Name                     |
