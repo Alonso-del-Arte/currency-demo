@@ -235,6 +235,19 @@ public class FreeAPIAccessNGTest {
         assertEquals(actual, expected, TEST_DELTA, message);
     }
     
+    @Test
+    public void testGetRateXCDToUSD() {
+        FreeAPIAccess instance = new FreeAPIAccess();
+        double expected = 0.37037037037037035;
+        double actual = instance.getRate(EAST_CARIBBEAN_DOLLARS, U_S_DOLLARS);
+        String message = "Reckoning conversion of " 
+                + EAST_CARIBBEAN_DOLLARS.getDisplayName() + " (" 
+                + EAST_CARIBBEAN_DOLLARS.getCurrencyCode() + ") to " 
+                + U_S_DOLLARS.getDisplayName() + " (" 
+                + U_S_DOLLARS.getCurrencyCode() + ")";
+        assertEquals(actual, expected, TEST_DELTA, message);
+    }
+    
     private static class AccessWithAPICallCounter extends FreeAPIAccess {
         
         private int callCountSoFar = 0;
