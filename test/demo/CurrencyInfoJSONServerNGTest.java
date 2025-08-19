@@ -28,6 +28,7 @@ import java.io.UnsupportedEncodingException;
 import java.net.HttpURLConnection;
 import java.net.InetSocketAddress;
 import java.net.URI;
+import java.net.URL;
 import java.net.URLDecoder;
 import java.nio.charset.Charset;
 import java.nio.charset.StandardCharsets;
@@ -36,6 +37,7 @@ import java.util.Locale;
 import java.util.Random;
 import java.util.Set;
 import java.util.stream.Collectors;
+import static org.testframe.api.Asserters.assertDoesNotThrow;
 
 import static org.testng.Assert.*;
 import org.testng.annotations.Test;
@@ -138,6 +140,27 @@ public class CurrencyInfoJSONServerNGTest {
                             .replace("\n", "").replace("\r", "");
             assertEquals(actual, expected);
         }
+    }
+    
+    @Test
+    public void testServerRespondsOnDefaultPortZeroParamConstructor() {
+        CurrencyInfoJSONServer instance = new CurrencyInfoJSONServer();
+        System.out.println("Expecting localhost response on port " 
+                + CurrencyInfoJSONServer.DEFAULT_HTTP_PORT + " from " 
+                + instance.toString());
+        String locator = "http://localhost:" 
+                + CurrencyInfoJSONServer.DEFAULT_HTTP_PORT + "/dealcard";
+        String key = "User-Agent";
+        String value = "Java/" + System.getProperty("java.version");
+        assertDoesNotThrow(() -> {
+            URI uri = new URI(locator);
+            URL url = uri.toURL();
+            HttpURLConnection conn = (HttpURLConnection) url.openConnection();
+            conn.setRequestProperty(key, value);
+            int expected = HttpURLConnection.HTTP_OK;
+            int actual = conn.getResponseCode();
+            assertEquals(actual, expected);
+        });
     }
     
     @Test
