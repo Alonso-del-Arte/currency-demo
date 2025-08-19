@@ -64,6 +64,13 @@ import org.testng.annotations.Test;
  */
 public class FreeAPIAccessNGTest {
     
+    private static final double TEST_DELTA = 0.01;
+    
+    private static final Currency U_S_DOLLARS = Currency.getInstance(Locale.US);
+    
+    private static final Currency EAST_CARIBBEAN_DOLLARS 
+            = Currency.getInstance("XCD");
+    
     private static final String API_KEY = System.getenv("FOREX_API_KEY");
     
     private static final String QUERY_PATH_BEGIN 
@@ -214,6 +221,18 @@ public class FreeAPIAccessNGTest {
         // TODO review the generated test code and remove the default call to fail.
         fail("The test case is a prototype.");
         assertEquals(result, expResult, 0.0);
+    }
+    
+    @Test
+    public void testGetRateUSDToXCD() {
+        FreeAPIAccess instance = new FreeAPIAccess();
+        double expected = 2.7;
+        double actual = instance.getRate(U_S_DOLLARS, EAST_CARIBBEAN_DOLLARS);
+        String message = "Reckoning conversion of " + U_S_DOLLARS.getDisplayName() 
+                + " (" + U_S_DOLLARS.getCurrencyCode() + ") to " 
+                + EAST_CARIBBEAN_DOLLARS.getDisplayName() + " (" 
+                + EAST_CARIBBEAN_DOLLARS.getCurrencyCode() + ")";
+        assertEquals(actual, expected, TEST_DELTA, message);
     }
     
     private static class AccessWithAPICallCounter extends FreeAPIAccess {
