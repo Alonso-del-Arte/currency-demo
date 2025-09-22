@@ -34,8 +34,9 @@ import java.util.Scanner;
  * href="https://free.currencyconverterapi.com">currencyconverterapi.com</a> for 
  * more information.
  * @deprecated Since late 2024, Manny's Free Currency Converter API is down 
- * indefinitely. It might never come back online. I have not yet found a good 
- * replacement.
+ * indefinitely. It might never come back online. But as I don't know that for a 
+ * fact, I am not marking this class for removal. Theoretically, it's possible 
+ * that one day I might be able to un-deprecate it.
  * @author Alonso del Arte
  */
 @Deprecated
