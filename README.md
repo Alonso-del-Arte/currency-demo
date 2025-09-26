@@ -215,6 +215,13 @@ U.&nbsp;S. dollar of 321.999592 as of September 10, 2024.
 Note to self, 13 December 2024: Check if Trinidad &amp; Tobago dollar is brittle 
 for other display names test
 
+### Upcoming currency changes
+
+Bulgaria has entered the eurozone. Effective January 1, 2026, the euro (EUR) 
+will be the official currency of Bulgaria. The Bulgarian lev (BGL) will continue 
+to be honored for cash payments until January 15, 2026, and after that levs can 
+be exchanged for euros at the Bulgarian National Bank indefinitely.
+
 ----
 
 This project is closed off to Hacktoberfest.
