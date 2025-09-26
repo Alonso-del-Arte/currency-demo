@@ -16,19 +16,25 @@
  */
 package demo;
 
+import javax.swing.JFrame;
+import javax.swing.WindowConstants;
+
 import static org.testng.Assert.*;
 import org.testng.annotations.Test;
 
 /**
- *
+ * Tests of the TipCalculator class.
  * @author Alonso del Arte
  */
 public class TipCalculatorNGTest {
     
     @Test
-    public void testSomeMethod() {
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
+    public void testConstructorSetsDefaultCloseOperation() {
+        JFrame instance = new TipCalculator();
+        int expected = WindowConstants.EXIT_ON_CLOSE;
+        int actual = instance.getDefaultCloseOperation();
+        String message = "Constructor should set EXIT_ON_CLOSE";
+        assertEquals(actual, expected, message);
     }
     
 }
