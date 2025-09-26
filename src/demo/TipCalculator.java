@@ -23,6 +23,10 @@ import javax.swing.WindowConstants;
  *
  * @author Alonso del Arte
  */
-public class TipCalculator {
+public class TipCalculator extends JFrame {
+    
+    public TipCalculator() {
+        this.setDefaultCloseOperation(WindowConstants.DO_NOTHING_ON_CLOSE);
+    }
     
 }
