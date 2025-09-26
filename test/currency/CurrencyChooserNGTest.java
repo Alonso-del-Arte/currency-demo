@@ -690,6 +690,22 @@ public class CurrencyChooserNGTest {
             assertNotEquals(bolivarDigital, currency, msg);
         }
     }
+    
+    // TODO: After December 31, 2025, add "BGN" (for the Bulgarian lev) to 
+    // EURO_REPLACED_EXCLUSION_CODES and delete this test, which for now is a 
+    // reminder.
+    @org.testng.annotations.Ignore
+    @Test
+    public void testBulgarianLevExcluded() {
+        Currency bulgarianLev = Currency.getInstance("BGN");
+        String bulgarianLevDisplayName = bulgarianLev.getDisplayName();
+        for (int i = 0; i < NUMBER_OF_CALLS_FOR_EXCLUSION_SEARCH; i++) {
+            Currency currency = CurrencyChooser.chooseCurrency();
+            String msg = "Currency " + currency.getDisplayName() 
+                    + " should not be " + bulgarianLevDisplayName;
+            assertNotEquals(bulgarianLev, currency, msg);
+        }
+    }
 
     @Test
     public void testZimbabweanDollarExcluded() {
