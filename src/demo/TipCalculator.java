@@ -19,6 +19,7 @@ package demo;
 import currency.MoneyAmount;
 
 import java.util.Currency;
+import java.util.Locale;
 
 import javax.swing.JFrame;
 import javax.swing.WindowConstants;
@@ -29,9 +30,12 @@ import javax.swing.WindowConstants;
  */
 public class TipCalculator extends JFrame {
     
+    private Currency currentCurrency 
+            = Currency.getInstance(Locale.getDefault());
+    
     // TODO: Write tests for this
     public Currency getCurrency() {
-        return Currency.getInstance("XTS");
+        return this.currentCurrency;
     }
     
     // TODO: Write tests for this
