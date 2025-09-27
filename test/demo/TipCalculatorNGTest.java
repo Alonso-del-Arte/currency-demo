@@ -16,6 +16,11 @@
  */
 package demo;
 
+import static demo.CurrencyByLocalePropsListerNGTest.chooseLocale;
+
+import java.util.Currency;
+import java.util.Locale;
+
 import javax.swing.JFrame;
 import javax.swing.WindowConstants;
 
@@ -27,6 +32,23 @@ import org.testng.annotations.Test;
  * @author Alonso del Arte
  */
 public class TipCalculatorNGTest {
+    
+    @Test
+    public void testGetCurrency() {
+        System.out.println("getCurrency");
+        Locale defaultLocale = Locale.getDefault();
+        boolean hasAssociatedCurrency = true;
+        Locale locale = chooseLocale(hasAssociatedCurrency);
+        Locale.setDefault(locale);
+        Currency expected = Currency.getInstance(locale);
+        TipCalculator instance = new TipCalculator();
+        Currency actual = instance.getCurrency();
+        String message = "Locale " + locale.getDisplayName() 
+                + " is associated with currency " + expected.getDisplayName() 
+                + " (" + expected.getCurrencyCode() + ")";
+        Locale.setDefault(defaultLocale);
+        assertEquals(actual, expected, message);
+    }
     
     @Test
     public void testConstructorSetsDefaultCloseOperation() {
