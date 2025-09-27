@@ -16,6 +16,10 @@
  */
 package demo;
 
+import currency.MoneyAmount;
+
+import java.util.Currency;
+
 import javax.swing.JFrame;
 import javax.swing.WindowConstants;
 
@@ -24,6 +28,16 @@ import javax.swing.WindowConstants;
  * @author Alonso del Arte
  */
 public class TipCalculator extends JFrame {
+    
+    // TODO: Write tests for this
+    public Currency getCurrency() {
+        return Currency.getInstance("XTS");
+    }
+    
+    // TODO: Write tests for this
+    public void setCurrency(Currency currency) {
+        System.out.println("SETTER PLACEHOLDER");
+    }
     
     public TipCalculator() {
         this.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
