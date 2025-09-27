@@ -42,7 +42,7 @@ public class CurrencyByLocalePropsListerNGTest {
     
     private static final Random RANDOM = new Random();
     
-    private static Locale chooseLocale(boolean hasAssociatedCurrency) {
+    static Locale chooseLocale(boolean hasAssociatedCurrency) {
         Locale locale = null;
         boolean flag = !hasAssociatedCurrency;
         while (flag ^ hasAssociatedCurrency) {
