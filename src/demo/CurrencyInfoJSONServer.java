@@ -67,7 +67,7 @@ public class CurrencyInfoJSONServer implements Closeable {
         return this.loc;
     }
 
-    public static String getCurrencyInfo(String currencyCode) {
+    static String getCurrencyInfo(String currencyCode) {
         try {
             Currency currency = Currency.getInstance(currencyCode);
             return "{\"name\":\"" + currency.getDisplayName() 
