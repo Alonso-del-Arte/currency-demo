@@ -21,6 +21,7 @@ import com.sun.net.httpserver.HttpExchange;
 import com.sun.net.httpserver.HttpHandler;
 import com.sun.net.httpserver.HttpServer;
 
+import java.io.Closeable;
 import java.io.IOException;
 import java.io.UnsupportedEncodingException;
 import java.net.HttpURLConnection;
@@ -36,7 +37,7 @@ import java.util.Locale;
  *
  * @author Alonso del Arte
  */
-public class CurrencyInfoJSONServer {
+public class CurrencyInfoJSONServer implements Closeable {
     
     /**
      * The default HTTP port. This constant is used by the constructors that 
@@ -78,6 +79,11 @@ public class CurrencyInfoJSONServer {
         } catch (IllegalArgumentException iae) {
             return "{\"result\":\"error\",\"error-type\":\"unsupported-code\"}";
         }
+    }
+    
+    @Override
+    public void close() {
+        // TODO: Write tests for this
     }
     
     /**
