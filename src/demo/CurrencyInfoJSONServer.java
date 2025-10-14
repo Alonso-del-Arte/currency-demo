@@ -43,7 +43,7 @@ public class CurrencyInfoJSONServer implements Closeable {
      * The default HTTP port. This constant is used by the constructors that 
      * don't take a port number.
      */
-    static final int DEFAULT_HTTP_PORT = 8080;
+    public static final int DEFAULT_HTTP_PORT = 8080;
     
     // TODO: Write tests for this
     public static final int DEFAULT_CLOSING_DELAY = -1;
