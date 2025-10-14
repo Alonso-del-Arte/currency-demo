@@ -148,8 +148,10 @@ public class CurrencyInfoJSONServerNGTest {
         System.out.println("Expecting localhost response on port " 
                 + CurrencyInfoJSONServer.DEFAULT_HTTP_PORT + " from " 
                 + instance.toString());
+        Currency currency = CurrencyChooser.chooseCurrency();
         String locator = "http://localhost:" 
-                + CurrencyInfoJSONServer.DEFAULT_HTTP_PORT + "/dealcard";
+                + CurrencyInfoJSONServer.DEFAULT_HTTP_PORT + "/" 
+                + currency.getCurrencyCode();
         String key = "User-Agent";
         String value = "Java/" + System.getProperty("java.version");
         assertDoesNotThrow(() -> {
