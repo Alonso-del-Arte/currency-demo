@@ -45,9 +45,12 @@ public class CurrencyInfoJSONServer implements Closeable {
      */
     public static final int DEFAULT_HTTP_PORT = 8080;
     
-    // TODO: Write tests for this
-    public static final int DEFAULT_CLOSING_DELAY = -1;
-        
+    /**
+     * How many seconds to wait before closing down the server socket. May close 
+     * sooner if there are no pending requests.
+     */
+    public static final int DEFAULT_CLOSING_DELAY = 2;
+    
     private static final int MAX_PORT_NUMBER = 4 * Short.MAX_VALUE;
     
     private final int portNum;
