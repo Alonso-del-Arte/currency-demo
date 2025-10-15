@@ -81,6 +81,14 @@ public class CurrencyInfoJSONServerNGTest {
     }
     
     @Test
+    public void testContentTypeSpecification() {
+        String expected = "application/json; charset=" 
+                + StandardCharsets.UTF_8.toString();
+        String actual = CurrencyInfoJSONServer.CONTENT_TYPE_SPECIFICATION;
+        assertEquals(actual, expected);
+    }
+    
+    @Test
     public void testGetPort() {
         int expected = RANDOM.nextInt(8000, 8100);
         try (CurrencyInfoJSONServer instance 
