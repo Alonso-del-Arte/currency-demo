@@ -43,6 +43,7 @@ import static org.testframe.api.Asserters.assertDoesNotThrow;
 import static org.testng.Assert.*;
 import org.testng.annotations.Test;
 
+import static org.testframe.api.Asserters.assertInRange;
 import static org.testframe.api.Asserters.assertThrows;
 
 /**
@@ -68,6 +69,15 @@ public class CurrencyInfoJSONServerNGTest {
         int expected = 8080;
         int actual = CurrencyInfoJSONServer.DEFAULT_HTTP_PORT;
         assertEquals(actual, expected);
+    }
+    
+    @Test
+    public void testDefaultClosingDelayConstant() {
+        int minimum = 1;
+        int maximum = 10;
+        int actual = CurrencyInfoJSONServer.DEFAULT_CLOSING_DELAY;
+        String msg = "Default closing delay should not be more than 10 seconds";
+        assertInRange(minimum, actual, maximum, msg);
     }
     
     @Test
