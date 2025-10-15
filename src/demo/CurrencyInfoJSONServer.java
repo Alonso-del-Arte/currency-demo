@@ -51,9 +51,11 @@ public class CurrencyInfoJSONServer implements Closeable {
      */
     public static final int DEFAULT_CLOSING_DELAY = 2;
     
-    // TODO: Write tests for this
+    /**
+     * The content type specification "application/json; charset=UTF-8".
+     */
     static final String CONTENT_TYPE_SPECIFICATION 
-            = "text/html; charset=" + StandardCharsets.UTF_8.toString();
+            = "application/json; charset=" + StandardCharsets.UTF_8.toString();
     
     private static final int MAX_PORT_NUMBER = 4 * Short.MAX_VALUE;
     
