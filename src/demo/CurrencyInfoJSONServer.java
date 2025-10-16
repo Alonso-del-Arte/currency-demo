@@ -119,6 +119,10 @@ public class CurrencyInfoJSONServer implements Closeable {
         }
     }
     
+    public void activate() {
+        //
+    }
+    
     @Override
     public void close() {
         this.httpServer.stop(DEFAULT_CLOSING_DELAY);
