@@ -63,6 +63,32 @@ public class CurrencyInfoJSONServer implements Closeable {
     
     private final Locale loc;
     
+    private HttpServer httpServer;
+    
+    private final HttpHandler handler = (HttpExchange exchange) -> {
+        final Headers headers = exchange.getResponseHeaders();
+//        final String method = exchange.getRequestMethod().toUpperCase();
+//        switch (method) {
+//            case "GET":
+                String responseBody = "{\"value\":\"NOT READY\"}";
+                headers.set("Content-Type", CONTENT_TYPE_SPECIFICATION);
+                byte[] rawResponseBody 
+                        = responseBody.getBytes(StandardCharsets.UTF_8);
+                exchange.sendResponseHeaders(HttpURLConnection.HTTP_OK, 
+                        rawResponseBody.length);
+                exchange.getResponseBody().write(rawResponseBody);
+//                break;
+//            case "OPTIONS":
+//                headers.set("Allow", "GET,OPTIONS,PUT");
+//                exchange.sendResponseHeaders(HttpURLConnection.HTTP_OK, -1);
+//                break;
+//            default:
+//                headers.set("Allow", "GET,OPTIONS,PUT");
+//                exchange.sendResponseHeaders(HttpURLConnection.HTTP_BAD_METHOD, 
+//                        -1);
+//        }
+    };
+    
     /**
      * Gives the port number that was assigned at the time of construction.
      * @return The port number. For example, 8080.
@@ -76,7 +102,7 @@ public class CurrencyInfoJSONServer implements Closeable {
      * @return The locale. For example, {@code Locale.CANADA_FRENCH}.
      */
     public Locale getLocale() {
-        return this.loc;
+        return Locale.CANADA;// this.loc;
     }
 
     static String getCurrencyInfo(String currencyCode) {
@@ -95,7 +121,8 @@ public class CurrencyInfoJSONServer implements Closeable {
     
     @Override
     public void close() {
-        // TODO: Write tests for this
+        this.httpServer.stop(DEFAULT_CLOSING_DELAY);
+        System.out.println("Stopped server localhost on port " + this.portNum);
     }
     
     /**
@@ -137,6 +164,17 @@ public class CurrencyInfoJSONServer implements Closeable {
         }
         this.portNum = port;
         this.loc = locale;
+//        String hostname = "localhost";
+//        try {
+//            this.httpServer = HttpServer
+//                    .create(new InetSocketAddress(hostname, this.portNum), 1);
+//            this.httpServer.createContext("/", this.handler);
+//            this.httpServer.start();
+//            System.out.println("Started server " + hostname + " on port " 
+//                    + this.portNum);
+//        } catch (IOException ioe) {
+//            throw new RuntimeException(ioe);
+//        }
     }
     
     public static void main(String[] args) {
