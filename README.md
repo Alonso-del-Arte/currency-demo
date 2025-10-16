@@ -106,8 +106,8 @@ more work parsing and caching. Go to
 price tiers and documentation on how to use the API. Also note that the API key 
 does not expire monthly like Manny's does.
 
-As of September 22, 2025, Manny's free API is still down, but the server is 
-still giving a response (HTTP 400).
+As of October 15, 2025, Manny's free API is still down, but the server is still 
+giving a response (HTTP 400).
 
 ## Notes about internationalization
 
