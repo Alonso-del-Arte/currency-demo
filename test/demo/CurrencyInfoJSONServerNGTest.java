@@ -91,11 +91,10 @@ public class CurrencyInfoJSONServerNGTest {
     @Test
     public void testGetPort() {
         int expected = RANDOM.nextInt(8000, 8100);
-        try (CurrencyInfoJSONServer instance 
-                = new CurrencyInfoJSONServer(expected, DEFAULT_LOCALE)) {
-            int actual = instance.getPort();
-            assertEquals(actual, expected);
-        }
+        CurrencyInfoJSONServer instance = new CurrencyInfoJSONServer(expected, 
+                DEFAULT_LOCALE);
+        int actual = instance.getPort();
+        assertEquals(actual, expected);
     }
     
     private static Locale chooseLocale() {
@@ -194,43 +193,37 @@ public class CurrencyInfoJSONServerNGTest {
     
     @Test
     public void testZeroParamConstructorSetsDefaultHTTPPort() {
-        try (CurrencyInfoJSONServer instance = new CurrencyInfoJSONServer()) {
-            int expected = CurrencyInfoJSONServer.DEFAULT_HTTP_PORT;
-            int actual = instance.getPort();
-            assertEquals(actual, expected);
-        }
+        CurrencyInfoJSONServer instance = new CurrencyInfoJSONServer();
+        int expected = CurrencyInfoJSONServer.DEFAULT_HTTP_PORT;
+        int actual = instance.getPort();
+        assertEquals(actual, expected);
     }
     
     @Test
     public void testZeroParamConstructorSetsDefaultLocale() {
-        try (CurrencyInfoJSONServer instance = new CurrencyInfoJSONServer()) {
-            Locale expected = Locale.getDefault();
-            Locale actual = instance.getLocale();
-            assertEquals(actual, expected);
-        }
+        CurrencyInfoJSONServer instance = new CurrencyInfoJSONServer();
+        Locale expected = Locale.getDefault();
+        Locale actual = instance.getLocale();
+        assertEquals(actual, expected);
     }
     
     @Test
     public void testPortNumberParamConstructorSetsSpecifiedPort() {
         int expected = CurrencyInfoJSONServer.DEFAULT_HTTP_PORT 
                 + (RANDOM.nextInt(256) - 128);
-        try (CurrencyInfoJSONServer instance 
-                = new CurrencyInfoJSONServer(expected)) {
-            int actual = instance.getPort();
-            assertEquals(actual, expected);
-        }
+        CurrencyInfoJSONServer instance = new CurrencyInfoJSONServer(expected);
+        int actual = instance.getPort();
+        assertEquals(actual, expected);
     }
     
     @Test
     public void testPortNumberParamConstructorSetsDefaultLocale() {
         int port = CurrencyInfoJSONServer.DEFAULT_HTTP_PORT 
                 + (RANDOM.nextInt(256) - 128);
-        try (CurrencyInfoJSONServer instance 
-                = new CurrencyInfoJSONServer(port)) {
-            Locale expected = Locale.getDefault();
-            Locale actual = instance.getLocale();
-            assertEquals(actual, expected);
-        }
+        CurrencyInfoJSONServer instance = new CurrencyInfoJSONServer(port);
+        Locale expected = Locale.getDefault();
+        Locale actual = instance.getLocale();
+        assertEquals(actual, expected);
     }
     
     @Test
@@ -259,11 +252,10 @@ public class CurrencyInfoJSONServerNGTest {
         int expected = CurrencyInfoJSONServer.DEFAULT_HTTP_PORT 
                 + (RANDOM.nextInt(256) - 128);
         Locale locale = chooseLocale();
-        try (CurrencyInfoJSONServer instance 
-                = new CurrencyInfoJSONServer(expected, locale)) {
-            int actual = instance.getPort();
-            assertEquals(actual, expected);
-        }
+        CurrencyInfoJSONServer instance = new CurrencyInfoJSONServer(expected, 
+                locale);
+        int actual = instance.getPort();
+        assertEquals(actual, expected);
     }
     
     @Test
