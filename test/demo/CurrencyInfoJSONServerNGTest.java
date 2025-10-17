@@ -106,9 +106,9 @@ public class CurrencyInfoJSONServerNGTest {
     @Test
     public void testGetLocale() {
         System.out.println("getLocale");
-        Locale expected = chooseLocale();
-        try (CurrencyInfoJSONServer instance 
-                = new CurrencyInfoJSONServer(expected)) {
+        for (Locale expected : LOCALES) {
+            CurrencyInfoJSONServer instance 
+                    = new CurrencyInfoJSONServer(expected);
             Locale actual = instance.getLocale();
             assertEquals(actual, expected);
         }
@@ -236,9 +236,9 @@ public class CurrencyInfoJSONServerNGTest {
     @Test
     public void testLocaleParamConstructorSetsDefaultPort() {
         int expected = CurrencyInfoJSONServer.DEFAULT_HTTP_PORT;
-        Locale locale = chooseLocale();
-        try (CurrencyInfoJSONServer instance 
-                = new CurrencyInfoJSONServer(locale)) {
+        for (Locale locale : LOCALES) {
+            CurrencyInfoJSONServer instance 
+                    = new CurrencyInfoJSONServer(locale);
             int actual = instance.getPort();
             assertEquals(actual, expected);
         }
@@ -246,9 +246,9 @@ public class CurrencyInfoJSONServerNGTest {
     
     @Test
     public void testLocaleParamConstructorSetsSpecifiedLocale() {
-        Locale expected = chooseLocale();
-        try (CurrencyInfoJSONServer instance 
-                = new CurrencyInfoJSONServer(expected)) {
+        for (Locale expected : LOCALES) {
+            CurrencyInfoJSONServer instance 
+                    = new CurrencyInfoJSONServer(expected);
             Locale actual = instance.getLocale();
             assertEquals(actual, expected);
         }
@@ -270,9 +270,9 @@ public class CurrencyInfoJSONServerNGTest {
     public void testTwoParamConstructorSetsSpecifiedLocale() {
         int port = CurrencyInfoJSONServer.DEFAULT_HTTP_PORT 
                 + (RANDOM.nextInt(256) - 128);
-        Locale expected = chooseLocale();
-        try (CurrencyInfoJSONServer instance 
-                = new CurrencyInfoJSONServer(port, expected)) {
+        for (Locale expected : LOCALES) {
+            CurrencyInfoJSONServer instance 
+                    = new CurrencyInfoJSONServer(port, expected);
             Locale actual = instance.getLocale();
             assertEquals(actual, expected);
         }
