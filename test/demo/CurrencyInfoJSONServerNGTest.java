@@ -169,6 +169,7 @@ public class CurrencyInfoJSONServerNGTest {
     @Test
     public void testServerRespondsOnDefaultPortZeroParamConstructor() {
         try (CurrencyInfoJSONServer instance = new CurrencyInfoJSONServer()) {
+            instance.activate();
             System.out.println("Expecting localhost response on port " 
                     + CurrencyInfoJSONServer.DEFAULT_HTTP_PORT + " from " 
                     + instance.toString());
