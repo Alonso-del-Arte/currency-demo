@@ -175,7 +175,7 @@ public class CurrencyInfoJSONServerNGTest {
                     + instance.toString());
             Currency currency = CurrencyChooser.chooseCurrency();
             String locator = "http://localhost:" 
-                    + CurrencyInfoJSONServer.DEFAULT_HTTP_PORT + "/" 
+                    + CurrencyInfoJSONServer.DEFAULT_HTTP_PORT + "/currency/" 
                     + currency.getCurrencyCode();
             String key = "User-Agent";
             String value = "Java/" + System.getProperty("java.version");
