@@ -102,7 +102,7 @@ public class CurrencyInfoJSONServer implements Closeable {
      * @return The locale. For example, {@code Locale.CANADA_FRENCH}.
      */
     public Locale getLocale() {
-        return Locale.CANADA;// this.loc;
+        return this.loc;
     }
 
     static String getCurrencyInfo(String currencyCode) {
