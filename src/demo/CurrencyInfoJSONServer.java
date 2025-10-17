@@ -120,7 +120,17 @@ public class CurrencyInfoJSONServer implements Closeable {
     }
     
     public void activate() {
-        //
+        String hostname = "localhost";
+        try {
+            this.httpServer = HttpServer
+                    .create(new InetSocketAddress(hostname, this.portNum), 1);
+            this.httpServer.createContext("/currency/", this.handler);
+            this.httpServer.start();
+            System.out.println("Started server " + hostname + " on port " 
+                    + this.portNum);
+        } catch (IOException ioe) {
+            throw new RuntimeException(ioe);
+        }
     }
     
     @Override
@@ -168,17 +178,6 @@ public class CurrencyInfoJSONServer implements Closeable {
         }
         this.portNum = port;
         this.loc = locale;
-//        String hostname = "localhost";
-//        try {
-//            this.httpServer = HttpServer
-//                    .create(new InetSocketAddress(hostname, this.portNum), 1);
-//            this.httpServer.createContext("/", this.handler);
-//            this.httpServer.start();
-//            System.out.println("Started server " + hostname + " on port " 
-//                    + this.portNum);
-//        } catch (IOException ioe) {
-//            throw new RuntimeException(ioe);
-//        }
     }
     
     public static void main(String[] args) {
