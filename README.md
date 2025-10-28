@@ -109,6 +109,10 @@ does not expire monthly like Manny's does.
 As of October 15, 2025, Manny's free API is still down, but the server is still 
 giving a response (HTTP 400).
 
+October 27, 2025: Here we go again. I'm losing another free tier. Today I was 
+notified that if I don't upgrade to a paid plan by November 14, I will lose 
+access. So I guess I have that long to figure out an alternative.
+
 ## Notes about internationalization
 
 Although I have not made a conscious effort to internationalize this repository, 
