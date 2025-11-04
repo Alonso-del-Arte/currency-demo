@@ -68,6 +68,12 @@ public abstract class RateQuoteCache extends LRUCache<CurrencyPair,
      */
     @Override
     public ConversionRateQuote retrieve(CurrencyPair currencies) {
+        // TODO: Write test that this does not do the following:
+        CurrencyPair flipped = currencies.flip();
+        if (!(this.hasPair(currencies)) && this.hasPair(flipped)) {
+            return super.retrieve(flipped).invert();
+        }
+        // END OF SECTION TO BE REMOVED TO PASS THE TEST TO BE WRITTEN
         if (this.needsRefresh(currencies)) {
             this.refresh(currencies);
         }
