@@ -77,8 +77,7 @@ public class FreeForExRateProviderNGTest {
     }
     
     /**
-     * Test of the getRate function, of the FreeForExRateProvider 
- class.
+     * Test of the getRate function, of the FreeForExRateProvider class.
      */
     @Test
     public void testGetRate() {
