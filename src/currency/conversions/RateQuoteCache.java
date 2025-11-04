@@ -21,7 +21,10 @@ import currency.CurrencyPair;
 
 /**
  * Least recently used (LRU) cache for conversion rate quotes. The criterion for 
- * refreshing a quote is to be determined by the caller.
+ * refreshing a quote is to be determined by the caller. Potentially fresh API 
+ * calls will be made for currency pairs not already in the cache, even if the 
+ * inverted pair is in the cache. If that behavior is needed, use {@link 
+ * InvertibleRateQuoteCache}.
  * @author Alonso del Arte
  */
 public abstract class RateQuoteCache extends LRUCache<CurrencyPair, 
@@ -60,7 +63,9 @@ public abstract class RateQuoteCache extends LRUCache<CurrencyPair,
      * Either retrieves a quote from the cache or creates it anew if it's not 
      * already in the cache. Each call for a quote that is not the very most 
      * recently retrieved will cause the contents of the cache to shift in some 
-     * way.
+     * way. If the flipped quote is available, it will not be inverted; there 
+     * will potentially be a fresh API call made. See {@link 
+     * InvertibleRateQuoteCache}.
      * @param currencies The pair of currencies for which to retrieve a quote. 
      * For example, United States dollars (USD) to euros (EUR).
      * @return A conversion rate quote. For example, $1 = 0,91335&euro; as of 
@@ -68,12 +73,6 @@ public abstract class RateQuoteCache extends LRUCache<CurrencyPair,
      */
     @Override
     public ConversionRateQuote retrieve(CurrencyPair currencies) {
-        // TODO: Write test that this does not do the following:
-        CurrencyPair flipped = currencies.flip();
-        if (!(this.hasPair(currencies)) && this.hasPair(flipped)) {
-            return super.retrieve(flipped).invert();
-        }
-        // END OF SECTION TO BE REMOVED TO PASS THE TEST TO BE WRITTEN
         if (this.needsRefresh(currencies)) {
             this.refresh(currencies);
         }
