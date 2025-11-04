@@ -200,4 +200,10 @@ public class FreeAPIAccess implements ExchangeRateProvider,
         return 1.0;
     }
     
+    // TODO: Write tests for this
+    @Override
+    public double getRate(CurrencyPair currencies) {
+        return -1.0;
+    }
+    
 }
