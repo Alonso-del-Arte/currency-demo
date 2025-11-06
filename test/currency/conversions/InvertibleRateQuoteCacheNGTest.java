@@ -105,6 +105,28 @@ public class InvertibleRateQuoteCacheNGTest {
         System.out.println("\"" + excMsg + "\"");
     }
     
+    @Test
+    public void testConstructorRejectsLowPositiveCapacity() {
+        for (int i = 1; i < LRUCache.MINIMUM_CAPACITY; i++) {
+            final int capacity = i;
+            String msg = "Capacity " + capacity + " should cause an exception";
+            Throwable t = assertThrows(() -> {
+            RateQuoteCache badCache 
+                    = new InvertibleRateQuoteCacheImpl(capacity);
+                System.out.println(msg + ", not given instance " 
+                        + badCache.toString());
+            }, IllegalArgumentException.class, msg);
+            String excMsg = t.getMessage();
+            assert excMsg != null : "Exception message should not be null";
+            assert !excMsg.isBlank() : "Exception message should not be blank";
+            String numStr = Integer.toString(i);
+            String capMsg = "Exception message should contain \"" + numStr 
+                    + "\"";
+            assert excMsg.contains(numStr) : capMsg;
+            System.out.println("\"" + excMsg + "\"");
+        }
+    }
+
     private static class InvertibleRateQuoteCacheImpl 
             extends InvertibleRateQuoteCache {
 
