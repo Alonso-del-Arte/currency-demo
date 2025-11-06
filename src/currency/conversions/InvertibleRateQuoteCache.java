@@ -16,6 +16,8 @@
  */
 package currency.conversions;
 
+import currency.CurrencyPair;
+
 /**
  * WORK IN PROGRESS...
  * The idea here is that when possible this will infer quotes rather than make a 
@@ -27,6 +29,18 @@ package currency.conversions;
  * @author Alonso del Arte
  */
 public abstract class InvertibleRateQuoteCache extends RateQuoteCache {
+    
+    // TODO: Write tests for this
+    @Override
+    boolean hasPair(CurrencyPair currencies) {
+        return false;
+    }
+    
+    // TODO: Write tests for this
+    @Override
+    public ConversionRateQuote retrieve(CurrencyPair currencies) {
+        return new ConversionRateQuote(currencies, -1.0);
+    }
     
     // TODO: Write tests for this
     public InvertibleRateQuoteCache(int capacity) {
