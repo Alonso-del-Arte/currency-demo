@@ -49,10 +49,10 @@ public abstract class InvertibleRateQuoteCache extends RateQuoteCache {
         return new ConversionRateQuote(currencies, -1.0);
     }
     
-    // TODO: Write tests for this
     public InvertibleRateQuoteCache(int capacity) {
         super(10);
-        if (capacity < LRUCache.MINIMUM_CAPACITY) {
+        if (capacity < LRUCache.MINIMUM_CAPACITY 
+                || capacity > LRUCache.MAXIMUM_CAPACITY) {
             String excMsg = "Capacity " + capacity + " is not valid";
             throw new IllegalArgumentException(excMsg);
         }
