@@ -55,6 +55,18 @@ public class InvertibleRateQuoteCacheNGTest {
         assert instance.hasPair(currencies) : msg;
     }
     
+    @Test
+    public void testDoesNotHavePair() {
+        Currency from = CurrencyChooser.chooseCurrency();
+        Currency to = CurrencyChooser.chooseCurrencyOtherThan(from);
+        CurrencyPair currencies = new CurrencyPair(from, to);
+        RateQuoteCache instance 
+                = new InvertibleRateQuoteCacheImpl(DEFAULT_CAPACITY);
+        String msg = "Since " + currencies.toString() 
+                + " was not added to the cache, cache shouldn't have that pair";
+        assert !instance.hasPair(currencies) : msg;
+    }
+    
     private static class InvertibleRateQuoteCacheImpl 
             extends InvertibleRateQuoteCache {
 
