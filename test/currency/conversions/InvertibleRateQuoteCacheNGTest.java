@@ -73,7 +73,7 @@ public class InvertibleRateQuoteCacheNGTest {
         String msg = "Capacity " + capacity + " should cause an exception";
         Throwable t = assertThrows(() -> {
             RateQuoteCache badCache 
-                    = new InvertibleRateQuoteCacheImpl(DEFAULT_CAPACITY);
+                    = new InvertibleRateQuoteCacheImpl(capacity);
             System.out.println(msg + ", not given instance " 
                     + badCache.toString());
         }, IllegalArgumentException.class, msg);
