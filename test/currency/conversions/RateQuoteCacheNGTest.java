@@ -68,7 +68,7 @@ public class RateQuoteCacheNGTest {
         assert !instance.hasPair(currencies) : msg;
     }
     
-    private static List<CurrencyPair> listOtherPairs(CurrencyPair pair, 
+    static List<CurrencyPair> listOtherPairs(CurrencyPair pair, 
             int initialCapacity) {
         int threshold = initialCapacity - 1;
         Set<CurrencyPair> others = new HashSet<>(threshold);
