@@ -33,7 +33,7 @@ public abstract class InvertibleRateQuoteCache extends RateQuoteCache {
     // TODO: Write tests for this
     @Override
     boolean hasPair(CurrencyPair currencies) {
-        return false;
+        return true;
     }
     
     // TODO: Write tests for this
