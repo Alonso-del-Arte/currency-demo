@@ -51,7 +51,7 @@ public abstract class InvertibleRateQuoteCache extends RateQuoteCache {
     // TODO: Write tests for this
     public InvertibleRateQuoteCache(int capacity) {
         super(10);
-        if (capacity < 0) {
+        if (capacity < 1) {
             String excMsg = "Capacity " + capacity + " is not valid";
             throw new IllegalArgumentException(excMsg);
         }
