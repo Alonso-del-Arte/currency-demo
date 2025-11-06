@@ -16,7 +16,20 @@
  */
 package currency.conversions;
 
+import cacheops.LRUCache;
+import currency.CurrencyChooser;
 import currency.CurrencyPair;
+import static currency.conversions.ExchangeRateProviderNGTest.RANDOM;
+
+import java.time.LocalDateTime;
+import java.util.ArrayList;
+import java.util.Currency;
+import java.util.HashSet;
+import java.util.List;
+import java.util.Set;
+
+import static org.testframe.api.Asserters.assertThrows;
+
 import static org.testng.Assert.*;
 import org.testng.annotations.Test;
 
@@ -26,10 +39,20 @@ import org.testng.annotations.Test;
  */
 public class InvertibleRateQuoteCacheNGTest {
     
+    private static final int DEFAULT_CAPACITY = 8;
+    
     @Test
-    public void testSomeMethod() {
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
+    public void testHasPair() {
+        System.out.println("hasPair");
+        Currency from = CurrencyChooser.chooseCurrency();
+        Currency to = CurrencyChooser.chooseCurrencyOtherThan(from);
+        CurrencyPair currencies = new CurrencyPair(from, to);
+        RateQuoteCache instance 
+                = new InvertibleRateQuoteCacheImpl(DEFAULT_CAPACITY);
+        instance.retrieve(currencies);
+        String msg = "Right after adding " + currencies.toString() 
+                + " to the cache, cache should have that pair";
+        assert instance.hasPair(currencies) : msg;
     }
     
     private static class InvertibleRateQuoteCacheImpl 
