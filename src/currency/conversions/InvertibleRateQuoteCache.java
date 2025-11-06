@@ -30,15 +30,21 @@ import currency.CurrencyPair;
  */
 public abstract class InvertibleRateQuoteCache extends RateQuoteCache {
     
-    // TODO: Write tests for this
     @Override
     boolean hasPair(CurrencyPair currencies) {
-        return true;
+        boolean found = false;
+        int i = 0;
+        while (!found && i < this.names.length) {
+            found = currencies.equals(this.names[i]);
+            i++;
+        }
+        return found;
     }
     
     // TODO: Write tests for this
     @Override
     public ConversionRateQuote retrieve(CurrencyPair currencies) {
+        super.retrieve(currencies);
         return new ConversionRateQuote(currencies, -1.0);
     }
     
