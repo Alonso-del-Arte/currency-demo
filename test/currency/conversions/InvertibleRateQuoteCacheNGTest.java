@@ -68,6 +68,30 @@ public class InvertibleRateQuoteCacheNGTest {
     }
     
     @Test
+    public void testCacheEvictsKeyAfterCapacityExhausted() {
+        Currency from = CurrencyChooser.chooseCurrency();
+        Currency to = CurrencyChooser.chooseCurrencyOtherThan(from);
+        CurrencyPair currencies = new CurrencyPair(from, to);
+        int capacity = RANDOM.nextInt(LRUCache.MINIMUM_CAPACITY + 1, 
+                LRUCache.MAXIMUM_CAPACITY - 1);
+        RateQuoteCache instance = new InvertibleRateQuoteCacheImpl(capacity);
+        instance.retrieve(currencies);
+        int initialCapacity = capacity 
+                + RANDOM.nextInt(LRUCache.MINIMUM_CAPACITY) + 1;
+        List<CurrencyPair> list = RateQuoteCacheNGTest
+                .listOtherPairs(currencies, initialCapacity);
+        for (int index = 1; index < initialCapacity; index++) {
+            CurrencyPair currCurrPair = list.get(index);
+            instance.retrieve(currCurrPair);
+        }
+        String msg = "Having retrieved rate for " + currencies.toString() 
+                + " and then " + (initialCapacity - 1) 
+                + " others, cache of capacity " + capacity 
+                + " should not retain " + currencies.toString();
+        assert !instance.hasPair(currencies) : msg;
+    }
+    
+    @Test
     public void testConstructorRejectsNegativeCapacity() {
         int capacity = -RANDOM.nextInt(128) - 1;
         String msg = "Capacity " + capacity + " should cause an exception";
