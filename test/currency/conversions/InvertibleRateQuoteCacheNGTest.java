@@ -114,6 +114,29 @@ public class InvertibleRateQuoteCacheNGTest {
     }
 
     @Test
+    public void testCacheRetainsFrequentlyUsedKey() {
+        Currency from = CurrencyChooser.chooseCurrency();
+        Currency to = CurrencyChooser.chooseCurrencyOtherThan(from);
+        CurrencyPair currencies = new CurrencyPair(from, to);
+        int expected = RANDOM.nextInt(LRUCache.MINIMUM_CAPACITY, 
+                LRUCache.MAXIMUM_CAPACITY);
+        InvertibleRateQuoteCacheImpl instance 
+                = new InvertibleRateQuoteCacheImpl(expected);
+        List<CurrencyPair> list = RateQuoteCacheNGTest
+                .listOtherPairs(currencies, expected);
+        for (int index = 1; index < expected; index++) {
+            instance.retrieve(currencies);
+            CurrencyPair currCurrPair = list.get(index);
+            instance.retrieve(currCurrPair);
+        }
+        int actual = instance.createCallCount;
+        String message = "Having frequently retrieved rate for " 
+                + currencies.toString() + ", create call count should be " 
+                + expected + ", with just one call for that pair";
+        assertEquals(actual, expected, message);
+    }
+
+    @Test
     public void testConstructorRejectsNegativeCapacity() {
         int capacity = -RANDOM.nextInt(128) - 1;
         String msg = "Capacity " + capacity + " should cause an exception";
@@ -197,6 +220,8 @@ public class InvertibleRateQuoteCacheNGTest {
     private static class InvertibleRateQuoteCacheImpl 
             extends InvertibleRateQuoteCache {
 
+        int createCallCount = 0;
+        
         @Override
         public boolean needsRefresh(CurrencyPair currencies) {
             return false;
@@ -204,6 +229,7 @@ public class InvertibleRateQuoteCacheNGTest {
 
         @Override
         protected ConversionRateQuote create(CurrencyPair name) {
+            this.createCallCount++;
             double rate = Math.random() + 0.5;
             return new ConversionRateQuote(name, rate);
         }
