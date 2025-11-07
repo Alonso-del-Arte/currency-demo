@@ -51,11 +51,6 @@ public abstract class InvertibleRateQuoteCache extends RateQuoteCache {
     
     public InvertibleRateQuoteCache(int capacity) {
         super(capacity);
-        if (capacity < LRUCache.MINIMUM_CAPACITY 
-                || capacity > LRUCache.MAXIMUM_CAPACITY) {
-            String excMsg = "Capacity " + capacity + " is not valid";
-            throw new IllegalArgumentException(excMsg);
-        }
     }
     
 }
