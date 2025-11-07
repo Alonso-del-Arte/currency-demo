@@ -92,6 +92,28 @@ public class InvertibleRateQuoteCacheNGTest {
     }
     
     @Test
+    public void testCacheRetainsKeyWhileCapacityAvailable() {
+        Currency from = CurrencyChooser.chooseCurrency();
+        Currency to = CurrencyChooser.chooseCurrencyOtherThan(from);
+        CurrencyPair currencies = new CurrencyPair(from, to);
+        int capacity = RANDOM.nextInt(LRUCache.MINIMUM_CAPACITY + 1, 
+                LRUCache.MAXIMUM_CAPACITY - 1);
+        RateQuoteCache instance = new InvertibleRateQuoteCacheImpl(capacity);
+        instance.retrieve(currencies);
+        List<CurrencyPair> list = RateQuoteCacheNGTest
+                .listOtherPairs(currencies, capacity);
+        for (int index = 1; index < capacity; index++) {
+            CurrencyPair currCurrPair = list.get(index);
+            instance.retrieve(currCurrPair);
+            String msg = "Having retrieved rate for " + currencies.toString() 
+                    + " and then " + index + " other(s) in a cache of capacity " 
+                    + capacity + ", including " + currCurrPair.toString() 
+                    + ", cache should still have " + currencies.toString();
+            assert instance.hasPair(currencies) : msg;
+        }
+    }
+
+    @Test
     public void testConstructorRejectsNegativeCapacity() {
         int capacity = -RANDOM.nextInt(128) - 1;
         String msg = "Capacity " + capacity + " should cause an exception";
