@@ -286,7 +286,9 @@ public class InvertibleRateQuoteCacheNGTest {
         protected ConversionRateQuote create(CurrencyPair name) {
             this.createCallCount++;
             double rate = Math.random() + 0.5;
-            this.mostRecentlyCreatedQuote = new ConversionRateQuote(name, rate);
+            LocalDateTime date = LocalDateTime.now().minusMinutes(this.minutes);
+            this.mostRecentlyCreatedQuote = new ConversionRateQuote(name, rate, 
+                    date);
             return this.mostRecentlyCreatedQuote;
         }
 
