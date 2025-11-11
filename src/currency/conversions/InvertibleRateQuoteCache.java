@@ -42,11 +42,12 @@ public abstract class InvertibleRateQuoteCache extends RateQuoteCache {
         return found;
     }
     
-    // TODO: Write tests for this
     @Override
     public ConversionRateQuote retrieve(CurrencyPair currencies) {
+        if (!this.hasPair(currencies) && this.hasPair(currencies.flip())) {
+            return super.retrieve(currencies.flip()).invert();
+        }
         return super.retrieve(currencies);
-//        return new ConversionRateQuote(currencies, -1.0);
     }
     
     public InvertibleRateQuoteCache(int capacity) {
