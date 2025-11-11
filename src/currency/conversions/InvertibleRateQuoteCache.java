@@ -42,6 +42,10 @@ public abstract class InvertibleRateQuoteCache extends RateQuoteCache {
         return found;
     }
     
+    @Override
+    protected void refresh(CurrencyPair name) {
+    }
+
     // TODO: Write tests for this
     @Override
     public ConversionRateQuote retrieve(CurrencyPair currencies) {
