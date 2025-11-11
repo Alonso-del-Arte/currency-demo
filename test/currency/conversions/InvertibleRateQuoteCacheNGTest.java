@@ -137,6 +137,20 @@ public class InvertibleRateQuoteCacheNGTest {
     }
 
     @Test
+    public void testRetrieveGivesQuoteFromCreateCall() {
+        Currency from = CurrencyChooser.chooseCurrency();
+        Currency to = CurrencyChooser.chooseCurrencyOtherThan(from);
+        CurrencyPair currencies = new CurrencyPair(from, to);
+        int capacity = RANDOM.nextInt(LRUCache.MINIMUM_CAPACITY + 1, 
+                LRUCache.MAXIMUM_CAPACITY - 1);
+        InvertibleRateQuoteCacheImpl instance 
+                = new InvertibleRateQuoteCacheImpl(capacity);
+        ConversionRateQuote actual = instance.retrieve(currencies);
+        ConversionRateQuote expected = instance.mostRecentlyCreatedQuote;
+        assertEquals(actual, expected);
+    }
+
+    @Test
     public void testConstructorRejectsNegativeCapacity() {
         int capacity = -RANDOM.nextInt(128) - 1;
         String msg = "Capacity " + capacity + " should cause an exception";
@@ -222,6 +236,8 @@ public class InvertibleRateQuoteCacheNGTest {
 
         int createCallCount = 0;
         
+        ConversionRateQuote mostRecentlyCreatedQuote = null;
+        
         @Override
         public boolean needsRefresh(CurrencyPair currencies) {
             return false;
@@ -231,7 +247,8 @@ public class InvertibleRateQuoteCacheNGTest {
         protected ConversionRateQuote create(CurrencyPair name) {
             this.createCallCount++;
             double rate = Math.random() + 0.5;
-            return new ConversionRateQuote(name, rate);
+            this.mostRecentlyCreatedQuote = new ConversionRateQuote(name, rate);
+            return this.mostRecentlyCreatedQuote;
         }
 
         public InvertibleRateQuoteCacheImpl(int capacity) {
