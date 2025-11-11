@@ -151,6 +151,39 @@ public class InvertibleRateQuoteCacheNGTest {
     }
 
     @Test
+    public void testRetrieve() {
+        System.out.println("retrieve");
+        Currency from = CurrencyChooser.chooseCurrency();
+        Currency to = CurrencyChooser.chooseCurrencyOtherThan(from);
+        CurrencyPair currencies = new CurrencyPair(from, to);
+        int capacity = RANDOM.nextInt(LRUCache.MINIMUM_CAPACITY, 
+                LRUCache.MAXIMUM_CAPACITY);
+        InvertibleRateQuoteCacheImpl instance 
+                = new InvertibleRateQuoteCacheImpl(capacity);
+        ConversionRateQuote expected = instance.retrieve(currencies);
+        int initialCapacity = capacity + 1;
+        List<CurrencyPair> list = RateQuoteCacheNGTest.
+                listOtherPairs(currencies, initialCapacity);
+        for (int index = 1; index < capacity; index++) {
+            CurrencyPair currCurrPair = list.get(index);
+            instance.retrieve(currCurrPair);
+            instance.retrieve(currencies);
+        }
+        instance.minutes = 0;
+        ConversionRateQuote actual = instance.retrieve(currencies);
+        assertEquals(actual, expected);
+        for (int j = 1; j < initialCapacity; j++) {
+            CurrencyPair currCurrPair = list.get(j);
+            instance.retrieve(currCurrPair);
+        }
+        ConversionRateQuote potentialFreshQuote = instance.retrieve(currencies);
+        String msg = "After evicting " + actual.toString() 
+                + " from cache, it should not match fresh quote " 
+                + potentialFreshQuote.toString();
+        assert !actual.equals(potentialFreshQuote) : msg;
+    }
+    
+    @Test
     public void testConstructorRejectsNegativeCapacity() {
         int capacity = -RANDOM.nextInt(128) - 1;
         String msg = "Capacity " + capacity + " should cause an exception";
@@ -234,13 +267,19 @@ public class InvertibleRateQuoteCacheNGTest {
     private static class InvertibleRateQuoteCacheImpl 
             extends InvertibleRateQuoteCache {
 
+        private static final int MINUTES_IN_AN_HOUR = 60;
+        
         int createCallCount = 0;
         
         ConversionRateQuote mostRecentlyCreatedQuote = null;
         
+        int minutes = MINUTES_IN_AN_HOUR + RANDOM.nextInt(MINUTES_IN_AN_HOUR);
+        
+        boolean refreshNeeded = false;
+
         @Override
         public boolean needsRefresh(CurrencyPair currencies) {
-            return false;
+            return this.refreshNeeded;
         }
 
         @Override
