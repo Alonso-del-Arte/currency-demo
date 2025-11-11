@@ -184,6 +184,24 @@ public class InvertibleRateQuoteCacheNGTest {
     }
     
     @Test
+    public void testRetrieveRefreshesQuoteIfNeeded() {
+        Currency from = CurrencyChooser.chooseCurrency();
+        Currency to = CurrencyChooser.chooseCurrencyOtherThan(from);
+        CurrencyPair currencies = new CurrencyPair(from, to);
+        int capacity = RANDOM.nextInt(LRUCache.MINIMUM_CAPACITY, 
+                LRUCache.MAXIMUM_CAPACITY);
+        InvertibleRateQuoteCacheImpl instance 
+                = new InvertibleRateQuoteCacheImpl(capacity);
+        ConversionRateQuote unexpected = instance.retrieve(currencies);
+        instance.minutes = 0;
+        instance.refreshNeeded = true;
+        ConversionRateQuote actual = instance.retrieve(currencies);
+        String message = "Quote " + unexpected.toString() 
+                + " was marked stale, should've been refreshed";
+        assertNotEquals(actual, unexpected, message);
+    }
+
+    @Test
     public void testConstructorRejectsNegativeCapacity() {
         int capacity = -RANDOM.nextInt(128) - 1;
         String msg = "Capacity " + capacity + " should cause an exception";
