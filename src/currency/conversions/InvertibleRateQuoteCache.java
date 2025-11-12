@@ -16,7 +16,6 @@
  */
 package currency.conversions;
 
-import cacheops.LRUCache;
 import currency.CurrencyPair;
 
 /**
