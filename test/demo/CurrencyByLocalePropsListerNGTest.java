@@ -55,7 +55,10 @@ public class CurrencyByLocalePropsListerNGTest {
                         + currency.getCurrencyCode() + ")");
                 flag = true;
             } catch (IllegalArgumentException iae) {
-                System.err.println(iae.getMessage());
+                String excMsg = iae.getMessage();
+                if (excMsg != null) {
+                    System.err.println(iae.getMessage());
+                }
                 System.out.println("Chose locale " + locale.getDisplayName() 
                         + " which is not associated with any currency");
                 flag = false;
