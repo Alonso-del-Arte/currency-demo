@@ -19,6 +19,7 @@ package currency.conversions.ayrtech;
 import currency.CurrencyPair;
 import currency.SpecificCurrenciesSupport;
 import currency.conversions.ExchangeRateProvider;
+import currency.conversions.InvertibleRateQuoteCache;
 
 import java.io.InputStream;
 import java.io.IOException;
@@ -33,8 +34,6 @@ import java.util.HashSet;
 import java.util.Set;
 import java.util.stream.Collectors;
 import java.util.Scanner;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
