@@ -31,17 +31,6 @@ import currency.CurrencyPair;
 public abstract class InvertibleRateQuoteCache extends RateQuoteCache {
     
     @Override
-    boolean hasPair(CurrencyPair currencies) {
-        boolean found = false;
-        int i = 0;
-        while (!found && i < this.names.length) {
-            found = currencies.equals(this.names[i]);
-            i++;
-        }
-        return found;
-    }
-    
-    @Override
     public ConversionRateQuote retrieve(CurrencyPair currencies) {
         CurrencyPair flipped = currencies.flip();
         if (!this.hasPair(currencies) && this.hasPair(flipped)) {
