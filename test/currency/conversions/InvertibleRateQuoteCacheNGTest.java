@@ -220,6 +220,27 @@ public class InvertibleRateQuoteCacheNGTest {
     }
     
     @Test
+    public void testRetrieveDoesNotInvertStaleQuote() {
+        Currency from = CurrencyChooser.chooseCurrency();
+        Currency to = CurrencyChooser.chooseCurrencyOtherThan(from);
+        CurrencyPair currencies = new CurrencyPair(from, to);
+        int capacity = RANDOM.nextInt(LRUCache.MINIMUM_CAPACITY + 1, 
+                LRUCache.MAXIMUM_CAPACITY - 1);
+        InvertibleRateQuoteCacheImpl instance 
+                = new InvertibleRateQuoteCacheImpl(capacity);
+        ConversionRateQuote quoteA = instance.retrieve(currencies);
+        instance.minutes = 0;
+        instance.refreshNeeded = true;
+        int expected = instance.createCallCount + 1;
+        ConversionRateQuote quoteB = instance.retrieve(currencies.flip());
+        int actual = instance.createCallCount;
+        String message = "Stale quote " + quoteA.toString() 
+                + " should not have been inverted to obtain " 
+                + quoteB.toString();
+        assertEquals(actual, expected, message);
+    }
+    
+    @Test
     public void testConstructorRejectsNegativeCapacity() {
         int capacity = -RANDOM.nextInt(128) - 1;
         String msg = "Capacity " + capacity + " should cause an exception";
