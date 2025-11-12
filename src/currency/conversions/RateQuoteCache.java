@@ -23,8 +23,8 @@ import currency.CurrencyPair;
  * Least recently used (LRU) cache for conversion rate quotes. The criterion for 
  * refreshing a quote is to be determined by the caller. Potentially fresh API 
  * calls will be made for currency pairs not already in the cache, even if the 
- * inverted pair is in the cache. If that behavior is needed, use {@link 
- * InvertibleRateQuoteCache}.
+ * inverted pair is in the cache. If that inverting behavior is needed, use 
+ * {@link InvertibleRateQuoteCache}.
  * @author Alonso del Arte
  */
 public abstract class RateQuoteCache extends LRUCache<CurrencyPair, 
@@ -80,7 +80,7 @@ public abstract class RateQuoteCache extends LRUCache<CurrencyPair,
     }
     
     /**
-     * Constructor.
+     * Sole constructor.
      * @param capacity The capacity for the cache. For example, 32. Should be at 
      * least {@link cacheops.LRUCache#MINIMUM_CAPACITY} but not more than {@link 
      * cacheops.LRUCache#MAXIMUM_CAPACITY}.
