@@ -177,7 +177,7 @@ public class FreeAPIAccessNGTest {
     }
     
     @Test
-    public void testGetRateSourceSameAsTarget() {
+    public void testGetRateSourceSameAsTargetAlreadyUnwrapped() {
         ExchangeRateProvider instance = new FreeAPIAccess();
         double expected = 1.0;
         double delta = 0.00001;
@@ -192,7 +192,7 @@ public class FreeAPIAccessNGTest {
     }
     
     @Test
-    public void testNoAPICallGetRateWhenSourceSameAsTarget() {
+    public void testNoAPICallGetRateWhenSourceSameAsTargetAlreadyUnwrapped() {
         AccessWithAPICallCounter instance = new AccessWithAPICallCounter();
         String msgPart = " should not have needed an API call";
         int expected = 0;
@@ -207,7 +207,7 @@ public class FreeAPIAccessNGTest {
     }
     
     @Test
-    public void testGetRateUSDToXCD() {
+    public void testGetRateUSDToXCDAlreadyUnwrapped() {
         FreeAPIAccess instance = new FreeAPIAccess();
         double expected = 2.7;
         double actual = instance.getRate(U_S_DOLLARS, EAST_CARIBBEAN_DOLLARS);
@@ -219,7 +219,7 @@ public class FreeAPIAccessNGTest {
     }
     
     @Test
-    public void testGetRateXCDToUSD() {
+    public void testGetRateXCDToUSDAlreadyUnwrapped() {
         FreeAPIAccess instance = new FreeAPIAccess();
         double expected = 0.37037037037037035;
         double actual = instance.getRate(EAST_CARIBBEAN_DOLLARS, U_S_DOLLARS);
