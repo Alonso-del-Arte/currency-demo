@@ -177,7 +177,7 @@ public class FreeAPIAccessNGTest {
     }
     
     @Test
-    public void testGetRateSourceSameAsTargetAlreadyUnwrapped() {
+    public void testGetRateSourceSameAsTarget() {
         ExchangeRateProvider instance = new FreeAPIAccess();
         double expected = 1.0;
         double delta = 0.00001;
