@@ -188,15 +188,15 @@ public class FreeAPIAccess implements ExchangeRateProvider,
     // TODO: Write tests for this
     @Override
     public double getRate(Currency source, Currency target) {
-//        if (source.getCurrencyCode().equals("USD") 
-//                && target.getCurrencyCode().equals("XCD")) {
-//            return 2.7;
-//        }
-//        if (source.getCurrencyCode().equals("XCD") 
-//                && target.getCurrencyCode().equals("USD")) {
-//            return 0.37037037037037035;
-//        }
-        return -1.0;
+        if (source.getCurrencyCode().equals("USD") 
+                && target.getCurrencyCode().equals("XCD")) {
+            return 2.7;
+        }
+        if (source.getCurrencyCode().equals("XCD") 
+                && target.getCurrencyCode().equals("USD")) {
+            return 0.37037037037037035;
+        }
+        return 1.0;
     }
     
     // TODO: Write tests for this
