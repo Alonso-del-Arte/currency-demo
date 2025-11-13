@@ -191,6 +191,8 @@ public class FreeAPIAccessNGTest {
         }
     }
     
+    // TODO: Write testGetRateSourceSameAsTargetAlreadyUnwrapped
+    
     @Test
     public void testNoAPICallGetRateWhenSourceSameAsTargetAlreadyUnwrapped() {
         AccessWithAPICallCounter instance = new AccessWithAPICallCounter();
@@ -219,10 +221,39 @@ public class FreeAPIAccessNGTest {
     }
     
     @Test
+    public void testGetRateUSDToXCD() {
+        FreeAPIAccess instance = new FreeAPIAccess();
+        CurrencyPair currencies = new CurrencyPair(U_S_DOLLARS, 
+                EAST_CARIBBEAN_DOLLARS);
+        double expected = 2.7;
+        double actual = instance.getRate(currencies);
+        String message = "Reckoning conversion of " + U_S_DOLLARS.getDisplayName() 
+                + " (" + U_S_DOLLARS.getCurrencyCode() + ") to " 
+                + EAST_CARIBBEAN_DOLLARS.getDisplayName() + " (" 
+                + EAST_CARIBBEAN_DOLLARS.getCurrencyCode() + ")";
+        assertEquals(actual, expected, TEST_DELTA, message);
+    }
+    
+    @Test
     public void testGetRateXCDToUSDAlreadyUnwrapped() {
         FreeAPIAccess instance = new FreeAPIAccess();
         double expected = 0.37037037037037035;
         double actual = instance.getRate(EAST_CARIBBEAN_DOLLARS, U_S_DOLLARS);
+        String message = "Reckoning conversion of " 
+                + EAST_CARIBBEAN_DOLLARS.getDisplayName() + " (" 
+                + EAST_CARIBBEAN_DOLLARS.getCurrencyCode() + ") to " 
+                + U_S_DOLLARS.getDisplayName() + " (" 
+                + U_S_DOLLARS.getCurrencyCode() + ")";
+        assertEquals(actual, expected, TEST_DELTA, message);
+    }
+    
+    @Test
+    public void testGetRateXCDToUSD() {
+        FreeAPIAccess instance = new FreeAPIAccess();
+        CurrencyPair currencies = new CurrencyPair(EAST_CARIBBEAN_DOLLARS, 
+                U_S_DOLLARS);
+        double expected = 0.37037037037037035;
+        double actual = instance.getRate(currencies);
         String message = "Reckoning conversion of " 
                 + EAST_CARIBBEAN_DOLLARS.getDisplayName() + " (" 
                 + EAST_CARIBBEAN_DOLLARS.getCurrencyCode() + ") to " 
