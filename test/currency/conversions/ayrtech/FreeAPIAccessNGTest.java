@@ -94,6 +94,8 @@ public class FreeAPIAccessNGTest {
     private static final Map<CurrencyPair, ConversionRateQuote> QUOTE_MAP 
             = new HashMap<>(MAX_NUMBER_OF_CURRENCIES);
     
+    private static final FreeAPIAccess TEST_INSTANCE = new FreeAPIAccess();
+    
     private static String minify(String endPoint) throws IOException {
         String queryPath = QUERY_PATH_BEGIN + endPoint;
         StringBuilder builder = new StringBuilder();
@@ -194,15 +196,13 @@ public class FreeAPIAccessNGTest {
     @Test
     public void testSupportedCurrencies() {
         System.out.println("supportedCurrencies");
-        SpecificCurrenciesSupport instance = new FreeAPIAccess();
-        Set<Currency> actual = instance.supportedCurrencies();
+        Set<Currency> actual = TEST_INSTANCE.supportedCurrencies();
         assertContainsSame(SUPPORTED_CURRENCIES, actual);
     }
 
     @Test
     public void testSupportedCurrenciesDoesNotLeakField() {
-        SpecificCurrenciesSupport instance = new FreeAPIAccess();
-        Set<Currency> initial = instance.supportedCurrencies();
+        Set<Currency> initial = TEST_INSTANCE.supportedCurrencies();
         Currency currency = CurrencyChooser.chooseCurrency(
                 cur -> !initial.contains(cur)
         );
@@ -212,20 +212,19 @@ public class FreeAPIAccessNGTest {
         assertDoesNotThrow(() -> {
             Set<Currency> expected = new HashSet<>(initial);
             initial.add(currency);
-            Set<Currency> actual = instance.supportedCurrencies();
+            Set<Currency> actual = TEST_INSTANCE.supportedCurrencies();
             assertContainsSame(expected, actual, msg);
         }, msg);
     }
     
     @Test
     public void testGetRateSourceSameAsTarget() {
-        ExchangeRateProvider instance = new FreeAPIAccess();
         double expected = 1.0;
         double delta = 0.00001;
         String msgPart = " should be " + expected + " with variance " + delta;
         for (Currency currency : SUPPORTED_CURRENCIES) {
             CurrencyPair currencies = new CurrencyPair(currency, currency);
-            double actual = instance.getRate(currencies);
+            double actual = TEST_INSTANCE.getRate(currencies);
             String message = "Given " + currency.getDisplayName() 
                     + ", exchange rate for " + currencies.toString() + msgPart;
             assertEquals(actual, expected, delta, message);
@@ -251,9 +250,9 @@ public class FreeAPIAccessNGTest {
     
     @Test
     public void testGetRateUSDToXCDAlreadyUnwrapped() {
-        FreeAPIAccess instance = new FreeAPIAccess();
         double expected = 2.7;
-        double actual = instance.getRate(U_S_DOLLARS, EAST_CARIBBEAN_DOLLARS);
+        double actual = TEST_INSTANCE.getRate(U_S_DOLLARS, 
+                EAST_CARIBBEAN_DOLLARS);
         String message = "Reckoning conversion of " + U_S_DOLLARS.getDisplayName() 
                 + " (" + U_S_DOLLARS.getCurrencyCode() + ") to " 
                 + EAST_CARIBBEAN_DOLLARS.getDisplayName() + " (" 
@@ -263,11 +262,10 @@ public class FreeAPIAccessNGTest {
     
     @Test
     public void testGetRateUSDToXCD() {
-        FreeAPIAccess instance = new FreeAPIAccess();
         CurrencyPair currencies = new CurrencyPair(U_S_DOLLARS, 
                 EAST_CARIBBEAN_DOLLARS);
         double expected = 2.7;
-        double actual = instance.getRate(currencies);
+        double actual = TEST_INSTANCE.getRate(currencies);
         String message = "Reckoning conversion of " + U_S_DOLLARS.getDisplayName() 
                 + " (" + U_S_DOLLARS.getCurrencyCode() + ") to " 
                 + EAST_CARIBBEAN_DOLLARS.getDisplayName() + " (" 
@@ -277,9 +275,9 @@ public class FreeAPIAccessNGTest {
     
     @Test
     public void testGetRateXCDToUSDAlreadyUnwrapped() {
-        FreeAPIAccess instance = new FreeAPIAccess();
         double expected = 0.37037037037037035;
-        double actual = instance.getRate(EAST_CARIBBEAN_DOLLARS, U_S_DOLLARS);
+        double actual = TEST_INSTANCE.getRate(EAST_CARIBBEAN_DOLLARS, 
+                U_S_DOLLARS);
         String message = "Reckoning conversion of " 
                 + EAST_CARIBBEAN_DOLLARS.getDisplayName() + " (" 
                 + EAST_CARIBBEAN_DOLLARS.getCurrencyCode() + ") to " 
@@ -290,11 +288,10 @@ public class FreeAPIAccessNGTest {
     
     @Test
     public void testGetRateXCDToUSD() {
-        FreeAPIAccess instance = new FreeAPIAccess();
         CurrencyPair currencies = new CurrencyPair(EAST_CARIBBEAN_DOLLARS, 
                 U_S_DOLLARS);
         double expected = 0.37037037037037035;
-        double actual = instance.getRate(currencies);
+        double actual = TEST_INSTANCE.getRate(currencies);
         String message = "Reckoning conversion of " 
                 + EAST_CARIBBEAN_DOLLARS.getDisplayName() + " (" 
                 + EAST_CARIBBEAN_DOLLARS.getCurrencyCode() + ") to " 
@@ -309,11 +306,10 @@ public class FreeAPIAccessNGTest {
     @Test
     public void testGetRate() {
         System.out.println("getRate");
-        FreeAPIAccess instance = new FreeAPIAccess();
         for (ConversionRateQuote quote : QUOTE_MAP.values()) {
             CurrencyPair currencies = quote.getCurrencies();
             double expected = quote.getRate();
-            double actual = instance.getRate(currencies);
+            double actual = TEST_INSTANCE.getRate(currencies);
             Currency from = currencies.getFromCurrency();
             Currency to = currencies.getToCurrency();
             String message = "Getting conversion rate for " 
