@@ -304,20 +304,24 @@ public class FreeAPIAccessNGTest {
     }
     
     /**
-     * Test of getRate method, of class FreeAPIAccess.
+     * Test of the getRate function, of the FreeAPIAccess class.
      */
-    @org.testng.annotations.Ignore
     @Test
     public void testGetRate() {
         System.out.println("getRate");
-        Currency source = null;
-        Currency target = null;
         FreeAPIAccess instance = new FreeAPIAccess();
-        double expResult = 0.0;
-        double result = instance.getRate(source, target);
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
-        assertEquals(result, expResult, 0.0);
+        for (ConversionRateQuote quote : QUOTE_MAP.values()) {
+            CurrencyPair currencies = quote.getCurrencies();
+            double expected = quote.getRate();
+            double actual = instance.getRate(currencies);
+            Currency from = currencies.getFromCurrency();
+            Currency to = currencies.getToCurrency();
+            String message = "Getting conversion rate for " 
+                    + from.getDisplayName() + " (" + from.getCurrencyCode() 
+                    + ") to " + to.getDisplayName() + " (" 
+                    + to.getCurrencyCode() + ")";
+            assertEquals(actual, expected, TEST_DELTA, message);
+        }
     }
     
     private static class AccessWithAPICallCounter extends FreeAPIAccess {
