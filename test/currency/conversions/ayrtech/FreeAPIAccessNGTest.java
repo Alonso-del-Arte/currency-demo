@@ -19,6 +19,7 @@ package currency.conversions.ayrtech;
 import currency.CurrencyChooser;
 import currency.CurrencyPair;
 import currency.SpecificCurrenciesSupport;
+import currency.conversions.ConversionRateQuote;
 import currency.conversions.ExchangeRateProvider;
 
 import java.io.InputStream;
@@ -27,18 +28,18 @@ import java.net.HttpURLConnection;
 import java.net.URI;
 import java.net.URISyntaxException;
 import java.net.URL;
-import java.net.URLConnection;
+import java.time.LocalDateTime;
 import java.util.Currency;
+import java.util.HashMap;
 import java.util.HashSet;
 import java.util.Locale;
+import java.util.Map;
 import java.util.Set;
 import java.util.Scanner;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
-import java.util.stream.Collectors;
 
 import static org.testframe.api.Asserters.assertContainsSame;
-import static org.testframe.api.Asserters.assertInRange;
 import static org.testframe.api.Asserters.assertDoesNotThrow;
 
 import static org.testng.Assert.*;
@@ -76,10 +77,22 @@ public class FreeAPIAccessNGTest {
     private static final String QUERY_PATH_BEGIN 
             = "https://v6.exchangerate-api.com/v6/" + API_KEY;
 
-    private static final Set<Currency> SUPPORTED_CURRENCIES = new HashSet<>();
-
     private static final String USER_AGENT_ID = "Java/"
             + System.getProperty("java.version");
+    
+    private static final Set<Currency> ALL_CURRENCIES 
+            = Currency.getAvailableCurrencies();
+    
+    private static final int MAX_NUMBER_OF_CURRENCIES = ALL_CURRENCIES.size();
+    
+    private static final Set<Currency> SUPPORTED_CURRENCIES 
+            = new HashSet<>(MAX_NUMBER_OF_CURRENCIES);
+    
+    private static final Map<String, Currency> CURRENCY_CODES_MAP 
+            = new HashMap<>(MAX_NUMBER_OF_CURRENCIES);
+    
+    private static final Map<CurrencyPair, ConversionRateQuote> QUOTE_MAP 
+            = new HashMap<>(MAX_NUMBER_OF_CURRENCIES);
     
     private static String minify(String endPoint) throws IOException {
         String queryPath = QUERY_PATH_BEGIN + endPoint;
@@ -123,14 +136,15 @@ public class FreeAPIAccessNGTest {
      */
     @BeforeClass
     public void setUpClass() throws IOException {
-        String endPoint = "/codes";
-        String input = minify(endPoint);
+        String codesEndPoint = "/codes";
+        String input = minify(codesEndPoint);
         Pattern iso4217CodePattern = Pattern.compile("\"[A-Z]{3}\"");
         Matcher matcher = iso4217CodePattern.matcher(input);
         while (matcher.find()) {
             String currencyCode = matcher.group().substring(1, 4);
             try {
                 Currency currency = Currency.getInstance(currencyCode);
+                CURRENCY_CODES_MAP.put(currencyCode, currency);
                 SUPPORTED_CURRENCIES.add(currency);
             } catch (IllegalArgumentException iae) {
                 int beginIndex = input.indexOf(currencyCode) + 6;
@@ -138,6 +152,33 @@ public class FreeAPIAccessNGTest {
                 String displayName = input.substring(beginIndex, endIndex);
                 System.err.println("Did not recognize " + currencyCode 
                         + ", said to be " + displayName);
+            }
+        }
+        String ratesEndPoint = "/latest/USD";
+        String ratesResponse = minify(ratesEndPoint);
+        int currIndex = ratesResponse.indexOf(" \"USD\":1,") + 7;
+        boolean hasNext = true;
+        while (hasNext) {
+            currIndex = ratesResponse.indexOf("\"", currIndex) + 1;
+            String key = ratesResponse.substring(currIndex, currIndex + 3);
+            if (CURRENCY_CODES_MAP.containsKey(key)) {
+                Currency currency = CURRENCY_CODES_MAP.get(key);
+                CurrencyPair currencies = new CurrencyPair(U_S_DOLLARS, currency);
+                currIndex = ratesResponse.indexOf(":", currIndex) + 1;
+                int commaIndex = ratesResponse.indexOf(",", currIndex);
+                if (commaIndex < 0) {
+                    commaIndex = ratesResponse.indexOf("\u007D", currIndex);
+                    hasNext = false;
+                }
+                String numStr = ratesResponse.substring(currIndex, commaIndex);
+                double rate = Double.parseDouble(numStr);
+                ConversionRateQuote value = new ConversionRateQuote(currencies, 
+                        rate, LocalDateTime.now());
+                System.out.println("Conversion for " + currencies.toString() 
+                        + " reported as " + rate);
+                QUOTE_MAP.put(currencies, value);
+            } else {
+                currIndex = ratesResponse.indexOf("\"", currIndex + 4);
             }
         }
     }
