@@ -169,3 +169,19 @@
 ### From AYR Tech currency conversion API
 
 ## Pseudocurrencies
+
+* XAG &mdash; 961 &mdash; Silver
+* XAU &mdash; 959 &mdash; Gold
+* XBA &mdash; 955 &mdash; European Composite Unit
+* XBB &mdash; 956 &mdash; European Monetary Unit
+* XBC &mdash; 957 &mdash; European Unit of Account (XBC)
+* XBD &mdash; 958 &mdash; European Unit of Account (XBD)
+* XDR &mdash; 960 &mdash; Special Drawing Rights
+* XFO &mdash; 000 &mdash; French Gold Franc
+* XFU &mdash; 000 &mdash; French UIC-Franc
+* XPD &mdash; 964 &mdash; Palladium
+* XPT &mdash; 962 &mdash; Platinum
+* XSU &mdash; 994 &mdash; Sucre
+* XTS &mdash; 963 &mdash; Testing Currency Code
+* XUA &mdash; 965 &mdash; ADB Unit of Account
+* XXX &mdash; 999 &mdash; Unknown Currency
