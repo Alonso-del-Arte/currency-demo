@@ -7,3 +7,5 @@
 ## Other exclusions
 
 ### From AYR Tech currency conversion API
+
+## Pseudocurrencies
