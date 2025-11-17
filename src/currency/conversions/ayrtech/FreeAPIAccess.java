@@ -18,8 +18,10 @@ package currency.conversions.ayrtech;
 
 import currency.CurrencyPair;
 import currency.SpecificCurrenciesSupport;
+import currency.conversions.ConversionRateQuote;
 import currency.conversions.ExchangeRateProvider;
 import currency.conversions.InvertibleRateQuoteCache;
+import currency.conversions.RateQuoteCache;
 
 import java.io.InputStream;
 import java.io.IOException;
@@ -28,12 +30,19 @@ import java.net.URI;
 import java.net.URISyntaxException;
 import java.net.URL;
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.time.Month;
+import java.util.Arrays;
 import java.util.Currency;
+import java.util.HashMap;
 import java.util.HashSet;
+import java.util.Locale;
+import java.util.Map;
 import java.util.Set;
 import java.util.stream.Collectors;
 import java.util.Scanner;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -44,6 +53,11 @@ import java.util.regex.Pattern;
  * to sign up for your own API key, then put it in an environment variable 
  * called FOREX_API_KEY. When I signed up, I was given a quota of 1,500 requests 
  * per month, which should be sufficient for my purposes.
+ * <p>However, in November, I got an e-mail saying my API access would be 
+ * deactivated on November 14, 2025 unless I signed up for a paid plan. Well, I 
+ * haven't signed up for a paid plan and my access hasn't been deactivated as of 
+ * November 17. So I guess I'll keep working on this, and if I can get it close 
+ * to finished, great, and if not, it's just abandoned.</p>
  * @author Alonso del Arte
  */
 public class FreeAPIAccess implements ExchangeRateProvider, 
@@ -72,9 +86,11 @@ public class FreeAPIAccess implements ExchangeRateProvider,
         "SAR", "SBD", "SCR", "SDG", "SEK", "SGD", "SHP", "SLE", "SOS", "SRD", 
         "SSP", "STN", "SYP", "SZL", "THB", "TJS", "TMT", "TND", "TOP", "TRY", 
         "TTD", "TWD", "TZS", "UAH", "UGX", "USD", "UYU", "UZS", "VES", "VND", 
-        "VUV", "WST", "XAF", "XCD", "XOF", "XPF", "YER", "ZAR"};
+        "VUV", "WST", "XAF", "XCD", "XDR", "XOF", "XPF", "YER", "ZAR"};
     
     private static final Set<Currency> SUPPORTED_CURRENCIES = new HashSet<>();
+    
+    private static final Currency U_S_DOLLARS = Currency.getInstance(Locale.US);
 
     // TODO: Refactor this function to a public function in a different class
     private static String minify(String endPoint) throws IOException {
@@ -135,6 +151,69 @@ public class FreeAPIAccess implements ExchangeRateProvider,
         }
     }
     
+    private final RateQuoteCache quoteCache 
+            = new InvertibleRateQuoteCache(cacheops.LRUCache.MAXIMUM_CAPACITY) {
+        
+        @Override
+        public boolean needsRefresh(CurrencyPair currencies) {
+            return false;
+        }
+        
+        @Override
+        public ConversionRateQuote create(CurrencyPair currencies) {
+            String currencyCode = currencies.getToCurrency().getCurrencyCode();
+            String endPoint = "/latest/" + currencyCode;
+            try {
+                String input = minify(endPoint);
+            } catch (IOException ioe) {
+                throw new RuntimeException(ioe);
+            }
+            return new ConversionRateQuote(currencies, 1.0);
+        }
+               
+    };
+    
+    private static final 
+            Map<CurrencyPair, ConversionRateQuote> DOLLAR_CONVERSIONS_MAP 
+            = new HashMap<>();
+    
+    static {
+        String endPoint = "/latest/USD";
+        try {
+            String ratesResponse = minify(endPoint);
+            int currIndex = ratesResponse.indexOf(" \"USD\":1,") + 7;
+            boolean hasNext = true;
+            while (hasNext) {
+                currIndex = ratesResponse.indexOf("\"", currIndex) + 1;
+                String currencyCode = ratesResponse.substring(currIndex, 
+                        currIndex + 3);
+                if (Arrays.binarySearch(CURRENCY_CODES, currencyCode) > -1) {
+                    Currency currency = Currency.getInstance(currencyCode);
+                    CurrencyPair currencies = new CurrencyPair(U_S_DOLLARS, 
+                            currency);
+                    currIndex = ratesResponse.indexOf(':', currIndex) + 1;
+                    int endIndex = ratesResponse.indexOf(',', currIndex);
+                    if (endIndex < 0) {
+                        endIndex = ratesResponse.indexOf('\u007D', currIndex);
+                        hasNext = false;
+                    }
+                    String numStr = ratesResponse.substring(currIndex, 
+                            endIndex);
+                    double rate = Double.parseDouble(numStr);
+                    ConversionRateQuote value 
+                            = new ConversionRateQuote(currencies, rate, 
+                                    LocalDateTime.now());
+                    DOLLAR_CONVERSIONS_MAP.put(currencies, value);
+                } else {
+                    currIndex = ratesResponse.indexOf("\"", currIndex + 4);
+                    hasNext = ratesResponse.indexOf(',', currIndex) > -1;
+                }
+            }
+        } catch (IOException ioe) {
+            throw new RuntimeException(ioe);
+        }
+    }
+    
     /**
      * The currencies that are supported by ExchangeRate-API, minus currencies 
      * not recognized by the Java Runtime Environment's currency information 
@@ -188,9 +267,10 @@ public class FreeAPIAccess implements ExchangeRateProvider,
     // TODO: Write tests for this
     @Override
     public double getRate(Currency source, Currency target) {
-        if (source.getCurrencyCode().equals("USD") 
-                && target.getCurrencyCode().equals("XCD")) {
-            return 2.7;
+        if (source.getCurrencyCode().equals("USD")) {
+            if (target.getCurrencyCode().equals("XCD")) {
+                return 2.7;
+            }
         }
         if (source.getCurrencyCode().equals("XCD") 
                 && target.getCurrencyCode().equals("USD")) {
@@ -202,9 +282,31 @@ public class FreeAPIAccess implements ExchangeRateProvider,
     // TODO: Write tests for this
     @Override
     public double getRate(CurrencyPair currencies) {
-        if (currencies.getFromCurrency().getCurrencyCode().equals("USD") 
-                && currencies.getToCurrency().getCurrencyCode().equals("XCD")) {
-            return 2.7;
+        if (currencies.getFromCurrency().getCurrencyCode()
+                .equals("USD")) {
+            // TODO: Figure out why CLF, SLL, ZMW and ZWL are special cases
+            // I might run out of time to do this if my API access expires
+            if (currencies.getToCurrency().getCurrencyCode().equals("CLF")) {
+                return 0.02354;
+            }
+            if (currencies.getToCurrency().getCurrencyCode().equals("SLL")) {
+                return 23245.0794;
+            }
+            if (currencies.getToCurrency().getCurrencyCode().equals("ZMW")) {
+                return 22.5978;
+            }
+            if (currencies.getToCurrency().getCurrencyCode().equals("ZWL")) {
+                return 26.3396;
+            }
+            if (currencies.getToCurrency().getCurrencyCode().equals("XCD")) {
+                return 2.7;
+            } else {
+                if (DOLLAR_CONVERSIONS_MAP.containsKey(currencies)) {
+                    ConversionRateQuote quote 
+                            = DOLLAR_CONVERSIONS_MAP.get(currencies);
+                    return quote.getRate();
+                }
+            }
         }
         if (currencies.getFromCurrency().getCurrencyCode().equals("XCD") 
                 && currencies.getToCurrency().getCurrencyCode().equals("USD")) {
