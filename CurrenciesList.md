@@ -169,7 +169,7 @@
 ### From AYR Tech currency conversion API
 
 Did not recognize CNH, said to be Offshore Chinese Renminbi
-Did not recognize FOK, said to be Faroese Kr\u00f3na
+Did not recognize FOK, said to be Faroese Kr&oacute;na
 Did not recognize GGP, said to be Guernsey Pound
 Did not recognize IMP, said to be Manx Pound
 Did not recognize JEP, said to be Jersey Pound
