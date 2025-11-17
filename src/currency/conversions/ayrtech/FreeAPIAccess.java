@@ -91,6 +91,8 @@ public class FreeAPIAccess implements ExchangeRateProvider,
     private static final Set<Currency> SUPPORTED_CURRENCIES = new HashSet<>();
     
     private static final Currency U_S_DOLLARS = Currency.getInstance(Locale.US);
+    
+    private final Currency baseCurrency;
 
     // TODO: Refactor this function to a public function in a different class
     private static String minify(String endPoint) throws IOException {
@@ -214,6 +216,11 @@ public class FreeAPIAccess implements ExchangeRateProvider,
         }
     }
     
+    // TODO: Write tests for this
+    public Currency getBaseCurrency() {
+        return Currency.getInstance("XCD");
+    }
+    
     /**
      * The currencies that are supported by ExchangeRate-API, minus currencies 
      * not recognized by the Java Runtime Environment's currency information 
@@ -313,6 +320,16 @@ public class FreeAPIAccess implements ExchangeRateProvider,
             return 0.37037037037037035;
         }
         return 1.0;
+    }
+    
+    // TODO: Write tests for this
+    public FreeAPIAccess() {
+        this(Currency.getInstance("XCD"));
+    }
+    
+    // TODO: Write tests for this
+    public FreeAPIAccess(Currency base) {
+        this.baseCurrency = base;
     }
     
 }
