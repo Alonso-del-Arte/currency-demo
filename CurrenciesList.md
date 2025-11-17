@@ -168,6 +168,15 @@
 
 ### From AYR Tech currency conversion API
 
+Did not recognize CNH, said to be Offshore Chinese Renminbi
+Did not recognize FOK, said to be Faroese Kr\u00f3na
+Did not recognize GGP, said to be Guernsey Pound
+Did not recognize IMP, said to be Manx Pound
+Did not recognize JEP, said to be Jersey Pound
+Did not recognize KID, said to be Kiribati Dollar
+Did not recognize TVD, said to be Tuvaluan Dollar
+Did not recognize XCG, said to be Caribbean Guilder
+
 ## Pseudocurrencies
 
 * XAG &mdash; 961 &mdash; Silver
