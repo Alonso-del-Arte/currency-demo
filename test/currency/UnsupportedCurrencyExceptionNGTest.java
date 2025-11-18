@@ -16,6 +16,8 @@
  */
 package currency;
 
+import static currency.CurrencyChooser.RANDOM;
+
 import java.util.Currency;
 
 import static org.testng.Assert.*;
@@ -48,6 +50,17 @@ public class UnsupportedCurrencyExceptionNGTest {
         Currency actual = instance.getCurrency();
         String message = "Expecting to retrieve " + expected.getDisplayName();
         assertEquals(actual, expected, message);
+    }
+    
+    @Test
+    public void testGetMessage() {
+        System.out.println("getMessage");
+        Currency currency = CurrencyChooser.chooseCurrency();
+        String expected = "Sample testing message " + RANDOM.nextInt();
+        UnsupportedCurrencyException instance 
+                = new UnsupportedCurrencyException(currency, expected);
+        String actual = instance.getMessage();
+        assertEquals(actual, expected);
     }
     
 }
