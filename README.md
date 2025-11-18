@@ -140,6 +140,7 @@ asterisk are also used for some other currency in combination with letters).
 | U+20AA  | &#x20AA; | ILS      | Israeli new shekel       |
 | U+20AB  | &#x20AB; | VND      | Vietnamese dong          |
 | U+20AC  | &euro;   | EUR      | Euro                     |
+| U+20B1  | &#x20B1; | PHP      | Philippine peso          |
 | U+20B9  | &#x20B9; | INR      | Indian rupee             |
 | U+20BA  | &#x20BA; | TRY      | Turkish lira             |
 | U+20BC  | &#x20BC; | AZN      | Azerbaijani manat        |
