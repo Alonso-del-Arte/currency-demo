@@ -28,9 +28,13 @@ import org.testng.annotations.Test;
 public class UnsupportedCurrencyExceptionNGTest {
     
     @Test
-    public void testSomeMethod() {
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
+    public void testGetCurrency() {
+        System.out.println("getCurrency");
+        Currency expected = CurrencyChooser.chooseCurrency();
+        UnsupportedCurrencyException instance 
+                = new UnsupportedCurrencyException(expected);
+        Currency actual = instance.getCurrency();
+        assertEquals(actual, expected);
     }
     
 }
