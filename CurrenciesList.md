@@ -30,7 +30,7 @@
 * CHF &mdash; 756 &mdash; Swiss Franc divides into cents
 * CLF &mdash; 990 &mdash; Chilean Unit of Account (UF) divides into 10,000ths
 * CLP &mdash; 152 &mdash; Chilean Peso 
-* CNY &mdash; 156 &mdash; Chinese Yuan CN¥ divides into cents
+* CNY &mdash; 156 &mdash; Chinese Yuan CN&yen; divides into cents
 * COP &mdash; 170 &mdash; Colombian Peso divides into cents
 * CRC &mdash; 188 &mdash; Costa Rican Colón divides into cents
 * CUC &mdash; 931 &mdash; Cuban Convertible Peso divides into cents
@@ -44,10 +44,10 @@
 * EGP &mdash; 818 &mdash; Egyptian Pound divides into cents
 * ERN &mdash; 232 &mdash; Eritrean Nakfa divides into cents
 * ETB &mdash; 230 &mdash; Ethiopian Birr divides into cents
-* EUR &mdash; 978 &mdash; Euro € divides into cents
+* EUR &mdash; 978 &mdash; Euro &euro; divides into cents
 * FJD &mdash; 242 &mdash; Fijian Dollar divides into cents
 * FKP &mdash; 238 &mdash; Falkland Islands Pound divides into cents
-* GBP &mdash; 826 &mdash; British Pound £ divides into cents
+* GBP &mdash; 826 &mdash; British Pound &pound; divides into cents
 * GEL &mdash; 981 &mdash; Georgian Lari divides into cents
 * GHS &mdash; 936 &mdash; Ghanaian Cedi divides into cents
 * GIP &mdash; 292 &mdash; Gibraltar Pound divides into cents
@@ -61,20 +61,20 @@
 * HTG &mdash; 332 &mdash; Haitian Gourde divides into cents
 * HUF &mdash; 348 &mdash; Hungarian Forint divides into cents
 * IDR &mdash; 360 &mdash; Indonesian Rupiah divides into cents
-* ILS &mdash; 376 &mdash; Israeli New Shekel ₪ divides into cents
-* INR &mdash; 356 &mdash; Indian Rupee ₹ divides into cents
+* ILS &mdash; 376 &mdash; Israeli New Shekel &#x20AA; divides into cents
+* INR &mdash; 356 &mdash; Indian Rupee &#x20B9; divides into cents
 * IQD &mdash; 368 &mdash; Iraqi Dinar divides into milles
 * IRR &mdash; 364 &mdash; Iranian Rial divides into cents
-* ISK &mdash; 352 &mdash; Icelandic Króna 
+* ISK &mdash; 352 &mdash; Icelandic Kr&oacute;na 
 * JMD &mdash; 388 &mdash; Jamaican Dollar divides into cents
 * JOD &mdash; 400 &mdash; Jordanian Dinar divides into milles
-* JPY &mdash; 392 &mdash; Japanese Yen ¥ 
+* JPY &mdash; 392 &mdash; Japanese Yen &yen;
 * KES &mdash; 404 &mdash; Kenyan Shilling divides into cents
 * KGS &mdash; 417 &mdash; Kyrgystani Som divides into cents
 * KHR &mdash; 116 &mdash; Cambodian Riel divides into cents
 * KMF &mdash; 174 &mdash; Comorian Franc 
 * KPW &mdash; 408 &mdash; North Korean Won divides into cents
-* KRW &mdash; 410 &mdash; South Korean Won ₩ 
+* KRW &mdash; 410 &mdash; South Korean Won &#x20A9;
 * KWD &mdash; 414 &mdash; Kuwaiti Dinar divides into milles
 * KYD &mdash; 136 &mdash; Cayman Islands Dollar divides into cents
 * KZT &mdash; 398 &mdash; Kazakhstani Tenge divides into cents
@@ -110,7 +110,7 @@
 * PAB &mdash; 590 &mdash; Panamanian Balboa divides into cents
 * PEN &mdash; 604 &mdash; Peruvian Sol divides into cents
 * PGK &mdash; 598 &mdash; Papua New Guinean Kina divides into cents
-* PHP &mdash; 608 &mdash; Philippine Peso ₱ divides into cents
+* PHP &mdash; 608 &mdash; Philippine Peso &#x20B1; divides into cents
 * PKR &mdash; 586 &mdash; Pakistani Rupee divides into cents
 * PLN &mdash; 985 &mdash; Polish Zloty divides into cents
 * PYG &mdash; 600 &mdash; Paraguayan Guarani 
@@ -131,14 +131,14 @@
 * SOS &mdash; 706 &mdash; Somali Shilling divides into cents
 * SRD &mdash; 968 &mdash; Surinamese Dollar divides into cents
 * SSP &mdash; 728 &mdash; South Sudanese Pound divides into cents
-* SVC &mdash; 222 &mdash; Salvadoran Colón divides into cents
+* SVC &mdash; 222 &mdash; Salvadoran Col&oacute;n divides into cents
 * SYP &mdash; 760 &mdash; Syrian Pound divides into cents
 * SZL &mdash; 748 &mdash; Swazi Lilangeni divides into cents
 * THB &mdash; 764 &mdash; Thai Baht divides into cents
 * TJS &mdash; 972 &mdash; Tajikistani Somoni divides into cents
 * TMT &mdash; 934 &mdash; Turkmenistani Manat divides into cents
 * TND &mdash; 788 &mdash; Tunisian Dinar divides into milles
-* TOP &mdash; 776 &mdash; Tongan Paʻanga divides into cents
+* TOP &mdash; 776 &mdash; Tongan Pa&#x2BB;anga divides into cents
 * TRY &mdash; 949 &mdash; Turkish Lira divides into cents
 * TTD &mdash; 780 &mdash; Trinidad & Tobago Dollar divides into cents
 * TWD &mdash; 901 &mdash; New Taiwan Dollar NT$ divides into cents
@@ -149,7 +149,7 @@
 * UYU &mdash; 858 &mdash; Uruguayan Peso divides into cents
 * UZS &mdash; 860 &mdash; Uzbekistani Som divides into cents
 * VES &mdash; 928 &mdash; Venezuelan Bolívar divides into cents
-* VND &mdash; 704 &mdash; Vietnamese Dong ₫ 
+* VND &mdash; 704 &mdash; Vietnamese Dong &#x20AB;
 * VUV &mdash; 548 &mdash; Vanuatu Vatu 
 * WST &mdash; 882 &mdash; Samoan Tala divides into cents
 * XAF &mdash; 950 &mdash; Central African CFA Franc FCFA 
