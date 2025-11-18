@@ -25,6 +25,11 @@ import java.util.Currency;
 public class UnsupportedCurrencyException extends RuntimeException {
     
     // TODO: Write tests for this
+    public Currency getCurrency() {
+        return Currency.getInstance("XTS");
+    }
+    
+    // TODO: Write tests for this
     @Override
     public String getMessage() {
         return "SORRY, NOT YET IMPLEMENTED";
