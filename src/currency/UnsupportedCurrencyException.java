@@ -24,9 +24,11 @@ import java.util.Currency;
  */
 public class UnsupportedCurrencyException extends RuntimeException {
     
+    private final Currency heldCurrency;
+    
     // TODO: Write tests for this
     public Currency getCurrency() {
-        return Currency.getInstance("XTS");
+        return this.heldCurrency;
     }
     
     // TODO: Write tests for this
@@ -36,11 +38,11 @@ public class UnsupportedCurrencyException extends RuntimeException {
     }
     
     public UnsupportedCurrencyException(Currency currency) {
-        //
+        this.heldCurrency = currency;
     }
     
     public UnsupportedCurrencyException(Currency currency, String msg) {
-        //
+        this.heldCurrency = Currency.getInstance("XTS");
     }
     
 }
