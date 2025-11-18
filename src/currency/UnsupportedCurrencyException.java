@@ -26,7 +26,10 @@ public class UnsupportedCurrencyException extends RuntimeException {
     
     private final Currency heldCurrency;
     
-    // TODO: Write tests for this
+    /**
+     * Retrieves the currency this exception was constructed with.
+     * @return The currency. For example, the North Korean won (KPW).
+     */
     public Currency getCurrency() {
         return this.heldCurrency;
     }
@@ -42,7 +45,7 @@ public class UnsupportedCurrencyException extends RuntimeException {
     }
     
     public UnsupportedCurrencyException(Currency currency, String msg) {
-        this.heldCurrency = Currency.getInstance("XTS");
+        this.heldCurrency = currency;
     }
     
 }
