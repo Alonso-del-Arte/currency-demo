@@ -27,12 +27,24 @@ import org.testng.annotations.Test;
  */
 public class UnsupportedCurrencyExceptionNGTest {
     
+    private static final String DEFAULT_MESSAGE = "For testing purposes only";
+    
     @Test
     public void testGetCurrency() {
         System.out.println("getCurrency");
         Currency expected = CurrencyChooser.chooseCurrency();
         UnsupportedCurrencyException instance 
                 = new UnsupportedCurrencyException(expected);
+        Currency actual = instance.getCurrency();
+        String message = "Expecting to retrieve " + expected.getDisplayName();
+        assertEquals(actual, expected, message);
+    }
+    
+    @Test
+    public void testGetCurrencyFromTwoParamConstructedInstance() {
+        Currency expected = CurrencyChooser.chooseCurrency();
+        UnsupportedCurrencyException instance 
+                = new UnsupportedCurrencyException(expected, DEFAULT_MESSAGE);
         Currency actual = instance.getCurrency();
         String message = "Expecting to retrieve " + expected.getDisplayName();
         assertEquals(actual, expected, message);
