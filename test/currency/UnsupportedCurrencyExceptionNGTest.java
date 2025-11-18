@@ -34,7 +34,8 @@ public class UnsupportedCurrencyExceptionNGTest {
         UnsupportedCurrencyException instance 
                 = new UnsupportedCurrencyException(expected);
         Currency actual = instance.getCurrency();
-        assertEquals(actual, expected);
+        String message = "Expecting to retrieve " + expected.getDisplayName();
+        assertEquals(actual, expected, message);
     }
     
 }
