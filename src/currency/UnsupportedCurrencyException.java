@@ -26,6 +26,8 @@ public class UnsupportedCurrencyException extends RuntimeException {
     
     private final Currency heldCurrency;
     
+    private final String heldMessage;
+    
     /**
      * Retrieves the currency this exception was constructed with.
      * @return The currency. For example, the North Korean won (KPW).
@@ -37,15 +39,17 @@ public class UnsupportedCurrencyException extends RuntimeException {
     // TODO: Write tests for this
     @Override
     public String getMessage() {
-        return "SORRY, NOT YET IMPLEMENTED";
+        return this.heldMessage;
     }
     
     public UnsupportedCurrencyException(Currency currency) {
         this.heldCurrency = currency;
+        this.heldMessage = "SORRY, NOT YET IMPLEMENTED";
     }
     
     public UnsupportedCurrencyException(Currency currency, String msg) {
         this.heldCurrency = currency;
+        this.heldMessage = msg;
     }
     
 }
