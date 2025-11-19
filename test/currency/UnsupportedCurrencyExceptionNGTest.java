@@ -63,4 +63,16 @@ public class UnsupportedCurrencyExceptionNGTest {
         assertEquals(actual, expected);
     }
     
+    @Test
+    public void testGetMessageFromOneParamConstructor() {
+        Currency currency = CurrencyChooser.chooseCurrency();
+        UnsupportedCurrencyException instance 
+                = new UnsupportedCurrencyException(currency);
+        String expected = "Currency " + currency.getDisplayName() + " (" 
+                + currency.getCurrencyCode() + ") not supported";
+        String actual = instance.getMessage();
+        assertEquals(actual, expected);
+        System.out.println("\"" + actual + "\"");
+    }
+    
 }
