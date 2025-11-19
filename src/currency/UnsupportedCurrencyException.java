@@ -44,7 +44,8 @@ public class UnsupportedCurrencyException extends RuntimeException {
     
     public UnsupportedCurrencyException(Currency currency) {
         this.heldCurrency = currency;
-        this.heldMessage = "SORRY, NOT YET IMPLEMENTED";
+        this.heldMessage = "Currency " + currency.getDisplayName() + " (" 
+                + currency.getCurrencyCode() + ") not supported";
     }
     
     public UnsupportedCurrencyException(Currency currency, String msg) {
