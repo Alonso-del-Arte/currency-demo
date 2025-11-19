@@ -19,7 +19,12 @@ package currency;
 import java.util.Currency;
 
 /**
- *
+ * Exception for when a particular currency is not supported by an instance of a 
+ * given class. That class should probably implement the {@link 
+ * SpecificCurrenciesSupport} interface.
+ * <p>This exception should not be used in cases where two currencies are 
+ * mismatched, such as trying to add an amount of one currency to an amount of 
+ * another currency. For that, use {@link CurrencyMismatchException}.</p>
  * @author Alonso del Arte
  */
 public class UnsupportedCurrencyException extends RuntimeException {
@@ -34,13 +39,32 @@ public class UnsupportedCurrencyException extends RuntimeException {
         return this.heldCurrency;
     }
     
+    /**
+     * Auxiliary constructor. It will fill in a message saying the specified 
+     * currency is not supported. For a customized message, use {@link 
+     * #UnsupportedCurrencyException(java.util.Currency, java.lang.String) the 
+     * primary constructor}.
+     * @param currency The currency that is not supported. For example, the 
+     * Myanmar kyat (MMK).
+     */
     public UnsupportedCurrencyException(Currency currency) {
         this(currency, "Currency " + currency.getDisplayName() + " (" 
                 + currency.getCurrencyCode() + ") not supported");
     }
     
-    public UnsupportedCurrencyException(Currency currency, String msg) {
-        super(msg);
+    /**
+     * Primary constructor. If there is no need to give an explanation as to why 
+     * the currency is not supported, use {@link 
+     * #UnsupportedCurrencyException(java.util.Currency) the auxiliary 
+     * constructor}.
+     * @param currency The currency that is not supported. For example, RUR, the 
+     * Russian ruble that was used for a few years after the collapse of the 
+     * Soviet Union in 1991.
+     * @param message An explanation as to why the currency is not supported. 
+     * For example, "The specified currency is a historical currency".
+     */
+    public UnsupportedCurrencyException(Currency currency, String message) {
+        super(message);
         this.heldCurrency = currency;
     }
     
