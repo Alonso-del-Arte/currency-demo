@@ -32,7 +32,7 @@
 * CLP &mdash; 152 &mdash; Chilean Peso 
 * CNY &mdash; 156 &mdash; Chinese Yuan CN&yen; divides into cents
 * COP &mdash; 170 &mdash; Colombian Peso divides into cents
-* CRC &mdash; 188 &mdash; Costa Rican Colón divides into cents
+* CRC &mdash; 188 &mdash; Costa Rican Col&oacute;n divides into cents
 * CUC &mdash; 931 &mdash; Cuban Convertible Peso divides into cents
 * CUP &mdash; 192 &mdash; Cuban Peso divides into cents
 * CVE &mdash; 132 &mdash; Cape Verdean Escudo divides into cents
