@@ -185,6 +185,16 @@ public class FreeAPIAccessNGTest {
         }
     }
     
+    @Test
+    public void testGetBaseCurrency() {
+        System.out.println("getBaseCurrency");
+        Currency expected = CurrencyChooser.chooseCurrency();
+        FreeAPIAccess instance = new FreeAPIAccess(expected);
+        Currency actual = instance.getBaseCurrency();
+        String message = "Base currency should be " + expected.getDisplayName();
+        assertEquals(actual, expected, message);
+    }
+    
     /**
      * Test of the supportedCurrencies function, of the FreeAPIAccess class. 
      * This test does not explicitly make an API call directly, and the called 
