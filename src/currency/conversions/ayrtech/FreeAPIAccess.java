@@ -301,13 +301,13 @@ public class FreeAPIAccess implements ExchangeRateProvider,
                 return 0.02354;
             }
             if (currencies.getToCurrency().getCurrencyCode().equals("SLL")) {
-                return 23245.0794;
+                return 23402.193;
             }
             if (currencies.getToCurrency().getCurrencyCode().equals("ZMW")) {
-                return 22.7764;
+                return 22.8525;
             }
             if (currencies.getToCurrency().getCurrencyCode().equals("ZWL")) {
-                return 26.3396;
+                return 26.2856;
             }
             if (currencies.getToCurrency().getCurrencyCode().equals("XCD")) {
                 return 2.7;
