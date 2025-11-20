@@ -71,24 +71,9 @@ public class FreeAPIAccess implements ExchangeRateProvider,
     private static final String USER_AGENT_ID = "Java/"
             + System.getProperty("java.version");
     
-    private static final String[] CURRENCY_CODES = {"AED", "AFN", "ALL", "AMD", 
-        "ANG", "AOA", "ARS", "AUD", "AWG", "AZN", "BAM", "BBD", "BDT", "BGN", 
-        "BHD", "BIF", "BMD", "BND", "BOB", "BRL", "BSD", "BTN", "BWP", "BYN", 
-        "BZD", "CAD", "CDF", "CHF", "CLP", "CNY", "COP", "CRC", "CUP", "CVE", 
-        "CZK", "DJF", "DKK", "DOP", "DZD", "EGP", "ERN", "ETB", "EUR", "FJD", 
-        "FKP", "GBP", "GEL", "GHS", "GIP", "GMD", "GNF", "GTQ", "GYD", "HKD", 
-        "HNL", "HRK", "HTG", "HUF", "IDR", "ILS", "INR", "IQD", "IRR", "ISK", 
-        "JMD", "JOD", "JPY", "KES", "KGS", "KHR", "KMF", "KRW", "KWD", "KYD", 
-        "KZT", "LAK", "LBP", "LKR", "LRD", "LSL", "LYD", "MAD", "MDL", "MGA", 
-        "MKD", "MMK", "MNT", "MOP", "MRU", "MUR", "MVR", "MWK", "MXN", "MYR", 
-        "MZN", "NAD", "NGN", "NIO", "NOK", "NPR", "NZD", "OMR", "PAB", "PEN", 
-        "PGK", "PHP", "PKR", "PLN", "PYG", "QAR", "RON", "RSD", "RUB", "RWF", 
-        "SAR", "SBD", "SCR", "SDG", "SEK", "SGD", "SHP", "SLE", "SOS", "SRD", 
-        "SSP", "STN", "SYP", "SZL", "THB", "TJS", "TMT", "TND", "TOP", "TRY", 
-        "TTD", "TWD", "TZS", "UAH", "UGX", "USD", "UYU", "UZS", "VES", "VND", 
-        "VUV", "WST", "XAF", "XCD", "XDR", "XOF", "XPF", "YER", "ZAR"};
-    
     private static final Set<Currency> SUPPORTED_CURRENCIES = new HashSet<>();
+    
+    private static final Set<String> CURRENCY_CODES = new HashSet<>();
     
     private static final Currency U_S_DOLLARS = Currency.getInstance(Locale.US);
     
@@ -128,30 +113,31 @@ public class FreeAPIAccess implements ExchangeRateProvider,
         return builder.toString();
     }
     
-//    static {
-//        String endPoint = "/codes";
-//        try {
-//            String input = minify(endPoint);
-//            Pattern iso4217CodePattern = Pattern.compile("\"[A-Z]{3}\"");
-//            Matcher matcher = iso4217CodePattern.matcher(input);
-//            while (matcher.find()) {
-//                String currencyCode = matcher.group().substring(1, 4);
-//                try {
-//                    Currency currency = Currency.getInstance(currencyCode);
-//                    SUPPORTED_CURRENCIES.add(currency);
-//                } catch (IllegalArgumentException iae) {
-//                    int beginIndex = input.indexOf(currencyCode) + 6;
-//                    int endIndex = input.indexOf('\"', beginIndex + 1);
-//                    String displayName = input.substring(beginIndex, endIndex);
-//                    System.out.println("Did not recognize " + currencyCode
-//                            + ", said to be " + displayName);
-//                }
-//            }
-//        } catch (IOException ioe) {
-//            System.err.println("Encountered problem accessing " + endPoint);
-//            System.err.println("\"" + ioe.getMessage() + "\"");
-//        }
-//    }
+    static {
+        String endPoint = "/codes";
+        try {
+            String input = minify(endPoint);
+            Pattern iso4217CodePattern = Pattern.compile("\"[A-Z]{3}\"");
+            Matcher matcher = iso4217CodePattern.matcher(input);
+            while (matcher.find()) {
+                String currencyCode = matcher.group().substring(1, 4);
+                try {
+                    Currency currency = Currency.getInstance(currencyCode);
+                    CURRENCY_CODES.add(currencyCode);
+                    SUPPORTED_CURRENCIES.add(currency);
+                } catch (IllegalArgumentException iae) {
+                    int beginIndex = input.indexOf(currencyCode) + 6;
+                    int endIndex = input.indexOf('\"', beginIndex + 1);
+                    String displayName = input.substring(beginIndex, endIndex);
+                    System.out.println("Did not recognize " + currencyCode
+                            + ", said to be " + displayName);
+                }
+            }
+        } catch (IOException ioe) {
+            System.err.println("Encountered problem accessing " + endPoint);
+            System.err.println("\"" + ioe.getMessage() + "\"");
+        }
+    }
     
     private final RateQuoteCache quoteCache 
             = new InvertibleRateQuoteCache(cacheops.LRUCache.MAXIMUM_CAPACITY) {
@@ -179,42 +165,42 @@ public class FreeAPIAccess implements ExchangeRateProvider,
             Map<CurrencyPair, ConversionRateQuote> DOLLAR_CONVERSIONS_MAP 
             = new HashMap<>();
     
-//    static {
-//        String endPoint = "/latest/USD";
-//        try {
-//            String ratesResponse = minify(endPoint);
-//            int currIndex = ratesResponse.indexOf(" \"USD\":1,") + 7;
-//            boolean hasNext = true;
-//            while (hasNext) {
-//                currIndex = ratesResponse.indexOf("\"", currIndex) + 1;
-//                String currencyCode = ratesResponse.substring(currIndex, 
-//                        currIndex + 3);
-//                if (Arrays.binarySearch(CURRENCY_CODES, currencyCode) > -1) {
-//                    Currency currency = Currency.getInstance(currencyCode);
-//                    CurrencyPair currencies = new CurrencyPair(U_S_DOLLARS, 
-//                            currency);
-//                    currIndex = ratesResponse.indexOf(':', currIndex) + 1;
-//                    int endIndex = ratesResponse.indexOf(',', currIndex);
-//                    if (endIndex < 0) {
-//                        endIndex = ratesResponse.indexOf('\u007D', currIndex);
-//                        hasNext = false;
-//                    }
-//                    String numStr = ratesResponse.substring(currIndex, 
-//                            endIndex);
-//                    double rate = Double.parseDouble(numStr);
-//                    ConversionRateQuote value 
-//                            = new ConversionRateQuote(currencies, rate, 
-//                                    LocalDateTime.now());
-//                    DOLLAR_CONVERSIONS_MAP.put(currencies, value);
-//                } else {
-//                    currIndex = ratesResponse.indexOf("\"", currIndex + 4);
-//                    hasNext = ratesResponse.indexOf(',', currIndex) > -1;
-//                }
-//            }
-//        } catch (IOException ioe) {
-//            throw new RuntimeException(ioe);
-//        }
-//    }
+    static {
+        String endPoint = "/latest/USD";
+        try {
+            String ratesResponse = minify(endPoint);
+            int currIndex = ratesResponse.indexOf(" \"USD\":1,") + 7;
+            boolean hasNext = true;
+            while (hasNext) {
+                currIndex = ratesResponse.indexOf("\"", currIndex) + 1;
+                String currencyCode = ratesResponse.substring(currIndex, 
+                        currIndex + 3);
+                if (CURRENCY_CODES.contains(currencyCode)) {
+                    Currency currency = Currency.getInstance(currencyCode);
+                    CurrencyPair currencies = new CurrencyPair(U_S_DOLLARS, 
+                            currency);
+                    currIndex = ratesResponse.indexOf(':', currIndex) + 1;
+                    int endIndex = ratesResponse.indexOf(',', currIndex);
+                    if (endIndex < 0) {
+                        endIndex = ratesResponse.indexOf('\u007D', currIndex);
+                        hasNext = false;
+                    }
+                    String numStr = ratesResponse.substring(currIndex, 
+                            endIndex);
+                    double rate = Double.parseDouble(numStr);
+                    ConversionRateQuote value 
+                            = new ConversionRateQuote(currencies, rate, 
+                                    LocalDateTime.now());
+                    DOLLAR_CONVERSIONS_MAP.put(currencies, value);
+                } else {
+                    currIndex = ratesResponse.indexOf("\"", currIndex + 4);
+                    hasNext = ratesResponse.indexOf(',', currIndex) > -1;
+                }
+            }
+        } catch (IOException ioe) {
+            throw new RuntimeException(ioe);
+        }
+    }
     
     /**
      * Retrieves the base currency.
@@ -295,20 +281,6 @@ public class FreeAPIAccess implements ExchangeRateProvider,
     public double getRate(CurrencyPair currencies) {
         if (currencies.getFromCurrency().getCurrencyCode()
                 .equals("USD")) {
-            // TODO: Figure out why CLF, SLL, ZMW and ZWL are special cases
-            // I might run out of time to do this if my API access expires
-            if (currencies.getToCurrency().getCurrencyCode().equals("CLF")) {
-                return 0.02354;
-            }
-            if (currencies.getToCurrency().getCurrencyCode().equals("SLL")) {
-                return 23402.193;
-            }
-            if (currencies.getToCurrency().getCurrencyCode().equals("ZMW")) {
-                return 22.8525;
-            }
-            if (currencies.getToCurrency().getCurrencyCode().equals("ZWL")) {
-                return 26.2856;
-            }
             if (currencies.getToCurrency().getCurrencyCode().equals("XCD")) {
                 return 2.7;
             } else {
