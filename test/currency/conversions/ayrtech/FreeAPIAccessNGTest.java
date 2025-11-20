@@ -330,6 +330,16 @@ public class FreeAPIAccessNGTest {
         }
     }
     
+    @Test
+    public void testAuxConstructorSetsUnitedStatesDollarsAsBaseCurrency() {
+        FreeAPIAccess instance = new FreeAPIAccess();
+        Currency expected = U_S_DOLLARS;
+        Currency actual = instance.getBaseCurrency();
+        String message = "Default currency should be " 
+                + expected.getDisplayName();
+        assertEquals(actual, expected, message);
+    } 
+    
     private static class AccessWithAPICallCounter extends FreeAPIAccess {
         
         private int callCountSoFar = 0;
