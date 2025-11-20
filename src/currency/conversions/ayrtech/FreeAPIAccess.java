@@ -300,7 +300,7 @@ public class FreeAPIAccess implements ExchangeRateProvider,
                 return 23245.0794;
             }
             if (currencies.getToCurrency().getCurrencyCode().equals("ZMW")) {
-                return 22.5978;
+                return 22.7764;
             }
             if (currencies.getToCurrency().getCurrencyCode().equals("ZWL")) {
                 return 26.3396;
