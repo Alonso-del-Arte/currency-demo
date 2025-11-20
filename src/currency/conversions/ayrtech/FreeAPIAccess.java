@@ -326,12 +326,18 @@ public class FreeAPIAccess implements ExchangeRateProvider,
         return 1.0;
     }
     
-    // TODO: Write tests for this
+    /**
+     * Auxiliary constructor. The base currency is the United States dollar 
+     * (USD).
+     */
     public FreeAPIAccess() {
-        this(Currency.getInstance("XCD"));
+        this(U_S_DOLLARS);
     }
     
-    // TODO: Write tests for this
+    /**
+     * Primary constructor. A base currency must be specified.
+     * @param base The base currency. For example, the British pound (GBP).
+     */
     public FreeAPIAccess(Currency base) {
         this.baseCurrency = base;
     }
