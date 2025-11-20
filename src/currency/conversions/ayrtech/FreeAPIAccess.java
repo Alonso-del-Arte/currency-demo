@@ -216,9 +216,13 @@ public class FreeAPIAccess implements ExchangeRateProvider,
         }
     }
     
-    // TODO: Write tests for this
+    /**
+     * Retrieves the base currency.
+     * @return The base currency. This is the same one that this instance was 
+     * constructed with.
+     */
     public Currency getBaseCurrency() {
-        return Currency.getInstance("XCD");
+        return this.baseCurrency;
     }
     
     /**
