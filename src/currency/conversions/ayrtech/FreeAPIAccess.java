@@ -128,30 +128,30 @@ public class FreeAPIAccess implements ExchangeRateProvider,
         return builder.toString();
     }
     
-    static {
-        String endPoint = "/codes";
-        try {
-            String input = minify(endPoint);
-            Pattern iso4217CodePattern = Pattern.compile("\"[A-Z]{3}\"");
-            Matcher matcher = iso4217CodePattern.matcher(input);
-            while (matcher.find()) {
-                String currencyCode = matcher.group().substring(1, 4);
-                try {
-                    Currency currency = Currency.getInstance(currencyCode);
-                    SUPPORTED_CURRENCIES.add(currency);
-                } catch (IllegalArgumentException iae) {
-                    int beginIndex = input.indexOf(currencyCode) + 6;
-                    int endIndex = input.indexOf('\"', beginIndex + 1);
-                    String displayName = input.substring(beginIndex, endIndex);
-                    System.out.println("Did not recognize " + currencyCode
-                            + ", said to be " + displayName);
-                }
-            }
-        } catch (IOException ioe) {
-            System.err.println("Encountered problem accessing " + endPoint);
-            System.err.println("\"" + ioe.getMessage() + "\"");
-        }
-    }
+//    static {
+//        String endPoint = "/codes";
+//        try {
+//            String input = minify(endPoint);
+//            Pattern iso4217CodePattern = Pattern.compile("\"[A-Z]{3}\"");
+//            Matcher matcher = iso4217CodePattern.matcher(input);
+//            while (matcher.find()) {
+//                String currencyCode = matcher.group().substring(1, 4);
+//                try {
+//                    Currency currency = Currency.getInstance(currencyCode);
+//                    SUPPORTED_CURRENCIES.add(currency);
+//                } catch (IllegalArgumentException iae) {
+//                    int beginIndex = input.indexOf(currencyCode) + 6;
+//                    int endIndex = input.indexOf('\"', beginIndex + 1);
+//                    String displayName = input.substring(beginIndex, endIndex);
+//                    System.out.println("Did not recognize " + currencyCode
+//                            + ", said to be " + displayName);
+//                }
+//            }
+//        } catch (IOException ioe) {
+//            System.err.println("Encountered problem accessing " + endPoint);
+//            System.err.println("\"" + ioe.getMessage() + "\"");
+//        }
+//    }
     
     private final RateQuoteCache quoteCache 
             = new InvertibleRateQuoteCache(cacheops.LRUCache.MAXIMUM_CAPACITY) {
@@ -179,42 +179,42 @@ public class FreeAPIAccess implements ExchangeRateProvider,
             Map<CurrencyPair, ConversionRateQuote> DOLLAR_CONVERSIONS_MAP 
             = new HashMap<>();
     
-    static {
-        String endPoint = "/latest/USD";
-        try {
-            String ratesResponse = minify(endPoint);
-            int currIndex = ratesResponse.indexOf(" \"USD\":1,") + 7;
-            boolean hasNext = true;
-            while (hasNext) {
-                currIndex = ratesResponse.indexOf("\"", currIndex) + 1;
-                String currencyCode = ratesResponse.substring(currIndex, 
-                        currIndex + 3);
-                if (Arrays.binarySearch(CURRENCY_CODES, currencyCode) > -1) {
-                    Currency currency = Currency.getInstance(currencyCode);
-                    CurrencyPair currencies = new CurrencyPair(U_S_DOLLARS, 
-                            currency);
-                    currIndex = ratesResponse.indexOf(':', currIndex) + 1;
-                    int endIndex = ratesResponse.indexOf(',', currIndex);
-                    if (endIndex < 0) {
-                        endIndex = ratesResponse.indexOf('\u007D', currIndex);
-                        hasNext = false;
-                    }
-                    String numStr = ratesResponse.substring(currIndex, 
-                            endIndex);
-                    double rate = Double.parseDouble(numStr);
-                    ConversionRateQuote value 
-                            = new ConversionRateQuote(currencies, rate, 
-                                    LocalDateTime.now());
-                    DOLLAR_CONVERSIONS_MAP.put(currencies, value);
-                } else {
-                    currIndex = ratesResponse.indexOf("\"", currIndex + 4);
-                    hasNext = ratesResponse.indexOf(',', currIndex) > -1;
-                }
-            }
-        } catch (IOException ioe) {
-            throw new RuntimeException(ioe);
-        }
-    }
+//    static {
+//        String endPoint = "/latest/USD";
+//        try {
+//            String ratesResponse = minify(endPoint);
+//            int currIndex = ratesResponse.indexOf(" \"USD\":1,") + 7;
+//            boolean hasNext = true;
+//            while (hasNext) {
+//                currIndex = ratesResponse.indexOf("\"", currIndex) + 1;
+//                String currencyCode = ratesResponse.substring(currIndex, 
+//                        currIndex + 3);
+//                if (Arrays.binarySearch(CURRENCY_CODES, currencyCode) > -1) {
+//                    Currency currency = Currency.getInstance(currencyCode);
+//                    CurrencyPair currencies = new CurrencyPair(U_S_DOLLARS, 
+//                            currency);
+//                    currIndex = ratesResponse.indexOf(':', currIndex) + 1;
+//                    int endIndex = ratesResponse.indexOf(',', currIndex);
+//                    if (endIndex < 0) {
+//                        endIndex = ratesResponse.indexOf('\u007D', currIndex);
+//                        hasNext = false;
+//                    }
+//                    String numStr = ratesResponse.substring(currIndex, 
+//                            endIndex);
+//                    double rate = Double.parseDouble(numStr);
+//                    ConversionRateQuote value 
+//                            = new ConversionRateQuote(currencies, rate, 
+//                                    LocalDateTime.now());
+//                    DOLLAR_CONVERSIONS_MAP.put(currencies, value);
+//                } else {
+//                    currIndex = ratesResponse.indexOf("\"", currIndex + 4);
+//                    hasNext = ratesResponse.indexOf(',', currIndex) > -1;
+//                }
+//            }
+//        } catch (IOException ioe) {
+//            throw new RuntimeException(ioe);
+//        }
+//    }
     
     /**
      * Retrieves the base currency.
