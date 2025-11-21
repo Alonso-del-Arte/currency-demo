@@ -41,6 +41,7 @@ import java.util.regex.Pattern;
 
 import static org.testframe.api.Asserters.assertContainsSame;
 import static org.testframe.api.Asserters.assertDoesNotThrow;
+import static org.testframe.api.Asserters.assertThrows;
 
 import static org.testng.Assert.*;
 import org.testng.annotations.BeforeClass;
@@ -338,7 +339,21 @@ public class FreeAPIAccessNGTest {
         String message = "Default currency should be " 
                 + expected.getDisplayName();
         assertEquals(actual, expected, message);
-    } 
+    }
+    
+    @Test
+    public void testPrimaryConstructorRejectsNullCurrency() {
+        String msg = "Constructor should reject null currency";
+        Throwable t = assertThrows(() -> {
+            FreeAPIAccess badInstance = new FreeAPIAccess(null);
+            System.out.println("Should not have been able to create " 
+                    + badInstance.toString() + " with null base currency");
+        }, NullPointerException.class, msg);
+        String excMsg = t.getMessage();
+        assert excMsg != null : "Exception message should not be null";
+        assert !excMsg.isBlank() : "Exception message should not be null";
+        System.out.println("\"" + excMsg + "\"");
+    }
     
     private static class AccessWithAPICallCounter extends FreeAPIAccess {
         
