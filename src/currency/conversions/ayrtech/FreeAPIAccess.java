@@ -309,8 +309,13 @@ public class FreeAPIAccess implements ExchangeRateProvider,
     /**
      * Primary constructor. A base currency must be specified.
      * @param base The base currency. For example, the British pound (GBP).
+     * @throws NullPointerException If {@code base} is null.
      */
     public FreeAPIAccess(Currency base) {
+        if (base == null) {
+            String excMsg = "Base currency must not be null";
+            throw new NullPointerException(excMsg);
+        }
         this.baseCurrency = base;
     }
     
