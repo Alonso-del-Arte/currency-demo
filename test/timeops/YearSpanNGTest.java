@@ -49,6 +49,17 @@ public class YearSpanNGTest {
         return Year.of(isoYear);
     }
     
+    @Test
+    public void testToString() {
+        System.out.println("toString");
+        Year begin = chooseYear();
+        Year end = chooseYearAfter(begin);
+        YearSpan instance = new YearSpan(begin, end);
+        String expected = begin.toString() + '\u2014' + end.toString();
+        String actual = instance.toString();
+        assertEquals(actual, expected);
+    }
+    
     /**
      * Test of getDuration method, of class YearSpan.
      */
