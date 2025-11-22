@@ -28,6 +28,16 @@ public class YearSpan implements Comparable<YearSpan>, DurationalSpan {
     private final Year start, finish;
     
     // TODO: Write tests for this
+    public Year getBeginYear() {
+        return this.finish;
+    }
+    
+    // TODO: Write tests for this
+    public Year getEndYear() {
+        return this.start;
+    }
+    
+    // TODO: Write tests for this
     @Override
     public Duration getDuration() {
         return Duration.ZERO;
