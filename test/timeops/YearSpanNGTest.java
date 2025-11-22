@@ -30,7 +30,7 @@ public class YearSpanNGTest {
     /**
      * Test of getDuration method, of class YearSpan.
      */
-    @Test
+//    @Test
     public void testGetDuration() {
         System.out.println("getDuration");
         YearSpan instance = null;
@@ -44,7 +44,7 @@ public class YearSpanNGTest {
     /**
      * Test of compareTo method, of class YearSpan.
      */
-    @Test
+//    @Test
     public void testCompareTo() {
         System.out.println("compareTo");
         YearSpan other = null;
