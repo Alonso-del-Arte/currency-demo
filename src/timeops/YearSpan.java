@@ -44,9 +44,8 @@ public class YearSpan implements Comparable<YearSpan>, DurationalSpan {
         return this.start.toString() + '\u2014' + this.finish.toString();
     }
     
-    // TODO: Write tests for this
     public String toASCIIString() {
-        return "SORRY, NOT IMPLEMENTED YET";
+        return this.start.toString() + " -- " + this.finish.toString();
     }
     
     public YearSpan(Year begin, Year end) {
