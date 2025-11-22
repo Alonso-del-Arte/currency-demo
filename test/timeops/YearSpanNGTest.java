@@ -42,6 +42,13 @@ public class YearSpanNGTest {
         return Year.of(isoYear);
     }
     
+    private Year chooseYearAfter(Year year) {
+        int origin = year.getValue() + 1;
+        int bound = origin + 200;
+        int isoYear = RANDOM.nextInt(origin, bound);
+        return Year.of(isoYear);
+    }
+    
     /**
      * Test of getDuration method, of class YearSpan.
      */
@@ -100,6 +107,29 @@ public class YearSpanNGTest {
         String excMsg = t.getMessage();
         assert excMsg != null : "Exception message should not be null";
         assert !excMsg.isBlank() : "Exception message should not be blank";
+        System.out.println("\"" + excMsg + "\"");
+    }
+    
+    @Test
+    public void testConstructorRejectsEndYearAfterBeginYear() {
+        Year end = chooseYear();
+        Year begin = chooseYearAfter(end);
+        String msg = "Beginning year " + begin.toString() + " and ending year " 
+                + end.toString() + " should cause an exception";
+        Throwable t = assertThrows(() -> {
+            YearSpan badInstance = new YearSpan(begin, end);
+            System.out.println(msg + ", not created instance " 
+                    + badInstance.toString());
+        }, NullPointerException.class, msg);
+        String excMsg = t.getMessage();
+        assert excMsg != null : "Exception message should not be null";
+        assert !excMsg.isBlank() : "Exception message should not be blank";
+        String beginYearStr = Integer.toString(begin.getValue());
+        String endYearStr = Integer.toString(end.getValue());
+        String containsMsg = "Exception message should contain \"" 
+                + beginYearStr + "\" and \"" + endYearStr + "\"";
+        assert excMsg.contains(beginYearStr) : containsMsg;
+        assert excMsg.contains(endYearStr) : containsMsg;
         System.out.println("\"" + excMsg + "\"");
     }
     
