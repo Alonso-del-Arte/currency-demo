@@ -71,6 +71,17 @@ public class YearSpanNGTest {
         assertEquals(actual, expected);
     }
     
+    @Test
+    public void testGetBeginYear() {
+        System.out.println("getBeginYear");
+        Year expected = chooseYear();
+        Year end = chooseYearAfter(expected);
+        YearSpan instance = new YearSpan(expected, end);
+        Year actual = instance.getBeginYear();
+        String message = "Getting begin year for " + instance.toString();
+        assertEquals(actual, expected, message);
+    }
+    
     /**
      * Test of getDuration method, of class YearSpan.
      */
