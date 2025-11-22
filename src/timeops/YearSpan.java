@@ -37,6 +37,11 @@ public class YearSpan implements Comparable<YearSpan>, DurationalSpan {
         return 0;
     }
     
+    // TODO: Write tests for this
+    public String toASCIIString() {
+        return "SORRY, NOT IMPLEMENTED YET";
+    }
+    
     public YearSpan(Year begin, Year end) {
         if (begin == null || end == null) {
             String excMsg = "Both years must be non-null";
