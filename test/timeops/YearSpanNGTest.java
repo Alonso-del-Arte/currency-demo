@@ -60,6 +60,17 @@ public class YearSpanNGTest {
         assertEquals(actual, expected);
     }
     
+    @Test
+    public void testToASCIIString() {
+        System.out.println("toASCIIString");
+        Year begin = chooseYear();
+        Year end = chooseYearAfter(begin);
+        YearSpan instance = new YearSpan(begin, end);
+        String expected = begin.toString() + " -- " + end.toString();
+        String actual = instance.toASCIIString();
+        assertEquals(actual, expected);
+    }
+    
     /**
      * Test of getDuration method, of class YearSpan.
      */
