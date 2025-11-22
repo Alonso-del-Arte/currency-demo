@@ -120,7 +120,7 @@ public class YearSpanNGTest {
             YearSpan badInstance = new YearSpan(begin, end);
             System.out.println(msg + ", not created instance " 
                     + badInstance.toString());
-        }, NullPointerException.class, msg);
+        }, IllegalArgumentException.class, msg);
         String excMsg = t.getMessage();
         assert excMsg != null : "Exception message should not be null";
         assert !excMsg.isBlank() : "Exception message should not be blank";
