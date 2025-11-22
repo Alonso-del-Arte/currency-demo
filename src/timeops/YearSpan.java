@@ -38,12 +38,8 @@ public class YearSpan implements Comparable<YearSpan>, DurationalSpan {
     }
     
     public YearSpan(Year begin, Year end) {
-        if (begin == null) {
-            String excMsg = "Beginning year must not be null";
-            throw new NullPointerException(excMsg);
-        }
-        if (end == null) {
-            String excMsg = "Ending year must not be null";
+        if (begin == null || end == null) {
+            String excMsg = "Both years must be non-null";
             throw new NullPointerException(excMsg);
         }
     }
