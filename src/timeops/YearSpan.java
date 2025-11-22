@@ -25,6 +25,8 @@ import java.time.Year;
  */
 public class YearSpan implements Comparable<YearSpan>, DurationalSpan {
     
+    private final Year start, finish;
+    
     // TODO: Write tests for this
     @Override
     public Duration getDuration() {
@@ -35,6 +37,11 @@ public class YearSpan implements Comparable<YearSpan>, DurationalSpan {
     @Override
     public int compareTo(YearSpan other) {
         return 0;
+    }
+    
+    @Override
+    public String toString() {
+        return this.start.toString() + '\u2014' + this.finish.toString();
     }
     
     // TODO: Write tests for this
@@ -48,6 +55,8 @@ public class YearSpan implements Comparable<YearSpan>, DurationalSpan {
                     + " and ending year " + end.toString() + " are not valid";
             throw new IllegalArgumentException(excMsg);
         }
+        this.start = begin;
+        this.finish = end;
     }
     
 }
