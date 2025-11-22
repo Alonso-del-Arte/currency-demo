@@ -37,12 +37,12 @@ public class YearSpanNGTest {
     
     private static final int BOUND_YEAR = 2200;
     
-    private Year chooseYear() {
+    private static Year chooseYear() {
         int isoYear = RANDOM.nextInt(ORIGIN_YEAR, BOUND_YEAR);
         return Year.of(isoYear);
     }
     
-    private Year chooseYearAfter(Year year) {
+    private static Year chooseYearAfter(Year year) {
         int origin = year.getValue() + 1;
         int bound = origin + 200;
         int isoYear = RANDOM.nextInt(origin, bound);
