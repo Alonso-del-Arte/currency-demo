@@ -17,6 +17,10 @@
 package timeops;
 
 import java.time.Duration;
+import java.time.Year;
+import java.util.Random;
+
+import static org.testframe.api.Asserters.assertThrows;
 
 import static org.testng.Assert.*;
 import org.testng.annotations.Test;
@@ -26,6 +30,17 @@ import org.testng.annotations.Test;
  * @author Alonso del Arte
  */
 public class YearSpanNGTest {
+    
+    private static final Random RANDOM = new Random();
+    
+    private static final int ORIGIN_YEAR = 1800;
+    
+    private static final int BOUND_YEAR = 2200;
+    
+    private Year chooseYear() {
+        int isoYear = RANDOM.nextInt(ORIGIN_YEAR, BOUND_YEAR);
+        return Year.of(isoYear);
+    }
     
     /**
      * Test of getDuration method, of class YearSpan.
@@ -54,6 +69,22 @@ public class YearSpanNGTest {
 //        assertEquals(result, expResult);
         // TODO review the generated test code and remove the default call to fail.
         fail("The test case is a prototype.");
+    }
+    
+    @Test
+    public void testConstructorRejectsNullBeginYear() {
+        Year end = chooseYear();
+        String msg = "Null year and ending year " + end.toString() 
+                + " should cause an exception";
+        Throwable t = assertThrows(() -> {
+            YearSpan badInstance = new YearSpan(null, end);
+            System.out.println(msg + ", not created instance " 
+                    + badInstance.toString());
+        }, NullPointerException.class, msg);
+        String excMsg = t.getMessage();
+        assert excMsg != null : "Exception message should not be null";
+        assert !excMsg.isBlank() : "Exception message should not be blank";
+        System.out.println("\"" + excMsg + "\"");
     }
     
 }
