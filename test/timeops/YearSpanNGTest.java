@@ -87,4 +87,20 @@ public class YearSpanNGTest {
         System.out.println("\"" + excMsg + "\"");
     }
     
+    @Test
+    public void testConstructorRejectsNullEndYear() {
+        Year begin = chooseYear();
+        String msg = "Beginning year " + begin.toString() 
+                + " and null ending year should cause an exception";
+        Throwable t = assertThrows(() -> {
+            YearSpan badInstance = new YearSpan(begin, null);
+            System.out.println(msg + ", not created instance " 
+                    + badInstance.toString());
+        }, NullPointerException.class, msg);
+        String excMsg = t.getMessage();
+        assert excMsg != null : "Exception message should not be null";
+        assert !excMsg.isBlank() : "Exception message should not be blank";
+        System.out.println("\"" + excMsg + "\"");
+    }
+    
 }
