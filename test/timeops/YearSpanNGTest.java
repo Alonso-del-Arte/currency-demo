@@ -16,6 +16,8 @@
  */
 package timeops;
 
+import static currency.MoneyAmountNGTest.provideNull;
+
 import java.time.Duration;
 import java.time.Year;
 import java.util.ArrayList;
@@ -122,6 +124,14 @@ public class YearSpanNGTest {
         String message = "Span " + instance.toString() 
                 + " should be equal to itself";
         assertEquals(instance, instance, message);
+    }
+    
+    @Test
+    public void testNotEqualsNull() {
+        YearSpan instance = makeYearSpan();
+        String msg = "Span " + instance.toString() + " should not equal null";
+        Object obj = provideNull();
+        assert !instance.equals(obj) : msg;
     }
 
     /**
