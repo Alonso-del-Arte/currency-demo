@@ -31,9 +31,8 @@ public class YearSpan implements Comparable<YearSpan>, DurationalSpan {
         return this.start;
     }
     
-    // TODO: Write tests for this
     public Year getEndYear() {
-        return this.start;
+        return this.finish;
     }
     
     // TODO: Write tests for this
