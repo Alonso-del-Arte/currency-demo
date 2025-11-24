@@ -56,6 +56,18 @@ public class YearSpan implements Comparable<YearSpan>, DurationalSpan {
         return this.start.toString() + " -- " + this.finish.toString();
     }
     
+    // TODO: Write tests for this
+    @Override
+    public boolean equals(Object obj) {
+        return false;
+    }
+    
+    // TODO: Write tests for this
+    @Override
+    public int hashCode() {
+        return 0;
+    }
+    
     public YearSpan(Year begin, Year end) {
         if (begin.isAfter(end)) {
             String excMsg = "Beginning year " + begin.toString() 
