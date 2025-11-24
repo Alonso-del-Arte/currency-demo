@@ -18,6 +18,9 @@ package timeops;
 
 import java.time.Duration;
 import java.time.Year;
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.List;
 import java.util.Random;
 
 import static org.testframe.api.Asserters.assertThrows;
@@ -47,6 +50,12 @@ public class YearSpanNGTest {
         int bound = origin + 200;
         int isoYear = RANDOM.nextInt(origin, bound);
         return Year.of(isoYear);
+    }
+    
+    private static YearSpan makeYearSpan() {
+        Year begin = chooseYear();
+        Year end = chooseYearAfter(begin);
+        return new YearSpan(begin, end);
     }
     
     @Test
@@ -105,6 +114,14 @@ public class YearSpanNGTest {
 //        assertEquals(result, expResult);
         // TODO review the generated test code and remove the default call to fail.
         fail("The test case is a prototype.");
+    }
+    
+    @Test
+    public void testReferentialEquality() {
+        YearSpan instance = makeYearSpan();
+        String message = "Span " + instance.toString() 
+                + " should be equal to itself";
+        assertEquals(instance, instance, message);
     }
 
     /**
