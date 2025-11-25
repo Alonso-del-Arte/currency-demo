@@ -147,6 +147,16 @@ public class YearSpanNGTest {
         Object obj = passThrough(year);
         assert !instance.equals(obj) : msg;
     }
+    
+    @Test
+    public void testEquals() {
+        System.out.println("equals");
+        Year begin = chooseYear();
+        Year end = chooseYearAfter(begin);
+        YearSpan someSpan = new YearSpan(begin, end);
+        YearSpan sameSpan = new YearSpan(begin, end);
+        assertEquals(someSpan, sameSpan);
+    }
 
     /**
      * Test of compareTo method, of class YearSpan.
