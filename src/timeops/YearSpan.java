@@ -49,6 +49,9 @@ public class YearSpan implements Comparable<YearSpan>, DurationalSpan {
     
     @Override
     public String toString() {
+        if (this.start.equals(this.finish)) {
+            return this.start.toString();
+        }
         return this.start.toString() + '\u2014' + this.finish.toString();
     }
     
