@@ -72,6 +72,15 @@ public class YearSpanNGTest {
     }
     
     @Test
+    public void testToStringSingleYear() {
+        Year begin = chooseYear();
+        YearSpan instance = new YearSpan(begin, begin);
+        String expected = begin.toString();
+        String actual = instance.toString();
+        assertEquals(actual, expected);
+    }
+    
+    @Test
     public void testToASCIIString() {
         System.out.println("toASCIIString");
         Year begin = chooseYear();
