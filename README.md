@@ -227,6 +227,9 @@ will be the official currency of Bulgaria. The Bulgarian lev (BGL) will continue
 to be honored for cash payments until January 15, 2026, and after that levs can 
 be exchanged for euros at the Bulgarian National Bank indefinitely.
 
+As of late November 2025, Russia's banks appear to be on the brink of collapse. 
+There might be a new currency code for Russian rubles in a few months.
+
 ----
 
 This project is closed off to Hacktoberfest.
