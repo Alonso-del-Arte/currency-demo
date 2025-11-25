@@ -133,6 +133,20 @@ public class YearSpanNGTest {
         Object obj = provideNull();
         assert !instance.equals(obj) : msg;
     }
+    
+    private static Object passThrough(Object obj) {
+        return obj;
+    }
+
+    @Test
+    public void testNotEqualsDiffClass() {
+        Year year = chooseYear();
+        YearSpan instance = new YearSpan(year, year);
+        String msg = "Span " + instance.toString() 
+                + " should not equal year object";
+        Object obj = passThrough(year);
+        assert !instance.equals(obj) : msg;
+    }
 
     /**
      * Test of compareTo method, of class YearSpan.
