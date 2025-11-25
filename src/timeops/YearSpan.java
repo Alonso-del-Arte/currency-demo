@@ -65,7 +65,8 @@ public class YearSpan implements Comparable<YearSpan>, DurationalSpan {
             return false;
         }
         if (obj instanceof YearSpan other) {
-            return this.start.equals(other.start);
+            return this.start.equals(other.start) 
+                    && this.finish.equals(other.finish);
         } else {
             return false;
         }
