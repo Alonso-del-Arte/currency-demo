@@ -56,10 +56,19 @@ public class YearSpan implements Comparable<YearSpan>, DurationalSpan {
         return this.start.toString() + " -- " + this.finish.toString();
     }
     
-    // TODO: Write tests for this
     @Override
     public boolean equals(Object obj) {
-        return obj instanceof YearSpan;
+        if (this == obj) {
+            return true;
+        }
+        if (obj == null) {
+            return false;
+        }
+        if (obj instanceof YearSpan) {
+            return this.start.equals(((YearSpan) obj).start);
+        } else {
+            return false;
+        }
     }
     
     // TODO: Write tests for this
