@@ -157,6 +157,18 @@ public class YearSpanNGTest {
         YearSpan sameSpan = new YearSpan(begin, end);
         assertEquals(someSpan, sameSpan);
     }
+    
+    @Test
+    public void testNotEqualsDiffBegin() {
+        Year beginA = chooseYear();
+        Year beginB = beginA.plusYears(1);
+        Year end = chooseYearAfter(beginB);
+        YearSpan spanA = new YearSpan(beginA, end);
+        YearSpan spanB = new YearSpan(beginB, end);
+        String msg = "Span " + spanA.toString() + " should not be equal to " 
+                + spanB.toString();
+        assert !spanA.equals(spanB) : msg;
+    }
 
     /**
      * Test of compareTo method, of class YearSpan.
