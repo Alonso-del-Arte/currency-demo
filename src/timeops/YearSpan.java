@@ -59,7 +59,7 @@ public class YearSpan implements Comparable<YearSpan>, DurationalSpan {
     // TODO: Write tests for this
     @Override
     public boolean equals(Object obj) {
-        return obj != null;
+        return obj instanceof YearSpan;
     }
     
     // TODO: Write tests for this
