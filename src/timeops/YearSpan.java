@@ -56,6 +56,9 @@ public class YearSpan implements Comparable<YearSpan>, DurationalSpan {
     }
     
     public String toASCIIString() {
+        if (this.start.equals(this.finish)) {
+            return this.start.toString();
+        }
         return this.start.toString() + " -- " + this.finish.toString();
     }
     
