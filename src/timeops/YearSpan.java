@@ -54,7 +54,7 @@ public class YearSpan implements Comparable<YearSpan>, DurationalSpan {
     // TODO: Write tests for this
     @Override
     public int compareTo(YearSpan other) {
-        return 0;
+        return Integer.compare(this.start.getValue(), other.start.getValue());
     }
     
     @Override
