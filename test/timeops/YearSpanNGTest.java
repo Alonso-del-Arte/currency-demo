@@ -101,6 +101,17 @@ public class YearSpanNGTest {
     }
     
     @Test
+    public void testToHTMLString() {
+        System.out.println("toHTMLString");
+        Year begin = chooseYear();
+        Year end = chooseYearAfter(begin);
+        YearSpan instance = new YearSpan(begin, end);
+        String expected = begin.toString() + "&mdash;" + end.toString();
+        String actual = instance.toHTMLString().replace(" ", "");
+        assertEquals(actual, expected);
+    }
+    
+    @Test
     public void testGetBeginYear() {
         System.out.println("getBeginYear");
         Year expected = chooseYear();
