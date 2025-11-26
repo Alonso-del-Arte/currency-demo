@@ -62,6 +62,17 @@ public class YearSpan implements Comparable<YearSpan>, DurationalSpan {
         return this.start.toString() + " -- " + this.finish.toString();
     }
     
+    /**
+     * Determines if this year span object is equal to another object. For the 
+     * examples, suppose this year span is 1991&mdash;1998.
+     * @param obj The object to compare. Examples: a {@code Year} object for 
+     * 1991, the year span 1989&mdash;1998, the year span 1991&mdash;1998, the 
+     * year span 1991&mdash;2003, and null.
+     * @return True only if {@code obj} is a {@code YearSpan} object with the 
+     * same beginning year and the same ending year, false otherwise. In the 
+     * examples, this would return true for 1991&mdash;1998, false for all 
+     * others.
+     */
     @Override
     public boolean equals(Object obj) {
         if (this == obj) {
@@ -78,10 +89,16 @@ public class YearSpan implements Comparable<YearSpan>, DurationalSpan {
         }
     }
     
-    // TODO: Write tests for this
+    /**
+     * Gives a hash code for this year span. There is no attempt made to obscure 
+     * the pertinent numbers.
+     * @return A hash code which simply consists of the beginning year shifted 
+     * sixteen bits to the right plus the ending year. For example, for 
+     * 2001&mdash;2187, this would be 131139723.
+     */
     @Override
     public int hashCode() {
-        return 0;
+        return (this.start.getValue() << 16) + this.finish.getValue();
     }
     
     public YearSpan(Year begin, Year end) {
