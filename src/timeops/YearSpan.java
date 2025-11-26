@@ -101,6 +101,16 @@ public class YearSpan implements Comparable<YearSpan>, DurationalSpan {
         return (this.start.getValue() << 16) + this.finish.getValue();
     }
     
+    /**
+     * Sole constructor.
+     * @param begin The beginning year. For example, 1968.
+     * @param end The ending year. For example, 2012. This may be the same as 
+     * {@code begin} but it must not be earlier.
+     * @throws IllegalArgumentException If the ending year is prior to the 
+     * beginning year.
+     * @throws NullPointerException If either {@code begin} or {@code end} is 
+     * null.
+     */
     public YearSpan(Year begin, Year end) {
         if (begin.isAfter(end)) {
             String excMsg = "Beginning year " + begin.toString() 
