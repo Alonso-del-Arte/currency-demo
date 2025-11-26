@@ -72,6 +72,11 @@ public class YearSpan implements Comparable<YearSpan>, DurationalSpan {
         return this.start.toString() + " -- " + this.finish.toString();
     }
     
+    // TODO: Write tests for this
+    public String toHTMLString() {
+        return "SORRY, NOT IMPLEMENTED YET";
+    }
+    
     /**
      * Determines if this year span object is equal to another object. For the 
      * examples, suppose this year span is 1991&mdash;1998.
