@@ -199,6 +199,18 @@ public class YearSpanNGTest {
                 + spanB.toString();
         assert !spanA.equals(spanB) : msg;
     }
+    
+    @Test
+    public void testHashCode() {
+        System.out.println("hashCode");
+        Year begin = chooseYear();
+        Year end = chooseYearAfter(begin);
+        YearSpan instance = new YearSpan(begin, end);
+        int expected = (begin.getValue() << 16) + end.getValue();
+        int actual = instance.hashCode();
+        String message = "Reckoning hash code for " + instance.toString();
+        assertEquals(actual, expected, message);
+    }
 
     /**
      * Test of compareTo method, of class YearSpan.
