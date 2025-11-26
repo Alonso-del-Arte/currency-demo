@@ -27,10 +27,20 @@ public class YearSpan implements Comparable<YearSpan>, DurationalSpan {
     
     private final Year start, finish;
     
+    /**
+     * Retrieves the beginning year for this span. For the example, suppose this 
+     * year span is 1871&mdash;2008.
+     * @return The beginning year. For example, 1871. Never null.
+     */
     public Year getBeginYear() {
         return this.start;
     }
     
+    /**
+     * Retrieves the ending year for this span. For the example, suppose this 
+     * year span is 1871&mdash;2008.
+     * @return The ending year. For example, 2008. Never null.
+     */
     public Year getEndYear() {
         return this.finish;
     }
