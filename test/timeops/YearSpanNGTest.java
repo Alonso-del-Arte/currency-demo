@@ -49,7 +49,7 @@ public class YearSpanNGTest {
     
     private static Year chooseYearAfter(Year year) {
         int origin = year.getValue() + 1;
-        int bound = origin + 200;
+        int bound = origin + 75;
         int isoYear = RANDOM.nextInt(origin, bound);
         return Year.of(isoYear);
     }
@@ -233,18 +233,27 @@ public class YearSpanNGTest {
     }
 
     /**
-     * Test of compareTo method, of class YearSpan.
+     * Test of the compareTo function, of the YearSpan class.
      */
-//    @Test
+    @Test
     public void testCompareTo() {
         System.out.println("compareTo");
-        YearSpan other = null;
-        YearSpan instance = null;
-        int expResult = 0;
-//        int result = instance.compareTo(other);
-//        assertEquals(result, expResult);
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
+        List<YearSpan> expected = new ArrayList<>();
+        int isoYear = RANDOM.nextInt(ORIGIN_YEAR - 100, ORIGIN_YEAR);
+        Year begin = Year.of(isoYear);
+        Year bound = Year.of(BOUND_YEAR);
+        while (begin.isBefore(bound)) {
+            Year end = chooseYearAfter(begin);
+            YearSpan span = new YearSpan(begin, end);
+            expected.add(span);
+            begin = end;
+        }
+        List<YearSpan> actual = new ArrayList<>(expected);
+        Collections.shuffle(actual);
+        Collections.sort(actual);
+        String message = "Year spans should be sorted as " 
+                + expected.toString();
+        assertEquals(actual, expected, message);
     }
     
     @Test
