@@ -184,6 +184,8 @@ public class FreeAPIAccessNGTest {
                 currIndex = ratesResponse.indexOf("\"", currIndex + 4);
             }
         }
+        System.out.println("Test class dollar conversions quote map has " 
+                + QUOTE_MAP.size() + " elements");
     }
     
     @Test
