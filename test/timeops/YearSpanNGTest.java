@@ -257,6 +257,25 @@ public class YearSpanNGTest {
     }
     
     @Test
+    public void testCompareToSameBeginYear() {
+        int initialCapacity = RANDOM.nextInt(16) + 4;
+        List<YearSpan> expected = new ArrayList<>(initialCapacity);
+        Year begin = chooseYear();
+        Year end = chooseYearAfter(begin);
+        while (expected.size() < initialCapacity) {
+            YearSpan span = new YearSpan(begin, end);
+            expected.add(span);
+            end = chooseYearAfter(end);
+        }
+        List<YearSpan> actual = new ArrayList<>(expected);
+        Collections.shuffle(actual);
+        Collections.sort(actual);
+        String message = "Year spans should be sorted as " 
+                + expected.toString();
+        assertEquals(actual, expected, message);
+    }
+    
+    @Test
     public void testConstructorRejectsNullBeginYear() {
         Year end = chooseYear();
         String msg = "Null year and ending year " + end.toString() 
