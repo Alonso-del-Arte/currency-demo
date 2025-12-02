@@ -27,6 +27,10 @@ import java.time.Year;
  */
 public class YearSpan implements Comparable<YearSpan>, DurationalSpan {
     
+    private static final int DAYS_IN_A_NON_LEAP_YEAR = 365;
+    
+    private static final int DAYS_IN_A_LEAP_YEAR = DAYS_IN_A_NON_LEAP_YEAR + 1;
+    
     private final Year start, finish;
     
     /**
@@ -55,7 +59,7 @@ public class YearSpan implements Comparable<YearSpan>, DurationalSpan {
 //     * {@code Duration} objects returned by {@link #getDuration()}.
     @Override
     public Duration getDuration() {
-        return Duration.ZERO;
+        return Duration.ofDays(DAYS_IN_A_NON_LEAP_YEAR);
     }
     
     /**
