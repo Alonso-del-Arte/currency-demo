@@ -20,7 +20,9 @@ import java.time.Duration;
 import java.time.Year;
 
 /**
- * Represents a span of one or more years.
+ * Represents a span of one or more years. This class is intended for use by 
+ * {@link currency.comparators.HistoricalCurrenciesComparator} to sort 
+ * historical currencies with known years of validity.
  * @author Alonso del Arte
  */
 public class YearSpan implements Comparable<YearSpan>, DurationalSpan {
@@ -29,7 +31,7 @@ public class YearSpan implements Comparable<YearSpan>, DurationalSpan {
     
     /**
      * Retrieves the beginning year for this span. For the example, suppose this 
-     * year span is 1871&mdash;2008.
+     * year span is 1871 &mdash; 2008.
      * @return The beginning year. For example, 1871. Never null.
      */
     public Year getBeginYear() {
@@ -38,7 +40,7 @@ public class YearSpan implements Comparable<YearSpan>, DurationalSpan {
     
     /**
      * Retrieves the ending year for this span. For the example, suppose this 
-     * year span is 1871&mdash;2008.
+     * year span is 1871 &mdash; 2008.
      * @return The ending year. For example, 2008. Never null.
      */
     public Year getEndYear() {
@@ -46,6 +48,11 @@ public class YearSpan implements Comparable<YearSpan>, DurationalSpan {
     }
     
     // TODO: Write tests for this
+    // TODO: Once this is passing all the pertinent tests, amend the {@link 
+    // #compareTo()} Javadoc to include the following:
+//    To compare 
+//     * year spans by duration, use the {@code compareTo()} function of the 
+//     * {@code Duration} objects returned by {@link #getDuration()}.
     @Override
     public Duration getDuration() {
         return Duration.ZERO;
@@ -55,14 +62,21 @@ public class YearSpan implements Comparable<YearSpan>, DurationalSpan {
      * Compares this year span to another year span. Note that the ending years 
      * are considered only if the beginning years are the same. Thus a longer 
      * span will be considered "less" than a short span that begins later. For 
-     * the examples, suppose this year span is 1871 &mdash; 2008.
+     * the examples, suppose this year span is 1871 &mdash; 2008. 
      * @param other The span to compare. Examples: 1871 &mdash; 2008, 1871 
-     * &mdash; 1898, 1994 &mdash; 2008. 
+     * &mdash; 1898, 1994 &mdash; 2008.
      * @return 0 if this year span begins and ends on the same years as {@code 
-     * other}; &minus;1 or any negative integer if {@code other} begins on a  
-     * later year, or they begin on the same year but this span ends earlier; 
-     * 1 or any positive integer if {@code other} begins on an earlier year, or 
-     * if they begin on the same year but this span ends later.
+     * other}; &minus;1 or any other negative integer if {@code other} begins on 
+     * a later year, or they begin on the same year but this span ends earlier; 
+     * 1 or any other positive integer if {@code other} begins on an earlier 
+     * year, or if they begin on the same year but this span ends later. In the 
+     * examples, this function would return 0 for 1871 &mdash; 2008 because the 
+     * beginning and ending years are the same; it might return 110 or any other 
+     * positive integer for 1871 &mdash; 1898 (beginning years are the same but 
+     * the ending years are 110 years apart); it might return &minus;123 or any 
+     * other negative integer for 1994 &mdash; 2008 as the beginning years are 
+     * 123 years apart (that the ending years are the same is not taken into 
+     * account when the beginning years are different).
      */
     @Override
     public int compareTo(YearSpan other) {
@@ -96,13 +110,13 @@ public class YearSpan implements Comparable<YearSpan>, DurationalSpan {
     
     /**
      * Determines if this year span object is equal to another object. For the 
-     * examples, suppose this year span is 1991&mdash;1998.
+     * examples, suppose this year span is 1991 &mdash; 1998.
      * @param obj The object to compare. Examples: a {@code Year} object for 
-     * 1991, the year span 1989&mdash;1998, the year span 1991&mdash;1998, the 
-     * year span 1991&mdash;2003, and null.
+     * 1991, the year span 1989 &mdash; 1998, the year span 1991 &mdash; 1998,  
+     * the year span 1991 &mdash; 2003, and null.
      * @return True only if {@code obj} is a {@code YearSpan} object with the 
      * same beginning year and the same ending year, false otherwise. In the 
-     * examples, this would return true for 1991&mdash;1998, false for all 
+     * examples, this would return true for 1991 &mdash; 1998, false for all 
      * others.
      */
     @Override
@@ -126,7 +140,7 @@ public class YearSpan implements Comparable<YearSpan>, DurationalSpan {
      * the pertinent numbers.
      * @return A hash code which simply consists of the beginning year shifted 
      * sixteen bits to the right plus the ending year. For example, for 
-     * 2001&mdash;2187, this would be 131139723.
+     * 2001 &mdash; 2187, this would be 131139723.
      */
     @Override
     public int hashCode() {
