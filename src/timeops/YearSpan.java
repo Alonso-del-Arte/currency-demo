@@ -55,7 +55,7 @@ public class YearSpan implements Comparable<YearSpan>, DurationalSpan {
     public int compareTo(YearSpan other) {
         if (this.start.equals(other.start)) {
             if (this.finish.equals(other.finish)) {
-                return -2;
+                return 0;
             }
             return this.finish.compareTo(other.finish);
         }
