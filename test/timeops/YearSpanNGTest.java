@@ -26,6 +26,7 @@ import java.util.List;
 import java.util.Random;
 
 import static org.testframe.api.Asserters.assertThrows;
+import static org.testframe.api.Asserters.assertZero;
 
 import static org.testng.Assert.*;
 import org.testng.annotations.Test;
@@ -273,6 +274,18 @@ public class YearSpanNGTest {
         String message = "Year spans should be sorted as " 
                 + expected.toString();
         assertEquals(actual, expected, message);
+    }
+    
+    @Test
+    public void testCompareToSameBeginYearSameEndYear() {
+        Year begin = chooseYear();
+        Year end = chooseYearAfter(begin);
+        YearSpan someSpan = new YearSpan(begin, end);
+        YearSpan sameSpan = new YearSpan(begin, end);
+        int actual = someSpan.compareTo(sameSpan);
+        String msg = "Span " + someSpan.toString() + " should compare 0 to " 
+                + sameSpan.toString();
+        assertZero(actual, msg);
     }
     
     @Test
