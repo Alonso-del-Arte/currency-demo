@@ -59,10 +59,10 @@ public class YearSpan implements Comparable<YearSpan>, DurationalSpan {
      * @param other The span to compare. Examples: 1871 &mdash; 2008, 1871 
      * &mdash; 1898, 1994 &mdash; 2008. 
      * @return 0 if this year span begins and ends on the same years as {@code 
-     * other}; &minus;1 or any negative integer if {@code other} begins on an 
-     * earlier year, or they begin on the same year but this span ends earlier; 
-     * 1 or any positive integer if {@code other} begins on a later year, or if 
-     * they begin on the same year but this span ends later.
+     * other}; &minus;1 or any negative integer if {@code other} begins on a  
+     * later year, or they begin on the same year but this span ends earlier; 
+     * 1 or any positive integer if {@code other} begins on an earlier year, or 
+     * if they begin on the same year but this span ends later.
      */
     @Override
     public int compareTo(YearSpan other) {
