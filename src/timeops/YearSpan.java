@@ -51,12 +51,25 @@ public class YearSpan implements Comparable<YearSpan>, DurationalSpan {
         return Duration.ZERO;
     }
     
+    /**
+     * Compares this year span to another year span. Note that the ending years 
+     * are considered only if the beginning years are the same. Thus a longer 
+     * span will be considered "less" than a short span that begins later. For 
+     * the examples, suppose this year span is 1871 &mdash; 2008.
+     * @param other The span to compare. Examples: 1871 &mdash; 2008, 1871 
+     * &mdash; 1898, 1994 &mdash; 2008. 
+     * @return 0 if this year span begins and ends on the same years as {@code 
+     * other}; &minus;1 or any negative integer if {@code other} begins on an 
+     * earlier year, or they begin on the same year but this span ends earlier; 
+     * 1 or any positive integer if {@code other} begins on a later year, or if 
+     * they begin on the same year but this span ends later.
+     */
     @Override
     public int compareTo(YearSpan other) {
-        if (this.start.equals(other.start)) {
+        int comparison = this.start.compareTo(other.start);
+        if (comparison == 0) {
             return this.finish.compareTo(other.finish);
-        }
-        return this.start.compareTo(other.start);
+        } else return comparison;
     }
     
     @Override
