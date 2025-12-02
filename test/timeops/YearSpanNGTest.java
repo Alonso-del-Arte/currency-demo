@@ -43,6 +43,10 @@ public class YearSpanNGTest {
     
     private static final int BOUND_YEAR = 2200;
     
+    private static final int DAYS_IN_A_NON_LEAP_YEAR = 365;
+    
+    private static final int DAYS_IN_A_LEAP_YEAR = DAYS_IN_A_NON_LEAP_YEAR + 1;
+    
     private static Year chooseYear() {
         int isoYear = RANDOM.nextInt(ORIGIN_YEAR, BOUND_YEAR);
         return Year.of(isoYear);
@@ -53,6 +57,12 @@ public class YearSpanNGTest {
         int bound = origin + 75;
         int isoYear = RANDOM.nextInt(origin, bound);
         return Year.of(isoYear);
+    }
+    
+    private static Year chooseNonLeapYear() {
+        int leapYear = 4 * RANDOM.nextInt(400, 600);
+        int nonLeapMod = RANDOM.nextInt(3) + 1;
+        return Year.of(leapYear + nonLeapMod);
     }
     
     private static YearSpan makeYearSpan() {
@@ -140,6 +150,16 @@ public class YearSpanNGTest {
         YearSpan instance = new YearSpan(begin, expected);
         Year actual = instance.getEndYear();
         String message = "Getting end year for " + instance.toString();
+        assertEquals(actual, expected, message);
+    }
+    
+    @Test
+    public void testGetDurationSingleNonLeapYear() {
+        Year begin = chooseNonLeapYear();
+        YearSpan span = new YearSpan(begin, begin);
+        Duration expected = Duration.ofDays(DAYS_IN_A_NON_LEAP_YEAR);
+        Duration actual = span.getDuration();
+        String message = "Reckoning duration of " + span.toString();
         assertEquals(actual, expected, message);
     }
     
