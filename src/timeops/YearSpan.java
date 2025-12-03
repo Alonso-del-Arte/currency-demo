@@ -23,6 +23,9 @@ import java.time.Year;
  * Represents a span of one or more years. This class is intended for use by 
  * {@link currency.comparators.HistoricalCurrenciesComparator} to sort 
  * historical currencies with known years of validity.
+ * <p>A year span technically begins on January 1 of the beginning year and ends 
+ * on December 31 of the ending year. A finer-grained {@link DurationalSpan} is 
+ * needed for different starting and/or ending dates.</p>
  * @author Alonso del Arte
  */
 public class YearSpan implements Comparable<YearSpan>, DurationalSpan {
