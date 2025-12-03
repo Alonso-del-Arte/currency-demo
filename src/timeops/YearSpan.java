@@ -65,10 +65,11 @@ public class YearSpan implements Comparable<YearSpan>, DurationalSpan {
 //     * {@code Duration} objects returned by {@link #getDuration()}.
     @Override
     public Duration getDuration() {
+        int numberOfYears = this.finish.getValue() - this.start.getValue() + 1;
         if (this.start.equals(this.finish)) {
             return Duration.ofDays(DAYS_IN_A_NON_LEAP_YEAR);
         } else {
-            return Duration.ofDays(DAYS_IN_TWO_NON_LEAP_YEARS);
+            return Duration.ofDays(numberOfYears * DAYS_IN_A_NON_LEAP_YEAR);
         }
     }
     
