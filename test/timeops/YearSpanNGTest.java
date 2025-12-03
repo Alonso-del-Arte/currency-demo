@@ -206,17 +206,19 @@ public class YearSpanNGTest {
     }
     
     /**
-     * Test of getDuration method, of class YearSpan.
+     * Test of the getDuration function, of the YearSpan class.
      */
-//    @Test
+    @Test
     public void testGetDuration() {
         System.out.println("getDuration");
-        YearSpan instance = null;
-        Duration expResult = null;
-//        Duration result = instance.getDuration();
-//        assertEquals(result, expResult);
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
+        Year begin = chooseYear();
+        Year end = begin.plusYears(3);
+        YearSpan span = new YearSpan(begin, end);
+        int numberOfDays = 4 * DAYS_IN_A_NON_LEAP_YEAR + 1;
+        Duration expected = Duration.ofDays(numberOfDays);
+        Duration actual = span.getDuration();
+        String message = "Reckoning duration of " + span.toString();
+        assertEquals(actual, expected, message);
     }
     
     @Test
