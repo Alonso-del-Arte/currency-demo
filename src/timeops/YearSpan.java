@@ -34,6 +34,9 @@ public class YearSpan implements Comparable<YearSpan>, DurationalSpan {
     
     private static final int DAYS_IN_A_LEAP_YEAR = DAYS_IN_A_NON_LEAP_YEAR + 1;
     
+    private static final int DAYS_IN_TWO_NON_LEAP_YEARS 
+            = 2 * DAYS_IN_A_NON_LEAP_YEAR;
+    
     private final Year start, finish;
     
     /**
@@ -62,7 +65,11 @@ public class YearSpan implements Comparable<YearSpan>, DurationalSpan {
 //     * {@code Duration} objects returned by {@link #getDuration()}.
     @Override
     public Duration getDuration() {
-        return Duration.ofDays(DAYS_IN_A_NON_LEAP_YEAR);
+        if (this.start.equals(this.finish)) {
+            return Duration.ofDays(DAYS_IN_A_NON_LEAP_YEAR);
+        } else {
+            return Duration.ofDays(DAYS_IN_TWO_NON_LEAP_YEARS);
+        }
     }
     
     /**
