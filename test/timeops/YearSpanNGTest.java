@@ -47,6 +47,9 @@ public class YearSpanNGTest {
     
     private static final int DAYS_IN_A_LEAP_YEAR = DAYS_IN_A_NON_LEAP_YEAR + 1;
     
+    private static final int DAYS_IN_TWO_NON_LEAP_YEARS 
+            = 2 * DAYS_IN_A_NON_LEAP_YEAR;
+    
     private static Year chooseYear() {
         int isoYear = RANDOM.nextInt(ORIGIN_YEAR, BOUND_YEAR);
         return Year.of(isoYear);
@@ -57,6 +60,12 @@ public class YearSpanNGTest {
         int bound = origin + 75;
         int isoYear = RANDOM.nextInt(origin, bound);
         return Year.of(isoYear);
+    }
+    
+    private static Year chooseLeapYear() {
+        int leapYear = 4 * RANDOM.nextInt(401, 599);
+        int adjustment = (leapYear % 100 == 0) ? 4 : 0;
+        return Year.of(leapYear + adjustment);
     }
     
     private static Year chooseNonLeapYear() {
@@ -158,6 +167,28 @@ public class YearSpanNGTest {
         Year begin = chooseNonLeapYear();
         YearSpan span = new YearSpan(begin, begin);
         Duration expected = Duration.ofDays(DAYS_IN_A_NON_LEAP_YEAR);
+        Duration actual = span.getDuration();
+        String message = "Reckoning duration of " + span.toString();
+        assertEquals(actual, expected, message);
+    }
+    
+    @Test
+    public void testGetDurationTwoNonLeapsYears1To2Mod4() {
+        Year begin = chooseLeapYear().plusYears(1);
+        Year end = begin.plusYears(1);
+        YearSpan span = new YearSpan(begin, end);
+        Duration expected = Duration.ofDays(DAYS_IN_TWO_NON_LEAP_YEARS);
+        Duration actual = span.getDuration();
+        String message = "Reckoning duration of " + span.toString();
+        assertEquals(actual, expected, message);
+    }
+    
+    @Test
+    public void testGetDurationTwoNonLeapsYears2To3Mod4() {
+        Year begin = chooseLeapYear().plusYears(2);
+        Year end = begin.plusYears(1);
+        YearSpan span = new YearSpan(begin, end);
+        Duration expected = Duration.ofDays(DAYS_IN_TWO_NON_LEAP_YEARS);
         Duration actual = span.getDuration();
         String message = "Reckoning duration of " + span.toString();
         assertEquals(actual, expected, message);
