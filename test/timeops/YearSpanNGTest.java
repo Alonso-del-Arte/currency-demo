@@ -194,6 +194,17 @@ public class YearSpanNGTest {
         assertEquals(actual, expected, message);
     }
     
+    @Test
+    public void testGetDurationThreeNonLeapsYears() {
+        Year begin = chooseLeapYear().plusYears(1);
+        Year end = begin.plusYears(2);
+        YearSpan span = new YearSpan(begin, end);
+        Duration expected = Duration.ofDays(3 * DAYS_IN_A_NON_LEAP_YEAR);
+        Duration actual = span.getDuration();
+        String message = "Reckoning duration of " + span.toString();
+        assertEquals(actual, expected, message);
+    }
+    
     /**
      * Test of getDuration method, of class YearSpan.
      */
