@@ -205,12 +205,8 @@ public class YearSpanNGTest {
         assertEquals(actual, expected, message);
     }
     
-    /**
-     * Test of the getDuration function, of the YearSpan class.
-     */
     @Test
-    public void testGetDuration() {
-        System.out.println("getDuration");
+    public void testGetDurationFourYears() {
         Year begin = chooseYear();
         Year end = begin.plusYears(3);
         YearSpan span = new YearSpan(begin, end);
@@ -220,6 +216,22 @@ public class YearSpanNGTest {
         String message = "Reckoning duration of " + span.toString();
         assertEquals(actual, expected, message);
     }
+    
+    /**
+     * Test of the getDuration function, of the YearSpan class.
+     */
+    @Test
+    public void testGetDuration() {
+        System.out.println("getDuration");
+        fail("WRITE TEST FOR ARBITRARY SPAN > 4 YEARS WITHIN SAME CENTURY");
+        // TODO: Write test for span such as 1907 -- 1983, 2002 -- 2079
+    }
+    
+    // TODO: Write test for getDuration() of year span going across non-leap 
+    // year century boundary, e.g., 1891 -- 1907, 2079 -- 2103
+    
+    // TODO: Write test for getDuration() of year span going across leap year 
+    // century boundary, e.g., 1993 -- 2005
     
     @Test
     public void testReferentialEquality() {
