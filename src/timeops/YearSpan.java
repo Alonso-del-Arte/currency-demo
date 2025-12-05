@@ -18,6 +18,7 @@ package timeops;
 
 import java.time.Duration;
 import java.time.Year;
+import java.time.format.DateTimeParseException;
 
 /**
  * Represents a span of one or more years. This class is intended for use by 
@@ -69,6 +70,11 @@ public class YearSpan implements Comparable<YearSpan>, DurationalSpan {
         int leapDays = (numberOfYears > 3) ? 1 : 0;
         return Duration.ofDays(numberOfYears * DAYS_IN_A_NON_LEAP_YEAR 
                 + leapDays);
+    }
+    
+    // TODO: Write tests for this
+    public static YearSpan parse(String s) {
+        return new YearSpan(Year.of(-7000), Year.of(6000));
     }
     
     /**
