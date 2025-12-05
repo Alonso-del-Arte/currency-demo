@@ -213,9 +213,14 @@ this project.
 The situation with the Zimbabwean dollar (ZWD, ZWL, ZWN, ZWR) is even more 
 confusing. The currency chooser in this project simply omits them all, even 
 though at least one currency conversion API acknowledges one of the four 
-ISO-4217 codes as valid. Specifically, Manny's currency converter API 
+ISO-4217 codes as valid. Specifically, Manny's currency conversion API 
 acknowledges ZWL as a valid current currency code, with an exchange rate from 
 U.&nbsp;S. dollar of 321.999592 as of September 10, 2024.
+
+Working with the AYR Tech currency conversion API, I've learned of yet another 
+currency code for the Zimbabwean dollar: ZWG. But the wrinkle with this one is 
+that the AYR Tech API gives the same rate for both ZWG and ZWL. The more I look 
+into it, the more confused I get.
 
 Note to self, 13 December 2024: Check if Trinidad &amp; Tobago dollar is brittle 
 for other display names test
