@@ -64,7 +64,7 @@ public class YearSpan implements Comparable<YearSpan>, DurationalSpan {
     }
     
     // TODO: Write tests for this
-    public boolean isWithin(Year year) {
+    public boolean includes(Year year) {
         return false;
     }
     
