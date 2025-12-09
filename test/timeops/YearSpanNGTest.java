@@ -227,6 +227,17 @@ public class YearSpanNGTest {
     }
     
     @Test
+    public void testAfterIsNotIncluded() {
+        Year year = chooseYear();
+        Year begin = chooseYearAfter(year);
+        Year end = chooseYearAfter(begin);
+        YearSpan instance = new YearSpan(begin, end);
+        String msg = instance.toString() + " should not include " 
+                + year.toString();
+        assert !instance.includes(year) : msg;
+    }
+    
+    @Test
     public void testGetDurationSingleNonLeapYear() {
         Year begin = chooseNonLeapYear();
         YearSpan span = new YearSpan(begin, begin);
