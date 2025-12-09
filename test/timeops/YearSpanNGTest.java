@@ -177,6 +177,20 @@ public class YearSpanNGTest {
     }
     
     @Test
+    public void testWithinIsNotBefore() {
+        Year begin = chooseYear();
+        Year end = chooseYearAfter(begin);
+        YearSpan instance = new YearSpan(begin, end);
+        Year stop = end.plusYears(1);
+        for (Year year = begin; year.isBefore(stop); year = year.plusYears(1)) {
+            String msg = instance.toString() 
+                    + " should not be considered to be before " 
+                    + year.toString();
+            assert !instance.isBefore(year) : msg;
+        }
+    }
+    
+    @Test
     public void testGetDurationSingleNonLeapYear() {
         Year begin = chooseNonLeapYear();
         YearSpan span = new YearSpan(begin, begin);
