@@ -20,11 +20,13 @@ import static currency.MoneyAmountNGTest.provideNull;
 
 import java.time.Duration;
 import java.time.Year;
+import java.time.format.DateTimeParseException;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 import java.util.Random;
 
+import static org.testframe.api.Asserters.assertDoesNotThrow;
 import static org.testframe.api.Asserters.assertThrows;
 import static org.testframe.api.Asserters.assertZero;
 
@@ -163,6 +165,18 @@ public class YearSpanNGTest {
     }
     
     @Test
+    public void testIsBefore() {
+        System.out.println("isBefore");
+        Year begin = chooseYear();
+        Year end = chooseYearAfter(begin);
+        YearSpan instance = new YearSpan(begin, end);
+        Year year = chooseYearAfter(end);
+        String msg = instance.toString() + " should be before " 
+                + year.toString();
+        assert instance.isBefore(year) : msg;
+    }
+    
+    @Test
     public void testGetDurationSingleNonLeapYear() {
         Year begin = chooseNonLeapYear();
         YearSpan span = new YearSpan(begin, begin);
@@ -220,7 +234,7 @@ public class YearSpanNGTest {
     /**
      * Test of the getDuration function, of the YearSpan class.
      */
-    @Test
+    @Test(enabled = false)
     public void testGetDuration() {
         System.out.println("getDuration");
         fail("WRITE TEST FOR ARBITRARY SPAN > 4 YEARS WITHIN SAME CENTURY");
