@@ -59,6 +59,22 @@ public class YearSpan implements Comparable<YearSpan>, DurationalSpan {
     }
     
     // TODO: Write tests for this
+    public boolean isBefore(Year year) {
+        return false;
+    }
+    
+    // TODO: Write tests for this
+    public boolean isWithin(Year year) {
+        return false;
+    }
+    
+    // TODO: Write tests for this
+    public boolean isAfter(Year year) {
+        return false;
+    }
+    
+    // TODO: Write tests for this accounting for century non-leap years, e.g., 
+    // 1900, 2100
     // TODO: Once this is passing all the pertinent tests, amend the {@link 
     // #compareTo()} Javadoc to include the following:
 //    To compare 
