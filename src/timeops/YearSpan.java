@@ -75,7 +75,7 @@ public class YearSpan implements Comparable<YearSpan>, DurationalSpan {
     
     // TODO: Write tests for this
     public boolean includes(Year year) {
-        return false;
+        return year.compareTo(this.finish) < 1;
     }
     
     // TODO: Write tests for this
