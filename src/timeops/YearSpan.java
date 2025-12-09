@@ -60,7 +60,7 @@ public class YearSpan implements Comparable<YearSpan>, DurationalSpan {
     
     // TODO: Write tests for this
     public boolean isBefore(Year year) {
-        return true;
+        return year.isAfter(this.finish) || year.isBefore(this.start);
     }
     
     // TODO: Write tests for this
