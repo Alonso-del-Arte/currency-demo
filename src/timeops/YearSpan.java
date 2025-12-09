@@ -58,9 +58,19 @@ public class YearSpan implements Comparable<YearSpan>, DurationalSpan {
         return this.finish;
     }
     
-    // TODO: Write tests for this
+    /**
+     * Determines whether or not this span is before a given year. For the 
+     * examples, suppose this span is 1994 &mdash; 2002.
+     * @param year The year for which to make the determination. Examples: 2025, 
+     * 2013, 2002, 1998, 1994, 1873.
+     * @return True if this span is before {@code year}, or in other words, 
+     * {@code year} is after the end of this year span. False otherwise. In the 
+     * examples, true for 2025 and 2013, false for 2002 even though that's the 
+     * end of the example year span, and obviously false for 1998, 1994 and 
+     * 1873.
+     */
     public boolean isBefore(Year year) {
-        return year.isAfter(this.finish) || year.isBefore(this.start);
+        return year.isAfter(this.finish);
     }
     
     // TODO: Write tests for this
