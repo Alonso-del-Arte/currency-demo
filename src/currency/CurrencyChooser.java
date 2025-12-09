@@ -148,6 +148,21 @@ public class CurrencyChooser {
         return CURRENCIES.contains(currency);
     }
     
+    // TODO: Write tests for this
+    public boolean isHistoricalCurrency(Currency currency) {
+        return false;
+    }
+
+    // TODO: Write tests for this
+    public boolean isEuroReplacedCurrency(Currency currency) {
+        return false;
+    }
+
+    // TODO: Write tests for this
+    public boolean isPseudocurrency(Currency currency) {
+        return false;
+    }
+
     /**
      * Chooses a pseudocurrency. Pseudocurrencies differ from standard 
      * currencies in that their values are not determined by a government bank.
