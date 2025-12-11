@@ -225,6 +225,9 @@ into it, the more confused I get.
 Note to self, 13 December 2024: Check if Trinidad &amp; Tobago dollar is brittle 
 for other display names test
 
+10 December 2025: I don't expect the phasing out of the American penny to be of 
+any consequence to this project.
+
 ### Upcoming currency changes
 
 Bulgaria has entered the eurozone. Effective January 1, 2026, the euro (EUR) 
