@@ -154,11 +154,7 @@ public class CurrencyChooser {
     
     // TODO: Write tests for this
     public static boolean isHistoricalCurrency(Currency currency) {
-        String displayName = currency.getDisplayName();
-        return displayName.contains("\u002818") 
-                || displayName.contains("\u002819") 
-                || displayName.contains("\u002820") 
-                || isEuroReplacedCurrency(currency);
+        return true;
     }
 
     // TODO: Write tests for this
