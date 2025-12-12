@@ -200,7 +200,17 @@ public class CurrencyChooserNGTest {
         }
     }
     
-    // TODO: Write @Test public void testIsNotHistoricalCurrency() {}
+    @Test
+    public void testIsNotHistoricalCurrency() {
+        for (Currency currency : CURRENCIES) {
+            if (!CurrencyChooserNGTest.isHistoricalCurrency(currency)) {
+                String msg = "Currency " + currency.getDisplayName() + " (" 
+                        + currency.getCurrencyCode() 
+                        + ") should not be considered historical";
+                assert !CurrencyChooser.isHistoricalCurrency(currency) : msg;
+            }
+        }
+    }
     
     @Test
     public void testChoosePseudocurrency() {
