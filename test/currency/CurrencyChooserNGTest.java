@@ -174,6 +174,25 @@ public class CurrencyChooserNGTest {
     }
     
     @Test
+    public void testIsEuroReplacedCurrency() {
+        System.out.println("isEuroReplacedCurrency");
+        Set<Currency> currencies = Arrays.asList(EURO_REPLACED_EXCLUSION_CODES)
+                .stream().map(currencyCode 
+                        -> Currency.getInstance(currencyCode))
+                .collect(Collectors.toSet());
+        for (Currency currency : currencies) {
+            String msg = "Currency " + currency.getDisplayName() + " (" 
+                    + currency.getCurrencyCode() 
+                    + ") should be considered a euro-replaced currency";
+            assert CurrencyChooser.isEuroReplacedCurrency(currency) : msg;
+        }
+    }
+    
+    // TODO: Write @Test public void testEuroReplacedIsHistoricalCurrency() {}
+    
+    // TODO: Write @Test public void testIsNotHistoricalCurrency() {}
+    
+    @Test
     public void testChoosePseudocurrency() {
         System.out.println("choosePseudocurrency");
         int initialCapacity = PSEUDO_CURRENCIES.size();
