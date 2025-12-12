@@ -157,7 +157,8 @@ public class CurrencyChooser {
         String displayName = currency.getDisplayName();
         return displayName.contains("\u002818") 
                 || displayName.contains("\u002819") 
-                || displayName.contains("\u002820");
+                || displayName.contains("\u002820") 
+                || isEuroReplacedCurrency(currency);
     }
 
     // TODO: Write tests for this
