@@ -188,7 +188,17 @@ public class CurrencyChooserNGTest {
         }
     }
     
-    // TODO: Write @Test public void testEuroReplacedIsHistoricalCurrency() {}
+    @Test
+    public void testEuroReplacedIsHistoricalCurrency() {
+        for (Currency currency : CURRENCIES) {
+            if (CurrencyChooser.isEuroReplacedCurrency(currency)) {
+                String msg = "Since currency " + currency.getDisplayName() 
+                        + " (" + currency.getCurrencyCode() 
+                        + "), said to be euro-replaced, should be historical";
+                assert CurrencyChooser.isHistoricalCurrency(currency) : msg;
+            }
+        }
+    }
     
     // TODO: Write @Test public void testIsNotHistoricalCurrency() {}
     
