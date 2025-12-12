@@ -149,17 +149,17 @@ public class CurrencyChooser {
     }
     
     // TODO: Write tests for this
-    public boolean isHistoricalCurrency(Currency currency) {
+    public static boolean isHistoricalCurrency(Currency currency) {
         return false;
     }
 
     // TODO: Write tests for this
-    public boolean isEuroReplacedCurrency(Currency currency) {
+    public static boolean isEuroReplacedCurrency(Currency currency) {
         return false;
     }
 
     // TODO: Write tests for this
-    public boolean isPseudocurrency(Currency currency) {
+    public static boolean isPseudocurrency(Currency currency) {
         return false;
     }
 
