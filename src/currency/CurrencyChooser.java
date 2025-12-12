@@ -152,9 +152,35 @@ public class CurrencyChooser {
         return CURRENCIES.contains(currency);
     }
     
-    // TODO: Write tests for this
+    /**
+     * Determines if a currency is historical. The determination is made by 
+     * consulting the currency information file available to the Java runtime 
+     * and also a list of euro-replaced currencies held statically by this 
+     * class.
+     * @param currency The currency for which to make the determination. 
+     * Examples: the Turkmenistani manat (TMM), the Andorran peseta (ADP) and 
+     * the Canadian dollar (CAD).
+     * @return True if the currency is marked as being in effect for a given 
+     * year span in the Java runtime's currency information file, or if {@link 
+     * #isEuroReplacedCurrency(java.util.Currency) isEuroReplacedCurrency()} 
+     * returns true; otherwise false. In the example, true for the Turkmenistani 
+     * manat, since it's said to have been a valid currency from 1993 to 2009; 
+     * true for the Andorran peseta, as it's been replaced by the euro; and 
+     * false for the Canadian dollar, which is still the official currency of 
+     * Canada.
+     * <p>Note: The behavior of this function for pseudocurrencies, such as gold 
+     * (XAU) and the European unit of account (XBC), should be considered 
+     * untested and undocumented. We make no promises that this function will 
+     * return correct results for pseudocurrencies, nor that its behavior for 
+     * pseudocurrencies will remain consistent in later versions of this 
+     * program.</p>
+     */
     public static boolean isHistoricalCurrency(Currency currency) {
-        return true;
+        String displayName = currency.getDisplayName();
+        return displayName.contains("\u002818") 
+                || displayName.contains("\u002819") 
+                || displayName.contains("\u002820") 
+                || isEuroReplacedCurrency(currency);
     }
 
     // TODO: Write tests for this
