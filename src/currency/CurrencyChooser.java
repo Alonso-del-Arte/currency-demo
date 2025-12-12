@@ -53,6 +53,10 @@ public class CurrencyChooser {
     
     private static final List<Currency> PSEUDO_CURRENCIES_LIST;
 
+    private static final String[] EURO_REPLACED_EXCLUSION_CODES = {"ADP", "ATS", 
+        "BEF", "CYP", "DEM", "EEK", "ESP", "FIM", "FRF", "GRD", "IEP", "ITL", 
+        "LUF", "MTL", "NLG", "PTE", "SIT"};
+    
     private static final Set<Currency> HISTORICAL_CURRENCIES = new HashSet<>();
 
     private static final Set<Currency> OTHER_EXCLUSIONS = new HashSet<>();
@@ -158,7 +162,8 @@ public class CurrencyChooser {
 
     // TODO: Write tests for this
     public static boolean isEuroReplacedCurrency(Currency currency) {
-        return false;
+        return Arrays.binarySearch(EURO_REPLACED_EXCLUSION_CODES, 
+                currency.getCurrencyCode()) > -1;
     }
 
     // TODO: Write tests for this
