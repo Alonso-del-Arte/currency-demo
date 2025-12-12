@@ -93,16 +93,20 @@ public class CurrencyChooserNGTest {
         TOTAL_NUMBER_OF_CURRENCIES = CURRENCIES.size();
     }
     
+    private static boolean hasYearSpanIndicated(Currency currency) {
+        String displayName = currency.getDisplayName();
+        return displayName.contains("\u002818") 
+                || displayName.contains("\u002819") 
+                || displayName.contains("\u002820");
+    }
+    
     private static boolean isEuroReplacedCurrency(Currency currency) {
         String key = currency.getCurrencyCode();
         return Arrays.binarySearch(EURO_REPLACED_EXCLUSION_CODES, key) > -1;
     }
 
     private static boolean isHistoricalCurrency(Currency currency) {
-        String displayName = currency.getDisplayName();
-        return displayName.contains("\u002818") 
-                || displayName.contains("\u002819") 
-                || displayName.contains("\u002820") 
+        return hasYearSpanIndicated(currency) 
                 || isEuroReplacedCurrency(currency);
     }
     
@@ -153,6 +157,19 @@ public class CurrencyChooserNGTest {
                     + currency.getCurrencyCode() 
                     + ") should not be considered suitable";
             assert !CurrencyChooser.isSuitableCurrency(currency) : msg;
+        }
+    }
+    
+    @Test
+    public void testIsHistoricalCurrency() {
+        System.out.println("isHistoricalCurrency");
+        for (Currency currency : CURRENCIES) {
+            if (hasYearSpanIndicated(currency)) {
+                String msg = "Currency " + currency.getDisplayName() + " (" 
+                        + currency.getCurrencyCode() 
+                        + ") should be considered historical";
+                assert CurrencyChooser.isHistoricalCurrency(currency) : msg;
+            }
         }
     }
     
