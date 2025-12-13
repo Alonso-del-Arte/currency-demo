@@ -213,6 +213,17 @@ public class CurrencyChooserNGTest {
     }
     
     @Test
+    public void testIsPseudocurrency() {
+        System.out.println("isPseudocurrency");
+        for (Currency currency : PSEUDO_CURRENCIES) {
+            String msg = "Currency " + currency.getDisplayName() + " (" 
+                    + currency.getCurrencyCode() 
+                    + ") should be considered pseudocurrency";
+            assert CurrencyChooser.isPseudocurrency(currency) : msg;
+        }
+    }
+    
+    @Test
     public void testChoosePseudocurrency() {
         System.out.println("choosePseudocurrency");
         int initialCapacity = PSEUDO_CURRENCIES.size();
