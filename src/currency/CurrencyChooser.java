@@ -183,7 +183,25 @@ public class CurrencyChooser {
                 || isEuroReplacedCurrency(currency);
     }
 
-    // TODO: Write tests for this
+    /**
+     * Determines whether or not a currency is a euro-replaced currency. This is 
+     * determined by a list of euro-replaced currencies maintained by this 
+     * class, since the Java runtime's currency information file does not mark 
+     * euro-replaced currencies as historical.
+     * @param currency The currency for which to make the determination. 
+     * Examples: the Italian lira (ITL) and the British pound (GBP).
+     * @return True if {@code currency} is a euro-replaced currency, false 
+     * otherwise. In the examples, true for the Italian lira and false for the 
+     * British pound (even though the euro is still used a lot in parts of 
+     * England after "Brexit," the pound remains the official currency of the 
+     * United Kingdom.
+     * <p>Note: The behavior of this function for pseudocurrencies, such as gold 
+     * (XAU) and the European unit of account (XBC), should be considered 
+     * untested and undocumented. We make no promises that this function will 
+     * return correct results for pseudocurrencies, nor that its behavior for 
+     * pseudocurrencies will remain consistent in later versions of this 
+     * program.</p>
+     */
     public static boolean isEuroReplacedCurrency(Currency currency) {
         return Arrays.binarySearch(EURO_REPLACED_EXCLUSION_CODES, 
                 currency.getCurrencyCode()) > -1;
