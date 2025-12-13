@@ -209,7 +209,7 @@ public class CurrencyChooser {
 
     // TODO: Write tests for this
     public static boolean isPseudocurrency(Currency currency) {
-        return false;
+        return true;
     }
 
     /**
