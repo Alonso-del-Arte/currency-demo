@@ -218,8 +218,18 @@ public class CurrencyChooserNGTest {
         for (Currency currency : PSEUDO_CURRENCIES) {
             String msg = "Currency " + currency.getDisplayName() + " (" 
                     + currency.getCurrencyCode() 
-                    + ") should be considered pseudocurrency";
+                    + ") should be considered a pseudocurrency";
             assert CurrencyChooser.isPseudocurrency(currency) : msg;
+        }
+    }
+    
+    @Test
+    public void testIsNotPseudocurrency() {
+        for (Currency currency : CURRENCIES) {
+            String msg = "Currency " + currency.getDisplayName() + " (" 
+                    + currency.getCurrencyCode() 
+                    + ") should not be considered a pseudocurrency";
+            assert !CurrencyChooser.isPseudocurrency(currency) : msg;
         }
     }
     
