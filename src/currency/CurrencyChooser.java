@@ -207,8 +207,21 @@ public class CurrencyChooser {
                 currency.getCurrencyCode()) > -1;
     }
 
+    /**
+     * Determines if a {@code Currency} instance is a pseudocurrency. 
+     * Pseudocurrencies include precious metals like gold (XAU) and silver 
+     * (XAG).
+     * @param currency The currency for which to make the determination. 
+     * Examples: palladium (XPD), the European composite unit (XBA), the testing 
+     * currency (XTS) and the East Caribbean dollar (XCD).
+     * @return True if the number of fraction digits for {@code currency} listed 
+     * in the Java currency information file is negative, false if that number 
+     * is 0 or positive. In the examples, true for palladium, the European 
+     * composite unit and the testing currency, but false for the East Caribbean 
+     * dollar even though its ISO-4217 currency code starts with X.
+     */
     public static boolean isPseudocurrency(Currency currency) {
-        return PSEUDO_CURRENCIES.contains(currency);
+        return currency.getDefaultFractionDigits() < 0;
     }
 
     /**
