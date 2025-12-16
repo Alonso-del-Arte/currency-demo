@@ -207,9 +207,8 @@ public class CurrencyChooser {
                 currency.getCurrencyCode()) > -1;
     }
 
-    // TODO: Write tests for this
     public static boolean isPseudocurrency(Currency currency) {
-        return true;
+        return PSEUDO_CURRENCIES.contains(currency);
     }
 
     /**
