@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2024 Alonso del Arte
+ * Copyright (C) 2025 Alonso del Arte
  *
  * This program is free software: you can redistribute it and/or modify it under 
  * the terms of the GNU General Public License as published by the Free Software 
@@ -17,6 +17,7 @@
 package currency;
 
 import java.util.Currency;
+import java.util.Locale;
 
 /**
  * Represents a pair of currencies. Preferably two distinct currencies. This is 
@@ -66,6 +67,16 @@ public class CurrencyPair {
     public String toString() {
         return this.source.getCurrencyCode() + '_' 
                 + this.target.getCurrencyCode();
+    }
+    
+    // TODO: Write tests for this
+    public String toDisplayString() {
+        return "Sorry, not implemented yet";
+    }
+    
+    // TODO: Write tests for this
+    public String toDisplayString(Locale locale) {
+        return "SORRY, NOT IMPLEMENTED YET";
     }
     
     /**
