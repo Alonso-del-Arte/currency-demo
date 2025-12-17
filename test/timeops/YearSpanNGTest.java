@@ -320,6 +320,30 @@ public class YearSpanNGTest {
         assertEquals(actual, expected, message);
     }
     
+    @Test
+    public void testGetDurationAcrossCenturyNonLeapYear() {
+        int centuryYear = RANDOM.nextInt(17, 20) * 100;
+        int isoYear = centuryYear - RANDOM.nextInt(1, 20);
+        Year begin = Year.of(isoYear);
+        isoYear = centuryYear + RANDOM.nextInt(60, 80);
+        Year end = Year.of(isoYear);
+        YearSpan instance = new YearSpan(begin, end);
+        Year stop = end.plusYears(1);
+        int numberOfYears = stop.getValue() - begin.getValue();
+        int numberOfLeapDays = 0;
+        for (Year curr = begin; curr.isBefore(stop); curr = curr.plusYears(1)) {
+            if (curr.isLeap()) {
+                numberOfLeapDays++;
+            }
+        }
+        Duration expected 
+                = Duration.ofDays(numberOfYears * DAYS_IN_A_NON_LEAP_YEAR 
+                        + numberOfLeapDays);
+        Duration actual = instance.getDuration();
+        String message = "Reckoning duration of " + instance.toString();
+        assertEquals(actual, expected, message);
+    }
+    
     // TODO: Write test for getDuration() of year span going across non-leap 
     // year century boundary, e.g., 1891 -- 1907, 2079 -- 2103
     
