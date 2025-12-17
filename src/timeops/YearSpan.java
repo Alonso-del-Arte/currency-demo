@@ -106,7 +106,13 @@ public class YearSpan implements Comparable<YearSpan>, DurationalSpan {
         int stop = this.finish.getValue() + 1;
         for (int y = this.start.getValue(); y < stop; y++) {
             if (y % 4 == 0) {
-                leapDays++;
+                if (y % 100 == 0) {
+                    if (y % 400 == 0) {
+                        leapDays++;
+                    }
+                } else {
+                    leapDays++;
+                }
             }
         }
         return Duration.ofDays(numberOfYears * DAYS_IN_A_NON_LEAP_YEAR 
