@@ -295,11 +295,29 @@ public class YearSpanNGTest {
     /**
      * Test of the getDuration function, of the YearSpan class.
      */
-    @Test(enabled = false)
+    @Test
     public void testGetDuration() {
         System.out.println("getDuration");
-        fail("WRITE TEST FOR ARBITRARY SPAN > 4 YEARS WITHIN SAME CENTURY");
-        // TODO: Write test for span such as 1907 -- 1983, 2002 -- 2079
+        int centuryYear = RANDOM.nextInt(16, 25) * 100;
+        int isoYear = centuryYear + RANDOM.nextInt(1, 20);
+        Year begin = Year.of(isoYear);
+        isoYear += RANDOM.nextInt(60, 80);
+        Year end = Year.of(isoYear);
+        YearSpan instance = new YearSpan(begin, end);
+        Year stop = end.plusYears(1);
+        int numberOfYears = stop.getValue() - begin.getValue();
+        int numberOfLeapDays = 0;
+        for (Year curr = begin; curr.isBefore(stop); curr = curr.plusYears(1)) {
+            if (curr.isLeap()) {
+                numberOfLeapDays++;
+            }
+        }
+        Duration expected 
+                = Duration.ofDays(numberOfYears * DAYS_IN_A_NON_LEAP_YEAR 
+                        + numberOfLeapDays);
+        Duration actual = instance.getDuration();
+        String message = "Reckoning duration of " + instance.toString();
+        assertEquals(actual, expected, message);
     }
     
     // TODO: Write test for getDuration() of year span going across non-leap 
