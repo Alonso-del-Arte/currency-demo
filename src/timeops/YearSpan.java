@@ -105,7 +105,7 @@ public class YearSpan implements Comparable<YearSpan>, DurationalSpan {
         int leapDays = 0;
         int stop = this.finish.getValue() + 1;
         for (int y = this.start.getValue(); y < stop; y++) {
-            if (y % 4 == 0) {
+            if ((y & 3) == 0) {
                 if (y % 100 == 0) {
                     if (y % 400 == 0) {
                         leapDays++;
