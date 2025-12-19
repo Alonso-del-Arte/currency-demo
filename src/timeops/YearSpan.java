@@ -103,8 +103,12 @@ public class YearSpan implements Comparable<YearSpan>, DurationalSpan {
     public Duration getDuration() {
         int numberOfYears = this.finish.getValue() - this.start.getValue() + 1;
         int leapDays = 0;
+        int value = this.start.getValue();
+        int remainder = value % 4;
+        int isoYear = value + ((remainder == 0) ? 0 : 4 - remainder);
+        Year commence = Year.of(isoYear);
         Year stop = this.finish.plusYears(1);
-        for (Year curr = this.start; curr.isBefore(stop); 
+        for (Year curr = commence; curr.isBefore(stop); 
                 curr = curr.plusYears(1)) {
             if (curr.isLeap()) {
                 leapDays++;
