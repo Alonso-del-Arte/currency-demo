@@ -227,17 +227,6 @@ public class YearSpanNGTest {
     }
     
     @Test
-    public void testBeforeIsNotAfter() {
-        Year begin = chooseYear();
-        Year end = chooseYearAfter(begin);
-        YearSpan instance = new YearSpan(begin, end);
-        Year year = chooseYearAfter(end);
-        String msg = instance.toString() + " should not be after " 
-                + year.toString();
-        assert !instance.isAfter(year) : msg;
-    }
-    
-    @Test
     public void testAfterIsNotIncluded() {
         Year year = chooseYear();
         Year begin = chooseYearAfter(year);
@@ -246,6 +235,17 @@ public class YearSpanNGTest {
         String msg = instance.toString() + " should not include " 
                 + year.toString();
         assert !instance.includes(year) : msg;
+    }
+    
+    @Test
+    public void testBeforeIsNotAfter() {
+        Year begin = chooseYear();
+        Year end = chooseYearAfter(begin);
+        YearSpan instance = new YearSpan(begin, end);
+        Year year = chooseYearAfter(end);
+        String msg = instance.toString() + " should not be after " 
+                + year.toString();
+        assert !instance.isAfter(year) : msg;
     }
     
     @Test
