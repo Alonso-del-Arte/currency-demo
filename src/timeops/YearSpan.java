@@ -92,17 +92,15 @@ public class YearSpan implements Comparable<YearSpan>, DurationalSpan {
         return false;
     }
     
-    // TODO: Once this is passing all the pertinent tests, amend the {@link 
-    // #compareTo()} Javadoc to include the following:
-//    To compare 
-//     * year spans by duration, use the {@code compareTo()} function of the 
-//     * {@code Duration} objects returned by {@link #getDuration()}.
     /**
      * Reckons the duration of this year span. Note that this function has not 
      * been tested with year spans beginning prior to 1582, so results for such 
      * spans are not at all guaranteed to be correct. And in any case, this 
      * class might in some cases be used to represent year spans that don't 
-     * neatly begin on January 1 of one year and end on December 31 of another.
+     * neatly begin on January 1 of one year and end on December 31 of another, 
+     * so the duration would be incorrect. But that might be good enough for 
+     * comparing year spans by how long they are rather than their location on 
+     * the timeline (see {@link #compareTo(timeops.YearSpan) compareTo()}).
      * @return The duration, generally expressed in hours. In the case of a year 
      * span consisting of a single non-leap year, this should be 8,760 hours, 
      * and 8,784 hours in the case of a year span consisting of a single leap 
@@ -137,8 +135,10 @@ public class YearSpan implements Comparable<YearSpan>, DurationalSpan {
     /**
      * Compares this year span to another year span. Note that the ending years 
      * are considered only if the beginning years are the same. Thus a longer 
-     * span will be considered "less" than a short span that begins later. For 
-     * the examples, suppose this year span is 1871 &mdash; 2008. 
+     * span will be considered "less" than a short span that begins later. To 
+     * compare year spans by duration, use the {@code compareTo()} function of 
+     * the {@code Duration} objects returned by {@link #getDuration()}. For the 
+     * examples, suppose this year span is 1871 &mdash; 2008. 
      * @param other The span to compare. Examples: 1871 &mdash; 2008, 1871 
      * &mdash; 1898, 1994 &mdash; 2008.
      * @return 0 if this year span begins and ends on the same years as {@code 
