@@ -92,13 +92,24 @@ public class YearSpan implements Comparable<YearSpan>, DurationalSpan {
         return false;
     }
     
-    // TODO: Write tests for this accounting for century non-leap years, e.g., 
-    // 1900, 2100
     // TODO: Once this is passing all the pertinent tests, amend the {@link 
     // #compareTo()} Javadoc to include the following:
 //    To compare 
 //     * year spans by duration, use the {@code compareTo()} function of the 
 //     * {@code Duration} objects returned by {@link #getDuration()}.
+    /**
+     * Reckons the duration of this year span. Note that this function has not 
+     * been tested with year spans beginning prior to 1582, so results for such 
+     * spans are not at all guaranteed to be correct. And in any case, this 
+     * class might in some cases be used to represent year spans that don't 
+     * neatly begin on January 1 of one year and end on December 31 of another.
+     * @return The duration, generally expressed in hours. In the case of a year 
+     * span consisting of a single non-leap year, this should be 8,760 hours, 
+     * and 8,784 hours in the case of a year span consisting of a single leap 
+     * year. For a more interesting example, consider the year span 2083 &mdash; 
+     * 2110, lasting 245,424 hours. If 2100 was a leap year (which it's not), 
+     * then the span would be 245,448 hours.
+     */
     @Override
     public Duration getDuration() {
         int numberOfYears = this.finish.getValue() - this.start.getValue() + 1;
@@ -109,7 +120,7 @@ public class YearSpan implements Comparable<YearSpan>, DurationalSpan {
         Year commence = Year.of(isoYear);
         Year stop = this.finish.plusYears(1);
         for (Year curr = commence; curr.isBefore(stop); 
-                curr = curr.plusYears(1)) {
+                curr = curr.plusYears(4)) {
             if (curr.isLeap()) {
                 leapDays++;
             }
