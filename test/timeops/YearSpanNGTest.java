@@ -519,6 +519,15 @@ public class YearSpanNGTest {
     }
     
     @Test
+    public void testParseSingleYearSpan() {
+        Year begin = chooseYear();
+        String s = begin.toString();
+        YearSpan expected = new YearSpan(begin, begin);
+        YearSpan actual = YearSpan.parse(s);
+        assertEquals(actual, expected);
+    }
+    
+    @Test
     public void testConstructorRejectsNullBeginYear() {
         Year end = chooseYear();
         String msg = "Null year and ending year " + end.toString() 
