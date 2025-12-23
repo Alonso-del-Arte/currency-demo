@@ -537,6 +537,17 @@ public class YearSpanNGTest {
     }
     
     @Test
+    public void testParseFromASCII() {
+        YearSpan expected = makeYearSpan();
+        String s = expected.toASCIIString();
+        String msg = "Ought to be able to parse span from \"" + s + "\"";
+        assertDoesNotThrow(() -> {
+            YearSpan actual = YearSpan.parse(s);
+            assertEquals(actual, expected);
+        }, msg);
+    }
+    
+    @Test
     public void testConstructorRejectsNullBeginYear() {
         Year end = chooseYear();
         String msg = "Null year and ending year " + end.toString() 
