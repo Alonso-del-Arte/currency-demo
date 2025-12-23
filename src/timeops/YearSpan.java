@@ -127,6 +127,11 @@ public class YearSpan implements Comparable<YearSpan>, DurationalSpan {
             Year begin = Year.parse(s);
             return new YearSpan(begin, begin);
         }
+        if (s.length() == 12) {
+            Year begin = Year.parse(s.substring(0, 4));
+            Year end = Year.parse(s.substring(8));
+            return new YearSpan(begin, end);
+        }
         Year begin = Year.parse(s.substring(0, 4));
         Year end = Year.parse(s.substring(5));
         return new YearSpan(begin, end);
