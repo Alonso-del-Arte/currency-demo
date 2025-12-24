@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2024 Alonso del Arte
+ * Copyright (C) 2025 Alonso del Arte
  *
  * This program is free software: you can redistribute it and/or modify it under 
  * the terms of the GNU General Public License as published by the Free Software 
@@ -21,6 +21,9 @@ import static currency.MoneyAmountNGTest.provideNull;
 
 import java.util.Currency;
 import java.util.HashSet;
+import java.util.Locale;
+import java.util.NoSuchElementException;
+import java.util.ResourceBundle;
 import java.util.Set;
 
 import static org.testframe.api.Asserters.assertThrows;
@@ -33,6 +36,8 @@ import org.testng.annotations.Test;
  * @author Alonso del Arte
  */
 public class CurrencyPairNGTest {
+    
+    private static final Locale[] LOCALES = Locale.getAvailableLocales();
     
     /**
      * Test of the getFromCurrency function, of the CurrencyPair class.
@@ -83,6 +88,27 @@ public class CurrencyPairNGTest {
         String expected = from.getCurrencyCode() + '_' + to.getCurrencyCode();
         String actual = instance.toString();
         assertEquals(actual, expected);
+    }
+    
+    @Test
+    public void testToDisplayString() {
+        System.out.println("toDisplayString");
+        CurrencyPair instance = CurrencyChooser.choosePair();
+        Currency from = instance.getFromCurrency();
+        Currency to = instance.getToCurrency();
+        String msgPart = "Display name for " + instance.toString() 
+                + " in locale ";
+        String key = "directionToWord";
+        for (Locale locale : LOCALES) {
+            String fromName = from.getDisplayName(locale);
+            String toName = to.getDisplayName(locale);
+            ResourceBundle res = ResourceBundle.getBundle("i18n.uiLabels");
+            String dirWord = ' ' + res.getString(key) + ' ';
+            String expected = fromName + dirWord + toName;
+            String actual = instance.toDisplayString(locale);
+            String message = msgPart + locale.getDisplayName();
+            assertEquals(actual, expected, message);
+        }
     }
     
     @Test
