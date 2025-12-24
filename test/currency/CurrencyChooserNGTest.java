@@ -830,6 +830,23 @@ public class CurrencyChooserNGTest {
     }
     
     @Test
+    public void testChoosePair() {
+        System.out.println("choosePair");
+        int numberOfTries = 128;
+        Set<CurrencyPair> pairs = new HashSet<>();
+        for (int i = 0; i < numberOfTries; i++) {
+            CurrencyPair pair = CurrencyChooser.choosePair();
+            pairs.add(pair);
+        }
+        int minimum = 11 * numberOfTries / 20;
+        int actual = pairs.size();
+        String msg = "Trying to pick " + numberOfTries + " pairs gave " + actual 
+                + " distinct, should've given at least " + minimum 
+                + " distinct";
+        assertMinimum(minimum, actual, msg);
+    }
+    
+    @Test
     public void testChoosePairOtherThan() {
         System.out.println("choosePairOtherThan");
         Currency from = CurrencyChooser.chooseCurrency();
