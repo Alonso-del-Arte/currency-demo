@@ -249,8 +249,7 @@ public class CurrencyChooserNGTest {
     @Test
     public void testChooseCurrency() {
         System.out.println("chooseCurrency");
-        int totalNumberOfCurrencies = CURRENCIES.size();
-        int numberOfTries = 5 * totalNumberOfCurrencies / 3;
+        int numberOfTries = 5 * TOTAL_NUMBER_OF_CURRENCIES / 3;
         Set<Currency> samples = new HashSet<>();
         int sampleNumber = 0;
         while (sampleNumber < numberOfTries) {
@@ -261,10 +260,10 @@ public class CurrencyChooserNGTest {
             samples.add(sample);
             sampleNumber++;
         }
-        int minimum = 11 * totalNumberOfCurrencies / 20;
+        int minimum = 11 * TOTAL_NUMBER_OF_CURRENCIES / 20;
         int actual = samples.size();
         String msg = "Trying to pick " + numberOfTries + " times from set of " 
-                + totalNumberOfCurrencies + " gave " + actual 
+                + TOTAL_NUMBER_OF_CURRENCIES + " gave " + actual 
                 + " distinct, should've given more than " + minimum 
                 + " distinct";
         assertMinimum(minimum, actual, msg);
