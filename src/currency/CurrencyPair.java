@@ -18,6 +18,7 @@ package currency;
 
 import java.util.Currency;
 import java.util.Locale;
+import java.util.ResourceBundle;
 
 /**
  * Represents a pair of currencies. Preferably two distinct currencies. This is 
@@ -26,6 +27,8 @@ import java.util.Locale;
  * @author Alonso del Arte
  */
 public class CurrencyPair {
+    
+    private static final String DIRECTION_WORD_KEY = "directionToWord";
     
     private final Currency source, target;
     
@@ -70,13 +73,19 @@ public class CurrencyPair {
     }
     
     // TODO: Write tests for this
+    // The idea for this one is that it will return the same as if the default 
+    // locale had been explicitily specified.
     public String toDisplayString() {
         return "Sorry, not implemented yet";
     }
     
     // TODO: Write tests for this
     public String toDisplayString(Locale locale) {
-        return "SORRY, NOT IMPLEMENTED YET";
+        String fromName = this.source.getDisplayName(locale);
+        String toName = this.target.getDisplayName(locale);
+        ResourceBundle bundle = ResourceBundle.getBundle("i18n.uiLabels");
+        String dirWord = ' ' + bundle.getString(DIRECTION_WORD_KEY) + ' ';
+        return fromName + dirWord + toName;
     }
     
     /**
