@@ -471,6 +471,12 @@ public class CurrencyChooser {
         return otherCurrency;
     }
     
+        // TODO: Write tests for this
+    public static CurrencyPair choosePair() {
+        return new CurrencyPair(Currency.getInstance("XTS"), 
+                Currency.getInstance("XTS"));
+    }
+    
     /**
      * Chooses a pair of currencies other than a specified pair. 
      * @param pair A pair of currencies. For example, United States dollars 
