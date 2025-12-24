@@ -472,9 +472,11 @@ public class CurrencyChooser {
     }
     
     /**
-     * Chooses a pair of currencies.
+     * Chooses a pair of currencies. The implementation may or may not use 
+     * {@link #chooseCurrency()} and {@link 
+     * #chooseCurrencyOtherThan(java.util.Currency) chooseCurrencyOtherThan()}.
      * @return A pair of currencies, guaranteed to consist of two distinct 
-     * currencies.
+     * currencies. For example, Swazi lilangeni (SZL) to Kyrgystani som (KGS).
      */
     public static CurrencyPair choosePair() {
         Currency from = chooseCurrency();
