@@ -471,10 +471,15 @@ public class CurrencyChooser {
         return otherCurrency;
     }
     
-        // TODO: Write tests for this
+    /**
+     * Chooses a pair of currencies.
+     * @return A pair of currencies, guaranteed to consist of two distinct 
+     * currencies.
+     */
     public static CurrencyPair choosePair() {
-        return new CurrencyPair(Currency.getInstance("XTS"), 
-                Currency.getInstance("XTS"));
+        Currency from = chooseCurrency();
+        Currency to = chooseCurrencyOtherThan(from);
+        return new CurrencyPair(from, to);
     }
     
     /**
