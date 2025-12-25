@@ -102,7 +102,7 @@ public class CurrencyPairNGTest {
             String fromName = from.getDisplayName(locale);
             String toName = to.getDisplayName(locale);
             ResourceBundle res = ResourceBundle.getBundle("i18n.uiLabels");
-            String dirWord = ' ' + res.getString("directionToWord") + ' ';
+            String dirWord = res.getString("directionToWord");
             String inclSpStr = res.getString("includeSpaces");
             boolean inclSpaces = Boolean.parseBoolean(inclSpStr);
             String connector = (inclSpaces) ? ' ' + dirWord + ' ' : dirWord;
