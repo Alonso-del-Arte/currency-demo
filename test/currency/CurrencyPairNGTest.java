@@ -98,13 +98,15 @@ public class CurrencyPairNGTest {
         Currency to = instance.getToCurrency();
         String msgPart = "Display name for " + instance.toString() 
                 + " in locale ";
-        String key = "directionToWord";
         for (Locale locale : LOCALES) {
             String fromName = from.getDisplayName(locale);
             String toName = to.getDisplayName(locale);
             ResourceBundle res = ResourceBundle.getBundle("i18n.uiLabels");
-            String dirWord = ' ' + res.getString(key) + ' ';
-            String expected = fromName + dirWord + toName;
+            String dirWord = ' ' + res.getString("directionToWord") + ' ';
+            String inclSpStr = res.getString("includeSpaces");
+            boolean inclSpaces = Boolean.parseBoolean(inclSpStr);
+            String connector = (inclSpaces) ? ' ' + dirWord + ' ' : dirWord;
+            String expected = fromName + connector + toName;
             String actual = instance.toDisplayString(locale);
             String message = msgPart + locale.getDisplayName();
             assertEquals(actual, expected, message);
