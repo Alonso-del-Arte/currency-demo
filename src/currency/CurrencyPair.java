@@ -30,6 +30,8 @@ public class CurrencyPair {
     
     private static final String DIRECTION_WORD_KEY = "directionToWord";
     
+    private static final String INCLUDE_SPACES_KEY = "includeSpaces";
+    
     private final Currency source, target;
     
     /**
@@ -79,13 +81,27 @@ public class CurrencyPair {
         return "Sorry, not implemented yet";
     }
     
-    // TODO: Write tests for this
+    /**
+     * Gives text to describe this currency pair in the specified locale, 
+     * provided the necessary elements are available in the Java runtime's 
+     * currency information file and this program's internationalization files. 
+     * If either of those is lacking (the latter, almost certainly), fallbacks, 
+     * most likely in English, will be used. For the example, suppose this 
+     * currency pair is United States dollars (USD) to Jordanian dinars (JOD).
+     * @param locale The locale. For example, {@code Locale.GERMAN}.
+     * @return Text suitable for the locale, or some text with fallbacks to 
+     * English. In the example, this would be "US-Dollar zu Jordanischer Dinar".
+     */
     public String toDisplayString(Locale locale) {
         String fromName = this.source.getDisplayName(locale);
         String toName = this.target.getDisplayName(locale);
-        ResourceBundle bundle = ResourceBundle.getBundle("i18n.uiLabels");
-        String dirWord = ' ' + bundle.getString(DIRECTION_WORD_KEY) + ' ';
-        return fromName + dirWord + toName;
+        ResourceBundle bundle = ResourceBundle.getBundle("i18n.uiLabels", 
+                locale);
+        String dirWord = bundle.getString(DIRECTION_WORD_KEY);
+        String inclSpStr = bundle.getString(INCLUDE_SPACES_KEY);
+        boolean inclSpaces = Boolean.parseBoolean(inclSpStr);
+        String connector = (inclSpaces) ? ' ' + dirWord + ' ' : dirWord;
+        return fromName + connector + toName;
     }
     
     /**
