@@ -101,7 +101,8 @@ public class CurrencyPairNGTest {
         for (Locale locale : LOCALES) {
             String fromName = from.getDisplayName(locale);
             String toName = to.getDisplayName(locale);
-            ResourceBundle res = ResourceBundle.getBundle("i18n.uiLabels");
+            ResourceBundle res = ResourceBundle.getBundle("i18n.uiLabels", 
+                    locale);
             String dirWord = res.getString("directionToWord");
             String inclSpStr = res.getString("includeSpaces");
             boolean inclSpaces = Boolean.parseBoolean(inclSpStr);
