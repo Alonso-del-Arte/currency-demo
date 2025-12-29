@@ -266,6 +266,13 @@ public class FreeAPIAccess implements ExchangeRateProvider,
         if (source.getCurrencyCode().equals("USD")) {
             if (target.getCurrencyCode().equals("XCD")) {
                 return 2.7;
+            } else {
+                CurrencyPair currencies = new CurrencyPair(source, target);
+                if (DOLLAR_CONVERSIONS_MAP.containsKey(currencies)) {
+                    ConversionRateQuote quote 
+                            = DOLLAR_CONVERSIONS_MAP.get(currencies);
+                    return quote.getRate();
+                }
             }
         }
         if (source.getCurrencyCode().equals("XCD") 
