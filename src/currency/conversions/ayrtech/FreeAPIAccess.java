@@ -272,7 +272,7 @@ public class FreeAPIAccess implements ExchangeRateProvider,
                 && target.getCurrencyCode().equals("USD")) {
             return 0.37037037037037035;
         }
-        return 1.0;
+        return -1.0;
     }
     
     // TODO: Write tests for this
