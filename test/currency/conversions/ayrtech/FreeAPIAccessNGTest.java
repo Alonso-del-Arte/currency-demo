@@ -244,8 +244,21 @@ public class FreeAPIAccessNGTest {
         }
     }
     
-    // TODO: Write testGetRateSourceSameAsTargetAlreadyUnwrapped
-    
+    @Test
+    public void testGetRateSourceSameAsTargetUnwrapped() {
+        double expected = 1.0;
+        double delta = 0.00001;
+        String msgPart = " to itself should be " + expected + " with variance " 
+                + delta;
+        for (Currency currency : SUPPORTED_CURRENCIES) {
+            double actual = TEST_INSTANCE.getRate(currency, currency);
+            String message = "Given " + currency.getDisplayName() 
+                    + ", exchange rate for " + currency.getDisplayName() 
+                    + msgPart;
+            assertEquals(actual, expected, delta, message);
+        }
+    }
+        
     @Test
     public void testNoAPICallGetRateWhenSourceSameAsTargetAlreadyUnwrapped() {
         AccessWithAPICallCounter instance = new AccessWithAPICallCounter();
