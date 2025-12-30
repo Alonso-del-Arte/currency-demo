@@ -278,8 +278,14 @@ public class FreeAPIAccess implements ExchangeRateProvider,
     // TODO: Write tests for this
     @Override
     public double getRate(CurrencyPair currencies) {
+        if (currencies.getFromCurrency().equals(currencies.getToCurrency())) {
+            return 1.0;
+        }
         if (currencies.getFromCurrency().getCurrencyCode()
                 .equals("USD")) {
+            if (currencies.getToCurrency().getCurrencyCode().equals("USD")) {
+                return 1.0;
+            }
             if (currencies.getToCurrency().getCurrencyCode().equals("XCD")) {
                 return 2.7;
             } else {
@@ -288,6 +294,15 @@ public class FreeAPIAccess implements ExchangeRateProvider,
                             = DOLLAR_CONVERSIONS_MAP.get(currencies);
                     return quote.getRate();
                 }
+            }
+        } else {
+            this.makeAPICall(); // Preparing to fail the next test without 
+                                // making 200 API calls
+            System.out.println("Making API call for " + currencies.toString());
+            CurrencyPair key = currencies.flip();
+            if (DOLLAR_CONVERSIONS_MAP.containsKey(key)) {
+                ConversionRateQuote quote = DOLLAR_CONVERSIONS_MAP.get(key);
+                return quote.invert().getRate();
             }
         }
         if (currencies.getFromCurrency().getCurrencyCode().equals("XCD") 
