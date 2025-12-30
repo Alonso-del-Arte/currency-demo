@@ -394,7 +394,7 @@ public class FreeAPIAccessNGTest {
         private int callCountSoFar = 0;
         
         @Override
-        InputStream makeAPICall() {
+        String makeAPICall() {
             this.callCountSoFar++;
             return super.makeAPICall();
         }

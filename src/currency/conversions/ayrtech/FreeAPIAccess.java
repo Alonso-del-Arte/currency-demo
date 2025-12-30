@@ -245,15 +245,8 @@ public class FreeAPIAccess implements ExchangeRateProvider,
         return new HashSet<>(SUPPORTED_CURRENCIES);
     }
     
-    InputStream makeAPICall() {
-        return new InputStream() {
-            
-            @Override
-            public int read() throws IOException {
-                return 0;
-            }
-            
-        };
+    String makeAPICall() {
+        return "PLACEHOLDER";
     }
     
     private void processAPICall() {
