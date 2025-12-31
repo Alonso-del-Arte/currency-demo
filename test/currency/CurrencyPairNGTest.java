@@ -115,6 +115,17 @@ public class CurrencyPairNGTest {
     }
     
     @Test
+    public void testToDisplayStringDefaultLocale() {
+        CurrencyPair instance = CurrencyChooser.choosePair();
+        Locale locale = Locale.getDefault();
+        String expected = instance.toDisplayString(locale);
+        String actual = instance.toDisplayString();
+        String message = "Display name for " + instance.toString() 
+                + " in default locale ";
+        assertEquals(actual, expected, message);
+    }
+    
+    @Test
     public void testReferentialEquality() {
         Currency from = CurrencyChooser.chooseCurrency();
         Currency to = CurrencyChooser.chooseCurrencyOtherThan(from);
