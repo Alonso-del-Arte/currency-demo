@@ -74,7 +74,17 @@ public class CurrencyPair {
                 + this.target.getCurrencyCode();
     }
     
-    // TODO: Write Javadoc
+    /**
+     * Gives text to describe this currency pair in the default locale, provided 
+     * the necessary elements are available in the Java runtime's currency 
+     * information file and this program's internationalization files. If either 
+     * of those is lacking (the latter, almost certainly), fallbacks, most 
+     * likely in English, will be used. For the example, suppose this currency 
+     * pair is United States dollars (USD) to Jordanian dinars (JOD), and the 
+     * default locale is {@code Locale.GERMAN}.
+     * @return Text suitable for the locale, or some text with fallbacks to 
+     * English. In the example, this would be "US-Dollar zu Jordanischer Dinar".
+     */
     public String toDisplayString() {
         return this.toDisplayString(Locale.getDefault());
     }
