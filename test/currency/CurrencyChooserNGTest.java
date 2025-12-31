@@ -525,6 +525,26 @@ public class CurrencyChooserNGTest {
     }
     
     @Test
+    public void testChooseCurrencyOtherThanFromSetRejectsEmptySet() {
+        Currency currency = CurrencyChooser.chooseCurrency();
+        Set<Currency> set = new HashSet<>();
+        String msg = "Trying to choose currency other than " 
+                + currency.getDisplayName() + " (" + currency.getCurrencyCode() 
+                + ") from empty set should cause exception";
+        Throwable t = assertThrows(() -> {
+            Currency badChoice 
+                    = CurrencyChooser.chooseCurrencyOtherThan(currency, set);
+            System.out.println(msg + ", not given result " 
+                    + badChoice.getDisplayName() + " (" 
+                    + badChoice.getCurrencyCode() + ")");
+        }, NoSuchElementException.class, msg);
+        String excMsg = t.getMessage();
+        assert excMsg != null : "Exception message should not be null";
+        assert !excMsg.isBlank() : "Exception message should not be blank";
+        System.out.println("\"" + excMsg + "\"");
+    }
+    
+    @Test
     public void testChooseCurrencyByBadPredicateCausesException() {
         String invalidDisplayName = "Invalid display name " 
                 + System.currentTimeMillis();
