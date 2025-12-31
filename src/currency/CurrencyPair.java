@@ -74,20 +74,9 @@ public class CurrencyPair {
                 + this.target.getCurrencyCode();
     }
     
-    // TODO: Write tests for this
-    // The idea for this one is that it will return the same as if the default 
-    // locale had been explicitily specified.
+    // TODO: Write Javadoc
     public String toDisplayString() {
-        Locale locale = Locale.getDefault();
-        String fromName = this.source.getDisplayName(locale);
-        String toName = this.target.getDisplayName(locale);
-        ResourceBundle bundle = ResourceBundle.getBundle("i18n.uiLabels", 
-                locale);
-        String dirWord = bundle.getString(DIRECTION_WORD_KEY);
-        String inclSpStr = bundle.getString(INCLUDE_SPACES_KEY);
-        boolean inclSpaces = Boolean.parseBoolean(inclSpStr);
-        String connector = (inclSpaces) ? ' ' + dirWord + ' ' : dirWord;
-        return fromName + connector + toName;
+        return this.toDisplayString(Locale.getDefault());
     }
     
     /**
