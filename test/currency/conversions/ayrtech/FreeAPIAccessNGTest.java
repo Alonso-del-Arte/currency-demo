@@ -414,6 +414,26 @@ public class FreeAPIAccessNGTest {
         }
     }
     
+    @Test
+    public void testGetRateCanInvertWithoutAPICallUnwrapped() {
+        AccessWithAPICallCounter instance = new AccessWithAPICallCounter();
+        int expected = instance.callCountSoFar;
+        String lastRateRecord = "No getRate() calls yet";
+        for (ConversionRateQuote quote : QUOTE_MAP.values()) {
+            CurrencyPair currencies = quote.getCurrencies().flip();
+            Currency from = currencies.getFromCurrency();
+            Currency to = currencies.getToCurrency();
+            double rate = instance.getRate(from, to);
+            lastRateRecord = "Rate for " + from.getDisplayName() + " (" 
+                    + from.getCurrencyCode() + ") to " + to.getDisplayName() 
+                    + " (" + to.getCurrencyCode() + ") is said to be " + rate;
+        }
+        System.out.println(lastRateRecord);
+        int actual = instance.callCountSoFar;
+        String message = "Shouldn't have made API calls for inverted rates";
+        assertEquals(actual, expected, message);
+    }
+    
     // TODO: Write tests for caching, including inversion, and equivalents for 
     // base currency conversions
     
