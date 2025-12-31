@@ -471,6 +471,12 @@ public class CurrencyChooser {
         return otherCurrency;
     }
     
+    // TODO: Write tests for this
+    public static Currency chooseCurrencyOtherThan(Currency currency, 
+            Set<Currency> set) {
+        return currency;
+    }
+    
     /**
      * Chooses a pair of currencies. The implementation may or may not use 
      * {@link #chooseCurrency()} and {@link 
