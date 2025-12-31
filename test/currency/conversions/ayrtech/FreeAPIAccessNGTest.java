@@ -378,6 +378,22 @@ public class FreeAPIAccessNGTest {
         }
     }
     
+    @Test
+    public void testGetRateUnwrappedCanInvertBaseCurrencyToTarget() {
+        for (ConversionRateQuote quote : QUOTE_MAP.values()) {
+            CurrencyPair currencies = quote.getCurrencies().flip();
+            Currency source = currencies.getFromCurrency();
+            Currency target = currencies.getToCurrency();
+            double expected = quote.invert().getRate();
+            double actual = TEST_INSTANCE.getRate(source, target);
+            String message = "Getting conversion rate for " 
+                    + source.getDisplayName() + " (" + source.getCurrencyCode() 
+                    + ") to " + target.getDisplayName() + " (" 
+                    + target.getCurrencyCode() + ")";
+            assertEquals(actual, expected, TEST_DELTA, message);
+        }
+    }
+    
     // TODO: Write tests for caching, including inversion, and equivalents for 
     // base currency conversions
     
