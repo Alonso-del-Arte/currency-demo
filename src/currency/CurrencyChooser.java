@@ -474,6 +474,11 @@ public class CurrencyChooser {
     // TODO: Write tests for this
     public static Currency chooseCurrencyOtherThan(Currency currency, 
             Set<Currency> set) {
+        if (set.isEmpty()) {
+            String excMsg = "Can't choose currency other than " 
+                    + currency.toString() + " from empty set";
+            throw new NoSuchElementException(excMsg);
+        }
         return currency;
     }
     
