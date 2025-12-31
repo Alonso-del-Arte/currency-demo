@@ -268,8 +268,6 @@ public class FreeAPIAccess implements ExchangeRateProvider,
                 }
             }
         } else {
-            this.makeAPICall(); // Preparing to fail the next test without 
-                                // making 200 API calls
             CurrencyPair currencies = new CurrencyPair(source, target);
             System.out.println("Making API call for " + currencies.toString());
             CurrencyPair key = currencies.flip();
