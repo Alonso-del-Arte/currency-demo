@@ -267,6 +267,16 @@ public class FreeAPIAccess implements ExchangeRateProvider,
                     return quote.getRate();
                 }
             }
+        } else {
+            this.makeAPICall(); // Preparing to fail the next test without 
+                                // making 200 API calls
+            CurrencyPair currencies = new CurrencyPair(source, target);
+            System.out.println("Making API call for " + currencies.toString());
+            CurrencyPair key = currencies.flip();
+            if (DOLLAR_CONVERSIONS_MAP.containsKey(key)) {
+                ConversionRateQuote quote = DOLLAR_CONVERSIONS_MAP.get(key);
+                return quote.invert().getRate();
+            }
         }
         if (source.getCurrencyCode().equals("XCD") 
                 && target.getCurrencyCode().equals("USD")) {
