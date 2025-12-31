@@ -81,7 +81,9 @@ public class CurrencyPair {
      * of those is lacking (the latter, almost certainly), fallbacks, most 
      * likely in English, will be used. For the example, suppose this currency 
      * pair is United States dollars (USD) to Jordanian dinars (JOD), and the 
-     * default locale is {@code Locale.GERMAN}.
+     * default locale is {@code Locale.GERMAN}. Note that this function gives 
+     * the same result as calling {@link #toDisplayString(java.util.Locale) 
+     * toDisplayString()} with the default locale specified.
      * @return Text suitable for the locale, or some text with fallbacks to 
      * English. In the example, this would be "US-Dollar zu Jordanischer Dinar".
      */
