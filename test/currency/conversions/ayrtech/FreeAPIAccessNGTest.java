@@ -18,9 +18,7 @@ package currency.conversions.ayrtech;
 
 import currency.CurrencyChooser;
 import currency.CurrencyPair;
-import currency.SpecificCurrenciesSupport;
 import currency.conversions.ConversionRateQuote;
-import currency.conversions.ExchangeRateProvider;
 
 import java.io.InputStream;
 import java.io.IOException;
