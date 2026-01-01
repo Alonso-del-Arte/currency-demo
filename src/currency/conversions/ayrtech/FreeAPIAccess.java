@@ -272,7 +272,6 @@ public class FreeAPIAccess implements ExchangeRateProvider,
             }
         } else {
             CurrencyPair currencies = new CurrencyPair(source, target);
-            System.out.println("Making API call for " + currencies.toString());
             CurrencyPair key = currencies.flip();
             if (DOLLAR_CONVERSIONS_MAP.containsKey(key)) {
                 ConversionRateQuote quote = DOLLAR_CONVERSIONS_MAP.get(key);
