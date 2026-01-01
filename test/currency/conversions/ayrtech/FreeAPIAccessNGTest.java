@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2025 Alonso del Arte
+ * Copyright (C) 2026 Alonso del Arte
  *
  * This program is free software: you can redistribute it and/or modify it under 
  * the terms of the GNU General Public License as published by the Free Software 
@@ -19,7 +19,6 @@ package currency.conversions.ayrtech;
 import currency.CurrencyChooser;
 import currency.CurrencyPair;
 import currency.conversions.ConversionRateQuote;
-import currency.conversions.ExchangeRateProvider;
 
 import java.io.InputStream;
 import java.io.IOException;
