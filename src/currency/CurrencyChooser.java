@@ -115,6 +115,7 @@ public class CurrencyChooser {
         }
         CURRENCIES.removeAll(PSEUDO_CURRENCIES);
         CURRENCIES.removeAll(HISTORICAL_CURRENCIES);
+        HISTORICAL_CURRENCIES.addAll(euroReplacedCurrencies);
         CURRENCIES.removeAll(OTHER_EXCLUSIONS);
         PSEUDO_CURRENCIES_LIST = new ArrayList<>(PSEUDO_CURRENCIES);
     }
@@ -179,11 +180,7 @@ public class CurrencyChooser {
      * program.</p>
      */
     public static boolean isHistoricalCurrency(Currency currency) {
-        String displayName = currency.getDisplayName();
-        return displayName.contains("\u002818") 
-                || displayName.contains("\u002819") 
-                || displayName.contains("\u002820") 
-                || isEuroReplacedCurrency(currency);
+        return HISTORICAL_CURRENCIES.contains(currency);
     }
 
     /**
