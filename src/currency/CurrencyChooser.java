@@ -61,16 +61,19 @@ public class CurrencyChooser {
 
     private static final Set<Currency> OTHER_EXCLUSIONS = new HashSet<>();
     
-    private static final String[] OTHER_EXCLUSION_CODES = {"ADP", "ATS", "AYM", 
-        "BEF", "BGL", "BGN", "BOV", "CHE", "CHW", "COU", "CYP", "DEM", "EEK", 
-        "ESP", "FIM", "FRF", "GRD", "GWP", "IEP", "ITL", "LUF", "MGF", "MTL", 
-        "MXV", "NLG", "PTE", "SIT", "SRG", "STN", "TPE", "USN", "USS", "UYI", 
-        "VED", "ZWN"};
+    private static final String[] OTHER_EXCLUSION_CODES = {"AYM", "BGL", "BOV", 
+        "CHE", "CHW", "COU", "GWP", "MGF", "MXV", "SRG", "STN", "TPE", 
+        "USN", "USS", "UYI", "VED", "ZWN"};
 
     private static final Map<Integer, Set<Currency>> CURRENCIES_DIGITS_MAP 
             = new HashMap<>();
     
     static {
+        Set<Currency> euroReplacedCurrencies = new HashSet<>();
+        for (String currencyCode : EURO_REPLACED_EXCLUSION_CODES) {
+            euroReplacedCurrencies.add(Currency.getInstance(currencyCode));
+        }
+        CURRENCIES.removeAll(euroReplacedCurrencies);
         final String nineteenthCenturyYearIndicator = "\u002818";
         final String twentiethCenturyYearIndicator = "\u002819";
         final String twentyFirstCenturyYearIndicator = "\u002820";
