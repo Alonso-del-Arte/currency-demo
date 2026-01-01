@@ -283,6 +283,11 @@ public class FreeAPIAccess implements ExchangeRateProvider,
                 && target.getCurrencyCode().equals("USD")) {
             return 0.37037037037037035;
         }
+        CurrencyPair currencies = new CurrencyPair(source, target);
+        if (this.baseCurrQuoteMap.containsKey(currencies)) {
+            ConversionRateQuote quote = this.baseCurrQuoteMap.get(currencies);
+            return quote.getRate();
+        }
         return 1.0;
     }
     
