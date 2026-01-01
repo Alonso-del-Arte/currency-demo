@@ -19,6 +19,7 @@ package currency.conversions.ayrtech;
 import currency.CurrencyChooser;
 import currency.CurrencyPair;
 import currency.conversions.ConversionRateQuote;
+import currency.conversions.ExchangeRateProvider;
 
 import java.io.InputStream;
 import java.io.IOException;
@@ -430,6 +431,51 @@ public class FreeAPIAccessNGTest {
         int actual = instance.callCountSoFar;
         String message = "Shouldn't have made API calls for inverted rates";
         assertEquals(actual, expected, message);
+    }
+    
+    private static Map<CurrencyPair, ConversionRateQuote> 
+        makeQuoteMap(Currency currency) {
+        String currencyCode = currency.getCurrencyCode();
+        String ratesEndPoint = "/latest/" + currencyCode;
+        try {
+            String ratesResponse = minify(ratesEndPoint);
+            Map<CurrencyPair, ConversionRateQuote> map = new HashMap<>();
+            String str = "\"" + currencyCode + "\":1,";
+            int currIndex = ratesResponse.indexOf(str) + 7;
+            boolean hasNext = true;
+            while (hasNext) {
+                currIndex = ratesResponse.indexOf("\"", currIndex) + 1;
+                String key = ratesResponse.substring(currIndex, 
+                        currIndex + 3);
+                if (CURRENCY_CODES_MAP.containsKey(key)) {
+                    Currency to = CURRENCY_CODES_MAP.get(key);
+                    CurrencyPair currencies 
+                            = new CurrencyPair(currency, to);
+                    currIndex = ratesResponse.indexOf(":", currIndex) + 1;
+                    int commaIndex = ratesResponse.indexOf(",", currIndex);
+                    if (commaIndex < 0) {
+                        commaIndex = ratesResponse.indexOf("\u007D", currIndex);
+                        hasNext = false;
+                    }
+                    String numStr = ratesResponse.substring(currIndex, 
+                            commaIndex);
+                    double rate = Double.parseDouble(numStr);
+                    ConversionRateQuote value 
+                            = new ConversionRateQuote(currencies, rate, 
+                                    LocalDateTime.now());
+                    System.out.println("Conversion for " + currencies.toString() 
+                            + " reported as " + rate);
+                    map.put(currencies, value);
+                } else {
+                    currIndex = ratesResponse.indexOf("\"", currIndex + 4);
+                }
+            }
+            return map;
+        } catch (IOException ioe) {
+            String excMsg = "Encountered " + ioe.getClass().getName() 
+                    + " trying to get quotes for " + currencyCode;
+            throw new RuntimeException(excMsg, ioe);
+        }
     }
     
     // TODO: Write tests for caching, including inversion, and equivalents for 
