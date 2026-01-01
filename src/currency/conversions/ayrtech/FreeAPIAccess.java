@@ -78,6 +78,8 @@ public class FreeAPIAccess implements ExchangeRateProvider,
     private static final Currency U_S_DOLLARS = Currency.getInstance(Locale.US);
     
     private final Currency baseCurrency;
+    
+    private Currency currencyForNextAPICall = U_S_DOLLARS;
 
     // TODO: Refactor this function to a public function in a different class
     private static String minify(String endPoint) throws IOException {
@@ -249,7 +251,15 @@ public class FreeAPIAccess implements ExchangeRateProvider,
     }
     
     String makeAPICall() {
-        return "PLACEHOLDER";
+        String endPoint = "/latest/" 
+                + this.currencyForNextAPICall.getCurrencyCode();
+        try {
+        return minify(endPoint);
+        } catch (IOException cause) {
+            String message = "Encountered " + cause.getClass().getName() 
+                    + " trying to get end point \"" + endPoint + "\"";
+            throw new RuntimeException(message, cause);
+        }
     }
     
     // TODO: Write tests for this
