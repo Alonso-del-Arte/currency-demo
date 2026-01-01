@@ -288,6 +288,11 @@ public class FreeAPIAccess implements ExchangeRateProvider,
             ConversionRateQuote quote = this.baseCurrQuoteMap.get(currencies);
             return quote.getRate();
         }
+        if (this.baseCurrQuoteMap.containsKey(currencies.flip())) {
+            ConversionRateQuote quote 
+                    = this.baseCurrQuoteMap.get(currencies.flip());
+            return quote.invert().getRate();
+        }
         return 1.0;
     }
     
