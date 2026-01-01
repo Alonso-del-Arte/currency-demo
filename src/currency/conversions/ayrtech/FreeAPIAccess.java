@@ -165,6 +165,9 @@ public class FreeAPIAccess implements ExchangeRateProvider,
             Map<CurrencyPair, ConversionRateQuote> DOLLAR_CONVERSIONS_MAP 
             = new HashMap<>();
     
+    private Map<CurrencyPair, ConversionRateQuote> baseCurrQuoteMap 
+            = new HashMap<>();
+    
     static {
         String endPoint = "/latest/USD";
         try {
@@ -311,9 +314,58 @@ public class FreeAPIAccess implements ExchangeRateProvider,
                 && currencies.getToCurrency().getCurrencyCode().equals("USD")) {
             return 0.37037037037037035;
         }
+        if (this.baseCurrQuoteMap.containsKey(currencies)) {
+            ConversionRateQuote quote = this.baseCurrQuoteMap.get(currencies);
+            return quote.getRate();
+        }
         return 1.0;
     }
     
+    private Map<CurrencyPair, ConversionRateQuote> makeQuoteMap(Currency base) {
+        String currencyCode = base.getCurrencyCode();
+        String ratesEndPoint = "/latest/" + currencyCode;
+        try {
+            String ratesResponse = minify(ratesEndPoint);
+            Map<CurrencyPair, ConversionRateQuote> map 
+                    = new HashMap<>(156);
+            String str = "\"" + currencyCode + "\":1,";
+            int currIndex = ratesResponse.indexOf(str) + 7;
+            boolean hasNext = true;
+            while (hasNext) {
+                currIndex = ratesResponse.indexOf("\"", currIndex) + 1;
+                String key = ratesResponse.substring(currIndex, 
+                        currIndex + 3);
+                if (CURRENCY_CODES.contains(key)) {
+                    Currency currency = Currency.getInstance(key);
+                    CurrencyPair currencies 
+                            = new CurrencyPair(base, currency);
+                    currIndex = ratesResponse.indexOf(":", currIndex) + 1;
+                    int commaIndex = ratesResponse.indexOf(",", currIndex);
+                    if (commaIndex < 0) {
+                        commaIndex = ratesResponse.indexOf("\u007D", currIndex);
+                        hasNext = false;
+                    }
+                    String numStr = ratesResponse.substring(currIndex, 
+                            commaIndex);
+                    double rate = Double.parseDouble(numStr);
+                    ConversionRateQuote value 
+                            = new ConversionRateQuote(currencies, rate, 
+                                    LocalDateTime.now());
+                    System.out.println("Conversion for " + currencies.toString() 
+                            + " reported as " + rate);
+                    map.put(currencies, value);
+                } else {
+                    currIndex = ratesResponse.indexOf("\"", currIndex + 4);
+                }
+            }
+            return map;
+        } catch (IOException ioe) {
+            String excMsg = "Encountered " + ioe.getClass().getName() 
+                    + " trying to get quotes for " + currencyCode;
+            throw new RuntimeException(excMsg, ioe);
+        }
+    }
+
     /**
      * Auxiliary constructor. The base currency is the United States dollar 
      * (USD).
@@ -333,6 +385,11 @@ public class FreeAPIAccess implements ExchangeRateProvider,
             throw new NullPointerException(excMsg);
         }
         this.baseCurrency = base;
+        if (this.baseCurrency.equals(U_S_DOLLARS)) {
+            this.baseCurrQuoteMap = DOLLAR_CONVERSIONS_MAP;
+        } else {
+            this.baseCurrQuoteMap = this.makeQuoteMap(this.baseCurrency);
+        }
     }
     
 }
