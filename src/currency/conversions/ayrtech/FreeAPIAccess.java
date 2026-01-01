@@ -262,43 +262,10 @@ public class FreeAPIAccess implements ExchangeRateProvider,
         }
     }
     
-    // TODO: Write tests for this
     @Override
     public double getRate(Currency source, Currency target) {
-        if (source.getCurrencyCode().equals("USD")) {
-            if (target.getCurrencyCode().equals("XCD")) {
-                return 2.7;
-            } else {
-                CurrencyPair currencies = new CurrencyPair(source, target);
-                if (DOLLAR_CONVERSIONS_MAP.containsKey(currencies)) {
-                    ConversionRateQuote quote 
-                            = DOLLAR_CONVERSIONS_MAP.get(currencies);
-                    return quote.getRate();
-                }
-            }
-        } else {
-            CurrencyPair currencies = new CurrencyPair(source, target);
-            CurrencyPair key = currencies.flip();
-            if (DOLLAR_CONVERSIONS_MAP.containsKey(key)) {
-                ConversionRateQuote quote = DOLLAR_CONVERSIONS_MAP.get(key);
-                return quote.invert().getRate();
-            }
-        }
-        if (source.getCurrencyCode().equals("XCD") 
-                && target.getCurrencyCode().equals("USD")) {
-            return 0.37037037037037035;
-        }
         CurrencyPair currencies = new CurrencyPair(source, target);
-        if (this.baseCurrQuoteMap.containsKey(currencies)) {
-            ConversionRateQuote quote = this.baseCurrQuoteMap.get(currencies);
-            return quote.getRate();
-        }
-        if (this.baseCurrQuoteMap.containsKey(currencies.flip())) {
-            ConversionRateQuote quote 
-                    = this.baseCurrQuoteMap.get(currencies.flip());
-            return quote.invert().getRate();
-        }
-        return 1.0;
+        return this.getRate(currencies);
     }
     
     // TODO: Write tests for this
