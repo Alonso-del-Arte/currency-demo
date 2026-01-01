@@ -224,6 +224,9 @@ public class FreeAPIAccess implements ExchangeRateProvider,
     
     @Override
     public double getRate(Currency source, Currency target) {
+        if (source.equals(target)) {
+            return 1.0;
+        }
         CurrencyPair currencies = new CurrencyPair(source, target);
         return this.getRate(currencies);
     }
