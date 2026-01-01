@@ -163,48 +163,8 @@ public class FreeAPIAccess implements ExchangeRateProvider,
                
     };
     
-    private static final 
-            Map<CurrencyPair, ConversionRateQuote> DOLLAR_CONVERSIONS_MAP 
-            = new HashMap<>();
-    
     private Map<CurrencyPair, ConversionRateQuote> baseCurrQuoteMap 
             = new HashMap<>();
-    
-    static {
-        String endPoint = "/latest/USD";
-        try {
-            String ratesResponse = minify(endPoint);
-            int currIndex = ratesResponse.indexOf(" \"USD\":1,") + 7;
-            boolean hasNext = true;
-            while (hasNext) {
-                currIndex = ratesResponse.indexOf("\"", currIndex) + 1;
-                String currencyCode = ratesResponse.substring(currIndex, 
-                        currIndex + 3);
-                if (CURRENCY_CODES.contains(currencyCode)) {
-                    Currency currency = Currency.getInstance(currencyCode);
-                    CurrencyPair currencies = new CurrencyPair(U_S_DOLLARS, 
-                            currency);
-                    currIndex = ratesResponse.indexOf(':', currIndex) + 1;
-                    int endIndex = ratesResponse.indexOf(',', currIndex);
-                    if (endIndex < 0) {
-                        endIndex = ratesResponse.indexOf('\u007D', currIndex);
-                        hasNext = false;
-                    }
-                    String numStr = ratesResponse.substring(currIndex, 
-                            endIndex);
-                    double rate = Double.parseDouble(numStr);
-                    ConversionRateQuote value 
-                            = new ConversionRateQuote(currencies, rate, 
-                                    LocalDateTime.now());
-                    DOLLAR_CONVERSIONS_MAP.put(currencies, value);
-                } else {
-                    currIndex = ratesResponse.indexOf("\"", currIndex + 4);
-                }
-            }
-        } catch (IOException ioe) {
-            throw new RuntimeException(ioe);
-        }
-    }
     
     /**
      * Retrieves the base currency.
@@ -268,33 +228,10 @@ public class FreeAPIAccess implements ExchangeRateProvider,
         return this.getRate(currencies);
     }
     
-    // TODO: Write tests for this
     @Override
     public double getRate(CurrencyPair currencies) {
         if (currencies.getFromCurrency().equals(currencies.getToCurrency())) {
             return 1.0;
-        }
-        if (currencies.getFromCurrency().getCurrencyCode()
-                .equals("USD")) {
-            if (currencies.getToCurrency().getCurrencyCode().equals("XCD")) {
-                return 2.7;
-            } else {
-                if (DOLLAR_CONVERSIONS_MAP.containsKey(currencies)) {
-                    ConversionRateQuote quote 
-                            = DOLLAR_CONVERSIONS_MAP.get(currencies);
-                    return quote.getRate();
-                }
-            }
-        } else {
-            CurrencyPair key = currencies.flip();
-            if (DOLLAR_CONVERSIONS_MAP.containsKey(key)) {
-                ConversionRateQuote quote = DOLLAR_CONVERSIONS_MAP.get(key);
-                return quote.invert().getRate();
-            }
-        }
-        if (currencies.getFromCurrency().getCurrencyCode().equals("XCD") 
-                && currencies.getToCurrency().getCurrencyCode().equals("USD")) {
-            return 0.37037037037037035;
         }
         if (this.baseCurrQuoteMap.containsKey(currencies)) {
             ConversionRateQuote quote = this.baseCurrQuoteMap.get(currencies);
@@ -372,11 +309,7 @@ public class FreeAPIAccess implements ExchangeRateProvider,
             throw new NullPointerException(excMsg);
         }
         this.baseCurrency = base;
-        if (this.baseCurrency.equals(U_S_DOLLARS)) {
-            this.baseCurrQuoteMap = DOLLAR_CONVERSIONS_MAP;
-        } else {
-            this.baseCurrQuoteMap = this.makeQuoteMap(this.baseCurrency);
-        }
+        this.baseCurrQuoteMap = this.makeQuoteMap(this.baseCurrency);
     }
     
 }
