@@ -233,9 +233,6 @@ public class FreeAPIAccess implements ExchangeRateProvider,
     
     @Override
     public double getRate(CurrencyPair currencies) {
-        if (currencies.getFromCurrency().equals(currencies.getToCurrency())) {
-            return 1.0;
-        }
         if (this.baseCurrQuoteMap.containsKey(currencies)) {
             ConversionRateQuote quote = this.baseCurrQuoteMap.get(currencies);
             return quote.getRate();
