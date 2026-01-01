@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2025 Alonso del Arte
+ * Copyright (C) 2026 Alonso del Arte
  *
  * This program is free software: you can redistribute it and/or modify it under 
  * the terms of the GNU General Public License as published by the Free Software 
@@ -54,18 +54,18 @@ public class CurrencyChooser {
     private static final List<Currency> PSEUDO_CURRENCIES_LIST;
 
     private static final String[] EURO_REPLACED_EXCLUSION_CODES = {"ADP", "ATS", 
-        "BEF", "CYP", "DEM", "EEK", "ESP", "FIM", "FRF", "GRD", "IEP", "ITL", 
-        "LUF", "MTL", "NLG", "PTE", "SIT"};
+        "BEF", "BGN", "CYP", "DEM", "EEK", "ESP", "FIM", "FRF", "GRD", "IEP", 
+        "ITL", "LUF", "MTL", "NLG", "PTE", "SIT"};
     
     private static final Set<Currency> HISTORICAL_CURRENCIES = new HashSet<>();
 
     private static final Set<Currency> OTHER_EXCLUSIONS = new HashSet<>();
     
     private static final String[] OTHER_EXCLUSION_CODES = {"ADP", "ATS", "AYM", 
-        "BEF", "BGL", "BOV", "CHE", "CHW", "COU", "CYP", "DEM", "EEK", "ESP", 
-        "FIM", "FRF", "GRD", "GWP", "IEP", "ITL", "LUF", "MGF", "MTL", "MXV", 
-        "NLG", "PTE", "SIT", "SRG", "STN", "TPE", "USN", "USS", "UYI", "VED", 
-        "ZWN"};
+        "BEF", "BGL", "BGN", "BOV", "CHE", "CHW", "COU", "CYP", "DEM", "EEK", 
+        "ESP", "FIM", "FRF", "GRD", "GWP", "IEP", "ITL", "LUF", "MGF", "MTL", 
+        "MXV", "NLG", "PTE", "SIT", "SRG", "STN", "TPE", "USN", "USS", "UYI", 
+        "VED", "ZWN"};
 
     private static final Map<Integer, Set<Currency>> CURRENCIES_DIGITS_MAP 
             = new HashMap<>();
@@ -248,7 +248,8 @@ public class CurrencyChooser {
      * 2-letter ISO-3166 code for the country, in this case AZ. It was removed 
      * the next year, but remains in Java's currency information file.</li>
      * <li>The Bulgarian hard lev (BGL), I'm not sure how it differs from the 
-     * Bulgarian lev (BGN).</li>
+     * Bulgarian lev (BGN), which is now an euro-replaced currency (more on that 
+     * later).</li>
      * <li>The Bolivian MVDOL (BOV), a monetary unit managed by the Banco 
      * Central de Bolivia. The MVDOL correlates the modern boliviano (BOB) to 
      * the United States dollar (USD). The MVDOL is used for financial 
@@ -305,6 +306,13 @@ public class CurrencyChooser {
      * <li>The Belgian franc (BEF) was the official currency of Belgium from 
      * 1832 to 2002. The old coins can no longer be exchanged for euros, but 
      * there's no time limit for exchanging the old notes.</li>
+     * <li>The Bulgarian lev (BGN) will continue to circulate in Bulgaria along 
+     * with the euro until February 1, 2026. The Bulgarian National Bank will 
+     * exchange the old lev notes and coins indefinitely. Other banks and some 
+     * post offices in Bulgaria will exchange leva to euros free of charge until 
+     * June 30, 2026, and potentially with a fee after that to at least December 
+     * 31, 2026. The other European nations' central banks have much sooner 
+     * deadlines for such exchanges.</li>
      * <li>The Cypriot pound (CYP) was a currency of Cyprus until 2008, when it 
      * was replaced by the euro. The old notes and coins can no longer be 
      * exchanged for euros.</li>
