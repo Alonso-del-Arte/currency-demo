@@ -434,12 +434,13 @@ public class FreeAPIAccessNGTest {
     }
     
     private static Map<CurrencyPair, ConversionRateQuote> 
-        makeQuoteMap(Currency currency) {
-        String currencyCode = currency.getCurrencyCode();
+        makeQuoteMap(Currency base) {
+        String currencyCode = base.getCurrencyCode();
         String ratesEndPoint = "/latest/" + currencyCode;
         try {
             String ratesResponse = minify(ratesEndPoint);
-            Map<CurrencyPair, ConversionRateQuote> map = new HashMap<>();
+            Map<CurrencyPair, ConversionRateQuote> map 
+                    = new HashMap<>(MAX_NUMBER_OF_CURRENCIES);
             String str = "\"" + currencyCode + "\":1,";
             int currIndex = ratesResponse.indexOf(str) + 7;
             boolean hasNext = true;
@@ -448,9 +449,9 @@ public class FreeAPIAccessNGTest {
                 String key = ratesResponse.substring(currIndex, 
                         currIndex + 3);
                 if (CURRENCY_CODES_MAP.containsKey(key)) {
-                    Currency to = CURRENCY_CODES_MAP.get(key);
+                    Currency currency = CURRENCY_CODES_MAP.get(key);
                     CurrencyPair currencies 
-                            = new CurrencyPair(currency, to);
+                            = new CurrencyPair(base, currency);
                     currIndex = ratesResponse.indexOf(":", currIndex) + 1;
                     int commaIndex = ratesResponse.indexOf(",", currIndex);
                     if (commaIndex < 0) {
@@ -476,6 +477,29 @@ public class FreeAPIAccessNGTest {
                     + " trying to get quotes for " + currencyCode;
             throw new RuntimeException(excMsg, ioe);
         }
+    }
+
+    @Test
+    public void testGetRateDiffBaseCurrency() {
+        Currency base = CurrencyChooser.chooseCurrencyOtherThan(U_S_DOLLARS);
+        AccessWithAPICallCounter instance = new AccessWithAPICallCounter(base);
+        int initialNumberOfCalls = instance.callCountSoFar;
+        Map<CurrencyPair, ConversionRateQuote> quoteMap = makeQuoteMap(base);
+        for (ConversionRateQuote quote : quoteMap.values()) {
+            CurrencyPair currencies = quote.getCurrencies();
+            double expected = quote.getRate();
+            double actual = instance.getRate(currencies);
+            Currency from = currencies.getFromCurrency();
+            Currency to = currencies.getToCurrency();
+            String message = "Getting conversion rate for " 
+                    + from.getDisplayName() + " (" + from.getCurrencyCode() 
+                    + ") to " + to.getDisplayName() + " (" 
+                    + to.getCurrencyCode() + ")";
+            assertEquals(actual, expected, TEST_DELTA, message);
+        }
+        int totalNumberOfCalls = instance.callCountSoFar;
+        String message = "Instance shouldn't have made more API calls";
+        assertEquals(totalNumberOfCalls, initialNumberOfCalls, message);
     }
     
     // TODO: Write tests for caching, including inversion, and equivalents for 
@@ -514,6 +538,14 @@ public class FreeAPIAccessNGTest {
             this.callCountSoFar++;
             return super.makeAPICall();
         }
+
+        public AccessWithAPICallCounter() {
+            this(U_S_DOLLARS);
+        }
+        
+        public AccessWithAPICallCounter(Currency base) {
+            super(base);
+        }        
         
     }
     
