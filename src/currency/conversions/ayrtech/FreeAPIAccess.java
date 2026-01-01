@@ -252,10 +252,6 @@ public class FreeAPIAccess implements ExchangeRateProvider,
         return "PLACEHOLDER";
     }
     
-    private void processAPICall() {
-        //
-    }
-    
     // TODO: Write tests for this
     @Override
     public double getRate(Currency source, Currency target) {
