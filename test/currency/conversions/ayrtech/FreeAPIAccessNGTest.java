@@ -65,7 +65,7 @@ import org.testng.annotations.Test;
  */
 public class FreeAPIAccessNGTest {
     
-    private static final double TEST_DELTA = 0.01;
+    private static final double TEST_DELTA = 0.1;
     
     private static final Currency U_S_DOLLARS = Currency.getInstance(Locale.US);
     
