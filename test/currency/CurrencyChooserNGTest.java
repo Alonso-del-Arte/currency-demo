@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2025 Alonso del Arte
+ * Copyright (C) 2026 Alonso del Arte
  *
  * This program is free software: you can redistribute it and/or modify it under 
  * the terms of the GNU General Public License as published by the Free Software 
@@ -66,8 +66,8 @@ public class CurrencyChooserNGTest {
             * CURRENCIES.size();
     
     private static final String[] EURO_REPLACED_EXCLUSION_CODES = {"ADP", "ATS", 
-        "BEF", "CYP", "DEM", "EEK", "ESP", "FIM", "FRF", "GRD", "IEP", "ITL", 
-        "LUF", "MTL", "NLG", "PTE", "SIT"};
+        "BEF", "BGN", "CYP", "DEM", "EEK", "ESP", "FIM", "FRF", "GRD", "IEP", 
+        "ITL", "LUF", "MTL", "NLG", "PTE", "SIT"};
     
     private static final String[] OTHER_EXCLUSION_CODES = {"AYM", "BGL", "BOV", 
         "CHE", "CHW", "COU", "GWP", "MGF", "MXV", "SRG", "STN", "TPE", "USN", 
@@ -787,22 +787,6 @@ public class CurrencyChooserNGTest {
         }
     }
     
-    // TODO: After December 31, 2025, add "BGN" (for the Bulgarian lev) to 
-    // EURO_REPLACED_EXCLUSION_CODES and delete this test, which for now is a 
-    // reminder.
-    @org.testng.annotations.Ignore
-    @Test
-    public void testBulgarianLevExcluded() {
-        Currency bulgarianLev = Currency.getInstance("BGN");
-        String bulgarianLevDisplayName = bulgarianLev.getDisplayName();
-        for (int i = 0; i < NUMBER_OF_CALLS_FOR_EXCLUSION_SEARCH; i++) {
-            Currency currency = CurrencyChooser.chooseCurrency();
-            String msg = "Currency " + currency.getDisplayName() 
-                    + " should not be " + bulgarianLevDisplayName;
-            assertNotEquals(bulgarianLev, currency, msg);
-        }
-    }
-
     @Test
     public void testZimbabweanDollarExcluded() {
         Currency zimbabweanDollar = Currency.getInstance("ZWN");
