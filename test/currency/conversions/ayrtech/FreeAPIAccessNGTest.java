@@ -502,6 +502,29 @@ public class FreeAPIAccessNGTest {
         assertEquals(totalNumberOfCalls, initialNumberOfCalls, message);
     }
     
+    @Test
+    public void testGetRateDiffBaseCurrencyCanInvert() {
+        Currency base = CurrencyChooser.chooseCurrencyOtherThan(U_S_DOLLARS);
+        AccessWithAPICallCounter instance = new AccessWithAPICallCounter(base);
+        int initialNumberOfCalls = instance.callCountSoFar;
+        Map<CurrencyPair, ConversionRateQuote> quoteMap = makeQuoteMap(base);
+        for (ConversionRateQuote quote : quoteMap.values()) {
+            CurrencyPair currencies = quote.getCurrencies().flip();
+            double expected = quote.invert().getRate();
+            double actual = instance.getRate(currencies);
+            Currency from = currencies.getFromCurrency();
+            Currency to = currencies.getToCurrency();
+            String message = "Getting conversion rate for " 
+                    + from.getDisplayName() + " (" + from.getCurrencyCode() 
+                    + ") to " + to.getDisplayName() + " (" 
+                    + to.getCurrencyCode() + ")";
+            assertEquals(actual, expected, TEST_DELTA, message);
+        }
+        int totalNumberOfCalls = instance.callCountSoFar;
+        String message = "Instance shouldn't have made more API calls";
+        assertEquals(totalNumberOfCalls, initialNumberOfCalls, message);
+    }
+    
     // TODO: Write tests for caching, including inversion, and equivalents for 
     // base currency conversions
     
