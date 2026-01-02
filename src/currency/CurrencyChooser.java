@@ -57,6 +57,9 @@ public class CurrencyChooser {
         "BEF", "BGN", "CYP", "DEM", "EEK", "ESP", "FIM", "FRF", "GRD", "IEP", 
         "ITL", "LUF", "MTL", "NLG", "PTE", "SIT"};
     
+    private static final Set<Currency> EURO_REPLACED_CURRENCIES 
+            = new HashSet<>();
+    
     private static final Set<Currency> HISTORICAL_CURRENCIES = new HashSet<>();
 
     private static final Set<Currency> OTHER_EXCLUSIONS = new HashSet<>();
@@ -69,11 +72,10 @@ public class CurrencyChooser {
             = new HashMap<>();
     
     static {
-        Set<Currency> euroReplacedCurrencies = new HashSet<>();
         for (String currencyCode : EURO_REPLACED_EXCLUSION_CODES) {
-            euroReplacedCurrencies.add(Currency.getInstance(currencyCode));
+            EURO_REPLACED_CURRENCIES.add(Currency.getInstance(currencyCode));
         }
-        CURRENCIES.removeAll(euroReplacedCurrencies);
+        CURRENCIES.removeAll(EURO_REPLACED_CURRENCIES);
         final String nineteenthCenturyYearIndicator = "\u002818";
         final String twentiethCenturyYearIndicator = "\u002819";
         final String twentyFirstCenturyYearIndicator = "\u002820";
@@ -115,7 +117,7 @@ public class CurrencyChooser {
         }
         CURRENCIES.removeAll(PSEUDO_CURRENCIES);
         CURRENCIES.removeAll(HISTORICAL_CURRENCIES);
-        HISTORICAL_CURRENCIES.addAll(euroReplacedCurrencies);
+        HISTORICAL_CURRENCIES.addAll(EURO_REPLACED_CURRENCIES);
         CURRENCIES.removeAll(OTHER_EXCLUSIONS);
         PSEUDO_CURRENCIES_LIST = new ArrayList<>(PSEUDO_CURRENCIES);
     }
@@ -203,8 +205,7 @@ public class CurrencyChooser {
      * program.</p>
      */
     public static boolean isEuroReplacedCurrency(Currency currency) {
-        return Arrays.binarySearch(EURO_REPLACED_EXCLUSION_CODES, 
-                currency.getCurrencyCode()) > -1;
+        return EURO_REPLACED_CURRENCIES.contains(currency);
     }
 
     /**
