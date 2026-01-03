@@ -27,6 +27,7 @@ import java.util.NoSuchElementException;
 import java.util.Random;
 import java.util.Set;
 import java.util.function.Predicate;
+import java.util.stream.Collectors;
 
 /**
  * Chooses currencies to be used in the testing of other classes in the 
@@ -58,7 +59,9 @@ public class CurrencyChooser {
         "ITL", "LUF", "MTL", "NLG", "PTE", "SIT"};
     
     private static final Set<Currency> EURO_REPLACED_CURRENCIES 
-            = new HashSet<>();
+            = Set.of(EURO_REPLACED_EXCLUSION_CODES).stream()
+                    .map(currencyCode -> Currency.getInstance(currencyCode))
+                    .collect(Collectors.toSet());
     
     private static final Set<Currency> HISTORICAL_CURRENCIES = new HashSet<>();
 
@@ -72,9 +75,6 @@ public class CurrencyChooser {
             = new HashMap<>();
     
     static {
-        for (String currencyCode : EURO_REPLACED_EXCLUSION_CODES) {
-            EURO_REPLACED_CURRENCIES.add(Currency.getInstance(currencyCode));
-        }
         CURRENCIES.removeAll(EURO_REPLACED_CURRENCIES);
         final String nineteenthCenturyYearIndicator = "\u002818";
         final String twentiethCenturyYearIndicator = "\u002819";
