@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2025 Alonso del Arte
+ * Copyright (C) 2026 Alonso del Arte
  *
  * This program is free software: you can redistribute it and/or modify it under 
  * the terms of the GNU General Public License as published by the Free Software 
@@ -32,7 +32,9 @@ import java.util.stream.Collectors;
 
 /**
  * Provides hard-coded currency exchange rates. See {@link #DATE_OF_HARD_CODING} 
- * for the date that these values were hard-coded.
+ * for the date that these values were hard-coded. This is to be used for 
+ * demonstrations for which the most up-to-date values are not available, or are 
+ * not relevant to what is being demonstrated.
  * @author Alonso del Arte
  */
 public class HardCodedRateProvider implements ExchangeRateProvider, 
@@ -44,7 +46,7 @@ public class HardCodedRateProvider implements ExchangeRateProvider,
      * might remain current until the next hard-coding.
      */
     public static final LocalDate DATE_OF_HARD_CODING 
-            = LocalDate.of(2025, Month.MARCH, 3);
+            = LocalDate.of(2026, Month.JANUARY, 3);
     
     private static final Currency UNITED_STATES_DOLLARS 
             = Currency.getInstance(Locale.US);
@@ -58,9 +60,10 @@ public class HardCodedRateProvider implements ExchangeRateProvider,
                     currencyCode -> Currency.getInstance(currencyCode)
             ).collect(Collectors.toSet());
     
-    private static final double[] HARD_CODED_RATES = {1.6116, 5.9909941, 1.45, 
-        7.29, 0.95, 0.78822, 7.78, 3.6, 87.38, 149.22, 1459.18, 20.78, 1.78, 
-        57.79, 32.92, 1.0, 25589.98, 625.4, 2.7, 625.39, 113.71};
+    private static final double[] HARD_CODED_RATES = {1.4948, 5.4663, 1.3729, 
+        7.0009, 0.853, 0.743, 7.7909, 3.1861, 90.1319, 156.8463, 1444.4676, 
+        17.923, 1.7341, 58.8721, 31.4455, 1.0, 26271.8575, 559.5222, 2.7, 
+        559.5222, 101.7885};
     
     private static final Map<CurrencyPair, Double> QUOTES_MAP = new HashMap<>();
     
