@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2025 Alonso del Arte
+ * Copyright (C) 2026 Alonso del Arte
  *
  * This program is free software: you can redistribute it and/or modify it under 
  * the terms of the GNU General Public License as published by the Free Software 
@@ -54,12 +54,12 @@ public class HardCodedRateProviderNGTest {
     private static final String USD_3_LETTER_CODE 
             = UNITED_STATES_DOLLARS.getCurrencyCode();
     
-    private static final String[] NON_USD_CURRENCY_CODES = {"AUD", "BRL", "CAD", 
-        "CNY", "EUR", "GBP", "HKD", "ILS", "INR", "JPY", "KRW", "MXN", "NZD", 
-        "PHP", "TWD", "VND", "XAF", "XCD", "XOF", "XPF"};
+    private static final String[] SELECTED_NON_USD_CURRENCY_CODES = {"AUD", 
+        "BRL", "CAD", "CNY", "EUR", "GBP", "HKD", "ILS", "INR", "JPY", "KRW", 
+        "MXN", "NZD", "PHP", "TWD", "VND", "XAF", "XCD", "XOF", "XPF"};
     
-    private static final Set<Currency> NON_USD_CURRENCIES 
-            = Set.of(NON_USD_CURRENCY_CODES).stream()
+    private static final Set<Currency> SELECTED_NON_USD_CURRENCIES 
+            = Set.of(SELECTED_NON_USD_CURRENCY_CODES).stream()
                     .map(currencyCode -> Currency.getInstance(currencyCode))
                     .collect(Collectors.toSet());
     
@@ -71,7 +71,7 @@ public class HardCodedRateProviderNGTest {
     
     static {
         UNSUPPORTED_CURRENCIES.remove(UNITED_STATES_DOLLARS);
-        UNSUPPORTED_CURRENCIES.removeAll(NON_USD_CURRENCIES);
+        UNSUPPORTED_CURRENCIES.removeAll(SELECTED_NON_USD_CURRENCIES);
     }
     
     @Test
@@ -414,7 +414,7 @@ public class HardCodedRateProviderNGTest {
     public void testGetRate() {
         ExchangeRateProvider instance = new HardCodedRateProvider();
         double delta = 0.01;
-        for (Currency currency : NON_USD_CURRENCIES) {
+        for (Currency currency : SELECTED_NON_USD_CURRENCIES) {
             CurrencyPair pair 
                     = new CurrencyPair(UNITED_STATES_DOLLARS, currency);
             double rate = instance.getRate(pair);
@@ -433,10 +433,10 @@ public class HardCodedRateProviderNGTest {
     @Test
     public void testGetRateNeitherCurrencyUSD() {
         ExchangeRateProvider instance = new HardCodedRateProvider();
-        Currency source = CurrencyChooser.chooseCurrency(NON_USD_CURRENCIES);
+        Currency source = CurrencyChooser.chooseCurrency(SELECTED_NON_USD_CURRENCIES);
         String msgPart = "Inquiring rate for " + source.getDisplayName() + " (" 
                 + source.getCurrencyCode() + ") to ";
-        for (Currency target : NON_USD_CURRENCIES) {
+        for (Currency target : SELECTED_NON_USD_CURRENCIES) {
             double expected = instance.getRate(UNITED_STATES_DOLLARS, target) 
                     / instance.getRate(UNITED_STATES_DOLLARS, source);
             double actual = instance.getRate(source, target);
@@ -450,7 +450,7 @@ public class HardCodedRateProviderNGTest {
     public void testUnsupportedSourceCurrencyCausesException() {
         ExchangeRateProvider instance = new HardCodedRateProvider();
         Currency from = CurrencyChooser.chooseCurrency(UNSUPPORTED_CURRENCIES);
-        Currency to = CurrencyChooser.chooseCurrency(NON_USD_CURRENCIES);
+        Currency to = CurrencyChooser.chooseCurrency(SELECTED_NON_USD_CURRENCIES);
         CurrencyPair currencies = new CurrencyPair(from, to);
         String fromCurrCode = from.getCurrencyCode();
         String msg = "Since " + from.getDisplayName() + " (" + fromCurrCode 
@@ -474,7 +474,7 @@ public class HardCodedRateProviderNGTest {
         ExchangeRateProvider instance = new HardCodedRateProvider();
         Currency source 
                  = CurrencyChooser.chooseCurrency(UNSUPPORTED_CURRENCIES);
-        Currency target = CurrencyChooser.chooseCurrency(NON_USD_CURRENCIES);
+        Currency target = CurrencyChooser.chooseCurrency(SELECTED_NON_USD_CURRENCIES);
         String fromCurrCode = source.getCurrencyCode();
         String msg = "Since " + source.getDisplayName() + " (" + fromCurrCode 
                 + ") is not supported, conversion from " + fromCurrCode + " to " 
@@ -495,7 +495,7 @@ public class HardCodedRateProviderNGTest {
     @Test
     public void testUnsupportedTargetCurrencyCausesException() {
         ExchangeRateProvider instance = new HardCodedRateProvider();
-        Currency from = CurrencyChooser.chooseCurrency(NON_USD_CURRENCIES);
+        Currency from = CurrencyChooser.chooseCurrency(SELECTED_NON_USD_CURRENCIES);
         Currency to = CurrencyChooser.chooseCurrency(UNSUPPORTED_CURRENCIES);
         CurrencyPair currencies = new CurrencyPair(from, to);
         String toCurrCode = to.getCurrencyCode();
@@ -518,7 +518,7 @@ public class HardCodedRateProviderNGTest {
     @Test
     public void testUnsupportedTargetCurrencyTwoParamGetRateCausesException() {
         ExchangeRateProvider instance = new HardCodedRateProvider();
-        Currency source = CurrencyChooser.chooseCurrency(NON_USD_CURRENCIES);
+        Currency source = CurrencyChooser.chooseCurrency(SELECTED_NON_USD_CURRENCIES);
         Currency target 
                 = CurrencyChooser.chooseCurrency(UNSUPPORTED_CURRENCIES);
         String toCurrCode = target.getCurrencyCode();
