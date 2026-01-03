@@ -65,17 +65,21 @@ public class CurrencyChooser {
     
     private static final Set<Currency> HISTORICAL_CURRENCIES = new HashSet<>();
 
-    private static final Set<Currency> OTHER_EXCLUSIONS = new HashSet<>();
-    
     private static final String[] OTHER_EXCLUSION_CODES = {"AYM", "BGL", "BOV", 
         "CHE", "CHW", "COU", "GWP", "MGF", "MXV", "SRG", "STN", "TPE", 
         "USN", "USS", "UYI", "VED", "ZWN"};
 
+    private static final Set<Currency> OTHER_EXCLUSIONS 
+            = Set.of(OTHER_EXCLUSION_CODES).stream()
+                    .map(currencyCode -> Currency.getInstance(currencyCode))
+                    .collect(Collectors.toSet());
+    
     private static final Map<Integer, Set<Currency>> CURRENCIES_DIGITS_MAP 
             = new HashMap<>();
     
     static {
         CURRENCIES.removeAll(EURO_REPLACED_CURRENCIES);
+        CURRENCIES.removeAll(OTHER_EXCLUSIONS);
         final String nineteenthCenturyYearIndicator = "\u002818";
         final String twentiethCenturyYearIndicator = "\u002819";
         final String twentyFirstCenturyYearIndicator = "\u002820";
@@ -100,10 +104,7 @@ public class CurrencyChooser {
                         CURRENCIES_DIGITS_MAP.put(fractionDigits, 
                                 digitGroupedSet);
                     }
-                    if (Arrays.binarySearch(OTHER_EXCLUSION_CODES, 
-                            currency.getCurrencyCode()) < 0) {
-                        digitGroupedSet.add(currency);
-                    }
+                    digitGroupedSet.add(currency);
                 }
             }
         }
