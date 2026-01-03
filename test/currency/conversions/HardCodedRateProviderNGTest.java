@@ -76,7 +76,7 @@ public class HardCodedRateProviderNGTest {
     
     @Test
     public void testDateOfHardCodingConstant() {
-        LocalDate expected = LocalDate.of(2025, Month.MARCH, 3);
+        LocalDate expected = LocalDate.of(2026, Month.JANUARY, 3);
         LocalDate actual = HardCodedRateProvider.DATE_OF_HARD_CODING;
         assertEquals(actual, expected);
     }
@@ -116,9 +116,9 @@ public class HardCodedRateProviderNGTest {
     public void testGetRateUSDToAUD() {
         ExchangeRateProvider instance = new HardCodedRateProvider();
         Currency austrDollar = Currency.getInstance("AUD");
-        double minimum = 1.44533;
+        double minimum = 1.29;
         double actual = instance.getRate(UNITED_STATES_DOLLARS, austrDollar);
-        double maximum = 1.64034;
+        double maximum = 1.59;
         String msg = "Rate of conversion from " + USD_DISPLAY_NAME + " (" 
                 + USD_3_LETTER_CODE + ") to " + austrDollar.getDisplayName() + " (" 
                 + austrDollar.getCurrencyCode() 
@@ -132,7 +132,7 @@ public class HardCodedRateProviderNGTest {
         Currency brazReal = Currency.getInstance("BRL");
         double minimum = 4.47;
         double actual = instance.getRate(UNITED_STATES_DOLLARS, brazReal);
-        double maximum = 6.29;
+        double maximum = 6.19;
         String msg = "Rate of conversion from " + USD_DISPLAY_NAME + " (" 
                 + USD_3_LETTER_CODE + ") to " + brazReal.getDisplayName() + " (" 
                 + brazReal.getCurrencyCode() 
@@ -146,7 +146,7 @@ public class HardCodedRateProviderNGTest {
         Currency canadianDollar = Currency.getInstance("CAD");
         double minimum = 1.2;
         double actual = instance.getRate(UNITED_STATES_DOLLARS, canadianDollar);
-        double maximum = 1.5;
+        double maximum = 1.45;
         String msg = "Rate of conversion from " + USD_DISPLAY_NAME + " (" 
                 + USD_3_LETTER_CODE + ") to " + canadianDollar.getDisplayName() 
                 + " (" + canadianDollar.getCurrencyCode() 
@@ -158,9 +158,9 @@ public class HardCodedRateProviderNGTest {
     public void testGetRateUSDToCNY() {
         ExchangeRateProvider instance = new HardCodedRateProvider();
         Currency chineseYuan = Currency.getInstance("CNY");
-        double minimum = 6.0;
+        double minimum = 6.32;
         double actual = instance.getRate(UNITED_STATES_DOLLARS, chineseYuan);
-        double maximum = 7.5;
+        double maximum = 7.32;
         String msg = "Rate of conversion from " + USD_DISPLAY_NAME + " (" 
                 + USD_3_LETTER_CODE + ") to " + chineseYuan.getDisplayName() 
                 + " (" + chineseYuan.getCurrencyCode() 
@@ -172,9 +172,9 @@ public class HardCodedRateProviderNGTest {
     public void testGetRateUSDToEUR() {
         ExchangeRateProvider instance = new HardCodedRateProvider();
         Currency euro = Currency.getInstance("EUR");
-        double minimum = 0.892811;
+        double minimum = 0.82;
         double actual = instance.getRate(UNITED_STATES_DOLLARS, euro);
-        double maximum = 0.978298;
+        double maximum = 1.03;
         String msg = "Rate of conversion from " + USD_DISPLAY_NAME + " (" 
                 + USD_3_LETTER_CODE + ") to " + euro.getDisplayName() + " (" 
                 + euro.getCurrencyCode() 
@@ -214,9 +214,9 @@ public class HardCodedRateProviderNGTest {
     public void testGetRateUSDToILS() {
         ExchangeRateProvider instance = new HardCodedRateProvider();
         Currency israeliShekel = Currency.getInstance("ILS");
-        double minimum = 3.0;
+        double minimum = 3.09;
         double actual = instance.getRate(UNITED_STATES_DOLLARS, israeliShekel);
-        double maximum = 4.5;
+        double maximum = 4.05;
         String msg = "Rate of conversion from " + USD_DISPLAY_NAME + " (" 
                 + USD_3_LETTER_CODE + ") to " + israeliShekel.getDisplayName() 
                 + " (" + israeliShekel.getCurrencyCode() 
@@ -228,9 +228,9 @@ public class HardCodedRateProviderNGTest {
     public void testGetRateUSDToINR() {
         ExchangeRateProvider instance = new HardCodedRateProvider();
         Currency indianRupee = Currency.getInstance("INR");
-        double minimum = 70.0;
+        double minimum = 72.44;
         double actual = instance.getRate(UNITED_STATES_DOLLARS, indianRupee);
-        double maximum = 90.0;
+        double maximum = 90.01;
         String msg = "Rate of conversion from " + USD_DISPLAY_NAME + " (" 
                 + USD_3_LETTER_CODE + ") to " + indianRupee.getDisplayName() 
                 + " (" + indianRupee.getCurrencyCode() 
@@ -242,9 +242,9 @@ public class HardCodedRateProviderNGTest {
     public void testGetRateUSDToJPY() {
         ExchangeRateProvider instance = new HardCodedRateProvider();
         Currency japaneseYen = Currency.getInstance("JPY");
-        double minimum = 100.0;
+        double minimum = 103.93;
         double actual = instance.getRate(UNITED_STATES_DOLLARS, japaneseYen);
-        double maximum = 160.0;
+        double maximum = 160.88;
         String msg = "Rate of conversion from " + USD_DISPLAY_NAME + " (" 
                 + USD_3_LETTER_CODE + ") to " + japaneseYen.getDisplayName() 
                 + " (" + japaneseYen.getCurrencyCode() 
@@ -256,7 +256,7 @@ public class HardCodedRateProviderNGTest {
     public void testGetRateUSDToKRW() {
         ExchangeRateProvider instance = new HardCodedRateProvider();
         Currency korWon = Currency.getInstance(Locale.KOREA);
-        double minimum = 1083.85;
+        double minimum = 1092.82;
         double actual = instance.getRate(UNITED_STATES_DOLLARS, korWon);
         double maximum = 1478.09;
         String msg = "Rate of conversion from " + USD_DISPLAY_NAME + " (" 
@@ -270,9 +270,9 @@ public class HardCodedRateProviderNGTest {
     public void testGetRateUSDToMXN() {
         ExchangeRateProvider instance = new HardCodedRateProvider();
         Currency mexPeso = Currency.getInstance("MXN");
-        double minimum = 15.0;
+        double minimum = 16.55;
         double actual = instance.getRate(UNITED_STATES_DOLLARS, mexPeso);
-        double maximum = 25.0;
+        double maximum = 21.89;
         String msg = "Rate of conversion from " + USD_DISPLAY_NAME + " (" 
                 + USD_3_LETTER_CODE + ") to " + mexPeso.getDisplayName() + " (" 
                 + mexPeso.getCurrencyCode() 
@@ -284,10 +284,10 @@ public class HardCodedRateProviderNGTest {
     public void testGetRateUSDToNZD() {
         ExchangeRateProvider instance = new HardCodedRateProvider();
         Currency newZealandDollar = Currency.getInstance("NZD");
-        double minimum = 1.2;
+        double minimum = 1.34;
         double actual = instance.getRate(UNITED_STATES_DOLLARS, 
                 newZealandDollar);
-        double maximum = 1.8;
+        double maximum = 1.78;
         String msg = "Rate of conversion from " + USD_DISPLAY_NAME + " (" 
                 + USD_3_LETTER_CODE + ") to " 
                 + newZealandDollar.getDisplayName() + " (" 
@@ -300,9 +300,9 @@ public class HardCodedRateProviderNGTest {
     public void testGetRateUSDToPHP() {
         ExchangeRateProvider instance = new HardCodedRateProvider();
         Currency philPeso = Currency.getInstance("PHP");
-        double minimum = 45.0;
+        double minimum = 47.66;
         double actual = instance.getRate(UNITED_STATES_DOLLARS, philPeso);
-        double maximum = 60.0;
+        double maximum = 58.95;
         String msg = "Rate of conversion from " + USD_DISPLAY_NAME + " (" 
                 + USD_3_LETTER_CODE + ") to " + philPeso.getDisplayName() + " (" 
                 + philPeso.getCurrencyCode() 
@@ -314,9 +314,9 @@ public class HardCodedRateProviderNGTest {
     public void testGetRateUSDToTWD() {
         ExchangeRateProvider instance = new HardCodedRateProvider();
         Currency taiwanDollar = Currency.getInstance("TWD");
-        double minimum = 32.6;
+        double minimum = 27.64;
         double actual = instance.getRate(UNITED_STATES_DOLLARS, taiwanDollar);
-        double maximum = 33.0;
+        double maximum = 32.93;
         String msg = "Rate of conversion from " + USD_DISPLAY_NAME + " (" 
                 + USD_3_LETTER_CODE + ") to " + taiwanDollar.getDisplayName() + " (" 
                 + taiwanDollar.getCurrencyCode() 
@@ -342,9 +342,9 @@ public class HardCodedRateProviderNGTest {
     public void testGetRateUSDToVND() {
         ExchangeRateProvider instance = new HardCodedRateProvider();
         Currency vietDong = Currency.getInstance("VND");
-        double minimum = 22000.0;
+        double minimum = 22394.0;
         double actual = instance.getRate(UNITED_STATES_DOLLARS, vietDong);
-        double maximum = 26000.0;
+        double maximum = 26375.0;
         String msg = "Rate of conversion from " + USD_DISPLAY_NAME + " (" 
                 + USD_3_LETTER_CODE + ") to " + vietDong.getDisplayName() + " (" 
                 + vietDong.getCurrencyCode() 
@@ -356,9 +356,9 @@ public class HardCodedRateProviderNGTest {
     public void testGetRateUSDToXAF() {
         ExchangeRateProvider instance = new HardCodedRateProvider();
         Currency cfaFranc = Currency.getInstance("XAF");
-        double minimum = 500.0;
+        double minimum = 539.29;
         double actual = instance.getRate(UNITED_STATES_DOLLARS, cfaFranc);
-        double maximum = 700.0;
+        double maximum = 674.12;
         String msg = "Rate of conversion from " + USD_DISPLAY_NAME + " (" 
                 + USD_3_LETTER_CODE + ") to " + cfaFranc.getDisplayName() + " (" 
                 + cfaFranc.getCurrencyCode() 
@@ -385,10 +385,10 @@ public class HardCodedRateProviderNGTest {
     public void testGetRateUSDToXOF() {
         ExchangeRateProvider instance = new HardCodedRateProvider();
         Currency westAfricanFranc = Currency.getInstance("XOF");
-        double minimum = 500.0;
+        double minimum = 534.0;
         double actual = instance.getRate(UNITED_STATES_DOLLARS, 
                 westAfricanFranc);
-        double maximum = 700.0;
+        double maximum = 676.98;
         String msg = "Rate of conversion from " + USD_DISPLAY_NAME + " (" 
                 + USD_3_LETTER_CODE + ") to " + westAfricanFranc.getDisplayName() 
                 + " (" + westAfricanFranc.getCurrencyCode() 
@@ -400,9 +400,9 @@ public class HardCodedRateProviderNGTest {
     public void testGetRateUSDToXPF() {
         ExchangeRateProvider instance = new HardCodedRateProvider();
         Currency cfpFranc = Currency.getInstance("XPF");
-        double minimum = 113.0;
+        double minimum = 101.14;
         double actual = instance.getRate(UNITED_STATES_DOLLARS, cfpFranc);
-        double maximum = 116.0;
+        double maximum = 102.60;
         String msg = "Rate of conversion from " + USD_DISPLAY_NAME + " (" 
                 + USD_3_LETTER_CODE + ") to " + cfpFranc.getDisplayName() 
                 + " (" + cfpFranc.getCurrencyCode() 
