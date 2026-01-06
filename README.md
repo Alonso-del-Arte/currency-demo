@@ -115,10 +115,10 @@ access. So I guess I have that long to figure out an alternative.
 
 ## Notes about internationalization
 
-Although I have not made a conscious effort to internationalize this repository, 
-there is some internationalization in this program. Java gives us some 
-internationalization for "free." In particular, the names and symbols of 
-currencies will vary depending on your locale.
+Although I did not at first make a conscious effort to internationalize this 
+repository, there has always been some internationalization in this program. 
+Java gives us some internationalization for "free." In particular, the names and 
+symbols of currencies will vary depending on your locale.
 
 Unicode provides a fairly complete set of currency symbols, many of which are 
 accessible through `java.util.Currency`'s `getSymbol()` function depending on 
