@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2025 Alonso del Arte
+ * Copyright (C) 2026 Alonso del Arte
  *
  * This program is free software: you can redistribute it and/or modify it under 
  * the terms of the GNU General Public License as published by the Free Software 
@@ -39,7 +39,7 @@ import org.testng.annotations.Test;
  */
 public class YearSpanNGTest {
     
-    private static final Random RANDOM = new Random();
+    static final Random RANDOM = new Random();
     
     private static final int ORIGIN_YEAR = 1800;
     
