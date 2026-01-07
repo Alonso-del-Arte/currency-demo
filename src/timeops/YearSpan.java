@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2025 Alonso del Arte
+ * Copyright (C) 2026 Alonso del Arte
  *
  * This program is free software: you can redistribute it and/or modify it under 
  * the terms of the GNU General Public License as published by the Free Software 
@@ -170,6 +170,7 @@ public class YearSpan implements Comparable<YearSpan>, DurationalSpan {
         return this.start.toString() + '\u2014' + this.finish.toString();
     }
     
+    @Override
     public String toASCIIString() {
         if (this.start.equals(this.finish)) {
             return this.start.toString();

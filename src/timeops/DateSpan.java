@@ -45,6 +45,7 @@ public class DateSpan implements Comparable<DateSpan>, DurationalSpan {
     }
     
     // TODO: Write tests for this
+    @Override
     public String toASCIIString() {
         return "SORRY, NOT IMPLEMENTED YET";
     }

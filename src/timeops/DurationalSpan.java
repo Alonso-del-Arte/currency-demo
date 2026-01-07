@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2025 Alonso del Arte
+ * Copyright (C) 2026 Alonso del Arte
  *
  * This program is free software: you can redistribute it and/or modify it under 
  * the terms of the GNU General Public License as published by the Free Software 
@@ -30,5 +30,14 @@ public interface DurationalSpan {
      * February in a non-leap year, the duration should be 28 days.
      */
     Duration getDuration();
+    
+    /**
+     * Gives a text representation of this durational span using only ASCII 
+     * characters. May be the same as {@code toString()} provided that one 
+     * doesn't use characters beyond ASCII.
+     * @return A text representation. Might use, for example, two dashes instead 
+     * of an em dash.
+     */
+    String toASCIIString();
     
 }
