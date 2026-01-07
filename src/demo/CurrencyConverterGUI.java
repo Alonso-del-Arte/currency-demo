@@ -20,6 +20,7 @@ import currency.CurrencyPair;
 import currency.MoneyAmount;
 import currency.conversions.ConversionRateQuote;
 import currency.conversions.CurrencyConverter;
+import currency.conversions.HardCodedRateProvider;
 import currency.conversions.RateQuoteCache;
 import currency.conversions.mannys.FreeForExRateProvider;
 
@@ -156,7 +157,7 @@ public class CurrencyConverterGUI extends JFrame implements ActionListener,
     public static void main(String[] args) {
         CurrencyConverterGUI display = new CurrencyConverterGUI(DEFAULT_PAIR, 
                 new CurrencyConverter(
-                        new FreeForExRateProvider()
+                        new HardCodedRateProvider()
                 ));
         display.setVisible(true);
     }
