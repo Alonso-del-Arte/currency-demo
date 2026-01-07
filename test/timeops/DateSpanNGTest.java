@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2025 Alonso del Arte
+ * Copyright (C) 2026 Alonso del Arte
  *
  * This program is free software: you can redistribute it and/or modify it under 
  * the terms of the GNU General Public License as published by the Free Software 
@@ -17,15 +17,30 @@
 package timeops;
 
 import java.time.Duration;
+import java.time.LocalDate;
 
 import static org.testng.Assert.*;
 import org.testng.annotations.Test;
+
+import static timeops.YearSpanNGTest.RANDOM;
 
 /**
  * Tests of the DateSpan class.
  * @author Alonso del Arte
  */
 public class DateSpanNGTest {
+    
+    private static final LocalDate TEST_BEGIN_DATE = LocalDate.now();
+    
+    private static LocalDate chooseDate() {
+        int daysToSubtract = RANDOM.nextInt(2, 2048);
+        return TEST_BEGIN_DATE.minusDays(daysToSubtract);
+    }
+    
+    private static LocalDate chooseDateAfter(LocalDate date) {
+        int daysToAdd = RANDOM.nextInt(2, 2048);
+        return date.plusDays(daysToAdd);
+    }
     
     /**
      * Test of getDuration method, of class DateSpan.
