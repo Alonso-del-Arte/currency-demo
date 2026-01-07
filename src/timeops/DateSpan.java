@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2025 Alonso del Arte
+ * Copyright (C) 2026 Alonso del Arte
  *
  * This program is free software: you can redistribute it and/or modify it under 
  * the terms of the GNU General Public License as published by the Free Software 
@@ -25,6 +25,8 @@ import java.time.LocalDate;
  */
 public class DateSpan implements Comparable<DateSpan>, DurationalSpan {
     
+    private final LocalDate start, finish;
+    
     // TODO: Write tests for this
     @Override
     public Duration getDuration() {
@@ -37,8 +39,14 @@ public class DateSpan implements Comparable<DateSpan>, DurationalSpan {
         return 0;
     }
     
+    @Override
+    public String toString() {
+        return this.start.toString() + '\u2014' + this.finish.toString();
+    }
+    
     public DateSpan(LocalDate begin, LocalDate end) {
-        // TODO: Write tests for this
+        this.start = begin;
+        this.finish = end;
     }
     
 }
