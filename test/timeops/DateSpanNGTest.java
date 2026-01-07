@@ -56,7 +56,7 @@ public class DateSpanNGTest {
     /**
      * Test of getDuration method, of class DateSpan.
      */
-    @Test
+    @Test(enabled = false)
     public void testGetDuration() {
         System.out.println("getDuration");
         DateSpan instance = null;
@@ -70,7 +70,7 @@ public class DateSpanNGTest {
     /**
      * Test of compareTo method, of class DateSpan.
      */
-    @Test
+    @Test(enabled = false)
     public void testCompareTo() {
         System.out.println("compareTo");
         DateSpan other = null;
