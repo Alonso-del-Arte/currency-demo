@@ -42,6 +42,17 @@ public class DateSpanNGTest {
         return date.plusDays(daysToAdd);
     }
     
+    @Test
+    public void testToString() {
+        System.out.println("toString");
+        LocalDate begin = chooseDate();
+        LocalDate end = chooseDateAfter(begin);
+        DateSpan instance = new DateSpan(begin, end);
+        String expected = begin.toString() + '\u2014' + end.toString();
+        String actual = instance.toString();
+        assertEquals(actual, expected);
+    }
+    
     /**
      * Test of getDuration method, of class DateSpan.
      */
