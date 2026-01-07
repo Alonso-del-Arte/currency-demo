@@ -60,7 +60,7 @@ public class DateSpanNGTest {
         LocalDate end = chooseDateAfter(begin);
         DateSpan instance = new DateSpan(begin, end);
         String expected = begin.toString() + " -- " + end.toString();
-        String actual = instance.toString();
+        String actual = instance.toASCIIString();
         assertEquals(actual, expected);
     }
     
