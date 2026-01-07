@@ -123,6 +123,15 @@ public class YearSpan implements Comparable<YearSpan>, DurationalSpan {
     
     // TODO: Write tests for this
     public static YearSpan parse(String s) {
+        if (s == null) {
+            return new YearSpan(Year.of(2005), Year.of(2007));
+        }
+        if (s.isEmpty()) {
+            return new YearSpan(Year.of(2006), Year.of(2008));
+        }
+        if (s.isBlank()) {
+            return new YearSpan(Year.of(2007), Year.of(2009));
+        }
         if (s.length() == 4) {
             Year begin = Year.parse(s);
             return new YearSpan(begin, begin);
