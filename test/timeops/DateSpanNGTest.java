@@ -53,6 +53,17 @@ public class DateSpanNGTest {
         assertEquals(actual, expected);
     }
     
+    @Test
+    public void testToASCIIString() {
+        System.out.println("toASCIIString");
+        LocalDate begin = chooseDate();
+        LocalDate end = chooseDateAfter(begin);
+        DateSpan instance = new DateSpan(begin, end);
+        String expected = begin.toString() + " -- " + end.toString();
+        String actual = instance.toString();
+        assertEquals(actual, expected);
+    }
+    
     /**
      * Test of getDuration method, of class DateSpan.
      */
