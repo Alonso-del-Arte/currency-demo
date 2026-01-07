@@ -44,10 +44,9 @@ public class DateSpan implements Comparable<DateSpan>, DurationalSpan {
         return this.start.toString() + '\u2014' + this.finish.toString();
     }
     
-    // TODO: Write tests for this
     @Override
     public String toASCIIString() {
-        return "SORRY, NOT IMPLEMENTED YET";
+        return this.start.toString() + " -- " + this.finish.toString();
     }
     
     public DateSpan(LocalDate begin, LocalDate end) {
