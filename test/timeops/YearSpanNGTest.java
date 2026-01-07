@@ -47,8 +47,6 @@ public class YearSpanNGTest {
     
     private static final int DAYS_IN_A_NON_LEAP_YEAR = 365;
     
-    private static final int DAYS_IN_A_LEAP_YEAR = DAYS_IN_A_NON_LEAP_YEAR + 1;
-    
     private static final int DAYS_IN_TWO_NON_LEAP_YEARS 
             = 2 * DAYS_IN_A_NON_LEAP_YEAR;
     
