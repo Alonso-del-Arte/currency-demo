@@ -127,12 +127,8 @@ public class YearSpan implements Comparable<YearSpan>, DurationalSpan {
             String excMsg = "Parameter should not be null";
             throw new NullPointerException(excMsg);
         }
-        if (s.isEmpty()) {
-            String excMsg = "Parameter should not be empty";
-            throw new DateTimeParseException(excMsg, s, 0);
-        }
         if (s.isBlank()) {
-            String excMsg = "Parameter should not be blank";
+            String excMsg = "Parameter should not be blank nor empty";
             throw new DateTimeParseException(excMsg, s, 0);
         }
         if (s.length() == 4) {
