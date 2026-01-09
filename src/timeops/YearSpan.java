@@ -128,7 +128,8 @@ public class YearSpan implements Comparable<YearSpan>, DurationalSpan {
             throw new NullPointerException(excMsg);
         }
         if (s.isEmpty()) {
-            return new YearSpan(Year.of(2006), Year.of(2008));
+            String excMsg = "Parameter should not be empty";
+            throw new DateTimeParseException(excMsg, s, 0);
         }
         if (s.isBlank()) {
             return new YearSpan(Year.of(2007), Year.of(2009));
