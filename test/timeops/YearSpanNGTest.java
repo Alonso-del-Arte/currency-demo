@@ -22,6 +22,7 @@ import java.time.Duration;
 import java.time.Year;
 import java.time.format.DateTimeParseException;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
 import java.util.Random;
@@ -518,7 +519,7 @@ public class YearSpanNGTest {
     
     @Test
     public void testParseRejectsNullString() {
-        String msg = "Null String should cause null pointer exception";
+        String msg = "Null String should have caused null pointer exception";
         Throwable t = assertThrows(() -> {
             YearSpan badSpan = YearSpan.parse(null);
             System.out.println(msg + ", not given " + badSpan.toString());
@@ -531,7 +532,7 @@ public class YearSpanNGTest {
     
     @Test
     public void testParseRejectsEmptyString() {
-        String msg = "Empty String should cause exception";
+        String msg = "Empty String should have caused exception";
         DateTimeParseException dtpe = assertThrows(() -> {
             YearSpan badSpan = YearSpan.parse("");
             System.out.println(msg + ", not given " + badSpan.toString());
@@ -543,6 +544,31 @@ public class YearSpanNGTest {
         int actual = dtpe.getErrorIndex();
         String message = "Getting error index from parse exception";
         assertEquals(actual, expected, message);
+        System.out.println("\"" + excMsg + "\"");
+    }
+    
+    private static String makeBlankString() {
+        int len = RANDOM.nextInt(1, 32);
+        char[] value = new char[len];
+        Arrays.fill(value, ' ');
+        return new String(value);
+    }
+    
+    @Test
+    public void testParseRejectsBlankString() {
+        String expected = makeBlankString();
+        String msg = "\"" + expected + "\" should have caused exception";
+        DateTimeParseException dtpe = assertThrows(() -> {
+            YearSpan badSpan = YearSpan.parse("     ");
+            System.out.println(msg + ", not given " + badSpan.toString());
+        }, DateTimeParseException.class, msg);
+        String excMsg = dtpe.getMessage();
+        assert excMsg != null : "Exception message should not be null";
+        assert !excMsg.isBlank() : "Exception message should not be blank";
+        String actual = dtpe.getParsedString();
+        String message = "Getting parsed String from exception";
+        assertEquals(actual, expected, message);
+        assertZero(dtpe.getErrorIndex(), "Getting error index");
         System.out.println("\"" + excMsg + "\"");
     }
     
