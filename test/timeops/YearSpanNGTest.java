@@ -517,6 +517,19 @@ public class YearSpanNGTest {
     }
     
     @Test
+    public void testParseRejectsNullString() {
+        String msg = "Null string should cause null pointer exception";
+        Throwable t = assertThrows(() -> {
+            YearSpan badSpan = YearSpan.parse(null);
+            System.out.println(msg + ", not given " + badSpan.toString());
+        }, NullPointerException.class, msg);
+        String excMsg = t.getMessage();
+        assert excMsg != null : "Exception message should not be null";
+        assert !excMsg.isBlank() : "Exception message should not be blank";
+        System.out.println("\"" + excMsg + "\"");
+    }
+    
+    @Test
     public void testParseSingleYearSpan() {
         Year begin = chooseYear();
         String s = begin.toString();
