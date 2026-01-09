@@ -559,7 +559,7 @@ public class YearSpanNGTest {
         String expected = makeBlankString();
         String msg = "\"" + expected + "\" should have caused exception";
         DateTimeParseException dtpe = assertThrows(() -> {
-            YearSpan badSpan = YearSpan.parse("     ");
+            YearSpan badSpan = YearSpan.parse(expected);
             System.out.println(msg + ", not given " + badSpan.toString());
         }, DateTimeParseException.class, msg);
         String excMsg = dtpe.getMessage();
