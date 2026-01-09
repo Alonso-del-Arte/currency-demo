@@ -532,13 +532,17 @@ public class YearSpanNGTest {
     @Test
     public void testParseRejectsEmptyString() {
         String msg = "Empty String should cause exception";
-        Throwable t = assertThrows(() -> {
+        DateTimeParseException dtpe = assertThrows(() -> {
             YearSpan badSpan = YearSpan.parse("");
             System.out.println(msg + ", not given " + badSpan.toString());
         }, DateTimeParseException.class, msg);
-        String excMsg = t.getMessage();
+        String excMsg = dtpe.getMessage();
         assert excMsg != null : "Exception message should not be null";
         assert !excMsg.isBlank() : "Exception message should not be blank";
+        int expected = 0;
+        int actual = dtpe.getErrorIndex();
+        String message = "Getting error index from parse exception";
+        assertEquals(actual, expected, message);
         System.out.println("\"" + excMsg + "\"");
     }
     
