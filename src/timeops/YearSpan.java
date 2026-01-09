@@ -124,7 +124,8 @@ public class YearSpan implements Comparable<YearSpan>, DurationalSpan {
     // TODO: Write tests for this
     public static YearSpan parse(String s) {
         if (s == null) {
-            return new YearSpan(Year.of(2005), Year.of(2007));
+            String excMsg = "Parameter should not be null";
+            throw new NullPointerException(excMsg);
         }
         if (s.isEmpty()) {
             return new YearSpan(Year.of(2006), Year.of(2008));
