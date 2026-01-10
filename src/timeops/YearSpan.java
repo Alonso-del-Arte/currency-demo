@@ -121,7 +121,17 @@ public class YearSpan implements Comparable<YearSpan>, DurationalSpan {
                 + leapDays);
     }
     
-    // TODO: Write tests for this
+    /**
+     * Parses text for a year span. This function has only been tested with year 
+     * spans beginning no earlier than the 16<sup>th</sup> Century and ending no 
+     * later than the 24<sup>th</sup> Century. We make no guarantees for year 
+     * spans outside of that range.
+     * @param s The text to parse. Examples: "1871 &mdash; 2008", "1871--2008".
+     * @return The year span. The examples would both give 1871 &mdash; 2008.
+     * @throws NullPointerException If {@code s} is null.
+     * @throws DateTimeParseException If {@code s} is blank, empty or otherwise 
+     * not containing a parsable year span.
+     */
     public static YearSpan parse(String s) {
         if (s == null) {
             String excMsg = "Parameter should not be null";
@@ -135,6 +145,7 @@ public class YearSpan implements Comparable<YearSpan>, DurationalSpan {
             Year begin = Year.parse(s);
             return new YearSpan(begin, begin);
         }
+        // TODO: Test for invalid separators
         Year begin = Year.parse(s.substring(0, 4));
         Year end = Year.parse(s.substring(s.length() - 4));
         return new YearSpan(begin, end);
