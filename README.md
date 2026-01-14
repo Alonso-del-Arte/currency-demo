@@ -112,6 +112,11 @@ October 27, 2025: Here we go again. I'm losing another free tier. Today I was
 notified that if I don't upgrade to a paid plan by November 14, I will lose 
 access. So I guess I have that long to figure out an alternative.
 
+January 13, 2026: I still have access to ExchangeRate-API. Maybe I should say 
+something. I guess at this point it's up to me to decide whether or not I want 
+to work on the caching mechanism. The dashboard for my API access shows that 
+last month I used less than a third of the quota available to me.
+
 ## Notes about internationalization
 
 Although I did not at first make a conscious effort to internationalize this 
