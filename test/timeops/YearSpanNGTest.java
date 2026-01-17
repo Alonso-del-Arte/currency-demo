@@ -582,6 +582,20 @@ public class YearSpanNGTest {
     }
     
     @Test
+    public void testParseRejectsLowercaseLettersSeparator() {
+        Year begin = chooseYear();
+        Year end = chooseYearAfter(begin);
+        String badSep = makeLowerCaseString();
+        String s = begin.toString() + badSep + end.toString();
+        String msg = "\"" + s + "\" should have caused an exception";
+        DateTimeParseException dtpe = assertThrows(() -> {
+            YearSpan badSpan = YearSpan.parse(s);
+            System.out.println(msg + ", not given " + badSpan.toString());
+        }, DateTimeParseException.class, msg);
+        fail("FINISH WRITING THIS TEST");
+    }
+    
+    @Test
     public void testParseSingleYearSpan() {
         Year begin = chooseYear();
         String s = begin.toString();
