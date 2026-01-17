@@ -572,6 +572,15 @@ public class YearSpanNGTest {
         System.out.println("\"" + excMsg + "\"");
     }
     
+    private static String makeLowerCaseString() {
+        int len = RANDOM.nextInt(2, 8);
+        char[] chs = new char[len];
+        for (int i = 0; i < len; i++) {
+            chs[i] = (char) RANDOM.nextInt('a', 'z');
+        }
+        return new String(chs);
+    }
+    
     @Test
     public void testParseSingleYearSpan() {
         Year begin = chooseYear();
