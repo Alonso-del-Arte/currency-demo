@@ -582,31 +582,35 @@ public class YearSpanNGTest {
     }
     
     @Test
-    public void testParseRejectsLowercaseLettersSeparator() {
+    public void testParseRejectsLowerCaseLettersSeparator() {
         Year begin = chooseYear();
         Year end = chooseYearAfter(begin);
-        String badSep = makeLowerCaseString();
-        String s = begin.toString() + badSep + end.toString();
+        String expected = makeLowerCaseString();
+        String s = begin.toString() + expected + end.toString();
         String msg = "\"" + s + "\" should have caused an exception";
         DateTimeParseException dtpe = assertThrows(() -> {
             YearSpan badSpan = YearSpan.parse(s);
             System.out.println(msg + ", not given " + badSpan.toString());
         }, DateTimeParseException.class, msg);
-        fail("FINISH WRITING THIS TEST");
+        String actual = dtpe.getParsedString();
+        String message = "Getting parsed String from \"" + s + "\"";
+        assertEquals(actual, expected, message);
     }
     
     @Test
     public void testParseRejectsUpperCaseLettersSeparator() {
         Year begin = chooseYear();
         Year end = chooseYearAfter(begin);
-        String badSep = makeLowerCaseString().toUpperCase();
-        String s = begin.toString() + badSep + end.toString();
+        String expected = makeLowerCaseString().toUpperCase();
+        String s = begin.toString() + expected + end.toString();
         String msg = "\"" + s + "\" should have caused an exception";
         DateTimeParseException dtpe = assertThrows(() -> {
             YearSpan badSpan = YearSpan.parse(s);
             System.out.println(msg + ", not given " + badSpan.toString());
         }, DateTimeParseException.class, msg);
-        fail("FINISH WRITING THIS TEST");
+        String actual = dtpe.getParsedString();
+        String message = "Getting parsed String from \"" + s + "\"";
+        assertEquals(actual, expected, message);
     }
     
     @Test
