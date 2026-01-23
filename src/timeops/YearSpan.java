@@ -145,10 +145,20 @@ public class YearSpan implements Comparable<YearSpan>, DurationalSpan {
             Year begin = Year.parse(s);
             return new YearSpan(begin, begin);
         }
-        // TODO: Test for invalid separators
-        Year begin = Year.parse(s.substring(0, 4));
-        Year end = Year.parse(s.substring(s.length() - 4));
-        return new YearSpan(begin, end);
+        String intermediate = s.replace(" ", "");
+        int endYearDigitsBeginIndex = intermediate.length() - 4;
+        Year begin = Year.parse(intermediate.substring(0, 4));
+        String separator = intermediate.substring(4, endYearDigitsBeginIndex);
+        Year end = Year.parse(intermediate.substring(endYearDigitsBeginIndex));
+        switch (separator) {
+            case "--":
+            case "\u2014":
+            case "&mdash;":
+                return new YearSpan(begin, end);
+            default:
+                String excMsg = "Invalid separator";
+                throw new DateTimeParseException(excMsg, separator, 4);
+        }
     }
     
     /**
