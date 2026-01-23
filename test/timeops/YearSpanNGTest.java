@@ -669,8 +669,8 @@ public class YearSpanNGTest {
                 Year begin = Year.of(Integer.parseInt(s.substring(0, 4)));
                 Year end = Year.of(Integer.parseInt(s.substring(5)));
                 YearSpan expected = new YearSpan(begin, end);
-                String msg = "Ought to be able to parse span from \"" + input 
-                        + "\"";
+                String msg = "Ought to be able to parse span " 
+                        + expected.toString() + " from \"" + input + "\"";
                 assertDoesNotThrow(() -> {
                     YearSpan actual = YearSpan.parse(s);
                     assertEquals(actual, expected);
