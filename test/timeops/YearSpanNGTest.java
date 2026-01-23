@@ -24,8 +24,12 @@ import java.time.format.DateTimeParseException;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
+import java.util.Currency;
 import java.util.List;
 import java.util.Random;
+import java.util.Set;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 import static org.testframe.api.Asserters.assertDoesNotThrow;
 import static org.testframe.api.Asserters.assertThrows;
@@ -651,6 +655,28 @@ public class YearSpanNGTest {
             YearSpan actual = YearSpan.parse(s);
             assertEquals(actual, expected);
         }, msg);
+    }
+    
+    @Test
+    public void testParseFromCurrencyInstance() {
+        Pattern pattern = Pattern.compile("\\d{4}.\\d{4}");
+        Set<Currency> currencies = Currency.getAvailableCurrencies();
+        for (Currency currency : currencies) {
+            String input = currency.getDisplayName();
+            Matcher matcher = pattern.matcher(input);
+            if (matcher.find()) {
+                String s = matcher.group();
+                Year begin = Year.of(Integer.parseInt(s.substring(0, 4)));
+                Year end = Year.of(Integer.parseInt(s.substring(5)));
+                YearSpan expected = new YearSpan(begin, end);
+                String msg = "Ought to be able to parse span from \"" + input 
+                        + "\"";
+                assertDoesNotThrow(() -> {
+                    YearSpan actual = YearSpan.parse(s);
+                    assertEquals(actual, expected);
+                }, msg);
+            }
+        }
     }
     
     @Test
