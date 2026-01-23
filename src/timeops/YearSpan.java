@@ -151,7 +151,7 @@ public class YearSpan implements Comparable<YearSpan>, DurationalSpan {
         String separator = intermediate.substring(4, beginIndex);
         Year end = Year.parse(intermediate.substring(beginIndex));
         switch (separator) {
-            case "-", "--", "\u2014", "&mdash;" -> {
+            case "--", "\u2013", "\u2014", "&mdash;" -> {
                 return new YearSpan(begin, end);
             }
             default -> {
