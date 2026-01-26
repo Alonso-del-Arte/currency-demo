@@ -19,6 +19,8 @@ package currency;
 import java.time.Year;
 
 import java.util.Currency;
+import java.util.HashMap;
+import java.util.Map;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -33,6 +35,18 @@ public class CurrencyYearSpanDeterminer {
     private static final Pattern YEAR_SPAN_PATTERN 
             = Pattern.compile("\\d{4}.\\d{4}");
     
+    private static final Year EURO_YEAR_ZERO = Year.of(2002);
+    
+    private static final Map<Currency, YearSpan> EURO_REPLACED_YEAR_SPANS 
+            = new HashMap<>();
+    
+    static {
+        EURO_REPLACED_YEAR_SPANS.put(Currency.getInstance("ADP"), 
+                new YearSpan(Year.of(1936), EURO_YEAR_ZERO));
+        EURO_REPLACED_YEAR_SPANS.put(Currency.getInstance("ATS"), 
+                new YearSpan(Year.of(1945), EURO_YEAR_ZERO));
+    }
+    
     // TODO: Write tests for this
     public static YearSpan determineYearSpan(Currency currency) {
         String input = currency.getDisplayName();
@@ -41,15 +55,8 @@ public class CurrencyYearSpanDeterminer {
             String s = matcher.group();
             return YearSpan.parse(s);
         }
-        if (currency.getCurrencyCode().equals("ADP")) {
-            Year begin = Year.of(1936);
-            Year end = Year.of(2002);
-            return new YearSpan(begin, end);
-        }
-        if (currency.getCurrencyCode().equals("ATS")) {
-            Year begin = Year.of(1945);
-            Year end = Year.of(2002);
-            return new YearSpan(begin, end);
+        if (EURO_REPLACED_YEAR_SPANS.containsKey(currency)) {
+            return EURO_REPLACED_YEAR_SPANS.get(currency);
         }
         Year begin = Year.now();
         Year end = Year.of(2400);
