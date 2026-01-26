@@ -196,7 +196,7 @@ public class CurrencyChooser {
      * otherwise. In the examples, true for the Italian lira and false for the 
      * British pound (even though the euro is still used a lot in parts of 
      * England after "Brexit," the pound remains the official currency of the 
-     * United Kingdom.
+     * United Kingdom).
      * <p>Note: The behavior of this function for pseudocurrencies, such as gold 
      * (XAU) and the European unit of account (XBC), should be considered 
      * untested and undocumented. We make no promises that this function will 
