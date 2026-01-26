@@ -17,7 +17,6 @@
 package currency;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.Currency;
 import java.util.HashSet;
 import java.util.HashMap;
