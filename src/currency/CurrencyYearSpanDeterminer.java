@@ -41,6 +41,11 @@ public class CurrencyYearSpanDeterminer {
             String s = matcher.group();
             return YearSpan.parse(s);
         }
+        if (currency.getCurrencyCode().equals("ADP")) {
+            Year begin = Year.of(1936);
+            Year end = Year.of(2002);
+            return new YearSpan(begin, end);
+        }
         Year begin = Year.now();
         Year end = Year.of(2400);
         return new YearSpan(begin, end);
