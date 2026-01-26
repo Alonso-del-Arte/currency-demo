@@ -18,7 +18,6 @@ package currency;
 
 import java.time.Year;
 import java.util.Currency;
-import java.util.Locale;
 import java.util.Set;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
@@ -37,6 +36,8 @@ public class CurrencyYearSpanDeterminerNGTest {
     
     private static final Set<Currency> CURRENCIES 
             = Currency.getAvailableCurrencies();
+    
+    private static final Year EURO_YEAR_ZERO = Year.of(2002);
     
     private static final Pattern YEAR_SPAN_PATTERN 
             = Pattern.compile("\\d{4}.\\d{4}");
@@ -82,13 +83,24 @@ public class CurrencyYearSpanDeterminerNGTest {
                 + ") is an active currency, its year span should begin now";
         assertEquals(actual, expected, message);
     }
-        
+    
     @Test
     public void testDetermineYearSpanAndorranPeseta() {
         Currency currency = Currency.getInstance("ADP");
         Year begin = Year.of(1936);
-        Year end = Year.of(2002);
-        YearSpan expected = new YearSpan(begin, end);
+        YearSpan expected = new YearSpan(begin, EURO_YEAR_ZERO);
+        YearSpan actual 
+                = CurrencyYearSpanDeterminer.determineYearSpan(currency);
+        String message = "Currency " + currency.getDisplayName() + " (" 
+                + currency.getCurrencyCode() + ") is a euro-replaced currency";
+        assertEquals(actual, expected, message);
+    }
+    
+    @Test
+    public void testDetermineYearSpanAustrianSchilling() {
+        Currency currency = Currency.getInstance("ATS");
+        Year begin = Year.of(1945);
+        YearSpan expected = new YearSpan(begin, EURO_YEAR_ZERO);
         YearSpan actual 
                 = CurrencyYearSpanDeterminer.determineYearSpan(currency);
         String message = "Currency " + currency.getDisplayName() + " (" 
