@@ -19,6 +19,8 @@ package currency;
 import java.time.Year;
 
 import java.util.Currency;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 import timeops.YearSpan;
 
@@ -28,8 +30,17 @@ import timeops.YearSpan;
  */
 public class CurrencyYearSpanDeterminer {
     
+    private static final Pattern YEAR_SPAN_PATTERN 
+            = Pattern.compile("\\d{4}.\\d{4}");
+    
     // TODO: Write tests for this
     public static YearSpan determineYearSpan(Currency currency) {
+        String input = currency.getDisplayName();
+        Matcher matcher = YEAR_SPAN_PATTERN.matcher(input);
+        if (matcher.find()) {
+            String s = matcher.group();
+            return YearSpan.parse(s);
+        }
         Year begin = Year.of(1600);
         Year end = Year.of(2400);
         return new YearSpan(begin, end);
