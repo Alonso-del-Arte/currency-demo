@@ -35,18 +35,41 @@ import timeops.YearSpan;
  */
 public class CurrencyYearSpanDeterminerNGTest {
     
+    private static final Set<Currency> CURRENCIES 
+            = Currency.getAvailableCurrencies();
+    
+    private static final Pattern YEAR_SPAN_PATTERN 
+            = Pattern.compile("\\d{4}.\\d{4}");
+    
+    private static boolean hasYearSpanIndicated(Currency cur) {
+        String input = cur.getDisplayName();
+        Matcher matcher = YEAR_SPAN_PATTERN.matcher(input);
+        return matcher.find();
+    }
+    
+    private static final Set<Currency> CURRENCIES_YEAR_MARKED 
+            = CURRENCIES.stream().filter(cur -> hasYearSpanIndicated(cur))
+            .collect(Collectors.toSet());
+    
     /**
-     * Test of determineYearSpan method, of class CurrencyYearSpanDeterminer.
+     * Test of the determineYearSpan function, of the CurrencyYearSpanDeterminer 
+     * class.
      */
     @Test
     public void testDetermineYearSpan() {
         System.out.println("determineYearSpan");
-        Currency currency = null;
-        YearSpan expResult = null;
-        YearSpan result = CurrencyYearSpanDeterminer.determineYearSpan(currency);
-        assertEquals(result, expResult);
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
+        for (Currency currency : CURRENCIES_YEAR_MARKED) {
+            String input = currency.getDisplayName();
+            Matcher matcher = YEAR_SPAN_PATTERN.matcher(input);
+            matcher.find();
+            String s = matcher.group();
+            YearSpan expected = YearSpan.parse(s);
+            YearSpan actual 
+                    = CurrencyYearSpanDeterminer.determineYearSpan(currency);
+            String message = "Reckoning year span for " + input;
+            assertEquals(actual, expected, message);
+        }
     }
+    
     
 }
