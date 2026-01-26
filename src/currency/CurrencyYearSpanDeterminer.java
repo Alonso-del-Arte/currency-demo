@@ -41,7 +41,7 @@ public class CurrencyYearSpanDeterminer {
             String s = matcher.group();
             return YearSpan.parse(s);
         }
-        Year begin = Year.of(1600);
+        Year begin = Year.now();
         Year end = Year.of(2400);
         return new YearSpan(begin, end);
     }
