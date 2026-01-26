@@ -71,5 +71,16 @@ public class CurrencyYearSpanDeterminerNGTest {
         }
     }
     
-    
+    @Test
+    public void testDetermineYearSpanActiveCurrency() {
+        Currency currency = CurrencyChooser.chooseCurrency();
+        YearSpan span = CurrencyYearSpanDeterminer.determineYearSpan(currency);
+        Year expected = Year.now();
+        Year actual = span.getBeginYear();
+        String message = "Since currency " + currency.getDisplayName() + " (" 
+                + currency.getCurrencyCode() 
+                + ") is an active currency, its year span should begin now";
+        assertEquals(actual, expected, message);
+    }
+        
 }
