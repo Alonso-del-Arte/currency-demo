@@ -46,6 +46,11 @@ public class CurrencyYearSpanDeterminer {
             Year end = Year.of(2002);
             return new YearSpan(begin, end);
         }
+        if (currency.getCurrencyCode().equals("ATS")) {
+            Year begin = Year.of(1945);
+            Year end = Year.of(2002);
+            return new YearSpan(begin, end);
+        }
         Year begin = Year.now();
         Year end = Year.of(2400);
         return new YearSpan(begin, end);
