@@ -183,4 +183,16 @@ public class CurrencyYearSpanDeterminerNGTest {
         assertEquals(actual, expected, message);
     }
     
+    @Test
+    public void testDetermineYearSpanFinnishMarkka() {
+        Currency currency = Currency.getInstance("FIM");
+        Year begin = Year.of(1860);
+        YearSpan expected = new YearSpan(begin, EURO_YEAR_ZERO);
+        YearSpan actual 
+                = CurrencyYearSpanDeterminer.determineYearSpan(currency);
+        String message = "Currency " + currency.getDisplayName() + " (" 
+                + currency.getCurrencyCode() + ") is a euro-replaced currency";
+        assertEquals(actual, expected, message);
+    }
+    
 }
