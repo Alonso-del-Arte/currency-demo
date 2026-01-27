@@ -51,6 +51,8 @@ public class CurrencyYearSpanDeterminer {
                 new YearSpan(Year.of(1880), Year.of(2026)));
         EURO_REPLACED_YEAR_SPANS.put(Currency.getInstance("CYP"), 
                 new YearSpan(Year.of(1879), Year.of(2008)));
+        EURO_REPLACED_YEAR_SPANS.put(Currency.getInstance("DEM"), 
+                new YearSpan(Year.of(1990), EURO_YEAR_ZERO));
     }
     
     // TODO: Write tests for this
