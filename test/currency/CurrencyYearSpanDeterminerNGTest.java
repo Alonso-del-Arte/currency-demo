@@ -158,4 +158,17 @@ public class CurrencyYearSpanDeterminerNGTest {
         assertEquals(actual, expected, message);
     }
     
+    @Test
+    public void testDetermineYearSpanEstonianKroon() {
+        Currency currency = Currency.getInstance("EEK");
+        Year begin = Year.of(1992);
+        Year end = Year.of(2011);
+        YearSpan expected = new YearSpan(begin, end);
+        YearSpan actual 
+                = CurrencyYearSpanDeterminer.determineYearSpan(currency);
+        String message = "Currency " + currency.getDisplayName() + " (" 
+                + currency.getCurrencyCode() + ") is a euro-replaced currency";
+        assertEquals(actual, expected, message);
+    }
+    
 }
