@@ -133,4 +133,17 @@ public class CurrencyYearSpanDeterminerNGTest {
         assertEquals(actual, expected, message);
     }
     
+    @Test
+    public void testDetermineYearSpanCypriotPound() {
+        Currency currency = Currency.getInstance("CYP");
+        Year begin = Year.of(1879);
+        Year end = Year.of(2008);
+        YearSpan expected = new YearSpan(begin, end);
+        YearSpan actual 
+                = CurrencyYearSpanDeterminer.determineYearSpan(currency);
+        String message = "Currency " + currency.getDisplayName() + " (" 
+                + currency.getCurrencyCode() + ") is a euro-replaced currency";
+        assertEquals(actual, expected, message);
+    }
+    
 }
