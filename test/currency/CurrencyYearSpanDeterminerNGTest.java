@@ -120,4 +120,17 @@ public class CurrencyYearSpanDeterminerNGTest {
         assertEquals(actual, expected, message);
     }
     
+    @Test
+    public void testDetermineYearSpanBulgarianLev() {
+        Currency currency = Currency.getInstance("BGN");
+        Year begin = Year.of(1880);
+        Year end = Year.of(2026);
+        YearSpan expected = new YearSpan(begin, end);
+        YearSpan actual 
+                = CurrencyYearSpanDeterminer.determineYearSpan(currency);
+        String message = "Currency " + currency.getDisplayName() + " (" 
+                + currency.getCurrencyCode() + ") is a euro-replaced currency";
+        assertEquals(actual, expected, message);
+    }
+    
 }
