@@ -171,4 +171,16 @@ public class CurrencyYearSpanDeterminerNGTest {
         assertEquals(actual, expected, message);
     }
     
+    @Test
+    public void testDetermineYearSpanSpanishPeseta() {
+        Currency currency = Currency.getInstance("ESP");
+        Year begin = Year.of(1868);
+        YearSpan expected = new YearSpan(begin, EURO_YEAR_ZERO);
+        YearSpan actual 
+                = CurrencyYearSpanDeterminer.determineYearSpan(currency);
+        String message = "Currency " + currency.getDisplayName() + " (" 
+                + currency.getCurrencyCode() + ") is a euro-replaced currency";
+        assertEquals(actual, expected, message);
+    }
+    
 }
