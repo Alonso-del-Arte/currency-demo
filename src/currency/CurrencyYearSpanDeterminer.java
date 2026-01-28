@@ -83,10 +83,18 @@ public class CurrencyYearSpanDeterminer {
     }
     
     /**
-     * Determines year spans for currencies.
+     * Determines year spans for currencies. The purpose of this function is to 
+     * facilitate the sorting of historical currencies according to when they 
+     * were in active use.
      * @param currency The currency for which to determine the year span. 
-     * Examples: Dutch guilder (NLG)
-     * @return The year span
+     * Examples: The old Belarussian ruble (BYB), the Dutch guilder (NLG) and 
+     * the United States dollar (USD).
+     * @return The year span, gleaned from the currency's display name if 
+     * available, or from a list "hard-coded" in this program in the case of 
+     * euro-replaced currencies. In the case of currently active currencies, the 
+     * year span begins this year and ends at some point in the distant future. 
+     * In the examples, this would be 1994 &mdash; 1999 for BYB, 1434 &mdash; 
+     * 2002 for NLG and 2026 to several years in the future for USD.
      */
     public static YearSpan determineYearSpan(Currency currency) {
         String input = currency.getDisplayName();
