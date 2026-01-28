@@ -27,7 +27,9 @@ import java.util.regex.Pattern;
 import timeops.YearSpan;
 
 /**
- *
+ * Matches up currencies to year spans. If the year span is listed in the 
+ * display name, that's extracted. For euro-replaced currencies, the year spans 
+ * are "hard-coded" by this program.
  * @author Alonso del Arte
  */
 public class CurrencyYearSpanDeterminer {
