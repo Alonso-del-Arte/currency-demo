@@ -40,6 +40,7 @@ public class CurrencyYearSpanDeterminer {
     private static final Map<Currency, YearSpan> EURO_REPLACED_YEAR_SPANS 
             = new HashMap<>();
     
+    // TODO: Refactor, maybe as a CSV file access
     static {
         EURO_REPLACED_YEAR_SPANS.put(Currency.getInstance("ADP"), 
                 new YearSpan(Year.of(1936), EURO_YEAR_ZERO));
@@ -71,6 +72,8 @@ public class CurrencyYearSpanDeterminer {
                 new YearSpan(Year.of(1854), EURO_YEAR_ZERO));
         EURO_REPLACED_YEAR_SPANS.put(Currency.getInstance("MTL"), 
                 new YearSpan(Year.of(1972), Year.of(2008)));
+        EURO_REPLACED_YEAR_SPANS.put(Currency.getInstance("NLG"), 
+                new YearSpan(Year.of(1434), EURO_YEAR_ZERO));
     }
     
     // TODO: Write tests for this
