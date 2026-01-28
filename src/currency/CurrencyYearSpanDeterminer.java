@@ -80,7 +80,6 @@ public class CurrencyYearSpanDeterminer {
                 new YearSpan(Year.of(1991), Year.of(2007)));
     }
     
-    // TODO: Write tests for this
     public static YearSpan determineYearSpan(Currency currency) {
         String input = currency.getDisplayName();
         Matcher matcher = YEAR_SPAN_PATTERN.matcher(input);
