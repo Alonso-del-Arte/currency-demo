@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2025 Alonso del Arte
+ * Copyright (C) 2026 Alonso del Arte
  *
  * This program is free software: you can redistribute it and/or modify it under 
  * the terms of the GNU General Public License as published by the Free Software 
@@ -16,12 +16,16 @@
  */
 package currency.comparators;
 
+import currency.CurrencyYearSpanDeterminer;
+
 import java.time.Year;
 import java.util.Comparator;
 import java.util.Currency;
 
 import static org.testng.Assert.*;
 import org.testng.annotations.Test;
+
+import timeops.YearSpan;
 
 /**
  *
