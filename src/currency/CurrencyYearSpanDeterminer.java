@@ -82,6 +82,12 @@ public class CurrencyYearSpanDeterminer {
                 new YearSpan(Year.of(1991), Year.of(2007)));
     }
     
+    /**
+     * Determines year spans for currencies.
+     * @param currency The currency for which to determine the year span. 
+     * Examples: Dutch guilder (NLG)
+     * @return The year span
+     */
     public static YearSpan determineYearSpan(Currency currency) {
         String input = currency.getDisplayName();
         Matcher matcher = YEAR_SPAN_PATTERN.matcher(input);
