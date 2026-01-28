@@ -19,8 +19,10 @@ package currency.comparators;
 import static currency.CurrencyYearSpanDeterminer.determineYearSpan;
 
 import java.time.Year;
+import java.util.ArrayList;
 import java.util.Comparator;
 import java.util.Currency;
+import java.util.List;
 
 import static org.testng.Assert.*;
 import org.testng.annotations.Test;
