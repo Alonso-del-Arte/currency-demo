@@ -16,8 +16,6 @@
  */
 package currency.comparators;
 
-import java.io.IOException;
-import java.net.URISyntaxException;
 import java.time.Year;
 import java.util.Comparator;
 import java.util.Currency;
