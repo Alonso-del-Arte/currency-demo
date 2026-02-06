@@ -164,6 +164,9 @@
 
 ### Euro-replaced currencies
 
+* BGN &mdash; 975 &mdash; Bulgarian lev, changed over in 2026
+* FINISH WRITING
+
 ## Other exclusions
 
 ### From AYR Tech currency conversion API
