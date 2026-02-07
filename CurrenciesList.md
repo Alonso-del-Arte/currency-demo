@@ -164,8 +164,27 @@
 
 ### Euro-replaced currencies
 
-* BGN &mdash; 975 &mdash; Bulgarian lev, changed over in 2026
-* FINISH WRITING
+These currencies were replaced by the euro (EUR). Several of the eurozone 
+nations began the transition in 1999 and completed it in 2002.
+
+* ADP &mdash; 020 &mdash; Andorran Peseta, replaced in 2002
+* ATS &mdash; 040 &mdash; Austrian Schilling, replaced in 2002
+* BEF &mdash; 056 &mdash; Belgian Franc, replaced in 2002
+* BGN &mdash; 975 &mdash; Bulgarian Lev, replaced in 2026
+* CYP &mdash; 196 &mdash; Cypriot Pound, replaced in 2008
+* DEM &mdash; 276 &mdash; German Mark, replaced in 2002
+* EEK &mdash; 233 &mdash; Estonian Kroon, replaced in 2011
+* ESP &mdash; 724 &mdash; Spanish Peseta, replaced in 2002
+* FIM &mdash; 246 &mdash; Finnish Markka, replaced in 2002
+* FRF &mdash; 250 &mdash; French Franc, replaced in 2002
+* GRD &mdash; 300 &mdash; Greek Drachma, replaced in 2002
+* IEP &mdash; 372 &mdash; Irish Pound, replaced in 2002
+* ITL &mdash; 380 &mdash; Italian Lira, replaced in 2002
+* LUF &mdash; 442 &mdash; Luxembourgian Franc, replaced in 2002
+* MTL &mdash; 470 &mdash; Maltese Lira, replaced in 2008
+* NLG &mdash; 528 &mdash; Dutch Guilder, replaced in 2002
+* PTE &mdash; 620 &mdash; Portuguese Escudo, replaced in 2002
+* SIT &mdash; 705 &mdash; Slovenian Tolar, replaced in 2007
 
 ## Other exclusions
 
