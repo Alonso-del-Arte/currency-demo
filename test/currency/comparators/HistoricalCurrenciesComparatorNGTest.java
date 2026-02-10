@@ -20,9 +20,14 @@ import static currency.CurrencyYearSpanDeterminer.determineYearSpan;
 
 import java.time.Year;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.Comparator;
 import java.util.Currency;
 import java.util.List;
+import java.util.Set;
+import java.util.stream.Collectors;
+
+import static org.testframe.api.Asserters.assertContainsSameOrder;
 
 import static org.testng.Assert.*;
 import org.testng.annotations.Test;
@@ -30,25 +35,30 @@ import org.testng.annotations.Test;
 import timeops.YearSpan;
 
 /**
- *
- * @author al
+ * Tests of the HistoricalCurrenciesComparator class.
+ * @author Alonso del Arte
  */
 public class HistoricalCurrenciesComparatorNGTest {
     
     /**
-     * Test of compare method, of class HistoricalCurrenciesComparator.
+     * Test of the compare function, of the HistoricalCurrenciesComparator 
+     * class.
      */
     @Test
     public void testCompare() {
         System.out.println("compare");
-        Currency currencyA = null;
-        Currency currencyB = null;
-        HistoricalCurrenciesComparator instance = new HistoricalCurrenciesComparator();
-        int expResult = 0;
-        int result = instance.compare(currencyA, currencyB);
-        assertEquals(result, expResult);
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
+        Set<Currency> currencies = Currency.getAvailableCurrencies();
+        List<Currency> actual 
+                = currencies.stream().collect(Collectors.toList());
+        List<Currency> expected = new ArrayList<>(actual);
+        Collections.sort(expected, (Currency curA, Currency curB) -> {
+            YearSpan spanA = determineYearSpan(curA);
+            YearSpan spanB = determineYearSpan(curB);
+            return spanA.compareTo(spanB);
+        });
+        Collections.sort(actual, new HistoricalCurrenciesComparator());
+        String msg = "Currencies should be sorted according to year spans";
+        assertContainsSameOrder(expected, actual, msg);
     }
     
 }
