@@ -16,6 +16,8 @@
  */
 package currency.comparators;
 
+import static currency.CurrencyYearSpanDeterminer.determineYearSpan;
+
 import java.time.Year;
 import java.util.Comparator;
 import java.util.Currency;
@@ -28,10 +30,11 @@ import timeops.YearSpan;
  */
 public class HistoricalCurrenciesComparator implements Comparator<Currency> {
     
-    // TODO: Write tests for this
     @Override
     public int compare(Currency currencyA, Currency currencyB) {
-        return 0;
+        YearSpan spanA = determineYearSpan(currencyA);
+        YearSpan spanB = determineYearSpan(currencyB);
+        return spanA.compareTo(spanB);
     }
     
 }
