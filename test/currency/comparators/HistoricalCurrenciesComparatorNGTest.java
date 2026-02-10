@@ -18,10 +18,8 @@ package currency.comparators;
 
 import static currency.CurrencyYearSpanDeterminer.determineYearSpan;
 
-import java.time.Year;
 import java.util.ArrayList;
 import java.util.Collections;
-import java.util.Comparator;
 import java.util.Currency;
 import java.util.List;
 import java.util.Set;
@@ -29,7 +27,6 @@ import java.util.stream.Collectors;
 
 import static org.testframe.api.Asserters.assertContainsSameOrder;
 
-import static org.testng.Assert.*;
 import org.testng.annotations.Test;
 
 import timeops.YearSpan;
