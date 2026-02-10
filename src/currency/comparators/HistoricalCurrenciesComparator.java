@@ -18,7 +18,6 @@ package currency.comparators;
 
 import static currency.CurrencyYearSpanDeterminer.determineYearSpan;
 
-import java.time.Year;
 import java.util.Comparator;
 import java.util.Currency;
 
