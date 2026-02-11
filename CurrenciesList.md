@@ -162,14 +162,15 @@
 
 ## Historical currencies
 
-* VEB &mdash; 862 &mdash; Venezuelan Bolívar (1871–2008)
+* VEB &mdash; 862 &mdash; Venezuelan Bol&iacute;var (1871–2008)
 * TRL &mdash; 792 &mdash; Turkish Lira (1922–2005)
 * AFA &mdash; 004 &mdash; Afghan Afghani (1927–2002)
 * ROL &mdash; 642 &mdash; Romanian Leu (1952–2006)
 * SLL &mdash; 694 &mdash; Sierra Leonean Leone (1964—2022)
 * ZMK &mdash; 894 &mdash; Zambian Kwacha (1968–2012)
 * MRO &mdash; 478 &mdash; Mauritanian Ouguiya (1973–2017)
-* STD &mdash; 678 &mdash; São Tomé & Príncipe Dobra (1977–2017)
+* STD &mdash; 678 &mdash; S&atilde;o Tom&eacute; &amp; Pr&iacute;ncipe Dobra 
+(1977–2017)
 * GHC &mdash; 288 &mdash; Ghanaian Cedi (1979–2007)
 * MZM &mdash; 508 &mdash; Mozambican Metical (1980–2006)
 * ZWD &mdash; 716 &mdash; Zimbabwean Dollar (1980–2008)
@@ -181,7 +182,7 @@
 * YUM &mdash; 891 &mdash; Yugoslavian New Dinar (1994–2002)
 * BYR &mdash; 974 &mdash; Belarusian Ruble (2000–2016)
 * CSD &mdash; 891 &mdash; Serbian Dinar (2002–2006)
-* VEF &mdash; 937 &mdash; Venezuelan Bolívar (2008–2018)
+* VEF &mdash; 937 &mdash; Venezuelan Bol&iacute;var (2008–2018)
 * ZWR &mdash; 935 &mdash; Zimbabwean Dollar (2008)
 * ZWL &mdash; 932 &mdash; Zimbabwean Dollar (2009)
 
