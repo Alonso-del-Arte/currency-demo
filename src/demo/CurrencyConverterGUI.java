@@ -22,7 +22,6 @@ import currency.conversions.ConversionRateQuote;
 import currency.conversions.CurrencyConverter;
 import currency.conversions.HardCodedRateProvider;
 import currency.conversions.RateQuoteCache;
-import currency.conversions.mannys.FreeForExRateProvider;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
