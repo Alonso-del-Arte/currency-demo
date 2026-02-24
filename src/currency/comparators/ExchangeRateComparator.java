@@ -29,21 +29,29 @@ import java.util.Currency;
  */
 public class ExchangeRateComparator implements Comparator<Currency> {
     
+    private final Currency baseCur;
+    
+    private final ExchangeRateProvider rateSupplier;
+    
     // TODO: Write tests for this
     @Override
     public int compare(Currency currencyA, Currency currencyB) {
-        return 0;
+        double rateA = this.rateSupplier.getRate(this.baseCur, currencyA);
+        double rateB = this.rateSupplier.getRate(this.baseCur, currencyB);
+        return Double.compare(rateA, rateB);
     }
     
     /**
      * Constructor.
      * @param base The currency on which to base the comparisons. For example, 
      * the United States dollar (USD).
-     * @param rateProvider
+     * @param rateProvider A rate provider, such as one that connects to the 
+     * Internet to obtain the latest exchange rates.
      */
     public ExchangeRateComparator(Currency base, 
             ExchangeRateProvider rateProvider) {
-        // TODO: Write tests for this
+        this.baseCur = base;
+        this.rateSupplier = rateProvider;
     }
   
 }
