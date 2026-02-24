@@ -285,8 +285,22 @@ public class HardCodedRateProviderNGTest {
         double actual = instance.getRate(UNITED_STATES_DOLLARS, kuwaitiDinar);
         double maximum = 0.35;
         String msg = "Rate of conversion from " + USD_DISPLAY_NAME + " (" 
-                + USD_3_LETTER_CODE + ") to " + kuwaitiDinar.getDisplayName() + " (" 
-                + kuwaitiDinar.getCurrencyCode() 
+                + USD_3_LETTER_CODE + ") to " + kuwaitiDinar.getDisplayName() 
+                + " (" + kuwaitiDinar.getCurrencyCode() 
+                + ") should be in the range of the past 5 years";
+        assertInRange(minimum, actual, maximum, DEFAULT_VARIANCE, msg);
+    }
+    
+    @Test
+    public void testGetRateUSDToLBP() {
+        ExchangeRateProvider instance = new HardCodedRateProvider();
+        Currency lebanesePound = Currency.getInstance("LBP");
+        double minimum = 1250.0;
+        double actual = instance.getRate(UNITED_STATES_DOLLARS, lebanesePound);
+        double maximum = 90000.0;
+        String msg = "Rate of conversion from " + USD_DISPLAY_NAME + " (" 
+                + USD_3_LETTER_CODE + ") to " + lebanesePound.getDisplayName() 
+                + " (" + lebanesePound.getCurrencyCode() 
                 + ") should be in the range of the past 5 years";
         assertInRange(minimum, actual, maximum, DEFAULT_VARIANCE, msg);
     }
