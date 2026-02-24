@@ -278,6 +278,20 @@ public class HardCodedRateProviderNGTest {
     }
     
     @Test
+    public void testGetRateUSDToKWD() {
+        ExchangeRateProvider instance = new HardCodedRateProvider();
+        Currency kuwaitiDinar = Currency.getInstance("KWD");
+        double minimum = 0.25;
+        double actual = instance.getRate(UNITED_STATES_DOLLARS, kuwaitiDinar);
+        double maximum = 0.35;
+        String msg = "Rate of conversion from " + USD_DISPLAY_NAME + " (" 
+                + USD_3_LETTER_CODE + ") to " + kuwaitiDinar.getDisplayName() + " (" 
+                + kuwaitiDinar.getCurrencyCode() 
+                + ") should be in the range of the past 5 years";
+        assertInRange(minimum, actual, maximum, DEFAULT_VARIANCE, msg);
+    }
+    
+    @Test
     public void testGetRateUSDToMXN() {
         ExchangeRateProvider instance = new HardCodedRateProvider();
         Currency mexPeso = Currency.getInstance("MXN");
