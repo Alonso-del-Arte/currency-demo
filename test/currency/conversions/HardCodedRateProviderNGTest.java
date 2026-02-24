@@ -55,8 +55,9 @@ public class HardCodedRateProviderNGTest {
             = UNITED_STATES_DOLLARS.getCurrencyCode();
     
     private static final String[] SELECTED_NON_USD_CURRENCY_CODES = {"AUD", 
-        "BRL", "CAD", "CNY", "EUR", "GBP", "HKD", "ILS", "INR", "JPY", "KRW", 
-        "MXN", "NZD", "PHP", "TWD", "VND", "XAF", "XCD", "XOF", "XPF"};
+        "BRL", "CAD", "CNY", "EUR", "GBP", "HKD", "ILS", "INR", "IRR", "JPY", 
+        "KRW", "KWD", "LBP", "MXN", "NZD", "PHP", "TWD", "VND", "XAF", "XCD", 
+        "XOF", "XPF"};
     
     private static final Set<Currency> SELECTED_NON_USD_CURRENCIES 
             = Set.of(SELECTED_NON_USD_CURRENCY_CODES).stream()
