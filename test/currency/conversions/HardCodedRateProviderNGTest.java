@@ -236,6 +236,20 @@ public class HardCodedRateProviderNGTest {
     }
     
     @Test
+    public void testGetRateUSDToIRR() {
+        ExchangeRateProvider instance = new HardCodedRateProvider();
+        Currency iranianRial = Currency.getInstance("IRR");
+        double minimum = 42000.0;
+        double actual = instance.getRate(UNITED_STATES_DOLLARS, iranianRial);
+        double maximum = 1500000.0;
+        String msg = "Rate of conversion from " + USD_DISPLAY_NAME + " (" 
+                + USD_3_LETTER_CODE + ") to " + iranianRial.getDisplayName() 
+                + " (" + iranianRial.getCurrencyCode() 
+                + ") should be in the range of the past 5 years";
+        assertInRange(minimum, actual, maximum, DEFAULT_VARIANCE, msg);
+    }
+    
+    @Test
     public void testGetRateUSDToJPY() {
         ExchangeRateProvider instance = new HardCodedRateProvider();
         Currency japaneseYen = Currency.getInstance("JPY");
