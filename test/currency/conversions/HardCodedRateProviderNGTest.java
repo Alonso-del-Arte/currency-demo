@@ -84,12 +84,8 @@ public class HardCodedRateProviderNGTest {
     @Test
     public void testSupportedCurrencies() {
         SpecificCurrenciesSupport instance = new HardCodedRateProvider();
-        String[] currencyCodes = {"AUD", "BRL", "CAD", "CNY", "EUR", "GBP", 
-            "HKD", "ILS", "INR", "JPY", "KRW", "MXN", "NZD", "PHP", "TWD", 
-            "USD", "VND", "XAF", "XCD", "XOF", "XPF"};
-        Set<Currency> expected = Set.of(currencyCodes).stream()
-                .map(currencyCode -> Currency.getInstance(currencyCode))
-                .collect(Collectors.toSet());
+        Set<Currency> expected = new HashSet<>(ALL_CURRENCIES);
+        expected.removeAll(UNSUPPORTED_CURRENCIES);
         Set<Currency> actual = instance.supportedCurrencies();
         assertContainsSame(expected, actual);
     }
