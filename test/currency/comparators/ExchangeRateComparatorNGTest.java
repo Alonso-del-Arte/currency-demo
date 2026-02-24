@@ -57,6 +57,9 @@ public class ExchangeRateComparatorNGTest {
         List<Currency> expected = new ArrayList<>(actual);
         Currency base = CurrencyChooser.chooseCurrency(currencies);
         Collections.sort(expected, new DraftComparator(base, rateProvider));
+        Comparator<Currency> instance = new ExchangeRateComparator(base, 
+                rateProvider);
+        Collections.sort(actual, instance);
         String msg = "Expecting to sort by exchange rate to base currency " 
                 + base.getDisplayName() + " (" + base.getCurrencyCode() + ")";
         assertContainsSameOrder(expected, actual, msg);
