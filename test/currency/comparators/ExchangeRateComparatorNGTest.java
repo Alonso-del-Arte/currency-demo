@@ -16,16 +16,20 @@
  */
 package currency.comparators;
 
+import currency.CurrencyChooser;
 import currency.MoneyAmount;
 import currency.conversions.CurrencyConverter;
 import currency.conversions.ExchangeRateProvider;
 import currency.conversions.HardCodedRateProvider;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.Comparator;
 import java.util.Currency;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
+import java.util.Set;
 import java.util.TreeMap;
 import java.util.stream.Collectors;
 
@@ -46,8 +50,16 @@ public class ExchangeRateComparatorNGTest {
     @Test
     public void testCompare() {
         System.out.println("compare");
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
+        HardCodedRateProvider rateProvider = new HardCodedRateProvider();
+        Set<Currency> currencies = rateProvider.supportedCurrencies();
+        List<Currency> actual = currencies.stream()
+                .collect(Collectors.toList());
+        List<Currency> expected = new ArrayList<>(actual);
+        Currency base = CurrencyChooser.chooseCurrency(currencies);
+        Collections.sort(expected, new DraftComparator(base, rateProvider));
+        String msg = "Expecting to sort by exchange rate to base currency " 
+                + base.getDisplayName() + " (" + base.getCurrencyCode() + ")";
+        assertContainsSameOrder(expected, actual, msg);
     }
     
     private static class DraftComparator implements Comparator<Currency> {
