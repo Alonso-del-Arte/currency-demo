@@ -61,13 +61,13 @@ public class HardCodedRateProvider implements ExchangeRateProvider,
             ).collect(Collectors.toSet());
     
     // TODO: Figure out a better way to attach rates.    AUD   BRL     CAD
-    private static final double[] HARD_CODED_RATES = {1.4948, 5.4663, 1.3729,
-        // CNY   EUR   GBP    HKD     ILS     INR      IRR           JPY       KRW
-        7.0009, 0.853, 0.743, 7.7909, 3.1861, 90.1319, 1284780.8693, 156.8463, 1444.4676, 
-        // KWD  LBP      MXN     NZD     PHP      TWD      USD  VND         XAF       XCD
-        0.3066, 89500.0, 17.923, 1.7341, 58.8721, 31.4455, 1.0, 26271.8575, 559.5222, 2.7,
+    private static final double[] HARD_CODED_RATES = {1.4158, 5.1764, 1.3687,
+        // CNY   EUR    GBP     HKD     ILS     INR      IRR           JPY       KRW
+        6.9163, 0.8481, 0.7409, 7.8188, 3.1229, -1.0, 1284780.8693, 154.5984, 1443.8242, 
+        // KWD  LBP      MXN      NZD     PHP      TWD      USD  VND         XAF       XCD
+        0.3066, 89500.0, 17.2415, 1.6773, 57.6602, 31.4496, 1.0, 26034.7402, 556.3434, 2.7,
         // XOF     XPF
-        559.5222, 101.7885};
+        556.3434, 101.2103};
     
     private static final Map<CurrencyPair, Double> QUOTES_MAP = new HashMap<>();
     
