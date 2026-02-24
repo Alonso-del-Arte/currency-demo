@@ -63,7 +63,7 @@ public class HardCodedRateProvider implements ExchangeRateProvider,
     // TODO: Figure out a better way to attach rates.    AUD   BRL     CAD
     private static final double[] HARD_CODED_RATES = {1.4158, 5.1764, 1.3687,
         // CNY   EUR    GBP     HKD     ILS     INR      IRR           JPY       KRW
-        6.9163, 0.8481, 0.7409, 7.8188, 3.1229, -1.0, 1284780.8693, 154.5984, 1443.8242, 
+        6.9163, 0.8481, 0.7409, 7.8188, 3.1229, 90.9674, 1284780.8693, 154.5984, 1443.8242, 
         // KWD  LBP      MXN      NZD     PHP      TWD      USD  VND         XAF       XCD
         0.3066, 89500.0, 17.2415, 1.6773, 57.6602, 31.4496, 1.0, 26034.7402, 556.3434, 2.7,
         // XOF     XPF
