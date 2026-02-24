@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2025 Alonso del Arte
+ * Copyright (C) 2026 Alonso del Arte
  *
  * This program is free software: you can redistribute it and/or modify it under 
  * the terms of the GNU General Public License as published by the Free Software 
@@ -18,14 +18,18 @@ package currency.comparators;
 
 import currency.MoneyAmount;
 import currency.conversions.CurrencyConverter;
-import currency.conversions.mannys.FreeForExRateProvider;
+import currency.conversions.ExchangeRateProvider;
+import currency.conversions.HardCodedRateProvider;
 
 import java.util.ArrayList;
+import java.util.Comparator;
 import java.util.Currency;
 import java.util.List;
 import java.util.Map;
 import java.util.TreeMap;
 import java.util.stream.Collectors;
+
+import static org.testframe.api.Asserters.assertContainsSameOrder;
 
 import static org.testng.Assert.*;
 import org.testng.annotations.Test;
@@ -36,38 +40,35 @@ import org.testng.annotations.Test;
  */
 public class ExchangeRateComparatorNGTest {
     
-    private static final List<String> CURRENCY_CODES = List.of("AUD", "CAD", 
-            "CHF", "EUR", "GBP", "JPY", "USD");
-    
-    private static final List<Currency> CURRENCIES = CURRENCY_CODES.stream()
-            .map((s) -> Currency.getInstance(s)).collect(Collectors.toList());
-    
-    private static List<Currency> makeList(Currency currency) {
-        CurrencyConverter converter 
-                = new CurrencyConverter(new FreeForExRateProvider());
-        Map<MoneyAmount, Currency> map = new TreeMap<>();
-        for (Currency cur : CURRENCIES) {
-            MoneyAmount amount = new MoneyAmount(1, cur);
-            MoneyAmount converted = converter.convert(amount, currency);
-            map.put(converted, cur);
-        }
-        MoneyAmount baseAmount = new MoneyAmount(1, currency);
-        List<Currency> list = new ArrayList<>();
-        return list;
-    }
-    
     /**
      * Test of the compare function, of the ExchangeRateComparator class.
      */
     @Test
     public void testCompare() {
         System.out.println("compare");
-        for (Currency currency : CURRENCIES) {
-            System.out.println(currency.getDisplayName() + " (" 
-                    + currency.getCurrencyCode() + ")");
-        }
         // TODO review the generated test code and remove the default call to fail.
         fail("The test case is a prototype.");
+    }
+    
+    private static class DraftComparator implements Comparator<Currency> {
+        
+        private final Currency baseCur;
+        
+        private final ExchangeRateProvider rateSupplier;
+        
+        @Override
+        public int compare(Currency curA, Currency curB) {
+            double rateA = this.rateSupplier.getRate(this.baseCur, curA);
+            double rateB = this.rateSupplier.getRate(this.baseCur, curB);
+            return Double.compare(rateA, rateB);
+        }
+
+        public DraftComparator(Currency base, 
+                ExchangeRateProvider rateProvider) {
+            this.baseCur = base;
+            this.rateSupplier = rateProvider;
+        }
+        
     }
     
 }
