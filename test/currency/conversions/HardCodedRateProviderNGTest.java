@@ -77,7 +77,7 @@ public class HardCodedRateProviderNGTest {
     
     @Test
     public void testDateOfHardCodingConstant() {
-        LocalDate expected = LocalDate.of(2026, Month.JANUARY, 3);
+        LocalDate expected = LocalDate.of(2026, Month.FEBRUARY, 24);
         LocalDate actual = HardCodedRateProvider.DATE_OF_HARD_CODING;
         assertEquals(actual, expected);
     }
