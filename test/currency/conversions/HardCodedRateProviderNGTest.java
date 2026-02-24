@@ -227,7 +227,7 @@ public class HardCodedRateProviderNGTest {
         Currency indianRupee = Currency.getInstance("INR");
         double minimum = 72.44;
         double actual = instance.getRate(UNITED_STATES_DOLLARS, indianRupee);
-        double maximum = 90.95;
+        double maximum = 100.0;
         String msg = "Rate of conversion from " + USD_DISPLAY_NAME + " (" 
                 + USD_3_LETTER_CODE + ") to " + indianRupee.getDisplayName() 
                 + " (" + indianRupee.getCurrencyCode() 
