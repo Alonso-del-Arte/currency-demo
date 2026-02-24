@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2024 Alonso del Arte
+ * Copyright (C) 2026 Alonso del Arte
  *
  * This program is free software: you can redistribute it and/or modify it under 
  * the terms of the GNU General Public License as published by the Free Software 
@@ -16,7 +16,7 @@
  */
 package currency.comparators;
 
-import currency.conversions.CurrencyConverter;
+import currency.conversions.ExchangeRateProvider;
 
 import java.io.IOException;
 import java.net.URISyntaxException;
@@ -24,8 +24,7 @@ import java.util.Comparator;
 import java.util.Currency;
 
 /** WORK IN PROGRESS...
- * Compares currencies according to their exchange rates. A connection to the  
- * online currency conversion API used by {@link CurrencyConverter} is required.
+ * Compares currencies according to their exchange rates.
  * @author Alonso del Arte
  */
 public class ExchangeRateComparator implements Comparator<Currency> {
@@ -40,8 +39,10 @@ public class ExchangeRateComparator implements Comparator<Currency> {
      * Constructor.
      * @param base The currency on which to base the comparisons. For example, 
      * the United States dollar (USD).
+     * @param rateProvider
      */
-    public ExchangeRateComparator(Currency base) {
+    public ExchangeRateComparator(Currency base, 
+            ExchangeRateProvider rateProvider) {
         // TODO: Write tests for this
     }
   
