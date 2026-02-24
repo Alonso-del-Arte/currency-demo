@@ -52,17 +52,21 @@ public class HardCodedRateProvider implements ExchangeRateProvider,
             = Currency.getInstance(Locale.US);
     
     private static final String[] CURRENCY_CODES = {"AUD", "BRL", "CAD", "CNY", 
-        "EUR", "GBP", "HKD", "ILS", "INR", "JPY", "KRW", "MXN", "NZD", "PHP", 
-        "TWD", "USD", "VND", "XAF", "XCD", "XOF", "XPF"};
+        "EUR", "GBP", "HKD", "ILS", "INR", "IRR", "JPY", "KRW", "KWD", "LBP", 
+        "MXN", "NZD", "PHP", "TWD", "USD", "VND", "XAF", "XCD", "XOF", "XPF"};
     
     private static final Set<Currency> SUPPORTED_CURRENCIES 
             = Set.of(CURRENCY_CODES).stream().map(
                     currencyCode -> Currency.getInstance(currencyCode)
             ).collect(Collectors.toSet());
     
-    private static final double[] HARD_CODED_RATES = {1.4948, 5.4663, 1.3729, 
-        7.0009, 0.853, 0.743, 7.7909, 3.1861, 90.1319, 156.8463, 1444.4676, 
-        17.923, 1.7341, 58.8721, 31.4455, 1.0, 26271.8575, 559.5222, 2.7, 
+    // TODO: Figure out a better way to attach rates.    AUD   BRL     CAD
+    private static final double[] HARD_CODED_RATES = {1.4948, 5.4663, 1.3729,
+        // CNY   EUR   GBP    HKD     ILS     INR      IRR   JPY       KRW
+        7.0009, 0.853, 0.743, 7.7909, 3.1861, 90.1319, -1.0, 156.8463, 1444.4676, 
+        // KWD  LBP   MXN     NZD     PHP      TWD      USD  VND         XAF       XCD
+        -1.033, -1.0, 17.923, 1.7341, 58.8721, 31.4455, 1.0, 26271.8575, 559.5222, 2.7,
+        // XOF     XPF
         559.5222, 101.7885};
     
     private static final Map<CurrencyPair, Double> QUOTES_MAP = new HashMap<>();
