@@ -46,7 +46,7 @@ public class HardCodedRateProvider implements ExchangeRateProvider,
      * might remain current until the next hard-coding.
      */
     public static final LocalDate DATE_OF_HARD_CODING 
-            = LocalDate.of(2026, Month.JANUARY, 3);
+            = LocalDate.of(2026, Month.FEBRUARY, 24);
     
     private static final Currency UNITED_STATES_DOLLARS 
             = Currency.getInstance(Locale.US);
@@ -60,14 +60,11 @@ public class HardCodedRateProvider implements ExchangeRateProvider,
                     currencyCode -> Currency.getInstance(currencyCode)
             ).collect(Collectors.toSet());
     
-    // TODO: Figure out a better way to attach rates.    AUD   BRL     CAD
-    private static final double[] HARD_CODED_RATES = {1.4158, 5.1764, 1.3687,
-        // CNY   EUR    GBP     HKD     ILS     INR      IRR           JPY       KRW
-        6.9163, 0.8481, 0.7409, 7.8188, 3.1229, 90.9674, 1284780.8693, 154.5984, 1443.8242, 
-        // KWD  LBP      MXN      NZD     PHP      TWD      USD  VND         XAF       XCD
-        0.3066, 89500.0, 17.2415, 1.6773, 57.6602, 31.4496, 1.0, 26034.7402, 556.3434, 2.7,
-        // XOF     XPF
-        556.3434, 101.2103};
+    // TODO: Figure out a better way to attach rates
+    private static final double[] HARD_CODED_RATES = {1.4158, 5.1764, 1.3687, 
+        6.9163, 0.8481, 0.7409, 7.8188, 3.1229, 90.9674, 1284780.8693, 154.5984, 
+        1443.8242, 0.3066, 89500.0, 17.2415, 1.6773, 57.6602, 31.4496, 1.0, 
+        26034.7402, 556.3434, 2.7,556.3434, 101.2103};
     
     private static final Map<CurrencyPair, Double> QUOTES_MAP = new HashMap<>();
     
