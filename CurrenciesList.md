@@ -240,3 +240,29 @@ nations began the transition in 1999 and completed it in 2002.
 * XTS &mdash; 963 &mdash; Testing Currency Code
 * XUA &mdash; 965 &mdash; ADB Unit of Account
 * XXX &mdash; 999 &mdash; Unknown Currency
+
+## Currencies in order of "strength"
+
+Using data from AYR Tech's FOREX API and my `ExchangeRateComparator`, I have 
+determined that the strongest currency in the world as of February 26, 2026, is 
+the Chilean unit of account (CLF). The official currency of Chile, the Chilean 
+peso (CLP), however, ranks weaker than the Russian ruble (RUB). The strongest 
+official currency is the Kuwaiti dinar (KWD). The weakest currency is currently 
+the Iranian rial (IRR). The Lebanese pound (LBP) has been the weakest currency 
+in the past, and it's not far behind the Iranian rial for that dubious honor.
+
+Here's the whole list: CLF, KWD, BHD, OMR, JOD, XDR, FKP, GIP, SHP, GBP, CHF, 
+KYD, EUR, PAB, BMD, BSD, USD, BND, SGD, CAD, AUD, BGN, BAM, NZD, AZN, ANG, AWG, 
+BZD, BBD, FJD, TOP, GEL, WST, XCD, TND, BYN, ILS, PEN, TMT, PLN, QAR, AED, SAR, 
+MYR, PGK, RON, BRL, DKK, LYD, HRK, TTD, CNY, BOB, GTQ, HKD, SBD, MOP, SEK, MAD, 
+TJS, NOK, GHS, BWP, SCR, ERN, MVR, ZAR, SZL, LSL, NAD, MDL, MXN, ZMW, CZK, STN, 
+CUP, SLE, ZWL, HNL, THB, TWD, NIO, SRD, UYU, MRU, UAH, TRY, MUR, EGP, MKD, PHP, 
+DOP, AFN, MZN, GMD, RUB, ALL, KGS, BTN, INR, CVE, RSD, XPF, SYP, VUV, ISK, BDT, 
+KES, DZD, HTG, NPR, ETB, JMD, JPY, DJF, LRD, GYD, YER, PKR, LKR, HUF, AMD, KMF, 
+VES, CRC, KZT, XOF, XAF, SOS, SDG, CLP, AOA, IQD, NGN, KRW, ARS, RWF, MWK, MMK, 
+CDF, TZS, BIF, UGX, MNT, COP, KHR, MGA, SSP, PYG, GNF, UZS, IDR, LAK, SLL, VND, 
+LBP, IRR.
+
+Note however that this list excludes the currencies that don't have entries in 
+the currency information file of my Java installation. Though I doubt any of 
+those would land at the extreme positions.
