@@ -33,9 +33,8 @@ public class ExchangeRateComparator implements Comparator<Currency> {
     
     private final ExchangeRateProvider rateSupplier;
     
-    // TODO: Write tests for this
     public Currency getBaseCurrency() {
-        return Currency.getInstance("XTS");
+        return this.baseCur;
     }
     
     /**
