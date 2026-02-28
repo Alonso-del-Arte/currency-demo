@@ -86,4 +86,13 @@ public class ExchangeRateComparatorNGTest {
         
     }
     
+    private static class MockRateProvider implements ExchangeRateProvider {
+        
+        @Override
+        public double getRate(Currency source, Currency target) {
+            return source.getDisplayName().compareTo(target.getDisplayName());
+        }
+        
+    }
+    
 }
