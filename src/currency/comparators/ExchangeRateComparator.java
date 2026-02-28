@@ -37,16 +37,8 @@ public class ExchangeRateComparator implements Comparator<Currency> {
         return this.baseCur;
     }
     
-    // TODO: Write tests for this
     public ExchangeRateProvider getRateProvider() {
-        return new ExchangeRateProvider() {
-            
-            @Override
-            public double getRate(Currency source, Currency target) {
-                return 0;
-            }
-            
-        };
+        return this.rateSupplier;
     }
     
     /**
