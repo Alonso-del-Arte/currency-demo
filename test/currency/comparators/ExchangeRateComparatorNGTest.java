@@ -21,6 +21,7 @@ import currency.MoneyAmount;
 import currency.conversions.CurrencyConverter;
 import currency.conversions.ExchangeRateProvider;
 import currency.conversions.HardCodedRateProvider;
+import currency.conversions.MockExchangeRateProvider;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -43,6 +44,16 @@ import org.testng.annotations.Test;
  * @author Alonso del Arte
  */
 public class ExchangeRateComparatorNGTest {
+    
+    @Test
+    public void testGetBaseCurrency() {
+        System.out.println("getBaseCurrency");
+        Currency expected = CurrencyChooser.chooseCurrency();
+        ExchangeRateComparator instance = new ExchangeRateComparator(expected, 
+                new MockRateProvider());
+        Currency actual = instance.getBaseCurrency();
+        assertEquals(actual, expected);
+    }
     
     /**
      * Test of the compare function, of the ExchangeRateComparator class.
