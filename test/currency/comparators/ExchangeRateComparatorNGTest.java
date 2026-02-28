@@ -55,6 +55,17 @@ public class ExchangeRateComparatorNGTest {
         assertEquals(actual, expected);
     }
     
+    @Test
+    public void testGetRateProvider() {
+        System.out.println("getRateProvider");
+        Currency base = CurrencyChooser.chooseCurrency();
+        ExchangeRateProvider expected = new MockRateProvider();
+        ExchangeRateComparator instance = new ExchangeRateComparator(base, 
+                expected);
+        ExchangeRateProvider actual = instance.getRateProvider();
+        assertEquals(actual, expected);
+    }
+    
     /**
      * Test of the compare function, of the ExchangeRateComparator class.
      */
