@@ -37,6 +37,18 @@ public class ExchangeRateComparator implements Comparator<Currency> {
         return this.baseCur;
     }
     
+    // TODO: Write tests for this
+    public ExchangeRateProvider getRateProvider() {
+        return new ExchangeRateProvider() {
+            
+            @Override
+            public double getRate(Currency source, Currency target) {
+                return 0;
+            }
+            
+        };
+    }
+    
     /**
      * Compares two currencies according to how they exchange to the base 
      * currency. For the examples, suppose the euro (EUR) is the base currency. 
