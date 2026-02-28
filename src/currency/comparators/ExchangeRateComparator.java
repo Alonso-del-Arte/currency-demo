@@ -18,13 +18,13 @@ package currency.comparators;
 
 import currency.conversions.ExchangeRateProvider;
 
-import java.io.IOException;
-import java.net.URISyntaxException;
 import java.util.Comparator;
 import java.util.Currency;
 
-/** WORK IN PROGRESS...
- * Compares currencies according to their exchange rates.
+/** 
+ * Compares currencies according to their exchange rates. The exchange rates are 
+ * reckoned in relation to a base currency as given by a specified rate 
+ * provider.
  * @author Alonso del Arte
  */
 public class ExchangeRateComparator implements Comparator<Currency> {
@@ -33,7 +33,26 @@ public class ExchangeRateComparator implements Comparator<Currency> {
     
     private final ExchangeRateProvider rateSupplier;
     
-    // TODO: Write tests for this
+    /**
+     * Compares two currencies according to how they exchange to the base 
+     * currency. For the examples, suppose the euro (EUR) is the base currency. 
+     * The quoted rates are from February 27, 2026.
+     * @param currencyA The first currency to compare. For example, the Bahraini 
+     * dinar (BHD). As of the date given above, one euro exchanges to 0.444 
+     * dinars. 
+     * @param currencyB The second currency to compare. For example, the 
+     * Japanese yen. As of the date given above, one euro exchanges to 184&yen;.
+     * @return &minus;1 or any negative integer if the base currency exchanges 
+     * to less of {@code currencyA} than {@code currencyB}; 0 if they exchange 
+     * the same; 1 or any positive integer if the base currency exchanges to 
+     * more of {@code currencyA} than {@code currencyB}. With the examples, this 
+     * function would most likely return &minus;1, or possibly some other 
+     * negative integer.
+     * @throws RuntimeException If some kind of {@code IOException} or other 
+     * checked exception occurs, it will be wrapped into an unchecked exception, 
+     * such as if the Internet connection drops out while making a query to an 
+     * online API.
+     */
     @Override
     public int compare(Currency currencyA, Currency currencyB) {
         double rateA = this.rateSupplier.getRate(this.baseCur, currencyA);
