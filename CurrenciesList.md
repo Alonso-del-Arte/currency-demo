@@ -225,6 +225,9 @@ nations began the transition in 1999 and completed it in 2002.
 
 ## Pseudocurrencies
 
+The following are recognized in Java's currency information file but all give 
+&minus;1 for default fraction digits.
+
 ### Metals
 
 * XAG &mdash; 961 &mdash; Silver
