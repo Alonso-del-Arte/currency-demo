@@ -131,6 +131,8 @@
 * SOS &mdash; 706 &mdash; Somali Shilling divides into cents
 * SRD &mdash; 968 &mdash; Surinamese Dollar divides into cents
 * SSP &mdash; 728 &mdash; South Sudanese Pound divides into cents
+* STN &mdash; 930 &mdash; S&atilde;o Tom&eacute; &amp; Pr&iacute;ncipe Dobra 
+divides into cents
 * SVC &mdash; 222 &mdash; Salvadoran Col&oacute;n divides into cents
 * SYP &mdash; 760 &mdash; Syrian Pound divides into cents
 * SZL &mdash; 748 &mdash; Swazi Lilangeni divides into cents
