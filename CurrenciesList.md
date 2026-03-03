@@ -148,7 +148,7 @@
 * USD &mdash; 840 &mdash; US Dollar $ divides into cents
 * UYU &mdash; 858 &mdash; Uruguayan Peso divides into cents
 * UZS &mdash; 860 &mdash; Uzbekistani Som divides into cents
-* VES &mdash; 928 &mdash; Venezuelan Bolívar divides into cents
+* VES &mdash; 928 &mdash; Venezuelan Bol&iacute;var divides into cents
 * VND &mdash; 704 &mdash; Vietnamese Dong &#x20AB;
 * VUV &mdash; 548 &mdash; Vanuatu Vatu 
 * WST &mdash; 882 &mdash; Samoan Tala divides into cents
@@ -162,29 +162,35 @@
 
 ## Historical currencies
 
-* VEB &mdash; 862 &mdash; Venezuelan Bol&iacute;var (1871–2008)
-* TRL &mdash; 792 &mdash; Turkish Lira (1922–2005)
-* AFA &mdash; 004 &mdash; Afghan Afghani (1927–2002)
-* ROL &mdash; 642 &mdash; Romanian Leu (1952–2006)
-* SLL &mdash; 694 &mdash; Sierra Leonean Leone (1964—2022)
-* ZMK &mdash; 894 &mdash; Zambian Kwacha (1968–2012)
-* MRO &mdash; 478 &mdash; Mauritanian Ouguiya (1973–2017)
+* VEB &mdash; 862 &mdash; Venezuelan Bol&iacute;var (1871–2008), was replaced by 
+another Bol&iacute;var (VEF), which in turn was replaced by the current 
+Bol&iacute;var (VES).
+* TRL &mdash; 792 &mdash; Turkish Lira (1922–2005), replaced by TRY
+* AFA &mdash; 004 &mdash; Afghan Afghani (1927–2002), replaced by AFN
+* ROL &mdash; 642 &mdash; Romanian Leu (1952–2006), replaced by RON
+* SLL &mdash; 694 &mdash; Sierra Leonean Leone (1964—2022), replaced by SLE
+* ZMK &mdash; 894 &mdash; Zambian Kwacha (1968–2012), replaced by ZMW
+* MRO &mdash; 478 &mdash; Mauritanian Ouguiya (1973–2017) &iquest;replaced by 
+MRU?
 * STD &mdash; 678 &mdash; S&atilde;o Tom&eacute; &amp; Pr&iacute;ncipe Dobra 
 (1977–2017)
-* GHC &mdash; 288 &mdash; Ghanaian Cedi (1979–2007)
-* MZM &mdash; 508 &mdash; Mozambican Metical (1980–2006)
-* ZWD &mdash; 716 &mdash; Zimbabwean Dollar (1980–2008)
-* RUR &mdash; 810 &mdash; Russian Ruble (1991–1998)
-* SDD &mdash; 736 &mdash; Sudanese Dinar (1992–2007)
-* AZM &mdash; 031 &mdash; Azerbaijani Manat (1993–2006)
-* TMM &mdash; 795 &mdash; Turkmenistani Manat (1993–2009)
-* BYB &mdash; 112 &mdash; Belarusian Ruble (1994–1999)
+* GHC &mdash; 288 &mdash; Ghanaian Cedi (1979–2007), replaced by GHS
+* MZM &mdash; 508 &mdash; Mozambican Metical (1980–2006), replaced by MZN
+* ZWD &mdash; 716 &mdash; Zimbabwean Dollar (1980–2008) &iquest;replaced by ZWR?
+* RUR &mdash; 810 &mdash; Russian Ruble (1991–1998), replaced by RUB
+* SDD &mdash; 736 &mdash; Sudanese Dinar (1992–2007), was replaced by the 
+Sudanese Pound (SDG)
+* AZM &mdash; 031 &mdash; Azerbaijani Manat (1993–2006), was replaced by AZN 
+(AYM was invalid)
+* TMM &mdash; 795 &mdash; Turkmenistani Manat (1993–2009), replaced by TMT
+* BYB &mdash; 112 &mdash; Belarusian Ruble (1994–1999), was replaced by BYR and 
+later by BYN
 * YUM &mdash; 891 &mdash; Yugoslavian New Dinar (1994–2002)
-* BYR &mdash; 974 &mdash; Belarusian Ruble (2000–2016)
+* BYR &mdash; 974 &mdash; Belarusian Ruble (2000–2016), replaced by BYN
 * CSD &mdash; 891 &mdash; Serbian Dinar (2002–2006)
-* VEF &mdash; 937 &mdash; Venezuelan Bol&iacute;var (2008–2018)
-* ZWR &mdash; 935 &mdash; Zimbabwean Dollar (2008)
-* ZWL &mdash; 932 &mdash; Zimbabwean Dollar (2009)
+* VEF &mdash; 937 &mdash; Venezuelan Bol&iacute;var (2008–2018), replaced by VES
+* ZWR &mdash; 935 &mdash; Zimbabwean Dollar (2008) &iquest;replaced by ZWL?
+* ZWL &mdash; 932 &mdash; Zimbabwean Dollar (2009) &iquest;replaced by ZWG?
 
 ### Euro-replaced currencies
 
