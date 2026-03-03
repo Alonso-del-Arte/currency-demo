@@ -225,8 +225,15 @@ nations began the transition in 1999 and completed it in 2002.
 
 ## Pseudocurrencies
 
+### Metals
+
 * XAG &mdash; 961 &mdash; Silver
 * XAU &mdash; 959 &mdash; Gold
+* XPD &mdash; 964 &mdash; Palladium
+* XPT &mdash; 962 &mdash; Platinum
+
+### Units of account and such
+
 * XBA &mdash; 955 &mdash; European Composite Unit
 * XBB &mdash; 956 &mdash; European Monetary Unit
 * XBC &mdash; 957 &mdash; European Unit of Account (XBC)
@@ -234,11 +241,12 @@ nations began the transition in 1999 and completed it in 2002.
 * XDR &mdash; 960 &mdash; Special Drawing Rights
 * XFO &mdash; 000 &mdash; French Gold Franc
 * XFU &mdash; 000 &mdash; French UIC-Franc
-* XPD &mdash; 964 &mdash; Palladium
-* XPT &mdash; 962 &mdash; Platinum
 * XSU &mdash; 994 &mdash; SUCRE Unit of Account
-* XTS &mdash; 963 &mdash; Testing Currency Code
 * XUA &mdash; 965 &mdash; ADB Unit of Account
+
+### Special
+
+* XTS &mdash; 963 &mdash; Testing Currency Code
 * XXX &mdash; 999 &mdash; Unknown Currency
 
 ## Currencies in order of "strength"
