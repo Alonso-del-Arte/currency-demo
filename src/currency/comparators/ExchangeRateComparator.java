@@ -33,10 +33,25 @@ public class ExchangeRateComparator implements Comparator<Currency> {
     
     private final ExchangeRateProvider rateSupplier;
     
+    /**
+     * Gets the base currency that was passed to the constructor. For the 
+     * example, suppose this instance was constructed with a base currency of 
+     * euros (EUR) and a {@link currency.conversions.HardCodedRateProvider 
+     * HardCodedRateProvider}.
+     * @return The currency given to the constructor. For example, EUR.
+     */
     public Currency getBaseCurrency() {
         return this.baseCur;
     }
     
+    /**
+     * Gets the rate provider that was passed to the constructor. For the 
+     * example, suppose this instance was constructed with a base currency of 
+     * euros (EUR) and a {@link currency.conversions.HardCodedRateProvider 
+     * HardCodedRateProvider}.
+     * @return The rate provider given to the constructor. For example, an 
+     * instance of {@code HardCodedRateProvider}.
+     */
     public ExchangeRateProvider getRateProvider() {
         return this.rateSupplier;
     }
