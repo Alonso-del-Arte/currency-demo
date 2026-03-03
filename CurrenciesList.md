@@ -175,7 +175,7 @@ Bol&iacute;var (VES).
 * MRO &mdash; 478 &mdash; Mauritanian Ouguiya (1973–2017) &iquest;replaced by 
 MRU?
 * STD &mdash; 678 &mdash; S&atilde;o Tom&eacute; &amp; Pr&iacute;ncipe Dobra 
-(1977–2017)
+(1977–2017) &iquest;replaced by STN?
 * GHC &mdash; 288 &mdash; Ghanaian Cedi (1979–2007), replaced by GHS
 * MZM &mdash; 508 &mdash; Mozambican Metical (1980–2006), replaced by MZN
 * ZWD &mdash; 716 &mdash; Zimbabwean Dollar (1980–2008) &iquest;replaced by ZWR?
