@@ -236,7 +236,7 @@ nations began the transition in 1999 and completed it in 2002.
 * XFU &mdash; 000 &mdash; French UIC-Franc
 * XPD &mdash; 964 &mdash; Palladium
 * XPT &mdash; 962 &mdash; Platinum
-* XSU &mdash; 994 &mdash; Sucre
+* XSU &mdash; 994 &mdash; SUCRE Unit of Account
 * XTS &mdash; 963 &mdash; Testing Currency Code
 * XUA &mdash; 965 &mdash; ADB Unit of Account
 * XXX &mdash; 999 &mdash; Unknown Currency
