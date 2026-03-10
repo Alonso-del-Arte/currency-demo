@@ -1,5 +1,8 @@
 # List of currencies
 
+In this first list, the currencies are sorted according to their ISO-4217 letter 
+codes.
+
 * AED &mdash; 784 &mdash; United Arab Emirates Dirham divides into cents
 * AFN &mdash; 971 &mdash; Afghan Afghani divides into cents
 * ALL &mdash; 008 &mdash; Albanian Lek divides into cents
@@ -164,6 +167,9 @@ divides into cents
 
 ## Historical currencies
 
+In this list, these historical currencies are sorted according to the years they 
+were valid.
+
 * VEB &mdash; 862 &mdash; Venezuelan Bol&iacute;var (1871–2008), was replaced by 
 another Bol&iacute;var (VEF), which in turn was replaced by the current 
 Bol&iacute;var (VES).
@@ -197,7 +203,8 @@ later by BYN
 ### Euro-replaced currencies
 
 These currencies were replaced by the euro (EUR). Several of the eurozone 
-nations began the transition in 1999 and completed it in 2002.
+nations began the transition in 1999 and completed it in 2002. These are listed 
+according to their ISO-4217 letter codes.
 
 * ADP &mdash; 020 &mdash; Andorran Peseta, replaced in 2002
 * ATS &mdash; 040 &mdash; Austrian Schilling, replaced in 2002
