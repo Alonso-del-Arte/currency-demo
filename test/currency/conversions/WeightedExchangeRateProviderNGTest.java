@@ -35,12 +35,12 @@ public class WeightedExchangeRateProviderNGTest {
     @Test
     public void testGetRate() {
         System.out.println("getRate");
-        Currency source = null;
-        Currency target = null;
-        WeightedExchangeRateProvider instance = new WeightedExchangeRateProvider();
-        double expResult = 0.0;
-        double result = instance.getRate(source, target);
-        assertEquals(result, expResult, 0.0);
+//        Currency source = null;
+//        Currency target = null;
+//        WeightedExchangeRateProvider instance = new WeightedExchangeRateProvider();
+//        double expResult = 0.0;
+//        double result = instance.getRate(source, target);
+//        assertEquals(result, expResult, 0.0);
         // TODO review the generated test code and remove the default call to fail.
         fail("The test case is a prototype.");
     }
@@ -50,11 +50,11 @@ public class WeightedExchangeRateProviderNGTest {
      */
     @Test
     public void testGetRateForCurrencyPair() {
-        CurrencyPair currencies = null;
-        WeightedExchangeRateProvider instance = new WeightedExchangeRateProvider();
-        double expResult = 0.0;
-        double result = instance.getRate(currencies);
-        assertEquals(result, expResult, 0.0);
+//        CurrencyPair currencies = null;
+//        WeightedExchangeRateProvider instance = new WeightedExchangeRateProvider();
+//        double expResult = 0.0;
+//        double result = instance.getRate(currencies);
+//        assertEquals(result, expResult, 0.0);
         // TODO review the generated test code and remove the default call to fail.
         fail("The test case is a prototype.");
     }
