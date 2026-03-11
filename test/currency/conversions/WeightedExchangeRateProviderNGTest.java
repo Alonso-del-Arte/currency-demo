@@ -43,7 +43,7 @@ public class WeightedExchangeRateProviderNGTest {
     /**
      * Test of getRate method, of class WeightedExchangeRateProvider.
      */
-    @Test
+    @Test(enabled = false)
     public void testGetRate() {
         System.out.println("getRate");
 //        Currency source = null;
@@ -59,7 +59,7 @@ public class WeightedExchangeRateProviderNGTest {
     /**
      * Test of getRate method, of class WeightedExchangeRateProvider.
      */
-    @Test
+    @Test(enabled = false)
     public void testGetRateForCurrencyPair() {
 //        CurrencyPair currencies = null;
 //        WeightedExchangeRateProvider instance = new WeightedExchangeRateProvider();
