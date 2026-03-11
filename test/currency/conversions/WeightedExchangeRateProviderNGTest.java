@@ -70,4 +70,18 @@ public class WeightedExchangeRateProviderNGTest {
         fail("The test case is a prototype.");
     }
     
+    @Test
+    public void testConstructorRejectsNullMap() {
+        String msg = "Null weights map should cause exception";
+        Throwable t = assertThrows(() -> {
+            ExchangeRateProvider badInstance 
+                    = new WeightedExchangeRateProvider(null, DEFAULT_PROVIDER);
+            System.out.println(msg + ", not given " + badInstance.toString());
+        }, NullPointerException.class, msg);
+        String excMsg = t.getMessage();
+        assert excMsg != null : "Exception message should not be null";
+        assert !excMsg.isBlank() : "Exception message should not be blank";
+        System.out.println("\"" + excMsg + "\"");
+    }
+    
 }
