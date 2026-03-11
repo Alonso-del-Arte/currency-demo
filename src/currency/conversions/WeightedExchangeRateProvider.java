@@ -19,6 +19,7 @@ package currency.conversions;
 import currency.CurrencyPair;
 
 import java.util.Currency;
+import java.util.Map;
 
 /**
  *
@@ -26,14 +27,21 @@ import java.util.Currency;
  */
 public class WeightedExchangeRateProvider implements ExchangeRateProvider {
 
+    // TODO: Write tests for this
     @Override
     public double getRate(Currency source, Currency target) {
         return -1.0;
     }
 
+    // TODO: Write tests for this
     @Override
     public double getRate(CurrencyPair currencies) {
         return -1.0;
+    }
+    
+    public WeightedExchangeRateProvider(Map<Currency, Double> weights, 
+            ExchangeRateProvider rateProvider) {
+        // TODO: Write tests for this
     }
     
 }
