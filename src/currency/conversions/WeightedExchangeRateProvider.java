@@ -41,6 +41,10 @@ public class WeightedExchangeRateProvider implements ExchangeRateProvider {
     
     public WeightedExchangeRateProvider(Map<Currency, Double> weights, 
             ExchangeRateProvider rateProvider) {
+        if (weights == null) {
+            String excMsg = "Null weights map is not valid";
+            throw new NullPointerException(excMsg);
+        }
         // TODO: Write tests for this
     }
     
