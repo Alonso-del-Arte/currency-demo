@@ -84,4 +84,18 @@ public class WeightedExchangeRateProviderNGTest {
         System.out.println("\"" + excMsg + "\"");
     }
     
+    @Test
+    public void testConstructorRejectsNullRateProvider() {
+        String msg = "Null rate provider should cause exception";
+        Throwable t = assertThrows(() -> {
+            ExchangeRateProvider badInstance 
+                    = new WeightedExchangeRateProvider(EMPTY_WEIGHT_MAP, null);
+            System.out.println(msg + ", not given " + badInstance.toString());
+        }, NullPointerException.class, msg);
+        String excMsg = t.getMessage();
+        assert excMsg != null : "Exception message should not be null";
+        assert !excMsg.isBlank() : "Exception message should not be blank";
+        System.out.println("\"" + excMsg + "\"");
+    }
+    
 }
