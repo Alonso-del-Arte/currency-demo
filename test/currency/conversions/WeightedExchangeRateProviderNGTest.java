@@ -16,9 +16,14 @@
  */
 package currency.conversions;
 
+import currency.CurrencyChooser;
 import currency.CurrencyPair;
 
 import java.util.Currency;
+import java.util.HashMap;
+import java.util.Map;
+
+import static org.testframe.api.Asserters.assertThrows;
 
 import static org.testng.Assert.*;
 import org.testng.annotations.Test;
@@ -28,6 +33,12 @@ import org.testng.annotations.Test;
  * @author Alonso del Arte
  */
 public class WeightedExchangeRateProviderNGTest {
+    
+    private static final Map<Currency, Double> EMPTY_WEIGHT_MAP 
+            = new HashMap<>();
+    
+    private static final ExchangeRateProvider DEFAULT_PROVIDER 
+            = new HardCodedRateProvider();
     
     /**
      * Test of getRate method, of class WeightedExchangeRateProvider.
