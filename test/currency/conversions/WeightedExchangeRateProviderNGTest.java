@@ -52,6 +52,16 @@ public class WeightedExchangeRateProviderNGTest {
         return map;
     }
     
+    @Test
+    public void testGetWeights() {
+        System.out.println("getWeights");
+        Map<Currency, Double> expected = makeWeightsMap();
+        WeightedExchangeRateProvider instance 
+                = new WeightedExchangeRateProvider(expected, DEFAULT_PROVIDER);
+        Map<Currency, Double> actual = instance.getWeights();
+        assertEquals(actual, expected);
+    }
+    
     /**
      * Test of getRate method, of class WeightedExchangeRateProvider.
      */
