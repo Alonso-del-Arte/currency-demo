@@ -18,6 +18,7 @@ package currency.conversions;
 
 import currency.CurrencyChooser;
 import currency.CurrencyPair;
+import static currency.conversions.ExchangeRateProviderNGTest.RANDOM;
 
 import java.util.Currency;
 import java.util.HashMap;
@@ -39,6 +40,17 @@ public class WeightedExchangeRateProviderNGTest {
     
     private static final ExchangeRateProvider DEFAULT_PROVIDER 
             = new HardCodedRateProvider();
+    
+    private static Map<Currency, Double> makeWeightsMap() {
+        int initialCapacity = RANDOM.nextInt(4, 16);
+        Map<Currency, Double> map = new HashMap<>(initialCapacity);
+        while (map.size() < initialCapacity) {
+            Currency key = CurrencyChooser.chooseCurrency();
+            double value = 0.5 + RANDOM.nextDouble();
+            map.put(key, value);
+        }
+        return map;
+    }
     
     /**
      * Test of getRate method, of class WeightedExchangeRateProvider.
