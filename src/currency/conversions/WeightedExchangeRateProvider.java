@@ -35,7 +35,7 @@ public class WeightedExchangeRateProvider implements ExchangeRateProvider {
 
     // TODO: Write tests for this
     public Map<Currency, Double> getWeights() {
-        return this.currWeights; // new java.util.HashMap<>();
+        return new java.util.HashMap<>(this.currWeights);
     }
     
     // TODO: Write tests for this
