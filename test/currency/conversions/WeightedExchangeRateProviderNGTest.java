@@ -23,6 +23,7 @@ import static currency.conversions.ExchangeRateProviderNGTest.RANDOM;
 import java.util.Currency;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.Set;
 
 import static org.testframe.api.Asserters.assertThrows;
 
@@ -61,6 +62,24 @@ public class WeightedExchangeRateProviderNGTest {
         Map<Currency, Double> actual = instance.getWeights();
         assertEquals(actual, expected);
     }
+    
+    @Test
+    public void testGetWeightsDoesNotLeakField() {
+        Map<Currency, Double> weights = makeWeightsMap();
+        WeightedExchangeRateProvider instance 
+                = new WeightedExchangeRateProvider(weights, DEFAULT_PROVIDER);
+        Map<Currency, Double> providedWeights = instance.getWeights();
+        Map<Currency, Double> expected = new HashMap<>(providedWeights);
+        Set<Currency> keys = providedWeights.keySet();
+        for (Currency key : keys) {
+            double wrongValue = RANDOM.nextInt(-20, 1);
+            providedWeights.put(key, wrongValue);
+        }
+        Map<Currency, Double> actual = instance.getWeights();
+        assertEquals(actual, expected);
+    }
+    
+    // TODO: Write test that constructor copies weights map for its own use
     
     /**
      * Test of getRate method, of class WeightedExchangeRateProvider.
