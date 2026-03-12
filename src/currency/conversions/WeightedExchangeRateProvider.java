@@ -22,14 +22,20 @@ import java.util.Currency;
 import java.util.Map;
 
 /**
- *
+ * WORK IN PROGRESS...
+ * The idea is that some exchange rates can be weighted in order to get a more 
+ * meaningful comparison of "strength." For example, if 1&euro; exchanges to, 
+ * say, &yen;110, the yen could be weighted so that the rate is 1.1 rather than 
+ * 110.
  * @author Alonso del Arte
  */
 public class WeightedExchangeRateProvider implements ExchangeRateProvider {
+    
+    private final Map<Currency, Double> currWeights;
 
     // TODO: Write tests for this
     public Map<Currency, Double> getWeights() {
-        return new java.util.HashMap<>();
+        return this.currWeights; // new java.util.HashMap<>();
     }
     
     // TODO: Write tests for this
@@ -50,7 +56,7 @@ public class WeightedExchangeRateProvider implements ExchangeRateProvider {
             String excMsg = "Weights map, rate provider should not be null";
             throw new NullPointerException(excMsg);
         }
-        // TODO: Write tests for this
+        this.currWeights = weights;
     }
     
 }
