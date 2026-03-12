@@ -28,6 +28,11 @@ import java.util.Map;
 public class WeightedExchangeRateProvider implements ExchangeRateProvider {
 
     // TODO: Write tests for this
+    public Map<Currency, Double> getWeights() {
+        return new java.util.HashMap<>();
+    }
+    
+    // TODO: Write tests for this
     @Override
     public double getRate(Currency source, Currency target) {
         return -1.0;
