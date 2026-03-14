@@ -467,10 +467,10 @@ public class CurrencyChooser {
      * dollar (USD). Pseudo-currencies like gold (XAU) may be used, but then the 
      * effect is the same as calling {@link #chooseCurrency()} without any 
      * parameters.
-     * @return A currency other than <code>currency</code>. For example, given 
-     * USD, this function might return the Panamanian balboa (PAB). For what 
-     * it's worth, the balboa is one of two official currencies of Panama, the 
-     * other is the U.&nbsp;S. dollar.
+     * @return A currency other than {@code currency}. For example, given USD, 
+     * this function might return the Panamanian balboa (PAB). For what it's 
+     * worth, the balboa is one of two official currencies of Panama, the other 
+     * is the U.&nbsp;S. dollar (USD).
      */
     public static Currency chooseCurrencyOtherThan(Currency currency) {
         Currency otherCurrency = currency;
