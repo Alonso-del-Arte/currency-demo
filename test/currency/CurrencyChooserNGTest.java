@@ -20,6 +20,7 @@ import java.time.Duration;
 import java.time.temporal.ChronoUnit;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Collections;
 import java.util.Currency;
 import java.util.HashMap;
 import java.util.HashSet;
@@ -45,6 +46,9 @@ import org.testng.annotations.Test;
  * @author Alonso del Arte
  */
 public class CurrencyChooserNGTest {
+    
+    private static final Random RANDOM 
+            = new Random(System.currentTimeMillis() << 5);
     
     private static final Set<Currency> CURRENCIES 
             = Currency.getAvailableCurrencies();
@@ -373,9 +377,8 @@ public class CurrencyChooserNGTest {
     
     @Test
     public void testUnavailableFractionDigitsCauseException() {
-        Random random = new Random();
         int bound = 128;
-        int unlikelyFractionDigits = bound + random.nextInt(bound);
+        int unlikelyFractionDigits = bound + RANDOM.nextInt(bound);
         String msg = "Asking for currency with " + unlikelyFractionDigits 
                 + " fraction digits should cause exception";
         Throwable t = assertThrows(() -> {
