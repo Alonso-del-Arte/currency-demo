@@ -480,7 +480,6 @@ public class CurrencyChooser {
         return otherCurrency;
     }
     
-    // TODO: Write tests for this
     public static Currency chooseCurrencyOtherThan(Currency currency, 
             Set<Currency> set) {
         if (set.isEmpty()) {
@@ -488,7 +487,11 @@ public class CurrencyChooser {
                     + currency.toString() + " from empty set";
             throw new NoSuchElementException(excMsg);
         }
-        return currency;
+        Currency propCur = currency;
+        while (propCur.equals(currency)) {
+            propCur = chooseCurrency(set);
+        }
+        return propCur;
     }
     
     /**
