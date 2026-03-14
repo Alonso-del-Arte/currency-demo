@@ -540,7 +540,7 @@ public class CurrencyChooserNGTest {
             System.out.println(msg + ", not given result " 
                     + badChoice.getDisplayName() + " (" 
                     + badChoice.getCurrencyCode() + ")");
-        }, NoSuchElementException.class, msg);
+        }, IllegalArgumentException.class, msg);
         String excMsg = t.getMessage();
         assert excMsg != null : "Exception message should not be null";
         assert !excMsg.isBlank() : "Exception message should not be blank";
