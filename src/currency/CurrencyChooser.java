@@ -491,14 +491,15 @@ public class CurrencyChooser {
      * (EUR), Swiss francs (CHF) and Japanese yen (JPY).
      * @return A currency from {@code set} other than {@code currency}. In the 
      * example, this might be CHF. Won't be USD in this example.
-     * @throws NoSuchElementException If {@code set} is empty.
+     * @throws IllegalArgumentException If {@code set} is empty or contains only 
+     * one element.
      */
     public static Currency chooseCurrencyOtherThan(Currency currency, 
             Set<Currency> set) {
         if (set.isEmpty()) {
             String excMsg = "Can't choose currency other than " 
                     + currency.toString() + " from empty set";
-            throw new NoSuchElementException(excMsg);
+            throw new IllegalArgumentException(excMsg);
         }
         if (set.size() == 1) {
             String excMsg = "Can't choose currency other than " 
