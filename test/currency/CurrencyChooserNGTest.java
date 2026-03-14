@@ -548,6 +548,27 @@ public class CurrencyChooserNGTest {
     }
     
     @Test
+    public void testChooseCurrencyOtherThanFromSetRejectsOneElemSet() {
+        Currency currency = CurrencyChooser.chooseCurrency();
+        Set<Currency> set = new HashSet<>();
+        set.add(currency);
+        String msg = "Trying to choose currency other than " 
+                + currency.getDisplayName() + " (" + currency.getCurrencyCode() 
+                + ") from " + set.toString() + " should cause exception";
+        Throwable t = assertThrows(() -> {
+            Currency badChoice 
+                    = CurrencyChooser.chooseCurrencyOtherThan(currency, set);
+            System.out.println(msg + ", not given result " 
+                    + badChoice.getDisplayName() + " (" 
+                    + badChoice.getCurrencyCode() + ")");
+        }, IllegalArgumentException.class, msg);
+        String excMsg = t.getMessage();
+        assert excMsg != null : "Exception message should not be null";
+        assert !excMsg.isBlank() : "Exception message should not be blank";
+        System.out.println("\"" + excMsg + "\"");
+    }
+    
+    @Test
     public void testChooseCurrencyOtherThanFromSet() {
         int initialCapacity = RANDOM.nextInt(16) + 4;
         Set<Currency> set = new HashSet<>(initialCapacity);
