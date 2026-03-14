@@ -496,9 +496,9 @@ public class CurrencyChooser {
      */
     public static Currency chooseCurrencyOtherThan(Currency currency, 
             Set<Currency> set) {
-        if (set.isEmpty() || set.size() == 1) {
+        if (set.size() < 2) {
             String excMsg = "Can't choose currency other than " 
-                    + currency.toString() + " from empty or 1-element set";
+                    + currency.toString() + " from small set " + set.toString();
             throw new IllegalArgumentException(excMsg);
         }
         Currency propCur = currency;
