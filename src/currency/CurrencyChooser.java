@@ -500,6 +500,9 @@ public class CurrencyChooser {
                     + currency.toString() + " from empty set";
             throw new NoSuchElementException(excMsg);
         }
+        if (set.size() == 1) {
+            return Currency.getInstance("XTS");
+        }
         Currency propCur = currency;
         while (propCur.equals(currency)) {
             propCur = chooseCurrency(set);
