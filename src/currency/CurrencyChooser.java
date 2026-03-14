@@ -480,6 +480,19 @@ public class CurrencyChooser {
         return otherCurrency;
     }
     
+    /**
+     * Chooses a currency from a set other than a specified currency. Use {@link 
+     * #chooseCurrency(java.util.Set) chooseCurrency()} if any currency from a 
+     * given set is acceptable.
+     * @param currency The currency not to select. For example, United States 
+     * dollars (USD). Preferably a currency in {@code set}.
+     * @param set The set from which to select currencies. Preferably contains 
+     * {@code currency}. For example, a set containing USD as well as euros 
+     * (EUR), Swiss francs (CHF) and Japanese yen (JPY).
+     * @return A currency from {@code set} other than {@code currency}. In the 
+     * example, this might be CHF. Won't be USD in this example.
+     * @throws NoSuchElementException If {@code set} is empty.
+     */
     public static Currency chooseCurrencyOtherThan(Currency currency, 
             Set<Currency> set) {
         if (set.isEmpty()) {
