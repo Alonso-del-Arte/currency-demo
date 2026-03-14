@@ -548,6 +548,32 @@ public class CurrencyChooserNGTest {
     }
     
     @Test
+    public void testChooseCurrencyOtherThanFromSet() {
+        int initialCapacity = RANDOM.nextInt(16) + 4;
+        Set<Currency> set = new HashSet<>(initialCapacity);
+        List<Currency> currencies = new ArrayList<>(CURRENCIES);
+        while (set.size() < initialCapacity) {
+            set.add(currencies.get(RANDOM
+                    .nextInt(TOTAL_NUMBER_OF_CURRENCIES)));
+        }
+        Currency currency = CurrencyChooser.chooseCurrency(set);
+        Set<Currency> expected = new HashSet<>(set);
+        expected.remove(currency);
+        String msgPart = "should not be " + currency.getDisplayName() + " (" 
+                + currency.getCurrencyCode() + ")";
+        Set<Currency> actual = new HashSet<>(initialCapacity - 1);
+        int numberOfCalls = 12 * initialCapacity;
+        for (int i = 0; i < numberOfCalls; i++) {
+            Currency e = CurrencyChooser.chooseCurrencyOtherThan(currency, set);
+            String msg = "Currency " + e.getDisplayName() + " (" 
+                    + e.getCurrencyCode() + ") " + msgPart;
+            assert !currency.equals(e) : msg;
+            actual.add(e);
+        }
+        assertContainsSame(expected, actual);
+    }
+    
+    @Test
     public void testChooseCurrencyByBadPredicateCausesException() {
         String invalidDisplayName = "Invalid display name " 
                 + System.currentTimeMillis();
