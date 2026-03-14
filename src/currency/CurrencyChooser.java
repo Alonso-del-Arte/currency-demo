@@ -501,7 +501,9 @@ public class CurrencyChooser {
             throw new NoSuchElementException(excMsg);
         }
         if (set.size() == 1) {
-            return Currency.getInstance("XTS");
+            String excMsg = "Can't choose currency other than " 
+                    + currency.toString() + " from single-element set";
+            throw new IllegalArgumentException(excMsg);
         }
         Currency propCur = currency;
         while (propCur.equals(currency)) {
