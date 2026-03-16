@@ -32,6 +32,8 @@ import java.util.Map;
 public class WeightedExchangeRateProvider implements ExchangeRateProvider {
     
     private final Map<Currency, Double> currWeights;
+    
+    private final ExchangeRateProvider provider;
 
     // TODO: Write tests for this
     public Map<Currency, Double> getWeights() {
@@ -41,7 +43,7 @@ public class WeightedExchangeRateProvider implements ExchangeRateProvider {
     // TODO: Write tests for this
     @Override
     public double getRate(Currency source, Currency target) {
-        return -1.0;
+        return this.provider.getRate(source, target);
     }
 
     // TODO: Write tests for this
@@ -57,6 +59,7 @@ public class WeightedExchangeRateProvider implements ExchangeRateProvider {
             throw new NullPointerException(excMsg);
         }
         this.currWeights = weights;
+        this.provider = rateProvider;
     }
     
 }
