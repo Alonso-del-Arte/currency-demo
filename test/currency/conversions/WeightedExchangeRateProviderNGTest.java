@@ -18,6 +18,7 @@ package currency.conversions;
 
 import currency.CurrencyChooser;
 import currency.CurrencyPair;
+import currency.SpecificCurrenciesSupport;
 import static currency.conversions.ExchangeRateProviderNGTest.RANDOM;
 
 import java.util.Currency;
@@ -41,6 +42,12 @@ public class WeightedExchangeRateProviderNGTest {
     
     private static final ExchangeRateProvider DEFAULT_PROVIDER 
             = new HardCodedRateProvider();
+    
+    private static final Set<Currency> AVAILABLE_CURRENCIES 
+            = ((SpecificCurrenciesSupport) DEFAULT_PROVIDER)
+                    .supportedCurrencies();
+    
+    private static final double DEFAULT_DELTA = 0.0001;
     
     private static Map<Currency, Double> makeWeightsMap() {
         int initialCapacity = RANDOM.nextInt(4, 16);
@@ -80,6 +87,22 @@ public class WeightedExchangeRateProviderNGTest {
     }
     
     // TODO: Write test that constructor copies weights map for its own use
+    
+    @Test
+    public void testGetRateUnweighted() {
+        WeightedExchangeRateProvider instance 
+                = new WeightedExchangeRateProvider(EMPTY_WEIGHT_MAP, 
+                        DEFAULT_PROVIDER);
+        Currency source = CurrencyChooser.chooseCurrency(AVAILABLE_CURRENCIES);
+        Currency target = CurrencyChooser.chooseCurrencyOtherThan(source, 
+                AVAILABLE_CURRENCIES);
+        double expected = DEFAULT_PROVIDER.getRate(source, target);
+        double actual = instance.getRate(source, target);
+        String message = "Getting rate for " + source.getDisplayName() + " (" 
+                + source.getCurrencyCode() + ") to " + target.getDisplayName() 
+                + " (" + target.getCurrencyCode() + ")";
+        assertEquals(actual, expected, DEFAULT_DELTA, message);
+    }
     
     /**
      * Test of getRate method, of class WeightedExchangeRateProvider.
