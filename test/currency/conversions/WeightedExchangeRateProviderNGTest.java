@@ -104,6 +104,23 @@ public class WeightedExchangeRateProviderNGTest {
         assertEquals(actual, expected, DEFAULT_DELTA, message);
     }
     
+    @Test
+    public void testGetRateUnweightedFromCurrencyPair() {
+        WeightedExchangeRateProvider instance 
+                = new WeightedExchangeRateProvider(EMPTY_WEIGHT_MAP, 
+                        DEFAULT_PROVIDER);
+        Currency from = CurrencyChooser.chooseCurrency(AVAILABLE_CURRENCIES);
+        Currency to = CurrencyChooser.chooseCurrencyOtherThan(from, 
+                AVAILABLE_CURRENCIES);
+        CurrencyPair currencies = new CurrencyPair(from, to);
+        double expected = DEFAULT_PROVIDER.getRate(currencies);
+        double actual = instance.getRate(currencies);
+        String message = "Getting rate for " + from.getDisplayName() + " (" 
+                + from.getCurrencyCode() + ") to " + to.getDisplayName() 
+                + " (" + to.getCurrencyCode() + ")";
+        assertEquals(actual, expected, DEFAULT_DELTA, message);
+    }
+    
     /**
      * Test of getRate method, of class WeightedExchangeRateProvider.
      */
