@@ -44,9 +44,6 @@ public class WeightedExchangeRateProvider implements ExchangeRateProvider {
     // TODO: Write tests for this
     @Override
     public double getRate(Currency source, Currency target) {
-        if (target == null) {
-            throw new NullPointerException("Target should not be null");
-        }
         return this.provider.getRate(source, target);
     }
 
