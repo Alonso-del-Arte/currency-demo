@@ -108,6 +108,26 @@ public class WeightedExchangeRateProviderNGTest {
     }
     
     @Test
+    public void testGetRateRejectsNullTarget() {
+        WeightedExchangeRateProvider instance 
+                = new WeightedExchangeRateProvider(EMPTY_WEIGHT_MAP, 
+                        DEFAULT_PROVIDER);
+        Currency source = CurrencyChooser.chooseCurrency(AVAILABLE_CURRENCIES);
+        Currency target = null;
+        String msg = "Source " + source.getDisplayName() + " (" 
+                + source.getCurrencyCode() 
+                + ") and null target should cause an exception";
+        Throwable t = assertThrows(() -> {
+            double badResult = instance.getRate(source, target);
+            System.out.println(msg + ", not given result " + badResult);
+        }, NullPointerException.class, msg);
+        String excMsg = t.getMessage();
+        assert excMsg != null : "Exception message should not be null";
+        assert !excMsg.isBlank() : "Exception message should not be blank";
+        System.out.println("\"" + excMsg + "\"");
+    }
+    
+    @Test
     public void testGetRateUnweighted() {
         WeightedExchangeRateProvider instance 
                 = new WeightedExchangeRateProvider(EMPTY_WEIGHT_MAP, 
