@@ -51,7 +51,7 @@ public interface ExchangeRateProvider {
      * @return The conversion rate. In the example as of January 13, 2025, this 
      * was 0.97582065.
      * @throws RuntimeException If some kind of {@code IOException} or other 
-     * checked exception occurs, it will be wrapped into an unchecked exception.
+     * checked exception occurs, it may be wrapped into an unchecked exception.
      */
     default double getRate(CurrencyPair currencies) {
         return this.getRate(currencies.getFromCurrency(), 
