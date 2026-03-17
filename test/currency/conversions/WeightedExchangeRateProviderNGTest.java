@@ -89,6 +89,25 @@ public class WeightedExchangeRateProviderNGTest {
     // TODO: Write test that constructor copies weights map for its own use
     
     @Test
+    public void testGetRateRejectsNullSource() {
+        WeightedExchangeRateProvider instance 
+                = new WeightedExchangeRateProvider(EMPTY_WEIGHT_MAP, 
+                        DEFAULT_PROVIDER);
+        Currency source = null;
+        Currency target = CurrencyChooser.chooseCurrency(AVAILABLE_CURRENCIES);
+        String msg = "Null source and target " + target.getDisplayName() + " (" 
+                + target.getCurrencyCode() + ") should cause an exception";
+        Throwable t = assertThrows(() -> {
+            double badResult = instance.getRate(source, target);
+            System.out.println(msg + ", not given result " + badResult);
+        }, NullPointerException.class, msg);
+        String excMsg = t.getMessage();
+        assert excMsg != null : "Exception message should not be null";
+        assert !excMsg.isBlank() : "Exception message should not be blank";
+        System.out.println("\"" + excMsg + "\"");
+    }
+    
+    @Test
     public void testGetRateUnweighted() {
         WeightedExchangeRateProvider instance 
                 = new WeightedExchangeRateProvider(EMPTY_WEIGHT_MAP, 
