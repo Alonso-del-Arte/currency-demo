@@ -19,6 +19,7 @@ package currency.conversions;
 import currency.CurrencyPair;
 
 import java.util.Currency;
+import java.util.HashMap;
 import java.util.Map;
 
 /**
@@ -37,7 +38,7 @@ public class WeightedExchangeRateProvider implements ExchangeRateProvider {
 
     // TODO: Write tests for this
     public Map<Currency, Double> getWeights() {
-        return new java.util.HashMap<>(this.currWeights);
+        return new HashMap<>(this.currWeights);
     }
     
     // TODO: Write tests for this
