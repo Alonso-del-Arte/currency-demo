@@ -36,7 +36,6 @@ public class WeightedExchangeRateProvider implements ExchangeRateProvider {
     
     private final ExchangeRateProvider provider;
 
-    // TODO: Write tests for this
     public Map<Currency, Double> getWeights() {
         return new HashMap<>(this.currWeights);
     }
@@ -59,7 +58,7 @@ public class WeightedExchangeRateProvider implements ExchangeRateProvider {
             String excMsg = "Weights map, rate provider should not be null";
             throw new NullPointerException(excMsg);
         }
-        this.currWeights = weights;
+        this.currWeights = new HashMap<>(weights);
         this.provider = rateProvider;
     }
     
