@@ -86,8 +86,6 @@ public class WeightedExchangeRateProviderNGTest {
         assertEquals(actual, expected);
     }
     
-    // TODO: Write test that constructor copies weights map for its own use
-    
     @Test
     public void testGetRateRejectsNullSource() {
         WeightedExchangeRateProvider instance 
@@ -232,6 +230,17 @@ public class WeightedExchangeRateProviderNGTest {
         assert excMsg != null : "Exception message should not be null";
         assert !excMsg.isBlank() : "Exception message should not be blank";
         System.out.println("\"" + excMsg + "\"");
+    }
+    
+    @Test
+    public void testConstructorCopiesWeightsMapForItsOwnUse() {
+        Map<Currency, Double> weights = makeWeightsMap();
+        Map<Currency, Double> expected = new HashMap<>(weights);
+        WeightedExchangeRateProvider instance 
+                = new WeightedExchangeRateProvider(weights, DEFAULT_PROVIDER);
+        weights.clear();
+        Map<Currency, Double> actual = instance.getWeights();
+        assertEquals(actual, expected);
     }
     
 }
