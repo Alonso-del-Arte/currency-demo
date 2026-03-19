@@ -43,7 +43,11 @@ public class WeightedExchangeRateProvider implements ExchangeRateProvider {
     // TODO: Write tests for this
     @Override
     public double getRate(Currency source, Currency target) {
-        return this.provider.getRate(source, target);
+        double weight = 1.0;
+        if (this.currWeights.containsKey(target)) {
+            weight = this.currWeights.get(target);
+        }
+        return this.provider.getRate(source, target) * weight;
     }
 
     // TODO: Write tests for this
