@@ -175,19 +175,29 @@ public class WeightedExchangeRateProviderNGTest {
     }
     
     /**
-     * Test of getRate method, of class WeightedExchangeRateProvider.
+     * Test of the getRate function, of the WeightedExchangeRateProvider class.
      */
-    @Test(enabled = false)
+    @Test
     public void testGetRate() {
         System.out.println("getRate");
-//        Currency source = null;
-//        Currency target = null;
-//        WeightedExchangeRateProvider instance = new WeightedExchangeRateProvider();
-//        double expResult = 0.0;
-//        double result = instance.getRate(source, target);
-//        assertEquals(result, expResult, 0.0);
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
+        Map<Currency, Double> weights = makeWeightsMap();
+        WeightedExchangeRateProvider instance 
+                = new WeightedExchangeRateProvider(weights, DEFAULT_PROVIDER);
+        for (Map.Entry<Currency, Double> entry : weights.entrySet()) {
+            Currency target = entry.getKey();
+            double weight = entry.getValue();
+            Currency source = CurrencyChooser.chooseCurrencyOtherThan(target, 
+                    AVAILABLE_CURRENCIES);
+            double expected = DEFAULT_PROVIDER.getRate(source, target) * weight;
+            double actual = instance.getRate(source, target);
+            String message = "Considering that " + target.getDisplayName() 
+                    + " (" + target.getCurrencyCode() 
+                    + ") has been given a test weight of " + weight 
+                    + ", getting conversion from " + source.getDisplayName() 
+                    + " (" + source.getCurrencyCode() + ") to " 
+                    + target.getCurrencyCode();
+            assertEquals(actual, expected, DEFAULT_DELTA, message);
+        }
     }
 
     /**
