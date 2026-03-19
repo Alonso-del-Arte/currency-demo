@@ -53,7 +53,7 @@ public class WeightedExchangeRateProviderNGTest {
         int initialCapacity = RANDOM.nextInt(4, 16);
         Map<Currency, Double> map = new HashMap<>(initialCapacity);
         while (map.size() < initialCapacity) {
-            Currency key = CurrencyChooser.chooseCurrency();
+            Currency key = CurrencyChooser.chooseCurrency(AVAILABLE_CURRENCIES);
             double value = 0.5 + RANDOM.nextDouble();
             map.put(key, value);
         }
