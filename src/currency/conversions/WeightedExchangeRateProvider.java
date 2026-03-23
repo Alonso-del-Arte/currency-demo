@@ -40,7 +40,6 @@ public class WeightedExchangeRateProvider implements ExchangeRateProvider {
         return new HashMap<>(this.currWeights);
     }
     
-    // TODO: Write tests for this
     @Override
     public double getRate(Currency source, Currency target) {
         double weight = 1.0;
