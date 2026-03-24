@@ -49,10 +49,14 @@ public class WeightedExchangeRateProvider implements ExchangeRateProvider {
         return this.provider.getRate(source, target) * weight;
     }
 
-    // TODO: Write tests for this
     @Override
     public double getRate(CurrencyPair currencies) {
-        return this.provider.getRate(currencies);
+        Currency target = currencies.getToCurrency();
+        double weight = 1.0;
+        if (this.currWeights.containsKey(target)) {
+            weight = this.currWeights.get(target);
+        }
+        return this.provider.getRate(currencies) * weight;
     }
     
     public WeightedExchangeRateProvider(Map<Currency, Double> weights, 
