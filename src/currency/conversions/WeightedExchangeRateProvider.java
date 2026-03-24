@@ -23,7 +23,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 /**
- * WORK IN PROGRESS...
+ * Gives exchange rates from another provider multiplied by specified weights. 
  * The idea is that some exchange rates can be weighted in order to get a more 
  * meaningful comparison of "strength." For example, if 1&euro; exchanges to, 
  * say, &yen;110, the yen could be weighted so that the rate is 1.1 rather than 
@@ -36,10 +36,28 @@ public class WeightedExchangeRateProvider implements ExchangeRateProvider {
     
     private final ExchangeRateProvider provider;
 
+    /**
+     * Retrieves the rates as provided to the constructor at the time of 
+     * construction.
+     * @return The weights. For example, Japanese yen (JPY) weighted to 0.01 and 
+     * a couple other currencies with appropriate weights.
+     */
     public Map<Currency, Double> getWeights() {
         return new HashMap<>(this.currWeights);
     }
     
+    /**
+     * Gives the rate to convert one unit of the source currency to the target 
+     * currency. If a weight is specified for the target currency, then that 
+     * value is used. Otherwise the weight is 1.0.
+     * @param source The source to convert from. For example, United States 
+     * dollars (USD).
+     * @param target The target to convert one unit of {@code source} to. For 
+     * example, the Japanese yen (JPY).
+     * @return The rate of conversion, multiplied by the weight. In the example, 
+     * if the rate given by the provider is 158.6152 but JPY is weighted to 
+     * 0.01, then this function would return 1.586152.
+     */
     @Override
     public double getRate(Currency source, Currency target) {
         double weight = 1.0;
@@ -49,12 +67,33 @@ public class WeightedExchangeRateProvider implements ExchangeRateProvider {
         return this.provider.getRate(source, target) * weight;
     }
 
+    /**
+     * Gives the rate to convert one unit of the source currency to the target 
+     * currency. If a weight is specified for the target currency, then that 
+     * value is used. Otherwise the weight is 1.0.
+     * @param currencies The pair of currencies, source and target. For example, 
+     * United States dollars (USD) and Japanese yen (JPY). 
+     * @return The rate of conversion, multiplied by the weight. In the example, 
+     * if the rate given by the provider is 158.6152 but JPY is weighted to 
+     * 0.01, then this function would return 1.586152.
+     */
     @Override
     public double getRate(CurrencyPair currencies) {
         return this.getRate(currencies.getFromCurrency(), 
                 currencies.getToCurrency());
     }
     
+    /**
+     * Constructor.
+     * @param weights A map matching currencies to weights. For example, 
+     * Japanese yen (JPY) weighted to 0.01, and a couple other currencies 
+     * similarly weighted. It's not necessary to specify all currencies. Those 
+     * currencies without a specified weight will default to a weight of 1.0.
+     * @param rateProvider The rate provider to use. If nothing else, {@link 
+     * HardCodedRateProvider} should always be available.
+     * @throws NullPointerException If {@code weights} or {@code rateProvider} 
+     * is null.
+     */
     public WeightedExchangeRateProvider(Map<Currency, Double> weights, 
             ExchangeRateProvider rateProvider) {
         if (weights == null || rateProvider == null) {
