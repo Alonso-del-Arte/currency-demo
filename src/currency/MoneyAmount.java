@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2025 Alonso del Arte
+ * Copyright (C) 2026 Alonso del Arte
  *
  * This program is free software: you can redistribute it and/or modify it under 
  * the terms of the GNU General Public License as published by the Free Software 
@@ -276,7 +276,7 @@ public class MoneyAmount implements Comparable<MoneyAmount> {
      */
     public MoneyAmount(long units, Currency currency, short divisions) {
         if (currency == null) {
-            throw new NullPointerException("Currency should not be null");
+            throw new RuntimeException("Currency should not be null");
         }
         if (currency.getDefaultFractionDigits() < 0) {
             String excMsg = "Pseudocurrency " + currency.getDisplayName() + " (" 
