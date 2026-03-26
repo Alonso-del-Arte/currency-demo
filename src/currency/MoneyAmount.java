@@ -276,7 +276,7 @@ public class MoneyAmount implements Comparable<MoneyAmount> {
      */
     public MoneyAmount(long units, Currency currency, short divisions) {
         if (currency == null) {
-            throw new RuntimeException("Currency should not be null");
+            throw new NullPointerException("Currency should not be null");
         }
         if (currency.getDefaultFractionDigits() < 0) {
             String excMsg = "Pseudocurrency " + currency.getDisplayName() + " (" 
