@@ -835,6 +835,7 @@ public class MoneyAmountNGTest {
         }, NullPointerException.class);
         String excMsg = t.getMessage();
         assert excMsg != null : "Message should not be null";
+        assert !excMsg.isBlank() : "Message should not be blank";
         System.out.println("\"" + excMsg + "\"");
     }
 
@@ -850,10 +851,8 @@ public class MoneyAmountNGTest {
         }, NullPointerException.class);
         String excMsg = t.getMessage();
         assert excMsg != null : "Message should not be null";
+        assert !excMsg.isBlank() : "Message should not be blank";
         System.out.println("\"" + excMsg + "\"");
     }
     
-    // TODO: Write test that null currency gives NPE with same exception message 
-    //       regardless of constructor
-
 }
