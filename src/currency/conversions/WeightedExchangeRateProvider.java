@@ -84,13 +84,16 @@ public class WeightedExchangeRateProvider implements ExchangeRateProvider {
     }
     
     /**
-     * Constructor.
+     * Sole constructor.
      * @param weights A map matching currencies to weights. For example, 
      * Japanese yen (JPY) weighted to 0.01, and a couple other currencies 
      * similarly weighted. It's not necessary to specify all currencies. Those 
-     * currencies without a specified weight will default to a weight of 1.0.
+     * currencies without a specified weight will default to a weight of 1.0. 
+     * May be empty (but must not be null), though there's not much of a point 
+     * to that.
      * @param rateProvider The rate provider to use. If nothing else, {@link 
-     * HardCodedRateProvider} should always be available.
+     * HardCodedRateProvider} should always be available. Should not be another 
+     * {@code WeightedExchangeRateProvider}.
      * @throws NullPointerException If {@code weights} or {@code rateProvider} 
      * is null.
      */
