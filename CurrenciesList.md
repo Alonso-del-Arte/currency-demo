@@ -245,10 +245,14 @@ The following are recognized in Java's currency information file but all give
 
 ### Metals
 
-* XAG &mdash; 961 &mdash; Silver
-* XAU &mdash; 959 &mdash; Gold
-* XPD &mdash; 964 &mdash; Palladium
-* XPT &mdash; 962 &mdash; Platinum
+These four metals are all elements on the periodic table, very close neighbors, 
+as a matter of fact. Their ISO-4217 letter codes consist of 'X' and the 2-letter 
+chemical symbol with both letters capitalized.
+
+* XAG &mdash; 961 &mdash; Silver &mdash; Ag, 47
+* XAU &mdash; 959 &mdash; Gold &mdash; Au, 79
+* XPD &mdash; 964 &mdash; Palladium &mdash; Pd, 46
+* XPT &mdash; 962 &mdash; Platinum &mdash; Pt, 78
 
 ### Units of account and such
 
