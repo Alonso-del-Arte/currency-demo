@@ -174,6 +174,10 @@ Note that Bitcoin has the symbol &#x20BF; and the 3-letter code XBT has been
 proposed for ISO-4217. That symbol should not be confused with the symbol for 
 the Thai bhat, &#xE3F;.
 
+Unicode has provisionally accepted symbols for the United Arab Emirates dirham 
+(AED), the Maldivian rufiyaa (MVR) and the Omani rial (OMR). Those might be 
+added in the version of Unicode coming out late 2026.
+
 ## Notes about divisions of a unit of currency
 
 I am aware of the cent symbol, &cent; (Unicode U+00A2, HTML entity &amp;cent;). 
