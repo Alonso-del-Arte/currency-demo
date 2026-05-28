@@ -97,6 +97,13 @@ public class CurrencyConverterGUI extends JFrame implements ActionListener,
     private void updateReadouts() {
         //
     }
+    
+    // TODO: Write tests for this
+    public CurrencyPair getPair() {
+        Currency from = Currency.getInstance("XAU");
+        Currency to = Currency.getInstance("XTS");
+        return new CurrencyPair(from, to);
+    }
 
     @Override
     public void itemStateChanged(ItemEvent ie) {
