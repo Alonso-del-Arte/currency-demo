@@ -189,7 +189,7 @@ MRU?
 * SDD &mdash; 736 &mdash; Sudanese Dinar (1992–2007), was replaced by the 
 Sudanese Pound (SDG)
 * AZM &mdash; 031 &mdash; Azerbaijani Manat (1993–2006), was replaced by AZN 
-(AYM was invalid)
+(AYM was invalid, so its numeric counterpart 945 is therefore also invalid)
 * TMM &mdash; 795 &mdash; Turkmenistani Manat (1993–2009), replaced by TMT
 * BYB &mdash; 112 &mdash; Belarusian Ruble (1994–1999), was replaced by BYR and 
 later by BYN
