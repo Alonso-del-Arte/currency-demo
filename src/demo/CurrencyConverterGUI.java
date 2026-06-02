@@ -157,7 +157,7 @@ public class CurrencyConverterGUI extends JFrame implements ActionListener,
         readoutsPanel.add(new JLabel(" exchanges to "));
         readoutsPanel.add(this.toReadout);
         this.add(readoutsPanel, BorderLayout.PAGE_END);
-        this.setDefaultCloseOperation(JFrame.DO_NOTHING_ON_CLOSE);
+        this.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
         this.pack();
     }
     
