@@ -38,6 +38,7 @@ import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
+import javax.swing.WindowConstants;
 
 /**
  *
@@ -156,7 +157,7 @@ public class CurrencyConverterGUI extends JFrame implements ActionListener,
         readoutsPanel.add(new JLabel(" exchanges to "));
         readoutsPanel.add(this.toReadout);
         this.add(readoutsPanel, BorderLayout.PAGE_END);
-        this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        this.setDefaultCloseOperation(JFrame.DO_NOTHING_ON_CLOSE);
         this.pack();
     }
     
