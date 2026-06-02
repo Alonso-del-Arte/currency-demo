@@ -34,8 +34,10 @@ import java.util.Currency;
 import java.util.Locale;
 
 import javax.swing.JComboBox;
+import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JTextField;
+import javax.swing.WindowConstants;
 
 import static org.testframe.api.Asserters.assertThrows;
 
@@ -53,6 +55,26 @@ public class CurrencyConverterGUINGTest {
     
     private static final CurrencyConverter MOCK_CONVERTER 
             = new CurrencyConverter(MOCK_RATE_PROVIDER);
+    
+    private static String defaultCloseOperationLabel(int code) {
+        return switch (code) {
+            case WindowConstants.DO_NOTHING_ON_CLOSE -> "DO NOTHING ON CLOSE";
+            case WindowConstants.HIDE_ON_CLOSE -> "HIDE ON CLOSE";
+            case WindowConstants.DISPOSE_ON_CLOSE -> "DISPOSE ON CLOSE";
+            case WindowConstants.EXIT_ON_CLOSE -> "EXIT ON CLOSE";
+            default -> "UNRECOGNIZED OPERATION CODE " + code;
+        };
+    }
+    
+    @Test
+    public void testDefaultCloseOperation() {
+        JFrame instance = new CurrencyConverterGUI(MOCK_CONVERTER);
+        int expected = WindowConstants.EXIT_ON_CLOSE;
+        int actual = instance.getDefaultCloseOperation();
+        String message = "Expected " + defaultCloseOperationLabel(expected) 
+                + ", got " + defaultCloseOperationLabel(actual);
+        assertEquals(actual, expected, message);
+    }
     
     @Test
     public void testConstructorRejectsFromPseudocurrency() {
