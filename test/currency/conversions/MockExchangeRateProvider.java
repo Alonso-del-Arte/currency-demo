@@ -19,6 +19,7 @@ package currency.conversions;
 import currency.CurrencyPair;
 
 import java.util.Currency;
+import java.util.HashSet;
 import java.util.Set;
 
 /**
@@ -31,6 +32,8 @@ import java.util.Set;
 public class MockExchangeRateProvider implements ExchangeRateProvider {
     
     private final ConversionRateQuote[] quotes;
+    
+    private final Set<Currency> mentionedCurrencies = new HashSet<>();
     
     /**
      * Gives a conversion rate.
@@ -53,10 +56,9 @@ public class MockExchangeRateProvider implements ExchangeRateProvider {
         return 1.0;
     }
     
-    // TODO: Write tests for this
     @Override
     public Set<Currency> supportedCurrencies() {
-        return Currency.getAvailableCurrencies();
+        return this.mentionedCurrencies;
     }
         
     /**
@@ -68,6 +70,11 @@ public class MockExchangeRateProvider implements ExchangeRateProvider {
      */
     public MockExchangeRateProvider(ConversionRateQuote... rateQuotes) {
         this.quotes = rateQuotes;
+        for (ConversionRateQuote quote : this.quotes) {
+            CurrencyPair pair = quote.getCurrencies();
+            this.mentionedCurrencies.add(pair.getFromCurrency());
+            this.mentionedCurrencies.add(pair.getToCurrency());
+        }
     }
         
 }
