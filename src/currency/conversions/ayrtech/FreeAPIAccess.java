@@ -17,7 +17,6 @@
 package currency.conversions.ayrtech;
 
 import currency.CurrencyPair;
-import currency.SpecificCurrenciesSupport;
 import currency.conversions.ConversionRateQuote;
 import currency.conversions.ExchangeRateProvider;
 import currency.conversions.InvertibleRateQuoteCache;
@@ -54,8 +53,7 @@ import java.util.regex.Pattern;
  * to finished, great, and if not, it's just abandoned.</p>
  * @author Alonso del Arte
  */
-public class FreeAPIAccess implements ExchangeRateProvider, 
-        SpecificCurrenciesSupport {
+public class FreeAPIAccess implements ExchangeRateProvider {
     
     private static final String API_KEY = System.getenv("FOREX_API_KEY");
     

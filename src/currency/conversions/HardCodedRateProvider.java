@@ -17,7 +17,6 @@
 package currency.conversions;
 
 import currency.CurrencyPair;
-import currency.SpecificCurrenciesSupport;
 
 import java.time.LocalDate;
 import java.time.Month;
@@ -37,8 +36,7 @@ import java.util.stream.Collectors;
  * not relevant to what is being demonstrated.
  * @author Alonso del Arte
  */
-public class HardCodedRateProvider implements ExchangeRateProvider, 
-        SpecificCurrenciesSupport {
+public class HardCodedRateProvider implements ExchangeRateProvider {
     
     /**
      * Gives the date that the values given by this provider were hard-coded on. 

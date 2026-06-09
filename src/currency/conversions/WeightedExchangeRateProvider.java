@@ -21,6 +21,7 @@ import currency.CurrencyPair;
 import java.util.Currency;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.Set;
 
 /**
  * Gives exchange rates from another provider multiplied by specified weights. 
@@ -81,6 +82,12 @@ public class WeightedExchangeRateProvider implements ExchangeRateProvider {
     public double getRate(CurrencyPair currencies) {
         return this.getRate(currencies.getFromCurrency(), 
                 currencies.getToCurrency());
+    }
+    
+    // TODO: Write tests for this
+    @Override
+    public Set<Currency> supportedCurrencies() {
+        return Currency.getAvailableCurrencies();
     }
     
     /**

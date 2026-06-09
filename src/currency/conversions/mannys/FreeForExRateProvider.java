@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2025 Alonso del Arte
+ * Copyright (C) 2026 Alonso del Arte
  *
  * This program is free software: you can redistribute it and/or modify it under 
  * the terms of the GNU General Public License as published by the Free Software 
@@ -26,6 +26,7 @@ import java.net.URISyntaxException;
 import java.net.URL;
 import java.util.Currency;
 import java.util.Scanner;
+import java.util.Set;
 
 /**
  * Provides access to Manny's Free Currency Converter API. To use this, you need 
@@ -101,6 +102,12 @@ public class FreeForExRateProvider
     public double getRate(Currency source, Currency target) {
         // TODO: Implement rate quote caching
         return makeAPICall(source, target);
+    }
+    
+    // TODO: Write tests for this if Manny's free API ever comes back up
+    @Override
+    public Set<Currency> supportedCurrencies() {
+        return Currency.getAvailableCurrencies();
     }
     
 }
