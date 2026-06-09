@@ -22,9 +22,11 @@ import static currency.conversions.ExchangeRateProviderNGTest.RANDOM;
 
 import java.time.LocalDateTime;
 import java.util.Currency;
+import java.util.HashSet;
 import java.util.Locale;
+import java.util.Set;
 
-import static org.testframe.api.Asserters.assertInRange;
+import static org.testframe.api.Asserters.assertContainsSame;
 
 import static org.testng.Assert.*;
 import org.testng.annotations.Test;
@@ -96,6 +98,23 @@ public class MockExchangeRateProviderNGTest {
                 + target.getCurrencyCode() 
                 + ") not specified, should give 1.0, not try to deduce";
         assertEquals(actual, expected, TEST_DELTA, message);
+    }
+    
+    @Test
+    public void testSupportedCurrencies() {
+        System.out.println("supportedCurrencies");
+        ConversionRateQuote[] rateQuotes = inventQuotes();
+        ExchangeRateProvider instance 
+                = new MockExchangeRateProvider(rateQuotes);
+        Set<Currency> expected = new HashSet<>();
+        for (ConversionRateQuote quote : rateQuotes) {
+            CurrencyPair pair = quote.getCurrencies();
+            expected.add(pair.getFromCurrency());
+            expected.add(pair.getToCurrency());
+        }
+        Set<Currency> actual = instance.supportedCurrencies();
+        String msg = "Currencies should be those in quotes array";
+        assertContainsSame(expected, actual, msg);
     }
     
 }
