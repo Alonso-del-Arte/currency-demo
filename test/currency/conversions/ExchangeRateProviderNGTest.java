@@ -21,6 +21,7 @@ import currency.CurrencyPair;
 
 import java.util.Currency;
 import java.util.Random;
+import java.util.Set;
 
 import static org.testng.Assert.*;
 import org.testng.annotations.Test;
@@ -71,6 +72,11 @@ public class ExchangeRateProviderNGTest {
             this.mostRecentTarget = target;
             this.mostRecentReturn = 1.0 + RANDOM.nextDouble();
             return this.mostRecentReturn;
+        }
+        
+        @Override
+        public Set<Currency> supportedCurrencies() {
+            return Currency.getAvailableCurrencies();
         }
         
     }

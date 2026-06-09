@@ -115,6 +115,11 @@ public class ExchangeRateComparatorNGTest {
             return source.getDisplayName().compareTo(target.getDisplayName());
         }
         
+        @Override
+        public Set<Currency> supportedCurrencies() {
+            return Currency.getAvailableCurrencies();
+        }
+        
     }
     
 }

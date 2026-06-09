@@ -19,6 +19,7 @@ package currency.conversions;
 import currency.CurrencyPair;
 
 import java.util.Currency;
+import java.util.Set;
 
 /**
  * Provides mock exchange rates. The purpose here is to test that a {@link 
@@ -50,6 +51,12 @@ public class MockExchangeRateProvider implements ExchangeRateProvider {
             }
         }
         return 1.0;
+    }
+    
+    // TODO: Write tests for this
+    @Override
+    public Set<Currency> supportedCurrencies() {
+        return Currency.getAvailableCurrencies();
     }
         
     /**

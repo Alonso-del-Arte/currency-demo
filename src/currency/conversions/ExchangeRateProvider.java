@@ -17,6 +17,7 @@
 package currency.conversions;
 
 import currency.CurrencyPair;
+import currency.SpecificCurrenciesSupport;
 
 import java.util.Currency;
 
@@ -25,7 +26,7 @@ import java.util.Currency;
  * rate API.
  * @author Alonso del Arte
  */
-public interface ExchangeRateProvider {
+public interface ExchangeRateProvider extends SpecificCurrenciesSupport {
     
     /**
      * Gives the rate to convert one unit of the source currency to the target 
