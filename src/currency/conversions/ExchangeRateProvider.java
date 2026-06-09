@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2025 Alonso del Arte
+ * Copyright (C) 2026 Alonso del Arte
  *
  * This program is free software: you can redistribute it and/or modify it under 
  * the terms of the GNU General Public License as published by the Free Software 
@@ -22,8 +22,9 @@ import currency.SpecificCurrenciesSupport;
 import java.util.Currency;
 
 /**
- * Defines one function for classes that provide access to a currency conversion 
- * rate API.
+ * Provides currency exchange rates in 64-bit floating point. Note that it is 
+ * necessary to implement {@link SpecificCurrenciesSupport#supportedCurrencies() 
+ * supportedCurrencies()}.
  * @author Alonso del Arte
  */
 public interface ExchangeRateProvider extends SpecificCurrenciesSupport {
