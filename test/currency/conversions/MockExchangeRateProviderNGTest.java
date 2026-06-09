@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2024 Alonso del Arte
+ * Copyright (C) 2026 Alonso del Arte
  *
  * This program is free software: you can redistribute it and/or modify it under 
  * the terms of the GNU General Public License as published by the Free Software 
@@ -115,6 +115,18 @@ public class MockExchangeRateProviderNGTest {
         Set<Currency> actual = instance.supportedCurrencies();
         String msg = "Currencies should be those in quotes array";
         assertContainsSame(expected, actual, msg);
+    }
+    
+    @Test
+    public void testSupportedCurrenciesDoesNotLeakField() {
+        ConversionRateQuote[] rateQuotes = inventQuotes();
+        ExchangeRateProvider instance 
+                = new MockExchangeRateProvider(rateQuotes);
+        Set<Currency> quotedCurrencies = instance.supportedCurrencies();
+        Set<Currency> expected = new HashSet<>(quotedCurrencies);
+        quotedCurrencies.clear();
+        Set<Currency> actual = instance.supportedCurrencies();
+        assertEquals(actual, expected);
     }
     
 }
