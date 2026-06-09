@@ -44,8 +44,7 @@ public class WeightedExchangeRateProviderNGTest {
             = new HardCodedRateProvider();
     
     private static final Set<Currency> AVAILABLE_CURRENCIES 
-            = ((SpecificCurrenciesSupport) DEFAULT_PROVIDER)
-                    .supportedCurrencies();
+            = DEFAULT_PROVIDER.supportedCurrencies();
     
     private static final double DEFAULT_DELTA = 0.0001;
     
