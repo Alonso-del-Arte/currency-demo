@@ -508,6 +508,14 @@ public class CurrencyChooser {
         return propCur;
     }
     
+    // TODO: Write tests for this
+    public Currency chooseCurrencyNotIn(Set<Currency> set) {
+        if (set.isEmpty()) {
+            return Currency.getInstance("USD");
+        }
+        return chooseCurrency(set);
+    }
+    
     /**
      * Chooses a pair of currencies. The implementation may or may not use 
      * {@link #chooseCurrency()} and {@link 
