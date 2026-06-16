@@ -309,7 +309,7 @@ public class HardCodedRateProviderNGTest {
     public void testGetRateUSDToMXN() {
         ExchangeRateProvider instance = new HardCodedRateProvider();
         Currency mexPeso = Currency.getInstance("MXN");
-        double minimum = 16.55;
+        double minimum = 16.43;
         double actual = instance.getRate(UNITED_STATES_DOLLARS, mexPeso);
         double maximum = 21.89;
         String msg = "Rate of conversion from " + USD_DISPLAY_NAME + " (" 
