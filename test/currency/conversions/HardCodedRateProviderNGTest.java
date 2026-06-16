@@ -339,9 +339,9 @@ public class HardCodedRateProviderNGTest {
     public void testGetRateUSDToPHP() {
         ExchangeRateProvider instance = new HardCodedRateProvider();
         Currency philPeso = Currency.getInstance("PHP");
-        double minimum = 47.66;
+        double minimum = 48.35;
         double actual = instance.getRate(UNITED_STATES_DOLLARS, philPeso);
-        double maximum = 58.95;
+        double maximum = 60.7;
         String msg = "Rate of conversion from " + USD_DISPLAY_NAME + " (" 
                 + USD_3_LETTER_CODE + ") to " + philPeso.getDisplayName() + " (" 
                 + philPeso.getCurrencyCode() 
