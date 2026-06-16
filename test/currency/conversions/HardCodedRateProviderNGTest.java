@@ -383,7 +383,7 @@ public class HardCodedRateProviderNGTest {
         Currency vietDong = Currency.getInstance("VND");
         double minimum = 22394.0;
         double actual = instance.getRate(UNITED_STATES_DOLLARS, vietDong);
-        double maximum = 26375.0;
+        double maximum = 26355.0;
         String msg = "Rate of conversion from " + USD_DISPLAY_NAME + " (" 
                 + USD_3_LETTER_CODE + ") to " + vietDong.getDisplayName() + " (" 
                 + vietDong.getCurrencyCode() 
