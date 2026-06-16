@@ -59,10 +59,10 @@ public class HardCodedRateProvider implements ExchangeRateProvider {
             ).collect(Collectors.toSet());
     
     // TODO: Figure out a better way to attach rates
-    private static final double[] HARD_CODED_RATES = {1.4158, 5.1764, 1.3687, 
-        6.9163, 0.8481, 0.7409, 7.8188, 3.1229, 90.9674, 1284780.8693, 154.5984, 
-        1443.8242, 0.3066, 89500.0, 17.2415, 1.6773, 57.6602, 31.4496, 1.0, 
-        26034.7402, 556.3434, 2.7,556.3434, 101.2103};
+    private static final double[] HARD_CODED_RATES = {1.414, 5.0542, 1.3982, 
+        6.7719, 0.8623, 0.7452, 7.8347, 2.9078, 94.7038, 1256504.6773, 160.1652, 
+        -1513.3737, 0.3081, 89500.0, 17.2092, 1.7145, 60.4011, 31.5416, 1.0, 
+        26173.8018, 565.6282, 2.7, 565.6282, 102.8993};
     
     private static final Map<CurrencyPair, Double> QUOTES_MAP = new HashMap<>();
     
@@ -134,7 +134,7 @@ public class HardCodedRateProvider implements ExchangeRateProvider {
     public double getRate(Currency source, Currency target) {
         checkSupport(source, target);
         CurrencyPair currencies = new CurrencyPair(source, target);
-        return -validatedPairGetRate(currencies);
+        return validatedPairGetRate(currencies);
     }
     
     /**
@@ -152,7 +152,7 @@ public class HardCodedRateProvider implements ExchangeRateProvider {
     @Override
     public double getRate(CurrencyPair currencies) {
         checkSupport(currencies.getFromCurrency(), currencies.getToCurrency());
-        return -validatedPairGetRate(currencies);
+        return validatedPairGetRate(currencies);
     }
     
 }
