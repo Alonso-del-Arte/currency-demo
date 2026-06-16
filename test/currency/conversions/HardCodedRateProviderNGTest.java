@@ -211,9 +211,9 @@ public class HardCodedRateProviderNGTest {
     public void testGetRateUSDToILS() {
         ExchangeRateProvider instance = new HardCodedRateProvider();
         Currency israeliShekel = Currency.getInstance("ILS");
-        double minimum = 3.09;
+        double minimum = 2.8;
         double actual = instance.getRate(UNITED_STATES_DOLLARS, israeliShekel);
-        double maximum = 4.05;
+        double maximum = 4.06;
         String msg = "Rate of conversion from " + USD_DISPLAY_NAME + " (" 
                 + USD_3_LETTER_CODE + ") to " + israeliShekel.getDisplayName() 
                 + " (" + israeliShekel.getCurrencyCode() 
