@@ -134,7 +134,7 @@ public class HardCodedRateProvider implements ExchangeRateProvider {
     public double getRate(Currency source, Currency target) {
         checkSupport(source, target);
         CurrencyPair currencies = new CurrencyPair(source, target);
-        return validatedPairGetRate(currencies);
+        return -validatedPairGetRate(currencies);
     }
     
     /**
@@ -152,7 +152,7 @@ public class HardCodedRateProvider implements ExchangeRateProvider {
     @Override
     public double getRate(CurrencyPair currencies) {
         checkSupport(currencies.getFromCurrency(), currencies.getToCurrency());
-        return validatedPairGetRate(currencies);
+        return -validatedPairGetRate(currencies);
     }
     
 }
