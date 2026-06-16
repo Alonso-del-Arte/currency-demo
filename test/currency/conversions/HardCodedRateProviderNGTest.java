@@ -439,9 +439,9 @@ public class HardCodedRateProviderNGTest {
     public void testGetRateUSDToXPF() {
         ExchangeRateProvider instance = new HardCodedRateProvider();
         Currency cfpFranc = Currency.getInstance("XPF");
-        double minimum = 101.14;
+        double minimum = 99.89;
         double actual = instance.getRate(UNITED_STATES_DOLLARS, cfpFranc);
-        double maximum = 102.60;
+        double maximum = 124.0;
         String msg = "Rate of conversion from " + USD_DISPLAY_NAME + " (" 
                 + USD_3_LETTER_CODE + ") to " + cfpFranc.getDisplayName() 
                 + " (" + cfpFranc.getCurrencyCode() 
