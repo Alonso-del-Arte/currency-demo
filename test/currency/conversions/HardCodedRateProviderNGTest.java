@@ -424,7 +424,7 @@ public class HardCodedRateProviderNGTest {
     public void testGetRateUSDToXOF() {
         ExchangeRateProvider instance = new HardCodedRateProvider();
         Currency westAfricanFranc = Currency.getInstance("XOF");
-        double minimum = 534.0;
+        double minimum = 545.0;
         double actual = instance.getRate(UNITED_STATES_DOLLARS, 
                 westAfricanFranc);
         double maximum = 676.98;
