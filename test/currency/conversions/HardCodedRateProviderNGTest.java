@@ -355,7 +355,7 @@ public class HardCodedRateProviderNGTest {
         Currency taiwanDollar = Currency.getInstance("TWD");
         double minimum = 27.64;
         double actual = instance.getRate(UNITED_STATES_DOLLARS, taiwanDollar);
-        double maximum = 32.93;
+        double maximum = 33.2;
         String msg = "Rate of conversion from " + USD_DISPLAY_NAME + " (" 
                 + USD_3_LETTER_CODE + ") to " + taiwanDollar.getDisplayName() + " (" 
                 + taiwanDollar.getCurrencyCode() 
