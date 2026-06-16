@@ -44,7 +44,7 @@ public class HardCodedRateProvider implements ExchangeRateProvider {
      * might remain current until the next hard-coding.
      */
     public static final LocalDate DATE_OF_HARD_CODING 
-            = LocalDate.of(2026, Month.FEBRUARY, 24);
+            = LocalDate.of(2026, Month.JUNE, 15);
     
     private static final Currency UNITED_STATES_DOLLARS 
             = Currency.getInstance(Locale.US);
