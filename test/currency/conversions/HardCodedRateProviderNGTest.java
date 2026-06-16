@@ -253,7 +253,7 @@ public class HardCodedRateProviderNGTest {
     public void testGetRateUSDToJPY() {
         ExchangeRateProvider instance = new HardCodedRateProvider();
         Currency japaneseYen = Currency.getInstance("JPY");
-        double minimum = 103.93;
+        double minimum = 109.0;
         double actual = instance.getRate(UNITED_STATES_DOLLARS, japaneseYen);
         double maximum = 160.88;
         String msg = "Rate of conversion from " + USD_DISPLAY_NAME + " (" 
