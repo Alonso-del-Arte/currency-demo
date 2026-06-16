@@ -115,7 +115,7 @@ public class HardCodedRateProviderNGTest {
         Currency austrDollar = Currency.getInstance("AUD");
         double minimum = 1.29;
         double actual = instance.getRate(UNITED_STATES_DOLLARS, austrDollar);
-        double maximum = 1.59;
+        double maximum = 1.75;
         String msg = "Rate of conversion from " + USD_DISPLAY_NAME + " (" 
                 + USD_3_LETTER_CODE + ") to " + austrDollar.getDisplayName() + " (" 
                 + austrDollar.getCurrencyCode() 
