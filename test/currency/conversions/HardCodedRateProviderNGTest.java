@@ -323,10 +323,10 @@ public class HardCodedRateProviderNGTest {
     public void testGetRateUSDToNZD() {
         ExchangeRateProvider instance = new HardCodedRateProvider();
         Currency newZealandDollar = Currency.getInstance("NZD");
-        double minimum = 1.34;
+        double minimum = 1.37;
         double actual = instance.getRate(UNITED_STATES_DOLLARS, 
                 newZealandDollar);
-        double maximum = 1.78;
+        double maximum = 1.81;
         String msg = "Rate of conversion from " + USD_DISPLAY_NAME + " (" 
                 + USD_3_LETTER_CODE + ") to " 
                 + newZealandDollar.getDisplayName() + " (" 
