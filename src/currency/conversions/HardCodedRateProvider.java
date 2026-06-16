@@ -61,7 +61,7 @@ public class HardCodedRateProvider implements ExchangeRateProvider {
     // TODO: Figure out a better way to attach rates
     private static final double[] HARD_CODED_RATES = {1.414, 5.0542, 1.3982, 
         6.7719, 0.8623, 0.7452, 7.8347, 2.9078, 94.7038, 1256504.6773, 160.1652, 
-        -1513.3737, 0.3081, 89500.0, 17.2092, 1.7145, 60.4011, 31.5416, 1.0, 
+        1513.3737, 0.3081, 89500.0, 17.2092, 1.7145, 60.4011, 31.5416, 1.0, 
         26173.8018, 565.6282, 2.7, 565.6282, 102.8993};
     
     private static final Map<CurrencyPair, Double> QUOTES_MAP = new HashMap<>();
