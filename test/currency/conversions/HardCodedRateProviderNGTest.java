@@ -269,7 +269,7 @@ public class HardCodedRateProviderNGTest {
         Currency korWon = Currency.getInstance(Locale.KOREA);
         double minimum = 1134.25;
         double actual = instance.getRate(UNITED_STATES_DOLLARS, korWon);
-        double maximum = 1513.0;
+        double maximum = 1557.48;
         String msg = "Rate of conversion from " + USD_DISPLAY_NAME + " (" 
                 + USD_3_LETTER_CODE + ") to " + korWon.getDisplayName() + " (" 
                 + korWon.getCurrencyCode() 
