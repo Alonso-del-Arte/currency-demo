@@ -281,9 +281,9 @@ public class HardCodedRateProviderNGTest {
     public void testGetRateUSDToKWD() {
         ExchangeRateProvider instance = new HardCodedRateProvider();
         Currency kuwaitiDinar = Currency.getInstance("KWD");
-        double minimum = 0.25;
+        double minimum = 0.29;
         double actual = instance.getRate(UNITED_STATES_DOLLARS, kuwaitiDinar);
-        double maximum = 0.35;
+        double maximum = 0.32;
         String msg = "Rate of conversion from " + USD_DISPLAY_NAME + " (" 
                 + USD_3_LETTER_CODE + ") to " + kuwaitiDinar.getDisplayName() 
                 + " (" + kuwaitiDinar.getCurrencyCode() 
