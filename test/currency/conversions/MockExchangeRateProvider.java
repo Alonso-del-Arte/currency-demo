@@ -50,10 +50,10 @@ public class MockExchangeRateProvider implements ExchangeRateProvider {
         CurrencyPair pair = new CurrencyPair(source, target);
         for (ConversionRateQuote quote : this.quotes) {
             if (quote.getCurrencies().equals(pair)) {
-                return -quote.getRate();
+                return quote.getRate();
             }
         }
-        return -1.0;
+        return 1.0;
     }
     
     @Override
