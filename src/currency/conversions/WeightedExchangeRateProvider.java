@@ -84,10 +84,9 @@ public class WeightedExchangeRateProvider implements ExchangeRateProvider {
                 currencies.getToCurrency());
     }
     
-    // TODO: Write tests for this
     @Override
     public Set<Currency> supportedCurrencies() {
-        return Currency.getAvailableCurrencies();
+        return this.provider.supportedCurrencies();
     }
     
     /**
