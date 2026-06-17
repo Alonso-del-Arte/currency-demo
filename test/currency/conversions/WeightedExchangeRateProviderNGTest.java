@@ -26,6 +26,7 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.Set;
 
+import static org.testframe.api.Asserters.assertContainsSame;
 import static org.testframe.api.Asserters.assertThrows;
 
 import static org.testng.Assert.*;
@@ -223,6 +224,22 @@ public class WeightedExchangeRateProviderNGTest {
                     + target.getCurrencyCode();
             assertEquals(actual, expected, DEFAULT_DELTA, message);
         }
+    }
+    
+    @Test
+    public void testSupportedCurrencies() {
+        System.out.println("supportedCurrencies");
+        ConversionRateQuote[] rateQuotes 
+                = MockExchangeRateProviderNGTest.inventQuotes();
+        ExchangeRateProvider rateProvider 
+                = new MockExchangeRateProvider(rateQuotes);
+        Map<Currency, Double> weights = makeWeightsMap();
+        WeightedExchangeRateProvider instance 
+                = new WeightedExchangeRateProvider(weights, rateProvider);
+        Set<Currency> expected = rateProvider.supportedCurrencies();
+        Set<Currency> actual = instance.supportedCurrencies();
+        String msg = "Instance should support same currencies as non-weighted";
+        assertContainsSame(expected, actual, msg);
     }
     
     @Test
