@@ -84,6 +84,14 @@ public class WeightedExchangeRateProvider implements ExchangeRateProvider {
                 currencies.getToCurrency());
     }
     
+    /**
+     * The currencies that are supported. Note that a currency will not be 
+     * listed as supported if it's not supported by the non-weighted provider 
+     * this weighted provider was initialized with, even if it has a weight in 
+     * the map of weights.
+     * @return The same set of currencies supported by the provider this 
+     * weighted provider was initialized with.
+     */
     @Override
     public Set<Currency> supportedCurrencies() {
         return this.provider.supportedCurrencies();
@@ -96,10 +104,11 @@ public class WeightedExchangeRateProvider implements ExchangeRateProvider {
      * similarly weighted. It's not necessary to specify all currencies. Those 
      * currencies without a specified weight will default to a weight of 1.0. 
      * May be empty (but must not be null), though there's not much of a point 
-     * to that.
+     * to that. Preferably should only contain currencies that are supported by 
+     * the non-weighted rate provider, but this is not checked.
      * @param rateProvider The rate provider to use. If nothing else, {@link 
      * HardCodedRateProvider} should always be available. Should not be another 
-     * {@code WeightedExchangeRateProvider}.
+     * {@code WeightedExchangeRateProvider}, but this is not checked.
      * @throws NullPointerException If {@code weights} or {@code rateProvider} 
      * is null.
      */
