@@ -242,7 +242,7 @@ any consequence to this project.
 
 Bulgaria has entered the eurozone. Effective January 1, 2026, the euro (EUR) 
 became the official currency of Bulgaria. The Bulgarian lev (BGL) continued to 
-be honored for cash payments until January 15, 2026, and after that levs could  
+be honored for cash payments until January 15, 2026, and after that levs could 
 still be exchanged for euros at the Bulgarian National Bank indefinitely.
 
 As of late November 2025, Russia's banks appear to be on the brink of collapse. 
