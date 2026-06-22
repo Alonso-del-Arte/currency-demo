@@ -18,7 +18,6 @@ package currency.conversions;
 
 import currency.CurrencyChooser;
 import currency.CurrencyPair;
-import currency.SpecificCurrenciesSupport;
 import static currency.conversions.ExchangeRateProviderNGTest.RANDOM;
 
 import java.util.Currency;
