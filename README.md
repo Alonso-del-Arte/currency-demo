@@ -12,8 +12,8 @@ quantities
 point
 * Use `java.math.BigDecimal` &mdash; no information about the currency
 * Create our own class &mdash; we might duplicate third-party library efforts
-* Use a third-party library &mdash; we might need to integrate our project with 
-a project that uses a different third-party library
+* Use a third-party library &mdash; we might need to add a whole mess of 
+indirect dependencies to our project
 
 The JSR-354 proposal was approved for consideration to add to Java 9. However, 
 it wasn't actually added to Java 9, and as of Java 25 it is still not an 
