@@ -299,13 +299,52 @@ those would land at the extreme positions.
 
 # Cryptocurrencies
 
-This is by no means a complete list.
+A cryptocurrency is decentralized, it's not managed by any national government's 
+financial institution (such as the U.&nbsp;S. Federal Reserve System) nor by a 
+financial institution of an organization of nations (such as the European 
+Central Bank). If I understand it correctly, all cryptocurrency transactions are 
+recorded on a public ledger that can be scrutinized, while at the same time also 
+offering a measure of privacy.
 
+Theoretically, any jackass can start a cryptocurrency. The following list is by 
+no means a complete list. It's not even a complete list of all the 
+cryptocurrencies that Google Finance tracks.
+
+* Aptos
+* Arbitrum
 * Bitcoin
+* Bittensor
+* Cosmos
+* DoubleZero
 * Ethereum
 * Filecoin
+* GateToken
+* Hyperliquid
+* Immutable
+* Jupiter
+* Kite
+* LayerZero
+* Morpho
+* Nexo
+* Ondo
 * Pancake Swap
 * Ripple USD
+* Story
+* Tezos
+* UniSwap
+* VeChain
+* Worldcoin
+* Zcash
 
-The ISO-4217 standard does not recognize cryptocurrencies like Bitcoin and 
-Ethereum.
+The ISO-4217 standard does not recognize any of these cryptocurrencies, not even 
+the most famous, Bitcoin and Ethereum. But that hasn't stopped people from 
+inventing 3-letter codes for these currencies and using them as if they were 
+official ISO-4217 codes. This is obviously problematic because people might 
+choose codes that don't carry the expected meaning, or worse, conflict with 
+already assigned codes.
+
+For example, people have used the informal codes BTC, XBC and XBT for Bitcoin. 
+The problem with BTC is that that's supposed to be for Bhutanese currencies. XBC 
+could work except that's already been assigned to one of the European units of 
+account. There seems to be no problem with XBT, though cryptocurrencies like 
+Bittensor and BitTorrent might want to make a claim to that 3-letter code.
