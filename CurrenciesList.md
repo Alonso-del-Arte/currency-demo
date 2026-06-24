@@ -296,3 +296,16 @@ LBP, IRR.
 Note however that this list excludes the currencies that don't have entries in 
 the currency information file of my Java installation. Though I doubt any of 
 those would land at the extreme positions.
+
+# Cryptocurrencies
+
+This is by no means a complete list.
+
+* Bitcoin
+* Ethereum
+* Filecoin
+* Pancake Swap
+* Ripple USD
+
+The ISO-4217 standard does not recognize cryptocurrencies like Bitcoin and 
+Ethereum.
