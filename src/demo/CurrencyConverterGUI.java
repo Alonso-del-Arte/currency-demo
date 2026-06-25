@@ -57,6 +57,8 @@ public class CurrencyConverterGUI extends JFrame implements ActionListener,
     private static final Currency[] ALL_CURRENCIES 
             = Currency.getAvailableCurrencies().toArray(Currency[]::new);
     
+    private final CurrencyPair curPair;
+    
     private final JComboBox<Currency> fromCurrencies 
             = new JComboBox<>(ALL_CURRENCIES);
     
@@ -101,9 +103,7 @@ public class CurrencyConverterGUI extends JFrame implements ActionListener,
     
     // TODO: Write test that this update when user chooses different pair
     public CurrencyPair getPair() {
-        Currency from = this.fromCurrency;
-        Currency to = this.toCurrency;
-        return new CurrencyPair(from, to);
+        return this.curPair;
     }
 
     @Override
@@ -122,6 +122,7 @@ public class CurrencyConverterGUI extends JFrame implements ActionListener,
 
     public CurrencyConverterGUI(CurrencyPair currencies, 
             CurrencyConverter converter) {
+        this.curPair = currencies;
         Currency from = currencies.getFromCurrency();
         Currency to = currencies.getToCurrency();
         boolean eitherIsPseudo = from.getDefaultFractionDigits() < 0 
