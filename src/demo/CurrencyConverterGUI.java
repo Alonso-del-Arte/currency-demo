@@ -99,10 +99,10 @@ public class CurrencyConverterGUI extends JFrame implements ActionListener,
         //
     }
     
-    // TODO: Write tests for this
+    // TODO: Write test that this update when user chooses different pair
     public CurrencyPair getPair() {
-        Currency from = Currency.getInstance("XAU");
-        Currency to = Currency.getInstance("XTS");
+        Currency from = this.fromCurrency;
+        Currency to = this.toCurrency;
         return new CurrencyPair(from, to);
     }
 
