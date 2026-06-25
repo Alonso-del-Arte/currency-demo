@@ -56,6 +56,18 @@ public class CurrencyConverterGUINGTest {
     private static final CurrencyConverter MOCK_CONVERTER 
             = new CurrencyConverter(MOCK_RATE_PROVIDER);
     
+    @Test
+    public void testGetPair() {
+        System.out.println("getPair");
+        Currency from = CurrencyChooser.chooseCurrency();
+        Currency to = CurrencyChooser.chooseCurrencyOtherThan(from);
+        CurrencyPair expected = new CurrencyPair(from, to);
+        CurrencyConverterGUI instance 
+                = new CurrencyConverterGUI(expected, MOCK_CONVERTER);
+        CurrencyPair actual = instance.getPair();
+        assertEquals(actual, expected);
+    }
+    
     private static String defaultCloseOperationLabel(int code) {
         return switch (code) {
             case WindowConstants.DO_NOTHING_ON_CLOSE -> "DO NOTHING ON CLOSE";
