@@ -368,6 +368,7 @@ public class CurrencyChooser {
      * @return A currency with default fraction digits of at least 0. For 
      * example, the Kyrgystani som (KGS), which like most world currencies by 
      * default has two fractional digits. A som is divided into 100 tyin.
+     * @see currency.SpecificCurrenciesSupport
      */
     public static Currency chooseCurrency() {
         int index = RANDOM.nextInt(CURRENCIES.size());
