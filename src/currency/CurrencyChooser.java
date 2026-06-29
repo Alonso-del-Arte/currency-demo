@@ -307,8 +307,8 @@ public class CurrencyChooser {
      * <li>The Belgian franc (BEF) was the official currency of Belgium from 
      * 1832 to 2002. The old coins can no longer be exchanged for euros, but 
      * there's no time limit for exchanging the old notes.</li>
-     * <li>The Bulgarian lev (BGN) will continue to circulate in Bulgaria along 
-     * with the euro until February 1, 2026. The Bulgarian National Bank will 
+     * <li>The Bulgarian lev (BGN) continued to circulate in Bulgaria along with 
+     * the euro until February 1, 2026. The Bulgarian National Bank will 
      * exchange the old lev notes and coins indefinitely. Other banks and some 
      * post offices in Bulgaria will exchange leva to euros free of charge until 
      * June 30, 2026, and potentially with a fee after that to at least December 
