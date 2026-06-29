@@ -341,6 +341,12 @@ public class CurrencyChooser {
      * <li>The Italian lira (ITL) was the only official currency of Italy from 
      * 1861 to 1999. The old notes and coins can no longer be exchanged for 
      * euros.</li>
+     * <li>The Lithuanian litas (LTL) was the official currency of Lithuania 
+     * from 1922 to 1941, prior to the Nazi occupation, and from 1993 to 2015, 
+     * after Lithuania left the Soviet Union and later during the first few 
+     * years the country was in the European Union. Lithuanian banks will 
+     * continue to exchange the old notes and coins indefinitely and in 
+     * unlimited amounts.</li>
      * <li>The Luxembourgian franc (LUF) was the official currency of Luxembourg 
      * from 1854 to 2002 except during World War II. But even after the war, 
      * some other countries' currencies were accepted in Luxembourg. That 
