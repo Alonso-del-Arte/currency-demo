@@ -70,6 +70,8 @@ public class CurrencyYearSpanDeterminer {
                 new YearSpan(Year.of(1928), EURO_YEAR_ZERO));
         EURO_REPLACED_YEAR_SPANS.put(Currency.getInstance("ITL"), 
                 new YearSpan(Year.of(1861), EURO_YEAR_ZERO));
+        EURO_REPLACED_YEAR_SPANS.put(Currency.getInstance("LTL"), 
+                new YearSpan(Year.of(1993), Year.of(2015)));
         EURO_REPLACED_YEAR_SPANS.put(Currency.getInstance("LUF"), 
                 new YearSpan(Year.of(1854), EURO_YEAR_ZERO));
         EURO_REPLACED_YEAR_SPANS.put(Currency.getInstance("MTL"), 
@@ -87,14 +89,19 @@ public class CurrencyYearSpanDeterminer {
      * facilitate the sorting of historical currencies according to when they 
      * were in active use.
      * @param currency The currency for which to determine the year span. 
-     * Examples: The old Belarussian ruble (BYB), the Dutch guilder (NLG) and 
-     * the United States dollar (USD).
+     * Examples: The old Belarussian ruble (BYB), the Lithuanian litas (LTL), 
+     * the Dutch guilder (NLG) and the United States dollar (USD).
      * @return The year span, gleaned from the currency's display name if 
      * available, or from a list "hard-coded" in this program in the case of 
-     * euro-replaced currencies. In the case of currently active currencies, the 
-     * year span begins this year and ends at some point in the distant future. 
-     * In the examples, this would be 1994 &mdash; 1999 for BYB, 1434 &mdash; 
-     * 2002 for NLG and 2026 to several years in the future for USD.
+     * euro-replaced currencies. Note that in the case of currencies with 
+     * multiple spans, such as those that have been interrupted by war and 
+     * occupation, this function only gives the most recent span. In the case of 
+     * currently active currencies, the year span begins this year and ends at 
+     * some point in the distant future. In the examples, this would be 1994 
+     * &mdash; 1999 for BYB, 1993 &mdash; 2015 for LTL (the year span 1922 
+     * &mdash; 1941, corresponding to the time Lithuania was an independent 
+     * nation prior to the Nazi occupation, is ignored by this function), 1434 
+     * &mdash; 2002 for NLG and 2026 to several years in the future for USD.
      */
     public static YearSpan determineYearSpan(Currency currency) {
         String input = currency.getDisplayName();
