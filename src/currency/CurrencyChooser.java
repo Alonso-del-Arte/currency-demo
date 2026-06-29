@@ -370,7 +370,8 @@ public class CurrencyChooser {
      * old notes can be exchanged for euros indefinitely.</li>
      * </ul>
      * <p>I have not yet verified this is the complete list of euro-replaced 
-     * currencies.</p>
+     * currencies. Do note that a few members of the European Union, such as 
+     * Denmark, have opted not to adopt the euro.</p>
      * @return A currency with default fraction digits of at least 0. For 
      * example, the Kyrgystani som (KGS), which like most world currencies by 
      * default has two fractional digits. A som is divided into 100 tyin.
