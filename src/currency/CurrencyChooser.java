@@ -55,7 +55,7 @@ public class CurrencyChooser {
 
     private static final String[] EURO_REPLACED_EXCLUSION_CODES = {"ADP", "ATS", 
         "BEF", "BGN", "CYP", "DEM", "EEK", "ESP", "FIM", "FRF", "GRD", "IEP", 
-        "ITL", "LUF", "MTL", "NLG", "PTE", "SIT"};
+        "ITL", "LTL", "LUF", "MTL", "NLG", "PTE", "SIT"};
     
     private static final Set<Currency> EURO_REPLACED_CURRENCIES 
             = Set.of(EURO_REPLACED_EXCLUSION_CODES).stream()
