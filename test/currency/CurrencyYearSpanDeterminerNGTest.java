@@ -244,6 +244,19 @@ public class CurrencyYearSpanDeterminerNGTest {
     }
     
     @Test
+    public void testDetermineYearSpanLithuanianLitas() {
+        Currency currency = Currency.getInstance("LTL");
+        Year begin = Year.of(1993);
+        Year end = Year.of(2015);
+        YearSpan expected = new YearSpan(begin, end);
+        YearSpan actual 
+                = CurrencyYearSpanDeterminer.determineYearSpan(currency);
+        String message = "Currency " + currency.getDisplayName() + " (" 
+                + currency.getCurrencyCode() + ") is a euro-replaced currency";
+        assertEquals(actual, expected, message);
+    }
+    
+    @Test
     public void testDetermineYearSpanLuxembourgianFranc() {
         Currency currency = Currency.getInstance("LUF");
         Year begin = Year.of(1854);
