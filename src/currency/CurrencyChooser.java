@@ -30,7 +30,7 @@ import java.util.stream.Collectors;
 
 /**
  * Chooses currencies to be used in the testing of other classes in the 
- * <code>currency</code> package. Functions are provided to choose currencies 
+ * {@code currency} package. Functions are provided to choose currencies 
  * pseudorandomly, choose currencies with a specified number of subdivisions 
  * (e.g., 100 cents, 1,000 mills), and to choose currencies other than a 
  * specified currency.
@@ -397,10 +397,10 @@ public class CurrencyChooser {
      * which, however, does not have any kind of circulating bills or coins 
      * associated with it. 
      * @throws NoSuchElementException If there are no currencies for 
-     * <code>fractionDigits</code>. In the examples given above, 7 would almost 
+     * {@code fractionDigits}. In the examples given above, 7 would almost 
      * certainly cause this exception, as such a currency is unlikely to be on 
      * the list of available currencies, and &minus;6 definitely would, as 
-     * <code>Currency</code> instances with negative default fraction digits are 
+     * {@code Currency} instances with negative default fraction digits are 
      * ignored by this chooser.
      */
     public static Currency chooseCurrency(int fractionDigits) {
