@@ -884,6 +884,21 @@ public class CurrencyChooserNGTest {
     }
     
     @Test
+    public void testChooseCurrencyNotInEmptySet() {
+        Set<Currency> set = new HashSet<>();
+        int numberOfCalls = 40;
+        Set<Currency> chosen = new HashSet<>(numberOfCalls);
+        for (int i = 0; i < numberOfCalls; i++) {
+            chosen.add(CurrencyChooser.chooseCurrencyNotIn(set));
+        }
+        int minimum = 7 * numberOfCalls / 10;
+        int actual = chosen.size();
+        String msg = "Choosing not in empty set should give at least " + minimum 
+                + " distinct";
+        assertMinimum(minimum, actual, msg);
+    }
+    
+    @Test
     public void testChoosePair() {
         System.out.println("choosePair");
         int numberOfTries = 128;
