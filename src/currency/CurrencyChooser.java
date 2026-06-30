@@ -519,7 +519,7 @@ public class CurrencyChooser {
     // TODO: Write tests for this
     public static Currency chooseCurrencyNotIn(Set<Currency> set) {
         if (set.isEmpty()) {
-            return Currency.getInstance("USD");
+            return chooseCurrency();
         }
         return chooseCurrency(set);
     }
