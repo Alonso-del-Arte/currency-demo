@@ -898,6 +898,38 @@ public class CurrencyChooserNGTest {
         assertMinimum(minimum, actual, msg);
     }
     
+    private static Set<Currency> makeCurrencySet(int intendedSize) {
+        List<Currency> list = new ArrayList<>(CURRENCIES);
+        Collections.shuffle(list);
+        while (list.size() > intendedSize) {
+            list.removeLast();
+        }
+        return new HashSet<>(list);
+    }
+    
+    @Test
+    public void testChooseCurrencyNotIn() {
+        System.out.println("chooseCurrencyNotIn");
+        int intendedSize = 5;
+        Set<Currency> set = makeCurrencySet(intendedSize);
+        String setStr = set.toString();
+        int numberOfCalls = 40;
+        Set<Currency> chosen = new HashSet<>(numberOfCalls);
+        for (int i = 0; i < numberOfCalls; i++) {
+            Currency currency = CurrencyChooser.chooseCurrencyNotIn(set);
+            String msg = currency.getCurrencyCode() + " should not be one of " 
+                    + setStr;
+            assert !set.contains(currency) : msg;
+            chosen.add(currency);
+        }
+        int minimum = 7 * numberOfCalls / 10;
+        int actual = chosen.size();
+        String msg = "Choosing from set " + setStr + " should give at least " 
+                + minimum + " distinct, got " + actual;
+        assertMinimum(minimum, actual, msg);
+        System.out.println(msg);
+    }
+    
     @Test
     public void testChoosePair() {
         System.out.println("choosePair");
