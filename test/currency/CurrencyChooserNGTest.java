@@ -894,8 +894,9 @@ public class CurrencyChooserNGTest {
         int minimum = 7 * numberOfCalls / 10;
         int actual = chosen.size();
         String msg = "Choosing not in empty set should give at least " + minimum 
-                + " distinct";
+                + " distinct, got " + actual;
         assertMinimum(minimum, actual, msg);
+        System.out.println(msg);
     }
     
     private static Set<Currency> makeCurrencySet(int intendedSize) {
@@ -924,7 +925,7 @@ public class CurrencyChooserNGTest {
         }
         int minimum = 7 * numberOfCalls / 10;
         int actual = chosen.size();
-        String msg = "Choosing from set " + setStr + " should give at least " 
+        String msg = "Choosing not in set " + setStr + " should give at least " 
                 + minimum + " distinct, got " + actual;
         assertMinimum(minimum, actual, msg);
         System.out.println(msg);
