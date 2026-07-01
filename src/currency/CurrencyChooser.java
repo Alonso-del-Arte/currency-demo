@@ -51,6 +51,8 @@ public class CurrencyChooser {
     private static final List<Currency> CURRENCIES 
             = new ArrayList<>(ALL_CURRENCIES);
     
+    private static final int TOTAL_NUMBER_OF_CURRENCIES;
+    
     private static final Set<Currency> PSEUDO_CURRENCIES = new HashSet<>();
     
     private static final List<Currency> PSEUDO_CURRENCIES_LIST;
@@ -121,6 +123,7 @@ public class CurrencyChooser {
         CURRENCIES.removeAll(HISTORICAL_CURRENCIES);
         HISTORICAL_CURRENCIES.addAll(EURO_REPLACED_CURRENCIES);
         CURRENCIES.removeAll(OTHER_EXCLUSIONS);
+        TOTAL_NUMBER_OF_CURRENCIES = CURRENCIES.size();
         PSEUDO_CURRENCIES_LIST = new ArrayList<>(PSEUDO_CURRENCIES);
     }
     
@@ -518,7 +521,6 @@ public class CurrencyChooser {
         return propCur;
     }
     
-    // TODO: Write test that too full set causes NoSuchElementException
     public static Currency chooseCurrencyNotIn(Set<Currency> set) {
         if (set == null) {
             String excMsg = "Set should not be null";
@@ -526,6 +528,13 @@ public class CurrencyChooser {
         }
         if (set.isEmpty()) {
             return chooseCurrency();
+        }
+        int exclusionsSetSize = set.size();
+        if (exclusionsSetSize >= TOTAL_NUMBER_OF_CURRENCIES) {
+            String excMsg = "Set with " + exclusionsSetSize 
+                    + " exclusions is too large to avoid in from set of " 
+                    + TOTAL_NUMBER_OF_CURRENCIES + " available to choose from";
+            throw new NoSuchElementException(excMsg);
         }
         Currency propCur = chooseCurrency(set);
         while (set.contains(propCur)) {
