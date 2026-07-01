@@ -913,6 +913,26 @@ public class CurrencyChooserNGTest {
         System.out.println(msg);
     }
     
+    @Test
+    public void testChooseCurrencyNotInTooFullSet() {
+        Duration allottedTime = Duration.of(10, ChronoUnit.SECONDS);
+        String msg = "Trying to choose currency not in set with " 
+                + TOTAL_NUMBER_OF_CURRENCIES 
+                + " currencies should quickly cause exception";
+        assertTimeout(() -> {
+            Throwable t = assertThrows(() -> {
+                Currency badChoice 
+                        = CurrencyChooser.chooseCurrencyNotIn(CURRENCIES);
+                System.out.println(msg + ", not given " 
+                        + badChoice.getDisplayName() + "(" 
+                        + badChoice.getCurrencyCode() + ")");
+            }, NoSuchElementException.class, msg);
+            String excMsg = t.getMessage();
+            assert excMsg != null : "Exception message should not be null";
+            assert !excMsg.isBlank() : "Exception message should not be blank";
+        }, allottedTime, msg);
+    }
+    
     private static Set<Currency> makeCurrencySet(int intendedSize) {
         List<Currency> list = new ArrayList<>(CURRENCIES);
         Collections.shuffle(list);
