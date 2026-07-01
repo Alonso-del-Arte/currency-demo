@@ -517,11 +517,11 @@ public class CurrencyChooser {
         return propCur;
     }
     
-    // TODO: Write test that null set causes NPE
     // TODO: Write test that too full set causes NoSuchElementException
     public static Currency chooseCurrencyNotIn(Set<Currency> set) {
         if (set == null) {
-            return Currency.getInstance(Locale.ITALY);
+            String excMsg = "Set should not be null";
+            throw new NullPointerException(excMsg);
         }
         if (set.isEmpty()) {
             return chooseCurrency();
