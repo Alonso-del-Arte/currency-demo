@@ -930,6 +930,7 @@ public class CurrencyChooserNGTest {
             String excMsg = t.getMessage();
             assert excMsg != null : "Exception message should not be null";
             assert !excMsg.isBlank() : "Exception message should not be blank";
+            System.out.println("\"" + excMsg + "\"");
         }, allottedTime, msg);
     }
     
