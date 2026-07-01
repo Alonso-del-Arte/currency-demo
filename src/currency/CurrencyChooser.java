@@ -21,6 +21,7 @@ import java.util.Currency;
 import java.util.HashSet;
 import java.util.HashMap;
 import java.util.List;
+import java.util.Locale;
 import java.util.Map;
 import java.util.NoSuchElementException;
 import java.util.Random;
@@ -519,6 +520,9 @@ public class CurrencyChooser {
     // TODO: Write test that null set causes NPE
     // TODO: Write test that too full set causes NoSuchElementException
     public static Currency chooseCurrencyNotIn(Set<Currency> set) {
+        if (set == null) {
+            return Currency.getInstance(Locale.ITALY);
+        }
         if (set.isEmpty()) {
             return chooseCurrency();
         }
