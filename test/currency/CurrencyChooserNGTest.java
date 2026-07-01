@@ -884,6 +884,20 @@ public class CurrencyChooserNGTest {
     }
     
     @Test
+    public void testChooseCurrencyNotInNull() {
+        String msg = "Trying to choose not in null should have caused NPE";
+        Throwable t = assertThrows(() -> {
+            Currency badChoice = CurrencyChooser.chooseCurrencyNotIn(null);
+            System.out.println(msg + ", not given " + badChoice.getDisplayName() 
+                    + " (" +  badChoice.getCurrencyCode() + ")");
+        }, NullPointerException.class, msg);
+        String excMsg = t.getMessage();
+        assert excMsg != null : "Exception message should not be null";
+        assert !excMsg.isBlank() : "Exception message should not be blank";
+        System.out.println("\"" + excMsg + "\"");
+    }
+    
+    @Test
     public void testChooseCurrencyNotInEmptySet() {
         Set<Currency> set = new HashSet<>();
         int numberOfCalls = 40;
