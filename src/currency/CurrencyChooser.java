@@ -522,10 +522,6 @@ public class CurrencyChooser {
     }
     
     public static Currency chooseCurrencyNotIn(Set<Currency> set) {
-        if (set == null) {
-            String excMsg = "Set should not be null";
-            throw new NullPointerException(excMsg);
-        }
         if (set.isEmpty()) {
             return chooseCurrency();
         }
