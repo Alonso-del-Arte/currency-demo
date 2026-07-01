@@ -34,7 +34,8 @@ import java.util.stream.Collectors;
  * {@code currency} package. Functions are provided to choose currencies 
  * pseudorandomly, choose currencies with a specified number of subdivisions 
  * (e.g., 100 cents, 1,000 mills), and to choose currencies other than a 
- * specified currency.
+ * specified currency. Also functions to choose currencies from sets or not in 
+ * sets, as well as to choose pairs of currencies.
  * @author Alonso del Arte
  */
 public class CurrencyChooser {
