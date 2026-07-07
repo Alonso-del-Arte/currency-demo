@@ -297,6 +297,12 @@ Note however that this list excludes the currencies that don't have entries in
 the currency information file of my Java installation. Though I doubt any of 
 those would land at the extreme positions.
 
+## Pegged currencies
+
+### Pegged to the United States dollar (USD)
+
+* East Caribbean Dollar EC$ (XCD) pegged at US$0.37
+
 # Cryptocurrencies
 
 A cryptocurrency is decentralized, it's not managed by any national government's 
