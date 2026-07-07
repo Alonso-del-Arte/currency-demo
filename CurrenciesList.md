@@ -299,9 +299,11 @@ those would land at the extreme positions.
 
 ## Pegged currencies
 
+Rates in this section are given in 64-bit floating point precision.
+
 ### Pegged to the United States dollar (USD)
 
-* East Caribbean Dollar EC$ (XCD) pegged at US$0.37
+* East Caribbean Dollar (XCD) EC$1.00 pegged at US$0.37037037037037035
 
 # Cryptocurrencies
 
