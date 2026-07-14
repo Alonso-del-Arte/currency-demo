@@ -56,8 +56,11 @@ public class CurrencyConverterGUINGTest implements ItemListener {
     private static final CurrencyConverter MOCK_CONVERTER 
             = new CurrencyConverter(MOCK_RATE_PROVIDER);
     
+    private int itemChangeCallCounter = 0;
+    
     @Override
     public void itemStateChanged(ItemEvent ie) {
+        this.itemChangeCallCounter += ie.getStateChange();
         Currency item = (Currency) ie.getItem();
         System.out.println("Affected item is " + item.getDisplayName() + " (" 
                 + item.getCurrencyCode() + ")");
@@ -94,6 +97,8 @@ public class CurrencyConverterGUINGTest implements ItemListener {
                 + ", got " + defaultCloseOperationLabel(actual);
         assertEquals(actual, expected, message);
     }
+    
+    // TODO: Rewind close operation and write constructor for 2-param instance
     
     @Test
     public void testConstructorRejectsFromPseudocurrency() {
