@@ -19,9 +19,11 @@ package demo;
 import currency.CurrencyChooser;
 import currency.CurrencyPair;
 import currency.MoneyAmount;
+import currency.conversions.ConversionRateQuote;
 import currency.conversions.CurrencyConverter;
 import currency.conversions.ExchangeRateProvider;
 import currency.conversions.MockExchangeRateProvider;
+import currency.conversions.MockExchangeRateProviderNGTest;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -32,6 +34,7 @@ import java.math.BigDecimal;
 import java.math.RoundingMode;
 import java.util.Currency;
 import java.util.Locale;
+import java.util.Set;
 
 import javax.swing.JComboBox;
 import javax.swing.JFrame;
@@ -50,11 +53,17 @@ import org.testng.annotations.Test;
  */
 public class CurrencyConverterGUINGTest implements ItemListener {
     
+    private static final ConversionRateQuote[] MOCK_QUOTES 
+            = MockExchangeRateProviderNGTest.inventQuotes();
+    
     private static final ExchangeRateProvider MOCK_RATE_PROVIDER 
-            = new MockExchangeRateProvider();
+            = new MockExchangeRateProvider(MOCK_QUOTES);
     
     private static final CurrencyConverter MOCK_CONVERTER 
             = new CurrencyConverter(MOCK_RATE_PROVIDER);
+    
+    private static final Set<Currency> ALLOWED_CURRENCIES 
+            = MOCK_CONVERTER.getProvider().supportedCurrencies();
     
     private int itemChangeCallCounter = 0;
     
@@ -69,8 +78,9 @@ public class CurrencyConverterGUINGTest implements ItemListener {
     @Test
     public void testGetPair() {
         System.out.println("getPair");
-        Currency from = CurrencyChooser.chooseCurrency();
-        Currency to = CurrencyChooser.chooseCurrencyOtherThan(from);
+        Currency from = CurrencyChooser.chooseCurrency(ALLOWED_CURRENCIES);
+        Currency to = CurrencyChooser.chooseCurrencyOtherThan(from, 
+                ALLOWED_CURRENCIES);
         CurrencyPair expected = new CurrencyPair(from, to);
         CurrencyConverterGUI instance 
                 = new CurrencyConverterGUI(expected, MOCK_CONVERTER);
@@ -103,7 +113,7 @@ public class CurrencyConverterGUINGTest implements ItemListener {
     @Test
     public void testConstructorRejectsFromPseudocurrency() {
         Currency from = CurrencyChooser.choosePseudocurrency();
-        Currency to = CurrencyChooser.chooseCurrency();
+        Currency to = CurrencyChooser.chooseCurrency(ALLOWED_CURRENCIES);
         CurrencyPair currencies = new CurrencyPair(from, to);
         String fromCurrCode = from.getCurrencyCode();
         String toCurrCode = to.getCurrencyCode();
@@ -128,7 +138,7 @@ public class CurrencyConverterGUINGTest implements ItemListener {
     
     @Test
     public void testConstructorRejectsToPseudocurrency() {
-        Currency from = CurrencyChooser.chooseCurrency();
+        Currency from = CurrencyChooser.chooseCurrency(ALLOWED_CURRENCIES);
         Currency to = CurrencyChooser.choosePseudocurrency();
         CurrencyPair currencies = new CurrencyPair(from, to);
         String fromCurrCode = from.getCurrencyCode();
