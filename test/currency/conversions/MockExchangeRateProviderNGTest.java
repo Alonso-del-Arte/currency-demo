@@ -42,7 +42,7 @@ public class MockExchangeRateProviderNGTest {
     private static final Currency UNITED_STATES_DOLLARS 
             = Currency.getInstance(Locale.US);
     
-    static ConversionRateQuote[] inventQuotes() {
+    public static ConversionRateQuote[] inventQuotes() {
         int len = RANDOM.nextInt(16) + 4;
         ConversionRateQuote[] array = new ConversionRateQuote[len];
         LocalDateTime date = LocalDateTime.now();
