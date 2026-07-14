@@ -114,6 +114,10 @@ public class CurrencyConverterGUI extends JFrame implements ActionListener,
         //
     }
     
+    public void activate() {
+        // TODO: Write tests for this
+    }
+    
     public CurrencyConverterGUI(CurrencyConverter converter) {
         this(DEFAULT_PAIR, converter);
     }
@@ -158,6 +162,7 @@ public class CurrencyConverterGUI extends JFrame implements ActionListener,
         this.add(readoutsPanel, BorderLayout.PAGE_END);
         this.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
         this.pack();
+        this.setVisible(true);
     }
     
     public static void main(String[] args) {
@@ -165,7 +170,7 @@ public class CurrencyConverterGUI extends JFrame implements ActionListener,
                 new CurrencyConverter(
                         new HardCodedRateProvider()
                 ));
-        display.setVisible(true);
+        display.activate();
     }
     
 }
