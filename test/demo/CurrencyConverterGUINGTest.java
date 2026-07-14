@@ -48,13 +48,20 @@ import org.testng.annotations.Test;
  * Tests of the CurrencyConverterGUI class.
  * @author Alonso del Arte
  */
-public class CurrencyConverterGUINGTest {
+public class CurrencyConverterGUINGTest implements ItemListener {
     
     private static final ExchangeRateProvider MOCK_RATE_PROVIDER 
             = new MockExchangeRateProvider();
     
     private static final CurrencyConverter MOCK_CONVERTER 
             = new CurrencyConverter(MOCK_RATE_PROVIDER);
+    
+    @Override
+    public void itemStateChanged(ItemEvent ie) {
+        Currency item = (Currency) ie.getItem();
+        System.out.println("Affected item is " + item.getDisplayName() + " (" 
+                + item.getCurrencyCode() + ")");
+    }
     
     @Test
     public void testGetPair() {
