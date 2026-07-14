@@ -59,11 +59,9 @@ public class CurrencyConverterGUI extends JFrame implements ActionListener,
     
     private final CurrencyPair curPair;
     
-    private final JComboBox<Currency> fromCurrencies 
-            = new JComboBox<>(ALL_CURRENCIES);
+    final JComboBox<Currency> fromCurrencies = new JComboBox<>(ALL_CURRENCIES);
     
-    private final JComboBox<Currency> toCurrencies 
-            = new JComboBox<>(ALL_CURRENCIES);
+    final JComboBox<Currency> toCurrencies = new JComboBox<>(ALL_CURRENCIES);
     
     private final JTextField numberField = new JTextField(10);
     
