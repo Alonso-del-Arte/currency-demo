@@ -108,7 +108,19 @@ public class CurrencyConverterGUINGTest implements ItemListener {
         assertEquals(actual, expected, message);
     }
     
-    // TODO: Rewind close operation and write constructor for 2-param instance
+    @Test
+    public void testDefaultCloseOperationAuxConstructor() {
+        Currency from = CurrencyChooser.chooseCurrency(ALLOWED_CURRENCIES);
+        Currency to = CurrencyChooser.chooseCurrencyOtherThan(from, 
+                ALLOWED_CURRENCIES);
+        CurrencyPair currencies = new CurrencyPair(from, to);
+        JFrame instance = new CurrencyConverterGUI(currencies, MOCK_CONVERTER);
+        int expected = WindowConstants.EXIT_ON_CLOSE;
+        int actual = instance.getDefaultCloseOperation();
+        String message = "Expected " + defaultCloseOperationLabel(expected) 
+                + ", got " + defaultCloseOperationLabel(actual);
+        assertEquals(actual, expected, message);
+    }
     
     @Test
     public void testConstructorRejectsFromPseudocurrency() {
