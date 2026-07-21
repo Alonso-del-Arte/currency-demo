@@ -193,9 +193,9 @@ shilling (UGX) don't subdivide at all.
 
 To my knowledge, there are no currencies that divide only into ten parts. And 
 I'm only aware of one currency that divides into 10,000 parts, the Chilean unit 
-of account (CLF). But from what I can gather, that's not really used for 
-everyday purchases like groceries, with the main currency in Chile being the 
-Chilean peso (CLP), which interestingly enough doesn't subdivide at all.
+of account (CLF). But from what I gather, that's not really used for everyday 
+purchases like groceries, with the main currency in Chile being the Chilean peso 
+(CLP), which interestingly enough doesn't subdivide at all.
 
 ## Miscellaneous notes
 
