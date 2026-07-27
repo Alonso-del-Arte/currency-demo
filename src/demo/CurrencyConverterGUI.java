@@ -32,6 +32,8 @@ import java.math.BigDecimal;
 import java.math.RoundingMode;
 import java.util.Currency;
 import java.util.Locale;
+import java.util.Set;
+import java.util.stream.Collectors;
 
 import javax.swing.JComboBox;
 import javax.swing.JFrame;
@@ -39,6 +41,8 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
 import javax.swing.WindowConstants;
+
+import ui.CurrencyWrapper;
 
 /**
  *
@@ -54,14 +58,24 @@ public class CurrencyConverterGUI extends JFrame implements ActionListener,
     private static final CurrencyPair DEFAULT_PAIR = new CurrencyPair(DOLLARS, 
             EUROS);
     
+    private static final Set<Currency> CURRENCIES 
+            = Currency.getAvailableCurrencies();
+    
     private static final Currency[] ALL_CURRENCIES 
-            = Currency.getAvailableCurrencies().toArray(Currency[]::new);
+            = CURRENCIES.toArray(Currency[]::new);
+    
+    private static final CurrencyWrapper[] ALL_CURRENCIES_WRAPPED 
+            = CURRENCIES.stream().map(
+                    currency -> new CurrencyWrapper(currency)
+            ).collect(Collectors.toSet()).toArray(CurrencyWrapper[]::new);
     
     private final CurrencyPair curPair;
     
-    final JComboBox<Currency> fromCurrencies = new JComboBox<>(ALL_CURRENCIES);
+    final JComboBox<CurrencyWrapper> fromCurrencies 
+            = new JComboBox<>(ALL_CURRENCIES_WRAPPED);
     
-    final JComboBox<Currency> toCurrencies = new JComboBox<>(ALL_CURRENCIES);
+    final JComboBox<CurrencyWrapper> toCurrencies 
+            = new JComboBox<>(ALL_CURRENCIES_WRAPPED);
     
     private final JTextField numberField = new JTextField(10);
     
