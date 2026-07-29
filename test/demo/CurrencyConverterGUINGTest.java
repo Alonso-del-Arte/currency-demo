@@ -160,6 +160,22 @@ public class CurrencyConverterGUINGTest implements ItemListener {
     }
     
     @Test
+    public void testToCurrenciesAreSortedAlphabeticallyByISO4217LetterCode() {
+        Currency from = CurrencyChooser.chooseCurrency(ALLOWED_CURRENCIES);
+        Currency to = CurrencyChooser.chooseCurrencyOtherThan(from, 
+                ALLOWED_CURRENCIES);
+        CurrencyPair currencies = new CurrencyPair(from, to);
+        CurrencyConverterGUI instance 
+                = new CurrencyConverterGUI(currencies, MOCK_CONVERTER);
+        JComboBox comboBox = instance.toCurrencies;
+        List<CurrencyWrapper> actual = listItems(comboBox);
+        List<CurrencyWrapper> expected = new ArrayList<>(actual);
+        expected.sort(LETTER_CODE_COMPARATOR);
+        String msg = "From currencies should be sorted by 3-letter codes";
+        assertContainsSameOrder(expected, actual, msg);
+    }
+    
+    @Test
     public void testConstructorRejectsFromPseudocurrency() {
         Currency from = CurrencyChooser.choosePseudocurrency();
         Currency to = CurrencyChooser.chooseCurrency(ALLOWED_CURRENCIES);
