@@ -34,6 +34,7 @@ import java.awt.event.ItemListener;
 import java.math.BigDecimal;
 import java.math.RoundingMode;
 import java.util.ArrayList;
+import java.util.Comparator;
 import java.util.Currency;
 import java.util.List;
 import java.util.Locale;
@@ -68,6 +69,12 @@ public class CurrencyConverterGUINGTest implements ItemListener {
     
     private static final Set<Currency> ALLOWED_CURRENCIES 
             = MOCK_CONVERTER.getProvider().supportedCurrencies();
+    
+    private static final Comparator<CurrencyWrapper> LETTER_CODE_COMPARATOR 
+            = (CurrencyWrapper a, CurrencyWrapper b) 
+                    -> a.getWrappedCurrency().getCurrencyCode()
+                            .compareTo(b.getWrappedCurrency()
+                                    .getCurrencyCode());
     
     private int itemChangeCallCounter = 0;
     
@@ -134,6 +141,22 @@ public class CurrencyConverterGUINGTest implements ItemListener {
             list.add(comboBox.getItemAt(index));
         }
         return list;
+    }
+    
+    @Test
+    public void testFromCurrenciesAreSortedAlphabeticallyByISO4217LetterCode() {
+        Currency from = CurrencyChooser.chooseCurrency(ALLOWED_CURRENCIES);
+        Currency to = CurrencyChooser.chooseCurrencyOtherThan(from, 
+                ALLOWED_CURRENCIES);
+        CurrencyPair currencies = new CurrencyPair(from, to);
+        CurrencyConverterGUI instance 
+                = new CurrencyConverterGUI(currencies, MOCK_CONVERTER);
+        JComboBox comboBox = instance.fromCurrencies;
+        List<CurrencyWrapper> actual = listItems(comboBox);
+        List<CurrencyWrapper> expected = new ArrayList<>(actual);
+        expected.sort(LETTER_CODE_COMPARATOR);
+        String msg = "From currencies should be sorted by 3-letter codes";
+        assertContainsSameOrder(expected, actual, msg);
     }
     
     @Test
