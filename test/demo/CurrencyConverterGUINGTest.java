@@ -24,6 +24,7 @@ import currency.conversions.CurrencyConverter;
 import currency.conversions.ExchangeRateProvider;
 import currency.conversions.MockExchangeRateProvider;
 import currency.conversions.MockExchangeRateProviderNGTest;
+import ui.CurrencyWrapper;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -32,7 +33,9 @@ import java.awt.event.ItemEvent;
 import java.awt.event.ItemListener;
 import java.math.BigDecimal;
 import java.math.RoundingMode;
+import java.util.ArrayList;
 import java.util.Currency;
+import java.util.List;
 import java.util.Locale;
 import java.util.Set;
 
@@ -42,6 +45,7 @@ import javax.swing.JLabel;
 import javax.swing.JTextField;
 import javax.swing.WindowConstants;
 
+import static org.testframe.api.Asserters.assertContainsSameOrder;
 import static org.testframe.api.Asserters.assertThrows;
 
 import static org.testng.Assert.*;
@@ -120,6 +124,16 @@ public class CurrencyConverterGUINGTest implements ItemListener {
         String message = "Expected " + defaultCloseOperationLabel(expected) 
                 + ", got " + defaultCloseOperationLabel(actual);
         assertEquals(actual, expected, message);
+    }
+    
+    private static List<CurrencyWrapper> 
+            listItems(JComboBox<CurrencyWrapper> comboBox) {
+        int initialCapacity = comboBox.getItemCount();
+        List<CurrencyWrapper> list = new ArrayList<>(initialCapacity);
+        for (int index = 0; index < initialCapacity; index++) {
+            list.add(comboBox.getItemAt(index));
+        }
+        return list;
     }
     
     @Test
