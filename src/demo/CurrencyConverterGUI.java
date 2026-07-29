@@ -82,9 +82,7 @@ public class CurrencyConverterGUI extends JFrame implements ActionListener,
     
     static {
         int len = FROM_CURRENCIES.length;
-        for (int i = 0; i < len; i++) {
-            FROM_CURRENCIES[i] = ALL_CURRENCIES_WRAPPED[i];
-        }
+        System.arraycopy(ALL_CURRENCIES_WRAPPED, 0, FROM_CURRENCIES, 0, len);
         Arrays.sort(FROM_CURRENCIES, LETTER_CODE_COMPARATOR);
     }
     
