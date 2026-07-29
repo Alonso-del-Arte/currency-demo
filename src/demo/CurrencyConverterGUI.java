@@ -30,6 +30,8 @@ import java.awt.event.ItemEvent;
 import java.awt.event.ItemListener;
 import java.math.BigDecimal;
 import java.math.RoundingMode;
+import java.util.Arrays;
+import java.util.Comparator;
 import java.util.Currency;
 import java.util.Locale;
 import java.util.Set;
@@ -69,10 +71,27 @@ public class CurrencyConverterGUI extends JFrame implements ActionListener,
                     currency -> new CurrencyWrapper(currency)
             ).collect(Collectors.toSet()).toArray(CurrencyWrapper[]::new);
     
+    private static final Comparator<CurrencyWrapper> LETTER_CODE_COMPARATOR 
+            = (CurrencyWrapper a, CurrencyWrapper b) 
+                    -> a.getWrappedCurrency().getCurrencyCode()
+                            .compareTo(b.getWrappedCurrency()
+                                    .getCurrencyCode());
+    
+    private static final CurrencyWrapper[] FROM_CURRENCIES 
+            = new CurrencyWrapper[ALL_CURRENCIES_WRAPPED.length];
+    
+    static {
+        int len = FROM_CURRENCIES.length;
+        for (int i = 0; i < len; i++) {
+            FROM_CURRENCIES[i] = ALL_CURRENCIES_WRAPPED[i];
+        }
+        Arrays.sort(FROM_CURRENCIES, LETTER_CODE_COMPARATOR);
+    }
+    
     private final CurrencyPair curPair;
     
     final JComboBox<CurrencyWrapper> fromCurrencies 
-            = new JComboBox<>(ALL_CURRENCIES_WRAPPED);
+            = new JComboBox<>(FROM_CURRENCIES);
     
     final JComboBox<CurrencyWrapper> toCurrencies 
             = new JComboBox<>(ALL_CURRENCIES_WRAPPED);
