@@ -63,10 +63,7 @@ public class CurrencyConverterGUI extends JFrame implements ActionListener,
     private static final Set<Currency> CURRENCIES 
             = Currency.getAvailableCurrencies();
     
-    private static final Currency[] ALL_CURRENCIES 
-            = CURRENCIES.toArray(Currency[]::new);
-    
-    private static final CurrencyWrapper[] ALL_CURRENCIES_WRAPPED 
+    private static final CurrencyWrapper[] ALL_CURRENCIES 
             = CURRENCIES.stream().map(
                     currency -> new CurrencyWrapper(currency)
             ).collect(Collectors.toSet()).toArray(CurrencyWrapper[]::new);
@@ -78,16 +75,16 @@ public class CurrencyConverterGUI extends JFrame implements ActionListener,
                                     .getCurrencyCode());
     
     static {
-        Arrays.sort(ALL_CURRENCIES_WRAPPED, LETTER_CODE_COMPARATOR);
+        Arrays.sort(ALL_CURRENCIES, LETTER_CODE_COMPARATOR);
     }
     
     private final CurrencyPair curPair;
     
     final JComboBox<CurrencyWrapper> fromCurrencies 
-            = new JComboBox<>(ALL_CURRENCIES_WRAPPED);
+            = new JComboBox<>(ALL_CURRENCIES);
     
     final JComboBox<CurrencyWrapper> toCurrencies 
-            = new JComboBox<>(ALL_CURRENCIES_WRAPPED);
+            = new JComboBox<>(ALL_CURRENCIES);
     
     private final JTextField numberField = new JTextField(10);
     
