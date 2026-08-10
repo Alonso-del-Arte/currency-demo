@@ -36,6 +36,7 @@ import java.math.RoundingMode;
 import java.util.ArrayList;
 import java.util.Comparator;
 import java.util.Currency;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Locale;
 import java.util.Set;
@@ -98,10 +99,26 @@ public class CurrencyConverterGUINGTest implements ItemListener {
         assertEquals(actual, expected);
     }
     
-//    @Test
+    @Test
     public void testGetPair() {
         System.out.println("getPair");
-        fail("WRITE THIS TEST");
+        Currency origFrom = CurrencyChooser.chooseCurrency(ALLOWED_CURRENCIES);
+        Currency origTo = CurrencyChooser.chooseCurrencyOtherThan(origFrom, 
+                ALLOWED_CURRENCIES);
+        CurrencyPair currencies = new CurrencyPair(origFrom, origTo);
+        CurrencyConverterGUI instance 
+                = new CurrencyConverterGUI(currencies, MOCK_CONVERTER);
+        Set<Currency> set = new HashSet<>(ALLOWED_CURRENCIES);
+        set.remove(origFrom);
+        set.remove(origTo);
+        Currency from = CurrencyChooser.chooseCurrency(set);
+        Currency to = CurrencyChooser.chooseCurrencyOtherThan(from, set);
+        instance.activate();
+        instance.fromCurrencies.setSelectedItem(from);
+        instance.toCurrencies.setSelectedItem(to);
+        CurrencyPair expected = new CurrencyPair(from, to);
+        CurrencyPair actual = instance.getPair();
+        assertEquals(actual, expected);
     }
     
     private static String defaultCloseOperationLabel(int code) {
