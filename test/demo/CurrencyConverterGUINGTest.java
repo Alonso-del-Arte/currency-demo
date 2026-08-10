@@ -87,8 +87,7 @@ public class CurrencyConverterGUINGTest implements ItemListener {
     }
     
     @Test
-    public void testGetPair() {
-        System.out.println("getPair");
+    public void testGetPairInitial() {
         Currency from = CurrencyChooser.chooseCurrency(ALLOWED_CURRENCIES);
         Currency to = CurrencyChooser.chooseCurrencyOtherThan(from, 
                 ALLOWED_CURRENCIES);
@@ -97,6 +96,12 @@ public class CurrencyConverterGUINGTest implements ItemListener {
                 = new CurrencyConverterGUI(expected, MOCK_CONVERTER);
         CurrencyPair actual = instance.getPair();
         assertEquals(actual, expected);
+    }
+    
+//    @Test
+    public void testGetPair() {
+        System.out.println("getPair");
+        fail("WRITE THIS TEST");
     }
     
     private static String defaultCloseOperationLabel(int code) {
