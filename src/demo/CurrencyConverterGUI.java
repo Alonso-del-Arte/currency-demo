@@ -78,7 +78,7 @@ public class CurrencyConverterGUI extends JFrame implements ActionListener,
         Arrays.sort(ALL_CURRENCIES, LETTER_CODE_COMPARATOR);
     }
     
-    private final CurrencyPair curPair;
+    private CurrencyPair curPair;
     
     final JComboBox<CurrencyWrapper> fromCurrencies 
             = new JComboBox<>(ALL_CURRENCIES);
@@ -122,14 +122,22 @@ public class CurrencyConverterGUI extends JFrame implements ActionListener,
         //
     }
     
-    // TODO: Write test that this update when user chooses different pair
     public CurrencyPair getPair() {
         return this.curPair;
     }
 
     @Override
     public void itemStateChanged(ItemEvent ie) {
-        //
+        if (ie.getSource().equals(this.fromCurrencies)) {
+            this.fromCurrency = ((CurrencyWrapper) 
+                    this.fromCurrencies.getSelectedItem()).getWrappedCurrency();
+            this.curPair = new CurrencyPair(this.fromCurrency, this.toCurrency);
+        }
+        if (ie.getSource().equals(this.toCurrencies)) {
+            this.toCurrency = ((CurrencyWrapper) 
+                    this.toCurrencies.getSelectedItem()).getWrappedCurrency();
+            this.curPair = new CurrencyPair(this.fromCurrency, this.toCurrency);
+        }
     }
     
     @Override
@@ -186,6 +194,9 @@ public class CurrencyConverterGUI extends JFrame implements ActionListener,
         this.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
         this.pack();
         this.setVisible(true);
+        // TODO: Address leaky constructor warnings
+        this.fromCurrencies.addItemListener(this);
+        this.toCurrencies.addItemListener(this);
     }
     
     public static void main(String[] args) {
