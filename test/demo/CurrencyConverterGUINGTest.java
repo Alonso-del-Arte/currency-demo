@@ -53,6 +53,8 @@ import static org.testframe.api.Asserters.assertThrows;
 import static org.testng.Assert.*;
 import org.testng.annotations.Test;
 
+import ui.CurrencyWrapper;
+
 /**
  * Tests of the CurrencyConverterGUI class.
  * @author Alonso del Arte
@@ -114,8 +116,8 @@ public class CurrencyConverterGUINGTest implements ItemListener {
         Currency from = CurrencyChooser.chooseCurrency(set);
         Currency to = CurrencyChooser.chooseCurrencyOtherThan(from, set);
         instance.activate();
-        instance.fromCurrencies.setSelectedItem(from);
-        instance.toCurrencies.setSelectedItem(to);
+        instance.fromCurrencies.setSelectedItem(new CurrencyWrapper(from));
+        instance.toCurrencies.setSelectedItem(new CurrencyWrapper(to));
         CurrencyPair expected = new CurrencyPair(from, to);
         CurrencyPair actual = instance.getPair();
         assertEquals(actual, expected);
