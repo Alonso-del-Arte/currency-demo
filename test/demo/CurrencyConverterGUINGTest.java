@@ -49,6 +49,7 @@ import javax.swing.WindowConstants;
 
 import static org.testframe.api.Asserters.assertContainsSameOrder;
 import static org.testframe.api.Asserters.assertThrows;
+import static org.testframe.api.Asserters.assertZero;
 
 import static org.testng.Assert.*;
 import org.testng.annotations.Test;
@@ -78,6 +79,8 @@ public class CurrencyConverterGUINGTest implements ItemListener {
                     -> a.getWrappedCurrency().getCurrencyCode()
                             .compareTo(b.getWrappedCurrency()
                                     .getCurrencyCode());
+    
+    private static int preActivationCallCount = 0;
     
     private int itemChangeCallCounter = 0;
     
@@ -197,6 +200,33 @@ public class CurrencyConverterGUINGTest implements ItemListener {
         expected.sort(LETTER_CODE_COMPARATOR);
         String msg = "From currencies should be sorted by 3-letter codes";
         assertContainsSameOrder(expected, actual, msg);
+    }
+    
+    // TODO: Test not visible before activation
+    
+    @Test
+    public void testNoItemListenersBeforeActivation() {
+        Currency origFrom = CurrencyChooser.chooseCurrency(ALLOWED_CURRENCIES);
+        Currency origTo = CurrencyChooser.chooseCurrencyOtherThan(origFrom, 
+                ALLOWED_CURRENCIES);
+        CurrencyPair currencies = new CurrencyPair(origFrom, origTo);
+        CurrencyConverterGUI instance 
+                = new CurrencyConverterGUI(currencies, MOCK_CONVERTER) {
+                    
+                    @Override
+                    public void itemStateChanged(ItemEvent ie) {
+                        preActivationCallCount++;
+                        super.itemStateChanged(ie);
+                    }
+                
+                };
+        Set<Currency> set = new HashSet<>(ALLOWED_CURRENCIES);
+        Currency from = CurrencyChooser.chooseCurrency(set);
+        Currency to = CurrencyChooser.chooseCurrencyOtherThan(from, set);
+        instance.fromCurrencies.setSelectedItem(new CurrencyWrapper(from));
+        instance.toCurrencies.setSelectedItem(new CurrencyWrapper(to));
+        String msg = "Item event should occur zero times before activation";
+        assertZero(preActivationCallCount, msg);
     }
     
     @Test
