@@ -128,18 +128,17 @@ public class CurrencyConverterGUI extends JFrame implements ActionListener,
 
     @Override
     public void itemStateChanged(ItemEvent ie) {
-        if (ie.getSource().equals(this.fromCurrencies) 
-                && ie.getStateChange() == ItemEvent.SELECTED) {
-            this.fromCurrency = ((CurrencyWrapper) 
-                    this.fromCurrencies.getSelectedItem()).getWrappedCurrency();
+        if (ie.getStateChange() == ItemEvent.SELECTED) {
+            if (ie.getSource().equals(this.fromCurrencies)) {
+                this.fromCurrency = ((CurrencyWrapper) this.fromCurrencies
+                        .getSelectedItem()).getWrappedCurrency();
+            }
+            if (ie.getSource().equals(this.toCurrencies)) {
+                this.toCurrency = ((CurrencyWrapper) this.toCurrencies
+                        .getSelectedItem()).getWrappedCurrency();
+            }
+            this.curPair = new CurrencyPair(this.fromCurrency, this.toCurrency);
         }
-        if (ie.getSource().equals(this.toCurrencies) 
-                && ie.getStateChange() == ItemEvent.SELECTED) {
-            this.toCurrency = ((CurrencyWrapper) 
-                    this.toCurrencies.getSelectedItem()).getWrappedCurrency();
-        }
-        this.curPair = new CurrencyPair(this.fromCurrency, this.toCurrency);
-
     }
     
     @Override
