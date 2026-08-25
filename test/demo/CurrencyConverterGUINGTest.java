@@ -201,6 +201,24 @@ public class CurrencyConverterGUINGTest implements ItemListener {
         assertContainsSameOrder(expected, actual, msg);
     }
     
+    @Test
+    public void testInitialFromToCurrenciesAreInitiallySelectedInDropdowns() {
+        Currency from = CurrencyChooser.chooseCurrency(ALLOWED_CURRENCIES);
+        Currency to = CurrencyChooser.chooseCurrencyOtherThan(from, 
+                ALLOWED_CURRENCIES);
+        CurrencyPair expected = new CurrencyPair(from, to);
+        CurrencyConverterGUI instance = new CurrencyConverterGUI(expected, 
+                MOCK_CONVERTER);
+        Currency selFrom 
+                = ((CurrencyWrapper) instance.fromCurrencies.getSelectedItem())
+                        .getWrappedCurrency();
+        Currency selTo 
+                = ((CurrencyWrapper) instance.toCurrencies.getSelectedItem())
+                        .getWrappedCurrency();
+        CurrencyPair actual = new CurrencyPair(selFrom, selTo);
+        assertEquals(actual, expected);
+    }
+    
     // TODO: Test not visible before activation
     
     @Test
