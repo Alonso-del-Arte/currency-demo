@@ -157,6 +157,10 @@ public class CurrencyConverterGUI extends JFrame implements ActionListener,
 
     public CurrencyConverterGUI(CurrencyPair currencies, 
             CurrencyConverter converter) {
+        if (converter == null) {
+            String excMsg = "Null converter is not valid";
+            throw new NullPointerException(excMsg);
+        }
         this.curPair = currencies;
         Currency from = currencies.getFromCurrency();
         Currency to = currencies.getToCurrency();
