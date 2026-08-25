@@ -158,8 +158,8 @@ public class CurrencyConverterGUI extends JFrame implements ActionListener,
     public CurrencyConverterGUI(CurrencyPair currencies, 
             CurrencyConverter converter) {
         if (currencies == null) {
-            Currency dollars = Currency.getInstance("XCD");
-            currencies = new CurrencyPair(dollars, dollars);
+            String excMsg = "Null currency pair is not valid";
+            throw new NullPointerException(excMsg);
         }
         this.curPair = currencies;
         Currency from = currencies.getFromCurrency();
