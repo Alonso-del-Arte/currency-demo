@@ -247,6 +247,20 @@ public class CurrencyConverterGUINGTest implements ItemListener {
     }
     
     @Test
+    public void testConstructorRejectsNullCurrencies() {
+        String msg = "Null currency pair is not valid";
+        Throwable t = assertThrows(() -> {
+            JFrame instance = new CurrencyConverterGUI(null, MOCK_CONVERTER);
+            System.out.println(msg + ", not created instance " 
+                    + instance.toString());
+        }, NullPointerException.class, msg);
+        String excMsg = t.getMessage();
+        assert excMsg != null : "Exception message should not be null";
+        assert !excMsg.isBlank() : "Exception message should not be blank";
+        System.out.println("\"" + excMsg + "\"");
+    }
+    
+    @Test
     public void testConstructorRejectsFromPseudocurrency() {
         Currency from = CurrencyChooser.choosePseudocurrency();
         Currency to = CurrencyChooser.chooseCurrency(ALLOWED_CURRENCIES);
@@ -257,7 +271,7 @@ public class CurrencyConverterGUINGTest implements ItemListener {
                 + fromCurrCode + ") for conversion to " + to.getDisplayName() 
                 + " (" + toCurrCode + ") should cause an exception";
         Throwable t = assertThrows(() -> {
-            CurrencyConverterGUI instance = new CurrencyConverterGUI(currencies, 
+            JFrame instance = new CurrencyConverterGUI(currencies, 
                     MOCK_CONVERTER);
             System.out.println(msg + ", not created instance " 
                     + instance.toString());
@@ -283,7 +297,7 @@ public class CurrencyConverterGUINGTest implements ItemListener {
                 + fromCurrCode + ") for conversion to " + to.getDisplayName() 
                 + " (" + toCurrCode + ") should cause an exception";
         Throwable t = assertThrows(() -> {
-            CurrencyConverterGUI instance = new CurrencyConverterGUI(currencies, 
+            JFrame instance = new CurrencyConverterGUI(currencies, 
                     MOCK_CONVERTER);
             System.out.println(msg + ", not created instance " 
                     + instance.toString());
