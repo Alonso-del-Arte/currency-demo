@@ -313,6 +313,20 @@ public class CurrencyConverterGUINGTest implements ItemListener {
     }
     
     @Test
+    public void testAuxConstructorRejectsNullConverter() {
+        String msg = "Null converter should cause exception";
+        Throwable t = assertThrows(() -> {
+            JFrame instance = new CurrencyConverterGUI(null);
+            System.out.println(msg + ", not created instance " 
+                    + instance.toString());
+        }, NullPointerException.class, msg);
+        String excMsg = t.getMessage();
+        assert excMsg != null : "Exception message should not be null";
+        assert !excMsg.isBlank() : "Exception message should not be blank";
+        System.out.println("\"" + excMsg + "\"");
+    }
+    
+    @Test
     public void testConstructorRejectsNullConverter() {
         Currency from = CurrencyChooser.chooseCurrency(ALLOWED_CURRENCIES);
         Currency to = CurrencyChooser.chooseCurrencyOtherThan(from, 
