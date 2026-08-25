@@ -24,11 +24,10 @@ import currency.conversions.CurrencyConverter;
 import currency.conversions.ExchangeRateProvider;
 import currency.conversions.MockExchangeRateProvider;
 import currency.conversions.MockExchangeRateProviderNGTest;
-import ui.CurrencyWrapper;
 
+import java.awt.BorderLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.awt.BorderLayout;
 import java.awt.event.ItemEvent;
 import java.awt.event.ItemListener;
 import java.math.BigDecimal;
