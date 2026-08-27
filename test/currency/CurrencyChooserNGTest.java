@@ -546,6 +546,34 @@ public class CurrencyChooserNGTest {
         System.out.println("\"" + excMsg + "\"");
     }
     
+    // TODO: Write test for choose currency from set with no fraction digits
+    
+    // TODO: Write test for choose currency from set with 2 fraction digits
+    
+    // TODO: Write test for choose currency from set with 3 fraction digits
+    
+    // TODO: Write test for choose currency from set with 4 fraction digits
+    
+    @Test
+    public void testChooseCurrencyByPredicateFromSetRejectsEmptySet() {
+        Set<Currency> set = new HashSet<>();
+        Predicate<Currency> predicate = (currency) -> true;
+        String msg = "Trying to choose from empty set should cause exception";
+        Throwable t = assertThrows(() -> {
+            Currency badChoice = CurrencyChooser.chooseCurrency(predicate, 
+                    set);
+            System.out.println(msg + ", not given result " 
+                    + badChoice.getDisplayName() + " (" 
+                    + badChoice.getCurrencyCode() + ")");
+        }, NoSuchElementException.class, msg);
+        String excMsg = t.getMessage();
+        assert excMsg != null : "Exception message should not be null";
+        assert !excMsg.isBlank() : "Exception message should not be blank";
+        System.out.println("\"" + excMsg + "\"");
+    }
+    
+    // TODO: Write test for choose currency from set by predicate
+    
     @Test
     public void testChooseCurrencyOtherThanFromSetRejectsEmptySet() {
         Currency currency = CurrencyChooser.chooseCurrency();
