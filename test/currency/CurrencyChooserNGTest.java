@@ -528,6 +528,25 @@ public class CurrencyChooserNGTest {
     }
     
     @Test
+    public void testChooseCurrencyByFractionDigitsFromSetRejectsEmptySet() {
+        Set<Currency> set = new HashSet<>();
+        int fractionDigits = RANDOM.nextInt(5);
+        String msg = "Trying to choose currency with " + fractionDigits 
+                + " fraction digit(s) from empty set should cause exception";
+        Throwable t = assertThrows(() -> {
+            Currency badChoice = CurrencyChooser.chooseCurrency(fractionDigits, 
+                    set);
+            System.out.println(msg + ", not given result " 
+                    + badChoice.getDisplayName() + " (" 
+                    + badChoice.getCurrencyCode() + ")");
+        }, NoSuchElementException.class, msg);
+        String excMsg = t.getMessage();
+        assert excMsg != null : "Exception message should not be null";
+        assert !excMsg.isBlank() : "Exception message should not be blank";
+        System.out.println("\"" + excMsg + "\"");
+    }
+    
+    @Test
     public void testChooseCurrencyOtherThanFromSetRejectsEmptySet() {
         Currency currency = CurrencyChooser.chooseCurrency();
         Set<Currency> set = new HashSet<>();
