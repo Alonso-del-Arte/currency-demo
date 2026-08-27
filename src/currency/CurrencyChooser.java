@@ -471,6 +471,18 @@ public class CurrencyChooser {
         int index = RANDOM.nextInt(list.size());
         return list.get(index);
     }
+    
+    // TODO: Write tests for this
+    public static Currency chooseCurrency(Predicate<Currency> predicate, 
+            Set<Currency> set) {
+        return Currency.getInstance("XTS");
+    }
+
+    // TODO: Write tests for this
+    public static Currency chooseCurrency(int fractionDigits, 
+            Set<Currency> set) {
+        return Currency.getInstance("XTS");
+    }
 
     /**
      * Chooses a currency suitable for the {@link MoneyAmount} constructor 
