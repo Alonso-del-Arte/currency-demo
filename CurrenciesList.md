@@ -241,7 +241,8 @@ according to their ISO-4217 letter codes.
 ## Pseudocurrencies
 
 The following are recognized in Java's currency information file but all give 
-&minus;1 for default fraction digits.
+&minus;1 for default fraction digits. Also, their 3-letter codes start with 'X', 
+but that's also true of four actual currencies.
 
 ### Metals
 
