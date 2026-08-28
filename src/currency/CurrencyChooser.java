@@ -492,7 +492,9 @@ public class CurrencyChooser {
                 return currency;
             }
         }
-        return Currency.getInstance("XTS");
+        String excMsg = "No currency with " + fractionDigits 
+                + " fraction digits";
+        throw new NoSuchElementException(excMsg);
     }
 
     // TODO: Write tests for this
