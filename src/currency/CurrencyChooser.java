@@ -482,9 +482,7 @@ public class CurrencyChooser {
         }
         List<Currency> list = new ArrayList<>(set);
         Collections.shuffle(list);
-        Iterator<Currency> iterator = list.iterator();
-        while (iterator.hasNext()) {
-            Currency currency = iterator.next();
+        for (Currency currency : list) {
             if (currency.getDefaultFractionDigits() == fractionDigits) {
                 return currency;
             }
