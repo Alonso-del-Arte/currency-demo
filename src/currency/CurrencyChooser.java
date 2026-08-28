@@ -474,6 +474,23 @@ public class CurrencyChooser {
         return list.get(index);
     }
     
+    /**
+     * Chooses a currency with a given number of fraction digits from a set. The 
+     * choice is pseudorandom.
+     * @param fractionDigits The number of fraction digits. For example, 3.
+     * @param set The set of currencies. For example, a set consisting of 
+     * Bahraini dinars (BHD), euros (EUR), Iraqi dinars (IQD), Japanese yen 
+     * (JPY), Omani rials (OMR), Tunisian dinars (TND), United States dollars 
+     * (USD) and Vietnamese dong (VND). The example is small on purpose. For 
+     * best results, the set should be larger than that, but it should not be 
+     * the whole set of currencies recognized by the Java runtime. Must not be 
+     * empty. May include pseudocurrencies, but this is not recommended.
+     * @return A currency from the set with the specified {@code 
+     * fractionDigits}. In the example, this might be OMR.
+     * @throws NoSuchElementException If {@code set} does not contain any 
+     * currency with the specified {@code fractionDigits}. This is certain to 
+     * occur if {@code set} is empty.
+     */
     public static Currency chooseCurrency(int fractionDigits, 
             Set<Currency> set) {
         if (set.isEmpty()) {
