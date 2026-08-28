@@ -483,7 +483,7 @@ public class CurrencyChooser {
         List<Currency> list = new ArrayList<>(set);
         Collections.shuffle(list);
         for (Currency currency : list) {
-            if (currency.getDefaultFractionDigits() == 0) {
+            if (currency.getDefaultFractionDigits() == fractionDigits) {
                 return currency;
             }
         }
