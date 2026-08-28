@@ -594,9 +594,20 @@ public class CurrencyChooserNGTest {
         assertContainsSame(expected, actual, msg);
     }    
     
-    // TODO: Write test for choose currency from set with 3 fraction digits
-    
-    // TODO: Write test for choose currency from set with 4 fraction digits
+    @Test
+    public void testChooseCurrencyFromSetFractionDigits3() {
+        Set<Currency> expected = FRACT_DIGITS_MAP_SUBSETS.get(3);
+        int initialCapacity = expected.size();
+        Set<Currency> actual = new HashSet<>(initialCapacity);
+        int numberOfCalls = 12 * initialCapacity;
+        for (int i = 0; i < numberOfCalls; i++) {
+            Currency currency = CurrencyChooser.chooseCurrency(3, 
+                    CURRENCIES_SUBSET);
+            actual.add(currency);
+        }
+        String msg = "Getting currencies with fraction digits 3 from set";
+        assertContainsSame(expected, actual, msg);
+    }    
     
     @Test
     public void testChooseCurrencyByPredicateFromSetRejectsEmptySet() {
