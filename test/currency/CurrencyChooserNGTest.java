@@ -58,6 +58,11 @@ public class CurrencyChooserNGTest {
     private static final Map<Integer, Set<Currency>> FRACT_DIGITS_MAP 
             = new HashMap<>();
     
+    private static final Map<Integer, Set<Currency>> FRACT_DIGITS_MAP_SUBSETS 
+            = new HashMap<>();
+    
+    private static final Set<Currency> CURRENCIES_SUBSET = new HashSet<>();
+    
     private static final Currency DOLLARS = Currency.getInstance(Locale.US);
     
     private static final int TOTAL_NUMBER_OF_CURRENCIES;
@@ -92,6 +97,19 @@ public class CurrencyChooserNGTest {
                 }
                 digitGroupedSet.add(currency);
             }
+        }
+        int threshold = 5;
+        for (int key : FRACT_DIGITS_MAP.keySet()) {
+            List<Currency> list = new ArrayList(FRACT_DIGITS_MAP.get(key));
+            Collections.shuffle(list);
+            while (list.size() > threshold) {
+                list.remove(0);
+            }
+            Set<Currency> value = new HashSet<>(list);
+            FRACT_DIGITS_MAP_SUBSETS.put(key, value);
+        }
+        for (Set<Currency> set : FRACT_DIGITS_MAP_SUBSETS.values()) {
+            CURRENCIES_SUBSET.addAll(set);
         }
         CURRENCIES.removeAll(PSEUDO_CURRENCIES);
         TOTAL_NUMBER_OF_CURRENCIES = CURRENCIES.size();
@@ -546,7 +564,20 @@ public class CurrencyChooserNGTest {
         System.out.println("\"" + excMsg + "\"");
     }
     
-    // TODO: Write test for choose currency from set with no fraction digits
+    @Test
+    public void testChooseCurrencyFromSetNoFractionDigits() {
+        Set<Currency> expected = FRACT_DIGITS_MAP_SUBSETS.get(0);
+        int initialCapacity = expected.size();
+        Set<Currency> actual = new HashSet<>(initialCapacity);
+        int numberOfCalls = 12 * initialCapacity;
+        for (int i = 0; i < numberOfCalls; i++) {
+            Currency currency = CurrencyChooser.chooseCurrency(0, 
+                    CURRENCIES_SUBSET);
+            actual.add(currency);
+        }
+        String msg = "Getting currencies with no fraction digits from set";
+        assertContainsSame(expected, actual, msg);
+    }
     
     // TODO: Write test for choose currency from set with 2 fraction digits
     
