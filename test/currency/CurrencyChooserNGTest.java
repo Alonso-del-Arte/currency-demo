@@ -565,6 +565,24 @@ public class CurrencyChooserNGTest {
     }
     
     @Test
+    public void testChooseCurrencyByFractionDigitsFromSetRejectsNegative() {
+        int fractionDigits = -RANDOM.nextInt(Short.MAX_VALUE) - 1;
+        String msg = "Trying to choose currency with " + fractionDigits 
+                + " fraction digits should cause exception";
+        Throwable t = assertThrows(() -> {
+            Currency badChoice = CurrencyChooser.chooseCurrency(fractionDigits, 
+                    CURRENCIES);
+            System.out.println(msg + ", not given result " 
+                    + badChoice.getDisplayName() + " (" 
+                    + badChoice.getCurrencyCode() + ")");
+        }, NoSuchElementException.class, msg);
+        String excMsg = t.getMessage();
+        assert excMsg != null : "Exception message should not be null";
+        assert !excMsg.isBlank() : "Exception message should not be blank";
+        System.out.println("\"" + excMsg + "\"");
+    }
+    
+    @Test
     public void testChooseCurrencyFromSetNoFractionDigits() {
         Set<Currency> expected = FRACT_DIGITS_MAP_SUBSETS.get(0);
         int initialCapacity = expected.size();
