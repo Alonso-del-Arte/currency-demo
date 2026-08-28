@@ -17,9 +17,11 @@
 package currency;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.Currency;
 import java.util.HashSet;
 import java.util.HashMap;
+import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 import java.util.NoSuchElementException;
@@ -472,12 +474,20 @@ public class CurrencyChooser {
         return list.get(index);
     }
     
-    // TODO: Write tests for this
     public static Currency chooseCurrency(int fractionDigits, 
             Set<Currency> set) {
         if (set.isEmpty()) {
             String excMsg = "Set of currencies should not be empty";
             throw new NoSuchElementException(excMsg);
+        }
+        List<Currency> list = new ArrayList<>(set);
+        Collections.shuffle(list);
+        Iterator<Currency> iterator = list.iterator();
+        while (iterator.hasNext()) {
+            Currency currency = iterator.next();
+            if (currency.getDefaultFractionDigits() == fractionDigits) {
+                return currency;
+            }
         }
         return Currency.getInstance("XTS");
     }
