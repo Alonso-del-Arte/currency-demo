@@ -628,6 +628,24 @@ public class CurrencyChooserNGTest {
     }    
     
     @Test
+    public void testChooseCurrencyByFractionDigitsFromSetRejectsExcessive() {
+        int fractionDigits = RANDOM.nextInt(Short.MAX_VALUE) + 5;
+        String msg = "Trying to choose currency with " + fractionDigits 
+                + " fraction digits should cause exception";
+        Throwable t = assertThrows(() -> {
+            Currency badChoice = CurrencyChooser.chooseCurrency(fractionDigits, 
+                    CURRENCIES);
+            System.out.println(msg + ", not given result " 
+                    + badChoice.getDisplayName() + " (" 
+                    + badChoice.getCurrencyCode() + ")");
+        }, NoSuchElementException.class, msg);
+        String excMsg = t.getMessage();
+        assert excMsg != null : "Exception message should not be null";
+        assert !excMsg.isBlank() : "Exception message should not be blank";
+        System.out.println("\"" + excMsg + "\"");
+    }
+    
+    @Test
     public void testChooseCurrencyByPredicateFromSetRejectsEmptySet() {
         Set<Currency> set = new HashSet<>();
         Predicate<Currency> predicate = (currency) -> true;
