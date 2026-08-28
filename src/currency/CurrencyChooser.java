@@ -476,6 +476,11 @@ public class CurrencyChooser {
     
     public static Currency chooseCurrency(int fractionDigits, 
             Set<Currency> set) {
+        if (fractionDigits < 0) {
+            String excMsg = "No currency with " + fractionDigits 
+                    + " fraction digits";
+            throw new NoSuchElementException(excMsg);
+        }
         if (set.isEmpty()) {
             String excMsg = "Set of currencies should not be empty";
             throw new NoSuchElementException(excMsg);
