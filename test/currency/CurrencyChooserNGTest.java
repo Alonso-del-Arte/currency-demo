@@ -663,7 +663,25 @@ public class CurrencyChooserNGTest {
         System.out.println("\"" + excMsg + "\"");
     }
     
-    // TODO: Write test for choose currency from set by predicate
+    @Test
+    public void testChooseCurrencyByPredicateFromSet() {
+        int intendedSize = RANDOM.nextInt(20, 40);
+        Set<Currency> set = makeCurrencySet(intendedSize);
+        char firstLetter = (char) RANDOM.nextInt('A', 'Z' + 1);
+        Predicate<Currency> predicate 
+                = (cur) -> cur.getCurrencyCode().charAt(0) == firstLetter;
+        Set<Currency> expected = set.stream().filter(predicate)
+                .collect(Collectors.toSet());
+        Set<Currency> actual = new HashSet<>(expected.size());
+        int numberOfCalls = intendedSize * intendedSize;
+        for (int i = 0; i < numberOfCalls; i++) {
+            Currency currency = CurrencyChooser.chooseCurrency(predicate, set);
+            actual.add(currency);
+        }
+        String msg = "Gathering a set of currencies with ISO-4217 code " 
+                + firstLetter + "xx";
+        assertContainsSame(expected, actual, msg);
+    }
     
     @Test
     public void testChooseCurrencyOtherThanFromSetRejectsEmptySet() {
