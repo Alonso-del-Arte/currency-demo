@@ -675,6 +675,7 @@ public class CurrencyChooserNGTest {
         if (expected.isEmpty()) {
             Set<Currency> firstLetterCurrencies = CURRENCIES.stream()
                     .filter(predicate).collect(Collectors.toSet());
+            set.addAll(firstLetterCurrencies);
             expected.addAll(firstLetterCurrencies);
         }
         Set<Currency> actual = new HashSet<>(expected.size());
