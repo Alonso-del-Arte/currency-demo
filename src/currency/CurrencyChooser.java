@@ -505,12 +505,18 @@ public class CurrencyChooser {
         throw new NoSuchElementException(excMsg);
     }
 
-    // TODO: Write tests for this
     public static Currency chooseCurrency(Predicate<Currency> predicate, 
             Set<Currency> set) {
         if (set.isEmpty()) {
             String excMsg = "Set of currencies should not be empty";
             throw new NoSuchElementException(excMsg);
+        }
+        List<Currency> list = new ArrayList<>(set);
+        Collections.shuffle(list);
+        for (Currency currency : list) {
+            if (predicate.test(currency)) {
+                return currency;
+            }
         }
         return Currency.getInstance("XTS");
     }
