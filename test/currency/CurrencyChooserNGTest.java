@@ -672,6 +672,11 @@ public class CurrencyChooserNGTest {
                 = (cur) -> cur.getCurrencyCode().charAt(0) == firstLetter;
         Set<Currency> expected = set.stream().filter(predicate)
                 .collect(Collectors.toSet());
+        if (expected.isEmpty()) {
+            Set<Currency> firstLetterCurrencies = CURRENCIES.stream()
+                    .filter(predicate).collect(Collectors.toSet());
+            expected.addAll(firstLetterCurrencies);
+        }
         Set<Currency> actual = new HashSet<>(expected.size());
         int numberOfCalls = intendedSize * intendedSize;
         for (int i = 0; i < numberOfCalls; i++) {
