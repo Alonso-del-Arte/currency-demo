@@ -1,4 +1,6 @@
-# List of currencies
+# Lists of currencies
+
+## Currently active currencies
 
 In this first list, the currencies are sorted according to their ISO-4217 letter 
 codes.
