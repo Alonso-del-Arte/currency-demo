@@ -518,7 +518,9 @@ public class CurrencyChooser {
                 return currency;
             }
         }
-        return Currency.getInstance("XTS");
+        String excMsg = "No currency found matching predicate " 
+                + predicate.toString();
+        throw new NoSuchElementException(excMsg);
     }
 
     /**
