@@ -526,10 +526,6 @@ public class CurrencyChooser {
      */
     public static Currency chooseCurrency(Predicate<Currency> predicate, 
             Set<Currency> set) {
-        if (set.isEmpty()) {
-            String excMsg = "Set of currencies should not be empty";
-            throw new NoSuchElementException(excMsg);
-        }
         List<Currency> list = new ArrayList<>(set);
         Collections.shuffle(list);
         for (Currency currency : list) {
