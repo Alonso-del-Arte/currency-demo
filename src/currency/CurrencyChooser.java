@@ -505,6 +505,25 @@ public class CurrencyChooser {
         throw new NoSuchElementException(excMsg);
     }
 
+    /**
+     * Chooses a currency from a set satisfying a given predicate. The choice is 
+     * pseudorandom.
+     * @param predicate A predicate according to which to choose the currency. 
+     * For example, a predicate that says the symbol of a currency in the 
+     * default locale is different from the ISO-4217 3-letter code.
+     * @param set The set of currencies. For example, a set consisting of 
+     * Bahraini dinars (BHD), euros (EUR), Iraqi dinars (IQD), Japanese yen 
+     * (JPY), Omani rials (OMR), Tunisian dinars (TND), United States dollars 
+     * (USD) and Vietnamese dong (VND). The example is small on purpose. For 
+     * best results, the set should be larger than that, but it should not be 
+     * the whole set of currencies recognized by the Java runtime. Must not be 
+     * empty. May include pseudocurrencies, but this is not recommended.
+     * @return A currency from the set matching the predicate. In the example, 
+     * if the current locale is en_US, this function would return one of EUR, 
+     * JPY, USD or VND.
+     * @throws NoSuchElementException If no currency in {@code set} matches 
+     * {@code predicate}, or if {@code set} is empty.
+     */
     public static Currency chooseCurrency(Predicate<Currency> predicate, 
             Set<Currency> set) {
         if (set.isEmpty()) {
