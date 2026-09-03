@@ -660,6 +660,8 @@ public class CurrencyChooserNGTest {
         String excMsg = t.getMessage();
         assert excMsg != null : "Exception message should not be null";
         assert !excMsg.isBlank() : "Exception message should not be blank";
+        assert excMsg.contains(set.toString()) 
+                : "Exception message should quote set";
         System.out.println("\"" + excMsg + "\"");
     }
     
@@ -713,6 +715,8 @@ public class CurrencyChooserNGTest {
             String excMsg = t.getMessage();
             assert excMsg != null : "Exception message should not be null";
             assert !excMsg.isBlank() : "Exception message should not be blank";
+            assert excMsg.contains(set.toString()) 
+                    : "Exception message should quote set";
             System.out.println("\"" + excMsg + "\"");
         }, allottedTime, msg);
     }
