@@ -534,7 +534,7 @@ public class CurrencyChooser {
             }
         }
         String excMsg = "No currency found matching predicate " 
-                + predicate.toString();
+                + predicate.toString() + " in set " + set.toString();
         throw new NoSuchElementException(excMsg);
     }
 
