@@ -690,6 +690,34 @@ public class CurrencyChooserNGTest {
     }
     
     @Test
+    public void testChooseCurrencyFromSetByBadPredicateCausesException() {
+        int intendedSize = RANDOM.nextInt(25, 50);
+        Set<Currency> set = makeCurrencySet(intendedSize);
+        String invalidCurrencyCode = "Invalid ISO-4217 code " 
+                + System.currentTimeMillis();
+        Predicate<Currency> predicate 
+                = (Currency cur) -> cur.getCurrencyCode()
+                        .equals(invalidCurrencyCode);
+        Duration allottedTime = Duration.of(10, ChronoUnit.SECONDS);
+        String msg = "Bad predicate for invalid ISO-4217 code \"" 
+                + invalidCurrencyCode + "\" should not take more than " 
+                + allottedTime.toString() + " to cause exception";
+        assertTimeout(() -> {
+            Throwable t = assertThrows(() -> {
+                Currency currency 
+                        = CurrencyChooser.chooseCurrency(predicate, set);
+                System.out.println("Search for \"" + invalidCurrencyCode 
+                        + "\" somehow gave " + currency.getDisplayName() + " (" 
+                        + currency.getCurrencyCode() + ")");
+            }, NoSuchElementException.class);
+            String excMsg = t.getMessage();
+            assert excMsg != null : "Exception message should not be null";
+            assert !excMsg.isBlank() : "Exception message should not be blank";
+            System.out.println("\"" + excMsg + "\"");
+        }, allottedTime, msg);
+    }
+    
+    @Test
     public void testChooseCurrencyOtherThanFromSetRejectsEmptySet() {
         Currency currency = CurrencyChooser.chooseCurrency();
         Set<Currency> set = new HashSet<>();
