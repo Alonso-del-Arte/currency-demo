@@ -80,8 +80,9 @@ public class CurrencyConverterGUI extends JFrame implements ActionListener,
     
     private CurrencyPair curPair;
     
-    final JComboBox<CurrencyWrapper> fromCurrencies 
-            = new JComboBox<>(ALL_CURRENCIES);
+    private final CurrencyConverter curConv;
+    
+    final JComboBox<CurrencyWrapper> fromCurrencies;
     
     final JComboBox<CurrencyWrapper> toCurrencies 
             = new JComboBox<>(ALL_CURRENCIES);
@@ -162,6 +163,7 @@ public class CurrencyConverterGUI extends JFrame implements ActionListener,
             throw new NullPointerException(excMsg);
         }
         this.curPair = currencies;
+        this.curConv = converter;
         Currency from = currencies.getFromCurrency();
         Currency to = currencies.getToCurrency();
         boolean eitherIsPseudo = from.getDefaultFractionDigits() < 0 
@@ -180,6 +182,11 @@ public class CurrencyConverterGUI extends JFrame implements ActionListener,
                 + this.fromCurrency.getCurrencyCode() + " to " 
                 + this.toCurrency.getCurrencyCode();
         this.setTitle(title);
+        CurrencyWrapper[] items = this.curConv.getProvider()
+                .supportedCurrencies().stream().map(
+                        currency -> new CurrencyWrapper(currency)
+                ).collect(Collectors.toSet()).toArray(CurrencyWrapper[]::new);
+        this.fromCurrencies = new JComboBox<>(items);
         JPanel inputPanel = new JPanel();
         inputPanel.add(new JLabel("From: "));
         inputPanel.add(this.numberField);
