@@ -33,12 +33,14 @@ import java.awt.event.ItemListener;
 import java.math.BigDecimal;
 import java.math.RoundingMode;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Comparator;
 import java.util.Currency;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Locale;
 import java.util.Set;
+import java.util.stream.Collectors;
 
 import javax.swing.JComboBox;
 import javax.swing.JFrame;
@@ -46,6 +48,7 @@ import javax.swing.JLabel;
 import javax.swing.JTextField;
 import javax.swing.WindowConstants;
 
+import static org.testframe.api.Asserters.assertContainsSame;
 import static org.testframe.api.Asserters.assertContainsSameOrder;
 import static org.testframe.api.Asserters.assertThrows;
 import static org.testframe.api.Asserters.assertZero;
@@ -199,6 +202,22 @@ public class CurrencyConverterGUINGTest implements ItemListener {
         expected.sort(LETTER_CODE_COMPARATOR);
         String msg = "From currencies should be sorted by 3-letter codes";
         assertContainsSameOrder(expected, actual, msg);
+    }
+    
+    @Test
+    public void testFromCurrenciesAreLimitedByRateProvider() {
+        ConversionRateQuote[] rateQuotes 
+                = MockExchangeRateProviderNGTest.inventQuotes();
+        ExchangeRateProvider rateProvider 
+                = new MockExchangeRateProvider(rateQuotes);
+        CurrencyConverter converter = new CurrencyConverter(rateProvider);
+        CurrencyConverterGUI instance = new CurrencyConverterGUI(converter);
+        Set<CurrencyWrapper> expected = rateProvider.supportedCurrencies()
+                .stream().map(currency -> new CurrencyWrapper(currency))
+                .collect(Collectors.toSet());
+        Set<CurrencyWrapper> actual 
+                = new HashSet<>(listItems(instance.fromCurrencies));
+        assertContainsSame(expected, actual);
     }
     
     @Test
