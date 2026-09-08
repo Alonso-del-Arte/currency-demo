@@ -186,6 +186,7 @@ public class CurrencyConverterGUI extends JFrame implements ActionListener,
                 .supportedCurrencies().stream().map(
                         currency -> new CurrencyWrapper(currency)
                 ).collect(Collectors.toSet()).toArray(CurrencyWrapper[]::new);
+        Arrays.sort(items, LETTER_CODE_COMPARATOR);
         this.fromCurrencies = new JComboBox<>(items);
         JPanel inputPanel = new JPanel();
         inputPanel.add(new JLabel("From: "));
