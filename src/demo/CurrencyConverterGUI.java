@@ -34,7 +34,6 @@ import java.util.Arrays;
 import java.util.Comparator;
 import java.util.Currency;
 import java.util.Locale;
-import java.util.Set;
 import java.util.stream.Collectors;
 
 import javax.swing.JComboBox;
@@ -60,23 +59,11 @@ public class CurrencyConverterGUI extends JFrame implements ActionListener,
     private static final CurrencyPair DEFAULT_PAIR = new CurrencyPair(DOLLARS, 
             EUROS);
     
-    private static final Set<Currency> CURRENCIES 
-            = Currency.getAvailableCurrencies();
-    
-    private static final CurrencyWrapper[] ALL_CURRENCIES 
-            = CURRENCIES.stream().map(
-                    currency -> new CurrencyWrapper(currency)
-            ).collect(Collectors.toSet()).toArray(CurrencyWrapper[]::new);
-    
     private static final Comparator<CurrencyWrapper> LETTER_CODE_COMPARATOR 
             = (CurrencyWrapper a, CurrencyWrapper b) 
                     -> a.getWrappedCurrency().getCurrencyCode()
                             .compareTo(b.getWrappedCurrency()
                                     .getCurrencyCode());
-    
-    static {
-        Arrays.sort(ALL_CURRENCIES, LETTER_CODE_COMPARATOR);
-    }
     
     private CurrencyPair curPair;
     
