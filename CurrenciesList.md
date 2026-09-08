@@ -205,8 +205,9 @@ later by BYN
 ### Euro-replaced currencies
 
 These currencies were replaced by the euro (EUR). Several of the eurozone 
-nations began the transition in 1999 and completed it in 2002. These are listed 
-according to their ISO-4217 letter codes.
+nations began the transition in 1999 and completed it in 2002, others made the 
+transition later on. Here they are listed alphabetically by their ISO-4217 
+3-letter codes rather than chronologically by date of replacement.
 
 * ADP &mdash; 020 &mdash; Andorran Peseta, replaced in 2002
 * ATS &mdash; 040 &mdash; Austrian Schilling, replaced in 2002
