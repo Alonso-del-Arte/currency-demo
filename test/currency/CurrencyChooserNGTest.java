@@ -492,7 +492,7 @@ public class CurrencyChooserNGTest {
     
     @Test
     public void testChooseCurrencyByPredicate() {
-        int remainder = ((int) System.currentTimeMillis()) % 16;
+        int remainder = Math.abs(((int) System.currentTimeMillis()) % 16);
         Predicate<Currency> predicate 
                 = (currency) -> currency.getNumericCode() % 16 == remainder;
         Set<Currency> filtered = CURRENCIES.stream().filter(predicate)
