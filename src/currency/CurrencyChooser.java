@@ -424,13 +424,16 @@ public class CurrencyChooser {
     }
     
     /**
-     * Chooses a currency according to a specified predicate.
+     * Chooses a currency according to a specified predicate. The choice is 
+     * pseudorandom and could be a recently given previous currency.
      * @param predicate The predicate. For example, currency's display name 
      * should contain the word "dollar".
      * @return A currency satisfying the predicate. For the example predicate, 
      * for example, the Surinamese dollar (SRD).
      * @throws NoSuchElementException If no match for the predicate is found 
-     * after a reasonable number of attempts.
+     * after a reasonable number of attempts. The exception message indicates 
+     * how many attempts were made and how large the pool of candidate 
+     * currencies was.
      */
     public static Currency chooseCurrency(Predicate<Currency> predicate) {
         boolean found = false;
