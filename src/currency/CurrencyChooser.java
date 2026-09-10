@@ -143,11 +143,11 @@ public class CurrencyChooser {
     
     /**
      * Tells whether or not a currency is suitable for the {@link MoneyAmount} 
-     * constructor and {@link CurrencyConverter}. If a currency's identified as 
-     * historical in the Java runtime currency information file, or if it's a 
-     * precious metal (e.g., gold, silver, platinum), or if it's for testing 
-     * purposes only, it will not be considered suitable. There are a few other 
-     * exclusions.
+     * constructor and {@link currency.conversions.CurrencyConverter 
+     * CurrencyConverter}. If a currency's identified as historical in the Java 
+     * runtime currency information file, or if it's a precious metal (e.g., 
+     * gold, silver, platinum), or if it's for testing purposes only, it will 
+     * not be considered suitable. There are a few other exclusions.
      * @param currency The currency to check. Two examples: the old Venezuelan 
      * bol&iacute;var (VEB), which was valid from 1871 to 2008; and the modern 
      * Venezuelan bol&iacute;var (VES), technically valid since 2018 &mdash; for 
