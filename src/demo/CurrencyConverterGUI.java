@@ -138,6 +138,13 @@ public class CurrencyConverterGUI extends JFrame implements ActionListener,
         this.toCurrencies.addItemListener(this);
     }
     
+    // TODO: Write tests for this
+    public CurrencyConverterGUI() {
+        this(DEFAULT_PAIR.flip(), new CurrencyConverter(
+                new currency.conversions.mannys.FreeForExRateProvider()
+        ));
+    }
+    
     public CurrencyConverterGUI(CurrencyConverter converter) {
         this(DEFAULT_PAIR, converter);
     }
