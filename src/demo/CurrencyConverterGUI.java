@@ -150,7 +150,7 @@ public class CurrencyConverterGUI extends JFrame implements ActionListener,
     }
     
     public CurrencyConverterGUI(CurrencyConverter converter) {
-        this(DEFAULT_PAIR.flip(), converter);
+        this(DEFAULT_PAIR, converter);
     }
 
     public CurrencyConverterGUI(CurrencyPair currencies, 
