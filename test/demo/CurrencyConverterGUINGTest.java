@@ -94,6 +94,15 @@ public class CurrencyConverterGUINGTest implements ItemListener {
     }
     
     @Test
+    public void testConstantDefaultPair() {
+        Currency from = Currency.getInstance(Locale.US);
+        Currency to = Currency.getInstance("EUR");
+        CurrencyPair expected = new CurrencyPair(from, to);
+        CurrencyPair actual = CurrencyConverterGUI.DEFAULT_PAIR;
+        assertEquals(actual, expected);
+    }
+    
+    @Test
     public void testGetPairInitial() {
         Currency from = CurrencyChooser.chooseCurrency(ALLOWED_CURRENCIES);
         Currency to = CurrencyChooser.chooseCurrencyOtherThan(from, 
