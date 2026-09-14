@@ -56,7 +56,11 @@ public class CurrencyConverterGUI extends JFrame implements ActionListener,
     
     private static final Currency EUROS = Currency.getInstance("EUR");
     
-    private static final CurrencyPair DEFAULT_PAIR = new CurrencyPair(DOLLARS, 
+    /**
+     * The default pair for currencies to convert. From United States dollars 
+     * (USD) to euros (EUR).
+     */
+    public static final CurrencyPair DEFAULT_PAIR = new CurrencyPair(DOLLARS, 
             EUROS);
     
     private static final Comparator<CurrencyWrapper> LETTER_CODE_COMPARATOR 
