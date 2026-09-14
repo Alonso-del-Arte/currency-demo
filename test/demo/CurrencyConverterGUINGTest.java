@@ -242,6 +242,38 @@ public class CurrencyConverterGUINGTest implements ItemListener {
     }
     
     @Test
+    public void testFromCurrenciesAreLimitedByRateProviderAuxConstructor() {
+        ConversionRateQuote[] rateQuotes 
+                = MockExchangeRateProviderNGTest.inventQuotes();
+        ExchangeRateProvider rateProvider 
+                = new MockExchangeRateProvider(rateQuotes);
+        CurrencyConverter converter = new CurrencyConverter(rateProvider);
+        CurrencyConverterGUI instance = new CurrencyConverterGUI(converter);
+        Set<CurrencyWrapper> expected = rateProvider.supportedCurrencies()
+                .stream().map(currency -> new CurrencyWrapper(currency))
+                .collect(Collectors.toSet());
+        Set<CurrencyWrapper> actual 
+                = new HashSet<>(listItems(instance.fromCurrencies));
+        assertContainsSame(expected, actual);
+    }
+    
+    @Test
+    public void testToCurrenciesAreLimitedByRateProviderAuxConstructor() {
+        ConversionRateQuote[] rateQuotes 
+                = MockExchangeRateProviderNGTest.inventQuotes();
+        ExchangeRateProvider rateProvider 
+                = new MockExchangeRateProvider(rateQuotes);
+        CurrencyConverter converter = new CurrencyConverter(rateProvider);
+        CurrencyConverterGUI instance = new CurrencyConverterGUI(converter);
+        Set<CurrencyWrapper> expected = rateProvider.supportedCurrencies()
+                .stream().map(currency -> new CurrencyWrapper(currency))
+                .collect(Collectors.toSet());
+        Set<CurrencyWrapper> actual 
+                = new HashSet<>(listItems(instance.toCurrencies));
+        assertContainsSame(expected, actual);
+    }
+    
+    @Test
     public void testInitialFromToCurrenciesAreInitiallySelectedInDropdowns() {
         Currency from = CurrencyChooser.chooseCurrency(ALLOWED_CURRENCIES);
         Currency to = CurrencyChooser.chooseCurrencyOtherThan(from, 
