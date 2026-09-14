@@ -146,9 +146,7 @@ public class CurrencyConverterGUI extends JFrame implements ActionListener,
     }
     
     public CurrencyConverterGUI(CurrencyConverter converter) {
-        this(DEFAULT_PAIR.flip(), new CurrencyConverter(
-                new currency.conversions.mannys.FreeForExRateProvider()
-        ));
+        this(DEFAULT_PAIR.flip(), converter);
     }
 
     public CurrencyConverterGUI(CurrencyPair currencies, 
