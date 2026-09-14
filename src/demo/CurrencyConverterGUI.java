@@ -61,7 +61,7 @@ public class CurrencyConverterGUI extends JFrame implements ActionListener,
      * (USD) to euros (EUR).
      */
     public static final CurrencyPair DEFAULT_PAIR = new CurrencyPair(DOLLARS, 
-            EUROS);
+            EUROS).flip();
     
     private static final Comparator<CurrencyWrapper> LETTER_CODE_COMPARATOR 
             = (CurrencyWrapper a, CurrencyWrapper b) 
