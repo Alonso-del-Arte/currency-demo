@@ -319,6 +319,19 @@ public class CurrencyConverterGUINGTest implements ItemListener {
     }
     
     @Test
+    public void testAuxConstructorSetsDefaultPair() {
+        ConversionRateQuote[] rateQuotes 
+                = MockExchangeRateProviderNGTest.inventQuotes();
+        ExchangeRateProvider rateProvider 
+                = new MockExchangeRateProvider(rateQuotes);
+        CurrencyConverter converter = new CurrencyConverter(rateProvider);
+        CurrencyConverterGUI instance = new CurrencyConverterGUI(converter);
+        CurrencyPair expected = CurrencyConverterGUI.DEFAULT_PAIR;
+        CurrencyPair actual = instance.getPair();
+        assertEquals(actual, expected);
+    }
+    
+    @Test
     public void testConstructorRejectsNullCurrencies() {
         String msg = "Null currency pair is not valid";
         Throwable t = assertThrows(() -> {
