@@ -207,10 +207,13 @@ public class CurrencyConverterGUINGTest implements ItemListener {
     public void testFromCurrenciesAreLimitedByRateProvider() {
         ConversionRateQuote[] rateQuotes 
                 = MockExchangeRateProviderNGTest.inventQuotes();
+        ConversionRateQuote firstQuote = rateQuotes[0];
+        CurrencyPair currencies = firstQuote.getCurrencies();
         ExchangeRateProvider rateProvider 
                 = new MockExchangeRateProvider(rateQuotes);
         CurrencyConverter converter = new CurrencyConverter(rateProvider);
-        CurrencyConverterGUI instance = new CurrencyConverterGUI(converter);
+        CurrencyConverterGUI instance = new CurrencyConverterGUI(currencies, 
+                converter);
         Set<CurrencyWrapper> expected = rateProvider.supportedCurrencies()
                 .stream().map(currency -> new CurrencyWrapper(currency))
                 .collect(Collectors.toSet());
@@ -223,10 +226,13 @@ public class CurrencyConverterGUINGTest implements ItemListener {
     public void testToCurrenciesAreLimitedByRateProvider() {
         ConversionRateQuote[] rateQuotes 
                 = MockExchangeRateProviderNGTest.inventQuotes();
+        ConversionRateQuote firstQuote = rateQuotes[0];
+        CurrencyPair currencies = firstQuote.getCurrencies();
         ExchangeRateProvider rateProvider 
                 = new MockExchangeRateProvider(rateQuotes);
         CurrencyConverter converter = new CurrencyConverter(rateProvider);
-        CurrencyConverterGUI instance = new CurrencyConverterGUI(converter);
+        CurrencyConverterGUI instance = new CurrencyConverterGUI(currencies, 
+                converter);
         Set<CurrencyWrapper> expected = rateProvider.supportedCurrencies()
                 .stream().map(currency -> new CurrencyWrapper(currency))
                 .collect(Collectors.toSet());
