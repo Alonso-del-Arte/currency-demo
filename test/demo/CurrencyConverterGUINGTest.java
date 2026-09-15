@@ -328,6 +328,14 @@ public class CurrencyConverterGUINGTest implements ItemListener {
     }
     
     @Test
+    public void testZeroParamConstructorSetsDefaultPair() {
+        CurrencyConverterGUI instance = new CurrencyConverterGUI();
+        CurrencyPair expected = CurrencyConverterGUI.DEFAULT_PAIR;
+        CurrencyPair actual = instance.getPair();
+        assertEquals(actual, expected);
+    }
+    
+    @Test
     public void testAuxConstructorSetsDefaultPair() {
         ConversionRateQuote[] rateQuotes 
                 = MockExchangeRateProviderNGTest.inventQuotes();
