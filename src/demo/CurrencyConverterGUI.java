@@ -144,7 +144,7 @@ public class CurrencyConverterGUI extends JFrame implements ActionListener,
     
     // TODO: Write tests for this
     public CurrencyConverterGUI() {
-        this(DEFAULT_PAIR.flip(), new CurrencyConverter(
+        this(DEFAULT_PAIR, new CurrencyConverter(
                 new currency.conversions.mannys.FreeForExRateProvider()
         ));
     }
