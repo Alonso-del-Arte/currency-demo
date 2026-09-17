@@ -74,6 +74,8 @@ public class CurrencyConverterGUI extends JFrame implements ActionListener,
     
     private final CurrencyConverter curConv;
     
+    private final ExchangeRateProvider rateProvider;
+    
     final JComboBox<CurrencyWrapper> fromCurrencies;
     
     final JComboBox<CurrencyWrapper> toCurrencies;
@@ -120,7 +122,7 @@ public class CurrencyConverterGUI extends JFrame implements ActionListener,
     
     // TODO: Write tests for this
     public ExchangeRateProvider getProvider() {
-        return null;
+        return this.rateProvider;
     }
 
     @Override
@@ -167,6 +169,7 @@ public class CurrencyConverterGUI extends JFrame implements ActionListener,
         }
         this.curPair = currencies;
         this.curConv = converter;
+        this.rateProvider = this.curConv.getProvider();
         Currency from = currencies.getFromCurrency();
         Currency to = currencies.getToCurrency();
         boolean eitherIsPseudo = from.getDefaultFractionDigits() < 0 
