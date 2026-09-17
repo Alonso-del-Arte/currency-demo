@@ -22,6 +22,7 @@ import currency.MoneyAmount;
 import currency.conversions.ConversionRateQuote;
 import currency.conversions.CurrencyConverter;
 import currency.conversions.ExchangeRateProvider;
+import currency.conversions.HardCodedRateProvider;
 import currency.conversions.MockExchangeRateProvider;
 import currency.conversions.MockExchangeRateProviderNGTest;
 
@@ -134,6 +135,17 @@ public class CurrencyConverterGUINGTest implements ItemListener {
         CurrencyPair expected = new CurrencyPair(from, to);
         CurrencyPair actual = instance.getPair();
         assertEquals(actual, expected);
+    }
+    
+    @Test
+    public void testGetProviderZeroParamConstructor() {
+        CurrencyConverterGUI instance = new CurrencyConverterGUI();
+        ExchangeRateProvider provider = instance.getProvider();
+        Class expected = HardCodedRateProvider.class;
+        Class actual = provider.getClass();
+        String message = "Rate provider should be an instance of " 
+                + expected.getName();
+        assertEquals(actual, expected, message);
     }
     
     private static String defaultCloseOperationLabel(int code) {
