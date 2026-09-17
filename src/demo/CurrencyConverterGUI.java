@@ -20,6 +20,7 @@ import currency.CurrencyPair;
 import currency.MoneyAmount;
 import currency.conversions.ConversionRateQuote;
 import currency.conversions.CurrencyConverter;
+import currency.conversions.ExchangeRateProvider;
 import currency.conversions.HardCodedRateProvider;
 import currency.conversions.RateQuoteCache;
 
@@ -115,6 +116,11 @@ public class CurrencyConverterGUI extends JFrame implements ActionListener,
     
     public CurrencyPair getPair() {
         return this.curPair;
+    }
+    
+    // TODO: Write tests for this
+    public ExchangeRateProvider getProvider() {
+        return null;
     }
 
     @Override
