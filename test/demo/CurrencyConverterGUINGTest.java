@@ -148,6 +148,18 @@ public class CurrencyConverterGUINGTest implements ItemListener {
         assertEquals(actual, expected, message);
     }
     
+    @Test
+    public void testGetProviderAuxConstructor() {
+        ConversionRateQuote[] rateQuotes 
+                = MockExchangeRateProviderNGTest.inventQuotes();
+        ExchangeRateProvider expected 
+                = new MockExchangeRateProvider(rateQuotes);
+        CurrencyConverter converter = new CurrencyConverter(expected);
+        CurrencyConverterGUI instance = new CurrencyConverterGUI(converter);
+        ExchangeRateProvider actual = instance.getProvider();
+        assertEquals(actual, expected);
+    }
+    
     private static String defaultCloseOperationLabel(int code) {
         return switch (code) {
             case WindowConstants.DO_NOTHING_ON_CLOSE -> "DO NOTHING ON CLOSE";
