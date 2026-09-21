@@ -150,9 +150,8 @@ public class CurrencyConverterGUI extends JFrame implements ActionListener,
         this.toCurrencies.addItemListener(this);
     }
     
-    // TODO: Write tests for this
     public CurrencyConverterGUI() {
-        this(DEFAULT_PAIR, new CurrencyConverter(new HardCodedRateProvider()));
+        this(new CurrencyConverter(new HardCodedRateProvider()));
     }
     
     public CurrencyConverterGUI(CurrencyConverter converter) {
