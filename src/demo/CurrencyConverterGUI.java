@@ -120,7 +120,6 @@ public class CurrencyConverterGUI extends JFrame implements ActionListener,
         return this.curPair;
     }
     
-    // TODO: Write tests for this
     public ExchangeRateProvider getProvider() {
         return this.rateProvider;
     }
@@ -165,7 +164,7 @@ public class CurrencyConverterGUI extends JFrame implements ActionListener,
             throw new NullPointerException(excMsg);
         }
         this.curPair = currencies;
-        this.curConv = new CurrencyConverter(new HardCodedRateProvider());
+        this.curConv = converter;
         this.rateProvider = this.curConv.getProvider();
         Currency from = currencies.getFromCurrency();
         Currency to = currencies.getToCurrency();
