@@ -165,7 +165,7 @@ public class CurrencyConverterGUI extends JFrame implements ActionListener,
             throw new NullPointerException(excMsg);
         }
         this.curPair = currencies;
-        this.curConv = converter;
+        this.curConv = new CurrencyConverter(new HardCodedRateProvider());
         this.rateProvider = this.curConv.getProvider();
         Currency from = currencies.getFromCurrency();
         Currency to = currencies.getToCurrency();
