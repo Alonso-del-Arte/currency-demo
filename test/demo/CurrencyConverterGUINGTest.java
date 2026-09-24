@@ -342,6 +342,14 @@ public class CurrencyConverterGUINGTest implements ItemListener {
     // TODO: Test not visible before activation
     
     @Test
+    public void testVisibleAfterActivationZeroParamConstructor() {
+        CurrencyConverterGUI instance = new CurrencyConverterGUI();
+        instance.activate();
+        boolean visible = instance.isVisible();
+        assert visible : "Converter should be visible after activation";
+    }
+    
+    @Test
     public void testVisibleAfterActivationAuxConstructor() {
         CurrencyConverterGUI instance 
                 = new CurrencyConverterGUI(MOCK_CONVERTER);
