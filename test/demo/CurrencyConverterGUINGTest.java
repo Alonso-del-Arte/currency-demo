@@ -153,6 +153,20 @@ public class CurrencyConverterGUINGTest implements ItemListener {
     }
     
     @Test
+    public void testGetPairZeroParamConstructorInstance() {
+        CurrencyConverterGUI instance = new CurrencyConverterGUI();
+        Set<Currency> set = new HardCodedRateProvider().supportedCurrencies();
+        Currency from = CurrencyChooser.chooseCurrency(set);
+        Currency to = CurrencyChooser.chooseCurrencyOtherThan(from, set);
+        instance.activate();
+        instance.fromCurrencies.setSelectedItem(new CurrencyWrapper(from));
+        instance.toCurrencies.setSelectedItem(new CurrencyWrapper(to));
+        CurrencyPair expected = new CurrencyPair(from, to);
+        CurrencyPair actual = instance.getPair();
+        assertEquals(actual, expected);
+    }
+    
+    @Test
     public void testGetProviderZeroParamConstructor() {
         CurrencyConverterGUI instance = new CurrencyConverterGUI();
         ExchangeRateProvider provider = instance.getProvider();
