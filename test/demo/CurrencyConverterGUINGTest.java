@@ -340,6 +340,13 @@ public class CurrencyConverterGUINGTest implements ItemListener {
     }
     
     @Test
+    public void testNotVisibleBeforeActivationAuxConstructor() {
+        JFrame instance = new CurrencyConverterGUI(MOCK_CONVERTER);
+        boolean visible = instance.isVisible();
+        assert !visible : "Converter shouldn't be visible before activation";
+    }
+        
+    @Test
     public void testNotVisibleBeforeActivation() {
         Currency from = CurrencyChooser.chooseCurrency(ALLOWED_CURRENCIES);
         Currency to = CurrencyChooser.chooseCurrencyOtherThan(from, 
