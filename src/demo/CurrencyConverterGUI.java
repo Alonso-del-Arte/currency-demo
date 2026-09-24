@@ -213,7 +213,7 @@ public class CurrencyConverterGUI extends JFrame implements ActionListener,
         this.add(readoutsPanel, BorderLayout.PAGE_END);
         this.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
         this.pack();
-//        this.setVisible(true);
+        this.setVisible(true);
     }
     
     public static void main(String[] args) {
