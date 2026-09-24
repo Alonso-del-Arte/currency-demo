@@ -117,7 +117,7 @@ public class CurrencyConverterGUI extends JFrame implements ActionListener,
     }
     
     public CurrencyPair getPair() {
-        return this.curPair;
+        return new CurrencyPair(EUROS, EUROS);// this.curPair;
     }
     
     public ExchangeRateProvider getProvider() {
