@@ -176,9 +176,9 @@ Note that Bitcoin has the symbol &#x20BF (and the 3-letter code XBT has been
 unofficially used without approval from ISO). That symbol should not be confused 
 with the symbol for the Thai bhat, &#xE3F;.
 
-Unicode has provisionally accepted symbols for the United Arab Emirates dirham 
-(AED), the Maldivian rufiyaa (MVR) and the Omani rial (OMR). Those might be 
-added in the version of Unicode coming out late 2026.
+Unicode has now officially accepted symbols for the United Arab Emirates dirham 
+(AED), the Maldivian rufiyaa (MVR) and the Omani rial (OMR). Those were added in 
+Unicode Version 18.0, which came out in September 2026.
 
 ## Notes about divisions of a unit of currency
 
