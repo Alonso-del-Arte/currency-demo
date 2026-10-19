@@ -178,7 +178,9 @@ with the symbol for the Thai bhat, &#xE3F;.
 
 Unicode has now officially accepted symbols for the United Arab Emirates dirham 
 (AED), the Maldivian rufiyaa (MVR) and the Omani rial (OMR). Those were added in 
-Unicode Version 18.0, which came out in September 2026.
+Unicode Version 18.0, which came out in September 2026. These are '&#x20C3;', 
+'&#x20C2;' and '&#x20C4;', respectively. Font vendors have not caught up yet, so 
+you'll probably see boxes or question marks instead of the symbols. 
 
 ## Notes about divisions of a unit of currency
 
