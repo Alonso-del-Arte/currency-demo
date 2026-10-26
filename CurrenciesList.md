@@ -3,7 +3,8 @@
 ## Currently active currencies
 
 In this first list, the currencies are sorted according to their ISO-4217 letter 
-codes.
+codes. The currency names come from the Java currency information file for the 
+locale en-US, HotSpot installation of Java 21.
 
 * AED &mdash; 784 &mdash; United Arab Emirates Dirham divides into cents
 * AFN &mdash; 971 &mdash; Afghan Afghani divides into cents
