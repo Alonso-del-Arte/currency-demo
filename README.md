@@ -184,7 +184,7 @@ you'll probably see boxes or question marks instead of the symbols.
 
 For that matter, I have yet to see '&#x20C0;', the symbol for the Kyrgyrzstani 
 som, anywhere outside of the Unicode website, even though it was added in 
-Unicode Version 14.0.
+Unicode Version 14.0 (2021).
 
 ## Notes about divisions of a unit of currency
 
