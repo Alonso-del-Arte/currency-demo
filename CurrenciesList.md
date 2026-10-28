@@ -217,12 +217,12 @@ transition later on. Here they are listed alphabetically by their ISO-4217
 * CYP &mdash; 196 &mdash; Cypriot Pound, replaced in 2008
 * DEM &mdash; 276 &mdash; German Mark, replaced in 2002
 * EEK &mdash; 233 &mdash; Estonian Kroon, replaced in 2011
-* ESP &mdash; 724 &mdash; Spanish Peseta, replaced in 2002
+* ESP &mdash; 724 &mdash; Spanish Peseta, &#x20A7;, replaced in 2002
 * FIM &mdash; 246 &mdash; Finnish Markka, replaced in 2002
-* FRF &mdash; 250 &mdash; French Franc, replaced in 2002
+* FRF &mdash; 250 &mdash; French Franc, &#x20A3;, replaced in 2002
 * GRD &mdash; 300 &mdash; Greek Drachma, replaced in 2002
 * IEP &mdash; 372 &mdash; Irish Pound, replaced in 2002
-* ITL &mdash; 380 &mdash; Italian Lira, replaced in 2002
+* ITL &mdash; 380 &mdash; Italian Lira, &#x20A4;, replaced in 2002
 * LUF &mdash; 442 &mdash; Luxembourgian Franc, replaced in 2002
 * MTL &mdash; 470 &mdash; Maltese Lira, replaced in 2008
 * NLG &mdash; 528 &mdash; Dutch Guilder, replaced in 2002
