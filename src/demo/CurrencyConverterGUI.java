@@ -179,7 +179,8 @@ public class CurrencyConverterGUI extends JFrame implements ActionListener,
         }
         this.fromCurrency = from;
         this.toCurrency = to;
-        this.fromAmount = new MoneyAmount(1, this.fromCurrency);
+        this.fromAmount = new MoneyAmount(-1, this.fromCurrency);
+        this.toAmount = new MoneyAmount(-1, this.toCurrency);
         this.updateReadouts();
         String title = "Currency conversion from " 
                 + this.fromCurrency.getCurrencyCode() + " to " 
