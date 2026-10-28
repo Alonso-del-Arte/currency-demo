@@ -82,12 +82,6 @@ public class CurrencyConverterGUI extends JFrame implements ActionListener,
     
     private final JTextField numberField = new JTextField(10);
     
-    private JLabel fromCurrencyNameReadout 
-            = new JLabel("SORRY, NOT IMPLEMENTED YET");
-    
-    private JLabel toCurrencyNameReadout 
-            = new JLabel("SORRY, NOT IMPLEMENTED YET");
-    
     JLabel fromReadout = new JLabel("SORRY, NOT IMPLEMENTED YET");
     
     JLabel toReadout = new JLabel("SORRY, NOT IMPLEMENTED YET");
@@ -205,8 +199,6 @@ public class CurrencyConverterGUI extends JFrame implements ActionListener,
         this.add(inputPanel, BorderLayout.PAGE_START);
         JPanel namesPanel = new JPanel(new BorderLayout(20, 20));
 //        this.fromCurrencyNameReadout.setText(from.getDisplayName());
-        namesPanel.add(this.fromCurrencyNameReadout, BorderLayout.PAGE_START);
-        namesPanel.add(this.toCurrencyNameReadout, BorderLayout.PAGE_END);
         this.add(namesPanel, BorderLayout.CENTER);
         JPanel readoutsPanel = new JPanel();
         readoutsPanel.add(this.fromReadout);
