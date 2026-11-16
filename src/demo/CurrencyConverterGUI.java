@@ -144,14 +144,36 @@ public class CurrencyConverterGUI extends JFrame implements ActionListener,
         this.setVisible(true);
     }
     
+    /**
+     * Provides a graphical user interface for a currency converter. The initial 
+     * pair is United States dollars (USD) to euros (EUR) and the currency 
+     * converter is an instance of {@link HardCodedRateProvider}.
+     */
     public CurrencyConverterGUI() {
         this(new CurrencyConverter(new HardCodedRateProvider()));
     }
     
+    /**
+     * Provides a graphical user interface for a currency converter. The initial 
+     * pair is United States dollars (USD) to euros (EUR).
+     * @param converter The converter to use. For example, an instance of {@link 
+     * HardCodedRateProvider}.
+     * @throws NullPointerException If {@code converter} is null.
+     */
     public CurrencyConverterGUI(CurrencyConverter converter) {
         this(DEFAULT_PAIR, converter);
     }
 
+    /**
+     * Provides a graphical user interface for a currency converter. The initial 
+     * pair and the converter to use are specified by the caller.
+     * @param currencies The initial pair of currencies. For example, Canadian 
+     * dollars (CAD) to Japanese yen (JPY).
+     * @param converter The converter to use. For example, an instance of {@link 
+     * HardCodedRateProvider}.
+     * @throws NullPointerException If {@code currencies} or {@code converter} 
+     * is null.
+     */
     public CurrencyConverterGUI(CurrencyPair currencies, 
             CurrencyConverter converter) {
         if (converter == null) {
