@@ -170,6 +170,10 @@ divides into cents
 
 ## Historical currencies
 
+The following list is for currencies that had ISO-4217 codes and were replaced 
+by any currency other than the euro, or became invalid because the government 
+backing them ceased to exist.
+
 In this list, these historical currencies are sorted according to the years they 
 were valid.
 
@@ -233,6 +237,12 @@ transition later on. Here they are listed alphabetically by their ISO-4217
 
 ### From AYR Tech currency conversion API
 
+The following codes given by the AYR Tech currency conversion API are not 
+recognized by the currency information list in Java 21. That could be because 
+they're permanently unofficial or it could be that some of them were added to 
+the standard later but the currency information file in my Java runtimme has not 
+been updated.
+
 * Did not recognize CNH, said to be Offshore Chinese Renminbi
 * Did not recognize FOK, said to be Faroese Kr&oacute;na
 * Did not recognize GGP, said to be Guernsey Pound
@@ -252,7 +262,8 @@ but that's also true of four actual currencies.
 
 These four metals are all elements on the periodic table, very close neighbors, 
 as a matter of fact. Their ISO-4217 letter codes consist of 'X' and the 2-letter 
-chemical symbol with both letters capitalized.
+chemical symbol with both letters capitalized. Their atomic numbers are listed 
+here.
 
 * XAG &mdash; 961 &mdash; Silver &mdash; Ag, 47
 * XAU &mdash; 959 &mdash; Gold &mdash; Au, 79
