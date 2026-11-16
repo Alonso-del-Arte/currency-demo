@@ -80,7 +80,7 @@ public class CurrencyConverterGUI extends JFrame implements ActionListener,
     
     final JComboBox<CurrencyWrapper> toCurrencies;
     
-    private final JTextField numberField = new JTextField(10);
+    private final JTextField numberFieldFrom = new JTextField(10);
     
     JLabel fromReadout = new JLabel("SORRY, NOT IMPLEMENTED YET");
     
@@ -211,7 +211,7 @@ public class CurrencyConverterGUI extends JFrame implements ActionListener,
         this.toCurrencies = new JComboBox<>(items);
         JPanel inputPanel = new JPanel();
         inputPanel.add(new JLabel("From: "));
-        inputPanel.add(this.numberField);
+        inputPanel.add(this.numberFieldFrom);
         inputPanel.add(this.fromCurrencies);
         this.fromCurrencies
                 .setSelectedItem(new CurrencyWrapper(this.fromCurrency));
