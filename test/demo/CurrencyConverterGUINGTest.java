@@ -34,6 +34,7 @@ import java.awt.event.ItemListener;
 import java.math.BigDecimal;
 import java.math.RoundingMode;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Comparator;
 import java.util.Currency;
 import java.util.HashSet;
@@ -64,6 +65,10 @@ import ui.CurrencyWrapper;
  */
 public class CurrencyConverterGUINGTest implements ItemListener {
     
+    private static final Currency DOLLARS = Currency.getInstance(Locale.US);
+    
+    private static final Currency EUROS = Currency.getInstance("EUR");
+    
     private static final ConversionRateQuote[] MOCK_QUOTES 
             = MockExchangeRateProviderNGTest.inventQuotes();
     
@@ -85,6 +90,19 @@ public class CurrencyConverterGUINGTest implements ItemListener {
     private static int preActivationCallCount = 0;
     
     private int itemChangeCallCounter = 0;
+    
+    private static String oneUnitAmountString(Currency currency) {
+        int fractionDigits = currency.getDefaultFractionDigits();
+        if (fractionDigits == 0) {
+            return "1";
+        }
+        int length = 2 + fractionDigits;
+        char[] a = new char[length];
+        Arrays.fill(a, '0');
+        a[0] = '1';
+        a[1] = '.';
+        return new String(a);
+    }
     
     @Override
     public void itemStateChanged(ItemEvent ie) {
@@ -469,6 +487,18 @@ public class CurrencyConverterGUINGTest implements ItemListener {
         CurrencyPair actual = instance.getPair();
         assertEquals(actual, expected);
     }
+    
+    @Test
+    public void testZeroParamConstructorSetsInitialFromAmountField() {
+        CurrencyConverterGUI instance = new CurrencyConverterGUI();
+        String expected = oneUnitAmountString(DOLLARS);
+        String actual = instance.numberFieldFrom.getText();
+        assertEquals(actual, expected);
+    }
+    
+    // TODO: Test aux constructor sets initial From amount readout
+    
+    // TODO: Test main constructor sets initial From amount readout
     
     @Test
     public void testConstructorRejectsNullCurrencies() {
