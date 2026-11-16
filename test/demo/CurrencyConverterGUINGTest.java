@@ -41,6 +41,7 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Locale;
 import java.util.Set;
+import java.util.function.Predicate;
 import java.util.stream.Collectors;
 
 import javax.swing.JComboBox;
@@ -505,7 +506,23 @@ public class CurrencyConverterGUINGTest implements ItemListener {
         assertEquals(actual, expected);
     }
     
-    
+    @Test
+    public void testMainConstructorSetsInitialFromAmountField() {
+        Predicate<Currency> predicate 
+                = cur -> cur.getDefaultFractionDigits() != 2;
+        Currency from = CurrencyChooser.chooseCurrency(predicate);
+        Currency to = CurrencyChooser.chooseCurrencyOtherThan(from);
+        CurrencyPair currencies = new CurrencyPair(from, to);
+        CurrencyConverter converter = new CurrencyConverter(MOCK_RATE_PROVIDER);
+        CurrencyConverterGUI instance = new CurrencyConverterGUI(currencies, 
+                converter);
+        String expected = oneUnitAmountString(from);
+        String actual = instance.numberFieldFrom.getText();
+        String message = "Putting one unit of " + from.getDisplayName() + " (" 
+                + from.getSymbol() + ") in From field";
+        assertEquals(actual, expected, message);
+    }
+        
     // TODO: Test main constructor sets initial From amount field
     
     // TODO: Test 0-param constructor sets initial From amount readout
