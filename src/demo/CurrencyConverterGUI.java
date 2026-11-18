@@ -198,7 +198,7 @@ public class CurrencyConverterGUI extends JFrame implements ActionListener,
         this.fromCurrency = from;
         this.toCurrency = to;
         this.fromAmount = new MoneyAmount(1, this.fromCurrency);
-        this.toAmount = new MoneyAmount(-1, this.toCurrency);
+        this.toAmount = this.curConv.convert(this.fromAmount, this.toCurrency);
         this.updateReadouts();
         String title = "Currency conversion from " 
                 + this.fromCurrency.getCurrencyCode() + " to " 
@@ -221,8 +221,10 @@ public class CurrencyConverterGUI extends JFrame implements ActionListener,
         this.fromCurrencies
                 .setSelectedItem(new CurrencyWrapper(this.fromCurrency));
         inputPanel.add(new JLabel("To: "));
+        String toAmountStrWithoutSymbol = this.toAmount.toString()
+                .replace(this.toCurrency.getSymbol(), "");
+        this.numberFieldTo.setText(toAmountStrWithoutSymbol);
         inputPanel.add(this.numberFieldTo);
-        this.numberFieldTo.setText("? HUH ?");
         inputPanel.add(this.toCurrencies);
         this.toCurrencies.setSelectedItem(new CurrencyWrapper(this.toCurrency));
         this.add(inputPanel, BorderLayout.PAGE_START);
