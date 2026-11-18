@@ -218,6 +218,8 @@ public class CurrencyConverterGUI extends JFrame implements ActionListener,
         this.fromCurrencies
                 .setSelectedItem(new CurrencyWrapper(this.fromCurrency));
         inputPanel.add(new JLabel("To: "));
+        inputPanel.add(this.numberFieldTo);
+        this.numberFieldTo.setText("? HUH ?");
         inputPanel.add(this.toCurrencies);
         this.toCurrencies.setSelectedItem(new CurrencyWrapper(this.toCurrency));
         this.add(inputPanel, BorderLayout.PAGE_START);
