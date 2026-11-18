@@ -88,16 +88,6 @@ public class CurrencyConverterGUI extends JFrame implements ActionListener,
     
     JLabel toReadout = new JLabel("SORRY, NOT IMPLEMENTED YET");
     
-    private static int reckonUnitsInSubunits(Currency currency) {
-        int num = 1;
-        int fractionDigits = currency.getDefaultFractionDigits();
-        while (fractionDigits > 0) {
-            num *= 10;
-            fractionDigits--;
-        }
-        return num;
-    }
-    
     private Currency fromCurrency, toCurrency;
     
     private MoneyAmount fromAmount, toAmount;
@@ -207,7 +197,6 @@ public class CurrencyConverterGUI extends JFrame implements ActionListener,
         }
         this.fromCurrency = from;
         this.toCurrency = to;
-        int units = reckonUnitsInSubunits(this.fromCurrency);
         this.fromAmount = new MoneyAmount(1, this.fromCurrency);
         this.toAmount = new MoneyAmount(-1, this.toCurrency);
         this.updateReadouts();
