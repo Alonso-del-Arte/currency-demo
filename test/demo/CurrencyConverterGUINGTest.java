@@ -523,6 +523,56 @@ public class CurrencyConverterGUINGTest implements ItemListener {
         assertEquals(actual, expected, message);
     }
         
+    @Test
+    public void testZeroParamConstructorSetsInitialToAmountField() {
+        CurrencyConverterGUI instance = new CurrencyConverterGUI();
+        CurrencyConverter converter 
+                = new CurrencyConverter(new HardCodedRateProvider());
+        MoneyAmount source = new MoneyAmount(1, DOLLARS);
+        MoneyAmount converted = converter.convert(source, EUROS);
+        String expected = converted.toString().replace(EUROS.getSymbol(), "");
+        String actual = instance.numberFieldTo.getText();
+        String message = "To field should show conversion of " 
+                + source.toString() + " to " + EUROS.getDisplayName() + " (" 
+                + EUROS.getCurrencyCode() 
+                + ") through hard-coded rate provider";
+        assertEquals(actual, expected, message);
+    }
+    
+    @Test
+    public void testAuxConstructorSetsInitialToAmountField() {
+        CurrencyConverter converter = new CurrencyConverter(MOCK_RATE_PROVIDER);
+        CurrencyConverterGUI instance = new CurrencyConverterGUI(converter);
+        MoneyAmount source = new MoneyAmount(1, DOLLARS);
+        MoneyAmount converted = converter.convert(source, EUROS);
+        String expected = converted.toString().replace(EUROS.getSymbol(), "");
+        String actual = instance.numberFieldTo.getText();
+        String message = "To field should show conversion of " 
+                + source.toString() + " to " + EUROS.getDisplayName() + " (" 
+                + EUROS.getCurrencyCode() + ") through mock rate provider";
+        assertEquals(actual, expected, message);
+    }
+    
+    @Test
+    public void testMainConstructorSetsInitialToAmountField() {
+        Set<Currency> set = MOCK_RATE_PROVIDER.supportedCurrencies();
+        Currency currency = CurrencyChooser.chooseCurrency(set);
+        Currency target = CurrencyChooser.chooseCurrencyOtherThan(currency, 
+                set);
+        CurrencyPair currencies = new CurrencyPair(currency, target);
+        CurrencyConverter converter = new CurrencyConverter(MOCK_RATE_PROVIDER);
+        CurrencyConverterGUI instance = new CurrencyConverterGUI(currencies, 
+                converter);
+        MoneyAmount source = new MoneyAmount(1, currency);
+        MoneyAmount converted = converter.convert(source, target);
+        String expected = converted.toString().replace(target.getSymbol(), "");
+        String actual = instance.numberFieldTo.getText();
+        String message = "To field should show conversion of " 
+                + source.toString() + " to " + target.getDisplayName() + " (" 
+                + target.getCurrencyCode() + ") through mock rate provider";
+        assertEquals(actual, expected, message);
+    }
+        
     // TODO: Test main constructor sets initial From amount field
     
     // TODO: Test 0-param constructor sets initial From amount readout
