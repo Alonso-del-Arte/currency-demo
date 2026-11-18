@@ -532,6 +532,19 @@ public class CurrencyConverterGUINGTest implements ItemListener {
     // TODO: Test main constructor sets initial From amount readout
     
     @Test
+    public void testNumberFieldToIsReadOnly() {
+        Predicate<Currency> predicate 
+                = cur -> cur.getDefaultFractionDigits() != 2;
+        Currency from = CurrencyChooser.chooseCurrency(predicate);
+        Currency to = CurrencyChooser.chooseCurrencyOtherThan(from);
+        CurrencyPair currencies = new CurrencyPair(from, to);
+        CurrencyConverter converter = new CurrencyConverter(MOCK_RATE_PROVIDER);
+        CurrencyConverterGUI instance = new CurrencyConverterGUI(currencies, 
+                converter);
+        assert !instance.numberFieldTo.isEditable() : "To should not be editable";
+    }
+    
+    @Test
     public void testConstructorRejectsNullCurrencies() {
         String msg = "Null currency pair is not valid";
         Throwable t = assertThrows(() -> {
