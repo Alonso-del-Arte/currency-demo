@@ -153,12 +153,12 @@ asterisk are also used for some other currency in combination with letters).
 | U+20C0  | &#x20C0; | KGS      | Kyrgyrzstani som         |
 | U+20C1  | &#x20C1; | SAR      | Saudi riyal              |
 
-The symbol &#x20A0; was intended for the euro but it's hardly used nowadays. The 
-symbol &#x20A8; for the Indian rupee was used much more frequently.
-
 As far as I can tell, only three of these have word HTML entities: the British 
 pound (&amp;pound;), the Japanese yen (&amp;yen;) and the euro (&amp;euro;). 
 They all of course have numerical HTML entities.
+
+The symbol &#x20A0; was intended for the euro but it's hardly used nowadays. The 
+symbol &#x20A8; for the Indian rupee was used much more frequently.
 
 The cruzeiro symbol &#x20A2; is of greater historical interest, even though now 
 the official currency of Brazil is the Brazilian real (BRL), for which the 
