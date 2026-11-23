@@ -182,9 +182,9 @@ Unicode Version 18.0, which came out in September 2026. These are '&#x20C3;',
 '&#x20C2;' and '&#x20C4;', respectively. Font vendors have not caught up yet, so 
 you'll probably see boxes or question marks instead of the symbols.
 
-For that matter, I have yet to see '&#x20C0;', the symbol for the Kyrgyrzstani 
-som, anywhere outside of the Unicode website, even though it was added in 
-Unicode Version 14.0 (2021).
+For that matter, I started seeing '&#x20C0;', the symbol for the Kyrgyrzstani 
+som, outside of the Unicode website only very recently, even though it was added 
+in Unicode Version 14.0 (2021).
 
 ## Notes about divisions of a unit of currency
 
