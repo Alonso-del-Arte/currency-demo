@@ -172,7 +172,7 @@ Some euro-replaced currencies still have their own symbols in Unicode.
 | U+20A4  | &#x20A4; | ITL      | Italian lira   |
 | U+20A7  | &#x20A7; | ESP      | Spanish peseta |
 
-Note that Bitcoin has the symbol &#x20BF (and the 3-letter code XBT has been 
+Note that Bitcoin has the symbol &#x20BF; (and the 3-letter code XBT has been 
 unofficially used without approval from ISO). That symbol should not be confused 
 with the symbol for the Thai bhat, &#xE3F;.
 
