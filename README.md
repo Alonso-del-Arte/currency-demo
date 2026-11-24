@@ -45,7 +45,7 @@ function `getNumericCodeAsString()`. For example, for the Bahraini dinar (BHD),
 `getNumericCode()` returns 48 and `getNumericCodeAsString()` returns "048".
 
 But an instance of `Currency` still needs an instance of another type to 
-represent a specific amount of that currency, such as, for example, 20&euro;. 
+represent a specific amount of that currency, such as, for example, 20,00&euro;. 
 For general purpose uses, which could involve interest rate calculations, the 
 numeric part of the money amount class would probably be `BigDecimal`. But in 
 this demonstration, I'm using `long`.
@@ -184,7 +184,7 @@ you'll probably see boxes or question marks instead of the symbols.
 
 For that matter, I started seeing '&#x20C0;', the symbol for the Kyrgyrzstani 
 som, outside of the Unicode website only very recently, even though it was added 
-in Unicode Version 14.0 (2021).
+in Unicode Version 14.0 (2021). Support is still very hit and miss.
 
 ## Notes about divisions of a unit of currency
 
