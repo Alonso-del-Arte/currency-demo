@@ -211,14 +211,17 @@ Pr&iacute;ncipe dobra (STD) is listed as a historical currency, in effect from
 Manny's currency converter API responds with "\{\}" for conversions involving 
 STN, but on June 24, 2024, that same API responded "\{"USD_STD":20697.981008\}" 
 and "\{"EUR_STD":22213.258432\}" for queries involving the U.&nbsp;S. dollar and 
-euro, respectively.
+euro, respectively. The AYR Tech API gives the conversion of USD to STN as 
+22.4338 as of November 24, 2026, and does not list STN.
 
 Not sure what's going on with the Mauritanian ouguiya. The currency code "MRO" 
 is identified as "Mauritanian Ouguiya (1973–2017)" in the Java currency 
 information file. But Manny's currency converter, as of July 9, 2024, gives an 
 exchange rate of 356.999828 for U.&nbsp;S. dollars to MRO. But that same 
 converter gives an exchange rate of 35.6999828 for USD to MRU, which the Java 
-currency information file suggests is not a historical currency.
+currency information file suggests is not a historical currency. As of November 
+24, 2026, the AYR Tech API gives the conversion of USD to MRU as 40.7178 and 
+does not list MRO.
 
 Venezuela apparently has two active official currencies, the Venezuelan 
 bol&iacute;var (VES) and the bol&iacute;var digital (VED), which has been 
