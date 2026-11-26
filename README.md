@@ -21,7 +21,7 @@ official part of the Java Development Kit (JDK). The next long-term support
 (LTS) release is not expected to incorporate JSR-354 either.
 
 If JSR-354 had been added in Java 9, there would have been a `java.money` 
-package added to the JDK, which would have been roughly analogoous to the 
+package added to the JDK, which would have been roughly analogous to the 
 `java.time` package that was added in Java 8.
 
 However, Java does provide the `Currency` type in the `java.util` package, which 
