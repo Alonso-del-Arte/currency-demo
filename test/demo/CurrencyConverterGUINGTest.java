@@ -158,6 +158,7 @@ public class CurrencyConverterGUINGTest implements ItemListener {
     
     @Test
     public void testGetPairAuxConstructorInstance() {
+        fail("EXAMINE THIS TEST FOR BRITTLENESS");
         CurrencyConverterGUI instance 
                 = new CurrencyConverterGUI(MOCK_CONVERTER);
         Set<Currency> set = new HashSet<>(ALLOWED_CURRENCIES);
