@@ -573,13 +573,24 @@ public class CurrencyConverterGUINGTest implements ItemListener {
         assertEquals(actual, expected, message);
     }
         
-    // TODO: Test main constructor sets initial From amount field
-    
-    // TODO: Test 0-param constructor sets initial From amount readout
+    @Test
+    public void testZeroParamConstructorSetsInitialFromAmountReadout() {
+        CurrencyConverterGUI instance = new CurrencyConverterGUI();
+        MoneyAmount amount = new MoneyAmount(1, DOLLARS);
+        String expected = amount.toString();
+        String actual = instance.fromReadout.getText();
+        assertEquals(actual, expected);
+    }
     
     // TODO: Test aux constructor sets initial From amount readout
     
     // TODO: Test main constructor sets initial From amount readout
+    
+    // TODO: Test 0-param constructor sets initial To amount readout
+    
+    // TODO: Test aux constructor sets initial To amount readout
+    
+    // TODO: Test main constructor sets initial To amount readout
     
     @Test
     public void testConstructorRejectsNullCurrencies() {
