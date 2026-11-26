@@ -84,7 +84,7 @@ public class CurrencyConverterGUI extends JFrame implements ActionListener,
     
     final JTextField numberFieldTo = new JTextField(10);
     
-    JLabel fromReadout = new JLabel("SORRY, NOT IMPLEMENTED YET");
+    JLabel fromReadout = new JLabel();
     
     JLabel toReadout = new JLabel("SORRY, NOT IMPLEMENTED YET");
     
