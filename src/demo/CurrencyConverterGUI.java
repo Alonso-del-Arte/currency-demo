@@ -213,7 +213,8 @@ public class CurrencyConverterGUI extends JFrame implements ActionListener,
         this.toCurrencies = new JComboBox<>(items);
         JPanel inputPanel = new JPanel();
         inputPanel.add(new JLabel("From: "));
-        String fromAmountStrWithoutSymbol = this.fromAmount.toString()
+        String fromAmountStr = this.fromAmount.toString();
+        String fromAmountStrWithoutSymbol = fromAmountStr
                 .replace(this.fromCurrency.getSymbol(), "");
         this.numberFieldFrom.setText(fromAmountStrWithoutSymbol);
         inputPanel.add(this.numberFieldFrom);
@@ -232,6 +233,7 @@ public class CurrencyConverterGUI extends JFrame implements ActionListener,
 //        this.fromCurrencyNameReadout.setText(from.getDisplayName());
         this.add(namesPanel, BorderLayout.CENTER);
         JPanel readoutsPanel = new JPanel();
+        this.fromReadout.setText(fromAmountStr);
         readoutsPanel.add(this.fromReadout);
         readoutsPanel.add(new JLabel(" exchanges to "));
         readoutsPanel.add(this.toReadout);
