@@ -582,7 +582,15 @@ public class CurrencyConverterGUINGTest implements ItemListener {
         assertEquals(actual, expected);
     }
     
-    // TODO: Test aux constructor sets initial From amount readout
+    @Test
+    public void testAuxConstructorSetsInitialFromAmountReadout() {
+        CurrencyConverter converter = new CurrencyConverter(MOCK_RATE_PROVIDER);
+        CurrencyConverterGUI instance = new CurrencyConverterGUI(converter);
+        MoneyAmount amount = new MoneyAmount(1, DOLLARS);
+        String expected = amount.toString();
+        String actual = instance.fromReadout.getText();
+        assertEquals(actual, expected);
+    }
     
     // TODO: Test main constructor sets initial From amount readout
     
