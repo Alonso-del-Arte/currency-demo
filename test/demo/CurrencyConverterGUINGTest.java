@@ -592,8 +592,24 @@ public class CurrencyConverterGUINGTest implements ItemListener {
         assertEquals(actual, expected);
     }
     
-    // TODO: Test main constructor sets initial From amount readout
-    
+    @Test
+    public void testMainConstructorSetsInitialFromAmountReadout() {
+        Predicate<Currency> predicate 
+                = cur -> cur.getDefaultFractionDigits() != 2;
+        Currency from = CurrencyChooser.chooseCurrency(predicate);
+        Currency to = CurrencyChooser.chooseCurrencyOtherThan(from);
+        CurrencyPair currencies = new CurrencyPair(from, to);
+        CurrencyConverter converter = new CurrencyConverter(MOCK_RATE_PROVIDER);
+        CurrencyConverterGUI instance = new CurrencyConverterGUI(currencies, 
+                converter);
+        MoneyAmount amount = new MoneyAmount(1, from);
+        String expected = amount.toString();
+        String actual = instance.fromReadout.getText();
+        String message = "Putting one unit of " + from.getDisplayName() + " (" 
+                + from.getSymbol() + ") in From field";
+        assertEquals(actual, expected, message);
+    }
+        
     // TODO: Test 0-param constructor sets initial To amount readout
     
     // TODO: Test aux constructor sets initial To amount readout
